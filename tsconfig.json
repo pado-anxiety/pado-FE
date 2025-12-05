@@ -1,0 +1,12 @@
+{
+    "files": [],
+    "references": [
+      {
+        "path": "./apps/web/tsconfig.json"
+      },
+      {
+        "path": "./apps/expo/tsconfig.json"
+      }
+    ]
+  }
+  

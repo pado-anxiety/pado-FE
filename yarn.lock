@@ -8323,7 +8323,6 @@ __metadata:
     react-native-screens: "npm:~4.16.0"
     react-native-web: "npm:~0.21.0"
     react-native-worklets: "npm:0.5.1"
-    typescript: "npm:~5.9.2"
   languageName: unknown
   linkType: soft
 
@@ -8346,7 +8345,6 @@ __metadata:
     next: "npm:16.0.7"
     react: "npm:19.2.0"
     react-dom: "npm:19.2.0"
-    typescript: "npm:^5"
   languageName: unknown
   linkType: soft
 
@@ -9508,6 +9506,8 @@ __metadata:
 "root-workspace-0b6124@workspace:.":
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
+  dependencies:
+    typescript: "npm:~5.9.2"
   languageName: unknown
   linkType: soft
 
@@ -10624,7 +10624,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5, typescript@npm:~5.9.2":
+"typescript@npm:~5.9.2":
   version: 5.9.3
   resolution: "typescript@npm:5.9.3"
   bin:
@@ -10634,7 +10634,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A~5.9.2#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A~5.9.2#optional!builtin<compat/typescript>":
   version: 5.9.3
   resolution: "typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"
   bin:

@@ -1,17 +1,22 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "noEmit": true,
+
+    /* Base */
+    "removeComments": true,
     "strict": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@src/*": ["./src/*"],
+      "assets/*": ["./assets/*"],
+      "@env": ["./src/lib/env.js"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx", "nativewind-env.d.ts"],
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
 }
