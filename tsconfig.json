@@ -6,6 +6,9 @@
       },
       {
         "path": "./apps/expo/tsconfig.json"
+      },
+      {
+        "path": "./packages/tailwind-design-tokens/tsconfig.json"
       }
     ]
   }

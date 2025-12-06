@@ -12,8 +12,8 @@ export default function Home() {
           height={20}
           priority
         />
-        <div className="text-2xl font-bold text-red-500">
-          <h1 className="text-2xl font-bold text-red-500">
+        <div className="text-2xl font-bold">
+          <h1 className="text-2xl font-bold text-primary-300">
             To get started, edit the page.tsx file.
           </h1>
           <p className="font-bold text-red-500">hello</p>

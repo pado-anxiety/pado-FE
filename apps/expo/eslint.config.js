@@ -14,4 +14,7 @@ module.exports = defineConfig([
       globals: globals.node,
     },
   },
+  {
+    ignores: ['tailwind.config.js', 'eslint.config.js', 'metro.config.js'],
+  },
 ]);

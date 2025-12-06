@@ -1,0 +1,32 @@
+{
+    "name": "@nyangtodac/tailwind-design-tokens",
+    "private": true,
+    "main": "index.js",
+    "type": "commonjs",
+    "exports": {
+        ".": {
+            "types": "./types/index.d.ts",
+            "default": "./index.js",
+            "import": "./index.js",
+            "require": "./index.js"
+        },
+        "./colors": {
+            "types": "./types/colors/index.d.ts",
+            "default": "./colors/index.js",
+            "import": "./colors/index.js",
+            "require": "./colors/index.js"
+        },
+        "./spacing": {
+            "types": "./types/spacing/index.d.ts",
+            "default": "./spacing/index.js",
+            "import": "./spacing/index.js",
+            "require": "./spacing/index.js"
+        },
+        "./typography": {
+            "types": "./types/typography/index.d.ts",
+            "default": "./typography/index.js",
+            "import": "./typography/index.js",
+            "require": "./typography/index.js"
+        }
+    }
+}
