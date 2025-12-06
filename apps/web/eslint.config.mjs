@@ -95,7 +95,13 @@ const eslintConfig = [
     },
   },
   {
-    ignores: ['.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
+    ignores: [
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
+      'postcss.config.js',
+    ],
   },
 ];
 
