@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { button } from './Button.styles';
-import type { ButtonWebProps } from './Button.types';
+import { button } from './styles';
+import type { ButtonWebProps } from './type';
 
 export default function Button({
   text = '',

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { ActivityIndicator, Pressable, Text } from 'react-native';
-import { button } from './Button.styles';
-import type { ButtonProps } from './Button.types';
+import { button } from './styles';
+import type { ButtonProps } from './type';
 
 export default function Button({
   text = '',

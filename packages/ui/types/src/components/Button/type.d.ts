@@ -1,6 +1,6 @@
 import type { PressableProps, View } from 'react-native';
 import type { VariantProps } from 'tailwind-variants';
-import type { button } from './Button.styles';
+import type { button } from './styles';
 export type ButtonVariants = VariantProps<typeof button>;
 export interface ButtonProps extends ButtonVariants, Omit<PressableProps, 'disabled'> {
     text?: string;
@@ -20,4 +20,4 @@ export interface ButtonWebProps extends ButtonVariants {
     children?: React.ReactNode;
     type?: 'button' | 'submit' | 'reset';
 }
-//# sourceMappingURL=Button.types.d.ts.map
+//# sourceMappingURL=type.d.ts.map

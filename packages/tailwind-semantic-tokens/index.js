@@ -42,8 +42,14 @@ module.exports = {
         },
       },
       borderColor: {
-        DEFAULT: colors.charcoal[300],
-        dark: colors.charcoal[700],
+        primary: {
+          DEFAULT: colors.charcoal[300],
+          dark: colors.charcoal[700],
+        },
+        destructive: {
+          DEFAULT: colors.danger[500],
+          dark: colors.danger[400],
+        },
       },
     },
   },

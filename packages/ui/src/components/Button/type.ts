@@ -1,6 +1,6 @@
 import type { PressableProps, View } from 'react-native';
 import type { VariantProps } from 'tailwind-variants';
-import type { button } from './Button.styles';
+import type { button } from './styles';
 
 export type ButtonVariants = VariantProps<typeof button>;
 

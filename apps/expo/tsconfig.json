@@ -23,5 +23,10 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
   ],
+  "paths": {
+    "@src/*": ["./src/*"],
+    "assets/*": ["./assets/*"],
+    "@env": ["./src/lib/env.js"]
+  },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
 }
