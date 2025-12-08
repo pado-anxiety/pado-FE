@@ -9,6 +9,12 @@ module.exports = defineConfig([
   expoConfig,
   ...eslintConfigCustom,
   {
+    rules: {
+      'import/order': 'off',
+      'sort-imports': 'off',
+    },
+  },
+  {
     files: ['babel.config.js'],
     languageOptions: {
       globals: globals.node,

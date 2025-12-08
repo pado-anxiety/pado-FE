@@ -1,6 +1,7 @@
 import babelParser from '@babel/eslint-parser';
-import eslintConfigCustom from '@nyangtodac/eslint-config-custom';
 import nextTs from 'eslint-config-next/typescript';
+
+import eslintConfigCustom from '@nyangtodac/eslint-config-custom';
 
 // Manually patch the missing parser
 const patchedParser = {
@@ -46,21 +47,9 @@ const eslintConfig = [
       '@next/next/no-img-element': 'error',
       '@next/next/no-html-link-for-pages': 'error',
 
-      'import/order': [
-        'warn',
-        {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-          ],
-          'newlines-between': 'never',
-          alphabetize: { order: 'asc', caseInsensitive: true },
-        },
-      ],
+      'import/order': 'off',
+      'sort-imports': 'off',
+
       'import/no-duplicates': 'error',
 
       'jsx-a11y/alt-text': 'error',
