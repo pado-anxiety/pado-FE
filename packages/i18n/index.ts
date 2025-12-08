@@ -9,7 +9,7 @@ export const initI18n = (curerntLanguage?: string) => {
                 ...locales,
             },
             lng: curerntLanguage,
-            fallbackLng: "ko",
+            fallbackLng: "en",
             interpolation: {
                 escapeValue: false
             },
