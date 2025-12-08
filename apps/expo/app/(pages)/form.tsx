@@ -1,9 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@nyangtodac/ui';
 import { ControlledInput } from '@src/components/ui';
 import { useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
 import { z } from 'zod';
+
+import { Button } from '@nyangtodac/ui';
 
 const schema = z.object({
   name: z

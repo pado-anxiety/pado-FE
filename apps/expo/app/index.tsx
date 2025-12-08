@@ -1,6 +1,7 @@
-import { Button } from '@nyangtodac/ui';
 import { useRouter } from 'expo-router';
 import { Text, View } from 'react-native';
+
+import { Button } from '@nyangtodac/ui';
 
 export default function HomeScreen(): React.ReactNode {
   const router = useRouter();
