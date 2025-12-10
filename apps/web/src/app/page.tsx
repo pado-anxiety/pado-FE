@@ -2,17 +2,20 @@
 
 import Image from 'next/image';
 
-import { useTranslation } from 'react-i18next';
-
-import { Button } from '@nyangtodac/ui';
+import { Button, Text } from '@nyangtodac/ui';
 
 export default function Home() {
-  const { t } = useTranslation();
-
   return (
     <div className="flex min-h-screen w-full max-w-800px flex-col items-start justify-center font-family-geist-sans bg-background">
       <main className="flex min-h-screen w-full max-w-800px flex-col items-start justify-center font-family-geist-sans bg-background">
-        <p>{t('hello')}</p>
+        <Text
+          as="h1"
+          tx="hello"
+          className="text-title-large text-success dark:text-destructive-dark"
+        />
+        <p className="text-title-large text-destructive dark:text-destructive-dark">
+          hello
+        </p>
         <Button
           text="button"
           color="primary"

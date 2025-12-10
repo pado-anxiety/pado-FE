@@ -1,2 +1,2 @@
-export declare const initI18n: (curerntLanguage?: string) => import("i18next").i18n | Promise<import("i18next").TFunction<"translation", undefined>>;
+export declare const initI18n: (curerntLanguage: string | undefined) => import("i18next").i18n;
 //# sourceMappingURL=index.d.ts.map

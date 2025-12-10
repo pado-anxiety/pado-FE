@@ -11,4 +11,3 @@ module.exports = {
     'label-medium': ['14px', { lineHeight: '20px', fontWeight: '500' }],
     'label-small': ['12px', { lineHeight: '16px', fontWeight: '500' }],
 };
-  

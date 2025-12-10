@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
+
 import {
   Control,
   FieldValues,
@@ -13,7 +14,7 @@ import {
   TextInputProps,
   View,
 } from 'react-native';
-import { tv, VariantProps } from 'tailwind-variants';
+import { VariantProps, tv } from 'tailwind-variants';
 
 const input = tv({
   slots: {

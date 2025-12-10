@@ -5,7 +5,7 @@ import { WebView } from 'react-native-webview';
 
 import { Button } from '@nyangtodac/ui';
 
-export default function Lang() {
+export default function LangPage() {
   const { t } = useTranslation();
   const { language, changeLanguage } = useLanguage();
 
