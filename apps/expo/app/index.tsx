@@ -43,6 +43,14 @@ export default function HomeScreen(): React.ReactNode {
         disabled={false}
         fullWidth={false}
       />
+      <Button
+        text="modal page"
+        onPress={() => router.push('/(pages)/modal')}
+        color="primary"
+        size="default"
+        disabled={false}
+        fullWidth={false}
+      />
     </View>
   );
 }

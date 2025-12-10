@@ -7,6 +7,7 @@ export default function PagesLayout() {
       <Stack.Screen name="form" />
       <Stack.Screen name="lang" />
       <Stack.Screen name="text" />
+      <Stack.Screen name="modal" />
     </Stack>
   );
 }
