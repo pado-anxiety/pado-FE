@@ -34,7 +34,7 @@ jobs:
       - name: Build Next.js (OpenNext)
         run: |
           cd apps/web
-          npx @opennextjs/cloudflare build
+          npx @opennextjs/cloudflare build 
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
