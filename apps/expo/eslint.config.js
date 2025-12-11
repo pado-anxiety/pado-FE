@@ -15,7 +15,7 @@ module.exports = defineConfig([
     },
   },
   {
-    files: ['babel.config.js'],
+    files: ['babel.config.js', 'env.js'],
     languageOptions: {
       globals: globals.node,
     },

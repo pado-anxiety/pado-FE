@@ -1,3 +1,4 @@
+import { ENV } from '@src/lib/env';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
@@ -11,6 +12,8 @@ export default function HomeScreen(): React.ReactNode {
   return (
     <View className="flex-1 items-center justify-center gap-4">
       <Text className="text-2xl font-bold text-success">{t('hello')}</Text>
+      <Text>ENV: {ENV.APP_ENV}</Text>
+      <Text>SECRET_KEY: {ENV.SECRET_KEY}</Text>
       <Button
         text="change language"
         onPress={() => router.push('/(pages)/lang')}
