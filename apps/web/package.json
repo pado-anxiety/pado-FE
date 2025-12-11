@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build:cf": "npx @opennextjs/cloudflare build && node deploy-helper.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
