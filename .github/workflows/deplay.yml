@@ -26,8 +26,11 @@ jobs:
           node-version: 20
           cache: 'yarn'
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Build Next.js (OpenNext)
         run: |
