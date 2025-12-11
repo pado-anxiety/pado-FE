@@ -43,4 +43,19 @@ if (fs.existsSync(workerSrc)) {
   process.exit(1);
 }
 
-console.log('배포 준비 완료');
+// 정적 파일은 워커를 거치지 않고 CDN에서 바로 서빙하도록 설정
+const routesJson = {
+  version: 1,
+  include: ['/*'], // 기본적으로 모든 요청은 워커로 보내되,
+  exclude: [
+    '/_next/static/*', // CSS, JS, 폰트 등 정적 리소스 제외 (CDN 직통)
+    '/favicon.ico', // 파비콘 제외
+    '/*.svg', // 루트에 있는 SVG 파일들 제외
+    '/*.png', // (필요 시) 이미지 제외
+    '/*.jpg',
+  ],
+};
+
+const routesPath = path.join(assetsDir, '_routes.json');
+fs.writeFileSync(routesPath, JSON.stringify(routesJson, null, 2));
+console.log('_routes.json 생성 완료');
