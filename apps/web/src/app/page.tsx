@@ -2,13 +2,9 @@
 
 import Image from 'next/image';
 
-import { useTheme } from 'next-themes';
-
 import { Button, Text } from '@nyangtodac/ui';
 
 export default function Home() {
-  const { theme } = useTheme();
-
   return (
     <div className="flex min-h-screen w-full max-w-800px flex-col items-start justify-center gap-4 font-family-geist-sans bg-page p-8">
       <main className="flex min-h-screen w-full max-w-800px flex-col items-start justify-center gap-4 font-family-geist-sans">
@@ -17,7 +13,6 @@ export default function Home() {
           tx="hello"
           className="text-title-large text-success"
         />
-        <Text className="text-title-large text-success">theme: {theme}</Text>
         <p className="text-title-large text-destructive">hello</p>
         <Button
           text="button"

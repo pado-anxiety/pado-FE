@@ -9,7 +9,6 @@ export default function ThemePage() {
 
   const url = `http://localhost:3000/?theme=${theme}`;
 
-  console.log('url', url);
   return (
     <View className={`flex-1 items-center justify-center gap-4 bg-page`}>
       <Text className="text-2xl font-bold text-body">Theme: {theme}</Text>
