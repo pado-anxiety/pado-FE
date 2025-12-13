@@ -9,6 +9,11 @@
             "default": "./index.js",
             "import": "./index.js",
             "require": "./index.js"
+        },
+        "./semantic-colors": {
+            "default": "./semantic-colors.js",
+            "import": "./semantic-colors.js",
+            "require": "./semantic-colors.js"
         }
     },
     "dependencies": {

@@ -1,8 +1,8 @@
 import { useTheme } from '@src/lib/theme';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 import WebView from 'react-native-webview';
 
-import { Text } from '@nyangtodac/ui';
+import { Button, Text } from '@nyangtodac/ui';
 
 export default function ThemePage() {
   const { theme, changeTheme } = useTheme();
@@ -15,7 +15,11 @@ export default function ThemePage() {
       <Text className="text-2xl font-bold text-body">Theme: {theme}</Text>
       <Button
         onPress={() => changeTheme(theme === 'light' ? 'dark' : 'light')}
-        title="change theme"
+        text="change theme"
+        color="primary"
+        size="default"
+        disabled={false}
+        fullWidth={false}
       />
       <View className="w-full h-1/2 mt-2">
         <WebView source={{ uri: url }} />

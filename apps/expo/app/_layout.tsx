@@ -12,26 +12,29 @@ export const unstable_settings = {
   anchor: '(tabs)',
 };
 
-const ThemeWrapper = ({ children }: { children: React.ReactNode }) => {
-  const { theme } = useTheme();
-  return <View className={`${theme} flex-1`}>{children}</View>;
-};
+function NavigationContent() {
+  const { themeStyle } = useTheme();
+
+  return (
+    <View style={[{ flex: 1 }, themeStyle]}>
+      <BottomSheetModalProvider>
+        <Stack>
+          <Stack.Screen
+            name="index"
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="(pages)" />
+        </Stack>
+      </BottomSheetModalProvider>
+    </View>
+  );
+}
 
 export default function RootLayout(): React.ReactNode {
   return (
     <I18nProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <BottomSheetModalProvider>
-          <ThemeWrapper>
-            <Stack>
-              <Stack.Screen
-                name="index"
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen name="(pages)" />
-            </Stack>
-          </ThemeWrapper>
-        </BottomSheetModalProvider>
+        <NavigationContent />
       </GestureHandlerRootView>
     </I18nProvider>
   );
