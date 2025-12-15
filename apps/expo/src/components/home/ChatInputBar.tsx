@@ -1,4 +1,5 @@
-import { Button, View } from '@src/components/ui';
+import { Button } from '@src/components/ui';
+import { Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { SharedValue } from 'react-native-reanimated';
 
@@ -9,6 +10,8 @@ interface ChatInputBarProps {
   onSend: () => void;
   paddingBottom: SharedValue<number>;
   ref: React.Ref<TextInput>;
+  isChatModalVisible: boolean;
+  setIsChatModalVisible: (visible: boolean) => void;
 }
 
 export default function ChatInputBar({
@@ -17,9 +20,21 @@ export default function ChatInputBar({
   onFocus,
   onSend,
   ref,
+  isChatModalVisible,
+  setIsChatModalVisible,
 }: ChatInputBarProps) {
   return (
-    <View className="flex flex-row items-end justify-center gap-2 pt-4">
+    <Pressable
+      className="flex flex-row items-end justify-center gap-2 pt-4"
+      onPress={async () => {
+        if (isChatModalVisible) return;
+
+        setIsChatModalVisible(!isChatModalVisible);
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        (ref as React.RefObject<TextInput>)?.current?.focus();
+      }}
+    >
       <TextInput
         ref={ref}
         className="mt-0 bg-white rounded-xl border border-solid border-primary p-4 font-inter text-lg font-medium leading-5 text-body grow"
@@ -27,6 +42,7 @@ export default function ChatInputBar({
         onFocus={onFocus}
         value={message}
         onChangeText={onMessageChange}
+        pointerEvents={isChatModalVisible ? 'auto' : 'none'}
       />
       <Button
         text="⬆"
@@ -38,6 +54,6 @@ export default function ChatInputBar({
         disabled={false}
         className="rounded-xl border border-primary py-3"
       />
-    </View>
+    </Pressable>
   );
 }

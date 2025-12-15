@@ -114,8 +114,8 @@ export default function ChatScreen() {
     inputRef.current?.clear();
     inputRef.current?.blur();
     setChats((prev) => [
-      ...prev,
       { sender: 'USER', message, time: new Date().toISOString() },
+      ...prev,
     ]);
     setMessage('');
   }, [message]);
@@ -142,6 +142,8 @@ export default function ChatScreen() {
             onFocus={handleInputFocus}
             onSend={handleSend}
             paddingBottom={keyboardHeight}
+            isChatModalVisible={isChatModalVisible}
+            setIsChatModalVisible={setIsChatModalVisible}
           />
         </Animated.View>
       </Pressable>
