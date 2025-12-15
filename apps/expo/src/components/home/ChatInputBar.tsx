@@ -1,4 +1,4 @@
-import { Button } from '@src/components/ui';
+import { Button, View } from '@src/components/ui';
 import { Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { SharedValue } from 'react-native-reanimated';
@@ -9,7 +9,7 @@ interface ChatInputBarProps {
   onFocus: () => void;
   onSend: () => void;
   paddingBottom: SharedValue<number>;
-  ref: React.Ref<TextInput>;
+  ref: React.RefObject<TextInput | null>;
   isChatModalVisible: boolean;
   setIsChatModalVisible: (visible: boolean) => void;
 }
@@ -27,23 +27,27 @@ export default function ChatInputBar({
     <Pressable
       className="flex flex-row items-end justify-center gap-2 pt-4"
       onPress={async () => {
+        console.log('onPress');
         if (isChatModalVisible) return;
 
         setIsChatModalVisible(!isChatModalVisible);
         await new Promise((resolve) => setTimeout(resolve, 500));
-
-        (ref as React.RefObject<TextInput>)?.current?.focus();
+        ref?.current?.focus();
       }}
     >
-      <TextInput
-        ref={ref}
-        className="mt-0 bg-white rounded-xl border border-solid border-primary p-4 font-inter text-lg font-medium leading-5 text-body grow"
-        placeholder="Enter your chat"
-        onFocus={onFocus}
-        value={message}
-        onChangeText={onMessageChange}
+      <View
+        className="flex-1"
         pointerEvents={isChatModalVisible ? 'auto' : 'none'}
-      />
+      >
+        <TextInput
+          ref={ref}
+          className="mt-0 bg-white rounded-xl border border-solid border-primary p-4 font-inter text-lg font-medium leading-5 text-body grow"
+          placeholder="Enter your chat"
+          onFocus={onFocus}
+          value={message}
+          onChangeText={onMessageChange}
+        />
+      </View>
       <Button
         text="⬆"
         onPress={onSend}
