@@ -1,7 +1,6 @@
 import { View } from '@src/components/ui';
+import { ChatScreen } from '@src/features/chat';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-import { ChatScreen } from './_chat';
 
 export default function HomeScreen(): React.ReactNode {
   const insets = useSafeAreaInsets();
