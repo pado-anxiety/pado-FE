@@ -42,7 +42,7 @@ export default function ChatList({ ref, chats }: ChatListProps) {
       showsVerticalScrollIndicator={false}
       bounces={false}
       overScrollMode="never"
-      keyExtractor={(_, index) => index.toString()}
+      keyExtractor={(item, index) => `${item.time}-${index}`}
       renderItem={renderChatItem}
     />
   );
