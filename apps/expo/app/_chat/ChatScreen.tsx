@@ -23,7 +23,7 @@ export default function ChatScreen() {
     setIsChatModalVisible,
   } = useChat();
 
-  const { keyboardHeight, inputAnimatedStyle } = useChatKeyboard();
+  const { inputAnimatedStyle } = useChatKeyboard();
 
   return (
     <>
@@ -51,7 +51,6 @@ export default function ChatScreen() {
             onMessageChange={setMessage}
             onFocus={handleInputFocus}
             onSend={handleSend}
-            paddingBottom={keyboardHeight}
             isChatModalVisible={isChatModalVisible}
             setIsChatModalVisible={setIsChatModalVisible}
           />

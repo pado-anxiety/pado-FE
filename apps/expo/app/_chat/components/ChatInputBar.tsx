@@ -2,7 +2,6 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { View } from '@src/components/ui';
 import { Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import type { SharedValue } from 'react-native-reanimated';
 
 interface ChatInputBarProps {
   /** 현재 메시지 텍스트 */
@@ -13,8 +12,6 @@ interface ChatInputBarProps {
   onFocus: () => void;
   /** 전송 핸들러 */
   onSend: () => void;
-  /** 키보드 높이 (애니메이션용) */
-  paddingBottom: SharedValue<number>;
   /** TextInput ref */
   ref: React.RefObject<TextInput | null>;
   /** 채팅 모달 표시 여부 */

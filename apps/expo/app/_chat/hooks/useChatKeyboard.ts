@@ -1,14 +1,9 @@
 import { ViewStyle } from 'react-native';
 import { useKeyboardHandler } from 'react-native-keyboard-controller';
-import {
-  type SharedValue,
-  useAnimatedStyle,
-  useSharedValue,
-} from 'react-native-reanimated';
+import { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface UseChatKeyboardReturn {
-  keyboardHeight: SharedValue<number>;
   inputAnimatedStyle: ViewStyle;
 }
 
@@ -32,7 +27,6 @@ export function useChatKeyboard(): UseChatKeyboardReturn {
   });
 
   return {
-    keyboardHeight,
     inputAnimatedStyle,
   };
 }
