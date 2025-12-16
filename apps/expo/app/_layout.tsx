@@ -4,7 +4,9 @@ import { useTheme } from '@src/lib/theme';
 import { Stack } from 'expo-router';
 import { View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 import 'react-native-reanimated';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import '../global.css';
 
@@ -23,7 +25,7 @@ function NavigationContent() {
             name="index"
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="(pages)" />
+          <Stack.Screen name="(test)" />
         </Stack>
       </BottomSheetModalProvider>
     </View>
@@ -32,10 +34,14 @@ function NavigationContent() {
 
 export default function RootLayout(): React.ReactNode {
   return (
-    <I18nProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <NavigationContent />
-      </GestureHandlerRootView>
-    </I18nProvider>
+    <SafeAreaProvider>
+      <I18nProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <KeyboardProvider>
+            <NavigationContent />
+          </KeyboardProvider>
+        </GestureHandlerRootView>
+      </I18nProvider>
+    </SafeAreaProvider>
   );
 }

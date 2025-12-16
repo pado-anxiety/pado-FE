@@ -1,0 +1,1 @@
+export { parseChats } from './parseChats';

@@ -14,14 +14,15 @@ import {
   TextInputProps,
   View,
 } from 'react-native';
+import { twMerge } from 'tailwind-merge';
 import { VariantProps, tv } from 'tailwind-variants';
 
 const input = tv({
   slots: {
-    container: 'mb-2 self-stretch',
-    label: 'text-body mb-1 text-lg',
+    container: 'grow',
+    label: 'text-body text-lg',
     input:
-      'self-stretch mt-0 rounded-xl border-[0.5px] border-solid border-primary px-4 py-3 font-inter text-base font-medium leading-5 text-body',
+      'mt-0 rounded-xl border border-solid border-primary px-4 py-3 font-inter text-base font-medium leading-5 text-body',
   },
 
   variants: {
@@ -57,7 +58,14 @@ interface InputProps extends Omit<InputVariants, 'error'>, TextInputProps {
   ref?: React.Ref<TextInput>;
 }
 
-function Input({ label, error, disabled, onBlur, ...props }: InputProps) {
+function Input({
+  label,
+  error,
+  disabled,
+  onBlur,
+  className,
+  ...props
+}: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = useCallback(() => {
@@ -82,7 +90,7 @@ function Input({ label, error, disabled, onBlur, ...props }: InputProps) {
       {label && <Text className={styles.label()}>{label}</Text>}
       <NTextInput
         {...props}
-        className={styles.input()}
+        className={twMerge(styles.input(), className)}
         onFocus={handleFocus}
         onBlur={handleBlur}
       />

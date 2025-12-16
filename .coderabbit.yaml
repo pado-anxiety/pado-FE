@@ -22,6 +22,7 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
+    tests: false
 
 chat:
   auto_reply: true              

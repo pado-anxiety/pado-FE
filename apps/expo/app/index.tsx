@@ -1,75 +1,16 @@
-import { ENV } from '@src/lib/env';
-import { useRouter } from 'expo-router';
-import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
-
-import { Button } from '@nyangtodac/ui';
+import { View } from '@src/components/ui';
+import { ChatScreen } from '@src/features/chat';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function HomeScreen(): React.ReactNode {
-  const router = useRouter();
-  const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
 
   return (
-    <View className="flex-1 items-center justify-center gap-4 bg-page">
-      <Text className="text-2xl font-bold text-success">{t('hello')}</Text>
-      <Text className="text-body">ENV: {ENV.APP_ENV}</Text>
-      <Text className="text-body">SECRET_KEY: {ENV.SECRET_KEY}</Text>
-      <Button
-        text="change language"
-        onPress={() => router.push('/(pages)/lang')}
-        color="primary"
-        size="default"
-        disabled={false}
-        fullWidth={false}
-      />
-      <Button
-        text="button page"
-        onPress={() => router.push('/(pages)/button')}
-        color="primary"
-        size="default"
-        disabled={false}
-        fullWidth={false}
-      />
-      <Button
-        text="form page"
-        onPress={() => router.push('/(pages)/form')}
-        color="primary"
-        size="default"
-        disabled={false}
-        fullWidth={false}
-      />
-      <Button
-        text="text page"
-        onPress={() => router.push('/(pages)/text')}
-        color="primary"
-        size="default"
-        disabled={false}
-        fullWidth={false}
-      />
-      <Button
-        text="modal page"
-        onPress={() => router.push('/(pages)/modal')}
-        color="primary"
-        size="default"
-        disabled={false}
-        fullWidth={false}
-      />
-      <Button
-        text="image page"
-        onPress={() => router.push('/(pages)/image')}
-        color="primary"
-        size="default"
-        disabled={false}
-        fullWidth={false}
-      />
-      <Button
-        text="theme page"
-        onPress={() => router.push('/(pages)/theme')}
-        color="primary"
-        size="default"
-        disabled={false}
-        fullWidth={false}
-      />
+    <View
+      className="flex-1 bg-green-100"
+      style={{ paddingTop: insets.top }}
+    >
+      <ChatScreen />
     </View>
   );
 }
