@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 
-import { userAPI } from '@src/lib/api/chat';
+import { userAPI } from '@src/lib/api';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 
 import { CHAT_MOCK_DATA, ROLE } from '../constants';
