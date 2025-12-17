@@ -21,6 +21,7 @@ export default function ChatScreen() {
     handleInputFocus,
     handleSend,
     setIsChatModalVisible,
+    isChatLoading,
   } = useChat();
 
   const { inputAnimatedStyle } = useChatKeyboard();
@@ -43,6 +44,7 @@ export default function ChatScreen() {
             <ChatList
               ref={flatListRef}
               chats={chats}
+              isChatLoading={isChatLoading}
             />
           )}
           <ChatInputBar

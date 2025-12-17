@@ -28,6 +28,8 @@ interface UseChatReturn {
   handleSend: () => void;
   /** 채팅 모달 표시 설정 */
   setIsChatModalVisible: (visible: boolean) => void;
+  /** 채팅 로딩 여부 */
+  isChatLoading: boolean;
 }
 
 export function useChat(): UseChatReturn {
@@ -91,6 +93,7 @@ export function useChat(): UseChatReturn {
     inputRef.current?.clear();
     inputRef.current?.blur();
     sendMessageMutation.mutate(message);
+    setMessage('');
   }, [message, sendMessageMutation]);
 
   return {
@@ -104,5 +107,6 @@ export function useChat(): UseChatReturn {
     handleInputFocus,
     handleSend,
     setIsChatModalVisible,
+    isChatLoading: sendMessageMutation.isPending,
   };
 }
