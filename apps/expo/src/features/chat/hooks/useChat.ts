@@ -1,12 +1,11 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback } from 'react';
 
-import { API_KEY, QuotaResponse, chatAPI } from '@src/lib/api';
-import { useMutation, useQuery } from '@tanstack/react-query';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 
-import { queryClient } from '../../../../app/_layout';
-import { ROLE } from '../constants';
 import type { Chat } from '../types';
+import { useChatInput } from './useChatInput';
+import { useChatMessages } from './useChatMessages';
+import { useChatModal } from './useChatModal';
 
 interface UseChatReturn {
   inputRef: React.RefObject<TextInput | null>;
@@ -30,94 +29,52 @@ interface UseChatReturn {
   setIsChatModalVisible: (visible: boolean) => void;
   /** 채팅 로딩 여부 */
   isChatLoading: boolean;
-  /** 남은 횟수 */
-  remainingQuota: QuotaResponse | undefined;
 }
 
 export function useChat(): UseChatReturn {
-  const inputRef = useRef<TextInput>(null);
-  const flatListRef = useRef<FlatList>(null);
-
-  const [isChatModalVisible, setIsChatModalVisible] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
-
-  const { data: chats } = useQuery<Chat[]>({
-    queryKey: [API_KEY.CHATS],
-    queryFn: () => chatAPI.getChatHistory(),
-  });
-
-  const { data: remainingQuota } = useQuery({
-    queryKey: [API_KEY.QUOTA],
-    queryFn: () => chatAPI.getRemainingQuota(),
-  });
-
-  const sendMessageMutation = useMutation({
-    mutationFn: chatAPI.sendMessage,
-    onMutate: async (message) => {
-      await queryClient.cancelQueries({ queryKey: [API_KEY.CHATS] });
-
-      // 현재 채팅 내용 스냅샷
-      const chatSnapshot = queryClient.getQueryData<Chat[]>([API_KEY.CHATS]);
-
-      // chats 쿼리에 새로운 메시지 낙관적 업데이트
-      queryClient.setQueryData<Chat[]>([API_KEY.CHATS], (old) => [
-        { sender: ROLE.USER, message, time: new Date().toISOString() },
-        ...(old || []),
-      ]);
-
-      // 스냅샷 반환
-      return { chatSnapshot };
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [API_KEY.CHATS] });
-    },
-    onError: (error, _, context) => {
-      // chats 를 스냅샷으로 되돌림
-      if (context?.chatSnapshot) {
-        queryClient.setQueryData<Chat[]>([API_KEY.CHATS], context.chatSnapshot);
-      }
-      console.error(error);
-    },
-    onSettled: () => {
-      // 서버와 동기화
-      queryClient.invalidateQueries({
-        queryKey: [API_KEY.CHATS, API_KEY.QUOTA],
-      });
-    },
-  });
+  const { chats, isChatLoading, sendMessage } = useChatMessages();
+  const { isChatModalVisible, setIsChatModalVisible, closeModal, openModal } =
+    useChatModal();
+  const {
+    inputRef,
+    flatListRef,
+    message,
+    setMessage,
+    clearInput,
+    blurInput,
+    scrollToTop,
+  } = useChatInput();
 
   const handleBack = useCallback(() => {
-    setIsChatModalVisible(false);
+    closeModal();
     setMessage('');
-    inputRef.current?.blur();
-  }, []);
+    blurInput();
+  }, [closeModal, setMessage, blurInput]);
 
   const handleInputFocus = useCallback(() => {
-    flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
-    setIsChatModalVisible(true);
-  }, []);
+    scrollToTop();
+    openModal();
+  }, [scrollToTop, openModal]);
 
-  const handleSend = useCallback(async () => {
+  const handleSend = useCallback(() => {
     if (!message.trim()) return;
 
-    inputRef.current?.clear();
-    inputRef.current?.blur();
-    sendMessageMutation.mutate(message);
-    setMessage('');
-  }, [message, sendMessageMutation]);
+    clearInput();
+    blurInput();
+    sendMessage(message);
+  }, [message, clearInput, blurInput, sendMessage]);
 
   return {
     inputRef,
     flatListRef,
     isChatModalVisible,
     message,
-    chats: chats || [],
+    chats,
     setMessage,
     handleBack,
     handleInputFocus,
     handleSend,
     setIsChatModalVisible,
-    isChatLoading: sendMessageMutation.isPending,
-    remainingQuota,
+    isChatLoading,
   };
 }

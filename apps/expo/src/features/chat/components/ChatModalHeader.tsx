@@ -1,17 +1,16 @@
 import { Entypo, FontAwesome } from '@expo/vector-icons';
 import { Text, View } from '@src/components/ui';
-import { QuotaResponse } from '@src/lib/api';
 import { Pressable } from 'react-native-gesture-handler';
+
+import { useChatQuota } from '../hooks';
 
 interface ChatModalHeaderProps {
   onBack: () => void;
-  remainingQuota: QuotaResponse | undefined;
 }
 
-export default function ChatModalHeader({
-  onBack,
-  remainingQuota,
-}: ChatModalHeaderProps) {
+export default function ChatModalHeader({ onBack }: ChatModalHeaderProps) {
+  const { remainingQuota } = useChatQuota();
+
   return (
     <View className="flex flex-row justify-between gap-2 px-8 pb-3 w-full">
       <Pressable
