@@ -1,6 +1,7 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { I18nProvider } from '@src/lib/i18n';
 import { useTheme } from '@src/lib/theme';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 import { View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -32,16 +33,20 @@ function NavigationContent() {
   );
 }
 
+const queryClient = new QueryClient();
+
 export default function RootLayout(): React.ReactNode {
   return (
     <SafeAreaProvider>
-      <I18nProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <KeyboardProvider>
-            <NavigationContent />
-          </KeyboardProvider>
-        </GestureHandlerRootView>
-      </I18nProvider>
+      <QueryClientProvider client={queryClient}>
+        <I18nProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <KeyboardProvider>
+              <NavigationContent />
+            </KeyboardProvider>
+          </GestureHandlerRootView>
+        </I18nProvider>
+      </QueryClientProvider>
     </SafeAreaProvider>
   );
 }
