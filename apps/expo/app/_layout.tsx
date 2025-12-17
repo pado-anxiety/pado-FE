@@ -33,7 +33,7 @@ function NavigationContent() {
   );
 }
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 export default function RootLayout(): React.ReactNode {
   return (

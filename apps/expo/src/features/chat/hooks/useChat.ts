@@ -1,10 +1,11 @@
 import { useCallback, useRef, useState } from 'react';
 
 import { userAPI } from '@src/lib/api';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 
-import { CHAT_MOCK_DATA, ROLE } from '../constants';
+import { queryClient } from '../../../../app/_layout';
+import { ROLE } from '../constants';
 import type { Chat } from '../types';
 
 interface UseChatReturn {
@@ -35,15 +36,41 @@ export function useChat(): UseChatReturn {
 
   const [isChatModalVisible, setIsChatModalVisible] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
-  const [chats, setChats] = useState<Chat[]>(CHAT_MOCK_DATA);
+  const { data: chats } = useQuery<Chat[]>({
+    queryKey: ['chats'],
+    queryFn: () => userAPI.getChatHistory(),
+  });
 
   const sendMessageMutation = useMutation({
     mutationFn: userAPI.sendMessage,
-    onSuccess: (data) => {
-      setChats((prev) => [...data, ...prev]);
+    onMutate: async (message) => {
+      await queryClient.cancelQueries({ queryKey: ['chats'] });
+
+      // 현재 채팅 내용 스냅샷
+      const chatSnapshot = queryClient.getQueryData<Chat[]>(['chats']);
+
+      // chats 쿼리에 새로운 메시지 낙관적 업데이트
+      queryClient.setQueryData<Chat[]>(['chats'], (old) => [
+        { sender: ROLE.USER, message, time: new Date().toISOString() },
+        ...(old || []),
+      ]);
+
+      // 스냅샷 반환
+      return { chatSnapshot };
     },
-    onError: (error) => {
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['chats'] });
+    },
+    onError: (error, _, context) => {
+      // chats 를 스냅샷으로 되돌림
+      if (context?.chatSnapshot) {
+        queryClient.setQueryData<Chat[]>(['chats'], context.chatSnapshot);
+      }
       console.error(error);
+    },
+    onSettled: () => {
+      // 서버와 동기화
+      queryClient.invalidateQueries({ queryKey: ['chats'] });
     },
   });
 
@@ -63,10 +90,6 @@ export function useChat(): UseChatReturn {
 
     inputRef.current?.clear();
     inputRef.current?.blur();
-    setChats((prev) => [
-      { sender: ROLE.USER, message, time: new Date().toISOString() },
-      ...prev,
-    ]);
     sendMessageMutation.mutate(message);
   }, [message, sendMessageMutation]);
 
@@ -75,7 +98,7 @@ export function useChat(): UseChatReturn {
     flatListRef,
     isChatModalVisible,
     message,
-    chats,
+    chats: chats || [],
     setMessage,
     handleBack,
     handleInputFocus,
