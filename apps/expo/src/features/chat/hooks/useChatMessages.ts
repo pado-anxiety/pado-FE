@@ -3,9 +3,9 @@ import { useCallback } from 'react';
 import { API_KEY, chatAPI } from '@src/lib/api';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { queryClient } from '../../../../app/_layout';
 import { ROLE } from '../constants';
 import type { Chat } from '../types';
+import { queryClient } from './../../../../app/_layout';
 
 interface UseChatMessagesReturn {
   chats: Chat[];
@@ -48,9 +48,8 @@ export function useChatMessages(): UseChatMessagesReturn {
     },
     onSettled: () => {
       // 서버와 동기화
-      queryClient.invalidateQueries({
-        queryKey: [API_KEY.CHATS, API_KEY.QUOTA],
-      });
+      queryClient.invalidateQueries({ queryKey: [API_KEY.CHATS] });
+      queryClient.invalidateQueries({ queryKey: [API_KEY.QUOTA] });
     },
   });
 
