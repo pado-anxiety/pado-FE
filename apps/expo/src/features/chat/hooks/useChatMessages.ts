@@ -1,11 +1,10 @@
 import { useCallback } from 'react';
 
 import { API_KEY, chatAPI } from '@src/lib/api';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ROLE } from '../constants';
 import type { Chat } from '../types';
-import { queryClient } from './../../../../app/_layout';
 
 interface UseChatMessagesReturn {
   chats: Chat[];
@@ -14,6 +13,8 @@ interface UseChatMessagesReturn {
 }
 
 export function useChatMessages(): UseChatMessagesReturn {
+  const queryClient = useQueryClient();
+
   const { data: chats } = useQuery<Chat[]>({
     queryKey: [API_KEY.CHATS],
     queryFn: () => chatAPI.getChatHistory(),
