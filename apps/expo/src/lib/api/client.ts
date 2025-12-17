@@ -16,6 +16,7 @@ apiClient.interceptors.request.use(
   (config) => {
     // const accessToken = storage.getString('accessToken');
     const accessToken = ENV.ACCESS_TOKEN;
+    console.log('accessToken: ', accessToken);
 
     if (accessToken && config.headers) {
       config.headers.Authorization = `Bearer ${accessToken}`;

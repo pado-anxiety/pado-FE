@@ -31,6 +31,7 @@ const client = z.object({
 
   // add client environment variables here
   BASE_URL: z.string(),
+  ACCESS_TOKEN: z.string(),
 });
 
 const buildTime = z.object({
@@ -49,6 +50,7 @@ const _clientEnv = {
 
   // add client environment variables here
   BASE_URL: process.env.BASE_URL,
+  ACCESS_TOKEN: process.env.ACCESS_TOKEN,
 };
 
 const _buildTimeEnv = {
