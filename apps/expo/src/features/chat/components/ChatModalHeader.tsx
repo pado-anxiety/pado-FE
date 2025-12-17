@@ -1,5 +1,6 @@
 import { Entypo, FontAwesome } from '@expo/vector-icons';
 import { Text, View } from '@src/components/ui';
+import { ICONS_SIZE } from '@src/lib/styles';
 import { Pressable } from 'react-native-gesture-handler';
 
 import { useChatQuota } from '../hooks';
@@ -20,7 +21,7 @@ export default function ChatModalHeader({ onBack }: ChatModalHeaderProps) {
         <View className="pt-1.5">
           <Entypo
             name="chevron-thin-left"
-            size={24}
+            size={ICONS_SIZE.medium}
             color="rgb(224, 224, 224)"
           />
         </View>
@@ -32,7 +33,7 @@ export default function ChatModalHeader({ onBack }: ChatModalHeaderProps) {
         <View className="flex flex-row justify-center items-center gap-4 bg-chat-user rounded-full px-3 py-1.5">
           <FontAwesome
             name="send"
-            size={22}
+            size={ICONS_SIZE.small}
             color="rgb(224, 224, 224)"
           />
           <Text className="text-body-medium text-white">
