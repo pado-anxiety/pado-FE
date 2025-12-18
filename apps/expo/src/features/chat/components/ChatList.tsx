@@ -1,15 +1,16 @@
 import { useMemo } from 'react';
 
-import { ActivityIndicator, View } from '@src/components/ui';
+import { ActivityIndicator, Text, View } from '@src/components/ui';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { ROLE } from '../constants';
-import type { Chat, ParsedChat } from '../types';
+import type { ChatAPI, ChatUI } from '../types';
+import { CHAT_TYPE } from '../types/chat-type';
 import { parseChats } from '../utils';
 import { AssistantChatBox, UserChatBox } from './ChatItem';
 
 interface ChatListProps {
-  chats: Chat[];
+  chats: ChatAPI;
   isChatLoading: boolean;
   ref: React.RefObject<FlatList | null>;
 }
@@ -17,17 +18,29 @@ interface ChatListProps {
 export default function ChatList({ chats, isChatLoading, ref }: ChatListProps) {
   const parsedChats = useMemo(() => parseChats(chats), [chats]);
 
-  const renderChatItem = ({ item: chat }: { item: ParsedChat }) => (
-    <View
-      className={`flex flex-row items-center ${chat.sender === ROLE.USER ? 'self-end' : 'self-start'}`}
-    >
-      {chat.sender === ROLE.USER ? (
-        <UserChatBox chat={chat} />
-      ) : (
-        <AssistantChatBox chat={chat} />
-      )}
-    </View>
-  );
+  const renderChatItem = ({ item: chat }: { item: ChatUI }) => {
+    if (chat.type === CHAT_TYPE.CBT_RECOMMENDATION) {
+      return (
+        <View className="flex flex-row items-center self-end">
+          <Text className="text-body-medium text-gray-500">
+            CBT Recommendation
+          </Text>
+        </View>
+      );
+    }
+
+    return (
+      <View
+        className={`flex flex-row items-center ${chat.sender === ROLE.USER ? 'self-end' : 'self-start'}`}
+      >
+        {chat.sender === ROLE.USER ? (
+          <UserChatBox chat={chat} />
+        ) : (
+          <AssistantChatBox chat={chat} />
+        )}
+      </View>
+    );
+  };
 
   return (
     <>

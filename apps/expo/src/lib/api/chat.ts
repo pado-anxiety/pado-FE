@@ -1,11 +1,8 @@
-import { Chat } from '@src/features/chat';
+import { AssistantChat } from '@src/features/chat';
+import { ChatAPI } from '@src/features/chat/types';
 
 import { apiClient } from './client';
 import { ROUTES } from './route';
-
-export interface ChatResponse {
-  messages: Chat[];
-}
 
 export interface QuotaResponse {
   quota: number;
@@ -13,15 +10,15 @@ export interface QuotaResponse {
 }
 
 export const chatAPI = {
-  getChatHistory: async (): Promise<Chat[]> => {
-    const response: ChatResponse = await apiClient.get(ROUTES.CHATS);
-    return response.messages;
+  getChatHistory: async (): Promise<ChatAPI> => {
+    const response: { content: ChatAPI } = await apiClient.get(ROUTES.CHATS);
+    return response.content;
   },
-  sendMessage: async (message: string): Promise<Chat[]> => {
-    const response: ChatResponse = await apiClient.post(ROUTES.CHATS, {
+  sendMessage: async (message: string): Promise<AssistantChat> => {
+    const response: AssistantChat = await apiClient.post(ROUTES.CHATS, {
       message,
     });
-    return response.messages;
+    return response;
   },
   getRemainingQuota: async (): Promise<QuotaResponse> => {
     const response: QuotaResponse = await apiClient.get(ROUTES.QUOTA);

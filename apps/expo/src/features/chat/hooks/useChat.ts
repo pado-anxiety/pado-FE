@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 
-import type { Chat } from '../types';
+import type { ChatAPI } from '../types';
 import { useChatInput } from './useChatInput';
 import { useChatMessages } from './useChatMessages';
 import { useChatModal } from './useChatModal';
@@ -16,7 +16,7 @@ interface UseChatReturn {
   /** 현재 입력 중인 메시지 */
   message: string;
   /** 채팅 목록 */
-  chats: Chat[];
+  chats: ChatAPI;
   /** 메시지 변경 핸들러 */
   setMessage: (text: string) => void;
   /** 뒤로가기 핸들러 */
