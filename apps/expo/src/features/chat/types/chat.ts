@@ -45,5 +45,7 @@ export interface AssistantChatUI {
 /** CBT 추천 UI */
 export type CBTRecommendationChatUI = CBTRecommendationChat;
 
+export type ChatAPI = (Chat | CBTRecommendationChat)[];
+
 /** 파싱된 UI 채팅 */
 export type ChatUI = UserChatUI | AssistantChatUI | CBTRecommendationChatUI;

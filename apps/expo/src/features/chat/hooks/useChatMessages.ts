@@ -2,11 +2,11 @@ import { API_KEY, chatAPI } from '@src/lib/api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ROLE } from '../constants';
-import type { CBTRecommendationChat, Chat } from '../types';
+import type { ChatAPI } from '../types';
 import { CHAT_TYPE } from '../types/chat-type';
 
 interface UseChatMessagesReturn {
-  chats: (Chat | CBTRecommendationChat)[];
+  chats: ChatAPI;
   isChatLoading: boolean;
   sendMessage: (message: string) => void;
 }
@@ -14,7 +14,7 @@ interface UseChatMessagesReturn {
 export function useChatMessages(): UseChatMessagesReturn {
   const queryClient = useQueryClient();
 
-  const { data: chats } = useQuery<(Chat | CBTRecommendationChat)[]>({
+  const { data: chats } = useQuery<ChatAPI>({
     queryKey: [API_KEY.CHATS],
     queryFn: () => chatAPI.getChatHistory(),
   });
@@ -25,21 +25,18 @@ export function useChatMessages(): UseChatMessagesReturn {
       await queryClient.cancelQueries({ queryKey: [API_KEY.CHATS] });
 
       // 현재 채팅 내용 스냅샷
-      const chatSnapshot = queryClient.getQueryData<Chat[]>([API_KEY.CHATS]);
+      const chatSnapshot = queryClient.getQueryData<ChatAPI>([API_KEY.CHATS]);
 
       // chats 쿼리에 새로운 메시지 낙관적 업데이트
-      queryClient.setQueryData<(Chat | CBTRecommendationChat)[]>(
-        [API_KEY.CHATS],
-        (old) => [
-          {
-            type: CHAT_TYPE.CHAT,
-            sender: ROLE.USER,
-            message,
-            time: new Date().toISOString(),
-          },
-          ...(old || []),
-        ],
-      );
+      queryClient.setQueryData<ChatAPI>([API_KEY.CHATS], (old) => [
+        {
+          type: CHAT_TYPE.CHAT,
+          sender: ROLE.USER,
+          message,
+          time: new Date().toISOString(),
+        },
+        ...(old || []),
+      ]);
 
       // 스냅샷 반환
       return { chatSnapshot };
@@ -50,7 +47,10 @@ export function useChatMessages(): UseChatMessagesReturn {
     onError: (error, _, context) => {
       // chats 를 스냅샷으로 되돌림
       if (context?.chatSnapshot) {
-        queryClient.setQueryData<Chat[]>([API_KEY.CHATS], context.chatSnapshot);
+        queryClient.setQueryData<ChatAPI>(
+          [API_KEY.CHATS],
+          context.chatSnapshot,
+        );
       }
       console.error(error);
     },

@@ -4,13 +4,13 @@ import { ActivityIndicator, Text, View } from '@src/components/ui';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { ROLE } from '../constants';
-import type { CBTRecommendationChat, Chat, ChatUI } from '../types';
+import type { ChatAPI, ChatUI } from '../types';
 import { CHAT_TYPE } from '../types/chat-type';
 import { parseChats } from '../utils';
 import { AssistantChatBox, UserChatBox } from './ChatItem';
 
 interface ChatListProps {
-  chats: (Chat | CBTRecommendationChat)[];
+  chats: ChatAPI;
   isChatLoading: boolean;
   ref: React.RefObject<FlatList | null>;
 }

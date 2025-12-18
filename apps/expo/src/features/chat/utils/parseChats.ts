@@ -1,10 +1,8 @@
 import { ROLE } from '../constants';
-import type { CBTRecommendationChat, Chat, ChatUI } from '../types';
+import type { ChatAPI, ChatUI } from '../types';
 import { CHAT_TYPE } from '../types/chat-type';
 
-export const parseChats = (
-  chats: (Chat | CBTRecommendationChat)[],
-): ChatUI[] => {
+export const parseChats = (chats: ChatAPI): ChatUI[] => {
   const stack: ChatUI[] = [];
 
   for (const chat of chats) {
