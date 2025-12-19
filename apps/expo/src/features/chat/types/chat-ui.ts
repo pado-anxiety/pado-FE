@@ -1,5 +1,5 @@
 import { ROLE } from '../constants';
-import { CBTRecommendation } from './chat-api';
+import { CBTRecommendChat, CBTRecommendation } from './chat-api';
 import { CHAT_TYPE } from './chat-type';
 
 /** 사용자 채팅 UI */
@@ -27,7 +27,9 @@ export interface CBTRecommendChatUI {
 }
 
 /** CBT 추천 채팅 UI */
-export type CBTRecommendationChatUI = CBTRecommendChatUI | CBTRecommendation;
+export interface CBTRecommendationChatUI {
+  content: (CBTRecommendation | CBTRecommendChat)[];
+}
 
 export type ChatUI =
   | UserChatUI

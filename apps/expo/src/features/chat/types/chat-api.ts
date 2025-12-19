@@ -41,6 +41,7 @@ export interface CBTRecommendChat {
 /** CBT 추천 채팅 api */
 export interface CBTRecommendationAPI {
   content: (CBTRecommendation | CBTRecommendChat)[];
+  cbt: 'BREATHING' | 'CALMING_PHRASE' | 'GROUNDING' | 'COGNITIVE_REFRAME';
 }
 
 /** 채팅 기록 api */

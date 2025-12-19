@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { API_KEY, chatAPI } from '@src/lib/api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -9,9 +11,20 @@ interface UseChatMessagesReturn {
   chats: ChatAPI;
   isChatLoading: boolean;
   sendMessage: (message: string) => void;
+  cbtRecommendation:
+    | 'BREATHING'
+    | 'CALMING_PHRASE'
+    | 'GROUNDING'
+    | 'COGNITIVE_REFRAME'
+    | null;
+  getCBTRecommendation: () => void;
 }
 
 export function useChatMessages(): UseChatMessagesReturn {
+  const [cbtRecommendation, setCBTRecommendation] = useState<
+    'BREATHING' | 'CALMING_PHRASE' | 'GROUNDING' | 'COGNITIVE_REFRAME' | null
+  >(null);
+
   const queryClient = useQueryClient();
 
   const { data: chats } = useQuery<ChatAPI>({
@@ -58,11 +71,35 @@ export function useChatMessages(): UseChatMessagesReturn {
     },
   });
 
-  const sendMessage = (message: string) => sendMessageMutation.mutate(message);
+  const cbtRecommendationMutation = useMutation({
+    mutationFn: chatAPI.getCBTRecommendation,
+    onSuccess: (data) => {
+      console.log('data.content: ', data.content);
+      console.log('data.cbt: ', data.cbt);
+      setCBTRecommendation(data.cbt);
+    },
+    onError: (error) => {
+      console.error('error: ', error);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [API_KEY.CHATS] });
+    },
+  });
+
+  const sendMessage = (message: string) => {
+    sendMessageMutation.mutate(message);
+    setCBTRecommendation(null);
+  };
+
+  const getCBTRecommendation = () => {
+    cbtRecommendationMutation.mutate();
+  };
 
   return {
     chats: chats || [],
     isChatLoading: sendMessageMutation.isPending,
     sendMessage,
+    cbtRecommendation,
+    getCBTRecommendation,
   };
 }

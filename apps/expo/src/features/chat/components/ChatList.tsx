@@ -22,9 +22,17 @@ interface ChatListProps {
   chats: ChatAPI;
   isChatLoading: boolean;
   ref: React.RefObject<FlatList | null>;
+  recommandationModalHeight: number;
+  isRecommandationModalVisible: boolean;
 }
 
-export default function ChatList({ chats, isChatLoading, ref }: ChatListProps) {
+export default function ChatList({
+  chats,
+  isChatLoading,
+  ref,
+  recommandationModalHeight,
+  isRecommandationModalVisible,
+}: ChatListProps) {
   const parsedChats = useMemo(() => parseChats(chats), [chats]);
 
   const renderChatItem = ({ item: chat }: { item: ChatUI }) => {
@@ -58,6 +66,9 @@ export default function ChatList({ chats, isChatLoading, ref }: ChatListProps) {
           flexGrow: 1,
           justifyContent: 'flex-start',
           gap: 16,
+          paddingTop: isRecommandationModalVisible
+            ? recommandationModalHeight
+            : 0,
         }}
         showsVerticalScrollIndicator={false}
         bounces={false}
@@ -65,21 +76,21 @@ export default function ChatList({ chats, isChatLoading, ref }: ChatListProps) {
         keyExtractor={(item, index) => item.time + index}
         renderItem={renderChatItem}
         ListHeaderComponent={() => {
-          if (!isChatLoading) return null;
-
-          return (
-            <View className="flex flex-row items-start gap-3 max-w-[90%]">
-              <View className="w-12 h-12 bg-chat-assistant rounded-full" />
-              <View className="flex flex-col items-start gap-2">
-                <View className="mr-10 bg-chat-assistant rounded-xl p-4">
-                  <ActivityIndicator
-                    size="small"
-                    color="white"
-                  />
+          if (isChatLoading) {
+            return (
+              <View className="flex flex-row items-start gap-3 max-w-[90%]">
+                <View className="w-12 h-12 bg-chat-assistant rounded-full" />
+                <View className="flex flex-col items-start gap-2">
+                  <View className="mr-10 bg-chat-assistant rounded-xl p-4">
+                    <ActivityIndicator
+                      size="small"
+                      color="white"
+                    />
+                  </View>
                 </View>
               </View>
-            </View>
-          );
+            );
+          }
         }}
         // itemLayoutAnimation={LinearTransition.duration(50)}
       />

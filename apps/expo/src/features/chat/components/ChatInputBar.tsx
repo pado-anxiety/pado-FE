@@ -1,8 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { View } from '@src/components/ui';
-import { API_KEY, chatAPI } from '@src/lib/api';
 import { ICONS_SIZE } from '@src/lib/styles';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
@@ -21,6 +19,10 @@ interface ChatInputBarProps {
   isChatModalVisible: boolean;
   /** 채팅 모달 표시 설정 */
   setIsChatModalVisible: (visible: boolean) => void;
+  /** CBT 추천 요청 핸들러 */
+  getCBTRecommendation: () => void;
+  /** CBT 추천 모달 표시 여부 */
+  isRecommandationModalVisible: boolean;
 }
 
 export default function ChatInputBar({
@@ -31,22 +33,9 @@ export default function ChatInputBar({
   ref,
   isChatModalVisible,
   setIsChatModalVisible,
+  getCBTRecommendation,
+  isRecommandationModalVisible,
 }: ChatInputBarProps) {
-  const queryClient = useQueryClient();
-
-  const getCBTRecommendation = useMutation({
-    mutationFn: chatAPI.getCBTRecommendation,
-    onSuccess: (data) => {
-      console.log('data: ', data);
-    },
-    onError: (error) => {
-      console.error('error: ', error);
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [API_KEY.CHATS] });
-    },
-  });
-
   const handlePress = async () => {
     if (isChatModalVisible) return;
 
@@ -62,15 +51,21 @@ export default function ChatInputBar({
       border-neutral-700
       border-solid border rounded-full
       focus:border-neutral-600 py-1 px-1"
-      style={{ backgroundColor: 'rgba(65, 65, 65, 0.9)' }}
+      style={{
+        backgroundColor: 'rgba(65, 65, 65, 0.9)',
+        opacity: isRecommandationModalVisible ? 0.5 : 1,
+      }}
       onPress={handlePress}
+      pointerEvents={
+        !(isChatModalVisible && isRecommandationModalVisible) ? 'auto' : 'none'
+      }
     >
       <Pressable
         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
         onPress={() => {
           if (!isChatModalVisible) return;
 
-          getCBTRecommendation.mutate();
+          getCBTRecommendation();
         }}
         className="bg-neutral-600 aspect-square rounded-full p-3"
       >

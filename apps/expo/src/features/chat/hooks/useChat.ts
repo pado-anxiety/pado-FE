@@ -12,6 +12,13 @@ interface ChatInputState {
   inputRef: React.RefObject<TextInput | null>;
   message: string;
   setMessage: (text: string) => void;
+  cbtRecommendation:
+    | 'BREATHING'
+    | 'CALMING_PHRASE'
+    | 'GROUNDING'
+    | 'COGNITIVE_REFRAME'
+    | null;
+  getCBTRecommendation: () => void;
 }
 
 /** 채팅 리스트 관련 상태 */
@@ -42,7 +49,14 @@ interface UseChatReturn {
 }
 
 export function useChat(): UseChatReturn {
-  const { chats, isChatLoading, sendMessage } = useChatMessages();
+  const {
+    chats,
+    isChatLoading,
+    sendMessage,
+    cbtRecommendation,
+    getCBTRecommendation,
+  } = useChatMessages();
+
   const { isChatModalVisible, setIsChatModalVisible, closeModal, openModal } =
     useChatModal();
   const {
@@ -79,6 +93,8 @@ export function useChat(): UseChatReturn {
       inputRef,
       message,
       setMessage,
+      cbtRecommendation,
+      getCBTRecommendation,
     },
     list: {
       flatListRef,

@@ -37,6 +37,7 @@ export const chatAPI = {
         situation: 'PRESENTATION_EXAM',
       },
     );
+    console.log('response: ', response);
     return response;
   },
 };
