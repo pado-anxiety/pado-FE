@@ -11,13 +11,7 @@ export {
 
 export { useChat, useChatKeyboard } from './hooks';
 
-export type {
-  AssistantChat,
-  Chat,
-  ChatSender,
-  ParsedChat,
-  UserChat,
-} from './types';
+export type * from './types';
 
 export { parseChats } from './utils';
 

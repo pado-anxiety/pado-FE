@@ -1,6 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { View } from '@src/components/ui';
+import { API_KEY, chatAPI } from '@src/lib/api';
 import { ICONS_SIZE } from '@src/lib/styles';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
@@ -30,6 +32,21 @@ export default function ChatInputBar({
   isChatModalVisible,
   setIsChatModalVisible,
 }: ChatInputBarProps) {
+  const queryClient = useQueryClient();
+
+  const getCBTRecommendation = useMutation({
+    mutationFn: chatAPI.getCBTRecommendation,
+    onSuccess: (data) => {
+      console.log('data: ', data);
+    },
+    onError: (error) => {
+      console.error('error: ', error);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [API_KEY.CHATS] });
+    },
+  });
+
   const handlePress = async () => {
     if (isChatModalVisible) return;
 
@@ -53,7 +70,7 @@ export default function ChatInputBar({
         onPress={() => {
           if (!isChatModalVisible) return;
 
-          console.log('추천');
+          getCBTRecommendation.mutate();
         }}
         className="bg-neutral-600 aspect-square rounded-full p-3"
       >

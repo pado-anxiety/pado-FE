@@ -1,5 +1,10 @@
 import { ROLE } from '../constants';
-import type { ChatAPI, ChatUI } from '../types';
+import type {
+  CBTRecommendChat,
+  ChatAPI,
+  ChatAssistantAPI,
+  ChatUI,
+} from '../types';
 import { CHAT_TYPE } from '../types/chat-type';
 
 export const parseChats = (chats: ChatAPI): ChatUI[] => {
@@ -7,12 +12,23 @@ export const parseChats = (chats: ChatAPI): ChatUI[] => {
 
   for (const chat of chats) {
     if (chat.type === CHAT_TYPE.CHAT && chat.sender === ROLE.AI) {
-      const messages = chat.message.split(/(?<=[!?.])\s*/);
+      const messages = (chat as ChatAssistantAPI).message.split(
+        /(?<=[!?.])\s*/,
+      );
       stack.push({
-        type: CHAT_TYPE.CHAT,
-        sender: ROLE.AI,
+        ...chat,
         messages,
-        time: chat.time,
+      });
+      continue;
+    }
+
+    if (chat.type === CHAT_TYPE.CHAT && chat.sender === ROLE.SYSTEM) {
+      const messages = (chat as CBTRecommendChat).message.split(
+        /(?<=[!?.])\s*/,
+      );
+      stack.push({
+        ...chat,
+        messages,
       });
       continue;
     }

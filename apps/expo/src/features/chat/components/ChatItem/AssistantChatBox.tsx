@@ -1,9 +1,9 @@
 import { Text, View } from '@src/components/ui';
 
-import type { AssistantChat } from '../../types';
+import type { AssistantChatUI } from '../../types';
 
 interface AssistantChatBoxProps {
-  chat: AssistantChat;
+  chat: AssistantChatUI;
 }
 
 export default function AssistantChatBox({ chat }: AssistantChatBoxProps) {

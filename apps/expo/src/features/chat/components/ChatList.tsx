@@ -4,7 +4,12 @@ import { ActivityIndicator, Text, View } from '@src/components/ui';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { ROLE } from '../constants';
-import type { ChatAPI, ChatUI } from '../types';
+import type {
+  AssistantChatUI,
+  CBTRecommendation,
+  ChatAPI,
+  ChatUI,
+} from '../types';
 import { CHAT_TYPE } from '../types/chat-type';
 import { parseChats } from '../utils';
 import { AssistantChatBox, UserChatBox } from './ChatItem';
@@ -20,11 +25,18 @@ export default function ChatList({ chats, isChatLoading, ref }: ChatListProps) {
 
   const renderChatItem = ({ item: chat }: { item: ChatUI }) => {
     if (chat.type === CHAT_TYPE.CBT_RECOMMENDATION) {
+      const { intensity, situation, symptom } = (
+        chat as unknown as CBTRecommendation
+      ).options;
+
       return (
-        <View className="flex flex-row items-center self-end">
-          <Text className="text-body-medium text-gray-500">
-            CBT Recommendation
-          </Text>
+        <View className="flex flex-col items-start bg-chat-user rounded-xl p-4 self-end gap-2">
+          <Text className="text-body-small text-white">이전 CBT 추천 기록</Text>
+          <View className="flex flex-row items-center gap-2">
+            <Text className="text-body-small text-white bg-neutral-650 rounded-md p-2">{`${intensity}`}</Text>
+            <Text className="text-body-small text-white bg-neutral-650 rounded-md p-2">{`${situation}`}</Text>
+            <Text className="text-body-small text-white bg-neutral-650 rounded-md p-2">{`${symptom}`}</Text>
+          </View>
         </View>
       );
     }
@@ -36,7 +48,7 @@ export default function ChatList({ chats, isChatLoading, ref }: ChatListProps) {
         {chat.sender === ROLE.USER ? (
           <UserChatBox chat={chat} />
         ) : (
-          <AssistantChatBox chat={chat} />
+          <AssistantChatBox chat={chat as AssistantChatUI} />
         )}
       </View>
     );
@@ -57,7 +69,7 @@ export default function ChatList({ chats, isChatLoading, ref }: ChatListProps) {
         showsVerticalScrollIndicator={false}
         bounces={false}
         overScrollMode="never"
-        keyExtractor={(item) => item.time}
+        keyExtractor={(item, index) => item.time + index}
         renderItem={renderChatItem}
         ListHeaderComponent={() => {
           if (!isChatLoading) return null;

@@ -16,7 +16,6 @@ apiClient.interceptors.request.use(
   (config) => {
     // const accessToken = storage.getString('accessToken');
     const accessToken = ENV.ACCESS_TOKEN;
-    console.log('accessToken: ', accessToken);
 
     if (accessToken && config.headers) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -35,7 +34,7 @@ apiClient.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      console.log('토큰이 만료되었습니다. 로그아웃 처리가 필요합니다.');
+      console.error('클라이언트 오류가 발생했습니다: ', error);
     }
 
     return Promise.reject(error);
