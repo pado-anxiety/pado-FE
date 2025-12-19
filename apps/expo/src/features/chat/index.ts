@@ -2,6 +2,7 @@ export { default as ChatScreen } from './ChatScreen';
 
 export {
   AssistantChatBox,
+  CBTRecommendationBox,
   ChatInputBar,
   ChatList,
   ChatModalHeader,

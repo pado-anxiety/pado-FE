@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { ActivityIndicator, Text, View } from '@src/components/ui';
+import { ActivityIndicator, View } from '@src/components/ui';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { ROLE } from '../constants';
@@ -12,7 +12,11 @@ import type {
 } from '../types';
 import { CHAT_TYPE } from '../types/chat-type';
 import { parseChats } from '../utils';
-import { AssistantChatBox, UserChatBox } from './ChatItem';
+import {
+  AssistantChatBox,
+  CBTRecommendationBox,
+  UserChatBox,
+} from './ChatItem';
 
 interface ChatListProps {
   chats: ChatAPI;
@@ -25,31 +29,20 @@ export default function ChatList({ chats, isChatLoading, ref }: ChatListProps) {
 
   const renderChatItem = ({ item: chat }: { item: ChatUI }) => {
     if (chat.type === CHAT_TYPE.CBT_RECOMMENDATION) {
-      const { intensity, situation, symptom } = (
-        chat as unknown as CBTRecommendation
-      ).options;
+      return <CBTRecommendationBox chat={chat as CBTRecommendation} />;
+    }
 
+    if (chat.sender === ROLE.USER) {
       return (
-        <View className="flex flex-col items-start bg-chat-user rounded-xl p-4 self-end gap-2">
-          <Text className="text-body-small text-white">이전 CBT 추천 기록</Text>
-          <View className="flex flex-row items-center gap-2">
-            <Text className="text-body-small text-white bg-neutral-650 rounded-md p-2">{`${intensity}`}</Text>
-            <Text className="text-body-small text-white bg-neutral-650 rounded-md p-2">{`${situation}`}</Text>
-            <Text className="text-body-small text-white bg-neutral-650 rounded-md p-2">{`${symptom}`}</Text>
-          </View>
+        <View className="flex flex-row items-center self-end">
+          <UserChatBox chat={chat} />
         </View>
       );
     }
 
     return (
-      <View
-        className={`flex flex-row items-center ${chat.sender === ROLE.USER ? 'self-end' : 'self-start'}`}
-      >
-        {chat.sender === ROLE.USER ? (
-          <UserChatBox chat={chat} />
-        ) : (
-          <AssistantChatBox chat={chat as AssistantChatUI} />
-        )}
+      <View className="flex flex-row items-center self-start">
+        <AssistantChatBox chat={chat as AssistantChatUI} />
       </View>
     );
   };
