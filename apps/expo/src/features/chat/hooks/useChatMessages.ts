@@ -41,9 +41,6 @@ export function useChatMessages(): UseChatMessagesReturn {
       // 스냅샷 반환
       return { chatSnapshot };
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [API_KEY.CHATS] });
-    },
     onError: (error, _, context) => {
       // chats 를 스냅샷으로 되돌림
       if (context?.chatSnapshot) {

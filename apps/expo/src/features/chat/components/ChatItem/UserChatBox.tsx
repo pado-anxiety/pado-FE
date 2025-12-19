@@ -1,9 +1,9 @@
 import { Text, View } from '@src/components/ui';
 
-import type { UserChat } from '../../types';
+import type { UserChatUI } from '../../types';
 
 interface UserChatBoxProps {
-  chat: UserChat;
+  chat: UserChatUI;
 }
 
 export default function UserChatBox({ chat }: UserChatBoxProps) {
