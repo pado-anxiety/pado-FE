@@ -3,12 +3,15 @@ import { Pressable } from '@src/components/ui';
 import { ChatModalHeader, ChatOverlay } from './components';
 import ChatContainer from './components/ChatContainer/ChatContainer';
 import { ChatModalProvider } from './context';
+import { CBTModalProvider } from './context/CBTModalContext';
 import { useChat } from './hooks';
 
 export default function ChatScreen() {
   return (
     <ChatModalProvider>
-      <ChatContent />
+      <CBTModalProvider>
+        <ChatContent />
+      </CBTModalProvider>
     </ChatModalProvider>
   );
 }
