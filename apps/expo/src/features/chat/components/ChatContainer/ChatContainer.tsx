@@ -46,7 +46,7 @@ export default function ChatContainer({
         />
         {isCBTRecommendation && (
           <View
-            className="w-full bg-red-100 rounded-2xl p-5 absolute bottom-0 left-0 right-0"
+            className="w-full bg-neutral-200 rounded-2xl p-6 absolute bottom-0 left-0 right-0"
             onLayout={(e) => {
               const newHeight = e.nativeEvent.layout.height;
               setRecommandationModalHeight((prev) =>
@@ -54,7 +54,7 @@ export default function ChatContainer({
               );
             }}
           >
-            <Text className="text-body text-primary font-medium text-center mb-4">
+            <Text className="text-body-large text-primary font-medium text-start mb-3">
               {CBT_LABELS[cbtRecommendation]}을 해보시겠어요?
             </Text>
             <View className="flex flex-row gap-3">
@@ -62,16 +62,18 @@ export default function ChatContainer({
                 <Button
                   text="괜찮아요"
                   color="secondary"
-                  size="sm"
+                  size="default"
                   onPress={() => console.log('reject')}
+                  className="bg-neutral-300 border-[0.5px] border-neutral-400"
                 />
               </View>
               <View className="flex-1">
                 <Button
                   text="좋아요"
                   color="primary"
-                  size="sm"
+                  size="default"
                   onPress={() => console.log('accept')}
+                  className="bg-neutral-800 border-[0.5px] border-neutral-500"
                 />
               </View>
             </View>
