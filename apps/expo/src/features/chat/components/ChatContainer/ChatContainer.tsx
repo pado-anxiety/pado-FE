@@ -26,7 +26,11 @@ export default function ChatContainer({
   input,
   handlers,
 }: UseChatReturn) {
-  const { cbtRecommendation } = input;
+  const {
+    cbtRecommendation,
+    rejectCBTRecommendation,
+    acceptCBTRecommendation,
+  } = input;
   const isCBTRecommendation = !!cbtRecommendation;
 
   const { inputAnimatedStyle } = useChatKeyboard();
@@ -63,7 +67,7 @@ export default function ChatContainer({
                   text="괜찮아요"
                   color="secondary"
                   size="default"
-                  onPress={() => console.log('reject')}
+                  onPress={rejectCBTRecommendation}
                   className="bg-neutral-300 border-[0.5px] border-neutral-400"
                 />
               </View>
@@ -72,7 +76,7 @@ export default function ChatContainer({
                   text="좋아요"
                   color="primary"
                   size="default"
-                  onPress={() => console.log('accept')}
+                  onPress={() => acceptCBTRecommendation(cbtRecommendation)}
                   className="bg-neutral-800 border-[0.5px] border-neutral-500"
                 />
               </View>

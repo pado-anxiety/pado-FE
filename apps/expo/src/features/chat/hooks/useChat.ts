@@ -19,6 +19,8 @@ export interface ChatInputState {
     | 'COGNITIVE_REFRAME'
     | null;
   getCBTRecommendation: () => void;
+  rejectCBTRecommendation: () => void;
+  acceptCBTRecommendation: (route: string) => void;
 }
 
 /** 채팅 리스트 관련 상태 */
@@ -50,6 +52,8 @@ export function useChat(): UseChatReturn {
     sendMessage,
     cbtRecommendation,
     getCBTRecommendation,
+    rejectCBTRecommendation,
+    acceptCBTRecommendation,
   } = useChatMessages();
 
   const {
@@ -88,6 +92,8 @@ export function useChat(): UseChatReturn {
       setMessage,
       cbtRecommendation,
       getCBTRecommendation,
+      rejectCBTRecommendation,
+      acceptCBTRecommendation,
     },
     list: {
       flatListRef,

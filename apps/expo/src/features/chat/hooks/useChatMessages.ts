@@ -18,6 +18,8 @@ interface UseChatMessagesReturn {
     | 'COGNITIVE_REFRAME'
     | null;
   getCBTRecommendation: () => void;
+  rejectCBTRecommendation: () => void;
+  acceptCBTRecommendation: (route: string) => void;
 }
 
 export function useChatMessages(): UseChatMessagesReturn {
@@ -95,11 +97,22 @@ export function useChatMessages(): UseChatMessagesReturn {
     cbtRecommendationMutation.mutate();
   };
 
+  const rejectCBTRecommendation = () => {
+    setCBTRecommendation(null);
+  };
+
+  const acceptCBTRecommendation = (route: string) => {
+    setCBTRecommendation(null);
+    console.log('acceptCBTRecommendation', route);
+  };
+
   return {
     chats: chats || [],
     isChatLoading: sendMessageMutation.isPending,
     sendMessage,
     cbtRecommendation,
     getCBTRecommendation,
+    rejectCBTRecommendation,
+    acceptCBTRecommendation,
   };
 }
