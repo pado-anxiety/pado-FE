@@ -1,62 +1,36 @@
 import { Pressable } from '@src/components/ui';
-import Animated from 'react-native-reanimated';
 
-import {
-  ChatInputBar,
-  ChatList,
-  ChatModalHeader,
-  ChatOverlay,
-} from './components';
-import { useChat, useChatKeyboard } from './hooks';
+import { ChatModalHeader, ChatOverlay } from './components';
+import ChatContainer from './components/ChatContainer/ChatContainer';
+import { ChatModalProvider } from './context';
+import { useChat } from './hooks';
 
 export default function ChatScreen() {
-  const {
-    inputRef,
-    flatListRef,
-    isChatModalVisible,
-    message,
-    chats,
-    setMessage,
-    handleBack,
-    handleInputFocus,
-    handleSend,
-    setIsChatModalVisible,
-    isChatLoading,
-  } = useChat();
+  return (
+    <ChatModalProvider>
+      <ChatContent />
+    </ChatModalProvider>
+  );
+}
 
-  const { inputAnimatedStyle } = useChatKeyboard();
+function ChatContent() {
+  const { input, list, handlers } = useChat();
 
   return (
     <>
-      <ChatOverlay visible={isChatModalVisible} />
+      <ChatOverlay />
 
       <Pressable
         className="flex flex-1 flex-col justify-end w-full"
-        onPress={() => inputRef.current?.blur()}
+        onPress={() => input.inputRef.current?.blur()}
       >
-        {isChatModalVisible && <ChatModalHeader onBack={handleBack} />}
+        <ChatModalHeader onBack={handlers.handleBack} />
 
-        <Animated.View
-          className="flex flex-1 flex-col justify-end px-4"
-          style={[inputAnimatedStyle]}
-        >
-          {isChatModalVisible && (
-            <ChatList
-              ref={flatListRef}
-              chats={chats}
-              isChatLoading={isChatLoading}
-            />
-          )}
-          <ChatInputBar
-            ref={inputRef}
-            message={message}
-            onMessageChange={setMessage}
-            onFocus={handleInputFocus}
-            onSend={handleSend}
-            isChatModalVisible={isChatModalVisible}
-            setIsChatModalVisible={setIsChatModalVisible}
-          />
-        </Animated.View>
+        <ChatContainer
+          list={list}
+          input={input}
+          handlers={handlers}
+        />
       </Pressable>
     </>
   );

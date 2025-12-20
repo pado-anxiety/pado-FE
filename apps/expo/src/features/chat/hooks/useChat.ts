@@ -2,39 +2,60 @@ import { useCallback } from 'react';
 
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 
+import { useChatModal } from '../context';
 import type { ChatAPI } from '../types';
 import { useChatInput } from './useChatInput';
 import { useChatMessages } from './useChatMessages';
-import { useChatModal } from './useChatModal';
 
-interface UseChatReturn {
+/** 입력 관련 상태 */
+export interface ChatInputState {
   inputRef: React.RefObject<TextInput | null>;
-  /** FlatList ref */
-  flatListRef: React.RefObject<FlatList | null>;
-  /** 채팅 모달 표시 여부 */
-  isChatModalVisible: boolean;
-  /** 현재 입력 중인 메시지 */
   message: string;
-  /** 채팅 목록 */
-  chats: ChatAPI;
-  /** 메시지 변경 핸들러 */
   setMessage: (text: string) => void;
-  /** 뒤로가기 핸들러 */
-  handleBack: () => void;
-  /** 입력 포커스 핸들러 */
-  handleInputFocus: () => void;
-  /** 메시지 전송 핸들러 */
-  handleSend: () => void;
-  /** 채팅 모달 표시 설정 */
-  setIsChatModalVisible: (visible: boolean) => void;
-  /** 채팅 로딩 여부 */
+  cbtRecommendation:
+    | 'BREATHING'
+    | 'CALMING_PHRASE'
+    | 'GROUNDING'
+    | 'COGNITIVE_REFRAME'
+    | null;
+  getCBTRecommendation: () => void;
+  rejectCBTRecommendation: () => void;
+  acceptCBTRecommendation: (route: string) => void;
+}
+
+/** 채팅 리스트 관련 상태 */
+export interface ChatListState {
+  flatListRef: React.RefObject<FlatList | null>;
+  chats: ChatAPI;
   isChatLoading: boolean;
 }
 
+/** 핸들러 */
+export interface ChatHandlers {
+  handleBack: () => void;
+  handleInputFocus: () => void;
+  handleSend: () => void;
+}
+
+export interface UseChatReturn {
+  input: ChatInputState;
+  list: ChatListState;
+  handlers: ChatHandlers;
+}
+
 export function useChat(): UseChatReturn {
-  const { chats, isChatLoading, sendMessage } = useChatMessages();
-  const { isChatModalVisible, setIsChatModalVisible, closeModal, openModal } =
-    useChatModal();
+  const { openModal, closeModal } = useChatModal();
+
+  const {
+    chats,
+    isChatLoading,
+    sendMessage,
+    cbtRecommendation,
+    getCBTRecommendation,
+    rejectCBTRecommendation,
+    acceptCBTRecommendation,
+  } = useChatMessages();
+
   const {
     inputRef,
     flatListRef,
@@ -65,16 +86,24 @@ export function useChat(): UseChatReturn {
   }, [message, clearInput, blurInput, sendMessage]);
 
   return {
-    inputRef,
-    flatListRef,
-    isChatModalVisible,
-    message,
-    chats,
-    setMessage,
-    handleBack,
-    handleInputFocus,
-    handleSend,
-    setIsChatModalVisible,
-    isChatLoading,
+    input: {
+      inputRef,
+      message,
+      setMessage,
+      cbtRecommendation,
+      getCBTRecommendation,
+      rejectCBTRecommendation,
+      acceptCBTRecommendation,
+    },
+    list: {
+      flatListRef,
+      chats,
+      isChatLoading,
+    },
+    handlers: {
+      handleBack,
+      handleInputFocus,
+      handleSend,
+    },
   };
 }

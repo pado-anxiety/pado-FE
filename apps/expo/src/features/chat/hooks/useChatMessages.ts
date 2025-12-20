@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { API_KEY, chatAPI } from '@src/lib/api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -9,9 +11,22 @@ interface UseChatMessagesReturn {
   chats: ChatAPI;
   isChatLoading: boolean;
   sendMessage: (message: string) => void;
+  cbtRecommendation:
+    | 'BREATHING'
+    | 'CALMING_PHRASE'
+    | 'GROUNDING'
+    | 'COGNITIVE_REFRAME'
+    | null;
+  getCBTRecommendation: () => void;
+  rejectCBTRecommendation: () => void;
+  acceptCBTRecommendation: (route: string) => void;
 }
 
 export function useChatMessages(): UseChatMessagesReturn {
+  const [cbtRecommendation, setCBTRecommendation] = useState<
+    'BREATHING' | 'CALMING_PHRASE' | 'GROUNDING' | 'COGNITIVE_REFRAME' | null
+  >(null);
+
   const queryClient = useQueryClient();
 
   const { data: chats } = useQuery<ChatAPI>({
@@ -41,9 +56,6 @@ export function useChatMessages(): UseChatMessagesReturn {
       // 스냅샷 반환
       return { chatSnapshot };
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [API_KEY.CHATS] });
-    },
     onError: (error, _, context) => {
       // chats 를 스냅샷으로 되돌림
       if (context?.chatSnapshot) {
@@ -61,11 +73,46 @@ export function useChatMessages(): UseChatMessagesReturn {
     },
   });
 
-  const sendMessage = (message: string) => sendMessageMutation.mutate(message);
+  const cbtRecommendationMutation = useMutation({
+    mutationFn: chatAPI.getCBTRecommendation,
+    onSuccess: (data) => {
+      console.log('data.content: ', data.content);
+      console.log('data.cbt: ', data.cbt);
+      setCBTRecommendation(data.cbt);
+    },
+    onError: (error) => {
+      console.error('error: ', error);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [API_KEY.CHATS] });
+    },
+  });
+
+  const sendMessage = (message: string) => {
+    sendMessageMutation.mutate(message);
+    setCBTRecommendation(null);
+  };
+
+  const getCBTRecommendation = () => {
+    cbtRecommendationMutation.mutate();
+  };
+
+  const rejectCBTRecommendation = () => {
+    setCBTRecommendation(null);
+  };
+
+  const acceptCBTRecommendation = (route: string) => {
+    setCBTRecommendation(null);
+    console.log('acceptCBTRecommendation', route);
+  };
 
   return {
     chats: chats || [],
     isChatLoading: sendMessageMutation.isPending,
     sendMessage,
+    cbtRecommendation,
+    getCBTRecommendation,
+    rejectCBTRecommendation,
+    acceptCBTRecommendation,
   };
 }

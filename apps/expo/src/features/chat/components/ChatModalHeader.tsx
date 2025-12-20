@@ -3,6 +3,7 @@ import { Text, View } from '@src/components/ui';
 import { ICONS_SIZE } from '@src/lib/styles';
 import { Pressable } from 'react-native-gesture-handler';
 
+import { useChatModal } from '../context';
 import { useChatQuota } from '../hooks';
 
 interface ChatModalHeaderProps {
@@ -10,7 +11,11 @@ interface ChatModalHeaderProps {
 }
 
 export default function ChatModalHeader({ onBack }: ChatModalHeaderProps) {
+  const { isChatModalVisible } = useChatModal();
+
   const { remainingQuota } = useChatQuota();
+
+  if (!isChatModalVisible) return null;
 
   return (
     <View className="flex flex-row justify-between gap-2 px-8 pb-3 w-full">

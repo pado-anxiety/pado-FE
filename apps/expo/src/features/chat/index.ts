@@ -2,8 +2,8 @@ export { default as ChatScreen } from './ChatScreen';
 
 export {
   AssistantChatBox,
-  ChatInputBar,
-  ChatList,
+  CBTRecommendationBox,
+  ChatContainer,
   ChatModalHeader,
   ChatOverlay,
   UserChatBox,
@@ -11,13 +11,7 @@ export {
 
 export { useChat, useChatKeyboard } from './hooks';
 
-export type {
-  AssistantChat,
-  Chat,
-  ChatSender,
-  ParsedChat,
-  UserChat,
-} from './types';
+export type * from './types';
 
 export { parseChats } from './utils';
 

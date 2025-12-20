@@ -4,38 +4,34 @@ import { ICONS_SIZE } from '@src/lib/styles';
 import { Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
+import { useChatModal } from '../../context';
+import { ChatHandlers, ChatInputState } from '../../hooks/useChat';
+
 interface ChatInputBarProps {
-  /** 현재 메시지 텍스트 */
-  message: string;
-  /** 메시지 변경 핸들러 */
-  onMessageChange: (text: string) => void;
-  /** 포커스 핸들러 */
-  onFocus: () => void;
-  /** 전송 핸들러 */
-  onSend: () => void;
-  /** TextInput ref */
-  ref: React.RefObject<TextInput | null>;
-  /** 채팅 모달 표시 여부 */
-  isChatModalVisible: boolean;
-  /** 채팅 모달 표시 설정 */
-  setIsChatModalVisible: (visible: boolean) => void;
+  input: ChatInputState;
+  handlers: ChatHandlers;
 }
 
-export default function ChatInputBar({
-  message,
-  onMessageChange,
-  onFocus,
-  onSend,
-  ref,
-  isChatModalVisible,
-  setIsChatModalVisible,
-}: ChatInputBarProps) {
+export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
+  const {
+    inputRef,
+    message,
+    setMessage,
+    cbtRecommendation,
+    getCBTRecommendation,
+  } = input;
+  const isCBTRecommendation = !!cbtRecommendation;
+
+  const { handleInputFocus, handleSend } = handlers;
+
+  const { isChatModalVisible, openModal } = useChatModal();
+
   const handlePress = async () => {
     if (isChatModalVisible) return;
 
-    setIsChatModalVisible(!isChatModalVisible);
+    openModal();
     await new Promise((resolve) => setTimeout(resolve, 500));
-    ref?.current?.focus();
+    inputRef?.current?.focus();
   };
 
   return (
@@ -45,15 +41,21 @@ export default function ChatInputBar({
       border-neutral-700
       border-solid border rounded-full
       focus:border-neutral-600 py-1 px-1"
-      style={{ backgroundColor: 'rgba(65, 65, 65, 0.9)' }}
+      style={{
+        backgroundColor: 'rgba(65, 65, 65, 0.9)',
+        opacity: isCBTRecommendation ? 0.5 : 1,
+      }}
       onPress={handlePress}
+      pointerEvents={
+        !(isChatModalVisible && isCBTRecommendation) ? 'auto' : 'none'
+      }
     >
       <Pressable
         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
         onPress={() => {
           if (!isChatModalVisible) return;
 
-          console.log('추천');
+          getCBTRecommendation();
         }}
         className="bg-neutral-600 aspect-square rounded-full p-3"
       >
@@ -68,19 +70,19 @@ export default function ChatInputBar({
         pointerEvents={isChatModalVisible ? 'auto' : 'none'}
       >
         <TextInput
-          ref={ref}
+          ref={inputRef}
           className="bg-chat-input rounded-xl px-2 text-white grow focus:border-input-focus"
           style={{ fontSize: 17, height: 30 }}
           placeholder="메시지를 입력해주세요"
           placeholderTextColor="rgba(255, 255, 255, 0.50)"
-          onFocus={onFocus}
+          onFocus={handleInputFocus}
           value={message}
-          onChangeText={onMessageChange}
+          onChangeText={setMessage}
           textAlignVertical="center"
         />
       </View>
       <Pressable
-        onPress={onSend}
+        onPress={handleSend}
         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
       >
         <Ionicons
