@@ -333,6 +333,7 @@ export default function CBTRecommendModal({
       ref={ref}
       backgroundStyle={backgroundStyle}
       handleIndicatorStyle={handleIndicatorStyle}
+      onDismiss={resetAndClose}
     >
       <BottomSheetView className="px-5 pt-2 pb-14">
         {/* 스텝 인디케이터 */}

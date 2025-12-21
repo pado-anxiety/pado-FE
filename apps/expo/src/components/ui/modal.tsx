@@ -25,6 +25,7 @@ export function Modal({
   detached,
   backgroundStyle,
   handleIndicatorStyle,
+  onDismiss,
   children,
   ...props
 }: {
@@ -33,6 +34,7 @@ export function Modal({
   detached?: boolean;
   backgroundStyle?: StyleProp<ViewStyle>;
   handleIndicatorStyle?: StyleProp<ViewStyle>;
+  onDismiss?: () => void;
   children: React.ReactNode;
 }) {
   const modal = useModal();
@@ -56,6 +58,7 @@ export function Modal({
       keyboardBlurBehavior="restore"
       backgroundStyle={backgroundStyle}
       handleIndicatorStyle={handleIndicatorStyle}
+      onDismiss={onDismiss}
       {..._detachedProps}
       {...props}
     >
