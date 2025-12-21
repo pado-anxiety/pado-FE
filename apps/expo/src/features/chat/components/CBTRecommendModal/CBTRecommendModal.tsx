@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { RefObject, useCallback, useState } from 'react';
 
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import Slider from '@react-native-community/slider';
@@ -41,22 +41,31 @@ const TRIGGER_OPTIONS: { value: TriggerType; label: string }[] = [
   { value: 'RELATIONSHIP', label: '인간관계' },
   { value: 'HEALTH_DEATH', label: '건강/죽음' },
   { value: 'FUTURE_MONEY', label: '미래/돈' },
-  { value: 'UNKNOWN', label: '이유모름' },
+  { value: 'UNKNOWN', label: '이유 없이 불안' },
 ];
+
+export const INTENSITY_LABELS = {
+  BODY: {
+    1: '약간 거슬리는 정도',
+    2: '몸이 좀 뻐근해',
+    3: '꽤 힘들어',
+    4: '너무 괴로워',
+    5: '숨 막혀 (SOS)',
+  },
+  MIND: {
+    1: '신경 쓰이는 정도',
+    2: '마음이 복잡해',
+    3: '꽤 힘들어',
+    4: '너무 괴로워',
+    5: '터질 것 같아 (SOS)',
+  },
+};
 
 export default function CBTRecommendModal({
   ref,
 }: {
   ref: React.Ref<BottomSheetModal>;
 }) {
-  const backgroundStyle = useMemo(
-    () => ({ backgroundColor: colors.neutral[200] }),
-    [],
-  );
-  const handleIndicatorStyle = useMemo(
-    () => ({ backgroundColor: colors.neutral[400] }),
-    [],
-  );
   const [currentStep, setCurrentStep] = useState(1);
   const [selections, setSelections] =
     useState<CBTSelections>(initialSelections);
@@ -70,11 +79,10 @@ export default function CBTRecommendModal({
     if (currentStep < 3) {
       setCurrentStep((prev) => prev + 1);
     } else {
-      // 마지막 스텝에서 완료 처리
-      console.log('CBT 선택 완료:', selections);
+      (ref as RefObject<BottomSheetModal>).current?.dismiss();
       resetAndClose();
     }
-  }, [currentStep, selections, resetAndClose]);
+  }, [currentStep, ref, resetAndClose]);
 
   const setSymptom = useCallback((symptom: SymptomType) => {
     setSelections((prev) => ({ ...prev, symptom }));
@@ -117,7 +125,7 @@ export default function CBTRecommendModal({
           <Pressable
             key={option.value}
             onPress={() => setSymptom(option.value)}
-            className={`py-4 px-5 rounded-2xl border-2 ${
+            className={`py-4 px-5 rounded-2xl border-[1.5px] ${
               selections.symptom === option.value
                 ? 'bg-neutral-600 border-neutral-650'
                 : 'bg-neutral-100 border-neutral-300'
@@ -152,10 +160,13 @@ export default function CBTRecommendModal({
   const renderStep2 = () => (
     <View className="flex flex-col gap-2">
       <Text className="text-body-large text-neutral-900 text-center font-medium">
-        지금 느끼는 불안의 강도는 어때?
+        {selections.symptom === 'BODY'
+          ? '몸이 견디기 얼마나 힘든 상태야?'
+          : '그 마음의 무게가 어느 정도야?'}
       </Text>
-      <Text className="text-body-medium text-neutral-650 text-center">
-        1부터 5까지, 숫자가 클수록 강해요
+      <Text className="text-body-medium text-neutral-800 text-center">
+        {selections.symptom &&
+          INTENSITY_LABELS[selections.symptom][selections.intensity]}
       </Text>
 
       {/* 슬라이더 */}
@@ -174,7 +185,7 @@ export default function CBTRecommendModal({
         />
 
         {/* 스텝 숫자 라벨 */}
-        <View className="flex-row justify-between w-full px-1 mt-2">
+        <View className="flex-row justify-between w-full px-3 mt-2">
           {INTENSITY_LEVELS.map((level) => (
             <Text
               key={level}
@@ -190,9 +201,9 @@ export default function CBTRecommendModal({
         </View>
 
         {/* 라벨 */}
-        <View className="flex-row justify-between w-full mt-1 px-1">
-          <Text className="text-body-medium text-neutral-650">조금</Text>
-          <Text className="text-body-medium text-neutral-650">매우 심함</Text>
+        <View className="flex-row justify-between w-full mt-3 px-1">
+          <Text className="text-body-medium text-neutral-650">가벼움</Text>
+          <Text className="text-body-medium text-neutral-650">무거움</Text>
         </View>
       </View>
     </View>
@@ -200,11 +211,11 @@ export default function CBTRecommendModal({
 
   // Step 3: 트리거 선택
   const renderStep3 = () => (
-    <View className="flex flex-col gap-4">
+    <View className="flex flex-col gap-2">
       <Text className="text-body-large text-neutral-900 text-center font-medium">
-        어떤 상황이 가장 힘들었어?
+        어떤 상황 때문에 불안했어?
       </Text>
-      <Text className="text-body-small text-neutral-500 text-center">
+      <Text className="text-body-small text-neutral-800 text-center">
         하나를 선택해줘
       </Text>
       <View className="flex flex-row flex-wrap justify-center gap-3 mt-4">
@@ -214,15 +225,15 @@ export default function CBTRecommendModal({
             onPress={() => setTrigger(option.value)}
             className={`py-3 px-5 rounded-full border-2 ${
               selections.trigger === option.value
-                ? 'bg-primary-100 border-primary-500'
-                : 'bg-white border-neutral-300'
+                ? 'bg-neutral-600 border-neutral-650'
+                : 'bg-neutral-100 border-neutral-300'
             }`}
           >
             <Text
               className={`text-body-medium ${
                 selections.trigger === option.value
-                  ? 'text-primary-600 font-semibold'
-                  : 'text-neutral-700'
+                  ? 'text-white font-semibold'
+                  : 'text-neutral-900'
               }`}
             >
               {option.label}
@@ -249,8 +260,8 @@ export default function CBTRecommendModal({
   return (
     <Modal
       ref={ref}
-      backgroundStyle={backgroundStyle}
-      handleIndicatorStyle={handleIndicatorStyle}
+      backgroundStyle={{ backgroundColor: colors.neutral[200] }}
+      handleIndicatorStyle={{ backgroundColor: 'transparent' }}
       onDismiss={resetAndClose}
     >
       <BottomSheetView className="px-5 pt-2 pb-14">
