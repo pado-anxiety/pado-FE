@@ -1,11 +1,15 @@
+import { useRef } from 'react';
+
 import { Ionicons } from '@expo/vector-icons';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { View } from '@src/components/ui';
 import { ICONS_SIZE } from '@src/lib/styles';
 import { Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
-import { useCBTModal, useChatModal } from '../../context';
+import { useChatModal } from '../../context';
 import { ChatHandlers, ChatInputState } from '../../hooks/useChat';
+import { CBTRecommendModal } from '../CBTRecommendModal';
 
 interface ChatInputBarProps {
   input: ChatInputState;
@@ -18,8 +22,12 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
 
   const { handleInputFocus, handleSend } = handlers;
 
-  const { openModal: openCBTModal } = useCBTModal();
+  const cbtModalRef = useRef<BottomSheetModal>(null);
   const { isChatModalVisible, openModal: openChatModal } = useChatModal();
+
+  const openCBTModal = () => {
+    cbtModalRef.current?.present();
+  };
 
   const handlePress = async () => {
     if (isChatModalVisible) return;
@@ -91,6 +99,7 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
           className="pr-4"
         />
       </Pressable>
+      <CBTRecommendModal ref={cbtModalRef} />
     </Pressable>
   );
 }
