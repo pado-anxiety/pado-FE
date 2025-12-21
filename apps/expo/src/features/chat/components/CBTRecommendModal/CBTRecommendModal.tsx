@@ -2,19 +2,22 @@ import { RefObject, useCallback, useState } from 'react';
 
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Modal, Pressable, Text, View } from '@src/components/ui';
+import { API_KEY } from '@src/lib/api';
+import { chatAPI } from '@src/lib/api/chat';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import colors from '@nyangtodac/tailwind-design-tokens/colors';
 
-import IntensityStep from './IntensityStep';
-import SymptomStep from './SymptomStep';
-import TriggerStep from './TriggerStep';
 import {
   CBTSelections,
   IntensityLevel,
   SymptomType,
   TriggerType,
   initialSelections,
-} from './types';
+} from '../../types';
+import IntensityStep from './IntensityStep';
+import SymptomStep from './SymptomStep';
+import TriggerStep from './TriggerStep';
 
 interface CBTRecommendModalProps {
   modalRef: RefObject<BottomSheetModal | null>;
@@ -23,6 +26,18 @@ interface CBTRecommendModalProps {
 export default function CBTRecommendModal({
   modalRef,
 }: CBTRecommendModalProps) {
+  const queryClient = useQueryClient();
+
+  const CBTRecommendationMutation = useMutation({
+    mutationFn: chatAPI.getCBTRecommendation,
+    onError: (error) => {
+      console.error('error: ', error);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [API_KEY.CHATS] });
+    },
+  });
+
   const [currentStep, setCurrentStep] = useState(1);
   const [selections, setSelections] =
     useState<CBTSelections>(initialSelections);
@@ -36,10 +51,17 @@ export default function CBTRecommendModal({
     if (currentStep < 3) {
       setCurrentStep((prev) => prev + 1);
     } else {
+      CBTRecommendationMutation.mutate(selections);
       modalRef.current?.dismiss();
       resetAndClose();
     }
-  }, [currentStep, modalRef, resetAndClose]);
+  }, [
+    currentStep,
+    CBTRecommendationMutation,
+    modalRef,
+    resetAndClose,
+    selections,
+  ]);
 
   const setSymptom = useCallback((symptom: SymptomType) => {
     setSelections((prev) => ({ ...prev, symptom }));

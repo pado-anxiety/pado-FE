@@ -3,13 +3,13 @@ import { Text, View } from '@src/components/ui';
 
 import colors from '@nyangtodac/tailwind-design-tokens/colors';
 
-import StepLayout from './StepLayout';
 import {
   INTENSITY_LABELS,
   INTENSITY_LEVELS,
   IntensityLevel,
   SymptomType,
-} from './types';
+} from '../../types';
+import StepLayout from './StepLayout';
 
 interface IntensityStepProps {
   symptom: SymptomType;

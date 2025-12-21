@@ -1,7 +1,7 @@
 import { Pressable, Text, View } from '@src/components/ui';
 
+import { TRIGGER_OPTIONS, TriggerType } from '../../types';
 import StepLayout from './StepLayout';
-import { TRIGGER_OPTIONS, TriggerType } from './types';
 
 interface TriggerStepProps {
   selectedTrigger: TriggerType;

@@ -1,7 +1,7 @@
 import { Pressable, Text, View } from '@src/components/ui';
 
+import { SYMPTOM_OPTIONS, SymptomType } from '../../types';
 import StepLayout from './StepLayout';
-import { SYMPTOM_OPTIONS, SymptomType } from './types';
 
 interface SymptomStepProps {
   selectedSymptom: SymptomType;
