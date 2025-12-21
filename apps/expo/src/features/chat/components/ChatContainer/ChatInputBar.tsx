@@ -99,7 +99,7 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
           className="pr-4"
         />
       </Pressable>
-      <CBTRecommendModal ref={cbtModalRef} />
+      <CBTRecommendModal modalRef={cbtModalRef} />
     </Pressable>
   );
 }
