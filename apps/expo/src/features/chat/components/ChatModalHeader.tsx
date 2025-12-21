@@ -1,7 +1,9 @@
 import { Entypo, FontAwesome } from '@expo/vector-icons';
 import { Text, View } from '@src/components/ui';
 import { ICONS_SIZE } from '@src/lib/styles';
+import { Platform } from 'react-native';
 import { Pressable } from 'react-native-gesture-handler';
+import { scale } from 'react-native-size-matters';
 
 import { useChatModal } from '../context';
 import { useChatQuota } from '../hooks';
@@ -18,7 +20,10 @@ export default function ChatModalHeader({ onBack }: ChatModalHeaderProps) {
   if (!isChatModalVisible) return null;
 
   return (
-    <View className="flex flex-row justify-between gap-2 px-8 pb-3 w-full">
+    <View
+      className="flex flex-row justify-between gap-2 px-8 pb-3 w-full"
+      style={{ marginTop: Platform.OS === 'android' ? scale(10) : 0 }}
+    >
       <Pressable
         onPress={onBack}
         hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}

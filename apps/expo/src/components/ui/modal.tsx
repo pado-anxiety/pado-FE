@@ -7,7 +7,7 @@ import {
   BottomSheetModal,
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
-import { Keyboard } from 'react-native';
+import { Keyboard, StyleProp, ViewStyle } from 'react-native';
 
 export const useModal = () => {
   const ref = useRef<BottomSheetModal>(null);
@@ -23,12 +23,18 @@ export function Modal({
   ref,
   snapPoints,
   detached,
+  backgroundStyle,
+  handleIndicatorStyle,
+  onDismiss,
   children,
   ...props
 }: {
   ref: React.Ref<BottomSheetModal>;
   snapPoints?: string[];
   detached?: boolean;
+  backgroundStyle?: StyleProp<ViewStyle>;
+  handleIndicatorStyle?: StyleProp<ViewStyle>;
+  onDismiss?: () => void;
   children: React.ReactNode;
 }) {
   const modal = useModal();
@@ -50,6 +56,9 @@ export function Modal({
       enableDynamicSizing={true}
       keyboardBehavior="interactive"
       keyboardBlurBehavior="restore"
+      backgroundStyle={backgroundStyle}
+      handleIndicatorStyle={handleIndicatorStyle}
+      onDismiss={onDismiss}
       {..._detachedProps}
       {...props}
     >

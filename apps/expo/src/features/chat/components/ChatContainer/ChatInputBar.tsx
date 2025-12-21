@@ -1,4 +1,7 @@
+import { useRef } from 'react';
+
 import { Ionicons } from '@expo/vector-icons';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { View } from '@src/components/ui';
 import { ICONS_SIZE } from '@src/lib/styles';
 import { Pressable } from 'react-native';
@@ -6,6 +9,7 @@ import { TextInput } from 'react-native-gesture-handler';
 
 import { useChatModal } from '../../context';
 import { ChatHandlers, ChatInputState } from '../../hooks/useChat';
+import { CBTRecommendModal } from '../CBTRecommendModal';
 
 interface ChatInputBarProps {
   input: ChatInputState;
@@ -14,6 +18,7 @@ interface ChatInputBarProps {
 
 export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
   const {
+    blurInput,
     inputRef,
     message,
     setMessage,
@@ -24,12 +29,18 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
 
   const { handleInputFocus, handleSend } = handlers;
 
-  const { isChatModalVisible, openModal } = useChatModal();
+  const cbtModalRef = useRef<BottomSheetModal>(null);
+  const { isChatModalVisible, openModal: openChatModal } = useChatModal();
+
+  const openCBTModal = () => {
+    blurInput();
+    cbtModalRef.current?.present();
+  };
 
   const handlePress = async () => {
     if (isChatModalVisible) return;
 
-    openModal();
+    openChatModal();
     await new Promise((resolve) => setTimeout(resolve, 500));
     inputRef?.current?.focus();
   };
@@ -55,7 +66,7 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
         onPress={() => {
           if (!isChatModalVisible) return;
 
-          getCBTRecommendation();
+          openCBTModal();
         }}
         className="bg-neutral-600 aspect-square rounded-full p-3"
       >
@@ -96,6 +107,10 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
           className="pr-4"
         />
       </Pressable>
+      <CBTRecommendModal
+        modalRef={cbtModalRef}
+        onComplete={getCBTRecommendation}
+      />
     </Pressable>
   );
 }

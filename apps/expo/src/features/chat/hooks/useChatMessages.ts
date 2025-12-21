@@ -4,7 +4,7 @@ import { API_KEY, chatAPI } from '@src/lib/api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ROLE } from '../constants';
-import type { ChatAPI } from '../types';
+import type { CBTSelections, ChatAPI } from '../types';
 import { CHAT_TYPE } from '../types/chat-type';
 
 interface UseChatMessagesReturn {
@@ -17,7 +17,7 @@ interface UseChatMessagesReturn {
     | 'GROUNDING'
     | 'COGNITIVE_REFRAME'
     | null;
-  getCBTRecommendation: () => void;
+  getCBTRecommendation: (selections: CBTSelections) => void;
   rejectCBTRecommendation: () => void;
   acceptCBTRecommendation: (route: string) => void;
 }
@@ -76,8 +76,6 @@ export function useChatMessages(): UseChatMessagesReturn {
   const cbtRecommendationMutation = useMutation({
     mutationFn: chatAPI.getCBTRecommendation,
     onSuccess: (data) => {
-      console.log('data.content: ', data.content);
-      console.log('data.cbt: ', data.cbt);
       setCBTRecommendation(data.cbt);
     },
     onError: (error) => {
@@ -93,8 +91,8 @@ export function useChatMessages(): UseChatMessagesReturn {
     setCBTRecommendation(null);
   };
 
-  const getCBTRecommendation = () => {
-    cbtRecommendationMutation.mutate();
+  const getCBTRecommendation = (selections: CBTSelections) => {
+    cbtRecommendationMutation.mutate(selections);
   };
 
   const rejectCBTRecommendation = () => {

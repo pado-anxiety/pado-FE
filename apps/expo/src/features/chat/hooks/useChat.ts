@@ -3,12 +3,13 @@ import { useCallback } from 'react';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 
 import { useChatModal } from '../context';
-import type { ChatAPI } from '../types';
+import type { CBTSelections, ChatAPI } from '../types';
 import { useChatInput } from './useChatInput';
 import { useChatMessages } from './useChatMessages';
 
 /** 입력 관련 상태 */
 export interface ChatInputState {
+  blurInput: () => void;
   inputRef: React.RefObject<TextInput | null>;
   message: string;
   setMessage: (text: string) => void;
@@ -18,7 +19,7 @@ export interface ChatInputState {
     | 'GROUNDING'
     | 'COGNITIVE_REFRAME'
     | null;
-  getCBTRecommendation: () => void;
+  getCBTRecommendation: (selections: CBTSelections) => void;
   rejectCBTRecommendation: () => void;
   acceptCBTRecommendation: (route: string) => void;
 }
@@ -87,6 +88,7 @@ export function useChat(): UseChatReturn {
 
   return {
     input: {
+      blurInput,
       inputRef,
       message,
       setMessage,

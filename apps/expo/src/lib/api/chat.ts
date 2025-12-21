@@ -2,6 +2,9 @@ import {
   CBTRecommendationAPI,
   ChatAPI,
   ChatAssistantAPI,
+  IntensityLevel,
+  SymptomType,
+  TriggerType,
 } from '@src/features/chat/types';
 
 import { apiClient } from './client';
@@ -10,6 +13,12 @@ import { ROUTES } from './route';
 export interface QuotaResponse {
   quota: number;
   timeToRefill: string;
+}
+
+interface CBTRecommendationParams {
+  symptom: SymptomType;
+  intensity: IntensityLevel;
+  trigger: TriggerType;
 }
 
 export const chatAPI = {
@@ -28,16 +37,19 @@ export const chatAPI = {
     const response: QuotaResponse = await apiClient.get(ROUTES.QUOTA);
     return response;
   },
-  getCBTRecommendation: async (): Promise<CBTRecommendationAPI> => {
+  getCBTRecommendation: async ({
+    symptom,
+    intensity,
+    trigger,
+  }: CBTRecommendationParams): Promise<CBTRecommendationAPI> => {
     const response: CBTRecommendationAPI = await apiClient.post(
       ROUTES.CBT_RECOMMENDATION,
       {
-        symptom: 'BODY',
-        intensity: 1,
-        situation: 'PRESENTATION_EXAM',
+        symptom,
+        intensity,
+        situation: trigger,
       },
     );
-    console.log('response: ', response);
     return response;
   },
 };
