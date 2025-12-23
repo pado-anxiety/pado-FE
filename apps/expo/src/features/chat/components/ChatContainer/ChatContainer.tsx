@@ -16,6 +16,7 @@ export default function CBTRecommendationOverlay({
     <Animated.View
       className="flex flex-1 flex-col justify-end px-4"
       style={[inputAnimatedStyle]}
+      pointerEvents="box-none"
     >
       <ChatCBTContainer
         list={list}

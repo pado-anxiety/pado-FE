@@ -22,7 +22,10 @@ export default function ChatCBTContainer({
   const [recommandationModalHeight, setRecommandationModalHeight] = useState(0);
 
   return (
-    <View className="relative flex-1">
+    <View
+      className="relative flex-1"
+      pointerEvents="box-none"
+    >
       <ChatList
         list={list}
         input={input}

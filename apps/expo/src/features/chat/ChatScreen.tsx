@@ -12,6 +12,7 @@ export default function ChatScreen() {
     <View
       className="absolute inset-0"
       style={{ paddingTop: insets.top }}
+      pointerEvents="box-none"
     >
       <ChatModalProvider>
         <ChatContent />
@@ -30,6 +31,7 @@ function ChatContent() {
       <Pressable
         className="flex flex-1 flex-col justify-end w-full"
         onPress={() => input.inputRef.current?.blur()}
+        pointerEvents="box-none"
       >
         <ChatModalHeader onBack={handlers.handleBack} />
 
