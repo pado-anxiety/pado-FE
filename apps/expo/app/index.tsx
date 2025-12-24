@@ -1,15 +1,12 @@
 import { View } from '@src/components/ui';
 import { ChatScreen } from '@src/features/chat';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { CbtButtonList, HomeBackground } from '@src/features/home';
 
 export default function HomeScreen(): React.ReactNode {
-  const insets = useSafeAreaInsets();
-
   return (
-    <View
-      className="flex-1 bg-green-100"
-      style={{ paddingTop: insets.top }}
-    >
+    <View className="flex-1 relative">
+      <HomeBackground />
+      <CbtButtonList />
       <ChatScreen />
     </View>
   );
