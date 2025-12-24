@@ -1,9 +1,7 @@
 import { Text } from '@src/components/ui';
 import { Href, useRouter } from 'expo-router';
-import { Dimensions, Pressable } from 'react-native';
+import { Pressable, useWindowDimensions } from 'react-native';
 import { scale } from 'react-native-size-matters';
-
-const ITEM_SIZE = Dimensions.get('window').width / 3 - scale(10);
 
 type CbtButtonProps = {
   item: {
@@ -13,7 +11,9 @@ type CbtButtonProps = {
 };
 
 export function CbtButton({ item }: CbtButtonProps): React.ReactNode {
+  const { width } = useWindowDimensions();
   const router = useRouter();
+  const ITEM_SIZE = width / 3 - scale(10);
 
   return (
     <Pressable

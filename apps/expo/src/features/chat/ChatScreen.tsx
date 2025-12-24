@@ -8,6 +8,7 @@ import { useChat } from './hooks';
 
 export default function ChatScreen() {
   const insets = useSafeAreaInsets();
+
   return (
     <View
       className="absolute inset-0"
