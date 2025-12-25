@@ -15,7 +15,14 @@ dotenv.config({ path: envPath });
 const NAME = '냥토닥';
 const VERSION = packageJson.version;
 const SLUG = 'nyangtodac';
-const SCHEME = 'nyangtodac';
+const SCHEME = [
+  'nyangtodac',
+  'com.googleusercontent.apps.259176724998-g516lkit656ij0g9v7jp8s6umlhckvfi',
+];
+const IOS_REDIRECT_URI =
+  'com.googleusercontent.apps.259176724998-g516lkit656ij0g9v7jp8s6umlhckvfi:/oauth2redirect/google';
+const IOS_GOOGLE_CLIENT_ID =
+  '259176724998-g516lkit656ij0g9v7jp8s6umlhckvfi.apps.googleusercontent.com';
 const IOS_BUNDLE_IDENTIFIER = 'com.taewoongheo.nyangtodac';
 const ANDROID_PACKAGE = 'com.taewoongheo.nyangtodac';
 
@@ -25,7 +32,9 @@ const client = z.object({
   NAME: z.string(),
   VERSION: z.string(),
   SLUG: z.string(),
-  SCHEME: z.string(),
+  SCHEME: z.array(z.string()),
+  IOS_REDIRECT_URI: z.string(),
+  IOS_GOOGLE_CLIENT_ID: z.string(),
   IOS_BUNDLE_IDENTIFIER: z.string(),
   ANDROID_PACKAGE: z.string(),
 
@@ -45,6 +54,8 @@ const _clientEnv = {
   VERSION,
   SLUG,
   SCHEME,
+  IOS_REDIRECT_URI,
+  IOS_GOOGLE_CLIENT_ID,
   IOS_BUNDLE_IDENTIFIER,
   ANDROID_PACKAGE,
 
