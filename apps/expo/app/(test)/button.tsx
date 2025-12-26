@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-import { Button } from '@nyangtodac/ui';
+import { Button } from '@pado/ui';
 
 export default function ButtonPage() {
   return (

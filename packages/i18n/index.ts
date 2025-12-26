@@ -1,4 +1,4 @@
-import locales from "@nyangtodac/locales";
+import locales from "@pado/locales";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 

@@ -1,4 +1,4 @@
-const colors = require('@nyangtodac/tailwind-design-tokens/colors');
+const colors = require('@pado/tailwind-design-tokens/colors');
 
 const semanticColors = {
   light: {

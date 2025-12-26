@@ -3,7 +3,7 @@ import { RefObject } from 'react';
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Modal, Pressable, Text, View } from '@src/components/ui';
 
-import colors from '@nyangtodac/tailwind-design-tokens/colors';
+import colors from '@pado/tailwind-design-tokens/colors';
 
 import { CBT_MODAL_MESSAGES, CBT_STEP, CBT_STEPS } from '../../constants';
 import { useCBTStep } from '../../hooks';

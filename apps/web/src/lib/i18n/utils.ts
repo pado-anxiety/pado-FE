@@ -1,4 +1,4 @@
-import { initI18n } from '@nyangtodac/i18n';
+import { initI18n } from '@pado/i18n';
 
 const getInitialLanguage = () => {
   if (typeof window !== 'undefined') {

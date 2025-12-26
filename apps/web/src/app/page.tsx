@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import { Button, Text } from '@nyangtodac/ui';
+import { Button, Text } from '@pado/ui';
 
 export default function Home() {
   return (

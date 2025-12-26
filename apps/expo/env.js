@@ -12,12 +12,12 @@ console.log('loading env from:', envPath);
 
 dotenv.config({ path: envPath });
 
-const NAME = '냥토닥';
+const NAME = '파도';
 const VERSION = packageJson.version;
-const SLUG = 'nyangtodac';
-const SCHEME = 'nyangtodac';
-const IOS_BUNDLE_IDENTIFIER = 'com.taewoongheo.nyangtodac';
-const ANDROID_PACKAGE = 'com.taewoongheo.nyangtodac';
+const SLUG = 'pado';
+const SCHEME = 'pado';
+const IOS_BUNDLE_IDENTIFIER = 'com.taewoongheo.pado';
+const ANDROID_PACKAGE = 'com.taewoongheo.pado';
 
 // define env schema
 const client = z.object({

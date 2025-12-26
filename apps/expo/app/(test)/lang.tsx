@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-import { Button } from '@nyangtodac/ui';
+import { Button } from '@pado/ui';
 
 export default function LangPage() {
   const { t } = useTranslation();

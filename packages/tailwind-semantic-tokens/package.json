@@ -1,5 +1,5 @@
 {
-    "name": "@nyangtodac/tailwind-semantic-tokens",
+    "name": "@pado/tailwind-semantic-tokens",
     "private": true,
     "main": "index.js",
     "type": "commonjs",
@@ -17,6 +17,6 @@
         }
     },
     "dependencies": {
-        "@nyangtodac/tailwind-design-tokens": "workspace:*"
+        "@pado/tailwind-design-tokens": "workspace:*"
     }
 }

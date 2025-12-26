@@ -1,7 +1,7 @@
 import { Modal, useModal } from '@src/components/ui';
 import { View } from 'react-native';
 
-import { Button, Text } from '@nyangtodac/ui';
+import { Button, Text } from '@pado/ui';
 
 export default function ModalPage() {
   const { ref: modalRef, present, dismiss } = useModal();

@@ -2,7 +2,7 @@
 const { defineConfig, globalIgnores } = require('eslint/config');
 const expoConfig = require('eslint-config-expo/flat');
 const globals = require('globals');
-const eslintConfigCustom = require('@nyangtodac/eslint-config-custom');
+const eslintConfigCustom = require('@pado/eslint-config-custom');
 
 module.exports = defineConfig([
   globalIgnores(['dist/*', '/.expo', 'node_modules']),

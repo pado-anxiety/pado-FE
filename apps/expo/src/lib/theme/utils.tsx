@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 
 import { useColorScheme, vars } from 'nativewind';
 
-import semanticColors from '@nyangtodac/tailwind-semantic-tokens/semantic-colors';
+import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
 import { storage } from '../store';
 

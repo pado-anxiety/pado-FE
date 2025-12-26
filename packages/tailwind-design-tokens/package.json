@@ -1,5 +1,5 @@
 {
-    "name": "@nyangtodac/tailwind-design-tokens",
+    "name": "@pado/tailwind-design-tokens",
     "private": true,
     "main": "index.js",
     "type": "commonjs",

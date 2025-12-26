@@ -16,6 +16,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     supportsTablet: true,
     infoPlist: {
       CFBundleLocalizations: ['en', 'ko'],
+      CFBundleDisplayName: ClientEnv.NAME,
     },
     bundleIdentifier: ClientEnv.IOS_BUNDLE_IDENTIFIER,
   },

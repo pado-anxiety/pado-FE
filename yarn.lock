@@ -4555,78 +4555,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nyangtodac/eslint-config-custom@workspace:*, @nyangtodac/eslint-config-custom@workspace:packages/eslint-config-custom":
-  version: 0.0.0-use.local
-  resolution: "@nyangtodac/eslint-config-custom@workspace:packages/eslint-config-custom"
-  dependencies:
-    "@eslint/eslintrc": "npm:^3.3.3"
-    "@eslint/js": "npm:^9.39.1"
-    eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-prettier: "npm:^5.5.4"
-    eslint-plugin-unused-imports: "npm:^4.3.0"
-    typescript-eslint: "npm:^8.46.3"
-  peerDependencies:
-    eslint: ^9.25.0
-    prettier: ^3.7.4
-    typescript: ~5.9.2
-  languageName: unknown
-  linkType: soft
-
-"@nyangtodac/i18n@workspace:*, @nyangtodac/i18n@workspace:packages/i18n":
-  version: 0.0.0-use.local
-  resolution: "@nyangtodac/i18n@workspace:packages/i18n"
-  dependencies:
-    "@nyangtodac/locales": "workspace:*"
-    i18next: "npm:^25.7.1"
-    react-i18next: "npm:^16.4.0"
-  peerDependencies:
-    i18next: ^25.7.1
-    react-i18next: ^16.4.0
-  languageName: unknown
-  linkType: soft
-
-"@nyangtodac/locales@workspace:*, @nyangtodac/locales@workspace:packages/locales":
-  version: 0.0.0-use.local
-  resolution: "@nyangtodac/locales@workspace:packages/locales"
-  languageName: unknown
-  linkType: soft
-
-"@nyangtodac/tailwind-design-tokens@workspace:*, @nyangtodac/tailwind-design-tokens@workspace:packages/tailwind-design-tokens":
-  version: 0.0.0-use.local
-  resolution: "@nyangtodac/tailwind-design-tokens@workspace:packages/tailwind-design-tokens"
-  languageName: unknown
-  linkType: soft
-
-"@nyangtodac/tailwind-semantic-tokens@workspace:*, @nyangtodac/tailwind-semantic-tokens@workspace:packages/tailwind-semantic-tokens":
-  version: 0.0.0-use.local
-  resolution: "@nyangtodac/tailwind-semantic-tokens@workspace:packages/tailwind-semantic-tokens"
-  dependencies:
-    "@nyangtodac/tailwind-design-tokens": "workspace:*"
-  languageName: unknown
-  linkType: soft
-
-"@nyangtodac/ui@workspace:*, @nyangtodac/ui@workspace:packages/ui":
-  version: 0.0.0-use.local
-  resolution: "@nyangtodac/ui@workspace:packages/ui"
-  dependencies:
-    "@nyangtodac/tailwind-design-tokens": "workspace:*"
-    "@nyangtodac/tailwind-semantic-tokens": "workspace:*"
-    "@types/react": "npm:~19.1.0"
-    i18next: "npm:^25.7.1"
-    react-i18next: "npm:^16.4.0"
-    tailwind-merge: "npm:^3.4.0"
-    tailwind-variants: "npm:^3.2.2"
-    tailwindcss: "npm:^3.4.17"
-  peerDependencies:
-    i18next: ^25.7.1
-    nativewind: ^4.0.1
-    react: ^19.0.0
-    react-i18next: ^16.4.0
-    react-native: ^0.81.0
-    react-native-css-interop: "*"
-  languageName: unknown
-  linkType: soft
-
 "@opennextjs/aws@npm:3.9.4":
   version: 3.9.4
   resolution: "@opennextjs/aws@npm:3.9.4"
@@ -4676,6 +4604,78 @@ __metadata:
   checksum: 10c0/f124e4819741de260349b46d1e5d6e5921bf6c833d84b5ebd2b8e8d24a70c21c760934c2bbc04985832a5b7753f6a6246bfd3c810c0bba1b69a08d0ccc4480a1
   languageName: node
   linkType: hard
+
+"@pado/eslint-config-custom@workspace:*, @pado/eslint-config-custom@workspace:packages/eslint-config-custom":
+  version: 0.0.0-use.local
+  resolution: "@pado/eslint-config-custom@workspace:packages/eslint-config-custom"
+  dependencies:
+    "@eslint/eslintrc": "npm:^3.3.3"
+    "@eslint/js": "npm:^9.39.1"
+    eslint-config-prettier: "npm:^10.1.8"
+    eslint-plugin-prettier: "npm:^5.5.4"
+    eslint-plugin-unused-imports: "npm:^4.3.0"
+    typescript-eslint: "npm:^8.46.3"
+  peerDependencies:
+    eslint: ^9.25.0
+    prettier: ^3.7.4
+    typescript: ~5.9.2
+  languageName: unknown
+  linkType: soft
+
+"@pado/i18n@workspace:*, @pado/i18n@workspace:packages/i18n":
+  version: 0.0.0-use.local
+  resolution: "@pado/i18n@workspace:packages/i18n"
+  dependencies:
+    "@pado/locales": "workspace:*"
+    i18next: "npm:^25.7.1"
+    react-i18next: "npm:^16.4.0"
+  peerDependencies:
+    i18next: ^25.7.1
+    react-i18next: ^16.4.0
+  languageName: unknown
+  linkType: soft
+
+"@pado/locales@workspace:*, @pado/locales@workspace:packages/locales":
+  version: 0.0.0-use.local
+  resolution: "@pado/locales@workspace:packages/locales"
+  languageName: unknown
+  linkType: soft
+
+"@pado/tailwind-design-tokens@workspace:*, @pado/tailwind-design-tokens@workspace:packages/tailwind-design-tokens":
+  version: 0.0.0-use.local
+  resolution: "@pado/tailwind-design-tokens@workspace:packages/tailwind-design-tokens"
+  languageName: unknown
+  linkType: soft
+
+"@pado/tailwind-semantic-tokens@workspace:*, @pado/tailwind-semantic-tokens@workspace:packages/tailwind-semantic-tokens":
+  version: 0.0.0-use.local
+  resolution: "@pado/tailwind-semantic-tokens@workspace:packages/tailwind-semantic-tokens"
+  dependencies:
+    "@pado/tailwind-design-tokens": "workspace:*"
+  languageName: unknown
+  linkType: soft
+
+"@pado/ui@workspace:*, @pado/ui@workspace:packages/ui":
+  version: 0.0.0-use.local
+  resolution: "@pado/ui@workspace:packages/ui"
+  dependencies:
+    "@pado/tailwind-design-tokens": "workspace:*"
+    "@pado/tailwind-semantic-tokens": "workspace:*"
+    "@types/react": "npm:~19.1.0"
+    i18next: "npm:^25.7.1"
+    react-i18next: "npm:^16.4.0"
+    tailwind-merge: "npm:^3.4.0"
+    tailwind-variants: "npm:^3.2.2"
+    tailwindcss: "npm:^3.4.17"
+  peerDependencies:
+    i18next: ^25.7.1
+    nativewind: ^4.0.1
+    react: ^19.0.0
+    react-i18next: ^16.4.0
+    react-native: ^0.81.0
+    react-native-css-interop: "*"
+  languageName: unknown
+  linkType: soft
 
 "@pkgr/core@npm:^0.2.9":
   version: 0.2.9
@@ -13137,111 +13137,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nyangtodac-expo@workspace:apps/expo":
-  version: 0.0.0-use.local
-  resolution: "nyangtodac-expo@workspace:apps/expo"
-  dependencies:
-    "@expo/vector-icons": "npm:^15.0.3"
-    "@gorhom/bottom-sheet": "npm:^5"
-    "@hookform/resolvers": "npm:^5.2.2"
-    "@nyangtodac/eslint-config-custom": "workspace:*"
-    "@nyangtodac/i18n": "workspace:*"
-    "@nyangtodac/locales": "workspace:*"
-    "@nyangtodac/tailwind-design-tokens": "workspace:*"
-    "@nyangtodac/tailwind-semantic-tokens": "workspace:*"
-    "@nyangtodac/ui": "workspace:*"
-    "@react-native-community/slider": "npm:5.0.1"
-    "@react-navigation/bottom-tabs": "npm:^7.4.0"
-    "@react-navigation/elements": "npm:^2.6.3"
-    "@react-navigation/native": "npm:^7.1.8"
-    "@shopify/react-native-skia": "npm:2.2.12"
-    "@tanstack/eslint-plugin-query": "npm:^5.91.2"
-    "@tanstack/react-query": "npm:^5.90.12"
-    "@trivago/prettier-plugin-sort-imports": "npm:^6.0.0"
-    "@types/react": "npm:~19.1.0"
-    axios: "npm:^1.13.2"
-    cross-env: "npm:^10.1.0"
-    dotenv: "npm:^17.2.3"
-    eslint: "npm:^9.25.0"
-    eslint-config-expo: "npm:~10.0.0"
-    expo: "npm:^54.0.27"
-    expo-constants: "npm:^18.0.11"
-    expo-dev-client: "npm:^6.0.20"
-    expo-font: "npm:~14.0.9"
-    expo-haptics: "npm:~15.0.7"
-    expo-image: "npm:^3.0.11"
-    expo-linking: "npm:~8.0.9"
-    expo-localization: "npm:^17.0.8"
-    expo-router: "npm:~6.0.16"
-    expo-splash-screen: "npm:~31.0.11"
-    expo-status-bar: "npm:~3.0.8"
-    expo-symbols: "npm:~1.0.7"
-    expo-system-ui: "npm:~6.0.8"
-    expo-web-browser: "npm:~15.0.9"
-    i18next: "npm:^25.7.1"
-    nativewind: "npm:^4.2.1"
-    prettier: "npm:^3.7.4"
-    prettier-plugin-tailwindcss: "npm:^0.5.11"
-    react: "npm:19.1.0"
-    react-dom: "npm:19.1.0"
-    react-hook-form: "npm:^7.68.0"
-    react-i18next: "npm:^16.4.0"
-    react-native: "npm:0.81.5"
-    react-native-gesture-handler: "npm:~2.28.0"
-    react-native-keyboard-controller: "npm:^1.20.1"
-    react-native-mmkv: "npm:^4.1.0"
-    react-native-nitro-modules: "npm:^0.31.10"
-    react-native-reanimated: "npm:~4.1.1"
-    react-native-safe-area-context: "npm:~5.6.0"
-    react-native-screens: "npm:~4.16.0"
-    react-native-size-matters: "npm:^0.4.2"
-    react-native-webview: "npm:^13.16.0"
-    react-native-worklets: "npm:0.5.1"
-    tailwind-merge: "npm:^3.4.0"
-    tailwind-variants: "npm:^3.2.2"
-    tailwindcss: "npm:^3.4.17"
-    zod: "npm:^4.1.13"
-  languageName: unknown
-  linkType: soft
-
-"nyangtodac-web@workspace:apps/web":
-  version: 0.0.0-use.local
-  resolution: "nyangtodac-web@workspace:apps/web"
-  dependencies:
-    "@babel/core": "npm:^7.28.5"
-    "@babel/eslint-parser": "npm:^7.28.5"
-    "@hookform/resolvers": "npm:^5.2.2"
-    "@nyangtodac/eslint-config-custom": "workspace:*"
-    "@nyangtodac/i18n": "workspace:*"
-    "@nyangtodac/locales": "workspace:*"
-    "@nyangtodac/tailwind-design-tokens": "workspace:*"
-    "@nyangtodac/tailwind-semantic-tokens": "workspace:*"
-    "@nyangtodac/ui": "workspace:*"
-    "@opennextjs/cloudflare": "npm:^1.14.4"
-    "@trivago/prettier-plugin-sort-imports": "npm:^6.0.0"
-    "@types/babel__core": "npm:^7"
-    "@types/node": "npm:^20"
-    "@types/react": "npm:^19"
-    "@types/react-dom": "npm:^19"
-    autoprefixer: "npm:^10.4.22"
-    eslint: "npm:^9.39.1"
-    eslint-config-next: "npm:^16.0.7"
-    i18next: "npm:^25.7.1"
-    next: "npm:16.0.7"
-    next-themes: "npm:^0.4.6"
-    postcss: "npm:^8.5.6"
-    prettier: "npm:^3.7.4"
-    react: "npm:19.2.1"
-    react-dom: "npm:19.2.1"
-    react-i18next: "npm:^16.4.0"
-    tailwind-merge: "npm:^3.4.0"
-    tailwind-variants: "npm:^3.2.2"
-    tailwindcss: "npm:^3.4.17"
-    wrangler: "npm:^4.53.0"
-    zod: "npm:^4.1.13"
-  languageName: unknown
-  linkType: soft
-
 "ob1@npm:0.83.2":
   version: 0.83.2
   resolution: "ob1@npm:0.83.2"
@@ -13531,6 +13426,111 @@ __metadata:
   checksum: 10c0/62ba2785eb655fec084a257af34dbe24292ab74516d6aecef97ef72d4897310bc6898f6c85b5cd22770eaa1ce60d55a0230e150fb6a966e3ecd6c511e23d164b
   languageName: node
   linkType: hard
+
+"pado-expo@workspace:apps/expo":
+  version: 0.0.0-use.local
+  resolution: "pado-expo@workspace:apps/expo"
+  dependencies:
+    "@expo/vector-icons": "npm:^15.0.3"
+    "@gorhom/bottom-sheet": "npm:^5"
+    "@hookform/resolvers": "npm:^5.2.2"
+    "@pado/eslint-config-custom": "workspace:*"
+    "@pado/i18n": "workspace:*"
+    "@pado/locales": "workspace:*"
+    "@pado/tailwind-design-tokens": "workspace:*"
+    "@pado/tailwind-semantic-tokens": "workspace:*"
+    "@pado/ui": "workspace:*"
+    "@react-native-community/slider": "npm:5.0.1"
+    "@react-navigation/bottom-tabs": "npm:^7.4.0"
+    "@react-navigation/elements": "npm:^2.6.3"
+    "@react-navigation/native": "npm:^7.1.8"
+    "@shopify/react-native-skia": "npm:2.2.12"
+    "@tanstack/eslint-plugin-query": "npm:^5.91.2"
+    "@tanstack/react-query": "npm:^5.90.12"
+    "@trivago/prettier-plugin-sort-imports": "npm:^6.0.0"
+    "@types/react": "npm:~19.1.0"
+    axios: "npm:^1.13.2"
+    cross-env: "npm:^10.1.0"
+    dotenv: "npm:^17.2.3"
+    eslint: "npm:^9.25.0"
+    eslint-config-expo: "npm:~10.0.0"
+    expo: "npm:^54.0.27"
+    expo-constants: "npm:^18.0.11"
+    expo-dev-client: "npm:^6.0.20"
+    expo-font: "npm:~14.0.9"
+    expo-haptics: "npm:~15.0.7"
+    expo-image: "npm:^3.0.11"
+    expo-linking: "npm:~8.0.9"
+    expo-localization: "npm:^17.0.8"
+    expo-router: "npm:~6.0.16"
+    expo-splash-screen: "npm:~31.0.11"
+    expo-status-bar: "npm:~3.0.8"
+    expo-symbols: "npm:~1.0.7"
+    expo-system-ui: "npm:~6.0.8"
+    expo-web-browser: "npm:~15.0.9"
+    i18next: "npm:^25.7.1"
+    nativewind: "npm:^4.2.1"
+    prettier: "npm:^3.7.4"
+    prettier-plugin-tailwindcss: "npm:^0.5.11"
+    react: "npm:19.1.0"
+    react-dom: "npm:19.1.0"
+    react-hook-form: "npm:^7.68.0"
+    react-i18next: "npm:^16.4.0"
+    react-native: "npm:0.81.5"
+    react-native-gesture-handler: "npm:~2.28.0"
+    react-native-keyboard-controller: "npm:^1.20.1"
+    react-native-mmkv: "npm:^4.1.0"
+    react-native-nitro-modules: "npm:^0.31.10"
+    react-native-reanimated: "npm:~4.1.1"
+    react-native-safe-area-context: "npm:~5.6.0"
+    react-native-screens: "npm:~4.16.0"
+    react-native-size-matters: "npm:^0.4.2"
+    react-native-webview: "npm:^13.16.0"
+    react-native-worklets: "npm:0.5.1"
+    tailwind-merge: "npm:^3.4.0"
+    tailwind-variants: "npm:^3.2.2"
+    tailwindcss: "npm:^3.4.17"
+    zod: "npm:^4.1.13"
+  languageName: unknown
+  linkType: soft
+
+"pado-web@workspace:apps/web":
+  version: 0.0.0-use.local
+  resolution: "pado-web@workspace:apps/web"
+  dependencies:
+    "@babel/core": "npm:^7.28.5"
+    "@babel/eslint-parser": "npm:^7.28.5"
+    "@hookform/resolvers": "npm:^5.2.2"
+    "@opennextjs/cloudflare": "npm:^1.14.4"
+    "@pado/eslint-config-custom": "workspace:*"
+    "@pado/i18n": "workspace:*"
+    "@pado/locales": "workspace:*"
+    "@pado/tailwind-design-tokens": "workspace:*"
+    "@pado/tailwind-semantic-tokens": "workspace:*"
+    "@pado/ui": "workspace:*"
+    "@trivago/prettier-plugin-sort-imports": "npm:^6.0.0"
+    "@types/babel__core": "npm:^7"
+    "@types/node": "npm:^20"
+    "@types/react": "npm:^19"
+    "@types/react-dom": "npm:^19"
+    autoprefixer: "npm:^10.4.22"
+    eslint: "npm:^9.39.1"
+    eslint-config-next: "npm:^16.0.7"
+    i18next: "npm:^25.7.1"
+    next: "npm:16.0.7"
+    next-themes: "npm:^0.4.6"
+    postcss: "npm:^8.5.6"
+    prettier: "npm:^3.7.4"
+    react: "npm:19.2.1"
+    react-dom: "npm:19.2.1"
+    react-i18next: "npm:^16.4.0"
+    tailwind-merge: "npm:^3.4.0"
+    tailwind-variants: "npm:^3.2.2"
+    tailwindcss: "npm:^3.4.17"
+    wrangler: "npm:^4.53.0"
+    zod: "npm:^4.1.13"
+  languageName: unknown
+  linkType: soft
 
 "parent-module@npm:^1.0.0":
   version: 1.0.1

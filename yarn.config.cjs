@@ -80,7 +80,7 @@ module.exports = {
     // 워크스페이스 패키지는 반드시 workspace:* 사용
     for (const dependency of Yarn.dependencies()) {
       if (
-        dependency.ident.startsWith('@nyangtodac/') &&
+        dependency.ident.startsWith('@pado/') &&
         dependency.range !== 'workspace:*'
       ) {
         dependency.update('workspace:*');

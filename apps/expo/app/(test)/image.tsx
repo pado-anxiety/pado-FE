@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Image, preloadImages } from '@src/components/ui';
 import { Text, View } from 'react-native';
 
-import { Button } from '@nyangtodac/ui';
+import { Button } from '@pado/ui';
 
 const imageUrls = [
   'https://picsum.photos/400/400?random=1',

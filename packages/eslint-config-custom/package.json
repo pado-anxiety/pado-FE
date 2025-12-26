@@ -1,5 +1,5 @@
 {
-  "name": "@nyangtodac/eslint-config-custom",
+  "name": "@pado/eslint-config-custom",
   "private": true,
   "main": "index.js",
   "exports": {

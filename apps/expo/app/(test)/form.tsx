@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
 import { z } from 'zod';
 
-import { Button } from '@nyangtodac/ui';
+import { Button } from '@pado/ui';
 
 const schema = z.object({
   name: z

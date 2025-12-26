@@ -3,12 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
 
   transpilePackages: [
-    '@nyangtodac/ui',
-    '@nyangtodac/i18n',
-    '@nyangtodac/locales',
-    '@nyangtodac/tailwind-design-tokens',
-    '@nyangtodac/tailwind-semantic-tokens',
-    '@nyangtodac/eslint-config-custom',
+    '@pado/ui',
+    '@pado/i18n',
+    '@pado/locales',
+    '@pado/tailwind-design-tokens',
+    '@pado/tailwind-semantic-tokens',
+    '@pado/eslint-config-custom',
   ],
 
   turbopack: {

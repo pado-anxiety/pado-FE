@@ -1,7 +1,6 @@
-import type { Chat } from '../types';
 import { ROLE } from './const';
 
-export const CHAT_MOCK_DATA: Chat[] = [
+export const CHAT_MOCK_DATA = [
   {
     sender: ROLE.AI,
     message: '언제든 또 찾아와 줘',

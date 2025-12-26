@@ -1,5 +1,5 @@
 {
-    "name": "@nyangtodac/locales",
+    "name": "@pado/locales",
     "private": true,
     "main": "index.ts",
     "types": "types/index.d.ts"

@@ -1,7 +1,7 @@
 import babelParser from '@babel/eslint-parser';
 import nextTs from 'eslint-config-next/typescript';
 
-import eslintConfigCustom from '@nyangtodac/eslint-config-custom';
+import eslintConfigCustom from '@pado/eslint-config-custom';
 
 // Manually patch the missing parser.
 const patchedParser = {

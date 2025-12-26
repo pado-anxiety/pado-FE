@@ -5,8 +5,8 @@ module.exports = {
     '../../packages/ui/src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   presets: [
-    require('@nyangtodac/tailwind-design-tokens'),
-    require('@nyangtodac/tailwind-semantic-tokens'),
+    require('@pado/tailwind-design-tokens'),
+    require('@pado/tailwind-semantic-tokens'),
   ],
   safelist: ['dark'],
   darkMode: 'class',

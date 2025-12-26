@@ -1,6 +1,6 @@
 'use client';
 
-import { Text } from '@nyangtodac/ui';
+import { Text } from '@pado/ui';
 
 export default function TextPage() {
   return (

@@ -1,5 +1,5 @@
 {
-  "name": "nyangtodac-web",
+  "name": "pado-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@nyangtodac/i18n": "workspace:*",
-    "@nyangtodac/locales": "workspace:*",
+    "@pado/i18n": "workspace:*",
+    "@pado/locales": "workspace:*",
     "i18next": "^25.7.1",
     "next": "16.0.7",
     "next-themes": "^0.4.6",
@@ -25,11 +25,11 @@
   "devDependencies": {
     "@babel/core": "^7.28.5",
     "@babel/eslint-parser": "^7.28.5",
-    "@nyangtodac/eslint-config-custom": "workspace:*",
-    "@nyangtodac/tailwind-design-tokens": "workspace:*",
-    "@nyangtodac/tailwind-semantic-tokens": "workspace:*",
-    "@nyangtodac/ui": "workspace:*",
     "@opennextjs/cloudflare": "^1.14.4",
+    "@pado/eslint-config-custom": "workspace:*",
+    "@pado/tailwind-design-tokens": "workspace:*",
+    "@pado/tailwind-semantic-tokens": "workspace:*",
+    "@pado/ui": "workspace:*",
     "@trivago/prettier-plugin-sort-imports": "^6.0.0",
     "@types/babel__core": "^7",
     "@types/node": "^20",

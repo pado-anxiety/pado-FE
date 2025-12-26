@@ -1,5 +1,5 @@
-const tailwindDesignTokens = require('@nyangtodac/tailwind-design-tokens');
-const tailwindSemanticTokens = require('@nyangtodac/tailwind-semantic-tokens');
+const tailwindDesignTokens = require('@pado/tailwind-design-tokens');
+const tailwindSemanticTokens = require('@pado/tailwind-semantic-tokens');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

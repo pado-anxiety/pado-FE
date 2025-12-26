@@ -1,7 +1,7 @@
 import Slider from '@react-native-community/slider';
 import { Text, View } from '@src/components/ui';
 
-import colors from '@nyangtodac/tailwind-design-tokens/colors';
+import colors from '@pado/tailwind-design-tokens/colors';
 
 import { CBT_MODAL_MESSAGES } from '../../constants';
 import {

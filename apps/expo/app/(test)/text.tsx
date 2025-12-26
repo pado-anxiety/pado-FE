@@ -2,7 +2,7 @@ import { useLanguage } from '@src/lib/i18n';
 import { View } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-import { Text } from '@nyangtodac/ui';
+import { Text } from '@pado/ui';
 
 export default function TextPage() {
   const { language } = useLanguage();

@@ -5,8 +5,8 @@
     "packages/*"
   ],
   "scripts": {
-    "start:all:ios:development": "concurrently \"yarn workspace nyangtodac-expo start:ios:development\" \"yarn workspace nyangtodac-web dev\"",
-    "start:all:android:development": "concurrently \"yarn workspace nyangtodac-expo start:android:development\" \"yarn workspace nyangtodac-web dev\""
+    "start:all:ios:development": "concurrently \"yarn workspace pado-expo start:ios:development\" \"yarn workspace pado-web dev\"",
+    "start:all:android:development": "concurrently \"yarn workspace pado-expo start:android:development\" \"yarn workspace pado-web dev\""
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",

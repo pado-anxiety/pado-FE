@@ -1,6 +1,6 @@
 import { getLocales } from 'expo-localization';
 
-import { initI18n } from '@nyangtodac/i18n';
+import { initI18n } from '@pado/i18n';
 
 import { storage } from '../store';
 

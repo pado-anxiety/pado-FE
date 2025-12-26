@@ -2,7 +2,7 @@ import { useTheme } from '@src/lib/theme';
 import { View } from 'react-native';
 import WebView from 'react-native-webview';
 
-import { Button, Text } from '@nyangtodac/ui';
+import { Button, Text } from '@pado/ui';
 
 export default function ThemePage() {
   const { theme, changeTheme } = useTheme();
