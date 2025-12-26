@@ -28,6 +28,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
     edgeToEdgeEnabled: true,
     package: ClientEnv.ANDROID_PACKAGE,
+    googleServicesFile: './google-services.json',
   },
   web: {
     output: 'static',

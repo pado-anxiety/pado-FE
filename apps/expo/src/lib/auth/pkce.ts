@@ -1,9 +1,15 @@
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import * as Crypto from 'expo-crypto';
 import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
 
 import { ENV } from '../env';
+
+GoogleSignin.configure({
+  webClientId: ENV.WEB_CLIENT_ID,
+  offlineAccess: true,
+});
 
 const base64UrlEncode = (str: string): string => {
   return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -36,14 +42,19 @@ export const getGoogleClientId = () => {
 };
 
 export const handleGoogleLogin = async () => {
-  try {
-    const codeVerifier = await generateCodeVerifier();
-    const codeChallenge = await generateCodeChallenge(codeVerifier);
+  if (Platform.OS === 'ios') {
+    await handleIOSGoogleLogin();
+  } else {
+    await handleAndroidGoogleLogin();
+  }
+};
 
-    const redirectUri =
-      Platform.OS === 'ios'
-        ? ENV.IOS_REDIRECT_URI
-        : Linking.createURL('callback');
+const handleIOSGoogleLogin = async () => {
+  const codeVerifier = await generateCodeVerifier();
+  const codeChallenge = await generateCodeChallenge(codeVerifier);
+
+  try {
+    const redirectUri = ENV.IOS_REDIRECT_URI;
     const googleClientId = getGoogleClientId();
 
     const authUrl =
@@ -57,8 +68,6 @@ export const handleGoogleLogin = async () => {
 
     const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUri);
 
-    console.log('result: ', result);
-
     if (result.type === 'success' && result.url) {
       const params = Linking.parse(result.url).queryParams;
       const authCode = params?.code;
@@ -66,12 +75,31 @@ export const handleGoogleLogin = async () => {
       if (authCode) {
         // 백엔드 전송할 인증코드
         console.log('authCode: ', authCode);
+        console.log('codeVerifier: ', codeVerifier);
       } else {
-        throw new Error('Google login failed');
+        throw new Error('iOS Google login failed');
       }
     }
   } catch (error) {
-    console.error('Google login error: ', error);
+    console.error('iOS Google login error: ', error);
     throw error;
+  }
+};
+
+const handleAndroidGoogleLogin = async () => {
+  try {
+    await GoogleSignin.hasPlayServices();
+
+    const userInfo = await GoogleSignin.signIn();
+
+    if (userInfo?.data && userInfo.data.serverAuthCode) {
+      // 백엔드 전송할 인증코드
+      // codeChallenge 사용
+      console.log('authCode: ', userInfo.data.serverAuthCode);
+    } else {
+      throw new Error('Android Google login failed');
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
