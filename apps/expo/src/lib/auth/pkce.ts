@@ -4,10 +4,12 @@ import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
 
+import { authAPI } from '../api/auth';
 import { ENV } from '../env';
 
 GoogleSignin.configure({
   webClientId: ENV.WEB_CLIENT_ID,
+  iosClientId: ENV.IOS_GOOGLE_CLIENT_ID,
   offlineAccess: true,
 });
 
@@ -72,16 +74,21 @@ const handleIOSGoogleLogin = async () => {
       const params = Linking.parse(result.url).queryParams;
       const authCode = params?.code;
 
-      if (authCode) {
-        // 백엔드 전송할 인증코드
-        console.log('authCode: ', authCode);
-        console.log('codeVerifier: ', codeVerifier);
+      if (authCode && typeof authCode === 'string') {
+        const response = await authAPI.getAccessToken({
+          codeVerifier,
+          authorizationCode: authCode,
+          redirectUri,
+          platform: 'IOS',
+        });
+
+        console.log('response: ', response);
       } else {
         throw new Error('iOS Google login failed');
       }
     }
   } catch (error) {
-    console.error('iOS Google login error: ', error);
+    console.error(error);
     throw error;
   }
 };

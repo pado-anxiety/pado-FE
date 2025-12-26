@@ -1,13 +1,12 @@
-import { View } from '@src/components/ui';
-import { ChatScreen } from '@src/features/chat';
-import { CbtButtonList, HomeBackground } from '@src/features/home';
+import { Pressable, Text, View } from '@src/components/ui';
+import { handleGoogleLogin } from '@src/lib/auth';
 
 export default function HomeScreen(): React.ReactNode {
   return (
-    <View className="flex-1 relative">
-      <HomeBackground />
-      <CbtButtonList />
-      <ChatScreen />
+    <View className="flex-1 items-center justify-center">
+      <Pressable onPress={handleGoogleLogin}>
+        <Text>Get Access Token</Text>
+      </Pressable>
     </View>
   );
 }

@@ -13,4 +13,24 @@ export const authAPI = {
 
     return response.data;
   },
+  getAccessToken: async ({
+    codeVerifier,
+    authorizationCode,
+    redirectUri,
+    platform,
+  }: {
+    codeVerifier: string;
+    authorizationCode: string;
+    redirectUri: string | null;
+    platform: 'ANDROID' | 'IOS';
+  }) => {
+    const response = await apiClient.post('/login/google', {
+      codeVerifier,
+      authorizationCode,
+      redirectUri,
+      platform,
+    });
+
+    return response;
+  },
 };
