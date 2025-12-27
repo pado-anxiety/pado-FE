@@ -75,7 +75,7 @@ const handleIOSGoogleLogin = async () => {
       const authCode = params?.code;
 
       if (authCode && typeof authCode === 'string') {
-        const response = await authAPI.getAccessToken({
+        const response = await authAPI.getGoogleAccessToken({
           codeVerifier,
           authorizationCode: authCode,
           redirectUri,
@@ -100,9 +100,14 @@ const handleAndroidGoogleLogin = async () => {
     const userInfo = await GoogleSignin.signIn();
 
     if (userInfo?.data && userInfo.data.serverAuthCode) {
-      // 백엔드 전송할 인증코드
-      // codeChallenge 사용
-      console.log('authCode: ', userInfo.data.serverAuthCode);
+      const response = await authAPI.getGoogleAccessToken({
+        codeVerifier: '',
+        authorizationCode: userInfo.data.serverAuthCode,
+        redirectUri: '',
+        platform: 'ANDROID',
+      });
+
+      console.log('response: ', response);
     } else {
       throw new Error('Android Google login failed');
     }

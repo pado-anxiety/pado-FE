@@ -18,8 +18,6 @@ apiClient.interceptors.request.use(
   (config) => {
     const accessToken = getAccessToken();
 
-    console.log('accessToken: ', accessToken);
-
     if (accessToken && config.headers) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -39,8 +37,6 @@ apiClient.interceptors.response.use(
   },
   async (error) => {
     if (isRefreshing) return;
-
-    console.log('isRefreshing: ', isRefreshing);
 
     isRefreshing = true;
 

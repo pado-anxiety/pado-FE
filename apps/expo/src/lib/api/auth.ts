@@ -13,7 +13,7 @@ export const authAPI = {
 
     return response.data;
   },
-  getAccessToken: async ({
+  getGoogleAccessToken: async ({
     codeVerifier,
     authorizationCode,
     redirectUri,
@@ -21,7 +21,7 @@ export const authAPI = {
   }: {
     codeVerifier: string;
     authorizationCode: string;
-    redirectUri: string | null;
+    redirectUri: string;
     platform: 'ANDROID' | 'IOS';
   }) => {
     const response = await apiClient.post('/login/google', {
