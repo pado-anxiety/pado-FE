@@ -21,12 +21,10 @@ function NavigationContent() {
   return (
     <View style={[{ flex: 1 }, themeStyle]}>
       <BottomSheetModalProvider>
-        <Stack>
-          <Stack.Screen
-            name="index"
-            options={{ headerShown: false }}
-          />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
           <Stack.Screen name="(test)" />
+          <Stack.Screen name="(act)" />
         </Stack>
       </BottomSheetModalProvider>
     </View>
