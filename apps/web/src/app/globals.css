@@ -11,6 +11,8 @@ html {
   max-width: 480px;
   margin: 0 auto;
 
+  touch-action: none;
+
   min-height: 100dvh;
 
   background-color: #fff;

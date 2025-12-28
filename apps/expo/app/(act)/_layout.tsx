@@ -8,7 +8,7 @@ export default function ACTLayout() {
   return (
     <View
       className="flex-1"
-      style={{ paddingTop: insets.top }}
+      style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
     >
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="anchor" />
