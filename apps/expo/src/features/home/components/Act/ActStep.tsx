@@ -1,6 +1,5 @@
-import { Text, View } from '@src/components/ui';
+import { Pressable, Text, View } from '@src/components/ui';
 import { Href, useRouter } from 'expo-router';
-import { Pressable } from 'react-native';
 
 type ActButtonProps = {
   item: {
