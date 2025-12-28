@@ -1,4 +1,5 @@
 import { Button, View } from '@src/components/ui';
+import { getWebViewURL } from '@src/lib/webview';
 import { useRouter } from 'expo-router';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
 
@@ -11,6 +12,7 @@ export default function AnchorScreen() {
 
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = JSON.parse(event.nativeEvent.data);
+    console.log(data);
     if (data.type === 'NAVIGATE_HOME') {
       router.replace('/');
     }
@@ -27,7 +29,7 @@ export default function AnchorScreen() {
       <WebView
         style={{ flex: 1 }}
         scrollEnabled={false}
-        source={{ uri: 'http://localhost:3000/act/anchor' }}
+        source={{ uri: `${getWebViewURL()}/act/anchor` }}
         onMessage={handleMessage}
       />
     </View>
