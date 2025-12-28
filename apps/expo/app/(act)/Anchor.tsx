@@ -1,4 +1,5 @@
 import { Button, View } from '@src/components/ui';
+import { ROUTES } from '@src/lib/route';
 import { getWebViewURL } from '@src/lib/webview';
 import { useRouter } from 'expo-router';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
@@ -12,9 +13,8 @@ export default function AnchorScreen() {
 
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = JSON.parse(event.nativeEvent.data);
-    console.log(data);
     if (data.type === 'NAVIGATE_HOME') {
-      router.replace('/');
+      router.replace(ROUTES.HOME);
     }
   };
 

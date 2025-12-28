@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import { ROUTES } from '@pado/lib/route';
 import { Button, Text } from '@pado/ui';
 
 type Step = {
@@ -69,7 +70,7 @@ export default function AnchorStepPage() {
       setSelectedIndex(0);
       return;
     }
-    router.push('/act/anchor/result');
+    router.push(ROUTES.ANCHOR_RESULT);
   };
 
   const radius = 35;
