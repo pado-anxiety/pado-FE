@@ -1,4 +1,4 @@
-import { View } from '@src/components/ui';
+import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import { getWebViewURL } from '@src/lib/webview';
 import { useRouter } from 'expo-router';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
@@ -14,11 +14,11 @@ export default function AnchorStepScreen() {
   };
 
   return (
-    <View className="flex flex-1 bg-page">
+    <PageSafeAreaView className="flex flex-1 bg-page">
       <WebView
         source={{ uri: `${getWebViewURL()}/act/anchor/step` }}
         onMessage={handleMessage}
       />
-    </View>
+    </PageSafeAreaView>
   );
 }

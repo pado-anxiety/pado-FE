@@ -1,4 +1,4 @@
-import { View } from '@src/components/ui';
+import { PageSafeAreaView } from '@src/components/layout/indext';
 import { ROUTES } from '@src/lib/route';
 import { getWebViewURL } from '@src/lib/webview';
 import { useRouter } from 'expo-router';
@@ -15,11 +15,11 @@ export default function AnchorResultScreen() {
   };
 
   return (
-    <View className="flex flex-1 bg-page">
+    <PageSafeAreaView className="flex flex-1 bg-page">
       <WebView
         source={{ uri: `${getWebViewURL()}/act/anchor/result` }}
         onMessage={handleMessage}
       />
-    </View>
+    </PageSafeAreaView>
   );
 }

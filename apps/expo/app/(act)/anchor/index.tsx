@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Entypo } from '@expo/vector-icons';
+import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import { Pressable, View } from '@src/components/ui';
 import { ICONS_SIZE } from '@src/lib/styles';
 import { getWebViewURL } from '@src/lib/webview';
@@ -24,7 +25,7 @@ export default function AnchorScreen() {
   };
 
   return (
-    <View className="flex flex-1 bg-page">
+    <PageSafeAreaView className="bg-page">
       <View className="px-8">
         {!started ? (
           <Pressable onPress={handleGoBack}>
@@ -42,6 +43,6 @@ export default function AnchorScreen() {
         source={{ uri: `${getWebViewURL()}/act/anchor` }}
         onMessage={handleMessage}
       />
-    </View>
+    </PageSafeAreaView>
   );
 }

@@ -1,15 +1,9 @@
 import { View } from '@src/components/ui';
 import { Stack } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function ACTLayout() {
-  const insets = useSafeAreaInsets();
-
   return (
-    <View
-      className="flex-1 bg-page"
-      style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-    >
+    <View className="flex-1 bg-page">
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="anchor" />
         <Stack.Screen name="reflection" />
