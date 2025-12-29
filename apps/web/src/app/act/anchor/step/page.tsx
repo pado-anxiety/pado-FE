@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { ROUTES } from '@pado/lib/route';
 import { Button, Text } from '@pado/ui';
 
 type Step = {
@@ -70,7 +69,7 @@ export default function AnchorStepPage() {
       setSelectedIndex(0);
       return;
     }
-    router.push(ROUTES.ANCHOR_RESULT);
+    router.push('/act/anchor/result');
   };
 
   const radius = 35;
@@ -100,6 +99,15 @@ export default function AnchorStepPage() {
             strokeLinecap="round"
             className="transition-all duration-500 ease-out"
           />
+          <circle
+            r={radius}
+            cx="50"
+            cy="50"
+            fill="none"
+            stroke="blue"
+            opacity={0.1}
+            strokeWidth={strokeWidth}
+          />
         </svg>
         <div className="flex-1 flex flex-col justify-center items-center absolute top-0 left-0 w-full aspect-square z-100">
           <Text className="text-title-large">{step.subject}</Text>
@@ -114,19 +122,22 @@ export default function AnchorStepPage() {
         </div>
       </div>
       <div className="flex flex-col justify-center items-center gap-12">
-        <Text className="text-body-large">예시: {step.example}</Text>
+        <Text className="text-body-large">예) {step.example}</Text>
         <div className="flex flex-row gap-2">
           {Array.from({ length: step.count }).map((_, index) => (
             <button
               key={index}
               onClick={() => setSelectedIndex(index + 1)}
-              className={`w-10 h-10 rounded-full ${selectedIndex === index + 1 ? 'bg-primary' : 'bg-gray-200'} ${index < selectedIndex - 1 ? 'opacity-50' : 'opacity-100'}`}
+              className={`p-4 rounded-full ${selectedIndex === index + 1 ? 'bg-primary' : 'bg-gray-200'} ${index < selectedIndex - 1 ? 'opacity-50' : 'opacity-100'}`}
               disabled={index !== selectedIndex}
             >
-              {index + 1}
+              <Text className="text-body-large">{index + 1}</Text>
             </button>
           ))}
         </div>
+        <Text className="text-label-medium">
+          * 감각을 찾으면 버튼을 눌러주세요
+        </Text>
       </div>
       <Button
         size="default"
