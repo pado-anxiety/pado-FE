@@ -1,13 +1,9 @@
 'use client';
 
-import { useCallback } from 'react';
-
-import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button, Text } from '@pado/ui';
 
 import PageLayout from '@/components/ui/layout';
 import {
-  ANCHOR_STEPS,
   CountButtons,
   ExampleSection,
   ProgressCircle,
@@ -22,28 +18,9 @@ export default function AnchorStepPage() {
     selectedIndex,
     unit,
     isNextDisabled,
-    setStepIndex,
-    setSelectedIndex,
+    handleNextStep,
     handleSelectIndex,
   } = useAnchorStep();
-
-  const handleNextStep = useCallback(() => {
-    if (selectedIndex !== step.count) {
-      return;
-    }
-    if (stepIndex < ANCHOR_STEPS.length - 1) {
-      setStepIndex(stepIndex + 1);
-      setSelectedIndex(0);
-      return;
-    }
-    if (typeof window !== 'undefined' && window.ReactNativeWebView) {
-      const message = JSON.stringify({
-        type: WEBVIEW_MESSAGE_TYPE.NAVIGATE,
-      });
-      window.ReactNativeWebView.postMessage(message);
-      return;
-    }
-  }, [selectedIndex, step.count, stepIndex, setStepIndex, setSelectedIndex]);
 
   const radius = 35;
   const strokeWidth = 7;

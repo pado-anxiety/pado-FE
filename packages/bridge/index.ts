@@ -2,9 +2,15 @@ export const WEBVIEW_MESSAGE_TYPE = {
     NAVIGATE: 'NAVIGATE',
 } as const;
 
-export type WebViewMessageType = keyof typeof WEBVIEW_MESSAGE_TYPE;
+export interface WebViewMessagePayload {
+    [WEBVIEW_MESSAGE_TYPE.NAVIGATE]: {},
+    // ex)
+    // [WEBVIEW_MESSAGE_TYPE.SHOW_TOAST]: { message: string; duration?: number };
+}
 
-export interface WebViewMessage<T = any> {
-    type: WebViewMessageType;   
-    data?: T;
+export type WebViewMessageType = keyof WebViewMessagePayload;
+
+export interface WebViewMessage<K extends WebViewMessageType> {
+    type: K;
+    data: WebViewMessagePayload[K];
 }

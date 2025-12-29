@@ -4,16 +4,11 @@ import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button, Text } from '@pado/ui';
 
 import PageLayout from '@/components/ui/layout';
+import { handlePostMessage } from '@/lib';
 
 export default function AnchorResultPage() {
   const handleNextStep = () => {
-    if (typeof window !== 'undefined' && window.ReactNativeWebView) {
-      const message = JSON.stringify({
-        type: WEBVIEW_MESSAGE_TYPE.NAVIGATE,
-      });
-      window.ReactNativeWebView.postMessage(message);
-      return;
-    }
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
   };
 
   return (

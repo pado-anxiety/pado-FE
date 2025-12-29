@@ -1,5 +1,9 @@
 import { useCallback, useState } from 'react';
 
+import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
+
+import { handlePostMessage } from '@/lib';
+
 import { ANCHOR_STEPS } from '../constants';
 import { Step } from '../types';
 
@@ -9,6 +13,19 @@ export function useAnchorStep() {
 
   const step: Step = ANCHOR_STEPS[stepIndex];
   const unit = (100 / step.count) * 0.01;
+
+  const handleNextStep = useCallback(() => {
+    if (selectedIndex !== step.count) {
+      return;
+    }
+    if (stepIndex < ANCHOR_STEPS.length - 1) {
+      setStepIndex(stepIndex + 1);
+      setSelectedIndex(0);
+      return;
+    }
+
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
+  }, [selectedIndex, step.count, stepIndex, setStepIndex, setSelectedIndex]);
 
   const handleSelectIndex = useCallback((index: number) => {
     setSelectedIndex(index);
@@ -22,8 +39,7 @@ export function useAnchorStep() {
     selectedIndex,
     unit,
     isNextDisabled,
-    setStepIndex,
-    setSelectedIndex,
+    handleNextStep,
     handleSelectIndex,
   };
 }
