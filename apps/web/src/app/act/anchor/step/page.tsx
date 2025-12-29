@@ -22,7 +22,7 @@ export default function AnchorStepPage() {
     handleSelectIndex,
   } = useAnchorStep();
 
-  const radius = 35;
+  const radius = 35; // svg viewbox percentage, 0 ~ 100
   const strokeWidth = 7;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference * (1 - unit * selectedIndex);

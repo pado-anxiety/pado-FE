@@ -17,7 +17,7 @@ export function CountButtons({
         <button
           key={`${index + 1}`}
           onClick={() => onSelect(index + 1)}
-          className={`p-4 rounded-full ${selectedIndex === index + 1 ? 'bg-primary' : 'bg-gray-200'} ${index < selectedIndex - 1 ? 'opacity-50' : 'opacity-100'}`}
+          className={`p-4 rounded-full ${index === selectedIndex ? 'bg-primary' : 'bg-gray-200'} ${index < selectedIndex ? 'opacity-50' : 'opacity-100'}`}
           disabled={index !== selectedIndex}
         >
           <Text className="text-body-large">{index + 1}</Text>
