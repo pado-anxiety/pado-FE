@@ -9,7 +9,7 @@ type ExampleSectionProps = {
 export function ExampleSection({ step }: ExampleSectionProps) {
   return (
     <div className="flex flex-col justify-center items-center gap-12">
-      <Text className="text-body-large">예) {step.example}</Text>
+      <Text className="text-body-medium">예) {step.example}</Text>
     </div>
   );
 }

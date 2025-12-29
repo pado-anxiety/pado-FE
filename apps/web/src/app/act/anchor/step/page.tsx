@@ -1,8 +1,11 @@
 'use client';
 
+import { useCallback } from 'react';
+
 import { Button, Text } from '@pado/ui';
 
 import {
+  ANCHOR_STEPS,
   CountButtons,
   ExampleSection,
   ProgressCircle,
@@ -17,9 +20,28 @@ export default function AnchorStepPage() {
     selectedIndex,
     unit,
     isNextDisabled,
-    handleNextStep,
+    setStepIndex,
+    setSelectedIndex,
     handleSelectIndex,
   } = useAnchorStep();
+
+  const handleNextStep = useCallback(() => {
+    if (selectedIndex !== step.count) {
+      return;
+    }
+    if (stepIndex < ANCHOR_STEPS.length - 1) {
+      setStepIndex(stepIndex + 1);
+      setSelectedIndex(0);
+      return;
+    }
+    if (typeof window !== 'undefined' && window.ReactNativeWebView) {
+      const message = JSON.stringify({
+        type: 'NAVIGATE_RESULT',
+      });
+      window.ReactNativeWebView.postMessage(message);
+      return;
+    }
+  }, [selectedIndex, step.count, stepIndex, setStepIndex, setSelectedIndex]);
 
   const radius = 35;
   const strokeWidth = 7;
@@ -50,7 +72,7 @@ export default function AnchorStepPage() {
         </Text>
       </div>
       <Button
-        size="default"
+        size="lg"
         text="다음"
         onClick={handleNextStep}
         disabled={isNextDisabled}

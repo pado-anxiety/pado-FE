@@ -7,7 +7,7 @@ export default function ACTLayout() {
 
   return (
     <View
-      className="flex-1"
+      className="flex-1 bg-page"
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
     >
       <Stack screenOptions={{ headerShown: false }}>

@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants';
 
 export const button = tv({
   slots: {
-    container: 'flex items-center justify-center rounded-md px-4 py-2',
+    container: 'flex items-center justify-center rounded-md',
     label: 'font-semibold',
     indicator: 'text-white',
   },
@@ -31,16 +31,16 @@ export const button = tv({
     },
     size: {
       default: {
-        container: 'px-4',
-        label: 'text-lg',
+        container: 'py-4',
+        label: 'text-xl',
       },
       sm: {
-        container: 'px-3',
+        container: 'py-3',
         label: 'text-base',
       },
       lg: {
-        container: 'px-8',
-        label: 'text-xl',
+        container: 'py-5',
+        label: 'text-2xl',
       },
     },
     disabled: {
