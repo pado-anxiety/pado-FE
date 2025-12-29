@@ -21,6 +21,9 @@
       },
       {
         "path": "./packages/i18n/tsconfig.json"
+      },
+      {
+        "path": "./packages/bridge/tsconfig.json"
       }
     ]
   }

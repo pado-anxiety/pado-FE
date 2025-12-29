@@ -5,6 +5,7 @@ import { Pressable, View } from '@src/components/ui';
 import { WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { ROUTES } from '@src/lib/route/route';
 import { ICONS_SIZE } from '@src/lib/styles';
+import { handleOnMessage } from '@src/lib/webview';
 import { useRouter } from 'expo-router';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
 
@@ -16,10 +17,9 @@ export default function AnchorScreen() {
   };
 
   const handleMessage = (event: WebViewMessageEvent) => {
-    const data = JSON.parse(event.nativeEvent.data);
-    if (data.type === WEBVIEW_MESSAGE_TYPE.NAVIGATE) {
+    handleOnMessage(event, WEBVIEW_MESSAGE_TYPE.NAVIGATE, () => {
       router.push(ROUTES.ACT.ANCHOR.STEP);
-    }
+    });
   };
 
   return (
