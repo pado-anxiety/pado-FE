@@ -1,5 +1,5 @@
 import { Text } from '@src/components/ui';
-import { getCbtRoute } from '@src/lib/route';
+import { getCbtRoute } from '@src/lib/route/route';
 import { useRouter } from 'expo-router';
 import { Pressable, useWindowDimensions } from 'react-native';
 import { scale } from 'react-native-size-matters';

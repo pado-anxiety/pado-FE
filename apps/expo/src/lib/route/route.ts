@@ -5,7 +5,11 @@ export const ROUTES = {
 
   ACT: {
     BASE: '/(act)',
-    ANCHOR: '/(act)/anchor',
+    ANCHOR: {
+      BASE: '/(act)/anchor',
+      STEP: '/(act)/anchor/step',
+      RESULT: '/(act)/anchor/result',
+    },
     REFLECTION: '/(act)/reflection',
     DETACH: '/(act)/detach',
     EMBRACE: '/(act)/embrace',

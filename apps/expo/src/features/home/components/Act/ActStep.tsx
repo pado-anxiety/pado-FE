@@ -1,5 +1,5 @@
 import { Pressable, Text, View } from '@src/components/ui';
-import { getActRoute } from '@src/lib/route';
+import { getActRoute } from '@src/lib/route/route';
 import { useRouter } from 'expo-router';
 
 type ActButtonProps = {
