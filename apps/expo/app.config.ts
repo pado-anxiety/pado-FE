@@ -70,6 +70,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     reactCompiler: true,
   },
   extra: {
+    eas: {
+      projectId: '30195066-b4b9-406a-9236-c2eaa162bf54',
+    },
     ...env.ClientEnv,
+  },
+  updates: {
+    url: 'https://u.expo.dev/30195066-b4b9-406a-9236-c2eaa162bf54',
+  },
+  runtimeVersion: {
+    policy: 'appVersion',
   },
 });
