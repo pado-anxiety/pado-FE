@@ -1,6 +1,6 @@
-import { Text, View } from '@src/components/ui';
-import { Href, useRouter } from 'expo-router';
-import { Pressable } from 'react-native';
+import { Pressable, Text, View } from '@src/components/ui';
+import { getActRoute } from '@src/lib/route/route';
+import { useRouter } from 'expo-router';
 
 type ActButtonProps = {
   item: {
@@ -22,7 +22,7 @@ export function ActStep({ item }: ActButtonProps): React.ReactNode {
       <Pressable
         className="bg-white p-4 rounded-lg"
         onPress={() => {
-          router.push(`/(act)/${item.slug}` as Href);
+          router.push(getActRoute(item.slug));
         }}
       >
         <Text className="text-body-large">{item.label}</Text>

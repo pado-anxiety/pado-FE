@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@pado/bridge": "workspace:*",
     "@pado/i18n": "workspace:*",
     "@pado/locales": "workspace:*",
     "i18next": "^25.7.1",

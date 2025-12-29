@@ -11,10 +11,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import '../global.css';
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
-
 function NavigationContent() {
   const { themeStyle } = useTheme();
 

@@ -1,0 +1,6 @@
+{
+    "name": "@pado/bridge",
+    "private": true,
+    "main": "index.ts",
+    "types": "types/index.d.ts"
+}

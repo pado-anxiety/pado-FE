@@ -43,7 +43,8 @@ const client = z.object({
 
   // add client environment variables here
   BASE_URL: z.string(),
-  ACCESS_TOKEN: z.string(),
+  IOS_WEBVIEW_URL: z.string(),
+  ANDROID_WEBVIEW_URL: z.string(),
 });
 
 const buildTime = z.object({
@@ -65,7 +66,8 @@ const _clientEnv = {
 
   // add client environment variables here
   BASE_URL: process.env.BASE_URL,
-  ACCESS_TOKEN: process.env.ACCESS_TOKEN,
+  IOS_WEBVIEW_URL: process.env.IOS_WEBVIEW_URL,
+  ANDROID_WEBVIEW_URL: process.env.ANDROID_WEBVIEW_URL,
 };
 
 const _buildTimeEnv = {

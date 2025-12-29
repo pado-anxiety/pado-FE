@@ -4605,6 +4605,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pado/bridge@workspace:*, @pado/bridge@workspace:packages/bridge":
+  version: 0.0.0-use.local
+  resolution: "@pado/bridge@workspace:packages/bridge"
+  languageName: unknown
+  linkType: soft
+
 "@pado/eslint-config-custom@workspace:*, @pado/eslint-config-custom@workspace:packages/eslint-config-custom":
   version: 0.0.0-use.local
   resolution: "@pado/eslint-config-custom@workspace:packages/eslint-config-custom"
@@ -13459,6 +13465,7 @@ __metadata:
     "@expo/vector-icons": "npm:^15.0.3"
     "@gorhom/bottom-sheet": "npm:^5"
     "@hookform/resolvers": "npm:^5.2.2"
+    "@pado/bridge": "workspace:*"
     "@pado/eslint-config-custom": "workspace:*"
     "@pado/i18n": "workspace:*"
     "@pado/locales": "workspace:*"
@@ -13529,6 +13536,7 @@ __metadata:
     "@babel/eslint-parser": "npm:^7.28.5"
     "@hookform/resolvers": "npm:^5.2.2"
     "@opennextjs/cloudflare": "npm:^1.14.4"
+    "@pado/bridge": "workspace:*"
     "@pado/eslint-config-custom": "workspace:*"
     "@pado/i18n": "workspace:*"
     "@pado/locales": "workspace:*"

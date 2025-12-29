@@ -3,14 +3,14 @@ import { Stack } from 'expo-router';
 
 export default function ACTLayout() {
   return (
-    <View className="flex-1 justify-center items-center">
+    <View className="flex-1 bg-page">
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Anchor" />
-        <Stack.Screen name="Reflection" />
-        <Stack.Screen name="Detach" />
-        <Stack.Screen name="Embrace" />
-        <Stack.Screen name="Observer" />
-        <Stack.Screen name="Action" />
+        <Stack.Screen name="anchor" />
+        <Stack.Screen name="reflection" />
+        <Stack.Screen name="detach" />
+        <Stack.Screen name="embrace" />
+        <Stack.Screen name="observer" />
+        <Stack.Screen name="action" />
       </Stack>
     </View>
   );
