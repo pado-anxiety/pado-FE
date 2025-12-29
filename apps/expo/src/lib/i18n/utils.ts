@@ -1,6 +1,5 @@
-import { getLocales } from 'expo-localization';
-
 import { initI18n } from '@pado/i18n';
+import { getLocales } from 'expo-localization';
 
 import { storage } from '../store';
 
