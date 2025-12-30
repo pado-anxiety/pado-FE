@@ -12,7 +12,9 @@
     "run:android:production": "cross-env APP_ENV=production npx expo run:android",
     "run:ios:production": "cross-env APP_ENV=production npx expo run:ios",
     "lint": "expo lint",
-    "eas-build-pre-install": "corepack enable && corepack prepare yarn@4.12.0 --activate"
+    "eas-build-pre-install": "corepack enable && corepack prepare yarn@4.12.0 --activate",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -22,6 +24,7 @@
     "@pado/i18n": "workspace:*",
     "@react-native-community/slider": "5.0.1",
     "@react-native-google-signin/google-signin": "^16.1.1",
+    "@react-native-seoul/kakao-login": "^5.4.2",
     "@react-navigation/bottom-tabs": "^7.4.0",
     "@react-navigation/elements": "^2.6.3",
     "@react-navigation/native": "^7.1.8",
