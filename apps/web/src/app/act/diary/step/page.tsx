@@ -83,12 +83,20 @@ export default function DiaryStepPage() {
             size="default"
             text="다음"
             onClick={() => {
-              if (stepIndex === stepCount - 1) {
-                handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
+              if (!textareaRef.current?.value) {
                 return;
               }
 
-              if (!textareaRef.current?.value) {
+              if (stepIndex === stepCount - 1) {
+                handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
+                  data: JSON.stringify([
+                    ...historyCard,
+                    {
+                      question: step.question,
+                      answer: textareaRef.current.value || '',
+                    },
+                  ]),
+                });
                 return;
               }
 
@@ -108,14 +116,14 @@ export default function DiaryStepPage() {
           {historyCard.map((card) => (
             <div
               key={card.question + card.answer}
-              className="flex flex-col bg-blue-100 p-4 rounded-lg"
+              className="flex flex-col bg-primary p-4 rounded-lg"
             >
               <Text className="text-body-small">{card.question}</Text>
               <Text className="text-body-small">{card.answer}</Text>
             </div>
           ))}
         </div>
-        <div className="flex flex-col gap-4 bg-red-100">
+        <div className="flex flex-col gap-4">
           <div>
             <Text className="text-body-medium font-bold">{step.question}</Text>
             <Text className="text-body-small">{step.description}</Text>
