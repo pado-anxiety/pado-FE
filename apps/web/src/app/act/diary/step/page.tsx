@@ -16,7 +16,7 @@ export default function DiaryStepPage() {
 
   return (
     <PageLayout>
-      <div className="flex flex-col flex-1 gap-3">
+      <div className="flex flex-col flex-1 gap-3 ">
         <StepHeader
           currentStepIndex={stepIndex}
           onExit={handleExit}

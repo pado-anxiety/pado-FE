@@ -15,7 +15,7 @@ export function HistoryCards({ cards }: HistoryCardsProps) {
           className="flex flex-col bg-primary p-4 rounded-lg"
         >
           <Text className="text-body-small">{card.question}</Text>
-          <Text className="text-body-small">{card.answer}</Text>
+          <Text className="text-body-small line-clamp-2">{card.answer}</Text>
         </div>
       ))}
     </div>
