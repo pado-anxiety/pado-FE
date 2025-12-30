@@ -33,4 +33,11 @@ export const authAPI = {
 
     return response;
   },
+  getKaKaoAccessToken: async (accessToken: string) => {
+    const response = await apiClient.post('/login/kakao', {
+      accessToken,
+    });
+
+    return response;
+  },
 };
