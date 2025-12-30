@@ -7,7 +7,7 @@ import PageLayout from '@/components/ui/layout';
 import { handlePostMessage } from '@/lib';
 
 export default function AnchorResultPage() {
-  const handleNextStep = () => {
+  const handleComplete = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
   };
 
@@ -19,8 +19,8 @@ export default function AnchorResultPage() {
         </div>
         <Button
           size="default"
-          text="다음"
-          onClick={handleNextStep}
+          text="완료"
+          onClick={handleComplete}
         />
       </div>
     </PageLayout>
