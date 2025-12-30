@@ -28,7 +28,7 @@ const ANDROID_PACKAGE = 'com.taewoongheo.pado';
 const WEB_CLIENT_ID =
   '462769921210-uoli77o7e6u25cou915jusrmcfnfal83.apps.googleusercontent.com';
 
-// define env schema
+// // define env schema
 const client = z.object({
   APP_ENV: z.enum(['development', 'production']),
   NAME: z.string(),

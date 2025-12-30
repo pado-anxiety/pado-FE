@@ -9,7 +9,7 @@ export function SkySection(): React.ReactNode {
 
   return (
     <View
-      className="bg-white items-center justify-center"
+      className="bg-white items-center justify-center gap-4"
       style={{
         height: WAVE_LAYOUT.SKY_HEIGHT,
         paddingTop: insets.top,

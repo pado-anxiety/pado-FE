@@ -38,6 +38,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     [
+      '@react-native-seoul/kakao-login',
+      {
+        kakaoAppKey: '1121c212a27ee8d00ca1ff02afe0df39',
+        overrideKotlinVersion: '1.9.0',
+      },
+    ],
+    [
       'expo-dev-client',
       {
         launchMode: 'most-recent',
