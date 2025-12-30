@@ -2,7 +2,7 @@
 
 import PageLayout from '@/components/ui/layout';
 import {
-  AnswerTextarea,
+  AnswerArea,
   ExampleSection,
   HistoryCards,
   QuestionSection,
@@ -11,8 +11,16 @@ import {
 } from '@/features/diary';
 
 export default function DiaryStepPage() {
-  const { step, stepIndex, historyCards, textareaRef, handleNext, handleExit } =
-    useDiaryStep();
+  const {
+    step,
+    stepIndex,
+    historyCards,
+    textareaRef,
+    handleNext,
+    handleExit,
+    feels,
+    setFeels,
+  } = useDiaryStep();
 
   return (
     <PageLayout>
@@ -25,9 +33,17 @@ export default function DiaryStepPage() {
         <HistoryCards cards={historyCards} />
         <div className="flex flex-col gap-4">
           <QuestionSection step={step} />
-          <ExampleSection step={step} />
+          <ExampleSection
+            step={step}
+            stepIndex={stepIndex}
+          />
         </div>
-        <AnswerTextarea textareaRef={textareaRef} />
+        <AnswerArea
+          textareaRef={textareaRef}
+          stepIndex={stepIndex}
+          feels={feels}
+          setFeels={setFeels}
+        />
       </div>
     </PageLayout>
   );

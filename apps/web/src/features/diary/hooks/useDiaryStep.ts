@@ -12,6 +12,8 @@ export function useDiaryStep() {
   const [historyCards, setHistoryCards] = useState<HistoryCard[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
+  const [feels, setFeels] = useState<string[]>([]);
+
   const step: DiaryStep = DIARY_STEPS[stepIndex];
 
   const handleNext = useCallback(() => {
@@ -26,7 +28,7 @@ export function useDiaryStep() {
 
     if (stepIndex === STEP_COUNT - 1) {
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
-        data: JSON.stringify([...historyCards, newHistoryCard]),
+        data: JSON.stringify([...historyCards, { ...newHistoryCard, feels }]),
       });
       return;
     }
@@ -34,7 +36,7 @@ export function useDiaryStep() {
     setStepIndex(stepIndex + 1);
     setHistoryCards([...historyCards, newHistoryCard]);
     textareaRef.current.value = '';
-  }, [step, stepIndex, historyCards]);
+  }, [step, stepIndex, historyCards, feels]);
 
   const handleExit = useCallback(() => {
     console.log('이전');
@@ -47,5 +49,7 @@ export function useDiaryStep() {
     textareaRef,
     handleNext,
     handleExit,
+    feels,
+    setFeels,
   };
 }

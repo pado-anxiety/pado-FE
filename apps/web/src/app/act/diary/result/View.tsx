@@ -26,6 +26,13 @@ export default function DiaryResultView() {
             >
               <Text>{item.question}</Text>
               <Text>{item.answer}</Text>
+              {item.feels && (
+                <div className="flex flex-row gap-2">
+                  {item.feels.map((feel) => (
+                    <Text key={feel}>{feel}</Text>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>

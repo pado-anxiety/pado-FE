@@ -11,4 +11,5 @@ export type DiaryStep = {
 export type HistoryCard = {
   question: string;
   answer: string;
+  feels?: string[];
 };
