@@ -1,9 +1,13 @@
 export const WEBVIEW_MESSAGE_TYPE = {
     NAVIGATE: 'NAVIGATE',
+    DATA: 'DATA',
 } as const;
 
 export interface WebViewMessagePayload {
     [WEBVIEW_MESSAGE_TYPE.NAVIGATE]: {},
+    [WEBVIEW_MESSAGE_TYPE.DATA]: {
+        data: any;
+    },
     // ex)
     // [WEBVIEW_MESSAGE_TYPE.SHOW_TOAST]: { message: string; duration?: number };
 }

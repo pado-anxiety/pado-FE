@@ -10,8 +10,13 @@ export default function DiaryStepScreen() {
   const router = useRouter();
 
   const handleMessage = (event: WebViewMessageEvent) => {
-    handleOnMessage(event, WEBVIEW_MESSAGE_TYPE.NAVIGATE, () => {
-      router.push(ROUTES.ACT.DIARY.RESULT);
+    handleOnMessage(event, WEBVIEW_MESSAGE_TYPE.DATA, (data) => {
+      router.push({
+        pathname: ROUTES.ACT.DIARY.RESULT,
+        params: {
+          data: JSON.stringify(data),
+        },
+      });
     });
   };
 
