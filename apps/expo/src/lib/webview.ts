@@ -1,13 +1,13 @@
 import { WebViewMessageType } from '@pado/bridge';
 import { WebViewMessageEvent } from 'react-native-webview';
 
-export const handleOnMessage = (
+export const handleOnMessage = <T>(
   event: WebViewMessageEvent,
   type: WebViewMessageType,
-  callback: () => void,
+  callback: (data?: T) => void,
 ) => {
   const parsedData = JSON.parse(event.nativeEvent.data);
   if (parsedData.type === type) {
-    callback();
+    callback(parsedData.data);
   }
 };

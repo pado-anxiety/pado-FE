@@ -10,7 +10,11 @@ export const ROUTES = {
       STEP: '/(act)/anchor/step',
       RESULT: '/(act)/anchor/result',
     },
-    REFLECTION: '/(act)/reflection',
+    DIARY: {
+      BASE: '/(act)/diary',
+      STEP: '/(act)/diary/step',
+      RESULT: '/(act)/diary/result',
+    },
     DETACH: '/(act)/detach',
     EMBRACE: '/(act)/embrace',
     OBSERVER: '/(act)/observer',

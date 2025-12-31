@@ -8,7 +8,7 @@ export const ACT_MENU_LIST = [
   },
   {
     label: '마음 일기',
-    slug: 'reflection',
+    slug: 'diary',
     position: scale(-70),
   },
   {
