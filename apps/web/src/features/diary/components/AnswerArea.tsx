@@ -1,4 +1,4 @@
-import { ChangeEvent, RefObject, useCallback, useRef } from 'react';
+import { RefObject, useCallback, useEffect } from 'react';
 
 import { Text } from '@pado/ui';
 
@@ -30,21 +30,20 @@ export function AnswerArea({
   feels,
   setFeels,
 }: AnswerTextareaProps) {
-  const prevValueRef = useRef<string>('');
+  const handleChange = useCallback(() => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
 
-  const handleChange = useCallback(
-    (e: ChangeEvent<HTMLTextAreaElement>) => {
-      const target = e.target;
+    textarea.style.height = 'auto';
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  }, [textareaRef]);
 
-      if (target.scrollHeight > target.clientHeight && textareaRef.current) {
-        textareaRef.current.value = prevValueRef.current;
-        return;
-      }
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
 
-      prevValueRef.current = target.value;
-    },
-    [textareaRef],
-  );
+    textarea.style.height = 'auto';
+  }, [stepIndex, textareaRef]);
 
   const handleFeelClick = useCallback(
     (feel: string) => {
@@ -58,7 +57,7 @@ export function AnswerArea({
   );
 
   return (
-    <div className="flex-1 flex flex-col gap-4">
+    <div className="flex flex-col gap-4">
       {stepIndex === STEP_COUNT - 1 && (
         <div>
           <div className="flex flex-row gap-2 flex-wrap justify-center">
@@ -89,7 +88,7 @@ export function AnswerArea({
         </Text>
       )}
       <textarea
-        className={`${stepIndex === STEP_COUNT - 1 ? '' : 'flex-1'} p-2 rounded-lg border border-gray-300 resize-none overflow-hidden focus:outline-none focus:ring-0`}
+        className="p-2 rounded-lg border border-gray-300 resize-none overflow-hidden focus:outline-none focus:ring-0"
         ref={textareaRef}
         onChange={handleChange}
       />
