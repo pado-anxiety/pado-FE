@@ -82,14 +82,14 @@ export function AnswerArea({
           </div>
         </div>
       )}
-      {stepIndex === STEP_COUNT - 1 && (
-        <Text className="text-body-small text-center">
-          또는 직접 작성해보세요.
-        </Text>
-      )}
       <textarea
-        className="p-2 rounded-lg border border-gray-300 resize-none overflow-hidden focus:outline-none focus:ring-0"
+        className="p-2 text-body-medium rounded-lg border-none bg-page resize-none overflow-hidden focus:outline-none focus:ring-0"
         ref={textareaRef}
+        placeholder={
+          stepIndex === STEP_COUNT - 1
+            ? '또는 직접 작성해보세요'
+            : '내용을 입력해보세요'
+        }
         onChange={handleChange}
       />
     </div>

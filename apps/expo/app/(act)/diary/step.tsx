@@ -27,6 +27,8 @@ export default function DiaryStepScreen() {
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.DIARY.STEP}`,
         }}
         onMessage={handleMessage}
+        keyboardDisplayRequiresUserAction={false}
+        javaScriptCanOpenWindowsAutomatically={true}
       />
     </PageSafeAreaView>
   );
