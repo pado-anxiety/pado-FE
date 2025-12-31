@@ -4,11 +4,13 @@ import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button, Text } from '@pado/ui';
 
 import { DiaryResult } from '@/features/diary/types';
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, parseJSON } from '@/lib';
 
 export default function DiaryResultView() {
   const data = window.diaryResult.data;
-  const parsedData = JSON.parse(data as unknown as string) as DiaryResult[];
+  const parsedData = parseJSON(data as unknown as string, () => {
+    return {};
+  }) as DiaryResult[];
 
   const handleComplete = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
