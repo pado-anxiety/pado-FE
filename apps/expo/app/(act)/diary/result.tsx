@@ -1,6 +1,7 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
-import { handleOnMessage, parseJSON } from '@src/lib';
+import { handleOnMessage } from '@src/lib';
+import { parseJSON } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';

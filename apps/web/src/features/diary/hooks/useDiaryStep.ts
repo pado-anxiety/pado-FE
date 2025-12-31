@@ -3,6 +3,7 @@ import { useCallback, useRef, useState } from 'react';
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import { handlePostMessage } from '@/lib';
+import { safeStringify } from '@/lib/json';
 
 import { DIARY_STEPS, STEP_COUNT } from '../constants';
 import { DiaryStep, HistoryCard } from '../types';
@@ -29,7 +30,7 @@ export function useDiaryStep() {
 
       if (stepIndex === STEP_COUNT - 1) {
         handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
-          data: JSON.stringify([...historyCards, { ...newHistoryCard, feels }]),
+          data: safeStringify([...historyCards, { ...newHistoryCard, feels }]),
         });
         return;
       }

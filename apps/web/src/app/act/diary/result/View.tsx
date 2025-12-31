@@ -4,7 +4,8 @@ import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button, Text } from '@pado/ui';
 
 import { DiaryResult } from '@/features/diary/types';
-import { handlePostMessage, parseJSON } from '@/lib';
+import { handlePostMessage } from '@/lib';
+import { parseJSON } from '@/lib/json';
 
 export default function DiaryResultView() {
   const data = window.diaryResult.data;
