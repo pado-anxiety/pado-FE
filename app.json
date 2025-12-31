@@ -4,6 +4,14 @@
       "eas": {
         "projectId": "3dbc7009-2aac-4246-b59f-9a25e0ea2070"
       }
-    }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/3dbc7009-2aac-4246-b59f-9a25e0ea2070"
+    },
+    "android": {},
+    "ios": {}
   }
 }

@@ -14874,6 +14874,7 @@ __metadata:
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-prettier: "npm:^5.5.4"
     eslint-plugin-unused-imports: "npm:^4.3.0"
+    expo-updates: "npm:~29.0.15"
     prettier: "npm:^3.7.4"
     typescript: "npm:~5.9.2"
     typescript-eslint: "npm:^8.46.3"
