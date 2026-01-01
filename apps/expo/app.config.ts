@@ -38,6 +38,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     [
+      'expo-font',
+      {
+        fonts: ['./assets/fonts/NanumSquareNeo-Variable.ttf'],
+      },
+    ],
+    [
       '@react-native-seoul/kakao-login',
       {
         kakaoAppKey: '1121c212a27ee8d00ca1ff02afe0df39',

@@ -1,7 +1,8 @@
-export { Button, Text } from '@pado/ui';
+export { Button } from '@pado/ui';
 export { Image, preloadImages } from './image';
-export { default as ControlledInput } from './input';
+export { ControlledInput } from './input';
 export { Modal, useModal } from './modal';
+export { Text } from './text';
 
 export {
   ActivityIndicator,

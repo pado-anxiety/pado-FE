@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import I18nProvider from '@/lib/i18n/i18n-provider';
 import { ThemeProvider } from '@/lib/theme';
@@ -9,14 +9,9 @@ import ThemeSync from '@/lib/theme/theme-sync';
 
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+const nanumSquareNeo = localFont({
+  src: '../../public/NanumSquareNeo-Variable.woff2',
+  variable: '--font-nanum-square-neo',
 });
 
 export const metadata: Metadata = {
@@ -39,10 +34,10 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="ko"
       suppressHydrationWarning
     >
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${nanumSquareNeo.variable}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

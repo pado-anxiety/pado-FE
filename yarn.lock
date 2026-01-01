@@ -9820,7 +9820,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-font@npm:~14.0.10, expo-font@npm:~14.0.9":
+"expo-font@npm:~14.0.10":
   version: 14.0.10
   resolution: "expo-font@npm:14.0.10"
   dependencies:
@@ -13562,7 +13562,7 @@ __metadata:
     expo-constants: "npm:^18.0.11"
     expo-crypto: "npm:~15.0.8"
     expo-dev-client: "npm:^6.0.20"
-    expo-font: "npm:~14.0.9"
+    expo-font: "npm:~14.0.10"
     expo-haptics: "npm:~15.0.7"
     expo-image: "npm:^3.0.11"
     expo-linking: "npm:~8.0.9"

@@ -112,7 +112,7 @@ interface ControlledInputProps<T extends FieldValues> extends InputProps {
   rules?: TRule<T>;
 }
 
-export default function ControlledInput<T extends FieldValues>({
+export function ControlledInput<T extends FieldValues>({
   control,
   name,
   rules,
