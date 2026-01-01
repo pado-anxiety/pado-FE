@@ -3,11 +3,11 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button } from '@pado/ui';
 
-import { DetachResult, ResultDisplay } from '@/features/detach';
+import { ResultDisplay, UserTextToken } from '@/features/detach';
 import { handlePostMessage } from '@/lib';
 
 export default function DetachResultView() {
-  const data = window.detachResult.data as DetachResult;
+  const data = window.detachResult.data as UserTextToken[];
 
   const handleStart = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
