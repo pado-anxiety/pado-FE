@@ -1,9 +1,9 @@
 import { Text } from '@pado/ui';
 
-import { DetachResult } from '../types';
+import { UserTextToken } from '../types';
 
 type ResultDisplayProps = {
-  result: DetachResult;
+  result: UserTextToken[];
 };
 
 export function ResultDisplay({ result }: ResultDisplayProps) {
