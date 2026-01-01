@@ -68,7 +68,7 @@ export function TokenSelector({
       {userTextTokens.map(({ text, isSelected }, index) => (
         <Text
           data-index={index}
-          key={text}
+          key={`${text + index}`}
           className="text-body-medium"
           style={{ backgroundColor: isSelected ? 'yellow' : 'transparent' }}
           onClick={() => updateHighlight(index)}
