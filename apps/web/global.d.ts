@@ -1,3 +1,4 @@
+import { UserTextToken } from '@/features/detach';
 import { DiaryResult } from '@/features/diary/types';
 
 export {};
@@ -9,6 +10,9 @@ declare global {
     };
     diaryResult: {
       data: DiaryResult[];
+    };
+    detachResult: {
+      data: UserTextToken[];
     };
   }
 }

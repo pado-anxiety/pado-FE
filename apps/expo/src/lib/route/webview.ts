@@ -14,6 +14,11 @@ export const WEBVIEW_ROUTES = {
       STEP: '/act/diary/step',
       RESULT: '/act/diary/result',
     },
+    DETACH: {
+      BASE: '/act/detach',
+      STEP: '/act/detach/step',
+      RESULT: '/act/detach/result',
+    },
   },
 } as const;
 
