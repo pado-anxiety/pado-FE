@@ -12,7 +12,7 @@ type StepContentProps = {
   textareaRef: RefObject<HTMLTextAreaElement | null>;
   userTextTokens: UserTextToken[];
   setUserTextTokens: React.Dispatch<React.SetStateAction<UserTextToken[]>>;
-  handleChange: () => void;
+  handleChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export function StepContent({

@@ -2,7 +2,7 @@ import { RefObject } from 'react';
 
 type TextInputAreaProps = {
   textareaRef: RefObject<HTMLTextAreaElement | null>;
-  onChange: () => void;
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 export function TextInputArea({ textareaRef, onChange }: TextInputAreaProps) {
