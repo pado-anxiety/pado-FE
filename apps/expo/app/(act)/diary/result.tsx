@@ -1,7 +1,7 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import { handleOnMessage } from '@src/lib';
-import { parseJSON } from '@src/lib/json';
+import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
@@ -13,8 +13,6 @@ export default function DiaryResultScreen() {
   const parsedData = parseJSON(data as string, () => {
     router.replace(ROUTES.HOME);
   });
-
-  console.log(parsedData);
 
   const handleMessage = (event: WebViewMessageEvent) => {
     handleOnMessage(event, WEBVIEW_MESSAGE_TYPE.NAVIGATE, () => {
@@ -30,7 +28,7 @@ export default function DiaryResultScreen() {
         }}
         onMessage={handleMessage}
         injectedJavaScriptBeforeContentLoaded={`
-            window.diaryResult = ${JSON.stringify(parsedData)};
+            window.diaryResult = ${safeStringify(parsedData)};
             true;
         `}
       />
