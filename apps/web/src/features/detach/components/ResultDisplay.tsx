@@ -13,8 +13,8 @@ export function ResultDisplay({ result }: ResultDisplayProps) {
         사실만 남겨보았어요 ~(추가 문구)
       </Text>
       <div className="flex flex-row gap-1 flex-wrap border border-gray-200 rounded-lg p-2">
-        {result.map((item) => (
-          <div key={item.text}>
+        {result.map((item, index) => (
+          <div key={`${item.text + index}`}>
             <Text
               className="text-body-medium"
               style={{ opacity: !item.isSelected ? 1 : 0.2 }}
