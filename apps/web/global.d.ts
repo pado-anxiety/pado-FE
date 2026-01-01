@@ -10,5 +10,8 @@ declare global {
     diaryResult: {
       data: DiaryResult[];
     };
+    detachResult: {
+      data: unknown;
+    };
   }
 }

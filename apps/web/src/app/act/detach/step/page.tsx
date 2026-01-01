@@ -14,23 +14,18 @@ type UserTextToken = {
 };
 
 function Step({
+  userTextTokens,
+  setUserTextTokens,
   stepIndex,
   textareaRef,
   handleChange,
 }: {
+  userTextTokens: UserTextToken[];
+  setUserTextTokens: React.Dispatch<React.SetStateAction<UserTextToken[]>>;
   stepIndex: number;
   textareaRef: React.RefObject<HTMLTextAreaElement | null>;
   handleChange: () => void;
 }) {
-  const userText =
-    'AI 가 발전하면서 직업을 잃을까봐 불안해. 실제로도 빅테크 기업들은 신입 취업을 막고 있다는데 나도 막히는건 아닐까? 개발자가 되지 못하면 난 어떻게 살아가야 하지? 이게 아니면 나는 할 수 있는게 없는거 같아.';
-  const [userTextTokens, setUserTextTokens] = useState<UserTextToken[]>(
-    userText.split(' ').map((token) => ({
-      text: token,
-      isSelected: false,
-    })),
-  );
-
   const isDragging = useRef<boolean>(false);
   const selectedMode = useRef<boolean | null>(null); // true=highlight
 
@@ -66,7 +61,6 @@ function Step({
       if (selectedMode.current === null) {
         selectedMode.current = !userTextTokens[index].isSelected;
       }
-      console.log(selectedMode.current);
       updateHighlight(index, selectedMode.current);
     }
   };
@@ -130,6 +124,8 @@ export default function DetachStepPage() {
   const [stepIndex, setStepIndex] = useState<number>(0);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
+  const [userTextTokens, setUserTextTokens] = useState<UserTextToken[]>([]);
+
   const handleChange = () => {
     const textarea = textareaRef.current;
     if (!textarea) return;
@@ -140,9 +136,20 @@ export default function DetachStepPage() {
 
   const handleNext = () => {
     if (stepIndex < 1) {
+      if (!textareaRef.current?.value) {
+        return;
+      }
+      setUserTextTokens(
+        textareaRef.current?.value?.split(' ').map((token) => ({
+          text: token,
+          isSelected: false,
+        })) || [],
+      );
       setStepIndex(stepIndex + 1);
     } else {
-      handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
+      handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
+        data: userTextTokens,
+      });
     }
   };
 
@@ -163,6 +170,8 @@ export default function DetachStepPage() {
         </div>
         <div className="flex-1">
           <Step
+            userTextTokens={userTextTokens}
+            setUserTextTokens={setUserTextTokens}
             stepIndex={stepIndex}
             textareaRef={textareaRef}
             handleChange={handleChange}

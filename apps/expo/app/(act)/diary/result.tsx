@@ -14,6 +14,8 @@ export default function DiaryResultScreen() {
     router.replace(ROUTES.HOME);
   });
 
+  console.log(parsedData);
+
   const handleMessage = (event: WebViewMessageEvent) => {
     handleOnMessage(event, WEBVIEW_MESSAGE_TYPE.NAVIGATE, () => {
       router.replace(ROUTES.HOME);
