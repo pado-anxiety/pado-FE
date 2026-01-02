@@ -10,13 +10,20 @@ import { Point } from './types';
 export function ActList(): React.ReactNode {
   const containerRef = useRef<View>(null);
   const [points, setPoints] = useState<Point[]>([]);
+  const [height, setHeight] = useState(0);
 
   return (
     <View
       ref={containerRef}
       className="flex-1 w-full relative pb-24"
+      onLayout={(event) => {
+        setHeight(event.nativeEvent.layout.height);
+      }}
     >
-      <ActPath points={points} />
+      <ActPath
+        points={points}
+        height={height}
+      />
       <View className="flex-1 flex-col gap-24 items-center w-full">
         {ACT_MENU_LIST.map((item, index) => (
           <ActStep

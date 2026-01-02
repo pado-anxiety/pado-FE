@@ -1,10 +1,19 @@
-import { Canvas, DashPathEffect, Path, Skia } from '@shopify/react-native-skia';
+import {
+  Canvas,
+  DashPathEffect,
+  Fill,
+  LinearGradient,
+  Path,
+  Skia,
+  vec,
+} from '@shopify/react-native-skia';
 import { scale } from 'react-native-size-matters';
 
 import { Point } from './types';
 
 type ActPathProps = {
   points: Point[];
+  height: number;
 };
 
 function drawPath(points: Point[]) {
@@ -40,16 +49,24 @@ function drawPath(points: Point[]) {
   return path;
 }
 
-export function ActPath({ points }: ActPathProps): React.ReactNode {
+export function ActPath({ points, height }: ActPathProps): React.ReactNode {
   return (
     <Canvas
       style={{
         width: '100%',
-        height: '100%',
+        height: height,
         position: 'absolute',
         inset: 0,
+        backgroundColor: 'black',
       }}
     >
+      <Fill>
+        <LinearGradient
+          start={vec(0, 0)}
+          end={vec(0, height)}
+          colors={['#003366', '#010C1E']}
+        />
+      </Fill>
       <Path
         path={drawPath(points)}
         color="white"
