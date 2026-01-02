@@ -9,6 +9,9 @@ const APP_ENV = process.env.APP_ENV ?? 'development';
 
 const envPath = path.resolve(__dirname, `.env.${APP_ENV}`);
 console.log('loading env from:', envPath);
+console.log('BASE_URL: ', process.env.BASE_URL);
+console.log('IOS_WEBVIEW_URL: ', process.env.IOS_WEBVIEW_URL);
+console.log('ANDROID_WEBVIEW_URL: ', process.env.ANDROID_WEBVIEW_URL);
 
 dotenv.config({ path: envPath });
 
