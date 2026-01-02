@@ -48,20 +48,24 @@ export function ActStep({
         }}
       >
         <Pressable
-          ref={circleRef}
-          className="bg-white p-4 rounded-full"
-          style={{
-            width: BubbleSize,
-            height: BubbleSize,
-          }}
+          className="flex-1 items-center justify-center gap-2"
           onPress={() => {
             router.push(getActRoute(item.slug));
           }}
           onLayout={handleLayout}
-        />
-        <Text className="text-label-medium bg-white p-2 rounded-lg">
-          {item.label}
-        </Text>
+        >
+          <View
+            ref={circleRef}
+            className="bg-white p-4 rounded-full"
+            style={{
+              width: BubbleSize,
+              height: BubbleSize,
+            }}
+          />
+          <Text className="text-label-medium bg-white p-2 rounded-lg">
+            {item.label}
+          </Text>
+        </Pressable>
       </View>
     </View>
   );

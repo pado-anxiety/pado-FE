@@ -16,10 +16,6 @@ export const ACT_MENU_LIST = [
     slug: 'embrace',
   },
   {
-    label: '맥락으로서의 자기',
-    slug: 'observer',
-  },
-  {
     label: '가치 & 전념 행동',
     slug: 'action',
   },
