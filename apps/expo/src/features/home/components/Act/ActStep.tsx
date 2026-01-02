@@ -4,7 +4,7 @@ import { Pressable, Text, View } from '@src/components/ui';
 import { getActRoute } from '@src/lib/route/route';
 import { useRouter } from 'expo-router';
 
-import { BubbleSize, Point } from './ActList';
+import { BubbleSize, Point } from './types';
 
 type ActButtonProps = {
   item: {
@@ -58,7 +58,7 @@ export function ActStep({
             router.push(getActRoute(item.slug));
           }}
           onLayout={handleLayout}
-        ></Pressable>
+        />
         <Text className="text-label-medium bg-white p-2 rounded-lg">
           {item.label}
         </Text>
