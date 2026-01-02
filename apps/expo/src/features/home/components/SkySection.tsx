@@ -15,12 +15,6 @@ export function SkySection(): React.ReactNode {
         paddingTop: insets.top,
       }}
     >
-      <Text
-        className="text-label-medium"
-        style={{ fontFamily: 'NanumSquareNeo-Variable' }}
-      >
-        왜 폰트 적용이 안되지? 뭐지?
-      </Text>
       <Text>{ENV.BASE_URL}</Text>
       <Text>{ENV.IOS_WEBVIEW_URL}</Text>
       <Text>{ENV.ANDROID_WEBVIEW_URL}</Text>
