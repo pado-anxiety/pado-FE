@@ -10,11 +10,15 @@ import {
 import {
   BACKGROUND,
   FOREGROUND,
+  FOREGROUND_MID,
   MIDGROUND,
+  MIDGROUND_BACK,
   WAVE_LAYOUT,
 } from '../../constants';
 import BackgroundWave from './BackgroundWave';
+import ForegroundMidWave from './ForegroundMidWave';
 import ForegroundWave from './ForegroundWave';
+import MidgroundBackWave from './MidgroundBackWave';
 import MidgroundWave from './MidgroundWave';
 
 export function WaveHorizon(): React.ReactNode {
@@ -71,6 +75,18 @@ export function WaveHorizon(): React.ReactNode {
     );
   }, []);
 
+  const foregroundMidWavePath = useDerivedValue(() => {
+    return createWavePath(
+      clock,
+      FOREGROUND_MID.SPEED_MULTIPLIER,
+      width,
+      FOREGROUND_MID.AMPLITUDE,
+      FOREGROUND_MID.FREQUENCY,
+      WAVE_LAYOUT.HORIZON_HEIGHT,
+      FOREGROUND_MID.OFFSET,
+    );
+  }, []);
+
   const midgroundWavePath = useDerivedValue(() => {
     return createWavePath(
       clock,
@@ -80,6 +96,18 @@ export function WaveHorizon(): React.ReactNode {
       MIDGROUND.FREQUENCY,
       WAVE_LAYOUT.HORIZON_HEIGHT,
       MIDGROUND.OFFSET,
+    );
+  }, []);
+
+  const midgroundBackWavePath = useDerivedValue(() => {
+    return createWavePath(
+      clock,
+      MIDGROUND_BACK.SPEED_MULTIPLIER,
+      width,
+      MIDGROUND_BACK.AMPLITUDE,
+      MIDGROUND_BACK.FREQUENCY,
+      WAVE_LAYOUT.HORIZON_HEIGHT,
+      MIDGROUND_BACK.OFFSET,
     );
   }, []);
 
@@ -103,7 +131,9 @@ export function WaveHorizon(): React.ReactNode {
       }}
     >
       <BackgroundWave path={backgroundWavePath} />
+      <MidgroundBackWave path={midgroundBackWavePath} />
       <MidgroundWave path={midgroundWavePath} />
+      <ForegroundMidWave path={foregroundMidWavePath} />
       <ForegroundWave path={foregroundWavePath} />
     </Canvas>
   );

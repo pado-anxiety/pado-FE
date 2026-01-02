@@ -1,6 +1,6 @@
 import { AnimatedProp, Path, PathDef } from '@shopify/react-native-skia';
 
-export default function ForegroundWave({
+export default function MidgroundBackWave({
   path,
 }: {
   path: AnimatedProp<PathDef>;
@@ -8,7 +8,7 @@ export default function ForegroundWave({
   return (
     <Path
       path={path}
-      color="#003366"
+      color="#77AADD"
     />
   );
 }

@@ -8,8 +8,7 @@ export default function MidgroundWave({
   return (
     <Path
       path={path}
-      color="#000080"
-      opacity={0.6}
+      color="#3388CC"
     />
   );
 }

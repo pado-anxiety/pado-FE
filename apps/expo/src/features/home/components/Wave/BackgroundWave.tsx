@@ -8,8 +8,7 @@ export default function BackgroundWave({
   return (
     <Path
       path={path}
-      color="#000080"
-      opacity={0.3}
+      color="#D3F3FF"
     />
   );
 }
