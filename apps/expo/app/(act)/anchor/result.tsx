@@ -16,7 +16,7 @@ export default function AnchorResultScreen() {
   };
 
   return (
-    <PageSafeAreaView className="flex flex-1 bg-page">
+    <PageSafeAreaView className="flex flex-1 bg-act-page">
       <WebView
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.ANCHOR.RESULT}`,

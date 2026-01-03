@@ -24,8 +24,7 @@ export function ProgressCircle({
         cx="50"
         cy="50"
         fill="none"
-        stroke="blue"
-        opacity={0.5}
+        stroke="#21344E"
         strokeWidth={strokeWidth}
         strokeDasharray={circumference}
         strokeDashoffset={offset}
@@ -38,8 +37,8 @@ export function ProgressCircle({
         cx="50"
         cy="50"
         fill="none"
-        stroke="blue"
-        opacity={0.1}
+        stroke="#769BC4"
+        opacity={0.4}
         strokeWidth={strokeWidth}
       />
     </svg>

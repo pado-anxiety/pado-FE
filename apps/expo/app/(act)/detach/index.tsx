@@ -23,7 +23,7 @@ export default function DetachScreen() {
   };
 
   return (
-    <PageSafeAreaView className="bg-page">
+    <PageSafeAreaView className="bg-act-page">
       <View className="px-8">
         <Pressable onPress={handleGoBack}>
           <Entypo

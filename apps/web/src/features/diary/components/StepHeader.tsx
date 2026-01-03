@@ -20,6 +20,7 @@ export function StepHeader({
         size="default"
         text="나가기"
         onClick={onExit}
+        className="bg-btn-act-page"
       />
       <StepProgress
         stepCount={STEP_COUNT}
@@ -29,6 +30,7 @@ export function StepHeader({
         size="default"
         text="다음"
         onClick={onNext}
+        className="bg-btn-act-page"
       />
     </div>
   );

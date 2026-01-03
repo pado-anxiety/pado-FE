@@ -11,7 +11,7 @@ const ResultPage = dynamic(() => import('./View'), {
 
 export default function DetachResultPage() {
   return (
-    <PageLayout>
+    <PageLayout className="bg-act-page">
       <ResultPage />
     </PageLayout>
   );

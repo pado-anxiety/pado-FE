@@ -28,6 +28,7 @@ export default function DetachResultView() {
         size="default"
         text="다음"
         onClick={handleStart}
+        className="bg-btn-act-page"
       />
     </div>
   );

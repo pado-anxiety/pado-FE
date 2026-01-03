@@ -43,6 +43,7 @@ export default function DiaryResultView() {
       <Button
         text="완료"
         onClick={handleComplete}
+        className="bg-btn-act-page"
       />
     </div>
   );

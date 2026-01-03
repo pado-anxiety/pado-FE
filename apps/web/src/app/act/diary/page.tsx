@@ -17,7 +17,7 @@ export default function DiaryPage() {
   };
 
   return (
-    <PageLayout>
+    <PageLayout className="bg-act-page">
       <div className="flex flex-col flex-1 justify-between">
         <div className="flex flex-col gap-4">
           <Text className="text-title-medium">마음 일기</Text>
@@ -34,6 +34,7 @@ export default function DiaryPage() {
           size="default"
           text="시작하기"
           onClick={handleStart}
+          className="bg-btn-act-page"
         />
       </div>
     </PageLayout>

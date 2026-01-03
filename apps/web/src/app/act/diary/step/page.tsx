@@ -23,8 +23,8 @@ export default function DiaryStepPage() {
   } = useDiaryStep();
 
   return (
-    <PageLayout className="bg-page">
-      <div className="flex flex-col flex-1 bg-page gap-3 overflow-y-auto scrollbar-hide">
+    <PageLayout className="bg-act-page">
+      <div className="flex flex-col flex-1 bg-act-page gap-3 overflow-y-auto scrollbar-hide">
         <StepHeader
           currentStepIndex={stepIndex}
           onExit={handleExit}

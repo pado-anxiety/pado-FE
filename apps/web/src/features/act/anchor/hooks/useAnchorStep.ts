@@ -24,12 +24,22 @@ export function useAnchorStep() {
       return;
     }
 
-    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'NEXT',
+    });
   }, [selectedIndex, step.count, stepIndex, setStepIndex, setSelectedIndex]);
 
   const handleSelectIndex = useCallback((index: number) => {
     setSelectedIndex(index);
   }, []);
+
+  const handleMovePrevStep = useCallback(
+    (stepIndex: number) => {
+      setStepIndex(stepIndex - 1);
+      setSelectedIndex(0);
+    },
+    [setStepIndex, setSelectedIndex],
+  );
 
   const isNextDisabled = selectedIndex !== step.count;
 
@@ -41,5 +51,6 @@ export function useAnchorStep() {
     isNextDisabled,
     handleNextStep,
     handleSelectIndex,
+    handleMovePrevStep,
   };
 }

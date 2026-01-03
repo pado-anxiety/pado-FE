@@ -4,7 +4,9 @@ export const WEBVIEW_MESSAGE_TYPE = {
 } as const;
 
 export interface WebViewMessagePayload {
-    [WEBVIEW_MESSAGE_TYPE.NAVIGATE]: {},
+    [WEBVIEW_MESSAGE_TYPE.NAVIGATE]: {
+        action: string;
+    },
     [WEBVIEW_MESSAGE_TYPE.DATA]: {
         data: any;
     },

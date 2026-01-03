@@ -12,11 +12,13 @@ export function StepHeader({ onExit, onNext }: StepHeaderProps) {
         size="default"
         text="나가기"
         onClick={onExit}
+        className="bg-btn-act-page"
       />
       <Button
         size="default"
         text="다음"
         onClick={onNext}
+        className="bg-btn-act-page"
       />
     </div>
   );

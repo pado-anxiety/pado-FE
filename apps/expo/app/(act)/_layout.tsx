@@ -3,7 +3,7 @@ import { Stack } from 'expo-router';
 
 export default function ACTLayout() {
   return (
-    <View className="flex-1 bg-page">
+    <View className="flex-1 bg-act-page">
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="anchor" />
         <Stack.Screen name="diary" />

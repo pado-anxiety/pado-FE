@@ -33,8 +33,8 @@ function drawPath(points: Point[]) {
       const dx = end.x - start.x;
       const dy = end.y - start.y;
 
-      const curveTensionX = Math.random() * 0.5 + 0.22;
-      const curveTensionY = Math.random() * 0.8 + 0.22;
+      const curveTensionX = Math.random() * 0.5 + 0.3;
+      const curveTensionY = Math.random() * 0.8 + 0.4;
 
       const cp1x = start.x - dx * curveTensionX;
       const cp2x = end.x + dx * curveTensionX;

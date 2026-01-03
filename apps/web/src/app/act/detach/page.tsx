@@ -17,7 +17,7 @@ export default function DetachPage() {
   };
 
   return (
-    <PageLayout className="bg-page">
+    <PageLayout className="bg-act-page">
       <div className="flex flex-col flex-1 justify-between">
         <div className="flex flex-col gap-4">
           <Text className="text-title-medium">생각 거리 두기</Text>
@@ -34,6 +34,7 @@ export default function DetachPage() {
           size="default"
           text="시작하기"
           onClick={handleStart}
+          className="bg-btn-act-page"
         />
       </div>
     </PageLayout>

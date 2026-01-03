@@ -6,7 +6,7 @@ export default function PageLayout({
   className?: string;
 }) {
   return (
-    <div className={`flex flex-1 px-8 py-8 ${className} fixed inset-0`}>
+    <div className={`flex flex-1 px-8 py-4 pt-6 ${className} fixed inset-0`}>
       {children}
     </div>
   );

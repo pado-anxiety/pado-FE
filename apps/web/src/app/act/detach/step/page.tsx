@@ -16,7 +16,7 @@ export default function DetachStepPage() {
   } = useDetachStep();
 
   return (
-    <PageLayout className="bg-page">
+    <PageLayout className="bg-act-page">
       <div className="flex flex-col justify-between items-center gap-4">
         <StepHeader
           onExit={handleExit}
