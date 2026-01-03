@@ -32,6 +32,9 @@ export function useDiaryStep() {
         handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
           data: safeStringify([...historyCards, { ...newHistoryCard, feels }]),
         });
+        handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+          action: 'NEXT',
+        });
         return;
       }
 
@@ -44,7 +47,9 @@ export function useDiaryStep() {
   }, [step, stepIndex, historyCards, feels]);
 
   const handleExit = useCallback(() => {
-    // TODO: 이전 페이지로 이동 구현
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'HOME',
+    });
   }, []);
 
   return {

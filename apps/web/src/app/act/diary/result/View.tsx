@@ -14,7 +14,9 @@ export default function DiaryResultView() {
   }) as DiaryResult[];
 
   const handleComplete = () => {
-    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'HOME',
+    });
   };
 
   return (

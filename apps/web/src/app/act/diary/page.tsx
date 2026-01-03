@@ -13,7 +13,9 @@ const description = [
 
 export default function DiaryPage() {
   const handleStart = () => {
-    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'NEXT',
+    });
   };
 
   return (
