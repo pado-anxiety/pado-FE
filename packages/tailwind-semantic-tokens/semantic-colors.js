@@ -15,7 +15,7 @@ const semanticColors = {
     '--bg-act-page': '#DEE4E9',
     // '--bg-act-page': '#EBF2F7',
     '--btn-act-page': '#FF8A65',
-    '--btn-act-page-selected': colors.blue[600],
+    '--btn-act-page-selected': colors.blue[500],
     '--btn-act-page-unselected': colors.blue[50],
 
     // Chat specific backgrounds

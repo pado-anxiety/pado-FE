@@ -1,5 +1,6 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
+import { LoadingSpinner, WebViewLoadingView } from '@src/components/ui';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { useRouter } from 'expo-router';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
@@ -27,6 +28,12 @@ export default function AnchorStepScreen() {
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.ANCHOR.STEP}`,
         }}
+        startInLoadingState={true}
+        renderLoading={() => (
+          <WebViewLoadingView>
+            <LoadingSpinner />
+          </WebViewLoadingView>
+        )}
         onMessage={handleMessage}
       />
     </PageSafeAreaView>

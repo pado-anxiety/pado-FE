@@ -4,6 +4,7 @@ import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button, Text } from '@pado/ui';
 import { X } from 'lucide-react';
 
+import { Divide } from '@/components/ui';
 import PageLayout from '@/components/ui/layout';
 import { handlePostMessage } from '@/lib';
 
@@ -54,7 +55,7 @@ export default function AnchorPage() {
             </Text>
           ))}
         </div>
-        <div className="border border-blue-500 h-[1px] opacity-70" />
+        <Divide />
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto scrollbar-hide">
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-2">
