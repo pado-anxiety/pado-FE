@@ -7,11 +7,7 @@ interface ActResultDescriptionProps {
 }
 
 function ActResultDescription({ description }: ActResultDescriptionProps) {
-  return (
-    <Text className="text-body-medium font-normal">
-      {description}
-    </Text>
-  );
+  return <Text className="text-body-medium font-normal">{description}</Text>;
 }
 
 export default ActResultDescription;

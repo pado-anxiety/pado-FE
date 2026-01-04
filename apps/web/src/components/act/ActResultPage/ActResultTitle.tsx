@@ -8,14 +8,16 @@ interface ActResultTitleProps {
 
 function ActResultTitle({ title }: ActResultTitleProps) {
   return (
-    <Text className="text-title-medium">
+    <div className="flex flex-col">
       {title.map((line, index) => (
-        <span key={index}>
+        <Text
+          key={`${line + index}`}
+          className="text-title-medium"
+        >
           {line}
-          {index < title.length - 1 && <br />}
-        </span>
+        </Text>
       ))}
-    </Text>
+    </div>
   );
 }
 

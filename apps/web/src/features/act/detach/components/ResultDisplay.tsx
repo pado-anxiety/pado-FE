@@ -8,9 +8,7 @@ type ResultDisplayProps = {
 
 export function ResultDisplay({ result }: ResultDisplayProps) {
   return (
-    <div
-      className="flex flex-row gap-1 flex-wrap border rounded-2xl p-4 bg-white/50 border-white shadow-sm"
-    >
+    <div className="flex flex-row gap-1 flex-wrap border rounded-2xl p-4 bg-white/50 border-white shadow-sm">
       {result.map((item, index) => (
         <div key={`${item.text + index}`}>
           <Text

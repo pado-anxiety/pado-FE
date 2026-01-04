@@ -10,6 +10,7 @@ type AnswerTextareaProps = {
 export function AnswerArea({ textareaRef, stepIndex }: AnswerTextareaProps) {
   const step = DIARY_STEPS[stepIndex];
 
+  // TODO: 전체 페이지가 스크롤되는 문제
   return (
     <div className="flex flex-col gap-4 flex-1">
       <textarea

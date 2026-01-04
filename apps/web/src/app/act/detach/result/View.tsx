@@ -17,8 +17,8 @@ export default function DetachResultView() {
 
   return (
     <ActResultPage
-      title={['생각의 거품이 걷히고', '선명한 사실만 남았어요.']}
-      description="투명해진 문장처럼 생각은 힘을 잃고 결국 사라질 거예요. 이제 흔들리지 않는 사실 위에서 잠시 숨을 고르셔도 좋아요."
+      title={['생각의 거품이 걷히고', '사실만 남았어요.']}
+      description="투명해진 문장처럼 생각은 생각일 뿐이에요. 이제 흔들리지 않는 사실 위에서 잠시 숨을 고르셔도 좋아요."
       buttonText="다음"
       onButtonClick={handleStart}
     >
