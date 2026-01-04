@@ -42,8 +42,9 @@ export function useDetachStep() {
   }, [stepIndex, userTextTokens]);
 
   const handleExit = useCallback(() => {
-    // TODO: 이전 페이지로 이동 구현
-    console.log('나가기');
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'HOME',
+    });
   }, []);
 
   return {

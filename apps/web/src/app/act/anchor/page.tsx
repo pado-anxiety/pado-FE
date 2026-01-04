@@ -85,7 +85,7 @@ export default function AnchorPage() {
               </Text>
             </div>
 
-            <div className="mt-2 p-3 bg-white/50 rounded-lg">
+            <div className="mt-4 p-4 bg-white/50 rounded-xl border border-white">
               <Text className="text-body-small italic">
                 Tip: 판단하지 않고, 있는 그대로의 감각에만 천천히 집중해 보세요.
               </Text>

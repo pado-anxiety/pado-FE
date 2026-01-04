@@ -16,14 +16,17 @@ export function TokenSelector({
   const isDragging = useRef<boolean>(false);
   const selectedMode = useRef<boolean | null>(null); // true=highlight
 
-  const onDraggingStart = () => {
+  const startY = useRef<number>(0);
+  const onDraggingStart = (e: React.PointerEvent<HTMLDivElement>) => {
     isDragging.current = true;
+    startY.current = e.clientY;
   };
 
   const updateHighlight = (index: number, mode?: boolean) => {
     const t: UserTextToken = userTextTokens[index];
 
-    const m = mode !== null ? mode : !t.isSelected;
+    const m = mode ?? !t.isSelected;
+
     setUserTextTokens((prev: UserTextToken[]) => {
       if (prev[index].isSelected === m) {
         return prev;
@@ -36,7 +39,14 @@ export function TokenSelector({
   };
 
   const onDragging = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging.current) return;
+    if (!isDragging.current) {
+      return;
+    }
+
+    const diffY = Math.abs(e.clientY - startY.current);
+    if (diffY > 10) {
+      return;
+    }
 
     const target = document.elementFromPoint(
       e.clientX,
@@ -59,11 +69,10 @@ export function TokenSelector({
 
   return (
     <div
-      className="flex flex-row gap-1 flex-wrap"
+      className="flex flex-row gap-1 flex-wrap mt-4 p-4 bg-white/50 rounded-xl border border-white"
       onPointerMove={onDragging}
       onPointerUp={onDraggingEnd}
       onPointerDown={onDraggingStart}
-      style={{ touchAction: 'none' }}
     >
       {userTextTokens.map(({ text, isSelected }, index) => (
         <Text

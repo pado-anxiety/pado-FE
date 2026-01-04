@@ -18,20 +18,16 @@ export default function DetachStepPage() {
   return (
     <PageLayout className="bg-act-page">
       <div className="flex flex-col justify-between items-center gap-4">
-        <StepHeader
-          onExit={handleExit}
-          onNext={handleNext}
+        <StepHeader onExit={handleExit} />
+        <StepContent
+          step={step}
+          stepIndex={stepIndex}
+          textareaRef={textareaRef}
+          userTextTokens={userTextTokens}
+          setUserTextTokens={setUserTextTokens}
+          handleChange={handleChange}
+          handleNext={handleNext}
         />
-        <div className="flex-1">
-          <StepContent
-            step={step}
-            stepIndex={stepIndex}
-            textareaRef={textareaRef}
-            userTextTokens={userTextTokens}
-            setUserTextTokens={setUserTextTokens}
-            handleChange={handleChange}
-          />
-        </div>
       </div>
     </PageLayout>
   );

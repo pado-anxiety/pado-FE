@@ -1,5 +1,5 @@
 export type DetachStep = {
   id: number;
-  title: string;
+  title: string[];
   description: string;
 };

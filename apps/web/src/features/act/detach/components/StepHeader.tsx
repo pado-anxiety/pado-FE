@@ -1,24 +1,16 @@
-import { Button } from '@pado/ui';
+import { X } from 'lucide-react';
 
 type StepHeaderProps = {
   onExit: () => void;
-  onNext: () => void;
 };
 
-export function StepHeader({ onExit, onNext }: StepHeaderProps) {
+export function StepHeader({ onExit }: StepHeaderProps) {
   return (
-    <div className="flex flex-row gap-2 w-full justify-between">
-      <Button
-        size="default"
-        text="나가기"
+    <div className="flex flex-row gap-2 items-center justify-between w-full">
+      <X
+        size={30}
+        color="black"
         onClick={onExit}
-        className="bg-btn-act-page"
-      />
-      <Button
-        size="default"
-        text="다음"
-        onClick={onNext}
-        className="bg-btn-act-page"
       />
     </div>
   );

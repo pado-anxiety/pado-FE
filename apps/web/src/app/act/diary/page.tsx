@@ -71,36 +71,19 @@ export default function DiaryPage() {
               </Text>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1">
-                <Text className="text-body-small font-bold text-primary">
-                  1. 상황 (Fact)
-                </Text>
-                <Text className="text-body-small">
-                  언제, 어디서, 무슨 일이 있었나요?
-                </Text>
-              </div>
-
-              <div className="flex flex-col gap-1">
-                <Text className="text-body-small font-bold text-primary">
-                  2. 생각 (Thought)
-                </Text>
-                <Text className="text-body-small">
-                  그때 머릿속을 스쳐 지나간 생각은 무엇인가요?
-                </Text>
-              </div>
-
-              <div className="flex flex-col gap-1">
-                <Text className="text-body-small font-bold text-primary">
-                  3. 감정 (Emotion)
-                </Text>
-                <Text className="text-body-small">
-                  그 생각으로 인해 어떤 감정을 느꼈나요?
-                </Text>
-              </div>
+            <div className="flex flex-col gap-2">
+              <Text className="text-body-small">
+                1. 상황 (Fact): 언제, 어디서, 무슨 일이 있었나요?
+              </Text>
+              <Text className="text-body-small">
+                2. 생각 (Thought): 그때 머릿속을 스쳐 지나간 생각은 무엇인가요?
+              </Text>
+              <Text className="text-body-small">
+                3. 감정 (Emotion): 그 생각으로 인해 어떤 감정을 느꼈나요?
+              </Text>
             </div>
 
-            <div className="mt-2 p-3 bg-white/50 rounded-lg">
+            <div className="mt-4 p-4 bg-white/50 rounded-xl border border-white">
               <Text className="text-body-small italic">
                 Tip: &apos;생각&apos;은 사실이 아닙니다. 내가 상황을 어떻게
                 해석했는지 발견하는 것이 핵심이에요.

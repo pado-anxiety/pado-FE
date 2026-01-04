@@ -1,5 +1,7 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
+import { LoadingSpinner } from '@src/components/ui';
+import { WebViewLoadingView } from '@src/components/ui/webview-loading-view';
 import { handleOnMessage } from '@src/lib';
 import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
@@ -30,6 +32,12 @@ export default function DetachResultScreen() {
             window.detachResult = ${safeStringify(parsedData)};
             true;
         `}
+        startInLoadingState={true}
+        renderLoading={() => (
+          <WebViewLoadingView>
+            <LoadingSpinner />
+          </WebViewLoadingView>
+        )}
       />
     </PageSafeAreaView>
   );
