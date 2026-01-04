@@ -17,10 +17,15 @@ export function CountButtons({
         <button
           key={`${index + 1}`}
           onClick={() => onSelect(index + 1)}
-          className={`p-4 rounded-full ${index === selectedIndex ? 'bg-primary' : 'bg-gray-200'} ${index < selectedIndex ? 'opacity-50' : 'opacity-100'}`}
+          className="p-4 rounded-2xl"
+          style={{
+            backgroundColor: index === selectedIndex ? '#2E476B' : '#B9CDE5',
+            color: index === selectedIndex ? '#FFFFFF' : '',
+            opacity: index < selectedIndex ? 0.5 : 1,
+          }}
           disabled={index !== selectedIndex}
         >
-          <Text className="text-body-large">{index + 1}</Text>
+          <Text className="text-body-medium">{index + 1}</Text>
         </button>
       ))}
     </div>

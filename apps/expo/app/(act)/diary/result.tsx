@@ -1,6 +1,6 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
-import { handleOnMessage } from '@src/lib';
+import { LoadingSpinner, WebViewLoadingView } from '@src/components/ui';
 import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -15,13 +15,17 @@ export default function DiaryResultScreen() {
   });
 
   const handleMessage = (event: WebViewMessageEvent) => {
-    handleOnMessage(event, WEBVIEW_MESSAGE_TYPE.NAVIGATE, () => {
-      router.replace(ROUTES.HOME);
-    });
+    const parsedData = JSON.parse(event.nativeEvent.data);
+    if (parsedData.type === WEBVIEW_MESSAGE_TYPE.NAVIGATE) {
+      const { action } = parsedData.data;
+      if (action === 'HOME') {
+        router.replace(ROUTES.HOME);
+      }
+    }
   };
 
   return (
-    <PageSafeAreaView className="flex flex-1 bg-page">
+    <PageSafeAreaView className="flex flex-1 bg-act-page">
       <WebView
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.DIARY.RESULT}`,
@@ -31,6 +35,12 @@ export default function DiaryResultScreen() {
             window.diaryResult = ${safeStringify(parsedData)};
             true;
         `}
+        startInLoadingState={true}
+        renderLoading={() => (
+          <WebViewLoadingView>
+            <LoadingSpinner />
+          </WebViewLoadingView>
+        )}
       />
     </PageSafeAreaView>
   );

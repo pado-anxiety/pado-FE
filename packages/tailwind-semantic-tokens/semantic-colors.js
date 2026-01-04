@@ -11,6 +11,13 @@ const semanticColors = {
     '--bg-success': colors.success[500],
     '--bg-warning': colors.warning[500],
 
+    // act content
+    '--bg-act-page': '#DEE4E9',
+    // '--bg-act-page': '#EBF2F7',
+    '--btn-act-page': '#FF8A65',
+    '--btn-act-page-selected': colors.blue[500],
+    '--btn-act-page-unselected': colors.blue[50],
+
     // Chat specific backgrounds
     '--bg-chat-overlay': 'rgba(0, 0, 0, 0.88)',
     '--bg-chat-assistant': colors.neutral[900],
@@ -18,7 +25,7 @@ const semanticColors = {
 
     // Text colors
     '--text-primary': colors.neutral[900],
-    '--text-secondary': colors.neutral[700],
+    '--text-secondary': colors.neutral[600],
     '--text-tertiary': colors.neutral[500],
     '--text-inverse': colors.white,
     '--text-destructive': colors.danger[500],

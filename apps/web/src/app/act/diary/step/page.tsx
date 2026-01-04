@@ -1,14 +1,16 @@
 'use client';
 
-import PageLayout from '@/components/ui/layout';
+import { Button } from '@pado/ui';
+import { ArrowLeft, X } from 'lucide-react';
+
+import ActStepPage from '@/components/act/ActStepPage';
+import { Divide } from '@/components/ui';
 import {
   AnswerArea,
-  ExampleSection,
   HistoryCards,
   QuestionSection,
-  StepHeader,
   useDiaryStep,
-} from '@/features/diary';
+} from '@/features/act/diary';
 
 export default function DiaryStepPage() {
   const {
@@ -18,33 +20,53 @@ export default function DiaryStepPage() {
     textareaRef,
     handleNext,
     handleExit,
-    feels,
-    setFeels,
+    handlePrevStep,
   } = useDiaryStep();
 
+  const leftButton = (
+    <Button
+      size="sm"
+      color="link"
+      onClick={() => handlePrevStep(stepIndex)}
+    >
+      <ArrowLeft
+        size={30}
+        color="black"
+      />
+    </Button>
+  );
+
+  const rightButton = (
+    <Button
+      size="sm"
+      color="link"
+      onClick={handleExit}
+    >
+      <X
+        size={30}
+        color="black"
+      />
+    </Button>
+  );
+
   return (
-    <PageLayout className="bg-page">
-      <div className="flex flex-col flex-1 bg-page gap-3 overflow-y-auto scrollbar-hide">
-        <StepHeader
-          currentStepIndex={stepIndex}
-          onExit={handleExit}
-          onNext={handleNext}
-        />
+    <ActStepPage
+      leftButton={leftButton}
+      rightButton={rightButton}
+      buttonText="다음"
+      onButtonClick={handleNext}
+    >
+      <div className="flex flex-col gap-2 flex-1">
         <HistoryCards cards={historyCards} />
+        {historyCards.length > 0 && <Divide />}
         <div className="flex flex-col gap-4">
           <QuestionSection step={step} />
-          <ExampleSection
-            step={step}
-            stepIndex={stepIndex}
-          />
         </div>
         <AnswerArea
           textareaRef={textareaRef}
           stepIndex={stepIndex}
-          feels={feels}
-          setFeels={setFeels}
         />
       </div>
-    </PageLayout>
+    </ActStepPage>
   );
 }

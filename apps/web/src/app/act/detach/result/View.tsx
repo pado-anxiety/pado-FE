@@ -1,34 +1,28 @@
 'use client';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
-import { Button, Text } from '@pado/ui';
 
-import { ResultDisplay, UserTextToken } from '@/features/detach';
+import ActResultPage from '@/components/act/ActResultPage';
+import { ResultDisplay } from '@/features/act/detach';
 import { handlePostMessage } from '@/lib';
 
 export default function DetachResultView() {
-  const data = window.detachResult.data as UserTextToken[] | undefined;
+  const data = window.detachResult;
 
   const handleStart = () => {
-    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {});
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'HOME',
+    });
   };
 
-  if (!data) {
-    return (
-      <div className="flex flex-1 flex-col justify-between items-center">
-        <Text>결과를 불러올 수 없습니다.</Text>
-      </div>
-    );
-  }
-
   return (
-    <div className="flex flex-1 flex-col justify-between items-center">
-      <ResultDisplay result={data} />
-      <Button
-        size="default"
-        text="다음"
-        onClick={handleStart}
-      />
-    </div>
+    <ActResultPage
+      title={['생각의 거품이 걷히고', '사실만 남았어요.']}
+      description="투명해진 문장처럼 생각은 생각일 뿐이에요. 이제 흔들리지 않는 사실 위에서 잠시 숨을 고르셔도 좋아요."
+      buttonText="다음"
+      onButtonClick={handleStart}
+    >
+      <ResultDisplay result={data || []} />
+    </ActResultPage>
   );
 }
