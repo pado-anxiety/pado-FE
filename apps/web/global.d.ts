@@ -1,5 +1,5 @@
-import { UserTextToken } from '@/features/detach';
-import { DiaryResult } from '@/features/diary/types';
+import { UserTextToken } from '@/features/act/detach';
+import { DiaryResult } from '@/features/act/diary/types';
 
 export {};
 

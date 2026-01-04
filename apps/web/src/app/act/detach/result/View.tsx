@@ -3,7 +3,7 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button, Text } from '@pado/ui';
 
-import { ResultDisplay, UserTextToken } from '@/features/detach';
+import { ResultDisplay, UserTextToken } from '@/features/act/detach';
 import { handlePostMessage } from '@/lib';
 
 export default function DetachResultView() {

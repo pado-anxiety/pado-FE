@@ -1,14 +1,14 @@
 'use client';
 
+import { Divide } from '@/components/ui';
 import PageLayout from '@/components/ui/layout';
 import {
   AnswerArea,
-  ExampleSection,
   HistoryCards,
   QuestionSection,
   StepHeader,
   useDiaryStep,
-} from '@/features/diary';
+} from '@/features/act/diary';
 
 export default function DiaryStepPage() {
   const {
@@ -26,17 +26,13 @@ export default function DiaryStepPage() {
     <PageLayout className="bg-act-page">
       <div className="flex flex-col flex-1 bg-act-page gap-3 overflow-y-auto scrollbar-hide">
         <StepHeader
-          currentStepIndex={stepIndex}
           onExit={handleExit}
           onNext={handleNext}
         />
         <HistoryCards cards={historyCards} />
+        {historyCards.length > 0 && <Divide />}
         <div className="flex flex-col gap-4">
           <QuestionSection step={step} />
-          <ExampleSection
-            step={step}
-            stepIndex={stepIndex}
-          />
         </div>
         <AnswerArea
           textareaRef={textareaRef}

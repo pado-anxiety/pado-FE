@@ -8,9 +8,9 @@ type QuestionSectionProps = {
 
 export function QuestionSection({ step }: QuestionSectionProps) {
   return (
-    <div>
-      <Text className="text-body-medium font-bold">{step.question}</Text>
-      <Text className="text-body-small">{step.description}</Text>
+    <div className="flex flex-col gap-1">
+      <Text className="text-title-medium font-bold">{step.question}</Text>
+      <Text className="text-body-medium">{step.description}</Text>
     </div>
   );
 }

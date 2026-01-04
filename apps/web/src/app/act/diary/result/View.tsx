@@ -3,7 +3,7 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button, Text } from '@pado/ui';
 
-import { DiaryResult } from '@/features/diary/types';
+import { DiaryResult } from '@/features/act/diary/types';
 import { handlePostMessage } from '@/lib';
 import { parseJSON } from '@/lib/json';
 

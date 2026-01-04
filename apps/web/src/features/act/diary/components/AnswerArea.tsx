@@ -1,8 +1,8 @@
-import { RefObject, useCallback, useEffect } from 'react';
+import { RefObject, useCallback } from 'react';
 
 import { Text } from '@pado/ui';
 
-import { STEP_COUNT } from '../constants';
+import { DIARY_STEPS, STEP_COUNT } from '../constants';
 
 type AnswerTextareaProps = {
   textareaRef: RefObject<HTMLTextAreaElement | null>;
@@ -30,20 +30,7 @@ export function AnswerArea({
   feels,
   setFeels,
 }: AnswerTextareaProps) {
-  const handleChange = useCallback(() => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
-
-    textarea.style.height = 'auto';
-    textarea.style.height = `${textarea.scrollHeight}px`;
-  }, [textareaRef]);
-
-  useEffect(() => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
-
-    textarea.style.height = 'auto';
-  }, [stepIndex, textareaRef]);
+  const step = DIARY_STEPS[stepIndex];
 
   const handleFeelClick = useCallback(
     (feel: string) => {
@@ -57,7 +44,7 @@ export function AnswerArea({
   );
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 flex-1">
       {stepIndex === STEP_COUNT - 1 && (
         <div>
           <div className="flex flex-row gap-2 flex-wrap justify-center">
@@ -67,13 +54,13 @@ export function AnswerArea({
                 className="p-2 rounded-lg bg-primary text-white cursor-pointer"
                 style={{
                   backgroundColor: feels.includes(feel)
-                    ? 'var(--bg-secondary)'
-                    : 'var(--bg-primary)',
+                    ? 'var(--btn-act-page-selected)'
+                    : 'var(--btn-act-page-unselected)',
                 }}
                 onClick={() => handleFeelClick(feel)}
               >
                 <Text
-                  className={`${feels.includes(feel) ? 'text-white' : 'text-primary'}`}
+                  className={`text-body-small ${feels.includes(feel) ? 'text-white' : 'text-gray-700'}`}
                 >
                   {feel}
                 </Text>
@@ -83,14 +70,13 @@ export function AnswerArea({
         </div>
       )}
       <textarea
-        className="p-2 text-body-medium rounded-lg border-none bg-page resize-none overflow-hidden focus:outline-none focus:ring-0"
+        className="flex-1 p-4 text-body-small resize-none scrollbar-hide focus:outline-none focus:ring-0 bg-white/60 rounded-2xl border border-white shadow-sm"
         ref={textareaRef}
         placeholder={
           stepIndex === STEP_COUNT - 1
             ? '또는 직접 작성해보세요'
-            : '내용을 입력해보세요'
+            : `${'예시)\n' + step.example.bad + '\n' + step.example.good}`
         }
-        onChange={handleChange}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import PageLayout from '@/components/ui/layout';
-import { StepContent, StepHeader, useDetachStep } from '@/features/detach';
+import { StepContent, StepHeader, useDetachStep } from '@/features/act/detach';
 
 export default function DetachStepPage() {
   const {

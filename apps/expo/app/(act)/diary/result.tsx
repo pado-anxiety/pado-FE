@@ -10,9 +10,13 @@ export default function DiaryResultScreen() {
   const { data } = useLocalSearchParams();
   const router = useRouter();
 
+  console.log('data', data);
+
   const parsedData = parseJSON(data as string, () => {
     router.replace(ROUTES.HOME);
   });
+
+  console.log('parsedData', parsedData);
 
   const handleMessage = (event: WebViewMessageEvent) => {
     const parsedData = JSON.parse(event.nativeEvent.data);
