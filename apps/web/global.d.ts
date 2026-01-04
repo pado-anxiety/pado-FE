@@ -8,11 +8,7 @@ declare global {
     ReactNativeWebView: {
       postMessage: (message: string) => void;
     };
-    diaryResult: {
-      data: DiaryResult[];
-    };
-    detachResult: {
-      data: UserTextToken[];
-    };
+    diaryResult: DiaryResult[];
+    detachResult: UserTextToken[];
   }
 }
