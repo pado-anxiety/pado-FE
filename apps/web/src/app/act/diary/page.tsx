@@ -11,9 +11,9 @@ import PageLayout from '@/components/ui/layout';
 import { handlePostMessage } from '@/lib/webview';
 
 const description = [
-  '불안은 사건 그 자체가 아니라, 그 사건을 바라보는 내 "생각"에서 시작됩니다.',
-  '우리는 하루에도 수만 가지 생각을 하지만, 정작 어떤 생각이 내 마음을 흔드는지 모를 때가 많아요.',
-  '마치 제3자가 된 것처럼, 당시의 상황과 내 머릿속을 한 걸음 떨어져서 관찰해 볼까요?',
+  '불안은 사건 그 자체가 아니라, 사건을 바라보는 나의 "해석"에서 시작됩니다.',
+  '따라서 상황과 감정 사이에 숨어 나를 불안하게 만드는 "자동적 사고"를 찾아내야 해요.',
+  '불안의 원인이 된 생각을 발견하러 가볼까요?',
 ];
 
 export default function DiaryPage() {
@@ -32,7 +32,6 @@ export default function DiaryPage() {
   return (
     <PageLayout className="bg-act-page">
       <div className="flex flex-col flex-1 justify-between gap-4">
-        {/* 상단 헤더 및 설명 (1단계와 동일 구조) */}
         <div className="flex flex-col gap-3">
           <div className="flex flex-row justify-between items-center">
             <Text className="text-title-medium">마음 일기</Text>
@@ -60,7 +59,6 @@ export default function DiaryPage() {
 
         <Divide />
 
-        {/* 컨텐츠 설명 영역 (스크롤 가능) */}
         <div className="flex flex-1 flex-col gap-4 overflow-y-auto scrollbar-hide">
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-2">

@@ -11,7 +11,7 @@ const ResultPage = dynamic(() => import('./View'), {
 
 export default function DiaryResultPage() {
   return (
-    <PageLayout className="bg-act-page">
+    <PageLayout className="bg-act-page overflow-y-auto scrollbar-hide">
       <ResultPage />
     </PageLayout>
   );
