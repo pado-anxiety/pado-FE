@@ -27,8 +27,6 @@ export default function DiaryStepScreen() {
         router.back();
       } else if (action === 'HOME') {
         router.replace(ROUTES.HOME);
-      } else if (action === 'NEXT') {
-        // DATA 메시지가 먼저 처리되어 result로 이동하므로 여기서는 처리하지 않음
       }
     }
   };

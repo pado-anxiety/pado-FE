@@ -47,6 +47,18 @@ export function useDetachStep() {
     });
   }, []);
 
+  const handlePrevStep = useCallback((currentStepIndex: number) => {
+    if (currentStepIndex === 0) {
+      handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+        action: 'BACK',
+      });
+      return;
+    }
+
+    setStepIndex(currentStepIndex - 1);
+    setUserTextTokens([]);
+  }, []);
+
   return {
     step,
     stepIndex,
@@ -56,5 +68,6 @@ export function useDetachStep() {
     handleChange,
     handleNext,
     handleExit,
+    handlePrevStep,
   };
 }

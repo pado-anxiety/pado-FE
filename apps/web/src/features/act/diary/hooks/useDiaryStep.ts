@@ -13,15 +13,12 @@ export function useDiaryStep() {
   const [historyCards, setHistoryCards] = useState<HistoryCard[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const [feels, setFeels] = useState<string[]>([]);
-
   const step: DiaryStep = DIARY_STEPS[stepIndex];
 
   const handleNext = useCallback(() => {
     if (
       textareaRef.current?.value ||
-      (stepIndex === STEP_COUNT - 1 &&
-        (feels.length > 0 || textareaRef.current?.value !== ''))
+      (stepIndex === STEP_COUNT - 1 && textareaRef.current?.value !== '')
     ) {
       const newHistoryCard: HistoryCard = {
         question: step.question,
@@ -30,7 +27,7 @@ export function useDiaryStep() {
 
       if (stepIndex === STEP_COUNT - 1) {
         handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
-          data: safeStringify([...historyCards, { ...newHistoryCard, feels }]),
+          data: safeStringify([...historyCards, newHistoryCard]),
         });
         handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
           action: 'NEXT',
@@ -44,13 +41,31 @@ export function useDiaryStep() {
         textareaRef.current.value = '';
       }
     }
-  }, [step, stepIndex, historyCards, feels]);
+  }, [step, stepIndex, historyCards]);
 
   const handleExit = useCallback(() => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
     });
   }, []);
+
+  const handlePrevStep = useCallback(
+    (stepIndex: number) => {
+      if (stepIndex === 0) {
+        handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+          action: 'BACK',
+        });
+        return;
+      }
+
+      if (textareaRef.current) {
+        textareaRef.current.value = '';
+      }
+      setHistoryCards(historyCards.slice(0, -1));
+      setStepIndex(stepIndex - 1);
+    },
+    [handlePostMessage, historyCards, setHistoryCards, setStepIndex],
+  );
 
   return {
     step,
@@ -59,7 +74,6 @@ export function useDiaryStep() {
     textareaRef,
     handleNext,
     handleExit,
-    feels,
-    setFeels,
+    handlePrevStep,
   };
 }

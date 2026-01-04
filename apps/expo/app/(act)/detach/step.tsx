@@ -24,7 +24,9 @@ export default function DetachStepScreen() {
       });
     } else if (parsedData.type === WEBVIEW_MESSAGE_TYPE.NAVIGATE) {
       const { action } = parsedData.data;
-      if (action === 'HOME') {
+      if (action === 'BACK') {
+        router.back();
+      } else if (action === 'HOME') {
         router.replace(ROUTES.HOME);
       }
     }

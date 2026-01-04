@@ -31,7 +31,7 @@ function ActIntroPage({
   onClose,
 }: ActIntroPageProps) {
   return (
-    <PageLayout className="bg-act-page">
+    <PageLayout className="bg-act-page pt-4">
       <div className="flex flex-col flex-1 justify-between gap-4">
         {/* 헤더 및 메인 설명 */}
         <div className="flex flex-col gap-3">

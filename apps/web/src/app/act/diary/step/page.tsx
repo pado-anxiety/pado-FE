@@ -1,12 +1,14 @@
 'use client';
 
+import { Button } from '@pado/ui';
+import { ArrowLeft, X } from 'lucide-react';
+
+import ActStepPage from '@/components/act/ActStepPage';
 import { Divide } from '@/components/ui';
-import PageLayout from '@/components/ui/layout';
 import {
   AnswerArea,
   HistoryCards,
   QuestionSection,
-  StepHeader,
   useDiaryStep,
 } from '@/features/act/diary';
 
@@ -18,17 +20,43 @@ export default function DiaryStepPage() {
     textareaRef,
     handleNext,
     handleExit,
-    feels,
-    setFeels,
+    handlePrevStep,
   } = useDiaryStep();
 
+  const leftButton = (
+    <Button
+      size="sm"
+      color="link"
+      onClick={() => handlePrevStep(stepIndex)}
+    >
+      <ArrowLeft
+        size={30}
+        color="black"
+      />
+    </Button>
+  );
+
+  const rightButton = (
+    <Button
+      size="sm"
+      color="link"
+      onClick={handleExit}
+    >
+      <X
+        size={30}
+        color="black"
+      />
+    </Button>
+  );
+
   return (
-    <PageLayout className="bg-act-page">
-      <div className="flex flex-col flex-1 bg-act-page gap-3 overflow-y-auto scrollbar-hide">
-        <StepHeader
-          onExit={handleExit}
-          onNext={handleNext}
-        />
+    <ActStepPage
+      leftButton={leftButton}
+      rightButton={rightButton}
+      buttonText="다음"
+      onButtonClick={handleNext}
+    >
+      <div className="flex flex-col gap-2 flex-1">
         <HistoryCards cards={historyCards} />
         {historyCards.length > 0 && <Divide />}
         <div className="flex flex-col gap-4">
@@ -37,10 +65,8 @@ export default function DiaryStepPage() {
         <AnswerArea
           textareaRef={textareaRef}
           stepIndex={stepIndex}
-          feels={feels}
-          setFeels={setFeels}
         />
       </div>
-    </PageLayout>
+    </ActStepPage>
   );
 }

@@ -1,7 +1,10 @@
 'use client';
 
-import PageLayout from '@/components/ui/layout';
-import { StepContent, StepHeader, useDetachStep } from '@/features/act/detach';
+import { Button } from '@pado/ui';
+import { ArrowLeft, X } from 'lucide-react';
+
+import ActStepPage from '@/components/act/ActStepPage';
+import { StepContent, useDetachStep } from '@/features/act/detach';
 
 export default function DetachStepPage() {
   const {
@@ -13,22 +16,50 @@ export default function DetachStepPage() {
     handleChange,
     handleNext,
     handleExit,
+    handlePrevStep,
   } = useDetachStep();
 
+  const leftButton = (
+    <Button
+      size="sm"
+      color="link"
+      onClick={() => handlePrevStep(stepIndex)}
+    >
+      <ArrowLeft
+        size={30}
+        color="black"
+      />
+    </Button>
+  );
+
+  const rightButton = (
+    <Button
+      size="sm"
+      color="link"
+      onClick={handleExit}
+    >
+      <X
+        size={30}
+        color="black"
+      />
+    </Button>
+  );
+
   return (
-    <PageLayout className="bg-act-page">
-      <div className="flex flex-col justify-between items-center gap-4">
-        <StepHeader onExit={handleExit} />
-        <StepContent
-          step={step}
-          stepIndex={stepIndex}
-          textareaRef={textareaRef}
-          userTextTokens={userTextTokens}
-          setUserTextTokens={setUserTextTokens}
-          handleChange={handleChange}
-          handleNext={handleNext}
-        />
-      </div>
-    </PageLayout>
+    <ActStepPage
+      leftButton={leftButton}
+      rightButton={rightButton}
+      buttonText="다음"
+      onButtonClick={handleNext}
+    >
+      <StepContent
+        step={step}
+        stepIndex={stepIndex}
+        textareaRef={textareaRef}
+        userTextTokens={userTextTokens}
+        setUserTextTokens={setUserTextTokens}
+        handleChange={handleChange}
+      />
+    </ActStepPage>
   );
 }

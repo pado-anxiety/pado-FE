@@ -45,6 +45,7 @@ export function TokenSelector({
 
     const diffY = Math.abs(e.clientY - startY.current);
     if (diffY > 10) {
+      console.log('diffY', diffY);
       return;
     }
 
@@ -67,9 +68,10 @@ export function TokenSelector({
     selectedMode.current = null;
   };
 
+  // TODO: 스크롤 넘침 문제
   return (
     <div
-      className="flex flex-row gap-1 flex-wrap mt-4 p-4 bg-white/50 rounded-xl border border-white"
+      className="max-h-1000 flex flex-row gap-1 flex-wrap mt-4 p-4 bg-white/50 rounded-xl border border-white scrollbar-hide"
       onPointerMove={onDragging}
       onPointerUp={onDraggingEnd}
       onPointerDown={onDraggingStart}
