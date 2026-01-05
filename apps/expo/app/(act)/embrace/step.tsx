@@ -21,21 +21,17 @@ export default function EmbraceStepScreen() {
       }
     } else if (parsedData.type === WEBVIEW_MESSAGE_TYPE.DATA) {
       const { data } = parsedData.data;
-      const { totalTime } = data;
+      const { embraceResult } = data;
       router.push({
         pathname: ROUTES.ACT.EMBRACE.RESULT,
         params: {
-          data: safeStringify({ totalTime }),
+          data: safeStringify({ embraceResult }),
         },
       });
     }
   };
 
   return (
-    // <View
-    //   className="flex-1 bg-act-page"
-    //   style={{ paddingTop: insets.top }}
-    // >
     <WebView
       source={{
         uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.EMBRACE.STEP}`,
@@ -47,7 +43,10 @@ export default function EmbraceStepScreen() {
         </WebViewLoadingView>
       )}
       onMessage={handleMessage}
+      injectedJavaScriptBeforeContentLoaded={`
+          window.topInsets = ${safeStringify(insets.top)};
+          true;
+      `}
     />
-    // </View>
   );
 }

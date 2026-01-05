@@ -35,7 +35,7 @@ export default function EmbraceResultScreen() {
         )}
         onMessage={handleMessage}
         injectedJavaScriptBeforeContentLoaded={`
-            window.embraceResult = ${safeStringify(parsedData)};
+            window.embraceResult = ${safeStringify(parsedData.embraceResult)};
             true;
         `}
       />
