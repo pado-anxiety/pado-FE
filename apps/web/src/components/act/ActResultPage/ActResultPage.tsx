@@ -25,7 +25,7 @@ function ActResultPage({
 }: ActResultPageProps) {
   return (
     <PageLayout className="bg-act-page">
-      <div className="flex flex-col flex-1 items-center w-full pt-4 overflow-y-auto scrollbar-hide">
+      <div className="flex flex-col flex-1 items-center w-full pt-6 overflow-y-auto scrollbar-hide">
         <div className="flex flex-col items-start justify-between flex-1 gap-4 w-full pb-4">
           <div className="flex flex-col gap-4 w-full">
             <div className="flex flex-col gap-2">

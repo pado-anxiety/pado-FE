@@ -14,4 +14,9 @@ export const ACT_ROUTES = {
     STEP: '/act/detach/step',
     RESULT: '/act/detach/result',
   },
+  EMBRACE: {
+    BASE: '/act/embrace',
+    STEP: '/act/embrace/step',
+    RESULT: '/act/embrace/result',
+  },
 } as const;
