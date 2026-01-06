@@ -87,6 +87,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: '30195066-b4b9-406a-9236-c2eaa162bf54',
     },
     ...env.ClientEnv,
+    BASE_URL: 'https://nyangtodac-dev.site/',
+    IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
+    ANDROID_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
   },
   updates: {
     url: 'https://u.expo.dev/30195066-b4b9-406a-9236-c2eaa162bf54',

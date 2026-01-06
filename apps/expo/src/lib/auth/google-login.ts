@@ -11,7 +11,7 @@ import {
   generateCodeVerifier,
   getGoogleClientId,
 } from './pkce';
-import { parseGoogleAuthToken } from './utils';
+import { parseAuthToken } from './utils';
 
 export const SignInWithGoogle = async () => {
   if (Platform.OS === 'ios') {
@@ -52,9 +52,7 @@ const SignInWithGoogleOnIOS = async () => {
           platform: 'IOS',
         });
 
-        console.log(response);
-
-        const { accessToken, refreshToken } = parseGoogleAuthToken(response);
+        const { accessToken, refreshToken } = parseAuthToken(response);
         useAuth.getState().login(accessToken, refreshToken);
       } else {
         throw new Error('iOS Google login failed');

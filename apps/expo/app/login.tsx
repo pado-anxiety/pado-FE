@@ -55,7 +55,7 @@ export default function LoginScreen() {
         >
           <Pressable
             onPress={handleGoogleLogin}
-            className="bg-white rounded-[32px] border border-gray-200 flex-row items-center justify-center py-4 gap-2"
+            className="bg-white rounded-[32px] border border-gray-200 flex-row items-center justify-center py-5 gap-2"
           >
             <Image
               source={require('../assets/images/login/google.svg')}
@@ -66,7 +66,7 @@ export default function LoginScreen() {
 
           <Pressable
             onPress={handleKakaoLogin}
-            className="bg-[#FEE500] rounded-[32px] flex-row items-center justify-center py-4 gap-2"
+            className="bg-[#FEE500] rounded-[32px] flex-row items-center justify-center py-5 gap-2"
           >
             <Image
               source={require('../assets/images/login/kakao.svg')}

@@ -3,11 +3,10 @@ import { storage } from '../store';
 const ACCESS_TOKEN_KEY = 'accessToken';
 const REFRESH_TOKEN_KEY = 'refreshToken';
 
-export const parseGoogleAuthToken = (token: {
+export const parseAuthToken = (token: {
   accessToken: string;
   refreshToken: string;
 }) => {
-  console.log('token: ', token);
   return {
     accessToken: token.accessToken,
     refreshToken: token.refreshToken,
