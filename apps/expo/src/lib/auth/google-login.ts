@@ -5,21 +5,23 @@ import { Platform } from 'react-native';
 
 import { authAPI } from '../api/auth';
 import { ENV } from '../env';
+import { useAuth } from './auth-context';
 import {
   generateCodeChallenge,
   generateCodeVerifier,
   getGoogleClientId,
 } from './pkce';
+import { parseGoogleAuthToken } from './utils';
 
-export const handleGoogleLogin = async () => {
+export const SignInWithGoogle = async () => {
   if (Platform.OS === 'ios') {
-    await handleIOSGoogleLogin();
+    await SignInWithGoogleOnIOS();
   } else {
-    await handleAndroidGoogleLogin();
+    await SignInWithGoogleOnAndroid();
   }
 };
 
-const handleIOSGoogleLogin = async () => {
+const SignInWithGoogleOnIOS = async () => {
   const codeVerifier = await generateCodeVerifier();
   const codeChallenge = await generateCodeChallenge(codeVerifier);
 
@@ -50,7 +52,10 @@ const handleIOSGoogleLogin = async () => {
           platform: 'IOS',
         });
 
-        console.log('response: ', response);
+        console.log(response);
+
+        const { accessToken, refreshToken } = parseGoogleAuthToken(response);
+        useAuth.getState().login(accessToken, refreshToken);
       } else {
         throw new Error('iOS Google login failed');
       }
@@ -61,7 +66,7 @@ const handleIOSGoogleLogin = async () => {
   }
 };
 
-const handleAndroidGoogleLogin = async () => {
+const SignInWithGoogleOnAndroid = async () => {
   try {
     await GoogleSignin.hasPlayServices();
 

@@ -1,4 +1,4 @@
-import { getRefreshToken } from '../auth';
+import { authStorage } from '../auth';
 import { apiClient } from './client';
 
 export const ROUTES = {
@@ -8,7 +8,7 @@ export const ROUTES = {
 export const authAPI = {
   reissueAuthToken: async (): Promise<string> => {
     const response = await apiClient.post(ROUTES.REFRESH, {
-      refreshToken: getRefreshToken(),
+      refreshToken: authStorage.getRefreshToken(),
     });
 
     return response.data;
@@ -23,7 +23,7 @@ export const authAPI = {
     authorizationCode: string;
     redirectUri: string;
     platform: 'ANDROID' | 'IOS';
-  }) => {
+  }): Promise<{ accessToken: string; refreshToken: string }> => {
     const response = await apiClient.post('/login/google', {
       codeVerifier,
       authorizationCode,

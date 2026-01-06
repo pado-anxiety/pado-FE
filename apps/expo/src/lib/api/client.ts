@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { getAccessToken } from '../auth';
+import { authStorage } from '../auth';
 import { ENV } from '../env';
 import { authAPI } from './auth';
 
@@ -16,7 +16,7 @@ export const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
-    const accessToken = getAccessToken();
+    const accessToken = authStorage.getAccessToken();
 
     if (accessToken && config.headers) {
       config.headers.Authorization = `Bearer ${accessToken}`;
