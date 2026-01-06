@@ -9,7 +9,7 @@ export const ROUTES = {
 
 export const actAPI = {
   anchor: async (): Promise<void> => {
-    await apiClient.get(ROUTES.ANCHOR);
+    await apiClient.post(ROUTES.ANCHOR);
   },
   diary: async ({
     situation,
