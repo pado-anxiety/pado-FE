@@ -1,7 +1,7 @@
 import { Text } from '@pado/ui';
 import { Image, Pressable, View } from '@src/components/ui';
 import { WaveHorizon } from '@src/features/home';
-import { SignInWithGoogle, SignInWithKakao } from '@src/lib/auth';
+import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -9,15 +9,16 @@ import { scale } from 'react-native-size-matters';
 
 export default function LoginScreen() {
   const insets = useSafeAreaInsets();
+  const { login } = useAuth();
   const router = useRouter();
 
   const handleGoogleLogin = async () => {
-    await SignInWithGoogle();
+    await login('google');
     router.push(ROUTES.HOME);
   };
 
   const handleKakaoLogin = async () => {
-    await SignInWithKakao();
+    await login('kakao');
     router.push(ROUTES.HOME);
   };
 

@@ -1,7 +1,6 @@
 import { login } from '@react-native-seoul/kakao-login';
 
 import { authAPI } from '../api/auth';
-import { useAuth } from './auth-context';
 import { parseAuthToken } from './utils';
 
 export const SignInWithKakao = async () => {
@@ -16,7 +15,8 @@ export const SignInWithKakao = async () => {
     const response = await authAPI.getKaKaoAccessToken(token.accessToken);
 
     const { accessToken, refreshToken } = parseAuthToken(response);
-    useAuth.getState().login(accessToken, refreshToken);
+
+    return { accessToken, refreshToken };
   } catch (err) {
     console.error('로그인 중 에러 발생:', err);
     throw err;

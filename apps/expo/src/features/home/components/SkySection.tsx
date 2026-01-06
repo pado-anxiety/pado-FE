@@ -1,15 +1,15 @@
 import { Button, Text, View } from '@src/components/ui';
 import { useAuth } from '@src/lib/auth';
 import { ENV } from '@src/lib/env';
-import { useRouter } from 'expo-router';
+import { ROUTES } from '@src/lib/route';
+import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { WAVE_LAYOUT } from '../constants';
 
 export function SkySection(): React.ReactNode {
   const insets = useSafeAreaInsets();
-  const router = useRouter();
-  const { accessToken, refreshToken, isLoggedIn } = useAuth();
+  const { accessToken, refreshToken, isLoggedIn, logout } = useAuth();
 
   return (
     <View
@@ -26,8 +26,12 @@ export function SkySection(): React.ReactNode {
       <Text>{refreshToken}</Text>
       <Text>{isLoggedIn ? 'Logged In' : 'Logged Out'}</Text>
       <Button
-        text="Login"
-        onPress={() => router.push('/login')}
+        text="logout"
+        onPress={() => logout()}
+      />
+      <Button
+        text="login"
+        onPress={() => router.replace(ROUTES.LOGIN)}
       />
     </View>
   );

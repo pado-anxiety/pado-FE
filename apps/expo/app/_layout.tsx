@@ -21,6 +21,7 @@ function NavigationContent() {
           <Stack.Screen name="index" />
           <Stack.Screen name="(test)" />
           <Stack.Screen name="(act)" />
+          <Stack.Screen name="login" />
         </Stack>
       </BottomSheetModalProvider>
     </View>

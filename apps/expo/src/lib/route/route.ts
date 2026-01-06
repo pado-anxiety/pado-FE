@@ -2,6 +2,7 @@ import type { Href } from 'expo-router';
 
 export const ROUTES = {
   HOME: '/',
+  LOGIN: '/login',
 
   ACT: {
     BASE: '/(act)',

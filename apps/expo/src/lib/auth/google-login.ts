@@ -5,7 +5,6 @@ import { Platform } from 'react-native';
 
 import { authAPI } from '../api/auth';
 import { ENV } from '../env';
-import { useAuth } from './auth-context';
 import {
   generateCodeChallenge,
   generateCodeVerifier,
@@ -13,11 +12,11 @@ import {
 } from './pkce';
 import { parseAuthToken } from './utils';
 
-export const SignInWithGoogle = async () => {
+export const SignInWithGoogle = () => {
   if (Platform.OS === 'ios') {
-    await SignInWithGoogleOnIOS();
+    return SignInWithGoogleOnIOS();
   } else {
-    await SignInWithGoogleOnAndroid();
+    return SignInWithGoogleOnAndroid();
   }
 };
 
@@ -53,7 +52,7 @@ const SignInWithGoogleOnIOS = async () => {
         });
 
         const { accessToken, refreshToken } = parseAuthToken(response);
-        useAuth.getState().login(accessToken, refreshToken);
+        return { accessToken, refreshToken };
       } else {
         throw new Error('iOS Google login failed');
       }
