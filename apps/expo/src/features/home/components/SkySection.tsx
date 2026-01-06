@@ -1,38 +1,50 @@
-import { Button, Text, View } from '@src/components/ui';
-import { useAuth } from '@src/lib/auth';
-import { ENV } from '@src/lib/env';
-import { ROUTES } from '@src/lib/route';
-import { router } from 'expo-router';
+import { TouchableOpacity, View } from '@src/components/ui';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-import { WAVE_LAYOUT } from '../constants';
+import { scale } from 'react-native-size-matters';
 
 export function SkySection(): React.ReactNode {
   const insets = useSafeAreaInsets();
-  const { accessToken, refreshToken, isLoggedIn, logout } = useAuth();
 
   return (
     <View
-      className="bg-white items-center justify-center gap-4"
+      className="flex flex-col bg-white items-start justify-center gap-4 px-8"
       style={{
-        height: WAVE_LAYOUT.SKY_HEIGHT,
-        paddingTop: insets.top,
+        paddingTop: insets.top + scale(50),
       }}
     >
-      <Text>{ENV.BASE_URL}</Text>
-      <Text>{ENV.IOS_WEBVIEW_URL}</Text>
-      <Text>{ENV.ANDROID_WEBVIEW_URL}</Text>
-      <Text>{accessToken}</Text>
-      <Text>{refreshToken}</Text>
-      <Text>{isLoggedIn ? 'Logged In' : 'Logged Out'}</Text>
-      <Button
-        text="logout"
-        onPress={() => logout()}
-      />
-      <Button
-        text="login"
-        onPress={() => router.replace(ROUTES.LOGIN)}
-      />
+      <View className="flex flex-col gap-8 w-full">
+        <Animated.Text
+          className="text-2xl font-medium"
+          entering={FadeIn.duration(1000)}
+          style={{ fontFamily: 'NanumSquareNeo-Variable' }}
+        >
+          twheo 님 안녕하세요
+        </Animated.Text>
+        <View className="flex flex-col gap-6 w-full">
+          <TouchableOpacity className="flex flex-col">
+            <Animated.Text
+              entering={FadeIn.duration(1500)}
+              className="text-4xl text-slate-700 font-medium"
+              style={{ fontFamily: 'NanumSquareNeo-Variable' }}
+            >
+              ACT 기록 보기
+            </Animated.Text>
+            <View className="w-full h-[1px] bg-slate-300 mt-1" />
+          </TouchableOpacity>
+
+          <TouchableOpacity className="flex flex-col">
+            <Animated.Text
+              entering={FadeIn.duration(2000)}
+              className="text-4xl text-slate-700 font-medium"
+              style={{ fontFamily: 'NanumSquareNeo-Variable' }}
+            >
+              바람과 대화하기
+            </Animated.Text>
+            <View className="w-full h-[1px] bg-slate-300 mt-1" />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 }
