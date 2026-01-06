@@ -2,7 +2,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { I18nProvider } from '@src/lib/i18n';
 import { useTheme } from '@src/lib/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Stack } from 'expo-router';
+import { Slot } from 'expo-router';
 import { View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
@@ -17,12 +17,17 @@ function NavigationContent() {
   return (
     <View style={[{ flex: 1 }, themeStyle]}>
       <BottomSheetModalProvider>
-        <Stack screenOptions={{ headerShown: false }}>
+        <Slot />
+        {/* <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Stack.Screen name="index" />
           <Stack.Screen name="(test)" />
           <Stack.Screen name="(act)" />
           <Stack.Screen name="login" />
-        </Stack>
+        </Stack> */}
       </BottomSheetModalProvider>
     </View>
   );

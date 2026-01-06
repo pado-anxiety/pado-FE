@@ -1,11 +1,47 @@
+import { useState } from 'react';
+
 import { View } from '@src/components/ui';
+import { HistoryDeepSeaSection } from '@src/features/History/HistoryDeepSeaSection';
+import HistorySkySection from '@src/features/History/HistorySkySection';
 import { DeepSeaSection, SkySection, WaveHorizon } from '@src/features/home/';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 import { Redirect } from 'expo-router';
 import { ScrollView } from 'react-native-gesture-handler';
 
+function Page({
+  page,
+  setPage,
+}: {
+  page: 'HOME' | 'HISTORY' | 'CHAT';
+  setPage: (page: 'HOME' | 'HISTORY' | 'CHAT') => void;
+}) {
+  let MetaContent = null;
+  let Content = null;
+
+  switch (page) {
+    case 'HOME':
+      MetaContent = <SkySection setPage={setPage} />;
+      Content = <DeepSeaSection />;
+      break;
+    case 'HISTORY':
+      MetaContent = <HistorySkySection />;
+      Content = <HistoryDeepSeaSection />;
+      break;
+  }
+
+  return (
+    <>
+      {MetaContent}
+      <WaveHorizon />
+      {Content}
+    </>
+  );
+}
+
 export default function HomeScreen(): React.ReactNode {
+  const [page, setPage] = useState<'HOME' | 'HISTORY' | 'CHAT'>('HOME');
+
   const { isLoggedIn } = useAuth();
 
   if (!isLoggedIn) {
@@ -19,9 +55,10 @@ export default function HomeScreen(): React.ReactNode {
         bounces={false}
         showsVerticalScrollIndicator={false}
       >
-        <SkySection />
-        <WaveHorizon />
-        <DeepSeaSection />
+        <Page
+          page={page}
+          setPage={setPage}
+        />
       </ScrollView>
     </View>
   );

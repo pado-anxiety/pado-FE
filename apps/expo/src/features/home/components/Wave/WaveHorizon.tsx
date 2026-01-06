@@ -1,6 +1,7 @@
 import { Canvas, Skia } from '@shopify/react-native-skia';
 import { useWindowDimensions } from 'react-native';
-import {
+import Animated, {
+  LinearTransition,
   SharedValue,
   useDerivedValue,
   useFrameCallback,
@@ -124,17 +125,19 @@ export function WaveHorizon(): React.ReactNode {
   }, []);
 
   return (
-    <Canvas
-      style={{
-        width: width,
-        height: WAVE_LAYOUT.HORIZON_HEIGHT,
-      }}
-    >
-      <BackgroundWave path={backgroundWavePath} />
-      <MidgroundBackWave path={midgroundBackWavePath} />
-      <MidgroundWave path={midgroundWavePath} />
-      <ForegroundMidWave path={foregroundMidWavePath} />
-      <ForegroundWave path={foregroundWavePath} />
-    </Canvas>
+    <Animated.View layout={LinearTransition.duration(1000)}>
+      <Canvas
+        style={{
+          width: width,
+          height: WAVE_LAYOUT.HORIZON_HEIGHT,
+        }}
+      >
+        <BackgroundWave path={backgroundWavePath} />
+        <MidgroundBackWave path={midgroundBackWavePath} />
+        <MidgroundWave path={midgroundWavePath} />
+        <ForegroundMidWave path={foregroundMidWavePath} />
+        <ForegroundWave path={foregroundWavePath} />
+      </Canvas>
+    </Animated.View>
   );
 }
