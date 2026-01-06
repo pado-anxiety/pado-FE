@@ -5,6 +5,7 @@ export { LoadingSpinner } from './loading-spinner';
 export { Modal, useModal } from './modal';
 export { Text } from './text';
 export { WebViewLoadingView } from './webview-loading-view';
+export { AnimatedText } from './animated-text';
 
 export {
   ActivityIndicator,

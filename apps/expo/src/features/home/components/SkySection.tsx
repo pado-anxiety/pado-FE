@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from '@src/components/ui';
+import { AnimatedText, TouchableOpacity, View } from '@src/components/ui';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
@@ -18,25 +18,23 @@ export function SkySection({
       }}
     >
       <View className="flex flex-col gap-8 w-full">
-        <Animated.Text
+        <AnimatedText
+          delay={1000}
           className="text-2xl font-medium"
-          entering={FadeIn.duration(1000)}
-          style={{ fontFamily: 'NanumSquareNeo-Variable' }}
         >
           twheo 님 안녕하세요
-        </Animated.Text>
+        </AnimatedText>
         <View className="flex flex-col gap-6 w-full">
           <TouchableOpacity
             className="flex flex-col"
             onPress={() => setPage('HISTORY')}
           >
-            <Animated.Text
-              entering={FadeIn.duration(1500)}
+            <AnimatedText
+              delay={1500}
               className="text-4xl text-slate-700 font-medium"
-              style={{ fontFamily: 'NanumSquareNeo-Variable' }}
             >
               ACT 기록 보기
-            </Animated.Text>
+            </AnimatedText>
             <Animated.View
               className="w-full h-[1.5px] bg-slate-300 mt-1"
               entering={FadeIn.duration(1500)}
@@ -47,13 +45,12 @@ export function SkySection({
             className="flex flex-col"
             onPress={() => setPage('CHAT')}
           >
-            <Animated.Text
-              entering={FadeIn.duration(2000)}
+            <AnimatedText
+              delay={2000}
               className="text-4xl text-slate-700 font-medium"
-              style={{ fontFamily: 'NanumSquareNeo-Variable' }}
             >
               바람과 대화하기
-            </Animated.Text>
+            </AnimatedText>
             <Animated.View
               className="w-full h-[1.5px] bg-slate-300 mt-1"
               entering={FadeIn.duration(2000)}
