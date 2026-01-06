@@ -1,11 +1,13 @@
-import { Text, View } from '@src/components/ui';
+import { Button, Text, View } from '@src/components/ui';
 import { ENV } from '@src/lib/env';
+import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { WAVE_LAYOUT } from '../constants';
 
 export function SkySection(): React.ReactNode {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
 
   return (
     <View
@@ -18,6 +20,10 @@ export function SkySection(): React.ReactNode {
       <Text>{ENV.BASE_URL}</Text>
       <Text>{ENV.IOS_WEBVIEW_URL}</Text>
       <Text>{ENV.ANDROID_WEBVIEW_URL}</Text>
+      <Button
+        text="Login"
+        onPress={() => router.push('/login')}
+      />
     </View>
   );
 }
