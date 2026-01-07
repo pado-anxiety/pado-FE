@@ -1,6 +1,10 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { PageSafeAreaView } from '@src/components/layout/indext';
-import { LoadingSpinner, WebViewLoadingView } from '@src/components/ui';
+import {
+  LoadingSpinner,
+  WebViewErrorView,
+  WebViewLoadingView,
+} from '@src/components/ui';
 import { handleOnMessage } from '@src/lib';
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
@@ -19,6 +23,7 @@ export default function EmbraceResultScreen() {
     router.replace(ROUTES.HOME);
   });
 
+  // TODO: offline-first save
   const embraceMutation = useMutation({
     mutationFn: ({ breathingTime }: { breathingTime: number }) =>
       actAPI.embrace({ breathingTime }),
@@ -47,6 +52,9 @@ export default function EmbraceResultScreen() {
           <WebViewLoadingView>
             <LoadingSpinner />
           </WebViewLoadingView>
+        )}
+        renderError={() => (
+          <WebViewErrorView onPressHome={() => router.replace(ROUTES.HOME)} />
         )}
         onMessage={handleMessage}
         injectedJavaScriptBeforeContentLoaded={`

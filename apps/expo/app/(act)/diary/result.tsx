@@ -1,6 +1,10 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
-import { LoadingSpinner, WebViewLoadingView } from '@src/components/ui';
+import {
+  LoadingSpinner,
+  WebViewErrorView,
+  WebViewLoadingView,
+} from '@src/components/ui';
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
@@ -18,6 +22,7 @@ export default function DiaryResultScreen() {
     router.replace(ROUTES.HOME);
   });
 
+  // TODO: offline-first save
   const diaryMutation = useMutation({
     mutationFn: ({
       situation,
@@ -64,6 +69,9 @@ export default function DiaryResultScreen() {
           <WebViewLoadingView>
             <LoadingSpinner />
           </WebViewLoadingView>
+        )}
+        renderError={() => (
+          <WebViewErrorView onPressHome={() => router.replace(ROUTES.HOME)} />
         )}
       />
     </PageSafeAreaView>

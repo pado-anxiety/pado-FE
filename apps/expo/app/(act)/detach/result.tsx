@@ -1,7 +1,10 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
-import { LoadingSpinner } from '@src/components/ui';
-import { WebViewLoadingView } from '@src/components/ui/webview-loading-view';
+import {
+  LoadingSpinner,
+  WebViewErrorView,
+  WebViewLoadingView,
+} from '@src/components/ui';
 import { handleOnMessage } from '@src/lib';
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
@@ -19,6 +22,7 @@ export default function DetachResultScreen() {
   });
   const router = useRouter();
 
+  // TODO: offline-first save
   const detachMutation = useMutation({
     mutationFn: ({
       userTextToken,
@@ -55,6 +59,9 @@ export default function DetachResultScreen() {
           <WebViewLoadingView>
             <LoadingSpinner />
           </WebViewLoadingView>
+        )}
+        renderError={() => (
+          <WebViewErrorView onPressHome={() => router.replace(ROUTES.HOME)} />
         )}
       />
     </PageSafeAreaView>

@@ -1,6 +1,10 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { PageSafeAreaView } from '@src/components/layout/indext';
-import { LoadingSpinner, WebViewLoadingView } from '@src/components/ui';
+import {
+  LoadingSpinner,
+  WebViewErrorView,
+  WebViewLoadingView,
+} from '@src/components/ui';
 import { handleOnMessage } from '@src/lib';
 import { actAPI } from '@src/lib/api/act';
 import { WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
@@ -12,6 +16,7 @@ import WebView, { WebViewMessageEvent } from 'react-native-webview';
 export default function AnchorResultScreen() {
   const router = useRouter();
 
+  // TODO: offline-first save
   const anchorMutation = useMutation({
     mutationFn: () => actAPI.anchor(),
     onError: (error) => {
@@ -37,6 +42,9 @@ export default function AnchorResultScreen() {
           <WebViewLoadingView>
             <LoadingSpinner />
           </WebViewLoadingView>
+        )}
+        renderError={() => (
+          <WebViewErrorView onPressHome={() => router.replace(ROUTES.HOME)} />
         )}
         onMessage={handleMessage}
       />
