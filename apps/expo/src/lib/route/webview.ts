@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { ENV } from '../env';
 
 export const WEBVIEW_ROUTES = {
+  ONBOARD: '/onboard',
   ACT: {
     ANCHOR: {
       BASE: '/act/anchor',
@@ -28,8 +29,7 @@ export const WEBVIEW_ROUTES = {
 } as const;
 
 export const getWebViewBaseURL = () => {
-  if (Platform.OS === 'ios') {
-    return ENV.IOS_WEBVIEW_URL;
-  }
-  return ENV.ANDROID_WEBVIEW_URL;
+  const baseURL =
+    Platform.OS === 'ios' ? ENV.IOS_WEBVIEW_URL : ENV.ANDROID_WEBVIEW_URL;
+  return baseURL.replace(/\/$/, '');
 };

@@ -1,4 +1,6 @@
 import { AnimatedText, TouchableOpacity, View } from '@src/components/ui';
+import { ROUTES } from '@src/lib/route';
+import { router } from 'expo-router';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
@@ -50,6 +52,21 @@ export function SkySection({
               className="text-4xl text-slate-700 font-medium"
             >
               바람과 대화하기
+            </AnimatedText>
+            <Animated.View
+              className="w-full h-[1.5px] bg-slate-300 mt-1"
+              entering={FadeIn.duration(2000)}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            className="flex flex-col"
+            onPress={() => router.push(ROUTES.ONBOARD)}
+          >
+            <AnimatedText
+              delay={2000}
+              className="text-4xl text-slate-700 font-medium"
+            >
+              온보딩
             </AnimatedText>
             <Animated.View
               className="w-full h-[1.5px] bg-slate-300 mt-1"

@@ -12,5 +12,6 @@ declare global {
     detachResult: UserTextToken[];
     embraceResult: number;
     topInsets: number;
+    insets: { top: number; bottom: number };
   }
 }

@@ -1,4 +1,5 @@
 import { Text } from '@pado/ui';
+import { motion } from 'motion/react';
 
 import { NextButton } from './NextButton';
 import { RestartButton } from './RestartButton';
@@ -35,9 +36,14 @@ export function BreathContent({
             </Text>
           </div>
           {timer > 0 && (
-            <div className="bg-white/30 backdrop-blur-md rounded-2xl px-6 py-4">
+            <motion.div
+              key={timer}
+              initial={{ scale: 0.9, opacity: 0.5 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="bg-white/30 backdrop-blur-md rounded-2xl px-6 py-4"
+            >
               <Text className="text-title-large text-blue-900">{timer}</Text>
-            </div>
+            </motion.div>
           )}
           {isCompleted && (
             <div className="flex flex-col items-center gap-4 mt-4">
