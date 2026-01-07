@@ -85,7 +85,6 @@ const SignInWithGoogleOnAndroid = async (): Promise<AuthResult> => {
       platform: 'ANDROID',
     });
 
-    console.log('response: ', response);
     const { accessToken, refreshToken } = parseAuthToken(response);
     return { accessToken, refreshToken };
   } catch (error) {

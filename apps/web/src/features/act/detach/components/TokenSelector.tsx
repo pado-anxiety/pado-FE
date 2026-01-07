@@ -45,7 +45,6 @@ export function TokenSelector({
 
     const diffY = Math.abs(e.clientY - startY.current);
     if (diffY > 10) {
-      console.log('diffY', diffY);
       return;
     }
 

@@ -42,11 +42,14 @@ function Page({
 export default function HomeScreen(): React.ReactNode {
   const [page, setPage] = useState<'HOME' | 'HISTORY' | 'CHAT'>('HOME');
 
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, accessToken, refreshToken } = useAuth();
 
   if (!isLoggedIn) {
     return <Redirect href={ROUTES.LOGIN} />;
   }
+
+  console.log('accessToken: ', accessToken);
+  console.log('refreshToken: ', refreshToken);
 
   return (
     <View className="flex-1 bg-white">

@@ -19,8 +19,6 @@ export const historyAPI = {
       url += `?cursor=${cursor}`;
     }
     const response: HistoryAPI = await apiClient.get(url);
-    console.log('url: ', url);
-    console.log('response: ', response);
 
     return response;
   },

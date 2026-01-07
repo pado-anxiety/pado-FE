@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { router } from 'expo-router';
 
 import { authStorage } from '../auth';
 import { ENV } from '../env';
+import { ROUTES } from '../route';
 import { authAPI } from './auth';
 
 const BASE_URL = ENV.BASE_URL;
@@ -29,29 +31,31 @@ apiClient.interceptors.request.use(
   },
 );
 
-let isRefreshing = false;
-
 apiClient.interceptors.response.use(
   (response) => {
     return response.data;
   },
   async (error) => {
-    if (isRefreshing) return;
+    const {
+      config,
+      response: { status },
+    } = error;
 
-    isRefreshing = true;
+    if (status === 401 && !config._retry) {
+      config._retry = true;
 
-    if (error.response?.status === 401) {
-      console.error('클라이언트 오류가 발생했습니다: ', error);
+      try {
+        const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
 
-      // 엑세스 토큰 만료
-      // 엑세스 토큰 재발급 API
-      const newAccessToken = await authAPI.reissueAuthToken();
-      console.log('newAccessToken: ', newAccessToken);
-      // 해당 API 요청을 엑세스 토큰과 함께 재요청
-      //  성공 시 MMKV 에 해당 토큰 저장
-      //  실패 시 로그인 화면으로 전환
+        authStorage.setAuthToken(accessToken, refreshToken);
+
+        return apiClient(config);
+      } catch (error) {
+        console.error('토큰 재발급 오류가 발생했습니다: ', error);
+        router.replace(ROUTES.LOGIN);
+      }
     }
 
-    return Promise.reject(error);
+    router.replace(ROUTES.LOGIN);
   },
 );

@@ -9,7 +9,7 @@ interface AnimatedTextProps extends TextProps {
 
 export function AnimatedText({
   isEntering = true,
-  isExiting = true,
+  isExiting = false,
   delay = 1000,
   children,
   style,

@@ -10,7 +10,6 @@ type AuthResult =
 export const SignInWithKakao = async (): Promise<AuthResult> => {
   try {
     const token = await login();
-    console.log('token: ', token);
 
     if (!token || !token.accessToken) {
       return { errorMessage: '카카오 로그인에 실패했습니다.' };

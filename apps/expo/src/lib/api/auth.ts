@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { authStorage } from '../auth';
 import { apiClient } from './client';
 
@@ -6,12 +8,16 @@ export const ROUTES = {
 } as const;
 
 export const authAPI = {
-  reissueAuthToken: async (): Promise<string> => {
-    const response = await apiClient.post(ROUTES.REFRESH, {
-      refreshToken: authStorage.getRefreshToken(),
-    });
+  reissueAuthToken: async (): Promise<{
+    accessToken: string;
+    refreshToken: string;
+  }> => {
+    const response: { accessToken: string; refreshToken: string } =
+      await axios.post(`https://nyangtodac-dev.site/tokens/reissue`, {
+        refreshToken: authStorage.getRefreshToken(),
+      });
 
-    return response.data;
+    return response;
   },
   getGoogleAccessToken: async ({
     codeVerifier,
