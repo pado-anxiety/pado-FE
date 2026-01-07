@@ -10,7 +10,9 @@ interface AuthState {
   isLoggedIn: boolean;
   isLoading: boolean;
 
-  login: (platform: 'google' | 'kakao') => Promise<void>;
+  login: (
+    platform: 'google' | 'kakao',
+  ) => Promise<void | { errorMessage: string }>;
   logout: () => void;
 }
 
@@ -30,17 +32,25 @@ export const useAuth = create<AuthState>((set) => ({
       };
 
       if (platform === 'google') {
-        const { accessToken, refreshToken } = await SignInWithGoogle();
-        token.accessToken = accessToken;
-        token.refreshToken = refreshToken;
+        const result = await SignInWithGoogle();
+        if ('errorMessage' in result) {
+          return { errorMessage: result.errorMessage };
+        }
+        token.accessToken = result.accessToken;
+        token.refreshToken = result.refreshToken;
       } else if (platform === 'kakao') {
-        const { accessToken, refreshToken } = await SignInWithKakao();
-        token.accessToken = accessToken;
-        token.refreshToken = refreshToken;
+        const result = await SignInWithKakao();
+        if ('errorMessage' in result) {
+          return { errorMessage: result.errorMessage };
+        }
+        token.accessToken = result.accessToken;
+        token.refreshToken = result.refreshToken;
       }
 
       if (!token.accessToken || !token.refreshToken) {
-        throw new Error('로그인 실패');
+        return {
+          errorMessage: '로그인에 실패했습니다. 토큰을 받아올 수 없습니다.',
+        };
       }
 
       authStorage.setAuthToken(token.accessToken, token.refreshToken);
@@ -51,7 +61,7 @@ export const useAuth = create<AuthState>((set) => ({
       });
     } catch (error) {
       console.error(error);
-      throw error;
+      return { errorMessage: '로그인 중 예상치 못한 오류가 발생했습니다.' };
     } finally {
       set({ isLoading: false });
     }

@@ -6,6 +6,7 @@ import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { useMutation } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Alert } from 'react-native';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
 
 export default function DiaryResultScreen() {
@@ -13,6 +14,7 @@ export default function DiaryResultScreen() {
   const router = useRouter();
 
   const diaryData = parseJSON(data as string, () => {
+    Alert.alert('오류가 발생했습니다');
     router.replace(ROUTES.HOME);
   });
 
