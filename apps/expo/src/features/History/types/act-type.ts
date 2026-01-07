@@ -1,0 +1,7 @@
+export type ACTType =
+  | 'CONTACT_WITH_PRESENT'
+  | 'EMOTION_NOTE'
+  | 'COGNITIVE_DEFUSION'
+  | 'ACCEPTANCE'
+  | 'VALUES'
+  | 'EMOTION_NOTE';
