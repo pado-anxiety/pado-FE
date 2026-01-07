@@ -1,11 +1,16 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
-import { LoadingSpinner, WebViewLoadingView } from '@src/components/ui';
+import {
+  LoadingSpinner,
+  WebViewErrorView,
+  WebViewLoadingView,
+} from '@src/components/ui';
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { useMutation } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Alert } from 'react-native';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
 
 export default function DiaryResultScreen() {
@@ -13,9 +18,11 @@ export default function DiaryResultScreen() {
   const router = useRouter();
 
   const diaryData = parseJSON(data as string, () => {
+    Alert.alert('오류가 발생했습니다');
     router.replace(ROUTES.HOME);
   });
 
+  // TODO: offline-first save
   const diaryMutation = useMutation({
     mutationFn: ({
       situation,
@@ -62,6 +69,9 @@ export default function DiaryResultScreen() {
           <WebViewLoadingView>
             <LoadingSpinner />
           </WebViewLoadingView>
+        )}
+        renderError={() => (
+          <WebViewErrorView onPressHome={() => router.replace(ROUTES.HOME)} />
         )}
       />
     </PageSafeAreaView>

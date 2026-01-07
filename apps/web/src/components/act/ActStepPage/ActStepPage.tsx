@@ -1,5 +1,9 @@
 'use client';
 
+import { ErrorBoundary } from 'react-error-boundary';
+
+import { ErrorFallback } from '@/components/ui';
+
 import PageLayout from '../../ui/layout';
 import ActStepButton from './ActStepButton';
 import ActStepContent from './ActStepContent';
@@ -14,6 +18,33 @@ interface ActStepPageProps {
   buttonDisabled?: boolean;
 }
 
+interface ActStepPageContentProps {
+  buttonText: string;
+  onButtonClick: () => void;
+  buttonDisabled?: boolean;
+  children: React.ReactNode;
+}
+
+const ActStepPageContent = ({
+  buttonText,
+  onButtonClick,
+  buttonDisabled,
+  children,
+}: ActStepPageContentProps) => {
+  return (
+    <ErrorBoundary fallbackRender={() => <ErrorFallback />}>
+      <div className="flex flex-col w-full flex-1 justify-between gap-4">
+        <ActStepContent>{children}</ActStepContent>
+        <ActStepButton
+          text={buttonText}
+          onClick={onButtonClick}
+          disabled={buttonDisabled}
+        />
+      </div>
+    </ErrorBoundary>
+  );
+};
+
 function ActStepPage({
   leftButton,
   rightButton,
@@ -24,19 +55,18 @@ function ActStepPage({
 }: ActStepPageProps) {
   return (
     <PageLayout className="bg-act-page">
-      <div className="flex flex-col w-full flex-1 justify-between ">
+      <div className="flex flex-col w-full flex-1 justify-between">
         <ActStepHeader
           leftButton={leftButton}
           rightButton={rightButton}
         />
-        <div className="flex flex-col w-full flex-1 justify-between gap-4">
-          <ActStepContent>{children}</ActStepContent>
-          <ActStepButton
-            text={buttonText}
-            onClick={onButtonClick}
-            disabled={buttonDisabled}
-          />
-        </div>
+        <ActStepPageContent
+          buttonText={buttonText}
+          onButtonClick={onButtonClick}
+          buttonDisabled={buttonDisabled}
+        >
+          {children}
+        </ActStepPageContent>
       </div>
     </PageLayout>
   );

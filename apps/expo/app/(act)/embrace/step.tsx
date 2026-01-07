@@ -1,5 +1,9 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
-import { LoadingSpinner, WebViewLoadingView } from '@src/components/ui';
+import {
+  LoadingSpinner,
+  WebViewErrorView,
+  WebViewLoadingView,
+} from '@src/components/ui';
 import { safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { useRouter } from 'expo-router';
@@ -41,6 +45,9 @@ export default function EmbraceStepScreen() {
         <WebViewLoadingView>
           <LoadingSpinner />
         </WebViewLoadingView>
+      )}
+      renderError={() => (
+        <WebViewErrorView onPressHome={() => router.replace(ROUTES.HOME)} />
       )}
       onMessage={handleMessage}
       injectedJavaScriptBeforeContentLoaded={`

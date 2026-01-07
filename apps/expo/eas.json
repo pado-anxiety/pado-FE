@@ -16,10 +16,7 @@
       "distribution": "internal",
       "channel": "development",
       "env": {
-        "APP_ENV": "development",
-        "BASE_URL": "https://nyangtodac-dev.site/",
-        "IOS_WEBVIEW_URL": "https://nyangtodac-web-fe.pages.dev/",
-        "ANDROID_WEBVIEW_URL": "https://nyangtodac-web-fe.pages.dev/"
+        "APP_ENV": "development"
       }
     },
     "preview": {

@@ -1,22 +1,28 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
-import { LoadingSpinner } from '@src/components/ui';
-import { WebViewLoadingView } from '@src/components/ui/webview-loading-view';
+import {
+  LoadingSpinner,
+  WebViewErrorView,
+  WebViewLoadingView,
+} from '@src/components/ui';
 import { handleOnMessage } from '@src/lib';
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { useMutation } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Alert } from 'react-native';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
 
 export default function DetachResultScreen() {
   const { data } = useLocalSearchParams();
   const parsedData = parseJSON(data as string, () => {
+    Alert.alert('오류가 발생했습니다');
     router.replace(ROUTES.HOME);
   });
   const router = useRouter();
 
+  // TODO: offline-first save
   const detachMutation = useMutation({
     mutationFn: ({
       userTextToken,
@@ -53,6 +59,9 @@ export default function DetachResultScreen() {
           <WebViewLoadingView>
             <LoadingSpinner />
           </WebViewLoadingView>
+        )}
+        renderError={() => (
+          <WebViewErrorView onPressHome={() => router.replace(ROUTES.HOME)} />
         )}
       />
     </PageSafeAreaView>

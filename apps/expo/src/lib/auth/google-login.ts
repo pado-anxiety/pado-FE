@@ -12,7 +12,11 @@ import {
 } from './pkce';
 import { parseAuthToken } from './utils';
 
-export const SignInWithGoogle = () => {
+type AuthResult =
+  | { accessToken: string; refreshToken: string }
+  | { errorMessage: string };
+
+export const SignInWithGoogle = (): Promise<AuthResult> => {
   if (Platform.OS === 'ios') {
     return SignInWithGoogleOnIOS();
   } else {
@@ -20,11 +24,10 @@ export const SignInWithGoogle = () => {
   }
 };
 
-const SignInWithGoogleOnIOS = async () => {
-  const codeVerifier = await generateCodeVerifier();
-  const codeChallenge = await generateCodeChallenge(codeVerifier);
-
+const SignInWithGoogleOnIOS = async (): Promise<AuthResult> => {
   try {
+    const codeVerifier = await generateCodeVerifier();
+    const codeChallenge = await generateCodeChallenge(codeVerifier);
     const redirectUri = ENV.IOS_REDIRECT_URI;
     const googleClientId = getGoogleClientId();
 
@@ -39,49 +42,54 @@ const SignInWithGoogleOnIOS = async () => {
 
     const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUri);
 
-    if (result.type === 'success' && result.url) {
-      const params = Linking.parse(result.url).queryParams;
-      const authCode = params?.code;
-
-      if (authCode && typeof authCode === 'string') {
-        const response = await authAPI.getGoogleAccessToken({
-          codeVerifier,
-          authorizationCode: authCode,
-          redirectUri,
-          platform: 'IOS',
-        });
-
-        const { accessToken, refreshToken } = parseAuthToken(response);
-        return { accessToken, refreshToken };
-      } else {
-        throw new Error('iOS Google login failed');
-      }
+    if (result.type !== 'success' || !result.url) {
+      return { errorMessage: 'Google 로그인 인증이 취소되었습니다.' };
     }
+
+    const params = Linking.parse(result.url).queryParams;
+    const authCode = params?.code;
+
+    if (!authCode || typeof authCode !== 'string') {
+      return { errorMessage: 'Google 로그인 인증 코드를 받아올 수 없습니다.' };
+    }
+
+    const response = await authAPI.getGoogleAccessToken({
+      codeVerifier,
+      authorizationCode: authCode,
+      redirectUri,
+      platform: 'IOS',
+    });
+
+    const { accessToken, refreshToken } = parseAuthToken(response);
+    return { accessToken, refreshToken };
   } catch (error) {
     console.error(error);
-    throw error;
+    return { errorMessage: 'Google 로그인 중 오류가 발생했습니다.' };
   }
 };
 
-const SignInWithGoogleOnAndroid = async () => {
+const SignInWithGoogleOnAndroid = async (): Promise<AuthResult> => {
   try {
     await GoogleSignin.hasPlayServices();
 
     const userInfo = await GoogleSignin.signIn();
 
-    if (userInfo?.data && userInfo.data.serverAuthCode) {
-      const response = await authAPI.getGoogleAccessToken({
-        codeVerifier: '',
-        authorizationCode: userInfo.data.serverAuthCode,
-        redirectUri: '',
-        platform: 'ANDROID',
-      });
-
-      console.log('response: ', response);
-    } else {
-      throw new Error('Android Google login failed');
+    if (!userInfo?.data || !userInfo.data.serverAuthCode) {
+      return { errorMessage: 'Google 로그인 인증 정보를 받아올 수 없습니다.' };
     }
+
+    const response = await authAPI.getGoogleAccessToken({
+      codeVerifier: '',
+      authorizationCode: userInfo.data.serverAuthCode,
+      redirectUri: '',
+      platform: 'ANDROID',
+    });
+
+    console.log('response: ', response);
+    const { accessToken, refreshToken } = parseAuthToken(response);
+    return { accessToken, refreshToken };
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return { errorMessage: 'Google 로그인 중 오류가 발생했습니다.' };
   }
 };

@@ -4,6 +4,7 @@ import { WaveHorizon } from '@src/features/home';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 import { useRouter } from 'expo-router';
+import { Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
@@ -13,12 +14,20 @@ export default function LoginScreen() {
   const router = useRouter();
 
   const handleGoogleLogin = async () => {
-    await login('google');
+    const result = await login('google');
+    if (result && 'errorMessage' in result) {
+      Alert.alert(result.errorMessage);
+      return;
+    }
     router.push(ROUTES.HOME);
   };
 
   const handleKakaoLogin = async () => {
-    await login('kakao');
+    const result = await login('kakao');
+    if (result && 'errorMessage' in result) {
+      Alert.alert(result.errorMessage);
+      return;
+    }
     router.push(ROUTES.HOME);
   };
 

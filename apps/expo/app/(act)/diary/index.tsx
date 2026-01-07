@@ -1,6 +1,10 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
-import { LoadingSpinner, WebViewLoadingView } from '@src/components/ui';
+import {
+  LoadingSpinner,
+  WebViewErrorView,
+  WebViewLoadingView,
+} from '@src/components/ui';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { useRouter } from 'expo-router';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
@@ -34,6 +38,9 @@ export default function DiaryScreen() {
           <WebViewLoadingView>
             <LoadingSpinner />
           </WebViewLoadingView>
+        )}
+        renderError={() => (
+          <WebViewErrorView onPressHome={() => router.replace(ROUTES.HOME)} />
         )}
       />
     </PageSafeAreaView>

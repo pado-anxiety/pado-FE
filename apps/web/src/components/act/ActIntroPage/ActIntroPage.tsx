@@ -1,6 +1,8 @@
 'use client';
 
-import { Divide } from '../../ui';
+import { ErrorBoundary } from 'react-error-boundary';
+
+import { Divide, ErrorFallback } from '../../ui';
 import PageLayout from '../../ui/layout';
 import ActIntroButton from './ActIntroButton';
 import ActIntroContent from './ActIntroContent';
@@ -18,6 +20,39 @@ interface ActIntroPageProps {
   onStart: () => void;
   onClose: () => void;
 }
+
+interface ActIntroPageContentProps {
+  contentTitle: string;
+  contentDescription: string;
+  steps: string[];
+  tipText: string;
+  buttonText: string;
+  onStart: () => void;
+}
+
+const ActIntroPageContent = ({
+  contentTitle,
+  contentDescription,
+  steps,
+  tipText,
+  buttonText,
+  onStart,
+}: ActIntroPageContentProps) => {
+  return (
+    <ErrorBoundary fallbackRender={() => <ErrorFallback />}>
+      <ActIntroContent
+        contentTitle={contentTitle}
+        contentDescription={contentDescription}
+        steps={steps}
+        tipText={tipText}
+      />
+      <ActIntroButton
+        buttonText={buttonText}
+        onStart={onStart}
+      />
+    </ErrorBoundary>
+  );
+};
 
 function ActIntroPage({
   title,
@@ -44,16 +79,11 @@ function ActIntroPage({
 
         <Divide />
 
-        {/* 스크롤 가능한 컨텐츠 */}
-        <ActIntroContent
+        <ActIntroPageContent
           contentTitle={contentTitle}
           contentDescription={contentDescription}
           steps={steps}
           tipText={tipText}
-        />
-
-        {/* 하단 버튼 */}
-        <ActIntroButton
           buttonText={buttonText}
           onStart={onStart}
         />

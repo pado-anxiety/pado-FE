@@ -1,7 +1,10 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
-import { LoadingSpinner } from '@src/components/ui';
-import { WebViewLoadingView } from '@src/components/ui/webview-loading-view';
+import {
+  LoadingSpinner,
+  WebViewErrorView,
+  WebViewLoadingView,
+} from '@src/components/ui';
 import { safeStringify } from '@src/lib/json';
 import { WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { ROUTES } from '@src/lib/route/route';
@@ -46,6 +49,9 @@ export default function DetachStepScreen() {
           <WebViewLoadingView>
             <LoadingSpinner />
           </WebViewLoadingView>
+        )}
+        renderError={() => (
+          <WebViewErrorView onPressHome={() => router.replace(ROUTES.HOME)} />
         )}
       />
     </PageSafeAreaView>
