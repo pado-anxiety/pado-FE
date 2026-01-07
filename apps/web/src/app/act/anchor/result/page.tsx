@@ -1,22 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
-import { Button, Text } from '@pado/ui';
-import { cn } from 'tailwind-variants';
 
 import ActResultPage from '@/components/act/ActResultPage';
-import { Divide } from '@/components/ui';
 import { handlePostMessage } from '@/lib';
 
 export default function AnchorResultPage() {
-  const [selectedAnswer, setSelectedAnswer] = useState<1 | 2 | 3 | null>(null);
-
-  const handleSelectAnswer = (answer: 1 | 2 | 3) => {
-    setSelectedAnswer(answer);
-  };
-
   const handleComplete = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
@@ -26,43 +15,11 @@ export default function AnchorResultPage() {
   return (
     <ActResultPage
       title={['무사히 닻을 내렸습니다']}
-      description="5-4-3-2-1 감각 관찰을 완료했어요."
+      description="주변의 감각들을 하나씩 일깨우며 현재에 닻을 내렸어요. 이제 어지러운 생각들 대신 지금 이 순간의 평온함에 온전히 집중할 수 있습니다. 이제 준비는 되었습니다. 다음 단계인 감정일기를 통해 내 안에 숨겨진 진짜 감정을 알아가는 연습을 시작해 보세요."
       buttonText="완료"
       onButtonClick={handleComplete}
-      buttonDisabled={selectedAnswer === null}
     >
-      <div className="flex flex-col gap-2 w-full">
-        <Divide />
-        <Text className="text-body-medium font-normal">
-          지금, 당신을 둘러싼 세상이 이전보다 조금 더 선명하게 느껴지시나요?
-        </Text>
-        <div className="flex flex-col gap-4 w-full">
-          <Button
-            text="네, 훨씬 선명해졌어요"
-            className={cn(
-              'bg-btn-act-page-unselected',
-              selectedAnswer === 1 && 'bg-btn-act-page-selected',
-            )}
-            onClick={() => handleSelectAnswer(1)}
-          />
-          <Button
-            text="조금은 느껴지는 것 같아요"
-            className={cn(
-              'bg-btn-act-page-unselected',
-              selectedAnswer === 2 && 'bg-btn-act-page-selected',
-            )}
-            onClick={() => handleSelectAnswer(2)}
-          />
-          <Button
-            text="아직은 머릿속이 복잡해요"
-            className={cn(
-              'bg-btn-act-page-unselected',
-              selectedAnswer === 3 && 'bg-btn-act-page-selected',
-            )}
-            onClick={() => handleSelectAnswer(3)}
-          />
-        </div>
-      </div>
+      <div />
     </ActResultPage>
   );
 }

@@ -9874,17 +9874,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-linear-gradient@npm:^15.0.8":
-  version: 15.0.8
-  resolution: "expo-linear-gradient@npm:15.0.8"
-  peerDependencies:
-    expo: "*"
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/2ac3bff62143083e3d5b894fccc4c76de058277f65ed123232636cf26c88da6d566fa3cd46be4101f86e66b89ede7c058e12c93493b752df562da2fa971dcd66
-  languageName: node
-  linkType: hard
-
 "expo-linking@npm:~8.0.9":
   version: 8.0.10
   resolution: "expo-linking@npm:8.0.10"
@@ -13644,7 +13633,6 @@ __metadata:
     expo-font: "npm:~14.0.10"
     expo-haptics: "npm:~15.0.7"
     expo-image: "npm:^3.0.11"
-    expo-linear-gradient: "npm:^15.0.8"
     expo-linking: "npm:~8.0.9"
     expo-localization: "npm:^17.0.8"
     expo-router: "npm:~6.0.16"
@@ -13713,6 +13701,7 @@ __metadata:
     prettier: "npm:^3.7.4"
     react: "npm:19.2.1"
     react-dom: "npm:19.2.1"
+    react-error-boundary: "npm:^6.0.2"
     react-i18next: "npm:^16.4.0"
     tailwind-merge: "npm:^3.4.0"
     tailwind-variants: "npm:^3.2.2"
@@ -14298,6 +14287,16 @@ __metadata:
   peerDependencies:
     react: ^19.2.1
   checksum: 10c0/e56b6b3d72314df580ca800b70a69a21c6372703c8f45d9b5451ca6519faefb2496d76ffa9c5adb94136d2bbf2fd303d0dfc208a2cd77ede3132877471af9470
+  languageName: node
+  linkType: hard
+
+"react-error-boundary@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "react-error-boundary@npm:6.0.2"
+  peerDependencies:
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  checksum: 10c0/3cfa405114739883a501cf89fce4cd7e26fb30fc5bb9ce4a9306982aa26fdb452ce6b065a416fe15a41fa7bfddba960bc6847a843e95f194e624fa4c322f3f5b
   languageName: node
   linkType: hard
 
