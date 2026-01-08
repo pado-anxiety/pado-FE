@@ -1,27 +1,22 @@
 import HistoryCard from '@src/features/History/HistoryCard';
+import { ACTType } from '@src/features/History/types';
 
 import { HomeListItem as HomeListItemType } from '../types';
 import { DeepSeaSection } from './DeepSeaSection';
 
 interface HomeListItemProps {
   item: HomeListItemType;
-  totalLength: number;
-  hasNext: boolean;
+  handleModalOpen: (id: number, type: ACTType) => void;
 }
 
-export const HomeListItem = ({
-  item,
-  totalLength,
-  hasNext,
-}: HomeListItemProps) => {
+export const HomeListItem = ({ item, handleModalOpen }: HomeListItemProps) => {
   if (item.type === 'HOME') {
     return <DeepSeaSection key="home-sea" />;
   } else if (item.type === 'HISTORY') {
     return (
       <HistoryCard
         item={item}
-        totalLength={totalLength}
-        hasNext={hasNext}
+        handleModalOpen={handleModalOpen}
       />
     );
   }

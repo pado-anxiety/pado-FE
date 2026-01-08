@@ -9,7 +9,12 @@ interface HomeListFooterProps {
 
 export const HomeListFooter = ({ isFetchingNextPage }: HomeListFooterProps) => {
   if (!isFetchingNextPage) {
-    return null;
+    return (
+      <View
+        className="bg-[#003366]"
+        style={{ height: scale(50) }}
+      />
+    );
   }
 
   return (
