@@ -1,7 +1,8 @@
 import { Feather } from '@expo/vector-icons';
-import { AnimatedText, Pressable, View } from '@src/components/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
+
+import { AnimatedText, Pressable, View } from '@src/components/ui';
 
 export default function HistorySkySection({
   setPage,
@@ -12,7 +13,7 @@ export default function HistorySkySection({
 
   return (
     <View
-      className="flex flex-col bg-white items-start justify-center gap-4 px-8 pt-12"
+      className="flex flex-col items-start justify-center gap-4 bg-page px-8 pt-12"
       style={{ paddingTop: insets.top }}
     >
       <Pressable onPress={() => setPage('HOME')}>

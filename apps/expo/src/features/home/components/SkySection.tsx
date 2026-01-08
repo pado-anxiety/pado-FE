@@ -15,7 +15,7 @@ export function SkySection({
 
   return (
     <View
-      className="flex flex-col items-start justify-center gap-4 bg-white px-8"
+      className="flex flex-col items-start justify-center gap-4 bg-page px-8"
       style={{
         paddingTop: insets.top + scale(50),
       }}

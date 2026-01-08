@@ -4,6 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { ActivityIndicator, Alert } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import { scale } from 'react-native-size-matters';
 
 // 1. Reanimated 관련 모듈 임포트
 
@@ -27,6 +28,11 @@ export type historyItem = {
   type: 'HISTORY';
   content: HistoryItem;
   index: number;
+};
+
+export type chatItem = {
+  id: 'CHAT';
+  type: 'CHAT';
 };
 
 export default function HomeScreen(): React.ReactNode {
@@ -66,8 +72,7 @@ export default function HomeScreen(): React.ReactNode {
   const items = useMemo(() => {
     if (page === 'HOME') {
       return [{ id: 'HOME', type: 'HOME' }];
-    }
-    if (page === 'HISTORY') {
+    } else if (page === 'HISTORY') {
       return data?.pages.map((item, index) => ({
         id: item.id,
         type: 'HISTORY',
@@ -77,7 +82,11 @@ export default function HomeScreen(): React.ReactNode {
     }
   }, [page, data?.pages]);
 
-  const renderItem = ({ item }: { item: homeItem | historyItem }) => {
+  const renderItem = ({
+    item,
+  }: {
+    item: homeItem | historyItem | chatItem;
+  }) => {
     if (item.type === 'HOME') {
       return <DeepSeaSection key="home-sea" />;
     } else if (item.type === 'HISTORY') {
@@ -85,6 +94,7 @@ export default function HomeScreen(): React.ReactNode {
         <HistoryCard
           item={item}
           totalLength={data?.pages?.length ?? 0}
+          hasNext={data?.hasNext ?? false}
         />
       );
     }
@@ -126,23 +136,30 @@ export default function HomeScreen(): React.ReactNode {
   const renderFooter = () => {
     if (isFetchingNextPage) {
       return (
-        <ActivityIndicator
-          size="small"
-          color="white"
-        />
+        <View
+          className="w-full flex-1 items-center justify-center bg-[#003366]"
+          style={{ paddingVertical: scale(50) }}
+        >
+          <ActivityIndicator
+            size="small"
+            color="white"
+          />
+        </View>
       );
     }
   };
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-page">
       <FlatList
-        data={items as homeItem[] | historyItem[]}
+        data={items as homeItem[] | historyItem[] | chatItem[]}
         ListHeaderComponent={renderHeader()}
-        renderItem={({ item }: { item: homeItem | historyItem }) =>
+        renderItem={({ item }: { item: homeItem | historyItem | chatItem }) =>
           renderItem({ item })
         }
-        keyExtractor={(item: homeItem | historyItem) => item.id.toString()}
+        keyExtractor={(item: homeItem | historyItem | chatItem) =>
+          item.id.toString()
+        }
         bounces={false}
         overScrollMode="never"
         showsVerticalScrollIndicator={false}
@@ -150,6 +167,17 @@ export default function HomeScreen(): React.ReactNode {
         onEndReachedThreshold={0.2}
         ListFooterComponent={renderFooter()}
       />
+      {page === 'HISTORY' && !data && (
+        <View
+          className="w-full flex-1 items-center justify-center bg-[#003366]"
+          style={{ paddingVertical: scale(100) }}
+        >
+          <ActivityIndicator
+            size="small"
+            color="white"
+          />
+        </View>
+      )}
     </View>
   );
 }

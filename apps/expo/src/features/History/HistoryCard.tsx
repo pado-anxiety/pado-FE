@@ -6,14 +6,20 @@ import { Text, View } from '@src/components/ui';
 type HistoryCardProps = {
   item: historyItem;
   totalLength: number;
+  hasNext: boolean;
 };
 
-export default function HistoryCard({ item, totalLength }: HistoryCardProps) {
+export default function HistoryCard({
+  item,
+  totalLength,
+  hasNext,
+}: HistoryCardProps) {
   return (
     <View
       className="w-full self-start bg-[#003366] px-8 py-4"
       style={{
-        paddingBottom: item.index === totalLength - 1 ? scale(100) : 0,
+        paddingBottom:
+          item.index === totalLength - 1 && !hasNext ? scale(100) : 0,
       }}
     >
       <View className="rounded-lg bg-[#77AADD] p-4">

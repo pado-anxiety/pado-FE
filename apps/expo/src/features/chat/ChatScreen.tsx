@@ -1,5 +1,6 @@
-import { Pressable, View } from '@src/components/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { Pressable, View } from '@src/components/ui';
 
 import { ChatModalHeader, ChatOverlay } from './components';
 import ChatContainer from './components/ChatContainer/ChatContainer';
@@ -30,7 +31,7 @@ function ChatContent() {
       <ChatOverlay />
 
       <Pressable
-        className="flex flex-1 flex-col justify-end w-full"
+        className="flex w-full flex-1 flex-col justify-end"
         onPress={() => input.inputRef.current?.blur()}
         pointerEvents="box-none"
       >

@@ -30,6 +30,7 @@ export default function LoginScreen() {
       Alert.alert(result.errorMessage);
       return;
     }
+    console.log(useAuth.getState().accessToken);
     router.push(ROUTES.HOME);
   };
 

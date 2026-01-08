@@ -21,7 +21,7 @@ export const historyAPI = {
     console.log(url);
     const response: HistoryAPI = await apiClient.get(url);
 
-    // console.log(useAuth.getState().accessToken);
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     console.log('response: ', response);
 
