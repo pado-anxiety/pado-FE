@@ -1,8 +1,9 @@
-import { Text } from '@src/components/ui';
-import { getCbtRoute } from '@src/lib/route/route';
 import { useRouter } from 'expo-router';
 import { Pressable, useWindowDimensions } from 'react-native';
 import { scale } from 'react-native-size-matters';
+
+import { Text } from '@src/components/ui';
+import { getCbtRoute } from '@src/lib/route/route';
 
 type CbtButtonProps = {
   item: {
@@ -19,7 +20,7 @@ export function CbtButton({ item }: CbtButtonProps): React.ReactNode {
   return (
     <Pressable
       style={{ width: ITEM_SIZE - 10, height: ITEM_SIZE - 10 }}
-      className="max-w-[150px] aspect-square bg-neutral-200 border-[3px] border-solid border-blue-200 justify-center items-center rounded-xl"
+      className="aspect-square max-w-[150px] items-center justify-center rounded-xl border-[3px] border-solid border-blue-200 bg-neutral-200"
       onPress={() => {
         router.push(getCbtRoute(item.slug));
       }}

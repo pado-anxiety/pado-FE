@@ -30,7 +30,7 @@ export const authAPI = {
     platform: 'ANDROID' | 'IOS';
   }): Promise<{ accessToken: string; refreshToken: string }> => {
     const response = await axios.post(
-      'https://pado-anxiety.site/login/google',
+      'https://nyangtodac-dev.site/login/google',
       {
         codeVerifier,
         authorizationCode,
@@ -42,9 +42,12 @@ export const authAPI = {
     return response.data;
   },
   getKaKaoAccessToken: async (accessToken: string) => {
-    const response = await axios.post('https://pado-anxiety.site/login/kakao', {
-      accessToken,
-    });
+    const response = await axios.post(
+      'https://nyangtodac-dev.site/login/kakao',
+      {
+        accessToken,
+      },
+    );
 
     return response.data;
   },

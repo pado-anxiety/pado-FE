@@ -1,16 +1,21 @@
-import { useState } from 'react';
-
-import { Button, Text, View } from '@src/components/ui';
-import { HistoryAPI, historyAPI } from '@src/lib/api/history';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import Animated, { FadeIn } from 'react-native-reanimated';
 import { scale } from 'react-native-size-matters';
 
-export function HistoryDeepSeaSection(): React.ReactNode {
-  const [cursor, setCursor] = useState(0);
-  const [history, setHistory] = useState<HistoryAPI['content']>([]);
+import { Button, Text, View } from '@src/components/ui';
+import { historyAPI } from '@src/lib/api/history';
+import { formatToYYYYMMDD } from '@src/lib/time';
 
-  // cursor 을 바로 넘겨주면 다음 데이터가 알아서 넘어옴
+import { HistoryItem } from './types';
+
+function HistoryCard({ item }: { item: HistoryItem }) {
+  return (
+    <View className="flex w-full flex-row gap-2">
+      <Text>{item.time}</Text>
+    </View>
+  );
+}
+
+export function HistoryDeepSeaSection(): React.ReactNode {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ['history'],
@@ -19,24 +24,41 @@ export function HistoryDeepSeaSection(): React.ReactNode {
       initialPageParam: null,
       getNextPageParam: (lastPage) =>
         lastPage.hasNext ? lastPage.cursor : undefined,
+      select: (data) => ({
+        pages: data.pages
+          .map((page) =>
+            page.content.map((item) => ({
+              ...item,
+              time: formatToYYYYMMDD(item.time),
+            })),
+          )
+          .flat(),
+        hasNext: data.pages[data.pages.length - 1].hasNext,
+        cursor: data.pages[data.pages.length - 1].cursor,
+        pageParams: data.pageParams,
+      }),
     });
 
-  console.log(data);
+  console.log(data?.pages);
 
   return (
     <View
-      className="flex-1 bg-[#003366] items-center z-10"
+      className="z-10 flex-1 items-center bg-[#003366]"
       style={{ marginTop: -scale(20) }}
     >
-      <Animated.View entering={FadeIn.duration(1000)}>
-        <Text className="text-2xl text-white font-medium">
-          HistoryDeepSeaSection
-        </Text>
-        <Button
-          text="Fetch Next Page"
-          onPress={() => fetchNextPage()}
+      {data?.pages.map((item) => (
+        <HistoryCard
+          key={item.id}
+          item={item}
         />
-      </Animated.View>
+      ))}
+      <Button
+        text="Fetch Next Page"
+        onPress={() => {
+          console.log('요청');
+          fetchNextPage();
+        }}
+      />
     </View>
   );
 }

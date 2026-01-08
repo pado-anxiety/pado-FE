@@ -18,9 +18,12 @@ export const historyAPI = {
     if (cursor) {
       url += `?cursor=${cursor}`;
     }
+    console.log(url);
     const response: HistoryAPI = await apiClient.get(url);
 
-    console.log(response.content);
+    // console.log(useAuth.getState().accessToken);
+
+    console.log('response: ', response);
 
     return response;
   },

@@ -57,7 +57,7 @@ export function ActPath({ points, height }: ActPathProps): React.ReactNode {
         height: height,
         position: 'absolute',
         inset: 0,
-        backgroundColor: 'black',
+        backgroundColor: '#010C1E',
       }}
     >
       <Fill>
