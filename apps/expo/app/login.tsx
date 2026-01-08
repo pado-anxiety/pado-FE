@@ -1,12 +1,14 @@
-import { Text } from '@pado/ui';
-import { Image, Pressable, View } from '@src/components/ui';
-import { WaveHorizon } from '@src/features/home';
-import { useAuth } from '@src/lib/auth';
-import { ROUTES } from '@src/lib/route';
 import { useRouter } from 'expo-router';
 import { Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
+
+import { Text } from '@pado/ui';
+
+import { Image, Pressable, View } from '@src/components/ui';
+import { WaveHorizon } from '@src/features/home';
+import { useAuth } from '@src/lib/auth';
+import { ROUTES } from '@src/lib/route';
 
 export default function LoginScreen() {
   const insets = useSafeAreaInsets();
@@ -19,8 +21,6 @@ export default function LoginScreen() {
       Alert.alert(result.errorMessage);
       return;
     }
-    console.log('accessToken: ', useAuth.getState().accessToken);
-    console.log('refreshToken: ', useAuth.getState().refreshToken);
     router.push(ROUTES.HOME);
   };
 
@@ -62,31 +62,31 @@ export default function LoginScreen() {
         </View>
 
         <View
-          className="bg-page rounded-t-[32px] px-6 pt-8 flex gap-4 flex-col"
+          className="flex flex-col gap-4 rounded-t-[32px] bg-page px-6 pt-8"
           style={{ paddingBottom: insets.bottom + scale(32) }}
         >
           <Pressable
             onPress={handleGoogleLogin}
-            className="bg-white rounded-[32px] border border-gray-200 flex-row items-center justify-center py-5 gap-2"
+            className="flex-row items-center justify-center gap-2 rounded-[32px] border border-gray-200 bg-white py-5"
           >
             <Image
               source={require('../assets/images/login/google.svg')}
-              className="w-6 h-6"
+              className="h-6 w-6"
             />
             <Text className="text-body-medium">구글로 계속하기</Text>
           </Pressable>
 
           <Pressable
             onPress={handleKakaoLogin}
-            className="bg-[#FEE500] rounded-[32px] flex-row items-center justify-center py-5 gap-2"
+            className="flex-row items-center justify-center gap-2 rounded-[32px] bg-[#FEE500] py-5"
           >
             <Image
               source={require('../assets/images/login/kakao.svg')}
-              className="w-6 h-6"
+              className="h-6 w-6"
             />
             <Text className="text-body-medium">카카오톡으로 계속하기</Text>
           </Pressable>
-          <Text className="text-body-small text-center text-sub">
+          <Text className="text-center text-body-small text-sub">
             계속 진행하면 파도의 서비스 약관 및 개인 정보 정책에 동의하는 것으로
             간주됩니다.
           </Text>

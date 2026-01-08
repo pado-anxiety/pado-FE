@@ -12,11 +12,11 @@ export const authAPI = {
     refreshToken: string;
   }> => {
     const response: { accessToken: string; refreshToken: string } =
-      await axios.post(`https://nyangtodac-dev.site/tokens/reissue`, {
+      await axios.post(`https://pado-anxiety.site/tokens/reissue`, {
         refreshToken: authStorage.getRefreshToken(),
       });
 
-    return response;
+    return response.data;
   },
   getGoogleAccessToken: async ({
     codeVerifier,
@@ -30,7 +30,7 @@ export const authAPI = {
     platform: 'ANDROID' | 'IOS';
   }): Promise<{ accessToken: string; refreshToken: string }> => {
     const response = await axios.post(
-      'https://nyangtodac-dev.site/login/google',
+      'https://pado-anxiety.site/login/google',
       {
         codeVerifier,
         authorizationCode,
@@ -42,12 +42,9 @@ export const authAPI = {
     return response.data;
   },
   getKaKaoAccessToken: async (accessToken: string) => {
-    const response = await axios.post(
-      'https://nyangtodac-dev.site/login/kakao',
-      {
-        accessToken,
-      },
-    );
+    const response = await axios.post('https://pado-anxiety.site/login/kakao', {
+      accessToken,
+    });
 
     return response.data;
   },

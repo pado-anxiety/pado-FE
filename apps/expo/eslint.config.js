@@ -12,6 +12,13 @@ module.exports = defineConfig([
     rules: {
       'import/order': 'off',
       'sort-imports': 'off',
+      'prettier/prettier': [
+        'error',
+        {},
+        {
+          usePrettierrc: true,
+        },
+      ],
     },
   },
   {

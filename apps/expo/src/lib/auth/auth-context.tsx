@@ -13,7 +13,10 @@ interface AuthState {
   login: (
     platform: 'google' | 'kakao',
   ) => Promise<void | { errorMessage: string }>;
+
   logout: () => void;
+
+  setAuthToken: (accessToken: string, refreshToken: string) => void;
 }
 
 export const useAuth = create<AuthState>((set) => ({
@@ -55,7 +58,7 @@ export const useAuth = create<AuthState>((set) => ({
 
       authStorage.setAuthToken(token.accessToken, token.refreshToken);
       set({
-        accessToken: token.accessToken + '------------a',
+        accessToken: token.accessToken,
         refreshToken: token.refreshToken,
         isLoggedIn: true,
       });
@@ -74,6 +77,15 @@ export const useAuth = create<AuthState>((set) => ({
       accessToken: null,
       refreshToken: null,
       isLoggedIn: false,
+      isLoading: false,
+    });
+  },
+
+  setAuthToken: (accessToken: string, refreshToken: string) => {
+    set({
+      accessToken: accessToken,
+      refreshToken: refreshToken,
+      isLoggedIn: true,
       isLoading: false,
     });
   },

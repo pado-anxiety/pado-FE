@@ -1,6 +1,4 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { I18nProvider } from '@src/lib/i18n';
-import { useTheme } from '@src/lib/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Slot } from 'expo-router';
 import { View } from 'react-native';
@@ -8,6 +6,9 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import { I18nProvider } from '@src/lib/i18n';
+import { useTheme } from '@src/lib/theme';
 
 import '../global.css';
 

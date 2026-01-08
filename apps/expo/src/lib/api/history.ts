@@ -20,6 +20,8 @@ export const historyAPI = {
     }
     const response: HistoryAPI = await apiClient.get(url);
 
+    console.log(response.content);
+
     return response;
   },
 };

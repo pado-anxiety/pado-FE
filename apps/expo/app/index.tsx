@@ -1,14 +1,15 @@
 import { useState } from 'react';
 
+import { router } from 'expo-router';
+import { Alert } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+
 import { View } from '@src/components/ui';
 import { HistoryDeepSeaSection } from '@src/features/History/HistoryDeepSeaSection';
 import HistorySkySection from '@src/features/History/HistorySkySection';
 import { DeepSeaSection, SkySection, WaveHorizon } from '@src/features/home/';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
-import { router } from 'expo-router';
-import { Alert } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 
 function Page({
   page,

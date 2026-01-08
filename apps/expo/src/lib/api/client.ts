@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { router } from 'expo-router';
+import { Alert } from 'react-native';
 
-import { authStorage, useAuth } from '../auth';
+import { useAuth } from '../auth';
 import { ENV } from '../env';
 import { ROUTES } from '../route';
 import { authAPI } from './auth';
@@ -19,9 +20,6 @@ export const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     const accessToken = useAuth.getState().accessToken;
-
-    console.log('accessToken: ', accessToken);
-    console.log('refreshToken: ', useAuth.getState().refreshToken);
 
     if (accessToken && config.headers) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -50,12 +48,8 @@ apiClient.interceptors.response.use(
       try {
         const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
 
-        console.log('재발급 토큰 발급 성공');
-        console.log('accessToken: ', accessToken);
-        console.log('refreshToken: ', refreshToken);
-        console.log('===============================================');
+        useAuth.getState().setAuthToken(accessToken, refreshToken);
 
-        authStorage.setAuthToken(accessToken, refreshToken);
         return apiClient(config);
       } catch (error) {
         console.error('토큰 재발급 오류가 발생했습니다: ', error);
@@ -63,6 +57,10 @@ apiClient.interceptors.response.use(
       }
     }
 
-    router.replace(ROUTES.LOGIN);
+    if (config._retry) {
+      Alert.alert('로그인이 필요합니다.', '로그인 페이지로 이동합니다.', [
+        { text: '확인', onPress: () => router.replace(ROUTES.LOGIN) },
+      ]);
+    }
   },
 );
