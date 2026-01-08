@@ -40,8 +40,6 @@ export default function HomeScreen(): React.ReactNode {
     },
   });
 
-  console.log('detail: ', detail);
-
   const handleModalOpen = (id: number, type: ACTType) => {
     detailMutation.mutate(id);
     setModalType(type);
@@ -56,6 +54,10 @@ export default function HomeScreen(): React.ReactNode {
     page,
     historyPages: data?.pages,
   });
+
+  console.log('아이템');
+  console.log(items);
+  console.log('======================');
 
   if (!isLoggedIn) {
     Alert.alert('로그인이 필요합니다.', '로그인 페이지로 이동합니다.', [
@@ -88,7 +90,7 @@ export default function HomeScreen(): React.ReactNode {
             handleModalOpen={handleModalOpen}
           />
         )}
-        keyExtractor={(item) => item.id.toString() + Math.random().toString()}
+        keyExtractor={(item) => item.id.toString()}
         bounces={false}
         overScrollMode="never"
         showsVerticalScrollIndicator={false}

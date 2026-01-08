@@ -13,6 +13,8 @@ export const HomeListItem = ({ item, handleModalOpen }: HomeListItemProps) => {
   if (item.type === 'HOME') {
     return <DeepSeaSection key="home-sea" />;
   } else if (item.type === 'HISTORY') {
+    console.log(item);
+
     return (
       <HistoryCard
         item={item}

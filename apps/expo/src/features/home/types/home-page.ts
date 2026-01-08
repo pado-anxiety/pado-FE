@@ -8,10 +8,10 @@ export type HomeItem = {
 };
 
 export type HistoryItemWithIndex = {
-  id: number;
+  id: string;
+  date: string;
   type: 'HISTORY';
-  content: HistoryItem;
-  index: number;
+  items: HistoryItem[];
 };
 
 export type ChatItem = {
