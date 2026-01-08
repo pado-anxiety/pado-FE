@@ -10,11 +10,24 @@ import { scale } from 'react-native-size-matters';
 
 import { Text, View } from '@src/components/ui';
 import HistorySkySection from '@src/features/History/HistorySkySection';
+import { HistoryItem } from '@src/features/History/types';
 import { DeepSeaSection, SkySection, WaveHorizon } from '@src/features/home/';
 import { historyAPI } from '@src/lib/api/history';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 import { formatToYYYYMMDD } from '@src/lib/time';
+
+type homeItem = {
+  id: 'HOME';
+  type: 'HOME';
+};
+
+type historyItem = {
+  id: number;
+  type: 'HISTORY';
+  content: HistoryItem;
+  index: number;
+};
 
 export default function HomeScreen(): React.ReactNode {
   const [page, setPage] = useState<'HOME' | 'HISTORY' | 'CHAT'>('HOME');
@@ -66,11 +79,10 @@ export default function HomeScreen(): React.ReactNode {
     }
   }, [page, data?.pages]);
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item }: { item: homeItem | historyItem }) => {
     if (item.type === 'HOME') {
       return <DeepSeaSection key="home-sea" />;
-    }
-    if (item.type === 'HISTORY') {
+    } else if (item.type === 'HISTORY') {
       console.log(item.index);
 
       return (
@@ -78,7 +90,7 @@ export default function HomeScreen(): React.ReactNode {
           className="w-full self-start bg-[#003366] px-8 py-4"
           style={{
             paddingBottom:
-              item.index === data?.pages.length - 1 ? scale(100) : 0,
+              item.index === (data?.pages?.length ?? 0) - 1 ? scale(100) : 0,
           }}
         >
           <View className="rounded-lg bg-[#77AADD] p-4">
@@ -120,11 +132,13 @@ export default function HomeScreen(): React.ReactNode {
   return (
     <View className="flex-1 bg-white">
       <FlatList
-        data={items}
+        data={items as homeItem[] | historyItem[]}
         ListHeaderComponent={renderHeader()}
         // itemLayoutAnimation={LinearTransition}
-        renderItem={({ item }) => renderItem({ item })}
-        keyExtractor={(item) => item.id}
+        renderItem={({ item }: { item: homeItem | historyItem }) =>
+          renderItem({ item })
+        }
+        keyExtractor={(item: homeItem | historyItem) => item.id.toString()}
         bounces={false}
         overScrollMode="never"
         showsVerticalScrollIndicator={false}
