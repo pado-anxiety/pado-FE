@@ -1,12 +1,13 @@
 import { Feather } from '@expo/vector-icons';
 import { AnimatedText, Pressable, View } from '@src/components/ui';
-import { ROUTES } from '@src/lib/route';
-import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
-export default function HistorySkySection() {
-  const router = useRouter();
+export default function HistorySkySection({
+  setPage,
+}: {
+  setPage: (page: 'HOME' | 'HISTORY' | 'CHAT') => void;
+}) {
   const insets = useSafeAreaInsets();
 
   return (
@@ -14,7 +15,7 @@ export default function HistorySkySection() {
       className="flex flex-col bg-white items-start justify-center gap-4 px-8 pt-12"
       style={{ paddingTop: insets.top }}
     >
-      <Pressable onPress={() => router.push(ROUTES.HOME)}>
+      <Pressable onPress={() => setPage('HOME')}>
         <Feather
           name="arrow-left"
           size={30}
@@ -23,7 +24,7 @@ export default function HistorySkySection() {
       </Pressable>
       <View
         className="flex flex-col gap-4"
-        style={{ paddingTop: scale(20) }}
+        style={{ paddingTop: scale(50) }}
       >
         <AnimatedText
           delay={1000}

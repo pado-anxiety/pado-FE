@@ -19,6 +19,8 @@ export default function LoginScreen() {
       Alert.alert(result.errorMessage);
       return;
     }
+    console.log('accessToken: ', useAuth.getState().accessToken);
+    console.log('refreshToken: ', useAuth.getState().refreshToken);
     router.push(ROUTES.HOME);
   };
 

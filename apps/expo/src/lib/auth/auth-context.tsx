@@ -55,7 +55,7 @@ export const useAuth = create<AuthState>((set) => ({
 
       authStorage.setAuthToken(token.accessToken, token.refreshToken);
       set({
-        accessToken: token.accessToken,
+        accessToken: token.accessToken + '------------a',
         refreshToken: token.refreshToken,
         isLoggedIn: true,
       });

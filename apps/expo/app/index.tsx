@@ -26,7 +26,7 @@ function Page({
       Content = <DeepSeaSection />;
       break;
     case 'HISTORY':
-      MetaContent = <HistorySkySection />;
+      MetaContent = <HistorySkySection setPage={setPage} />;
       Content = <HistoryDeepSeaSection />;
       break;
   }
@@ -43,7 +43,7 @@ function Page({
 export default function HomeScreen(): React.ReactNode {
   const [page, setPage] = useState<'HOME' | 'HISTORY' | 'CHAT'>('HOME');
 
-  const { isLoggedIn, accessToken, refreshToken } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   if (!isLoggedIn) {
     Alert.alert('로그인이 필요합니다.', '로그인 페이지로 이동합니다.', [

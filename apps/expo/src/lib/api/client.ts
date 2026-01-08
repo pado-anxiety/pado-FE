@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { router } from 'expo-router';
 
-import { authStorage } from '../auth';
+import { authStorage, useAuth } from '../auth';
 import { ENV } from '../env';
 import { ROUTES } from '../route';
 import { authAPI } from './auth';
@@ -18,7 +18,10 @@ export const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   (config) => {
-    const accessToken = authStorage.getAccessToken();
+    const accessToken = useAuth.getState().accessToken;
+
+    console.log('accessToken: ', accessToken);
+    console.log('refreshToken: ', useAuth.getState().refreshToken);
 
     if (accessToken && config.headers) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -46,6 +49,12 @@ apiClient.interceptors.response.use(
 
       try {
         const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
+
+        console.log('재발급 토큰 발급 성공');
+        console.log('accessToken: ', accessToken);
+        console.log('refreshToken: ', refreshToken);
+        console.log('===============================================');
+
         authStorage.setAuthToken(accessToken, refreshToken);
         return apiClient(config);
       } catch (error) {
