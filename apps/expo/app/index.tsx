@@ -4,11 +4,11 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { ActivityIndicator, Alert } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { scale } from 'react-native-size-matters';
 
 // 1. Reanimated 관련 모듈 임포트
 
-import { Text, View } from '@src/components/ui';
+import { View } from '@src/components/ui';
+import HistoryCard from '@src/features/History/HistoryCard';
 import HistorySkySection from '@src/features/History/HistorySkySection';
 import { HistoryItem } from '@src/features/History/types';
 import { DeepSeaSection, SkySection, WaveHorizon } from '@src/features/home/';
@@ -17,12 +17,12 @@ import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 import { formatToYYYYMMDD } from '@src/lib/time';
 
-type homeItem = {
+export type homeItem = {
   id: 'HOME';
   type: 'HOME';
 };
 
-type historyItem = {
+export type historyItem = {
   id: number;
   type: 'HISTORY';
   content: HistoryItem;
@@ -57,8 +57,6 @@ export default function HomeScreen(): React.ReactNode {
       enabled: page === 'HISTORY',
     });
 
-  // console.log(data?.pages);
-
   if (!isLoggedIn) {
     Alert.alert('로그인이 필요합니다.', '로그인 페이지로 이동합니다.', [
       { text: '확인', onPress: () => router.replace(ROUTES.LOGIN) },
@@ -83,21 +81,11 @@ export default function HomeScreen(): React.ReactNode {
     if (item.type === 'HOME') {
       return <DeepSeaSection key="home-sea" />;
     } else if (item.type === 'HISTORY') {
-      console.log(item.index);
-
       return (
-        <View
-          className="w-full self-start bg-[#003366] px-8 py-4"
-          style={{
-            paddingBottom:
-              item.index === (data?.pages?.length ?? 0) - 1 ? scale(100) : 0,
-          }}
-        >
-          <View className="rounded-lg bg-[#77AADD] p-4">
-            <Text className="text-body-small">{item.content.type}</Text>
-            <Text className="text-black">{item.content.time}</Text>
-          </View>
-        </View>
+        <HistoryCard
+          item={item}
+          totalLength={data?.pages?.length ?? 0}
+        />
       );
     }
     return null;
@@ -129,12 +117,28 @@ export default function HomeScreen(): React.ReactNode {
     );
   };
 
+  const onEndReached = () => {
+    if (page === 'HISTORY' && hasNextPage) {
+      fetchNextPage();
+    }
+  };
+
+  const renderFooter = () => {
+    if (isFetchingNextPage) {
+      return (
+        <ActivityIndicator
+          size="small"
+          color="white"
+        />
+      );
+    }
+  };
+
   return (
     <View className="flex-1 bg-white">
       <FlatList
         data={items as homeItem[] | historyItem[]}
         ListHeaderComponent={renderHeader()}
-        // itemLayoutAnimation={LinearTransition}
         renderItem={({ item }: { item: homeItem | historyItem }) =>
           renderItem({ item })
         }
@@ -142,23 +146,9 @@ export default function HomeScreen(): React.ReactNode {
         bounces={false}
         overScrollMode="never"
         showsVerticalScrollIndicator={false}
-        onEndReached={() => {
-          if (page === 'HISTORY' && hasNextPage) {
-            fetchNextPage();
-          }
-        }}
+        onEndReached={onEndReached}
         onEndReachedThreshold={0.2}
-        ListFooterComponent={() => {
-          if (isFetchingNextPage) {
-            return (
-              <ActivityIndicator
-                size="small"
-                color="white"
-              />
-            );
-          }
-          return null;
-        }}
+        ListFooterComponent={renderFooter()}
       />
     </View>
   );
