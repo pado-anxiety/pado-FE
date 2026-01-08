@@ -1,4 +1,9 @@
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'expo-router';
+import WebView, { WebViewMessageEvent } from 'react-native-webview';
+
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
+
 import { PageSafeAreaView } from '@src/components/layout/indext';
 import {
   LoadingSpinner,
@@ -9,9 +14,6 @@ import { handleOnMessage } from '@src/lib';
 import { actAPI } from '@src/lib/api/act';
 import { WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { ROUTES } from '@src/lib/route/route';
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'expo-router';
-import WebView, { WebViewMessageEvent } from 'react-native-webview';
 
 export default function AnchorResultScreen() {
   const router = useRouter();

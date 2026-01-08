@@ -1,67 +1,35 @@
-import { useMemo, useState } from 'react';
-
-import { useInfiniteQuery } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { ActivityIndicator, Alert } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { scale } from 'react-native-size-matters';
 
-// 1. Reanimated 관련 모듈 임포트
-
 import { View } from '@src/components/ui';
-import HistoryCard from '@src/features/History/HistoryCard';
-import HistorySkySection from '@src/features/History/HistorySkySection';
-import { HistoryItem } from '@src/features/History/types';
-import { DeepSeaSection, SkySection, WaveHorizon } from '@src/features/home/';
-import { historyAPI } from '@src/lib/api/history';
+import {
+  HomeListFooter,
+  HomeListHeader,
+  HomeListItem,
+} from '@src/features/home';
+import {
+  useHistoryInfiniteQuery,
+  useHomeListData,
+  useHomePageState,
+} from '@src/features/home/hooks';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
-import { formatToYYYYMMDD } from '@src/lib/time';
-
-export type homeItem = {
-  id: 'HOME';
-  type: 'HOME';
-};
-
-export type historyItem = {
-  id: number;
-  type: 'HISTORY';
-  content: HistoryItem;
-  index: number;
-};
-
-export type chatItem = {
-  id: 'CHAT';
-  type: 'CHAT';
-};
 
 export default function HomeScreen(): React.ReactNode {
-  const [page, setPage] = useState<'HOME' | 'HISTORY' | 'CHAT'>('HOME');
   const { isLoggedIn } = useAuth();
+  const { page, setPage } = useHomePageState();
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ['history'],
-      queryFn: ({ pageParam }: { pageParam: number | null }) =>
-        historyAPI.getHistory(pageParam),
-      initialPageParam: null,
-      getNextPageParam: (lastPage) =>
-        lastPage.hasNext ? lastPage.cursor : undefined,
-      select: (data) => ({
-        pages: data.pages
-          .map((page) =>
-            page.content.map((item) => ({
-              ...item,
-              time: formatToYYYYMMDD(item.time),
-            })),
-          )
-          .flat(),
-        hasNext: data.pages[data.pages.length - 1].hasNext,
-        cursor: data.pages[data.pages.length - 1].cursor,
-        pageParams: data.pageParams,
-      }),
+    useHistoryInfiniteQuery({
       enabled: page === 'HISTORY',
     });
+
+  const items = useHomeListData({
+    page,
+    historyPages: data?.pages,
+  });
 
   if (!isLoggedIn) {
     Alert.alert('로그인이 필요합니다.', '로그인 페이지로 이동합니다.', [
@@ -69,103 +37,38 @@ export default function HomeScreen(): React.ReactNode {
     ]);
   }
 
-  const items = useMemo(() => {
-    if (page === 'HOME') {
-      return [{ id: 'HOME', type: 'HOME' }];
-    } else if (page === 'HISTORY') {
-      return data?.pages.map((item, index) => ({
-        id: item.id,
-        type: 'HISTORY',
-        content: item,
-        index: index,
-      }));
-    }
-  }, [page, data?.pages]);
-
-  const renderItem = ({
-    item,
-  }: {
-    item: homeItem | historyItem | chatItem;
-  }) => {
-    if (item.type === 'HOME') {
-      return <DeepSeaSection key="home-sea" />;
-    } else if (item.type === 'HISTORY') {
-      return (
-        <HistoryCard
-          item={item}
-          totalLength={data?.pages?.length ?? 0}
-          hasNext={data?.hasNext ?? false}
-        />
-      );
-    }
-    return null;
-  };
-
-  const renderHeader = () => {
-    let SkyContent = null;
-    if (page === 'HOME') {
-      SkyContent = (
-        <SkySection
-          key="home-sky"
-          setPage={setPage}
-        />
-      );
-    } else if (page === 'HISTORY') {
-      SkyContent = (
-        <HistorySkySection
-          key="history-sky"
-          setPage={setPage}
-        />
-      );
-    }
-
-    return (
-      <View>
-        {SkyContent}
-        <WaveHorizon />
-      </View>
-    );
-  };
-
-  const onEndReached = () => {
+  const handleEndReached = () => {
     if (page === 'HISTORY' && hasNextPage) {
       fetchNextPage();
-    }
-  };
-
-  const renderFooter = () => {
-    if (isFetchingNextPage) {
-      return (
-        <View
-          className="w-full flex-1 items-center justify-center bg-[#003366]"
-          style={{ paddingVertical: scale(50) }}
-        >
-          <ActivityIndicator
-            size="small"
-            color="white"
-          />
-        </View>
-      );
     }
   };
 
   return (
     <View className="flex-1 bg-page">
       <FlatList
-        data={items as homeItem[] | historyItem[] | chatItem[]}
-        ListHeaderComponent={renderHeader()}
-        renderItem={({ item }: { item: homeItem | historyItem | chatItem }) =>
-          renderItem({ item })
+        data={items}
+        ListHeaderComponent={
+          <HomeListHeader
+            page={page}
+            setPage={setPage}
+          />
         }
-        keyExtractor={(item: homeItem | historyItem | chatItem) =>
-          item.id.toString()
-        }
+        renderItem={({ item }) => (
+          <HomeListItem
+            item={item}
+            totalLength={data?.pages?.length ?? 0}
+            hasNext={data?.hasNext ?? false}
+          />
+        )}
+        keyExtractor={(item) => item.id.toString()}
         bounces={false}
         overScrollMode="never"
         showsVerticalScrollIndicator={false}
-        onEndReached={onEndReached}
+        onEndReached={handleEndReached}
         onEndReachedThreshold={0.2}
-        ListFooterComponent={renderFooter()}
+        ListFooterComponent={
+          <HomeListFooter isFetchingNextPage={isFetchingNextPage} />
+        }
       />
       {page === 'HISTORY' && !data && (
         <View

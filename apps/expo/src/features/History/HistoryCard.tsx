@@ -1,10 +1,11 @@
-import { historyItem } from '@app/index';
 import { scale } from 'react-native-size-matters';
 
 import { Text, View } from '@src/components/ui';
 
+import { HistoryItemWithIndex } from '../home';
+
 type HistoryCardProps = {
-  item: historyItem;
+  item: HistoryItemWithIndex;
   totalLength: number;
   hasNext: boolean;
 };

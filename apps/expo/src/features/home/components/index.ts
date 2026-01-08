@@ -2,5 +2,8 @@ export * from './CbtButton';
 export * from './CbtButtonList';
 export * from './DeepSeaSection';
 export * from './HomeBackground';
+export * from './HomeListFooter';
+export * from './HomeListHeader';
+export * from './HomeListItem';
 export * from './SkySection';
 export * from './Wave';

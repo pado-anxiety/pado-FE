@@ -18,12 +18,9 @@ export const historyAPI = {
     if (cursor) {
       url += `?cursor=${cursor}`;
     }
-    console.log(url);
     const response: HistoryAPI = await apiClient.get(url);
 
     await new Promise((resolve) => setTimeout(resolve, 5000));
-
-    console.log('response: ', response);
 
     return response;
   },
