@@ -46,9 +46,7 @@ apiClient.interceptors.response.use(
 
       try {
         const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
-
         authStorage.setAuthToken(accessToken, refreshToken);
-
         return apiClient(config);
       } catch (error) {
         console.error('토큰 재발급 오류가 발생했습니다: ', error);

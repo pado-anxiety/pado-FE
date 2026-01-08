@@ -73,6 +73,21 @@ export function SkySection({
               entering={FadeIn.duration(2000)}
             />
           </TouchableOpacity>
+          <TouchableOpacity
+            className="flex flex-col"
+            onPress={() => router.push(ROUTES.LOGIN)}
+          >
+            <AnimatedText
+              delay={2000}
+              className="text-4xl text-slate-700 font-medium"
+            >
+              로그인
+            </AnimatedText>
+            <Animated.View
+              className="w-full h-[1.5px] bg-slate-300 mt-1"
+              entering={FadeIn.duration(2000)}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </View>

@@ -6,7 +6,8 @@ import HistorySkySection from '@src/features/History/HistorySkySection';
 import { DeepSeaSection, SkySection, WaveHorizon } from '@src/features/home/';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
-import { Redirect } from 'expo-router';
+import { router } from 'expo-router';
+import { Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 function Page({
@@ -45,11 +46,10 @@ export default function HomeScreen(): React.ReactNode {
   const { isLoggedIn, accessToken, refreshToken } = useAuth();
 
   if (!isLoggedIn) {
-    return <Redirect href={ROUTES.LOGIN} />;
+    Alert.alert('로그인이 필요합니다.', '로그인 페이지로 이동합니다.', [
+      { text: '확인', onPress: () => router.replace(ROUTES.LOGIN) },
+    ]);
   }
-
-  console.log('accessToken: ', accessToken);
-  console.log('refreshToken: ', refreshToken);
 
   return (
     <View className="flex-1 bg-white">

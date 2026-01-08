@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { authStorage } from '../auth';
-import { apiClient } from './client';
 
 export const ROUTES = {
   REFRESH: '/tokens/reissue',
@@ -30,20 +29,26 @@ export const authAPI = {
     redirectUri: string;
     platform: 'ANDROID' | 'IOS';
   }): Promise<{ accessToken: string; refreshToken: string }> => {
-    const response = await apiClient.post('/login/google', {
-      codeVerifier,
-      authorizationCode,
-      redirectUri,
-      platform,
-    });
+    const response = await axios.post(
+      'https://nyangtodac-dev.site/login/google',
+      {
+        codeVerifier,
+        authorizationCode,
+        redirectUri,
+        platform,
+      },
+    );
 
-    return response;
+    return response.data;
   },
   getKaKaoAccessToken: async (accessToken: string) => {
-    const response = await apiClient.post('/login/kakao', {
-      accessToken,
-    });
+    const response = await axios.post(
+      'https://nyangtodac-dev.site/login/kakao',
+      {
+        accessToken,
+      },
+    );
 
-    return response;
+    return response.data;
   },
 };
