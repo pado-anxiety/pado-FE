@@ -39,12 +39,6 @@ export default function HistorySkySection({
         >
           지금까지 나의 ACT 기록들을 확인할 수 있어요.
         </AnimatedText>
-        <AnimatedText
-          delay={2000}
-          className="text-2xl font-medium"
-        >
-          깊이가 깊을수록 오래된 기록들이에요.
-        </AnimatedText>
       </View>
     </View>
   );

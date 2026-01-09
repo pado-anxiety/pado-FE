@@ -127,13 +127,11 @@ export function WaveHorizon(): React.ReactNode {
   }, []);
 
   return (
-    <View className="relative flex-1 bg-[#003366]">
-      <View
-        className="absolute top-0 w-full bg-page"
-        // TODO: 파도 배경 계산 방법 개선
-        style={{ height: WAVE_LAYOUT.HORIZON_HEIGHT * 0.6 }}
-      />
-      <Animated.View layout={LinearTransition.duration(1000)}>
+    <View className="relative flex-1 bg-page">
+      <Animated.View
+        layout={LinearTransition.duration(1000)}
+        className="w-full"
+      >
         <Canvas
           style={{
             width: width,
@@ -147,6 +145,15 @@ export function WaveHorizon(): React.ReactNode {
           <ForegroundMidWave path={foregroundMidWavePath} />
           <ForegroundWave path={foregroundWavePath} />
         </Canvas>
+
+        <View
+          style={{
+            backgroundColor: '#003366',
+            paddingBottom: 2000,
+            marginBottom: -2000,
+            marginTop: -1,
+          }}
+        />
       </Animated.View>
     </View>
   );

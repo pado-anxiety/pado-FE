@@ -59,6 +59,23 @@ export function SkySection({
               entering={FadeIn.duration(2000)}
             />
           </TouchableOpacity>
+
+          <TouchableOpacity
+            className="flex flex-col"
+            onPress={() => setPage('CHAT')}
+          >
+            <AnimatedText
+              delay={2000}
+              className="text-4xl font-medium text-slate-700"
+            >
+              학습
+            </AnimatedText>
+            <Animated.View
+              className="mt-1 h-[1.5px] w-full bg-slate-300"
+              entering={FadeIn.duration(2000)}
+            />
+          </TouchableOpacity>
+
           <TouchableOpacity
             className="flex flex-col"
             onPress={() => router.push(ROUTES.ONBOARD)}
