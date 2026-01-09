@@ -127,7 +127,7 @@ export function WaveHorizon(): React.ReactNode {
   }, []);
 
   return (
-    <View className="relative flex-1 bg-page">
+    <View className="bg-page">
       <Animated.View
         layout={LinearTransition.duration(1000)}
         className="w-full"

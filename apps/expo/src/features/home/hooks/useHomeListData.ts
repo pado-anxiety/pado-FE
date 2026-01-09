@@ -26,7 +26,6 @@ export const useHomeListData = ({
       const dataObject = historyPages.reduce(
         (acc, cur) => {
           const dateKey = cur.time;
-          console.log('dateKey: ', dateKey);
           if (!acc[dateKey]) acc[dateKey] = [];
           acc[dateKey].push({ id: cur.id, type: cur.type });
           return acc;

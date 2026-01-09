@@ -1,3 +1,5 @@
+import Animated, { FadeIn } from 'react-native-reanimated';
+
 import { Pressable, Text, View } from '@src/components/ui';
 import { formatToKoreanDate } from '@src/lib/time';
 
@@ -22,7 +24,7 @@ export default function HistoryCard({
   handleModalOpen,
 }: HistoryCardProps) {
   return (
-    <View className="bg-red-500">
+    <Animated.View entering={FadeIn.delay(1000)}>
       <View className="px-4 py-4">
         <View className="flex flex-row items-start justify-between gap-2">
           <View className="pt-1">
@@ -33,7 +35,7 @@ export default function HistoryCard({
           <View className="flex flex-1 flex-row flex-wrap gap-2">
             {item.items.map((el) => (
               <Pressable
-                key={`${el.id}-${el.type}`}
+                key={Math.random()}
                 onPress={() => handleModalOpen(el.id, el.type, item.date)}
                 className="rounded-full bg-white/10 px-3 py-1.5 active:bg-white/20"
               >
@@ -46,6 +48,6 @@ export default function HistoryCard({
         </View>
       </View>
       <View className="h-[1px] w-full bg-white/20" />
-    </View>
+    </Animated.View>
   );
 }

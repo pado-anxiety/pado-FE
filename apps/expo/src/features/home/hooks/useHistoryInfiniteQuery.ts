@@ -10,7 +10,7 @@ interface UseHistoryInfiniteQueryProps {
 export const useHistoryInfiniteQuery = ({
   enabled,
 }: UseHistoryInfiniteQueryProps) => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isPending, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ['history'],
       queryFn: ({ pageParam }: { pageParam: number | null }) =>
@@ -38,6 +38,7 @@ export const useHistoryInfiniteQuery = ({
     data,
     fetchNextPage,
     hasNextPage,
+    isPending,
     isFetchingNextPage,
   };
 };

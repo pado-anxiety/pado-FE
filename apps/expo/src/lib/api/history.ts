@@ -20,6 +20,8 @@ export const historyAPI = {
     }
     const response: HistoryAPI = await apiClient.get(url);
 
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
     return response;
   },
   getDetail: async (id: number) => {

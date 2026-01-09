@@ -5,27 +5,44 @@ import { View } from '@src/components/ui';
 
 interface HomeListFooterProps {
   isFetchingNextPage: boolean;
+  isPending: boolean;
 }
 
-export const HomeListFooter = ({ isFetchingNextPage }: HomeListFooterProps) => {
-  if (!isFetchingNextPage) {
+export const HomeListFooter = ({
+  isFetchingNextPage,
+  isPending,
+}: HomeListFooterProps) => {
+  if (isPending) {
+    return (
+      <View className="w-full flex-1 items-center justify-center bg-transparent">
+        <ActivityIndicator
+          size="large"
+          color="white"
+        />
+      </View>
+    );
+  }
+
+  if (isFetchingNextPage) {
     return (
       <View
-        className="bg-[#003366]"
-        // style={{ height: scale(50) }}
-      />
+        className="w-full flex-1 items-center justify-center bg-[#003366]"
+        style={{
+          paddingVertical: scale(50),
+        }}
+      >
+        <ActivityIndicator
+          size="large"
+          color="white"
+        />
+      </View>
     );
   }
 
   return (
     <View
-      className="w-full flex-1 items-center justify-center bg-[#003366]"
-      style={{ paddingVertical: scale(50) }}
-    >
-      <ActivityIndicator
-        size="small"
-        color="white"
-      />
-    </View>
+      className="flex-1 bg-[#003366]"
+      style={{ height: scale(50) }}
+    />
   );
 };

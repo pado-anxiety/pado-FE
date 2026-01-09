@@ -44,7 +44,7 @@ export default function HomeScreen(): React.ReactNode {
     setModalType({ type, date });
   };
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isPending, isFetchingNextPage } =
     useHistoryInfiniteQuery({
       enabled: page === 'HISTORY',
     });
@@ -67,11 +67,13 @@ export default function HomeScreen(): React.ReactNode {
   };
 
   return (
-    <View className="flex-1 bg-page">
+    <View className="flex-1 bg-red-100">
       <FlatList
         data={items}
         contentContainerStyle={{
+          display: 'flex',
           flexGrow: 1,
+          backgroundColor: '#003366',
         }}
         ListHeaderComponent={
           <HomeListHeader
@@ -92,11 +94,17 @@ export default function HomeScreen(): React.ReactNode {
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.2}
         ListFooterComponent={
-          <HomeListFooter isFetchingNextPage={isFetchingNextPage} />
+          <HomeListFooter
+            isFetchingNextPage={isFetchingNextPage}
+            isPending={isPending}
+          />
         }
         ListEmptyComponent={
-          page === 'HISTORY' && !isFetchingNextPage && items.length === 0 ? (
-            <View className="flex-1 items-center justify-center bg-[#003366]">
+          page === 'HISTORY' &&
+          !isFetchingNextPage &&
+          !isPending &&
+          items.length === 0 ? (
+            <View className="flex-1 items-center justify-center bg-transparent">
               <Text className="text-body-medium text-white">
                 기록이 없습니다.
               </Text>
