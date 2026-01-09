@@ -3,33 +3,53 @@ export type ACTType =
   | 'EMOTION_NOTE'
   | 'COGNITIVE_DEFUSION'
   | 'ACCEPTANCE'
-  | 'VALUES'
-  | 'EMOTION_NOTE';
+  | 'VALUES';
 
-export type ContactWithPresent = {
-  type: 'CONTACT_WITH_PRESENT';
-};
+// API response data types
+export type ContactWithPresentData = Record<string, never>;
 
-export type EmotionNote = {
-  type: 'EMOTION_NOTE';
+export type EmotionNoteData = {
   feelings: string;
   thoughts: string;
   situation: string;
 };
 
+export type CognitiveDefusionData = {
+  userTextToken: { text: string; isSelected: boolean }[];
+};
+
+export type AcceptanceData = {
+  breathingTime: number;
+};
+
+export type ValuesData = {
+  value: string;
+};
+
+// API response wrapper types
+export type ContactWithPresent = {
+  type: 'CONTACT_WITH_PRESENT';
+  data: ContactWithPresentData;
+};
+
+export type EmotionNote = {
+  type: 'EMOTION_NOTE';
+  data: EmotionNoteData;
+};
+
 export type CognitiveDefusion = {
   type: 'COGNITIVE_DEFUSION';
-  userTextToken: { text: string; isSelected: boolean }[];
+  data: CognitiveDefusionData;
 };
 
 export type Acceptance = {
   type: 'ACCEPTANCE';
-  breathingTime: number;
+  data: AcceptanceData;
 };
 
 export type Values = {
   type: 'VALUES';
-  value: string;
+  data: ValuesData;
 };
 
 export type ActHistory =

@@ -31,6 +31,7 @@ export default function LoginScreen() {
       return;
     }
     console.log(useAuth.getState().accessToken);
+    console.log(useAuth.getState().refreshToken);
     router.push(ROUTES.HOME);
   };
 

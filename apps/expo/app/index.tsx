@@ -6,6 +6,7 @@ import { ActivityIndicator, Alert, Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { Text, View } from '@src/components/ui';
+import { HistoryModalContent } from '@src/features/History';
 import { ACTType, ActHistory } from '@src/features/History/types';
 import {
   HomeListFooter,
@@ -20,14 +21,18 @@ import {
 import { historyAPI } from '@src/lib/api/history';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
-import { formatToKoreanDate } from '@src/lib/time';
+
+interface ModalType {
+  type: ACTType;
+  date: string;
+}
 
 export default function HomeScreen(): React.ReactNode {
   const { isLoggedIn } = useAuth();
   const { page, setPage } = useHomePageState();
 
-  const [modalType, setModalType] = useState(null);
-  const [detail, setDetail] = useState(null);
+  const [modalType, setModalType] = useState<ModalType | null>(null);
+  const [detail, setDetail] = useState<ActHistory | null>(null);
 
   const detailMutation = useMutation({
     mutationFn: historyAPI.getDetail,
@@ -119,27 +124,25 @@ export default function HomeScreen(): React.ReactNode {
             setModalType(null);
             setDetail(null);
           }}
-          className="absolute inset-0 items-center justify-center bg-black/80 px-8"
+          className="absolute inset-0 items-center justify-center bg-black/80 px-8 py-48"
         >
           {/* 모달 컨테이너: 클릭 시 닫히지 않도록 이벤트 전파 방지 */}
           <Pressable
             onPress={(e) => e.stopPropagation()}
-            className="w-full"
+            className="w-full "
           >
-            <View className="w-full rounded-3xl bg-act-page shadow-2xl">
+            <View className="w-full rounded-3xl border-[3px] border-blue-500 bg-act-page shadow-xl shadow-blue-900/10">
               <View className="p-6">
                 {detail ? (
-                  <>
-                    <ModalContent data={detail} />
-                    <Text className="text-body-medium ">
-                      {formatToKoreanDate(modalType.date)}
-                    </Text>
-                  </>
+                  <HistoryModalContent
+                    data={detail}
+                    date={modalType.date}
+                  />
                 ) : (
                   <View className="py-10">
                     <ActivityIndicator
                       size="small"
-                      color="#003366"
+                      color="#3B5B88"
                     />
                   </View>
                 )}
@@ -150,19 +153,4 @@ export default function HomeScreen(): React.ReactNode {
       )}
     </View>
   );
-}
-
-function ModalContent({ data }: { data: ActHistory }) {
-  if (data.type === 'CONTACT_WITH_PRESENT') {
-    return <Text className="text-body-large font-bold">현재와의 접촉</Text>;
-  } else if (data.type === 'EMOTION_NOTE') {
-    return <Text className="text-body-medium">감정 기록</Text>;
-  } else if (data.type === 'COGNITIVE_DEFUSION') {
-    return <Text className="text-body-medium">인지 분리</Text>;
-  } else if (data.type === 'ACCEPTANCE') {
-    return <Text className="text-body-medium">수용</Text>;
-  } else if (data.type === 'VALUES') {
-    return <Text className="text-body-medium">가치</Text>;
-  }
-  return null;
 }

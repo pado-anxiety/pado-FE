@@ -7,6 +7,7 @@ export { Modal, useModal } from './modal';
 export { Text } from './text';
 export { WebViewErrorView } from './webview-error-view';
 export { WebViewLoadingView } from './webview-loading-view';
+export { Divider } from './divider';
 
 export {
   ActivityIndicator,

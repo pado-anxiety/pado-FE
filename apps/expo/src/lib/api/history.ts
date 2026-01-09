@@ -1,4 +1,4 @@
-import { ACTType } from '@src/features/History/types';
+import { ACTType, ActHistory } from '@src/features/History/types';
 
 import { apiClient } from './client';
 
@@ -20,12 +20,12 @@ export const historyAPI = {
     }
     const response: HistoryAPI = await apiClient.get(url);
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
 
     return response;
   },
-  getDetail: async (id: number) => {
-    const response = await apiClient.get(`/records/${id}`);
+  getDetail: async (id: number): Promise<ActHistory> => {
+    const response: ActHistory = await apiClient.get(`/records/${id}`);
     return response;
   },
 };
