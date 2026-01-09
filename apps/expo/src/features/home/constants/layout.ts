@@ -2,7 +2,7 @@ import { scale } from 'react-native-size-matters';
 
 export const WAVE_LAYOUT = {
   SKY_HEIGHT: scale(300),
-  HORIZON_HEIGHT: scale(350),
+  HORIZON_HEIGHT: scale(250),
 } as const;
 
 export const FOREGROUND = {

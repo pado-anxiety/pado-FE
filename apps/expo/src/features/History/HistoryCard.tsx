@@ -22,7 +22,7 @@ export default function HistoryCard({
   handleModalOpen,
 }: HistoryCardProps) {
   return (
-    <View className="bg-[#003366]">
+    <View className="bg-red-500">
       <View className="px-4 py-4">
         <View className="flex flex-row items-start justify-between gap-2">
           <View className="pt-1">

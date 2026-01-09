@@ -8,6 +8,8 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 
+import { View } from '@src/components/ui';
+
 import {
   BACKGROUND,
   FOREGROUND,
@@ -44,7 +46,7 @@ export function WaveHorizon(): React.ReactNode {
 
     for (let x = 0; x <= width + 10; x += 10) {
       const angle = (x / width) * (Math.PI * frequency) + clockValue;
-      const y = amplitude * Math.sin(angle) + verticalOffset;
+      const y = amplitude * Math.sin(angle) + verticalOffset + 60;
       path.lineTo(x, y);
     }
 
@@ -125,21 +127,27 @@ export function WaveHorizon(): React.ReactNode {
   }, []);
 
   return (
-    <Animated.View layout={LinearTransition.duration(1000)}>
-      <Canvas
-        style={{
-          width: width,
-          height: WAVE_LAYOUT.HORIZON_HEIGHT,
-          // backgroundColor: semanticColors.light['--bg-page'],
-          backgroundColor: 'red',
-        }}
-      >
-        <BackgroundWave path={backgroundWavePath} />
-        <MidgroundBackWave path={midgroundBackWavePath} />
-        <MidgroundWave path={midgroundWavePath} />
-        <ForegroundMidWave path={foregroundMidWavePath} />
-        <ForegroundWave path={foregroundWavePath} />
-      </Canvas>
-    </Animated.View>
+    <View className="relative flex-1 bg-[#003366]">
+      <View
+        className="absolute top-0 w-full bg-page"
+        // TODO: 파도 배경 계산 방법 개선
+        style={{ height: WAVE_LAYOUT.HORIZON_HEIGHT * 0.6 }}
+      />
+      <Animated.View layout={LinearTransition.duration(1000)}>
+        <Canvas
+          style={{
+            width: width,
+            height: WAVE_LAYOUT.HORIZON_HEIGHT,
+            backgroundColor: 'transparent',
+          }}
+        >
+          <BackgroundWave path={backgroundWavePath} />
+          <MidgroundBackWave path={midgroundBackWavePath} />
+          <MidgroundWave path={midgroundWavePath} />
+          <ForegroundMidWave path={foregroundMidWavePath} />
+          <ForegroundWave path={foregroundWavePath} />
+        </Canvas>
+      </Animated.View>
+    </View>
   );
 }
