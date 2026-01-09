@@ -34,6 +34,8 @@ export default function AnchorStepScreen() {
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.ANCHOR.STEP}`,
         }}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
         startInLoadingState={true}
         renderLoading={() => (
           <WebViewLoadingView>

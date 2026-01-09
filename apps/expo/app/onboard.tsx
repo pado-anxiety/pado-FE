@@ -31,6 +31,8 @@ export default function OnboardScreen() {
       source={{
         uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ONBOARD}`,
       }}
+      sharedCookiesEnabled={true}
+      thirdPartyCookiesEnabled={true}
       injectedJavaScriptBeforeContentLoaded={`
         window.insets = ${safeStringify({
           top: insets.top,

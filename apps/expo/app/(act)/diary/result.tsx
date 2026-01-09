@@ -61,6 +61,8 @@ export default function DiaryResultScreen() {
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.DIARY.RESULT}`,
         }}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
         onMessage={handleMessage}
         injectedJavaScriptBeforeContentLoaded={`
             window.diaryResult = ${safeStringify(diaryData)};

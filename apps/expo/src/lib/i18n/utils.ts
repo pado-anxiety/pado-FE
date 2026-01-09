@@ -1,5 +1,7 @@
-import { initI18n } from '@pado/i18n';
 import { getLocales } from 'expo-localization';
+import { useTranslation } from 'react-i18next';
+
+import { initI18n } from '@pado/i18n';
 
 import { storage } from '../store';
 
@@ -23,10 +25,10 @@ const changeLanguage = (language: string) => {
 };
 
 export const useLanguage = () => {
-  const language = getLanguage();
+  const { i18n } = useTranslation();
 
   return {
-    language,
+    language: i18n.language,
     changeLanguage,
   };
 };

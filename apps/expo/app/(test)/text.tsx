@@ -50,7 +50,11 @@ export default function TextPage() {
         className="text-label-small text-body"
       />
       <View className="w-full h-1/2 mt-2">
-        <WebView source={{ uri: url }} />
+        <WebView
+          source={{ uri: url }}
+          sharedCookiesEnabled={true}
+          thirdPartyCookiesEnabled={true}
+        />
       </View>
     </View>
   );

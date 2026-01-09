@@ -21,7 +21,11 @@ export default function ThemePage() {
         fullWidth={false}
       />
       <View className="w-full h-1/2 mt-2">
-        <WebView source={{ uri: url }} />
+        <WebView
+          source={{ uri: url }}
+          sharedCookiesEnabled={true}
+          thirdPartyCookiesEnabled={true}
+        />
       </View>
     </View>
   );

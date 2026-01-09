@@ -39,6 +39,8 @@ export default function AnchorResultScreen() {
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.ANCHOR.RESULT}`,
         }}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
         startInLoadingState={true}
         renderLoading={() => (
           <WebViewLoadingView>

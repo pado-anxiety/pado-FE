@@ -5113,6 +5113,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-cookies/cookies@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "@react-native-cookies/cookies@npm:6.2.1"
+  dependencies:
+    invariant: "npm:^2.2.4"
+  peerDependencies:
+    react-native: ">= 0.60.2"
+  checksum: 10c0/7f3b6dcd966326587196d674491275ae52c574ae46c765981327c541336de58963d33e4fcdc5a55d4041f9b0b520840db4c79d880a43464728a115e2dff39ffa
+  languageName: node
+  linkType: hard
+
 "@react-native-google-signin/google-signin@npm:^16.1.1":
   version: 16.1.1
   resolution: "@react-native-google-signin/google-signin@npm:16.1.1"
@@ -13614,6 +13625,7 @@ __metadata:
     "@pado/tailwind-semantic-tokens": "workspace:*"
     "@pado/ui": "workspace:*"
     "@react-native-community/blur": "npm:^4.4.1"
+    "@react-native-cookies/cookies": "npm:^6.2.1"
     "@react-native-google-signin/google-signin": "npm:^16.1.1"
     "@react-native-seoul/kakao-login": "npm:^5.4.2"
     "@react-navigation/bottom-tabs": "npm:^7.4.0"

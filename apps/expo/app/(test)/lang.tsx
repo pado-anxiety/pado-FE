@@ -28,7 +28,11 @@ export default function LangPage() {
         Native view text: {t('hello')}
       </Text>
       <View className="w-full h-full mt-2">
-        <WebView source={{ uri: url }} />
+        <WebView
+          source={{ uri: url }}
+          sharedCookiesEnabled={true}
+          thirdPartyCookiesEnabled={true}
+        />
       </View>
     </View>
   );

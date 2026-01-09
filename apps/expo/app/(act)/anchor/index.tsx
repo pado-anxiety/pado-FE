@@ -32,6 +32,8 @@ export default function AnchorScreen() {
         style={{ flex: 1 }}
         scrollEnabled={false}
         startInLoadingState={true}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
         renderLoading={() => (
           <WebViewLoadingView>
             <LoadingSpinner />

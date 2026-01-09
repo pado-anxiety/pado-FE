@@ -43,6 +43,8 @@ export default function DiaryStepScreen() {
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.DIARY.STEP}`,
         }}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
         onMessage={handleMessage}
         keyboardDisplayRequiresUserAction={false}
         javaScriptCanOpenWindowsAutomatically={true}

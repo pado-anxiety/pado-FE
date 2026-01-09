@@ -14,7 +14,11 @@ export default function ButtonPage() {
         fullWidth={false}
       />
       <View className="mt-2 h-1/2 w-full">
-        <WebView source={{ uri: 'http://localhost:3000' }} />
+        <WebView
+          source={{ uri: 'http://localhost:3000' }}
+          sharedCookiesEnabled={true}
+          thirdPartyCookiesEnabled={true}
+        />
       </View>
     </View>
   );

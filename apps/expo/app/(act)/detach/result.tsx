@@ -53,6 +53,8 @@ export default function DetachResultScreen() {
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.DETACH.RESULT}`,
         }}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
         onMessage={handleMessage}
         injectedJavaScriptBeforeContentLoaded={`
             window.detachResult = ${safeStringify(parsedData)};

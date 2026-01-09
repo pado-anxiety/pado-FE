@@ -31,6 +31,8 @@ export default function DiaryScreen() {
       <WebView
         style={{ flex: 1 }}
         scrollEnabled={false}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.DIARY.BASE}`,
         }}

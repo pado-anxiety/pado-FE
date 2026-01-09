@@ -43,6 +43,8 @@ export default function DetachStepScreen() {
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.DETACH.STEP}`,
         }}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
         onMessage={handleMessage}
         keyboardDisplayRequiresUserAction={false}
         javaScriptCanOpenWindowsAutomatically={true}

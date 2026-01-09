@@ -51,6 +51,8 @@ export default function EmbraceResultScreen() {
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.EMBRACE.RESULT}`,
         }}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
         startInLoadingState={true}
         renderLoading={() => (
           <WebViewLoadingView>

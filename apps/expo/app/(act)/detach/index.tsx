@@ -31,6 +31,8 @@ export default function DetachScreen() {
       <WebView
         style={{ flex: 1 }}
         scrollEnabled={false}
+        sharedCookiesEnabled={true}
+        thirdPartyCookiesEnabled={true}
         source={{
           uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.DETACH.BASE}`,
         }}

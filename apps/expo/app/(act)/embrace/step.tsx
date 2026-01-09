@@ -43,6 +43,8 @@ export default function EmbraceStepScreen() {
         uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.EMBRACE.STEP}`,
       }}
       startInLoadingState={true}
+      sharedCookiesEnabled={true}
+      thirdPartyCookiesEnabled={true}
       renderLoading={() => (
         <WebViewLoadingView>
           <LoadingSpinner />
