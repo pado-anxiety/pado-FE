@@ -10,6 +10,7 @@ export const initI18n = (curerntLanguage: string | undefined) => {
             },
             lng: curerntLanguage,
             fallbackLng: "en",
+            initImmediate: false,
             interpolation: {
                 escapeValue: false
             },
@@ -17,6 +18,8 @@ export const initI18n = (curerntLanguage: string | undefined) => {
                 useSuspense: false,
             },
         });
+    } else if (curerntLanguage && i18n.language !== curerntLanguage) {
+        i18n.changeLanguage(curerntLanguage);
     }
 
     return i18n;

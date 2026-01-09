@@ -34,13 +34,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
+  console.log(cookieStore);
   const language = cookieStore.get('lang')?.value || 'en';
 
   return (
-    <html
-      lang={language}
-      suppressHydrationWarning
-    >
+    <html suppressHydrationWarning>
       <body className={`${nanumSquareNeo.variable}`}>
         <ThemeProvider
           attribute="class"

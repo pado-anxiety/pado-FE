@@ -25,7 +25,9 @@ export default function AnchorPage() {
   return (
     <ActIntroPage
       title={t('act.anchor.intro.title')}
-      description={t('act.anchor.intro.description', { returnObjects: true }) as string[]}
+      description={
+        t('act.anchor.intro.description', { returnObjects: true }) as string[]
+      }
       contentTitle={t('act.anchor.intro.contentTitle')}
       contentDescription={t('act.anchor.intro.contentDescription')}
       steps={t('act.anchor.intro.steps', { returnObjects: true }) as string[]}

@@ -29,8 +29,6 @@ function NavigationContent() {
           .split(':')[0]
           .split('/')[0];
 
-        console.log(domain);
-        console.log(getWebViewBaseURL());
         await CookieManager.set(getWebViewBaseURL(), {
           name: 'lang',
           value: language,
@@ -41,8 +39,6 @@ function NavigationContent() {
           secure: false,
           httpOnly: false, // 웹 JS(document.cookie)에서도 읽게 하려면 false
         });
-
-        console.log(`쿠키 설정 완료: lang=${language}`);
       } catch (error) {
         console.error('쿠키 설정 실패:', error);
       }
