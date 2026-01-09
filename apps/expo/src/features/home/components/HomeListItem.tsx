@@ -6,15 +6,13 @@ import { DeepSeaSection } from './DeepSeaSection';
 
 interface HomeListItemProps {
   item: HomeListItemType;
-  handleModalOpen: (id: number, type: ACTType) => void;
+  handleModalOpen: (id: number, type: ACTType, date: string) => void;
 }
 
 export const HomeListItem = ({ item, handleModalOpen }: HomeListItemProps) => {
   if (item.type === 'HOME') {
     return <DeepSeaSection key="home-sea" />;
   } else if (item.type === 'HISTORY') {
-    console.log(item);
-
     return (
       <HistoryCard
         item={item}

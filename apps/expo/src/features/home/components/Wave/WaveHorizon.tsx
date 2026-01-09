@@ -8,8 +8,6 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated';
 
-import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
-
 import {
   BACKGROUND,
   FOREGROUND,
@@ -132,7 +130,8 @@ export function WaveHorizon(): React.ReactNode {
         style={{
           width: width,
           height: WAVE_LAYOUT.HORIZON_HEIGHT,
-          backgroundColor: semanticColors.light['--bg-page'],
+          // backgroundColor: semanticColors.light['--bg-page'],
+          backgroundColor: 'red',
         }}
       >
         <BackgroundWave path={backgroundWavePath} />

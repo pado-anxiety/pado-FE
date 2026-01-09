@@ -6,7 +6,7 @@ import { ACTType } from './types';
 
 type HistoryCardProps = {
   item: HistoryItemWithIndex;
-  handleModalOpen: (id: number, type: ACTType) => void;
+  handleModalOpen: (id: number, type: ACTType, date: string) => void;
 };
 
 const WORD = {
@@ -34,7 +34,7 @@ export default function HistoryCard({
             {item.items.map((el) => (
               <Pressable
                 key={`${el.id}-${el.type}`}
-                onPress={() => handleModalOpen(el.id, el.type)}
+                onPress={() => handleModalOpen(el.id, el.type, item.date)}
                 className="rounded-full bg-white/10 px-3 py-1.5 active:bg-white/20"
               >
                 <Text className="text-body-small text-white">

@@ -1,8 +1,9 @@
 import { useRef } from 'react';
 
+import { useRouter } from 'expo-router';
+
 import { Pressable, Text, View } from '@src/components/ui';
 import { getActRoute } from '@src/lib/route/route';
-import { useRouter } from 'expo-router';
 
 import { BubbleSize, Point } from './types';
 
@@ -40,9 +41,9 @@ export function ActStep({
   };
 
   return (
-    <View className="flex-col w-full gap-40">
+    <View className="w-full flex-col gap-40">
       <View
-        className="flex-1 items-center justify-center px-20 gap-2"
+        className="flex-1 items-center justify-center gap-2 px-20"
         style={{
           alignSelf: index % 2 === 0 ? 'flex-start' : 'flex-end',
         }}
@@ -56,13 +57,13 @@ export function ActStep({
         >
           <View
             ref={circleRef}
-            className="bg-white p-4 rounded-full"
+            className="rounded-full bg-white p-4"
             style={{
               width: BubbleSize,
               height: BubbleSize,
             }}
           />
-          <Text className="text-label-medium bg-white p-2 rounded-lg">
+          <Text className="rounded-lg bg-white p-2 text-label-medium">
             {item.label}
           </Text>
         </Pressable>

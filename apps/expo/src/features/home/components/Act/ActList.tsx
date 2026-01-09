@@ -15,7 +15,7 @@ export function ActList(): React.ReactNode {
   return (
     <View
       ref={containerRef}
-      className="flex-1 w-full relative pb-24"
+      className="relative w-full flex-1"
       onLayout={(event) => {
         setHeight(event.nativeEvent.layout.height);
       }}
@@ -24,7 +24,7 @@ export function ActList(): React.ReactNode {
         points={points}
         height={height}
       />
-      <View className="flex-1 flex-col gap-24 items-center w-full">
+      <View className="w-full flex-1 flex-col items-center gap-24">
         {ACT_MENU_LIST.map((item, index) => (
           <ActStep
             key={index}

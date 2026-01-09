@@ -4,10 +4,9 @@ import { useMutation } from '@tanstack/react-query';
 import { router } from 'expo-router';
 import { ActivityIndicator, Alert, Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { scale } from 'react-native-size-matters';
 
 import { Text, View } from '@src/components/ui';
-import { ACTType } from '@src/features/History/types';
+import { ACTType, ActHistory } from '@src/features/History/types';
 import {
   HomeListFooter,
   HomeListHeader,
@@ -21,18 +20,18 @@ import {
 import { historyAPI } from '@src/lib/api/history';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
+import { formatToKoreanDate } from '@src/lib/time';
 
 export default function HomeScreen(): React.ReactNode {
   const { isLoggedIn } = useAuth();
   const { page, setPage } = useHomePageState();
 
-  const [modalType, setModalType] = useState<ACTType | null>(null);
+  const [modalType, setModalType] = useState(null);
   const [detail, setDetail] = useState(null);
 
   const detailMutation = useMutation({
     mutationFn: historyAPI.getDetail,
     onSuccess: (data) => {
-      console.log('data: ', data);
       setDetail(data);
     },
     onError: () => {
@@ -40,9 +39,9 @@ export default function HomeScreen(): React.ReactNode {
     },
   });
 
-  const handleModalOpen = (id: number, type: ACTType) => {
+  const handleModalOpen = (id: number, type: ACTType, date: string) => {
     detailMutation.mutate(id);
-    setModalType(type);
+    setModalType({ type, date });
   };
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
@@ -54,10 +53,6 @@ export default function HomeScreen(): React.ReactNode {
     page,
     historyPages: data?.pages,
   });
-
-  console.log('아이템');
-  console.log(items);
-  console.log('======================');
 
   if (!isLoggedIn) {
     Alert.alert('로그인이 필요합니다.', '로그인 페이지로 이동합니다.', [
@@ -101,10 +96,7 @@ export default function HomeScreen(): React.ReactNode {
         }
         ListEmptyComponent={
           page === 'HISTORY' && !isFetchingNextPage && items.length === 0 ? (
-            <View
-              className="flex-1 items-center justify-center bg-[#003366]"
-              style={{ marginTop: -scale(1) }}
-            >
+            <View className="flex-1 items-center justify-center bg-[#003366]">
               <Text className="text-body-medium text-white">
                 기록이 없습니다.
               </Text>
@@ -121,25 +113,40 @@ export default function HomeScreen(): React.ReactNode {
           }}
           className="absolute inset-0 items-center justify-center bg-black/80 px-8"
         >
-          <View className="w-full rounded-lg bg-white p-4 py-4">
-            {detail ? (
-              <ModalContent data={detail} />
-            ) : (
-              <ActivityIndicator
-                size="small"
-                color="black"
-              />
-            )}
-          </View>
+          {/* 모달 컨테이너: 클릭 시 닫히지 않도록 이벤트 전파 방지 */}
+          <Pressable
+            onPress={(e) => e.stopPropagation()}
+            className="w-full"
+          >
+            <View className="w-full rounded-3xl bg-act-page shadow-2xl">
+              <View className="p-6">
+                {detail ? (
+                  <>
+                    <ModalContent data={detail} />
+                    <Text className="text-body-medium ">
+                      {formatToKoreanDate(modalType.date)}
+                    </Text>
+                  </>
+                ) : (
+                  <View className="py-10">
+                    <ActivityIndicator
+                      size="small"
+                      color="#003366"
+                    />
+                  </View>
+                )}
+              </View>
+            </View>
+          </Pressable>
         </Pressable>
       )}
     </View>
   );
 }
 
-function ModalContent({ data }) {
+function ModalContent({ data }: { data: ActHistory }) {
   if (data.type === 'CONTACT_WITH_PRESENT') {
-    return <Text className="text-body-medium">현재와의 접촉</Text>;
+    return <Text className="text-body-large font-bold">현재와의 접촉</Text>;
   } else if (data.type === 'EMOTION_NOTE') {
     return <Text className="text-body-medium">감정 기록</Text>;
   } else if (data.type === 'COGNITIVE_DEFUSION') {

@@ -12,7 +12,7 @@ export const HomeListFooter = ({ isFetchingNextPage }: HomeListFooterProps) => {
     return (
       <View
         className="bg-[#003366]"
-        style={{ height: scale(50) }}
+        // style={{ height: scale(50) }}
       />
     );
   }

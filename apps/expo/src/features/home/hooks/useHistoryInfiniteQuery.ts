@@ -17,7 +17,7 @@ export const useHistoryInfiniteQuery = ({
         historyAPI.getHistory(pageParam),
       initialPageParam: null,
       getNextPageParam: (lastPage) =>
-        lastPage.hasNext ? lastPage.cursor : undefined,
+        lastPage?.hasNext && lastPage?.cursor ? lastPage.cursor : undefined,
       select: (data) => ({
         pages: data.pages
           .map((page) =>

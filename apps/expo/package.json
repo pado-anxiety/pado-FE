@@ -22,7 +22,7 @@
     "@hookform/resolvers": "^5.2.2",
     "@pado/bridge": "workspace:*",
     "@pado/i18n": "workspace:*",
-    "@react-native-community/slider": "5.0.1",
+    "@react-native-community/blur": "^4.4.1",
     "@react-native-google-signin/google-signin": "^16.1.1",
     "@react-native-seoul/kakao-login": "^5.4.2",
     "@react-navigation/bottom-tabs": "^7.4.0",
