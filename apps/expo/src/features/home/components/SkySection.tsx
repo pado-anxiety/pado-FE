@@ -1,9 +1,10 @@
 import { router } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
-import { AnimatedText, TouchableOpacity, View } from '@src/components/ui';
+import { AnimatedText, Text, TouchableOpacity, View } from '@src/components/ui';
 import { ROUTES } from '@src/lib/route';
 
 export function SkySection({
@@ -11,6 +12,7 @@ export function SkySection({
 }: {
   setPage: (page: 'HOME' | 'HISTORY' | 'CHAT') => void;
 }): React.ReactNode {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
   return (
@@ -25,7 +27,7 @@ export function SkySection({
           delay={1000}
           className="text-2xl font-medium"
         >
-          twheo 님 안녕하세요
+          <Text tx="home.greeting" />
         </AnimatedText>
         <View className="flex w-full flex-col gap-6">
           <TouchableOpacity
@@ -36,7 +38,7 @@ export function SkySection({
               delay={1500}
               className="text-4xl font-medium text-slate-700"
             >
-              ACT 기록 보기
+              {t('home.menu.viewActHistory')}
             </AnimatedText>
             <Animated.View
               className="mt-1 h-[1.5px] w-full bg-slate-300"
@@ -52,7 +54,7 @@ export function SkySection({
               delay={2000}
               className="text-4xl font-medium text-slate-700"
             >
-              바람과 대화하기
+              {t('home.menu.chatWithWind')}
             </AnimatedText>
             <Animated.View
               className="mt-1 h-[1.5px] w-full bg-slate-300"
@@ -68,7 +70,7 @@ export function SkySection({
               delay={2000}
               className="text-4xl font-medium text-slate-700"
             >
-              학습
+              {t('home.menu.learning')}
             </AnimatedText>
             <Animated.View
               className="mt-1 h-[1.5px] w-full bg-slate-300"
@@ -84,7 +86,7 @@ export function SkySection({
               delay={2000}
               className="text-4xl font-medium text-slate-700"
             >
-              온보딩
+              {t('home.menu.onboarding')}
             </AnimatedText>
             <Animated.View
               className="mt-1 h-[1.5px] w-full bg-slate-300"
@@ -99,7 +101,7 @@ export function SkySection({
               delay={2000}
               className="text-4xl font-medium text-slate-700"
             >
-              로그인
+              {t('home.menu.login')}
             </AnimatedText>
             <Animated.View
               className="mt-1 h-[1.5px] w-full bg-slate-300"

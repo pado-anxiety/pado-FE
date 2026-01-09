@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { useRouter } from 'expo-router';
 
 import { Pressable, Text, View } from '@src/components/ui';
@@ -9,7 +11,7 @@ import { BubbleSize, Point } from './types';
 
 type ActButtonProps = {
   item: {
-    label: string;
+    i18nKey: string;
     slug: string;
   };
   index: number;
@@ -23,6 +25,7 @@ export function ActStep({
   containerRef,
   onReportLayout,
 }: ActButtonProps): React.ReactNode {
+  const { t } = useTranslation();
   const circleRef = useRef<View>(null);
   const router = useRouter();
 
@@ -64,7 +67,7 @@ export function ActStep({
             }}
           />
           <Text className="rounded-lg bg-white p-2 text-label-medium">
-            {item.label}
+            {t(item.i18nKey)}
           </Text>
         </Pressable>
       </View>

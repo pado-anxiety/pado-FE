@@ -1,22 +1,22 @@
 export const ACT_MENU_LIST = [
   {
-    label: '현재와의 접촉',
+    i18nKey: 'act.common.title.anchor',
     slug: 'anchor',
   },
   {
-    label: '마음 일기',
+    i18nKey: 'act.common.title.diary',
     slug: 'diary',
   },
   {
-    label: '생각 거리 두기',
+    i18nKey: 'act.common.title.detach',
     slug: 'detach',
   },
   {
-    label: '기꺼이 수용하기',
+    i18nKey: 'act.common.title.embrace',
     slug: 'embrace',
   },
   {
-    label: '가치 & 전념 행동',
+    i18nKey: 'act.common.title.values',
     slug: 'action',
   },
 ];

@@ -4,7 +4,7 @@ import WebView, { WebViewMessageEvent } from 'react-native-webview';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
-import { PageSafeAreaView } from '@src/components/layout/indext';
+import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import {
   LoadingSpinner,
   WebViewErrorView,

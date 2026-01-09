@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import { router } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Alert, Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
@@ -28,6 +29,7 @@ interface ModalType {
 }
 
 export default function HomeScreen(): React.ReactNode {
+  const { t } = useTranslation();
   const { isLoggedIn } = useAuth();
   const { page, setPage } = useHomePageState();
 
@@ -40,7 +42,7 @@ export default function HomeScreen(): React.ReactNode {
       setDetail(data);
     },
     onError: () => {
-      Alert.alert('오류가 발생했습니다.', '나중에 다시 시도해주세요.');
+      Alert.alert(t('common.error.generic'), t('common.error.tryLater'));
     },
   });
 
@@ -60,8 +62,11 @@ export default function HomeScreen(): React.ReactNode {
   });
 
   if (!isLoggedIn) {
-    Alert.alert('로그인이 필요합니다.', '로그인 페이지로 이동합니다.', [
-      { text: '확인', onPress: () => router.replace(ROUTES.LOGIN) },
+    Alert.alert(t('common.error.loginRequired'), t('common.error.goToLogin'), [
+      {
+        text: t('common.button.complete'),
+        onPress: () => router.replace(ROUTES.LOGIN),
+      },
     ]);
   }
 
@@ -111,7 +116,7 @@ export default function HomeScreen(): React.ReactNode {
           items.length === 0 ? (
             <View className="flex-1 items-center justify-center bg-transparent">
               <Text className="text-body-medium text-white">
-                기록이 없습니다.
+                {t('common.empty.noRecords')}
               </Text>
             </View>
           ) : null
@@ -126,7 +131,6 @@ export default function HomeScreen(): React.ReactNode {
           }}
           className="absolute inset-0 items-center justify-center bg-black/80 px-8 py-48"
         >
-          {/* 모달 컨테이너: 클릭 시 닫히지 않도록 이벤트 전파 방지 */}
           <Pressable
             onPress={(e) => e.stopPropagation()}
             className="w-full "

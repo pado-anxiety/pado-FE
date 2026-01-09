@@ -1,4 +1,9 @@
+import { useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import WebView, { WebViewMessageEvent } from 'react-native-webview';
+
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
+
 import {
   LoadingSpinner,
   WebViewErrorView,
@@ -6,9 +11,6 @@ import {
 } from '@src/components/ui';
 import { safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
-import { useRouter } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import WebView, { WebViewMessageEvent } from 'react-native-webview';
 
 export default function EmbraceStepScreen() {
   const router = useRouter();

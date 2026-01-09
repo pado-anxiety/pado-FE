@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Text } from '@src/components/ui';
 import { AcceptanceData } from '@src/features/History/types';
 
@@ -9,15 +11,17 @@ interface AcceptanceContentProps {
 }
 
 export function AcceptanceContent({ date, data }: AcceptanceContentProps) {
+  const { t } = useTranslation();
+
   return (
     <ModalScrollContainer>
       <ModalHeader
-        title="수용"
+        title={t('act.common.historyType.acceptance')}
         date={date}
       />
       <ContentBox>
         <Text className="text-body-small">
-          호흡법을 {data.breathingTime}초 동안 수행했어요
+          {t('act.embrace.history.description', { seconds: data.breathingTime })}
         </Text>
       </ContentBox>
     </ModalScrollContainer>

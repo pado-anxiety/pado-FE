@@ -1,5 +1,6 @@
-import { View } from '@src/components/ui';
 import { Stack } from 'expo-router';
+
+import { View } from '@src/components/ui';
 
 export default function EmbraceLayout() {
   return (

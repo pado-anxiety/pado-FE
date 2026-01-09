@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Text, View } from '@src/components/ui';
 import { CognitiveDefusionData } from '@src/features/History/types';
 
@@ -12,14 +14,16 @@ export function CognitiveDefusionContent({
   date,
   data,
 }: CognitiveDefusionContentProps) {
+  const { t } = useTranslation();
+
   return (
     <ModalScrollContainer>
       <ModalHeader
-        title="생각 거리두기"
+        title={t('act.common.historyType.cognitiveDefusion')}
         date={date}
       />
       <View className="flex w-full flex-col gap-2">
-        <Text className="text-body-small">생각과 사실을 분리해보았어요</Text>
+        <Text className="text-body-small">{t('act.detach.history.description')}</Text>
         <ContentBox>
           <View className="flex-row flex-wrap gap-1">
             {data.userTextToken.map((item, index) => (

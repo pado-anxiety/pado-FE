@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Feather } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
@@ -9,6 +11,7 @@ export default function HistorySkySection({
 }: {
   setPage: (page: 'HOME' | 'HISTORY' | 'CHAT') => void;
 }) {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
   return (
@@ -31,13 +34,13 @@ export default function HistorySkySection({
           delay={1000}
           className="text-4xl font-medium"
         >
-          ACT 기록보기
+          {t('act.common.history.title')}
         </AnimatedText>
         <AnimatedText
           delay={1500}
           className="text-2xl font-medium"
         >
-          지금까지 나의 ACT 기록들을 확인할 수 있어요.
+          {t('act.common.history.subtitle')}
         </AnimatedText>
       </View>
     </View>

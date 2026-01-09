@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { Pressable, Text, View } from '@src/components/ui';
@@ -11,18 +12,20 @@ type HistoryCardProps = {
   handleModalOpen: (id: number, type: ACTType, date: string) => void;
 };
 
-const WORD = {
-  CONTACT_WITH_PRESENT: '현재와의 접촉',
-  EMOTION_NOTE: '감정 기록',
-  COGNITIVE_DEFUSION: '인지 분리',
-  ACCEPTANCE: '수용',
-  VALUES: '가치 및 전념행동',
+const ACT_TYPE_I18N_KEY: Record<ACTType, string> = {
+  CONTACT_WITH_PRESENT: 'act.common.historyType.contactWithPresent',
+  EMOTION_NOTE: 'act.common.historyType.emotionNote',
+  COGNITIVE_DEFUSION: 'act.common.historyType.cognitiveDefusion',
+  ACCEPTANCE: 'act.common.historyType.acceptance',
+  VALUES: 'act.common.historyType.values',
 };
 
 export default function HistoryCard({
   item,
   handleModalOpen,
 }: HistoryCardProps) {
+  const { t } = useTranslation();
+
   return (
     <Animated.View entering={FadeIn.delay(1000)}>
       <View className="px-4 py-4">
@@ -40,7 +43,7 @@ export default function HistoryCard({
                 className="rounded-full bg-white/10 px-3 py-1.5 active:bg-white/20"
               >
                 <Text className="text-body-small text-white">
-                  {WORD[el.type]}
+                  {t(ACT_TYPE_I18N_KEY[el.type])}
                 </Text>
               </Pressable>
             ))}

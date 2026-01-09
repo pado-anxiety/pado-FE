@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Text } from '@src/components/ui';
 import { ValuesData } from '@src/features/History/types';
 
@@ -9,10 +11,12 @@ interface ValuesContentProps {
 }
 
 export function ValuesContent({ date, data }: ValuesContentProps) {
+  const { t } = useTranslation();
+
   return (
     <ModalScrollContainer>
       <ModalHeader
-        title="가치"
+        title={t('act.values.history.title')}
         date={date}
       />
       <ContentBox>

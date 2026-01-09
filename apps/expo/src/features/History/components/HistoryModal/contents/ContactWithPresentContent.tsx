@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Text } from '@src/components/ui';
 
 import { ContentBox, ModalHeader, ModalScrollContainer } from '../layouts';
@@ -9,14 +11,18 @@ interface ContactWithPresentContentProps {
 export function ContactWithPresentContent({
   date,
 }: ContactWithPresentContentProps) {
+  const { t } = useTranslation();
+
   return (
     <ModalScrollContainer>
       <ModalHeader
-        title="현재와의 접촉"
+        title={t('act.common.historyType.contactWithPresent')}
         date={date}
       />
       <ContentBox>
-        <Text className="text-body-small">5-4-3-2-1 을 완료했어요</Text>
+        <Text className="text-body-small">
+          {t('act.anchor.history.completed')}
+        </Text>
       </ContentBox>
     </ModalScrollContainer>
   );

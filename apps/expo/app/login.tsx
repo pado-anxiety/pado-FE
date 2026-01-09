@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
@@ -11,6 +12,7 @@ import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 
 export default function LoginScreen() {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const { login } = useAuth();
   const router = useRouter();
@@ -52,13 +54,15 @@ export default function LoginScreen() {
           className="flex-1 items-center gap-4"
           style={{ marginTop: -scale(50) }}
         >
-          <Text className="text-5xl font-bold text-white">파도</Text>
+          <Text className="text-5xl font-bold text-white">
+            {t('home.app.name')}
+          </Text>
           <View className="flex-col items-center">
             <Text className="text-body-medium text-white">
-              내 안의 파도를 마주하는 시간
+              {t('home.app.tagline')}
             </Text>
             <Text className="text-body-medium text-white">
-              ACT 기반 불안 관리 앱
+              {t('home.app.description')}
             </Text>
           </View>
         </View>
@@ -75,7 +79,9 @@ export default function LoginScreen() {
               source={require('../assets/images/login/google.svg')}
               className="h-6 w-6"
             />
-            <Text className="text-body-medium">구글로 계속하기</Text>
+            <Text className="text-body-medium">
+              {t('auth.login.continueWithGoogle')}
+            </Text>
           </Pressable>
 
           <Pressable
@@ -86,11 +92,12 @@ export default function LoginScreen() {
               source={require('../assets/images/login/kakao.svg')}
               className="h-6 w-6"
             />
-            <Text className="text-body-medium">카카오톡으로 계속하기</Text>
+            <Text className="text-body-medium">
+              {t('auth.login.continueWithKakao')}
+            </Text>
           </Pressable>
           <Text className="text-center text-body-small text-sub">
-            계속 진행하면 파도의 서비스 약관 및 개인 정보 정책에 동의하는 것으로
-            간주됩니다.
+            {t('auth.login.termsAgreement')}
           </Text>
         </View>
       </View>

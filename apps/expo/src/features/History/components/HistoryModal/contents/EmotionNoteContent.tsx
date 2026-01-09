@@ -1,4 +1,5 @@
 import { FontAwesome } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { scale } from 'react-native-size-matters';
 
 import { Text, View } from '@src/components/ui';
@@ -12,15 +13,19 @@ interface EmotionNoteContentProps {
 }
 
 export function EmotionNoteContent({ date, data }: EmotionNoteContentProps) {
+  const { t } = useTranslation();
+
   return (
     <ModalScrollContainer>
       <ModalHeader
-        title="감정 기록"
+        title={t('act.common.historyType.emotionNote')}
         date={date}
       />
       <View className="flex flex-col items-center gap-2">
         <View className="flex w-full flex-col gap-2">
-          <Text className="text-body-small">어떤 상황이 있었나요?</Text>
+          <Text className="text-body-small">
+            {t('act.diary.history.situationQuestion')}
+          </Text>
           <ContentBox>
             <Text className="text-body-small">{data.situation}</Text>
           </ContentBox>
@@ -31,7 +36,9 @@ export function EmotionNoteContent({ date, data }: EmotionNoteContentProps) {
           color="black"
         />
         <View className="flex w-full flex-col gap-2">
-          <Text className="text-body-small">어떤 생각이 스쳤나요?</Text>
+          <Text className="text-body-small">
+            {t('act.diary.history.thoughtQuestion')}
+          </Text>
           <ContentBox>
             <Text className="text-body-small">{data.thoughts}</Text>
           </ContentBox>
@@ -42,7 +49,9 @@ export function EmotionNoteContent({ date, data }: EmotionNoteContentProps) {
           color="black"
         />
         <View className="flex w-full flex-col gap-2">
-          <Text className="text-body-small">어떤 감정을 느꼈나요?</Text>
+          <Text className="text-body-small">
+            {t('act.diary.history.emotionQuestion')}
+          </Text>
           <ContentBox>
             <Text className="text-body-small">{data.feelings}</Text>
           </ContentBox>
