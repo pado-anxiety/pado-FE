@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from 'react-i18next';
+
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Text } from '@pado/ui';
 import { ChevronsDown } from 'lucide-react';
@@ -10,6 +12,7 @@ import { handlePostMessage } from '@/lib';
 import { parseJSON } from '@/lib/json';
 
 export default function DiaryResultView() {
+  const { t } = useTranslation();
   const data = window.diaryResult;
 
   const parsedData = parseJSON(data as unknown as string, () => {
@@ -24,9 +27,9 @@ export default function DiaryResultView() {
 
   return (
     <ActResultPage
-      title={["어떤 바람이 '불안'이라는 파도를 만들었는지 살펴보았어요"]}
-      description="높은 파도는 '생각'이라는 바람이 만든 잠시뿐인 일렁임일 뿐, 바람이 지나가면 파도는 다시 고요해질 거예요."
-      buttonText="완료"
+      title={[t('act.diary.result.title')]}
+      description={t('act.diary.result.description')}
+      buttonText={t('common.button.complete')}
       onButtonClick={handleComplete}
     >
       <div className="flex flex-col gap-2">

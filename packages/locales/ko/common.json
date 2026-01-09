@@ -1,0 +1,23 @@
+{
+  "button": {
+    "start": "시작하기",
+    "next": "다음",
+    "complete": "완료",
+    "back": "뒤로",
+    "close": "닫기",
+    "restart": "다시 시작"
+  },
+  "loading": "로딩중...",
+  "error": {
+    "generic": "오류가 발생했습니다.",
+    "tryLater": "나중에 다시 시도해주세요.",
+    "loginRequired": "로그인이 필요합니다.",
+    "goToLogin": "로그인 페이지로 이동합니다."
+  },
+  "empty": {
+    "noRecords": "기록이 없습니다."
+  },
+  "example": "예시",
+  "or": "또는",
+  "writeYourOwn": "직접 작성해보세요"
+}

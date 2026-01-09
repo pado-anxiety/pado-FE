@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Button, Text } from '@pado/ui';
 
 type StartButtonProps = {
@@ -5,16 +7,18 @@ type StartButtonProps = {
 };
 
 export function StartButton({ onClick }: StartButtonProps) {
+  const { t } = useTranslation();
+
   return (
     <Button
-      text="호흡 시작하기"
+      text={t('act.embrace.step.startButton')}
       size="default"
       fullWidth={false}
       className="bg-btn-act-page px-12 py-5 rounded-2xl shadow-lg"
       onClick={onClick}
     >
       <Text className="text-body-small text-white font-bold">
-        호흡 시작하기
+        {t('act.embrace.step.startButton')}
       </Text>
     </Button>
   );

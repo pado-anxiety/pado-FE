@@ -1,0 +1,15 @@
+{
+  "greeting": "Hello",
+  "menu": {
+    "viewActHistory": "View ACT History",
+    "chatWithWind": "Chat with the Wind",
+    "learning": "Learning",
+    "onboarding": "Onboarding",
+    "login": "Login"
+  },
+  "app": {
+    "name": "Pado",
+    "tagline": "Time to face the waves within",
+    "description": "ACT-based anxiety management app"
+  }
+}

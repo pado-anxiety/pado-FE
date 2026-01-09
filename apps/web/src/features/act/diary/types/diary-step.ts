@@ -1,11 +1,6 @@
 export type DiaryStep = {
   id: number;
-  question: string;
-  description: string;
-  example: {
-    bad: string;
-    good: string;
-  };
+  i18nKey: string;
 };
 
 export type HistoryCard = {

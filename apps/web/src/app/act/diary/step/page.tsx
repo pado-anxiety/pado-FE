@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from 'react-i18next';
+
 import { Button } from '@pado/ui';
 import { ArrowLeft, X } from 'lucide-react';
 
@@ -13,6 +15,7 @@ import {
 } from '@/features/act/diary';
 
 export default function DiaryStepPage() {
+  const { t } = useTranslation();
   const {
     step,
     stepIndex,
@@ -53,7 +56,7 @@ export default function DiaryStepPage() {
     <ActStepPage
       leftButton={leftButton}
       rightButton={rightButton}
-      buttonText="다음"
+      buttonText={t('common.button.next')}
       onButtonClick={handleNext}
     >
       <div className="flex flex-col gap-2 flex-1">

@@ -1,0 +1,23 @@
+{
+  "button": {
+    "start": "Start",
+    "next": "Next",
+    "complete": "Complete",
+    "back": "Back",
+    "close": "Close",
+    "restart": "Restart"
+  },
+  "loading": "Loading...",
+  "error": {
+    "generic": "An error occurred.",
+    "tryLater": "Please try again later.",
+    "loginRequired": "Login is required.",
+    "goToLogin": "Redirecting to login page."
+  },
+  "empty": {
+    "noRecords": "No records found."
+  },
+  "example": "Example",
+  "or": "or",
+  "writeYourOwn": "Write your own"
+}

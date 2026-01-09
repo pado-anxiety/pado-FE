@@ -17,12 +17,13 @@ export const ANIMATION_VALUES = {
   BASE_Y_RATIO: 0.9,
 } as const;
 
-export const BREATH_TEXTS = {
-  INHALE: '숨을 깊게 들이마셔요',
-  HOLD: '숨을 멈춘 채 잠시 기다려요',
-  EXHALE: '천천히 숨을 내쉬어요',
-  COMPLETED: '호흡을 완료했어요',
-  RESTART: '다시 한 번 숨을 가다듬어 볼까요?',
+// i18n keys for breath texts
+export const BREATH_TEXT_KEYS = {
+  INHALE: 'act.embrace.breath.inhale',
+  HOLD: 'act.embrace.breath.hold',
+  EXHALE: 'act.embrace.breath.exhale',
+  COMPLETED: 'act.embrace.breath.completed',
+  RESTART: 'act.embrace.breath.restart',
 } as const;
 
 export const WAVE_MOVEMENT = {

@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from 'react-i18next';
+
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button, Text } from '@pado/ui';
 import { ArrowLeft, X } from 'lucide-react';
@@ -15,6 +17,7 @@ import {
 import { handlePostMessage } from '@/lib';
 
 export default function AnchorStepPage() {
+  const { t } = useTranslation();
   const {
     step,
     stepIndex,
@@ -77,7 +80,7 @@ export default function AnchorStepPage() {
     <ActStepPage
       leftButton={leftButton}
       rightButton={rightButton}
-      buttonText="다음"
+      buttonText={t('common.button.next')}
       onButtonClick={handleNextStep}
       buttonDisabled={isNextDisabled}
     >
@@ -105,7 +108,7 @@ export default function AnchorStepPage() {
             onSelect={handleSelectIndex}
           />
           <Text className="text-label-medium text-sub">
-            * 감각을 찾으면 버튼을 눌러주세요
+            {t('act.anchor.step.hint')}
           </Text>
         </div>
       </div>

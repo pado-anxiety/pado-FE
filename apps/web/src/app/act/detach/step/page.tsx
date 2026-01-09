@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslation } from 'react-i18next';
+
 import { Button } from '@pado/ui';
 import { ArrowLeft, X } from 'lucide-react';
 
@@ -7,6 +9,7 @@ import ActStepPage from '@/components/act/ActStepPage';
 import { StepContent, useDetachStep } from '@/features/act/detach';
 
 export default function DetachStepPage() {
+  const { t } = useTranslation();
   const {
     step,
     stepIndex,
@@ -49,7 +52,7 @@ export default function DetachStepPage() {
     <ActStepPage
       leftButton={leftButton}
       rightButton={rightButton}
-      buttonText="다음"
+      buttonText={t('common.button.next')}
       onButtonClick={handleNext}
     >
       <StepContent

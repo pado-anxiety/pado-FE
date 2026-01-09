@@ -1,0 +1,38 @@
+{
+  "intro": {
+    "title": "Willingly Accept",
+    "description": [
+      "It's okay not to struggle to forcefully suppress the waves of anxiety.",
+      "Waves are just part of the ocean; they cannot harm the ocean itself.",
+      "Now, shall we expand the ocean within you to create a space where anxiety can safely stay?",
+      "Meet the deep and calm self hidden beneath the waves through breathing."
+    ],
+    "contentTitle": "Wave Breathing",
+    "contentDescription": "Practice breathing in rhythm with the waves, expanding the space in your mind to accept anxiety.",
+    "steps": [
+      "1. When the wave rises, take a deep breath and expand your heart's container.",
+      "2. When the wave falls, exhale slowly and let anxiety stay.",
+      "3. Beneath the swaying waves, feel the unwavering deep ocean (yourself)."
+    ],
+    "tip": "Tip: Rather than trying to eliminate anxiety, think of it as making plenty of room for anxiety to enter."
+  },
+  "step": {
+    "startButton": "Start Breathing",
+    "restartButton": "Breathe Again"
+  },
+  "breath": {
+    "inhale": "Take a deep breath in",
+    "hold": "Hold your breath and wait",
+    "exhale": "Slowly exhale",
+    "completed": "Breathing complete",
+    "restart": "Shall we catch our breath once more?"
+  },
+  "result": {
+    "title": "Your inner ocean has expanded",
+    "description": "The waves of anxiety sometimes surge and come to us. We often try to eliminate or reduce those waves, but in fact, we cannot control the size of the waves as we wish. But within us, there is an ocean that can embrace these waves. Instead of forcefully pushing away the waves, you have expanded your ocean where the waves stay through breathing. Even if the size of the waves remains the same, your ocean has now become vast enough to embrace any anxiety.",
+    "breathTime": "You breathed for a total of {{seconds}} seconds."
+  },
+  "history": {
+    "description": "Performed breathing exercise for {{seconds}} seconds"
+  }
+}

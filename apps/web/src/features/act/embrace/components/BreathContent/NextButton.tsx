@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button } from '@pado/ui';
 
@@ -10,6 +12,8 @@ type NextButtonProps = {
 };
 
 export function NextButton({ sessionCount }: NextButtonProps) {
+  const { t } = useTranslation();
+
   const calculateTotalTime = () => {
     const secondsPerSession = TIME_CALCULATION.getSecondsPerSession();
     const totalSeconds = secondsPerSession * sessionCount;
@@ -23,7 +27,7 @@ export function NextButton({ sessionCount }: NextButtonProps) {
 
   return (
     <Button
-      text="다음"
+      text={t('common.button.next')}
       size="default"
       fullWidth={false}
       className="bg-btn-act-page text-xl px-14 py-4 rounded-2xl shadow-lg"

@@ -1,0 +1,21 @@
+{
+  "title": {
+    "anchor": "현재와의 접촉",
+    "diary": "마음 일기",
+    "detach": "생각 거리두기",
+    "embrace": "기꺼이 수용하기",
+    "values": "가치 & 전념행동"
+  },
+  "history": {
+    "title": "ACT 기록 보기",
+    "subtitle": "지금까지 나의 ACT 기록들을 확인할 수 있어요.",
+    "viewHistory": "ACT 기록 보기"
+  },
+  "historyType": {
+    "contactWithPresent": "현재와의 접촉",
+    "emotionNote": "감정 기록",
+    "cognitiveDefusion": "인지 분리",
+    "acceptance": "수용",
+    "values": "가치 및 전념행동"
+  }
+}

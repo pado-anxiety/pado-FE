@@ -1,0 +1,56 @@
+{
+  "intro": {
+    "title": "Focus on the Present",
+    "description": [
+      "When waves of anxiety hit, the first thing to do is to anchor yourself in the \"here and now\".",
+      "Before letting go of anxiety, you need to pause and take a breath.",
+      "Turn off the complex thoughts for a moment and focus only on the sensations your body and surroundings are sending you right now.",
+      "This process becomes the strongest foundation for safely letting anxiety pass."
+    ],
+    "contentTitle": "5-4-3-2-1 Sensory Observation",
+    "contentDescription": "A grounding technique that uses your five senses to anchor your mind.",
+    "steps": [
+      "1. Find 5 things you can see",
+      "2. Feel 4 things you can touch",
+      "3. Focus on 3 sounds you can hear",
+      "4. Find 2 scents you can smell",
+      "5. Notice 1 taste in your mouth"
+    ],
+    "tip": "Tip: Focus slowly on the sensations as they are, without judgment."
+  },
+  "step": {
+    "step1": {
+      "subject": "5 Things You Can See",
+      "description": ["Find 5 objects", "that you can see"],
+      "example": "Shapes, colors of objects, etc."
+    },
+    "step2": {
+      "subject": "4 Things You Can Touch",
+      "description": ["Focus on 4 sensations", "touching your body"],
+      "example": "The firmness of a chair, texture of clothes, etc."
+    },
+    "step3": {
+      "subject": "3 Things You Can Hear",
+      "description": ["Listen to 3 sounds", "around you"],
+      "example": "Distant noise, ticking of a clock, etc."
+    },
+    "step4": {
+      "subject": "2 Things You Can Smell",
+      "description": ["Find 2 scents", "around you"],
+      "example": "Subtle fragrances nearby"
+    },
+    "step5": {
+      "subject": "1 Thing You Can Taste",
+      "description": ["You can also imagine", "a taste you like"],
+      "example": "The sensation in your mouth or aftertaste of water you just drank"
+    },
+    "hint": "* Press the button when you find a sensation"
+  },
+  "result": {
+    "title": "You've safely anchored yourself",
+    "description": "You've awakened your senses one by one and anchored yourself in the present. Now, instead of confusing thoughts, you can fully focus on the peace of this moment. You're ready. Start practicing discovering your true emotions through the next step, the Emotion Diary."
+  },
+  "history": {
+    "completed": "Completed 5-4-3-2-1 exercise"
+  }
+}

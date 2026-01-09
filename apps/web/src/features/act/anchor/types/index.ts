@@ -1,7 +1,5 @@
 export type Step = {
   id: string;
-  subject: string;
-  description: string[];
-  example: string;
+  i18nKey: string;
   count: number;
 };

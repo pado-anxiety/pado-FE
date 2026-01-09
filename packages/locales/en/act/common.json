@@ -1,0 +1,21 @@
+{
+  "title": {
+    "anchor": "Contact with Present",
+    "diary": "Mind Diary",
+    "detach": "Cognitive Defusion",
+    "embrace": "Willingly Accept",
+    "values": "Values & Committed Action"
+  },
+  "history": {
+    "title": "View ACT History",
+    "subtitle": "You can check your ACT history so far.",
+    "viewHistory": "View ACT History"
+  },
+  "historyType": {
+    "contactWithPresent": "Contact with Present",
+    "emotionNote": "Emotion Note",
+    "cognitiveDefusion": "Cognitive Defusion",
+    "acceptance": "Acceptance",
+    "values": "Values & Committed Action"
+  }
+}

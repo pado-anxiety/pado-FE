@@ -1,0 +1,36 @@
+{
+  "intro": {
+    "title": "Cognitive Defusion",
+    "description": [
+      "Your thoughts are not facts. They are just noise created by your mind.",
+      "Shall we take a step back from your thoughts? We'll practice letting them pass by without holding on tight.",
+      "Let's reduce the sound of the false alarm called anxiety and face the real reality."
+    ],
+    "contentTitle": "The Process of Reducing the Power of Thoughts",
+    "contentDescription": "Practice recognizing thoughts as mere 'words' passing by, not mistaking them for reality.",
+    "steps": [
+      "1. Write a sentence: Write down the thoughts that make you anxious in sentences.",
+      "2. Separate thoughts: Drag and select the parts of the sentence that are 'my thoughts', not facts.",
+      "3. Let go: Watch the selected thoughts become transparent and disappear, leaving only objective facts."
+    ],
+    "tip": "Tip: Thoughts are like 'false alarms' sent by the brain. Don't react to the sound, just notice that a sound is heard.",
+    "button": "Start Defusion"
+  },
+  "step": {
+    "step1": {
+      "title": ["What thoughts are", "floating in your mind right now?"],
+      "description": "Write down what you hear in your mind without judgment. It's okay if it's long, and even a trivial sentence is fine."
+    },
+    "step2": {
+      "title": ["Where in this sentence", "are my 'thoughts'?"],
+      "description": "Try dragging only the interpretation or judgment parts."
+    }
+  },
+  "result": {
+    "title": ["The foam of thoughts has cleared,", "only facts remain."],
+    "description": "Like the sentence that became transparent, thoughts are just thoughts. You can now take a breath on the solid ground of facts."
+  },
+  "history": {
+    "description": "Separated thoughts from facts"
+  }
+}

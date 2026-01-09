@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { MotionValue, animate } from 'motion/react';
 
 import {
   BREATH_CYCLE_COUNT,
+  BREATH_TEXT_KEYS,
   BREATH_TIMING,
-  BREATH_TEXTS,
   WAVE_CONFIG,
 } from '../constants';
 
@@ -15,12 +17,13 @@ export function useOnboardBreathing(
   baseYValue: MotionValue<number>,
   gapValue: MotionValue<number>,
 ) {
+  const { t } = useTranslation();
   const [isBreathing, setIsBreathing] = useState(false);
   const [breathText, setBreathText] = useState('');
   const [breathTimer, setBreathTimer] = useState(0);
 
   const runBreathCycle = async () => {
-    setBreathText(BREATH_TEXTS.INHALE);
+    setBreathText(t(BREATH_TEXT_KEYS.INHALE));
     const inhaleTargetY = window.innerHeight * 0.4;
 
     animate(baseYValue, inhaleTargetY, {
@@ -37,13 +40,13 @@ export function useOnboardBreathing(
       await wait(1000);
     }
 
-    setBreathText(BREATH_TEXTS.HOLD);
+    setBreathText(t(BREATH_TEXT_KEYS.HOLD));
     for (let i = BREATH_TIMING.HOLD; i > 0; i--) {
       setBreathTimer(i);
       await wait(1000);
     }
 
-    setBreathText(BREATH_TEXTS.EXHALE);
+    setBreathText(t(BREATH_TEXT_KEYS.EXHALE));
     const exhaleTargetY = window.innerHeight * 0.7;
 
     animate(baseYValue, exhaleTargetY, {
@@ -72,7 +75,7 @@ export function useOnboardBreathing(
       await runBreathCycle();
     }
 
-    setBreathText('호흡을 완료했어요');
+    setBreathText(t('act.embrace.breath.completed'));
     setBreathTimer(0);
 
     const originalY = window.innerHeight * WAVE_CONFIG.BASE_Y_RATIO;

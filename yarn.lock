@@ -5103,10 +5103,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/slider@npm:5.0.1":
-  version: 5.0.1
-  resolution: "@react-native-community/slider@npm:5.0.1"
-  checksum: 10c0/b2e712bf97057704ebbd00506de3b6df69b41da111234dfda94926641dd27fdd2186b31b3ba6d8b63e9804411eba7a70b74e293a4eefd3d433561bc61b5b5c3b
+"@react-native-community/blur@npm:^4.4.1":
+  version: 4.4.1
+  resolution: "@react-native-community/blur@npm:4.4.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/f8f3b2e0dc630d93219c5db822a5d283754beedf31b8e481c17bca6f8b2a29d0e24cad4c5013f692f120a3336490dc5b1b3990a68c714c3308151adf92686ad7
   languageName: node
   linkType: hard
 
@@ -13610,7 +13613,7 @@ __metadata:
     "@pado/tailwind-design-tokens": "workspace:*"
     "@pado/tailwind-semantic-tokens": "workspace:*"
     "@pado/ui": "workspace:*"
-    "@react-native-community/slider": "npm:5.0.1"
+    "@react-native-community/blur": "npm:^4.4.1"
     "@react-native-google-signin/google-signin": "npm:^16.1.1"
     "@react-native-seoul/kakao-login": "npm:^5.4.2"
     "@react-navigation/bottom-tabs": "npm:^7.4.0"

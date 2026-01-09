@@ -1,5 +1,7 @@
 import { RefObject } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { DIARY_STEPS, STEP_COUNT } from '../constants';
 
 type AnswerTextareaProps = {
@@ -8,19 +10,25 @@ type AnswerTextareaProps = {
 };
 
 export function AnswerArea({ textareaRef, stepIndex }: AnswerTextareaProps) {
+  const { t } = useTranslation();
   const step = DIARY_STEPS[stepIndex];
 
-  // TODO: 전체 페이지가 스크롤되는 문제
+  const getPlaceholder = () => {
+    if (stepIndex === STEP_COUNT - 1) {
+      return t('act.diary.step.placeholder');
+    }
+    
+    const exampleBad = t(`${step.i18nKey}.exampleBad`);
+    const exampleGood = t(`${step.i18nKey}.exampleGood`);
+    return `${t('common.example')})\n${exampleBad}\n${exampleGood}`;
+  };
+
   return (
     <div className="flex flex-col gap-4 flex-1">
       <textarea
         className="flex-1 p-4 text-body-small resize-none scrollbar-hide focus:outline-none focus:ring-0 bg-white/60 rounded-2xl border border-white shadow-sm"
         ref={textareaRef}
-        placeholder={
-          stepIndex === STEP_COUNT - 1
-            ? '또는 직접 작성해보세요'
-            : `${'예시)\n' + step.example.bad + '\n' + step.example.good}`
-        }
+        placeholder={getPlaceholder()}
       />
     </div>
   );

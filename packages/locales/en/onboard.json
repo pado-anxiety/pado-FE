@@ -1,0 +1,58 @@
+{
+  "steps": {
+    "step1": {
+      "texts": ["Hello. Welcome to 'Pado', where you face the waves of your heart."],
+      "button": "Nice to meet you!"
+    },
+    "step2": {
+      "texts": ["Are you short of breath or feeling heavy", " because of daily anxiety?"],
+      "button": "Yes"
+    },
+    "step3": {
+      "texts": ["Trapped in anxiety,", " are you missing this present moment?"],
+      "button": "Yes"
+    },
+    "step4": {
+      "texts": [
+        "Acceptance and Commitment Therapy (ACT) says",
+        "anxiety is not something to overcome,",
+        "but something to let flow by."
+      ],
+      "button": "How can I let it flow?"
+    },
+    "step5": {
+      "texts": [
+        "That's why 'Pado' compares the anxiety in our hearts to 'waves' that come and go.",
+        "And just as waves are part of the ocean,",
+        "our hearts are also a deep and vast ocean that embraces those waves."
+      ],
+      "button": "I understand"
+    },
+    "step6": {
+      "texts": ["Now let's expand the ocean of your heart with 'Pado'"],
+      "button": "Sounds good"
+    },
+    "step7": {
+      "texts": [
+        "Let's simply practice the 4-7-8 breathing technique.",
+        "Breathe in deeply for 4 seconds,",
+        "Hold for 7 seconds,",
+        "Exhale slowly for 8 seconds.",
+        "This will help calm your mind before we start."
+      ],
+      "button": "Let's try it!"
+    },
+    "step8": {
+      "texts": [
+        "Well done. Do you feel more at ease?",
+        "Now let's expand the ocean of your heart with 'Pado'"
+      ],
+      "button": "Start"
+    }
+  },
+  "breath": {
+    "inhale": "Take a deep breath in",
+    "hold": "Hold your breath and wait",
+    "exhale": "Slowly exhale"
+  }
+}

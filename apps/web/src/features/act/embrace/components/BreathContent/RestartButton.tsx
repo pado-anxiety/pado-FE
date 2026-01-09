@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Button, Text } from '@pado/ui';
 
 type RestartButtonProps = {
@@ -5,9 +7,11 @@ type RestartButtonProps = {
 };
 
 export function RestartButton({ onClick }: RestartButtonProps) {
+  const { t } = useTranslation();
+
   return (
     <Button
-      text="다시 호흡하기"
+      text={t('act.embrace.step.restartButton')}
       size="default"
       color="primary"
       fullWidth={false}
@@ -15,7 +19,7 @@ export function RestartButton({ onClick }: RestartButtonProps) {
       onClick={onClick}
     >
       <Text className="text-body-small font-bold text-white underline">
-        다시 호흡하기
+        {t('act.embrace.step.restartButton')}
       </Text>
     </Button>
   );

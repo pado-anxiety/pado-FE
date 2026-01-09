@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { AnimatePresence } from 'motion/react';
 import { useMotionValue } from 'motion/react';
@@ -14,13 +16,15 @@ import {
   BREATHING_STEP_INDEX,
   BUTTON_DELAY,
   FADE_OUT_DURATION,
-  steps,
+  STEP_COUNT,
   TEXT_DELAY,
   WAVE_CONFIG,
 } from './constants';
 import { useOnboardBreathing, useOnboardWave } from './hooks';
+import type { Step } from './types';
 
 export default function OnboardView() {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
   const [showButton, setShowButton] = useState(false);
@@ -31,8 +35,17 @@ export default function OnboardView() {
 
   const insets = window.insets;
 
-  const step = steps[currentStep];
-  const isLastStep = currentStep === steps.length - 1;
+  // Get step data from i18n
+  const getStep = (index: number): Step => {
+    const stepKey = `onboard.steps.step${index + 1}`;
+    return {
+      texts: t(`${stepKey}.texts`, { returnObjects: true }) as string[],
+      buttonText: t(`${stepKey}.button`),
+    };
+  };
+
+  const step = getStep(currentStep);
+  const isLastStep = currentStep === STEP_COUNT - 1;
 
   const { baseYValue } = useOnboardWave(canvasRef, false, gapValue);
   const { isBreathing, breathText, breathTimer, startBreathing } =
@@ -89,7 +102,7 @@ export default function OnboardView() {
     setIsExiting(true);
 
     setTimeout(() => {
-      if (currentStep < steps.length - 1) {
+      if (currentStep < STEP_COUNT - 1) {
         setCurrentStep((prev) => prev + 1);
         setIsExiting(false);
       }

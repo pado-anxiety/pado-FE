@@ -1,0 +1,15 @@
+{
+  "greeting": "안녕하세요",
+  "menu": {
+    "viewActHistory": "ACT 기록 보기",
+    "chatWithWind": "바람과 대화하기",
+    "learning": "학습",
+    "onboarding": "온보딩",
+    "login": "로그인"
+  },
+  "app": {
+    "name": "파도",
+    "tagline": "내 안의 파도를 마주하는 시간",
+    "description": "ACT 기반 불안 관리 앱"
+  }
+}

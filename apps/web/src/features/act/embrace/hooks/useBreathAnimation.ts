@@ -6,10 +6,11 @@ import {
   useMotionValue,
   useTransform,
 } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 
 import {
   ANIMATION_VALUES,
-  BREATH_TEXTS,
+  BREATH_TEXT_KEYS,
   BREATH_TIMING,
   WAVE_MOVEMENT,
 } from '../constants';
@@ -17,6 +18,7 @@ import {
 const BaseYValue = window.innerHeight * ANIMATION_VALUES.BASE_Y_RATIO;
 
 export function useBreathAnimation() {
+  const { t } = useTranslation();
   const [isStarted, setIsStarted] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
   const [breathText, setBreathText] = useState('');
@@ -37,8 +39,8 @@ export function useBreathAnimation() {
     [ANIMATION_VALUES.GAP_MIN, ANIMATION_VALUES.GAP_MAX],
   ) as MotionValue<number>;
 
-  const runTimer = async (seconds: number, text: string) => {
-    setBreathText(text);
+  const runTimer = async (seconds: number, textKey: string) => {
+    setBreathText(t(textKey));
     setTimer(seconds);
     for (let i = seconds; i > 0; i--) {
       setTimer(i);
@@ -68,11 +70,11 @@ export function useBreathAnimation() {
           duration: BREATH_TIMING.INHALE_DURATION,
           ease: 'easeInOut',
         }),
-        runTimer(BREATH_TIMING.INHALE_DURATION, BREATH_TEXTS.INHALE),
+        runTimer(BREATH_TIMING.INHALE_DURATION, BREATH_TEXT_KEYS.INHALE),
       ]);
       await inhaleAnim;
 
-      await runTimer(BREATH_TIMING.HOLD_DURATION, BREATH_TEXTS.HOLD);
+      await runTimer(BREATH_TIMING.HOLD_DURATION, BREATH_TEXT_KEYS.HOLD);
 
       const exhaleAnim = Promise.all([
         animate(baseYValue, currentY - inhaleRise + exhaleDrop, {
@@ -83,7 +85,7 @@ export function useBreathAnimation() {
           duration: BREATH_TIMING.EXHALE_DURATION,
           ease: 'easeInOut',
         }),
-        runTimer(BREATH_TIMING.EXHALE_DURATION, BREATH_TEXTS.EXHALE),
+        runTimer(BREATH_TIMING.EXHALE_DURATION, BREATH_TEXT_KEYS.EXHALE),
       ]);
       await exhaleAnim;
     }
@@ -93,14 +95,14 @@ export function useBreathAnimation() {
       duration: BREATH_TIMING.FINAL_ANIMATION_DURATION,
       ease: 'easeInOut',
     });
-    setBreathText(BREATH_TEXTS.COMPLETED);
+    setBreathText(t(BREATH_TEXT_KEYS.COMPLETED));
     setSessionCount((prev) => prev + 1);
     setIsCompleted(true);
   };
 
   const handleRestart = async () => {
     setIsCompleted(false);
-    setBreathText(BREATH_TEXTS.RESTART);
+    setBreathText(t(BREATH_TEXT_KEYS.RESTART));
     setTimer(0);
     breathProgress.set(0);
     await animate(baseYValue, BaseYValue, {

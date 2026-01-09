@@ -1,0 +1,46 @@
+{
+  "intro": {
+    "title": "Mind Diary",
+    "description": [
+      "Anxiety doesn't start from the event itself, but from my \"interpretation\" of the event.",
+      "Therefore, we need to find the \"automatic thoughts\" hidden between the situation and emotions that make us anxious.",
+      "Shall we go discover the thoughts that caused your anxiety?"
+    ],
+    "contentTitle": "3 Steps to Read Your Mind's Flow",
+    "contentDescription": "A 'thought separation' technique that organizes tangled feelings into situation, thought, and emotion.",
+    "steps": [
+      "1. Situation (Fact): When, where, and what happened?",
+      "2. Thought: What thoughts crossed your mind at that moment?",
+      "3. Emotion: What emotions did you feel because of those thoughts?"
+    ],
+    "tip": "Tip: 'Thoughts' are not facts. The key is to discover how I interpreted the situation."
+  },
+  "step": {
+    "step1": {
+      "question": "What situation occurred?",
+      "description": "Write down the facts of the moment when your emotions were shaken, objectively like a CCTV recording.",
+      "exampleBad": "X: My friend ignored me and didn't contact me.",
+      "exampleGood": "O: I didn't receive a reply for 3 hours after sending a message to my friend."
+    },
+    "step2": {
+      "question": "What thoughts crossed your mind?",
+      "description": "Write down your interpretations or passing thoughts added to the facts.",
+      "exampleBad": "X: I was annoyed and angry. (This is an emotion)",
+      "exampleGood": "O: I thought \"Do they hate me?\" or \"Did I make a mistake?\""
+    },
+    "step3": {
+      "question": "What emotions did you feel?",
+      "description": "Select or write down the emotions or physical sensations that came because of those thoughts."
+    },
+    "placeholder": "Or write your own"
+  },
+  "result": {
+    "title": "We've examined what wind created the wave called 'anxiety'",
+    "description": "The high waves are just momentary ripples created by the wind called 'thoughts'. When the wind passes, the waves will become calm again."
+  },
+  "history": {
+    "situationQuestion": "What situation occurred?",
+    "thoughtQuestion": "What thoughts crossed your mind?",
+    "emotionQuestion": "What emotions did you feel?"
+  }
+}
