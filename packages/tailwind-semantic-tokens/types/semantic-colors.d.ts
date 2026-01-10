@@ -6,6 +6,10 @@ export let light: {
     '--bg-destructive': string;
     '--bg-success': string;
     '--bg-warning': string;
+    '--bg-act-page': string;
+    '--btn-act-page': string;
+    '--btn-act-page-selected': string;
+    '--btn-act-page-unselected': string;
     '--bg-chat-overlay': string;
     '--bg-chat-assistant': string;
     '--bg-chat-user': string;

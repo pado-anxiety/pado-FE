@@ -2,6 +2,8 @@ import { useRef } from 'react';
 
 import { Text } from '@pado/ui';
 
+import { triggerHaptic } from '@/lib';
+
 import { UserTextToken } from '../types';
 
 type TokenSelectorProps = {
@@ -32,6 +34,7 @@ export function TokenSelector({
         return prev;
       }
 
+      triggerHaptic('SELECT');
       const next = [...prev];
       next[index] = { ...t, isSelected: !!m };
       return next;

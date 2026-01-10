@@ -4,6 +4,7 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 import { Pressable, Text, View } from '@src/components/ui';
 import HistoryCard from '@src/features/History/HistoryCard';
 import { ACTType } from '@src/features/History/types';
+import { triggerHaptic } from '@src/lib/haptics';
 import { ROUTES } from '@src/lib/route';
 
 import { HomeListItem as HomeListItemType } from '../types';
@@ -33,7 +34,8 @@ export const HomeListItem = ({ item, handleModalOpen }: HomeListItemProps) => {
         className="mx-4 my-4 flex flex-col rounded-2xl bg-act-page"
       >
         <Pressable
-          onPress={() =>
+          onPress={() => {
+            triggerHaptic('NAVIGATE');
             router.push({
               pathname: ROUTES.LEARNING,
               params: {
@@ -41,8 +43,8 @@ export const HomeListItem = ({ item, handleModalOpen }: HomeListItemProps) => {
                 title: item.title,
                 description: item.description,
               },
-            })
-          }
+            });
+          }}
         >
           <View className="aspect-[3/2] w-full rounded-t-2xl bg-blue-400" />
           <View className="p-4">

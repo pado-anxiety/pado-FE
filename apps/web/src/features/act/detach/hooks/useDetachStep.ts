@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 
 import { DETACH_STEPS, STEP_COUNT } from '../constants';
 import { DetachStep, UserTextToken } from '../types';
@@ -27,6 +27,7 @@ export function useDetachStep() {
       if (!textareaRef.current?.value) {
         return;
       }
+      triggerHaptic('NAVIGATE');
       setUserTextTokens(
         textareaRef.current?.value?.split(' ').map((token) => ({
           text: token,
@@ -35,6 +36,7 @@ export function useDetachStep() {
       );
       setStepIndex(stepIndex + 1);
     } else {
+      triggerHaptic('NAVIGATE');
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
         data: userTextTokens,
       });

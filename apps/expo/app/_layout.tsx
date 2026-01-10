@@ -10,6 +10,7 @@ import { KeyboardProvider } from 'react-native-keyboard-controller';
 import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { getHapticState, setHapticState } from '@src/lib/haptics';
 import { I18nProvider, useLanguage } from '@src/lib/i18n';
 import { getWebViewBaseURL } from '@src/lib/route';
 import { useTheme } from '@src/lib/theme';
@@ -46,6 +47,11 @@ function NavigationContent() {
 
     setLangCookie();
   }, [language]);
+
+  useEffect(() => {
+    const hapticState = getHapticState();
+    setHapticState(hapticState);
+  }, []);
 
   return (
     <View style={[{ flex: 1 }, themeStyle]}>

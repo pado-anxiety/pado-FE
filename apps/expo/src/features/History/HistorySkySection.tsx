@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
 import { AnimatedText, Pressable, View } from '@src/components/ui';
+import { triggerHaptic } from '@src/lib/haptics';
 
 export default function HistorySkySection({
   setPage,
@@ -18,7 +19,12 @@ export default function HistorySkySection({
       className="flex flex-col items-start justify-center gap-4 bg-page px-8 pt-12"
       style={{ paddingTop: insets.top }}
     >
-      <Pressable onPress={() => setPage('HOME')}>
+      <Pressable
+        onPress={() => {
+          triggerHaptic('NAVIGATE');
+          setPage('HOME');
+        }}
+      >
         <Feather
           name="arrow-left"
           size={30}

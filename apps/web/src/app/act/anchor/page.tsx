@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import ActIntroPage from '@/components/act/ActIntroPage/ActIntroPage';
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 
 export default function AnchorPage() {
   const { t } = useTranslation();
@@ -14,6 +14,7 @@ export default function AnchorPage() {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'NEXT',
     });
+    triggerHaptic('NAVIGATE');
   };
 
   const handleClose = () => {

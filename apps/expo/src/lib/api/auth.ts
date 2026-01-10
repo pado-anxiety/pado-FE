@@ -12,7 +12,7 @@ export const authAPI = {
     refreshToken: string;
   }> => {
     const response: { accessToken: string; refreshToken: string } =
-      await axios.post(`https://pado-anxiety.site/tokens/reissue`, {
+      await axios.post(`https://nyangtodac-dev.site/tokens/reissue`, {
         refreshToken: authStorage.getRefreshToken(),
       });
 

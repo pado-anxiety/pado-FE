@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 
 import { ANCHOR_STEPS } from '../constants';
 import { Step } from '../types';
@@ -18,6 +18,7 @@ export function useAnchorStep() {
     if (selectedIndex !== step.count) {
       return;
     }
+    triggerHaptic('NAVIGATE');
     if (stepIndex < ANCHOR_STEPS.length - 1) {
       setStepIndex(stepIndex + 1);
       setSelectedIndex(0);

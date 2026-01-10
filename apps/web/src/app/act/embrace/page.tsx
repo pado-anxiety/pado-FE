@@ -5,12 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import ActIntroPage from '@/components/act/ActIntroPage/ActIntroPage';
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 
 export default function EmbracePage() {
   const { t } = useTranslation();
 
   const handleStart = () => {
+    triggerHaptic('NAVIGATE');
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'NEXT',
     });

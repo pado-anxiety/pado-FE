@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from '@src/components/ui';
+import { triggerHaptic } from '@src/lib/haptics';
 import { ROUTES } from '@src/lib/route';
 import { ICONS_SIZE } from '@src/lib/styles';
 
@@ -49,7 +50,10 @@ export function SkySection({
         <View className="flex w-full flex-col gap-4">
           <TouchableOpacity
             className="flex flex-col"
-            onPress={() => setPage('HISTORY')}
+            onPress={() => {
+              triggerHaptic('NAVIGATE');
+              setPage('HISTORY');
+            }}
           >
             <AnimatedText
               delay={1500}
@@ -65,7 +69,10 @@ export function SkySection({
 
           <TouchableOpacity
             className="flex flex-col"
-            onPress={() => setPage('LEARNING')}
+            onPress={() => {
+              triggerHaptic('NAVIGATE');
+              setPage('LEARNING');
+            }}
           >
             <AnimatedText
               delay={2000}
@@ -78,8 +85,8 @@ export function SkySection({
               entering={FadeIn.duration(2000)}
             />
           </TouchableOpacity>
-          {/* 
-          <TouchableOpacity
+
+          {/* <TouchableOpacity
             className="flex flex-col"
             onPress={() => router.push(ROUTES.ONBOARD)}
           >
@@ -108,11 +115,7 @@ export function SkySection({
               className="mt-1 h-[1.5px] w-full bg-slate-300"
               entering={FadeIn.duration(2000)}
             />
-          </TouchableOpacity>
-          <Button
-            text={'언어 변경'}
-            onPress={() => changeLanguage(language === 'en' ? 'ko' : 'en')}
-          /> */}
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>

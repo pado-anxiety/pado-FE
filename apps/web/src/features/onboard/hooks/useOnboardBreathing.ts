@@ -1,8 +1,9 @@
-import { useState } from 'react';
-
-import { useTranslation } from 'react-i18next';
+import { useRef, useState } from 'react';
 
 import { MotionValue, animate } from 'motion/react';
+import { useTranslation } from 'react-i18next';
+
+import { triggerHaptic } from '@/lib';
 
 import {
   BREATH_CYCLE_COUNT,
@@ -12,6 +13,7 @@ import {
 } from '../constants';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const HAPTIC_INTERVAL = 500; // 0.5초마다 진동
 
 export function useOnboardBreathing(
   baseYValue: MotionValue<number>,
@@ -21,6 +23,21 @@ export function useOnboardBreathing(
   const [isBreathing, setIsBreathing] = useState(false);
   const [breathText, setBreathText] = useState('');
   const [breathTimer, setBreathTimer] = useState(0);
+  const hapticIntervalRef = useRef<number | null>(null);
+
+  const startHapticLoop = () => {
+    triggerHaptic('EFFECT');
+    hapticIntervalRef.current = window.setInterval(() => {
+      triggerHaptic('EFFECT');
+    }, HAPTIC_INTERVAL);
+  };
+
+  const stopHapticLoop = () => {
+    if (hapticIntervalRef.current) {
+      clearInterval(hapticIntervalRef.current);
+      hapticIntervalRef.current = null;
+    }
+  };
 
   const runBreathCycle = async () => {
     setBreathText(t(BREATH_TEXT_KEYS.INHALE));
@@ -71,9 +88,13 @@ export function useOnboardBreathing(
     animate(baseYValue, readyY, { duration: 1.5, ease: 'easeInOut' });
     await wait(1500);
 
+    startHapticLoop();
+
     for (let i = 0; i < BREATH_CYCLE_COUNT; i++) {
       await runBreathCycle();
     }
+
+    stopHapticLoop();
 
     setBreathText(t('act.embrace.breath.completed'));
     setBreathTimer(0);

@@ -1,10 +1,10 @@
 'use client';
 
+import { ArrowLeft, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button, Text } from '@pado/ui';
-import { ArrowLeft, X } from 'lucide-react';
 
 import ActStepPage from '@/components/act/ActStepPage';
 import {

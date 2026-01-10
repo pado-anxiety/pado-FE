@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import {
   MotionValue,
@@ -8,6 +8,8 @@ import {
 } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 
+import { triggerHaptic } from '@/lib';
+
 import {
   ANIMATION_VALUES,
   BREATH_TEXT_KEYS,
@@ -16,6 +18,7 @@ import {
 } from '../constants';
 
 const BaseYValue = window.innerHeight * ANIMATION_VALUES.BASE_Y_RATIO;
+const HAPTIC_INTERVAL = 500; // 0.5초마다 진동
 
 export function useBreathAnimation() {
   const { t } = useTranslation();
@@ -39,6 +42,22 @@ export function useBreathAnimation() {
     [ANIMATION_VALUES.GAP_MIN, ANIMATION_VALUES.GAP_MAX],
   ) as MotionValue<number>;
 
+  const hapticIntervalRef = useRef<number | null>(null);
+
+  const startHapticLoop = () => {
+    triggerHaptic('EFFECT');
+    hapticIntervalRef.current = window.setInterval(() => {
+      triggerHaptic('EFFECT');
+    }, HAPTIC_INTERVAL);
+  };
+
+  const stopHapticLoop = () => {
+    if (hapticIntervalRef.current) {
+      clearInterval(hapticIntervalRef.current);
+      hapticIntervalRef.current = null;
+    }
+  };
+
   const runTimer = async (seconds: number, textKey: string) => {
     setBreathText(t(textKey));
     setTimer(seconds);
@@ -50,6 +69,7 @@ export function useBreathAnimation() {
 
   const handleStartClick = async () => {
     setIsStarted(true);
+    startHapticLoop();
 
     const startY = BaseYValue;
     baseYValue.set(startY);
@@ -90,6 +110,7 @@ export function useBreathAnimation() {
       await exhaleAnim;
     }
 
+    stopHapticLoop();
     setTimer(0);
     await animate(baseYValue, ANIMATION_VALUES.FINAL_Y_VALUE, {
       duration: BREATH_TIMING.FINAL_ANIMATION_DURATION,
@@ -101,6 +122,7 @@ export function useBreathAnimation() {
   };
 
   const handleRestart = async () => {
+    stopHapticLoop();
     setIsCompleted(false);
     setBreathText(t(BREATH_TEXT_KEYS.RESTART));
     setTimer(0);

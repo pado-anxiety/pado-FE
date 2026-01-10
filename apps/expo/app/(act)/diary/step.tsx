@@ -1,7 +1,5 @@
 import { useRouter } from 'expo-router';
-import WebView, { WebViewMessageEvent } from 'react-native-webview';
-
-import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
+import WebView from 'react-native-webview';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import {
@@ -12,30 +10,29 @@ import {
 import { safeStringify } from '@src/lib/json';
 import { WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { ROUTES } from '@src/lib/route/route';
+import { createWebViewMessageHandler } from '@src/lib/webview';
 
 export default function DiaryStepScreen() {
   const router = useRouter();
 
-  const handleMessage = (event: WebViewMessageEvent) => {
-    const parsedData = JSON.parse(event.nativeEvent.data);
-
-    if (parsedData.type === WEBVIEW_MESSAGE_TYPE.DATA) {
-      const { data } = parsedData.data;
+  const handleMessage = createWebViewMessageHandler({
+    onNavigate: (action) => {
+      if (action === 'BACK') {
+        router.back();
+      } else if (action === 'HOME') {
+        router.replace(ROUTES.HOME);
+      }
+    },
+    onData: (payload) => {
+      const { data } = payload as { data: unknown };
       router.push({
         pathname: ROUTES.ACT.DIARY.RESULT,
         params: {
           data: safeStringify(data),
         },
       });
-    } else if (parsedData.type === WEBVIEW_MESSAGE_TYPE.NAVIGATE) {
-      const { action } = parsedData.data;
-      if (action === 'BACK') {
-        router.back();
-      } else if (action === 'HOME') {
-        router.replace(ROUTES.HOME);
-      }
-    }
-  };
+    },
+  });
 
   return (
     <PageSafeAreaView className="flex flex-1 bg-act-page">

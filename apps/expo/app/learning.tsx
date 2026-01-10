@@ -1,8 +1,6 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import WebView, { WebViewMessageEvent } from 'react-native-webview';
-
-import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
+import WebView from 'react-native-webview';
 
 import {
   LoadingSpinner,
@@ -12,23 +10,22 @@ import {
 } from '@src/components/ui';
 import { safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
+import { createWebViewMessageHandler } from '@src/lib/webview';
 
 export default function LearningScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { subject, title, description } = useLocalSearchParams();
 
-  const handleMessage = (event: WebViewMessageEvent) => {
-    const parsedData = JSON.parse(event.nativeEvent.data);
-    if (parsedData.type === WEBVIEW_MESSAGE_TYPE.NAVIGATE) {
-      const { action } = parsedData.data;
+  const handleMessage = createWebViewMessageHandler({
+    onNavigate: (action) => {
       if (action === 'NEXT') {
         router.push(ROUTES.ACT.EMBRACE.STEP);
       } else if (action === 'HOME') {
         router.back();
       }
-    }
-  };
+    },
+  });
 
   return (
     <View className="flex-1 bg-act-page">

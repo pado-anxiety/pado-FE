@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import PageLayout from '@/components/ui/layout';
-import { handlePostMessage } from '@/lib/webview';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 
 import { BreathContent, StepContent, WaveCanvas } from './components';
 import {
@@ -85,6 +85,7 @@ export default function OnboardView() {
   }, [currentStep, isExiting, isBreathing, step]);
 
   const handleNext = async () => {
+    triggerHaptic('NAVIGATE');
     setShowButton(false);
 
     if (currentStep === BREATHING_STEP_INDEX) {

@@ -4,6 +4,7 @@ import { scale } from 'react-native-size-matters';
 
 import { AnimatedText, Pressable, View } from '@src/components/ui';
 import HistorySkySection from '@src/features/History/HistorySkySection';
+import { triggerHaptic } from '@src/lib/haptics';
 
 import { PageType } from '../types';
 import { SkySection } from './SkySection';
@@ -39,7 +40,12 @@ export const HomeListHeader = ({ page, setPage }: HomeListHeaderProps) => {
         className="flex flex-col items-start justify-center gap-4 bg-page px-8 pt-12"
         style={{ paddingTop: insets.top }}
       >
-        <Pressable onPress={() => setPage('HOME')}>
+        <Pressable
+          onPress={() => {
+            triggerHaptic('NAVIGATE');
+            setPage('HOME');
+          }}
+        >
           <Feather
             name="arrow-left"
             size={scale(30)}

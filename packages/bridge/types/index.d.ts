@@ -1,11 +1,21 @@
 export declare const WEBVIEW_MESSAGE_TYPE: {
     readonly NAVIGATE: "NAVIGATE";
     readonly DATA: "DATA";
+    readonly ERROR: "ERROR";
+    readonly HAPTIC: "HAPTIC";
 };
 export interface WebViewMessagePayload {
-    [WEBVIEW_MESSAGE_TYPE.NAVIGATE]: {};
+    [WEBVIEW_MESSAGE_TYPE.NAVIGATE]: {
+        action: string;
+    };
     [WEBVIEW_MESSAGE_TYPE.DATA]: {
         data: any;
+    };
+    [WEBVIEW_MESSAGE_TYPE.ERROR]: {
+        error: string;
+    };
+    [WEBVIEW_MESSAGE_TYPE.HAPTIC]: {
+        type: string;
     };
 }
 export type WebViewMessageType = keyof WebViewMessagePayload;

@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 
 import { LEARNING_DATA } from '../constants';
 import { LearningData, LearningStep } from '../types';
@@ -18,6 +18,7 @@ export function useLearningStep(subject: string) {
   const isLastStep = stepIndex === totalSteps - 1;
 
   const handleNext = useCallback(() => {
+    triggerHaptic('NAVIGATE');
     if (stepIndex < totalSteps - 1) {
       setStepIndex(stepIndex + 1);
     } else {
@@ -29,6 +30,7 @@ export function useLearningStep(subject: string) {
 
   const handlePrev = useCallback(() => {
     if (stepIndex > 0) {
+      triggerHaptic('NAVIGATE');
       setStepIndex(stepIndex - 1);
     }
   }, [stepIndex]);

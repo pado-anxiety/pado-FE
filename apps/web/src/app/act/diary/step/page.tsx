@@ -1,9 +1,9 @@
 'use client';
 
+import { ArrowLeft, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@pado/ui';
-import { ArrowLeft, X } from 'lucide-react';
 
 import ActStepPage from '@/components/act/ActStepPage';
 import { Divide } from '@/components/ui';

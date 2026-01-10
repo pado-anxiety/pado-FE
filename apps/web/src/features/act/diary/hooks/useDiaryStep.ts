@@ -1,14 +1,17 @@
 import { useCallback, useRef, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 import { safeStringify } from '@/lib/json';
 
 import { DIARY_STEPS, STEP_COUNT } from '../constants';
 import { DiaryStep, HistoryCard } from '../types';
 
 export function useDiaryStep() {
+  const { t } = useTranslation();
   const [stepIndex, setStepIndex] = useState<number>(0);
   const [historyCards, setHistoryCards] = useState<HistoryCard[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -20,8 +23,9 @@ export function useDiaryStep() {
       textareaRef.current?.value ||
       (stepIndex === STEP_COUNT - 1 && textareaRef.current?.value !== '')
     ) {
+      triggerHaptic('NAVIGATE');
       const newHistoryCard: HistoryCard = {
-        question: step.question,
+        question: t(step.i18nKey),
         answer: textareaRef.current?.value || '',
       };
 
@@ -41,7 +45,7 @@ export function useDiaryStep() {
         textareaRef.current.value = '';
       }
     }
-  }, [step, stepIndex, historyCards]);
+  }, [stepIndex, historyCards, t, step]);
 
   const handleExit = useCallback(() => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
@@ -64,7 +68,7 @@ export function useDiaryStep() {
       setHistoryCards(historyCards.slice(0, -1));
       setStepIndex(stepIndex - 1);
     },
-    [handlePostMessage, historyCards, setHistoryCards, setStepIndex],
+    [historyCards, setHistoryCards, setStepIndex],
   );
 
   return {

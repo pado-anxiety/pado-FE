@@ -1,9 +1,9 @@
+import { useRef } from 'react';
+
 import { useMutation } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Alert } from 'react-native';
-import WebView, { WebViewMessageEvent } from 'react-native-webview';
-
-import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
+import WebView from 'react-native-webview';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import {
@@ -14,10 +14,12 @@ import {
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
+import { createWebViewMessageHandler } from '@src/lib/webview';
 
 export default function DiaryResultScreen() {
   const { data } = useLocalSearchParams();
   const router = useRouter();
+  const hasMutated = useRef(false);
 
   const diaryData = parseJSON(data as string, () => {
     Alert.alert('오류가 발생했습니다');
@@ -40,20 +42,21 @@ export default function DiaryResultScreen() {
     },
   });
 
-  const handleMessage = (event: WebViewMessageEvent) => {
-    diaryMutation.mutate({
-      situation: diaryData.situation,
-      thoughts: diaryData.thoughts,
-      feelings: diaryData.feelings,
-    });
-    const parsedData = JSON.parse(event.nativeEvent.data);
-    if (parsedData.type === WEBVIEW_MESSAGE_TYPE.NAVIGATE) {
-      const { action } = parsedData.data;
+  const handleMessage = createWebViewMessageHandler({
+    onNavigate: (action) => {
       if (action === 'HOME') {
+        if (!hasMutated.current) {
+          hasMutated.current = true;
+          diaryMutation.mutate({
+            situation: diaryData.situation,
+            thoughts: diaryData.thoughts,
+            feelings: diaryData.feelings,
+          });
+        }
         router.replace(ROUTES.HOME);
       }
-    }
-  };
+    },
+  });
 
   return (
     <PageSafeAreaView className="flex flex-1 bg-act-page">

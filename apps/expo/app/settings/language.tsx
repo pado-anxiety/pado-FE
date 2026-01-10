@@ -15,7 +15,7 @@ export default function LanguageScreen() {
   };
 
   return (
-    <PageSafeAreaView className="gap-2 bg-page px-8">
+    <PageSafeAreaView className="mt-4 gap-2 bg-page px-8">
       <Pressable onPress={() => router.back()}>
         <Feather
           name="arrow-left"

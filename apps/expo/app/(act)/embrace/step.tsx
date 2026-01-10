@@ -1,8 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import WebView, { WebViewMessageEvent } from 'react-native-webview';
-
-import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
+import WebView from 'react-native-webview';
 
 import {
   LoadingSpinner,
@@ -11,22 +9,22 @@ import {
 } from '@src/components/ui';
 import { safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
+import { createWebViewMessageHandler } from '@src/lib/webview';
 
 export default function EmbraceStepScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
-  const handleMessage = (event: WebViewMessageEvent) => {
-    const parsedData = JSON.parse(event.nativeEvent.data);
-    if (parsedData.type === WEBVIEW_MESSAGE_TYPE.NAVIGATE) {
-      const { action } = parsedData.data;
+  const handleMessage = createWebViewMessageHandler({
+    onNavigate: (action) => {
       if (action === 'BACK') {
         router.back();
       } else if (action === 'HOME') {
         router.replace(ROUTES.HOME);
       }
-    } else if (parsedData.type === WEBVIEW_MESSAGE_TYPE.DATA) {
-      const { data } = parsedData.data;
+    },
+    onData: (payload) => {
+      const { data } = payload as { data: { embraceResult: number } };
       const { embraceResult } = data;
       router.push({
         pathname: ROUTES.ACT.EMBRACE.RESULT,
@@ -34,8 +32,8 @@ export default function EmbraceStepScreen() {
           data: safeStringify({ embraceResult }),
         },
       });
-    }
-  };
+    },
+  });
 
   return (
     <WebView
