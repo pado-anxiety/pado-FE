@@ -7,6 +7,15 @@ export const ROUTES = {
   ONBOARD: '/onboard',
   LEARNING: '/learning',
 
+  SETTINGS: {
+    BASE: '/settings',
+    VIBRATION: '/settings/vibration',
+    LANGUAGE: '/settings/language',
+    PRIVACY_POLICY: '/settings/policy',
+    TERMS_OF_SERVICE: '/settings/terms',
+    LICENSE_INFO: '/settings/license',
+  },
+
   ACT: {
     BASE: '/(act)',
     ANCHOR: {

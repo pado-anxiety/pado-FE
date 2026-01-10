@@ -60,6 +60,7 @@ function NavigationContent() {
           <Stack.Screen name="(act)" />
           <Stack.Screen name="login" />
           <Stack.Screen name="learning" />
+          <Stack.Screen name="settings" />
         </Stack>
       </BottomSheetModalProvider>
     </View>

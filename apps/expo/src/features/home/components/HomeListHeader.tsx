@@ -1,5 +1,4 @@
 import { Feather } from '@expo/vector-icons';
-import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
@@ -17,7 +16,6 @@ interface HomeListHeaderProps {
 
 export const HomeListHeader = ({ page, setPage }: HomeListHeaderProps) => {
   const insets = useSafeAreaInsets();
-  const { t } = useTranslation();
 
   let SkyContent = null;
 
@@ -44,7 +42,7 @@ export const HomeListHeader = ({ page, setPage }: HomeListHeaderProps) => {
         <Pressable onPress={() => setPage('HOME')}>
           <Feather
             name="arrow-left"
-            size={30}
+            size={scale(30)}
             color="black"
           />
         </Pressable>

@@ -1,10 +1,18 @@
+import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
+import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { scale } from 'react-native-size-matters';
 
-import { AnimatedText, Text, TouchableOpacity, View } from '@src/components/ui';
-import { useLanguage } from '@src/lib/i18n';
+import {
+  AnimatedText,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from '@src/components/ui';
+import { ROUTES } from '@src/lib/route';
+import { ICONS_SIZE } from '@src/lib/styles';
 
 export function SkySection({
   setPage,
@@ -12,18 +20,26 @@ export function SkySection({
   setPage: (page: 'HOME' | 'HISTORY' | 'CHAT' | 'LEARNING') => void;
 }): React.ReactNode {
   const { t } = useTranslation();
+  const router = useRouter();
   const insets = useSafeAreaInsets();
-
-  const { changeLanguage, language } = useLanguage();
 
   return (
     <View
       className="flex flex-col items-start justify-center gap-4 bg-page px-8"
       style={{
-        paddingTop: insets.top + scale(50),
+        paddingTop: insets.top,
       }}
     >
-      <View className="flex w-full flex-col gap-8">
+      <View className="flex w-full flex-row items-end justify-end">
+        <Pressable onPress={() => router.push(ROUTES.SETTINGS.BASE)}>
+          <MaterialIcons
+            name="settings"
+            size={ICONS_SIZE.large}
+            color="black"
+          />
+        </Pressable>
+      </View>
+      <View className="flex w-full flex-col gap-8 pt-12">
         <AnimatedText
           delay={1000}
           className="text-2xl font-medium"
