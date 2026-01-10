@@ -16,6 +16,10 @@ export const HomeListFooter = ({
   isFetchingNextPage,
   isPending,
 }: HomeListFooterProps) => {
+  if (page === 'HOME') {
+    return;
+  }
+
   if (page === 'HISTORY' && isPending) {
     return (
       <View className="w-full flex-1 items-center justify-center bg-transparent">

@@ -18,26 +18,20 @@ interface UseHomeListDataProps {
 const learningItems = [
   {
     id: '1',
-    subject: '학습1',
+    subject: 'anxiety_info',
     type: 'LEARNING',
-    title: '학습1',
-    description: '학습1에 대해 학습해봐요',
+    title: '불안은 왜 생기는 걸까요?',
+    description:
+      '불안은 우리를 괴롭히려는 적이 아니라, 우리를 지키기 위한 마음의 신호예요.',
     image: '',
   },
   {
     id: '2',
-    subject: '학습2',
+    subject: 'act_guide',
     type: 'LEARNING',
-    title: '학습2',
-    description: '학습2에 대해 학습해봐요',
-    image: '',
-  },
-  {
-    id: '3',
-    subject: '학습3',
-    type: 'LEARNING',
-    title: '학습3',
-    description: '학습3에 대해 학습해봐요',
+    title: 'ACT와 함께 파도 타기',
+    description:
+      '불안과 싸우는 대신, 불안과 함께 내가 원하는 삶의 방향으로 나아가는 법을 배워요.',
     image: '',
   },
 ];

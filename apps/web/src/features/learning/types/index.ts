@@ -1,12 +1,11 @@
 export interface LearningStep {
   step: number;
   title: string;
-  content: string;
+  content: string[];
   image?: string;
 }
 
 export interface LearningData {
-  subject: string;
   title: string;
   description: string;
   steps: LearningStep[];

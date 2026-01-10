@@ -1,11 +1,12 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
-import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import {
   LoadingSpinner,
+  View,
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
@@ -13,6 +14,7 @@ import { safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 
 export default function LearningScreen() {
+  const insets = useSafeAreaInsets();
   const router = useRouter();
   const { subject, title, description } = useLocalSearchParams();
 
@@ -29,7 +31,7 @@ export default function LearningScreen() {
   };
 
   return (
-    <PageSafeAreaView className="bg-act-page">
+    <View className="flex-1 bg-act-page">
       <WebView
         style={{ flex: 1 }}
         scrollEnabled={false}
@@ -49,10 +51,11 @@ export default function LearningScreen() {
         }}
         injectedJavaScriptBeforeContentLoaded={`
           window.learningData = ${safeStringify({ subject, title, description })};
+          window.insets = ${safeStringify({ top: insets.top, bottom: insets.bottom })};
           true;
         `}
         onMessage={handleMessage}
       />
-    </PageSafeAreaView>
+    </View>
   );
 }
