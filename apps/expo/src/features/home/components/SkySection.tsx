@@ -46,14 +46,14 @@ export function SkySection({
         >
           <Text tx="home.greeting" />
         </AnimatedText>
-        <View className="flex w-full flex-col gap-6">
+        <View className="flex w-full flex-col gap-4">
           <TouchableOpacity
             className="flex flex-col"
             onPress={() => setPage('HISTORY')}
           >
             <AnimatedText
               delay={1500}
-              className="text-4xl font-medium text-slate-700"
+              className="text-title-large font-medium text-slate-700"
             >
               {t('home.menu.viewActHistory')}
             </AnimatedText>
@@ -69,7 +69,7 @@ export function SkySection({
           >
             <AnimatedText
               delay={2000}
-              className="text-4xl font-medium text-slate-700"
+              className="text-title-large font-medium text-slate-700"
             >
               {t('home.menu.learning')}
             </AnimatedText>

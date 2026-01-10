@@ -47,18 +47,18 @@ export const HomeListHeader = ({ page, setPage }: HomeListHeaderProps) => {
           />
         </Pressable>
         <View
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-2"
           style={{ paddingTop: scale(50) }}
         >
           <AnimatedText
             delay={1000}
-            className="text-4xl font-medium"
+            className="text-title-large font-medium"
           >
             학습
           </AnimatedText>
           <AnimatedText
             delay={1500}
-            className="text-2xl font-medium"
+            className="text-body-large font-medium"
           >
             불안에 대해 학습해봐요
           </AnimatedText>

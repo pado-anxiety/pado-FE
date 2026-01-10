@@ -44,7 +44,7 @@ export default function SettingsScreen() {
             size={scale(20)}
             color="black"
           /> */}
-          <Text className="text-body-medium">언어 설정</Text>
+          <Text className="text-body-small">언어 설정</Text>
         </Pressable>
         <Pressable
           onPress={() => router.push(ROUTES.SETTINGS.VIBRATION)}
@@ -55,7 +55,7 @@ export default function SettingsScreen() {
             size={24}
             color="black"
           /> */}
-          <Text className="text-body-medium">진동</Text>
+          <Text className="text-body-small">진동</Text>
         </Pressable>
         <Pressable
           onPress={() => router.push(ROUTES.SETTINGS.PRIVACY_POLICY)}
@@ -66,7 +66,7 @@ export default function SettingsScreen() {
             size={scale(20)}
             color="black"
           /> */}
-          <Text className="text-body-medium">개인정보 처리 방침</Text>
+          <Text className="text-body-small">개인정보 처리 방침</Text>
         </Pressable>
         <Pressable
           onPress={() => router.push(ROUTES.SETTINGS.TERMS_OF_SERVICE)}
@@ -77,7 +77,7 @@ export default function SettingsScreen() {
             size={scale(20)}
             color="black"
           /> */}
-          <Text className="text-body-medium">이용약관</Text>
+          <Text className="text-body-small">이용약관</Text>
         </Pressable>
         <Pressable
           onPress={() => router.push(ROUTES.SETTINGS.LICENSE_INFO)}
@@ -88,12 +88,12 @@ export default function SettingsScreen() {
             size={scale(20)}
             color="black"
           /> */}
-          <Text className="text-body-medium">라이선스 정보</Text>
+          <Text className="text-body-small">라이선스 정보</Text>
         </Pressable>
       </View>
       <View className="mt-12 flex flex-row items-center justify-center">
         <Pressable onPress={handleLogout}>
-          <Text className="text-body-medium text-destructive">로그아웃</Text>
+          <Text className="text-body-small text-destructive">로그아웃</Text>
         </Pressable>
       </View>
     </PageSafeAreaView>

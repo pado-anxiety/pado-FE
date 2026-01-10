@@ -48,6 +48,8 @@ apiClient.interceptors.response.use(
       try {
         const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
 
+        console.log('토큰 재발급: ', accessToken);
+
         useAuth.getState().setAuthToken(accessToken, refreshToken);
 
         return apiClient(config);

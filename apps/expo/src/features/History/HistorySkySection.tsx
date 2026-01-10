@@ -1,6 +1,5 @@
-import { useTranslation } from 'react-i18next';
-
 import { Feather } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
@@ -27,18 +26,18 @@ export default function HistorySkySection({
         />
       </Pressable>
       <View
-        className="flex flex-col gap-4"
+        className="flex flex-col gap-2"
         style={{ paddingTop: scale(50) }}
       >
         <AnimatedText
           delay={1000}
-          className="text-4xl font-medium"
+          className="text-title-large font-medium"
         >
           {t('act.common.history.title')}
         </AnimatedText>
         <AnimatedText
           delay={1500}
-          className="text-2xl font-medium"
+          className="text-body-large font-medium"
         >
           {t('act.common.history.subtitle')}
         </AnimatedText>
