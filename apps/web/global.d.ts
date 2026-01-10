@@ -1,5 +1,6 @@
 import { UserTextToken } from '@/features/act/detach';
 import { DiaryResult } from '@/features/act/diary/types';
+import { WindowLearningData } from '@/features/learning';
 
 export {};
 
@@ -13,5 +14,6 @@ declare global {
     embraceResult: number;
     topInsets: number;
     insets: { top: number; bottom: number };
+    learningData: WindowLearningData;
   }
 }

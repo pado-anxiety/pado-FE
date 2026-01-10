@@ -1,6 +1,6 @@
 import { HistoryItem } from '@src/features/History/types';
 
-export type PageType = 'HOME' | 'HISTORY' | 'CHAT';
+export type PageType = 'HOME' | 'HISTORY' | 'CHAT' | 'LEARNING';
 
 export type HomeItem = {
   id: 'HOME';
@@ -19,4 +19,17 @@ export type ChatItem = {
   type: 'CHAT';
 };
 
-export type HomeListItem = HomeItem | HistoryItemWithIndex | ChatItem;
+export type LearningItem = {
+  id: string;
+  subject: string;
+  type: 'LEARNING';
+  title: string;
+  description: string;
+  image: string;
+};
+
+export type HomeListItem =
+  | HomeItem
+  | HistoryItemWithIndex
+  | ChatItem
+  | LearningItem;

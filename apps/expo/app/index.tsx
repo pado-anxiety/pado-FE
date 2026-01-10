@@ -105,6 +105,7 @@ export default function HomeScreen(): React.ReactNode {
         onEndReachedThreshold={0.2}
         ListFooterComponent={
           <HomeListFooter
+            page={page}
             isFetchingNextPage={isFetchingNextPage}
             isPending={isPending}
           />

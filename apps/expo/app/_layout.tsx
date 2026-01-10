@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import CookieManager from '@react-native-cookies/cookies';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Slot } from 'expo-router';
+import { Stack } from 'expo-router';
 import { View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
@@ -50,17 +50,17 @@ function NavigationContent() {
   return (
     <View style={[{ flex: 1 }, themeStyle]}>
       <BottomSheetModalProvider>
-        <Slot />
-        {/* <Stack
+        {/* <Slot /> */}
+        <Stack
           screenOptions={{
             headerShown: false,
           }}
         >
           <Stack.Screen name="index" />
-          <Stack.Screen name="(test)" />
           <Stack.Screen name="(act)" />
           <Stack.Screen name="login" />
-        </Stack> */}
+          <Stack.Screen name="learning" />
+        </Stack>
       </BottomSheetModalProvider>
     </View>
   );

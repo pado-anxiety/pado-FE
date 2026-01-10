@@ -38,6 +38,7 @@ module.exports = {
         destructive: 'var(--border-destructive)',
         input: 'var(--input-border)',
         'input-focus': 'var(--input-border-focus)',
+        'btn-act-page': 'var(--btn-act-page)',
       },
     },
   },

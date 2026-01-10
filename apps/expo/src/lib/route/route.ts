@@ -5,6 +5,7 @@ export const ROUTES = {
   LOGIN: '/login',
   ACT_HISTORY: '/history',
   ONBOARD: '/onboard',
+  LEARNING: '/learning',
 
   ACT: {
     BASE: '/(act)',

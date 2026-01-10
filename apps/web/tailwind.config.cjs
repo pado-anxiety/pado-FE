@@ -9,7 +9,7 @@ module.exports = {
     require('@pado/tailwind-semantic-tokens'),
   ],
   safelist: ['dark'],
-  darkMode: 'class',
+  // darkMode: 'class',
   theme: {
     extend: {},
   },

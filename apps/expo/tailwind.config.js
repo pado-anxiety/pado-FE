@@ -13,7 +13,7 @@ module.exports = {
     tailwindDesignTokens,
     tailwindSemanticTokens,
   ],
-  darkMode: 'class',
+  // darkMode: 'class',
   theme: {
     extend: {},
   },

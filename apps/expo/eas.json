@@ -23,7 +23,10 @@
       "distribution": "internal",
       "channel": "preview",
       "env": {
-        "APP_ENV": "production"
+        "APP_ENV": "production",
+        "BASE_URL": "https://nyangtodac-dev.site/",
+        "IOS_WEBVIEW_URL": "https://nyangtodac-web-fe.pages.dev/",
+        "ANDROID_WEBVIEW_URL": "https://nyangtodac-web-fe.pages.dev/"
       }
     },
     "production": {

@@ -4,6 +4,7 @@ import { ENV } from '../env';
 
 export const WEBVIEW_ROUTES = {
   ONBOARD: '/onboard',
+  LEARNING: '/learning',
   ACT: {
     ANCHOR: {
       BASE: '/act/anchor',

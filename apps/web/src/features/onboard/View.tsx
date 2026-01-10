@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { AnimatePresence, useMotionValue } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
-import { AnimatePresence } from 'motion/react';
-import { useMotionValue } from 'motion/react';
 
 import PageLayout from '@/components/ui/layout';
 import { handlePostMessage } from '@/lib/webview';
@@ -35,16 +34,19 @@ export default function OnboardView() {
 
   const insets = window.insets;
 
-  // Get step data from i18n
-  const getStep = (index: number): Step => {
-    const stepKey = `onboard.steps.step${index + 1}`;
-    return {
-      texts: t(`${stepKey}.texts`, { returnObjects: true }) as string[],
-      buttonText: t(`${stepKey}.button`),
-    };
-  };
+  // Get step data from i18n - memoized to prevent infinite loop
+  const getStep = useCallback(
+    (index: number): Step => {
+      const stepKey = `onboard.steps.step${index + 1}`;
+      return {
+        texts: t(`${stepKey}.texts`, { returnObjects: true }) as string[],
+        buttonText: t(`${stepKey}.button`),
+      };
+    },
+    [t],
+  );
 
-  const step = getStep(currentStep);
+  const step = useMemo(() => getStep(currentStep), [getStep, currentStep]);
   const isLastStep = currentStep === STEP_COUNT - 1;
 
   const { baseYValue } = useOnboardWave(canvasRef, false, gapValue);
@@ -55,8 +57,9 @@ export default function OnboardView() {
     if (isExiting || isBreathing) return;
 
     const timeouts: number[] = [];
+    const texts = step.texts;
 
-    step.texts.forEach((_, index) => {
+    texts.forEach((_, index) => {
       timeouts.push(
         window.setTimeout(
           () => {
@@ -67,7 +70,7 @@ export default function OnboardView() {
       );
     });
 
-    const totalDelay = step.texts.length * BUTTON_DELAY * 1000;
+    const totalDelay = texts.length * BUTTON_DELAY * 1000;
     timeouts.push(
       window.setTimeout(() => {
         setShowButton(true);
@@ -79,7 +82,7 @@ export default function OnboardView() {
       setVisibleTexts([]);
       setShowButton(false);
     };
-  }, [currentStep, isExiting, step.texts, isBreathing]);
+  }, [currentStep, isExiting, isBreathing, step]);
 
   const handleNext = async () => {
     setShowButton(false);
@@ -130,7 +133,10 @@ export default function OnboardView() {
               onNext={handleNext}
             />
           ) : (
-            <BreathContent breathText={breathText} breathTimer={breathTimer} />
+            <BreathContent
+              breathText={breathText}
+              breathTimer={breathTimer}
+            />
           )}
         </AnimatePresence>
       </div>
