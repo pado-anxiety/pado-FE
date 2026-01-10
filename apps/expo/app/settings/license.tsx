@@ -9,7 +9,7 @@ export default function LicenseScreen() {
   const router = useRouter();
 
   return (
-    <PageSafeAreaView className="gap-2 bg-page px-8">
+    <PageSafeAreaView className="mt-4 gap-4 bg-page px-8">
       <Pressable onPress={() => router.back()}>
         <Feather
           name="arrow-left"
@@ -17,7 +17,7 @@ export default function LicenseScreen() {
           color="black"
         />
       </Pressable>
-      <Text className="text-title-medium">라이선스 정보</Text>
+      <Text className="text-body-large">라이선스 정보</Text>
     </PageSafeAreaView>
   );
 }

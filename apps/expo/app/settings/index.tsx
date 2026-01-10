@@ -4,6 +4,7 @@ import { scale } from 'react-native-size-matters';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import { Pressable, Text, View } from '@src/components/ui';
+import { ENV } from '@src/lib';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 
@@ -81,14 +82,15 @@ export default function SettingsScreen() {
         </Pressable>
         <Pressable
           onPress={() => router.push(ROUTES.SETTINGS.LICENSE_INFO)}
-          className="flex flex-row items-center gap-2 border-b border-gray-300 py-4"
+          className="flex flex-row items-center gap-2 py-4"
         >
           {/* <Feather
             name="file-text"
             size={scale(20)}
             color="black"
           /> */}
-          <Text className="text-body-small">라이선스 정보</Text>
+          <Text className="text-body-small">앱 버전 {ENV.VERSION}</Text>
+          <Text className="text-body-small text-sub">라이선스 정보</Text>
         </Pressable>
       </View>
       <View className="mt-12 flex flex-row items-center justify-center">

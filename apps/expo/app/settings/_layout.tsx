@@ -6,9 +6,9 @@ export default function SettingsLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="language" />
       <Stack.Screen name="vibration" />
-      <Stack.Screen name="privacy-policy" />
-      <Stack.Screen name="terms-of-service" />
-      <Stack.Screen name="license-info" />
+      <Stack.Screen name="policy" />
+      <Stack.Screen name="terms" />
+      <Stack.Screen name="license" />
     </Stack>
   );
 }

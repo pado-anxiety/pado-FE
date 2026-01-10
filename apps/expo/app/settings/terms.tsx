@@ -9,7 +9,7 @@ export default function TermsOfServiceScreen() {
   const router = useRouter();
 
   return (
-    <PageSafeAreaView className="gap-2 bg-page px-8">
+    <PageSafeAreaView className="mt-4 gap-4 bg-page px-8">
       <Pressable onPress={() => router.back()}>
         <Feather
           name="arrow-left"
@@ -17,7 +17,7 @@ export default function TermsOfServiceScreen() {
           color="black"
         />
       </Pressable>
-      <Text className="text-title-medium">이용약관</Text>
+      <Text className="text-body-large">이용약관</Text>
     </PageSafeAreaView>
   );
 }
