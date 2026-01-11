@@ -5,7 +5,7 @@ export const ROUTES = {
   DIARY: '/records/emotion-note',
   DETACH: '/records/cognitive-defusion',
   EMBRACE: '/records/acceptance',
-  VALUES: '/records/values',
+  VALUES: '/records/committed-action',
 } as const;
 
 export const actAPI = {
@@ -46,18 +46,34 @@ export const actAPI = {
     });
   },
   values: async ({
+    diagnosis,
+    matter,
     value,
-    reason,
+    barrier,
     action,
   }: {
+    diagnosis: {
+      work: number;
+      growth: number;
+      leisure: number;
+      relationship: number;
+    };
+    matter: string;
     value: string;
-    reason: string;
+    barrier: string;
     action: string;
   }): Promise<void> => {
     await apiClient.post(ROUTES.VALUES, {
-      value,
-      reason,
-      action,
+      diagnosis: {
+        work: diagnosis.work,
+        growth: diagnosis.growth,
+        leisure: diagnosis.leisure,
+        relationship: diagnosis.relationship,
+      },
+      matter: matter,
+      value: value,
+      barrier: barrier,
+      action: action,
     });
   },
 };

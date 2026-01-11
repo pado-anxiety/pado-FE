@@ -28,18 +28,26 @@ export default function ActionResultView() {
       <div className="flex flex-col gap-3 w-full">
         <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm">
           <Text className="text-body-small text-gray-500 mb-1">
-            {t('act.values.result.selectedValue')}
+            {t('act.values.result.selectedDomain')}
           </Text>
-          <Text className="text-body-large font-bold text-blue-600">
-            {data?.value}
+          <Text className="text-body-medium text-gray-700 break-words leading-relaxed">
+            {t(`act.values.domain.${data?.selectedDomain}`)}
           </Text>
         </div>
         <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm">
           <Text className="text-body-small text-gray-500 mb-1">
-            {t('act.values.result.reason')}
+            {t('act.values.result.orientation')}
           </Text>
           <Text className="text-body-medium text-gray-700 break-words leading-relaxed">
-            {data?.reason}
+            {data?.orientation}
+          </Text>
+        </div>
+        <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm">
+          <Text className="text-body-small text-gray-500 mb-1">
+            {t('act.values.result.obstacle')}
+          </Text>
+          <Text className="text-body-medium text-gray-700 break-words leading-relaxed">
+            {data?.obstacle}
           </Text>
         </div>
         <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm">

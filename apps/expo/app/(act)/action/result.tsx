@@ -31,14 +31,23 @@ export default function ActionResultScreen() {
   // TODO: offline-first save
   const actionMutation = useMutation({
     mutationFn: ({
+      diagnosis,
+      matter,
       value,
-      reason,
+      barrier,
       action,
     }: {
+      diagnosis: {
+        work: number;
+        growth: number;
+        leisure: number;
+        relationship: number;
+      };
+      matter: string;
       value: string;
-      reason: string;
+      barrier: string;
       action: string;
-    }) => actAPI.values({ value, reason, action }),
+    }) => actAPI.values({ diagnosis, matter, value, barrier, action }),
     onError: (error) => {
       console.error('Failed to save action result', error);
     },
@@ -49,9 +58,12 @@ export default function ActionResultScreen() {
       if (action === 'HOME') {
         if (!hasMutated.current) {
           hasMutated.current = true;
+
           actionMutation.mutate({
-            value: parsedData.value,
-            reason: parsedData.reason,
+            diagnosis: parsedData.selectedValue,
+            matter: parsedData.selectedDomain.toUpperCase(),
+            value: parsedData.orientation,
+            barrier: parsedData.obstacle,
             action: parsedData.action,
           });
         }

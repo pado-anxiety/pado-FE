@@ -14,11 +14,11 @@ export default function ActionStepPage() {
     stepIndex,
     selectedValue,
     selectedDomain,
+    lowestDomains,
     orientation,
     obstacle,
     action,
     isNextDisabled,
-    getLowestDomains,
     handleSelectValue,
     handleSelectDomain,
     handleOrientationChange,
@@ -67,14 +67,14 @@ export default function ActionStepPage() {
         stepIndex={stepIndex}
         selectedValue={selectedValue}
         selectedDomain={selectedDomain}
-        getLowestDomains={getLowestDomains}
+        lowestDomains={lowestDomains}
         orientation={orientation}
         obstacle={obstacle}
-        onObstacleChange={handleObstacleChange}
         action={action}
         onSelectValue={handleSelectValue}
         onSelectDomain={handleSelectDomain}
         onOrientationChange={handleOrientationChange}
+        onObstacleChange={handleObstacleChange}
         onActionChange={handleActionChange}
       />
     </ActStepPage>

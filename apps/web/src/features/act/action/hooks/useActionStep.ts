@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import { handlePostMessage } from '@/lib';
 
-import { ACTION_STEPS, STEP_COUNT } from '../constants';
+import { STEP_COUNT } from '../constants';
 
 export type Value = {
   work: number | null;
@@ -21,48 +21,49 @@ export function useActionStep() {
     leisure: null,
     relationship: null,
   });
-
-  const getLowestDomains = (values: Value): string[] => {
-    let minScore = Infinity;
-
-    return Object.entries(values).reduce((acc: string[], [key, value]) => {
-      // 값이 null인 경우는 진단되지 않은 것으로 간주하여 제외
-      if (value === null) return acc;
-
-      if (value < minScore) {
-        // 새로운 최저점을 발견하면 기존 배열을 버리고 새 키를 담음
-        minScore = value;
-        return [key];
-      } else if (value === minScore) {
-        // 최저점과 동점이면 배열에 추가 (중복 허용)
-        return [...acc, key];
-      }
-
-      return acc;
-    }, []);
-  };
-
   const [selectedDomain, setSelectedDomain] = useState<keyof Value>('work');
   const [orientation, setOrientation] = useState('');
   const [obstacle, setObstacle] = useState('');
   const [action, setAction] = useState('');
 
-  const step = ACTION_STEPS[stepIndex];
+  const lowestDomains = useMemo((): (keyof Value)[] => {
+    const entries = Object.entries(selectedValue) as [
+      keyof Value,
+      number | null,
+    ][];
+    const validEntries = entries.filter(
+      (entry): entry is [keyof Value, number] => entry[1] !== null,
+    );
 
-  const isNextDisabled = () => {
-    if (stepIndex === 0)
-      return Object.values(selectedValue).some((v) => v === null);
-    if (stepIndex === 1) return orientation.trim().length === 0;
-    if (stepIndex === 2) return obstacle.trim().length === 0;
-    if (stepIndex === 3) return action.trim().length === 0;
-    return false;
-  };
+    if (validEntries.length === 0) return [];
+
+    const minScore = Math.min(...validEntries.map(([, value]) => value));
+
+    return validEntries
+      .filter(([, value]) => value === minScore)
+      .map(([key]) => key);
+  }, [selectedValue]);
+
+  const isNextDisabled = useMemo(() => {
+    switch (stepIndex) {
+      case 0:
+        return Object.values(selectedValue).some((v) => v === null);
+      case 1:
+        return orientation.trim().length === 0;
+      case 2:
+        return obstacle.trim().length === 0;
+      case 3:
+        return action.trim().length === 0;
+      default:
+        return false;
+    }
+  }, [stepIndex, selectedValue, orientation, obstacle, action]);
 
   const handleSelectValue = (key: keyof Value, value: number) => {
-    setSelectedValue({
-      ...selectedValue,
+    setSelectedValue((prev) => ({
+      ...prev,
       [key]: value,
-    });
+    }));
   };
 
   const handleSelectDomain = (domain: keyof Value) => {
@@ -83,14 +84,17 @@ export function useActionStep() {
 
   const handleNext = () => {
     if (stepIndex === 0) {
-      setSelectedDomain(getLowestDomains(selectedValue)[0] as keyof Value);
+      if (lowestDomains.length > 0) {
+        setSelectedDomain(lowestDomains[0]);
+      }
       setStepIndex((prev) => prev + 1);
     } else if (stepIndex < STEP_COUNT - 1) {
       setStepIndex((prev) => prev + 1);
     } else {
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
         data: {
-          value: selectedValue,
+          selectedValue,
+          selectedDomain,
           orientation,
           obstacle,
           action,
@@ -116,15 +120,14 @@ export function useActionStep() {
   };
 
   return {
-    step,
     stepIndex,
     selectedValue,
     selectedDomain,
+    lowestDomains,
     orientation,
     obstacle,
     action,
-    getLowestDomains,
-    isNextDisabled: isNextDisabled(),
+    isNextDisabled,
     handleSelectValue,
     handleSelectDomain,
     handleOrientationChange,
