@@ -7,7 +7,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   AnimatedText,
   Pressable,
-  Text,
   TouchableOpacity,
   View,
 } from '@src/components/ui';
@@ -23,6 +22,11 @@ export function SkySection({
   const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+
+  // const { data: user } = useQuery({
+  //   queryKey: [API_KEY.USER],
+  //   queryFn: () => userAPI.getUser(),
+  // });
 
   return (
     <View
@@ -41,12 +45,20 @@ export function SkySection({
         </Pressable>
       </View>
       <View className="flex w-full flex-col gap-8 pt-12">
-        <AnimatedText
-          delay={1000}
-          className="text-2xl font-medium"
-        >
-          <Text tx="home.greeting" />
-        </AnimatedText>
+        {/* <View className="flex w-full flex-col gap-2">
+          <AnimatedText
+            delay={1000}
+            className="text-body-large font-medium"
+          >
+            안녕하세요
+          </AnimatedText>
+          <AnimatedText
+            delay={1000}
+            className="text-body-large font-medium"
+          >
+            {user?.name} 님
+          </AnimatedText>
+        </View> */}
         <View className="flex w-full flex-col gap-4">
           <TouchableOpacity
             className="flex flex-col"
