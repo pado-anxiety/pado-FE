@@ -24,6 +24,8 @@ export type AcceptanceData = {
 
 export type ValuesData = {
   value: string;
+  reason: string;
+  action: string;
 };
 
 // API response wrapper types

@@ -15,7 +15,8 @@ export function ExampleSection({ step, index }: ExampleSectionProps) {
   return (
     <div className="flex flex-col justify-center items-center gap-12">
       <Text className="text-body-small text-sub">
-        {index === 0 ? `${t('common.example')}) ` : ''} {t(`${step.i18nKey}.example`)}
+        {index === 0 ? `${t('common.example')}) ` : ''}{' '}
+        {t(`${step.i18nKey}.example`)}
       </Text>
     </div>
   );

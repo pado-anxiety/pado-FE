@@ -5,6 +5,7 @@ export const ROUTES = {
   DIARY: '/records/emotion-note',
   DETACH: '/records/cognitive-defusion',
   EMBRACE: '/records/acceptance',
+  VALUES: '/records/values',
 } as const;
 
 export const actAPI = {
@@ -42,6 +43,21 @@ export const actAPI = {
   }): Promise<void> => {
     await apiClient.post(ROUTES.EMBRACE, {
       breathingTime,
+    });
+  },
+  values: async ({
+    value,
+    reason,
+    action,
+  }: {
+    value: string;
+    reason: string;
+    action: string;
+  }): Promise<void> => {
+    await apiClient.post(ROUTES.VALUES, {
+      value,
+      reason,
+      action,
     });
   },
 };

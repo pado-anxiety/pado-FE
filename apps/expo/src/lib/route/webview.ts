@@ -26,6 +26,11 @@ export const WEBVIEW_ROUTES = {
       STEP: '/act/embrace/step',
       RESULT: '/act/embrace/result',
     },
+    ACTION: {
+      BASE: '/act/action',
+      STEP: '/act/action/step',
+      RESULT: '/act/action/result',
+    },
   },
 } as const;
 

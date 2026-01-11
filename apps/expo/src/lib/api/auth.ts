@@ -16,6 +16,8 @@ export const authAPI = {
         refreshToken: authStorage.getRefreshToken(),
       });
 
+    console.log('토큰 재발급 response: ', response);
+
     return response.data;
   },
   getGoogleAccessToken: async ({

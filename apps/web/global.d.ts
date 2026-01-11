@@ -12,6 +12,7 @@ declare global {
     diaryResult: DiaryResult[];
     detachResult: UserTextToken[];
     embraceResult: number;
+    actionResult: { value: string; reason: string; action: string };
     topInsets: number;
     insets: { top: number; bottom: number };
     learningData: WindowLearningData;

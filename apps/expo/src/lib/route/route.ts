@@ -39,7 +39,11 @@ export const ROUTES = {
       RESULT: '/(act)/embrace/result',
     },
     OBSERVER: '/(act)/observer',
-    ACTION: '/(act)/action',
+    ACTION: {
+      BASE: '/(act)/action',
+      STEP: '/(act)/action/step',
+      RESULT: '/(act)/action/result',
+    },
   },
 
   CBT: {

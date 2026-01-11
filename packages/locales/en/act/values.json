@@ -1,6 +1,59 @@
 {
-  "title": "Values & Committed Action",
+  "intro": {
+    "title": "Values & Committed Action",
+    "description": [
+      "Find the direction of life you truly want without being swept away by anxiety.",
+      "Values are like a compass, not a destination.",
+      "Discover what's important in your life and take a small step toward those values."
+    ],
+    "contentTitle": "Discovering Values & Committed Action",
+    "contentDescription": "Discover values that will become your life's compass, and plan specific actions aligned with those values.",
+    "steps": [
+      "1. Explore values that are important in your life.",
+      "2. Reflect deeply on your chosen value.",
+      "3. Plan a small committed action toward that value."
+    ],
+    "tip": "Tip: Values are not goals to achieve. They are the direction of living and the criteria for every choice."
+  },
+  "step": {
+    "step1": {
+      "title": "What values are important to you?",
+      "description": "From the values in the circle below, choose what matters most in your life right now.",
+      "values": [
+        "Family",
+        "Health",
+        "Growth",
+        "Freedom",
+        "Love",
+        "Creativity",
+        "Honesty",
+        "Courage",
+        "Learning",
+        "Peace",
+        "Connection",
+        "Contribution"
+      ]
+    },
+    "step2": {
+      "title": "Why is this value important?",
+      "description": "Think about why your chosen value is important in your life.",
+      "placeholder": "This value is important to me because..."
+    },
+    "step3": {
+      "title": "What small action can you take for this value?",
+      "description": "Write down one small action you can do today that aligns with this value.",
+      "placeholder": "A small action I can do today..."
+    }
+  },
+  "result": {
+    "title": "You've taken the first step toward your values",
+    "description": "The value you chose becomes your life's compass. Even when anxiety comes, remember this value and keep moving forward one step at a time. Small committed actions build a meaningful life.",
+    "selectedValue": "My Value",
+    "reason": "Why this value matters",
+    "action": "Today's Committed Action"
+  },
   "history": {
-    "title": "Values"
+    "title": "Values",
+    "description": "Recorded values and committed actions"
   }
 }

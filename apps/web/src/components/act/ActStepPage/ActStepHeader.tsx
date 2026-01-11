@@ -3,6 +3,7 @@
 interface ActStepHeaderProps {
   leftButton?: React.ReactNode;
   rightButton?: React.ReactNode;
+  className?: string;
 }
 
 function ActStepHeader({ leftButton, rightButton }: ActStepHeaderProps) {

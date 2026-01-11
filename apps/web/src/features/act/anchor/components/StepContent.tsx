@@ -10,7 +10,9 @@ type StepContentProps = {
 
 export function StepContent({ step }: StepContentProps) {
   const { t } = useTranslation();
-  const description = t(`${step.i18nKey}.description`, { returnObjects: true }) as string[];
+  const description = t(`${step.i18nKey}.description`, {
+    returnObjects: true,
+  }) as string[];
 
   return (
     <div className="flex-1 flex flex-col gap-2 justify-center items-center absolute top-0 left-0 w-full aspect-square z-100">
