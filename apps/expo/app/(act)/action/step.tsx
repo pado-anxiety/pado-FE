@@ -25,6 +25,7 @@ export default function ActionStepScreen() {
     },
     onData: (payload) => {
       const { data } = payload as { data: unknown };
+      console.log('data', data);
       router.push({
         pathname: ROUTES.ACT.ACTION.RESULT,
         params: {

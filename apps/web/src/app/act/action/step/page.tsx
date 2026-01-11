@@ -13,11 +13,16 @@ export default function ActionStepPage() {
   const {
     stepIndex,
     selectedValue,
-    reason,
+    selectedDomain,
+    orientation,
+    obstacle,
     action,
     isNextDisabled,
+    getLowestDomains,
     handleSelectValue,
-    handleReasonChange,
+    handleSelectDomain,
+    handleOrientationChange,
+    handleObstacleChange,
     handleActionChange,
     handleNext,
     handleExit,
@@ -61,10 +66,15 @@ export default function ActionStepPage() {
       <StepContent
         stepIndex={stepIndex}
         selectedValue={selectedValue}
-        reason={reason}
+        selectedDomain={selectedDomain}
+        getLowestDomains={getLowestDomains}
+        orientation={orientation}
+        obstacle={obstacle}
+        onObstacleChange={handleObstacleChange}
         action={action}
         onSelectValue={handleSelectValue}
-        onReasonChange={handleReasonChange}
+        onSelectDomain={handleSelectDomain}
+        onOrientationChange={handleOrientationChange}
         onActionChange={handleActionChange}
       />
     </ActStepPage>

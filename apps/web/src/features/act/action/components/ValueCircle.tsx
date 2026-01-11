@@ -6,7 +6,7 @@ import { Value } from '../hooks/useActionStep';
 
 type ValueCircleProps = {
   selectedValue: Value;
-  onSelectValue: (key: string, value: number) => void;
+  onSelectValue: (key: keyof Value, value: number) => void;
 };
 
 const VIEWBOX_SIZE = 100;
@@ -124,7 +124,8 @@ export default function ValueCircle({
                 stroke="white"
                 strokeWidth={s.ringIndex === 0 ? 0 : 0.5}
                 onClick={() =>
-                  s.ringIndex !== 0 && onSelectValue(s.key, s.value)
+                  s.ringIndex !== 0 &&
+                  onSelectValue(s.key as keyof Value, s.value)
                 }
                 initial={false}
                 style={{ transformOrigin: '50px 50px', cursor: 'pointer' }}

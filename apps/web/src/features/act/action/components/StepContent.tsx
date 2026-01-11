@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 
 import { useTranslation } from 'react-i18next';
 
-import { Text } from '@pado/ui';
+import { Button, Text } from '@pado/ui';
 
 import { ACTION_STEPS } from '../constants';
 import { Value } from '../hooks/useActionStep';
@@ -16,20 +16,30 @@ const ValueCircleView = dynamic(() => import('./ValueCircle'), {
 type StepContentProps = {
   stepIndex: number;
   selectedValue: Value;
-  reason: string;
+  selectedDomain: keyof Value | null;
+  getLowestDomains: (values: Value) => string[];
+  orientation: string;
+  obstacle: string;
   action: string;
-  onSelectValue: (key: string, value: number) => void;
-  onReasonChange: (text: string) => void;
+  onSelectValue: (key: keyof Value, value: number) => void;
+  onSelectDomain: (domain: keyof Value) => void;
+  onOrientationChange: (text: string) => void;
+  onObstacleChange: (text: string) => void;
   onActionChange: (text: string) => void;
 };
 
 export function StepContent({
   stepIndex,
   selectedValue,
-  reason,
+  selectedDomain,
+  getLowestDomains,
+  orientation,
+  obstacle,
   action,
   onSelectValue,
-  onReasonChange,
+  onSelectDomain,
+  onOrientationChange,
+  onObstacleChange,
   onActionChange,
 }: StepContentProps) {
   const { t } = useTranslation();
@@ -57,20 +67,90 @@ export function StepContent({
   }
 
   if (stepIndex === 1) {
+    const keyMap = {
+      work: '일',
+      growth: '성장',
+      leisure: '여가',
+      relationship: '관계',
+    };
+
+    const lowestDomains = getLowestDomains(selectedValue);
+
     return (
-      <TextInputStep
-        i18nKey={step.i18nKey}
-        value={reason}
-        onChange={onReasonChange}
-      />
+      <div className="flex flex-1 flex-col gap-4">
+        <div className="flex flex-row gap-2 flex-wrap">
+          {lowestDomains.length > 1 &&
+            lowestDomains.map((key) => (
+              <Button
+                key={key}
+                onClick={() => onSelectDomain(key as keyof Value)}
+                fullWidth={false}
+                className={`py-2 px-4 rounded-2xl ${selectedDomain !== key ? 'bg-blue-100 text-black' : 'bg-btn-act-page text-white font-bold'}`}
+              >
+                <Text className="text-body-small">
+                  {keyMap[key as keyof typeof keyMap]}
+                </Text>
+              </Button>
+            ))}
+        </div>
+        <div className="flex flex-col gap-2">
+          <Text className="text-title-medium font-bold">
+            <Text
+              as="span"
+              className="text-title-medium bg-btn-act-page text-white font-bold py-2 px-4 rounded-2xl"
+            >
+              {keyMap[selectedDomain as keyof Value]}
+            </Text>{' '}
+            영역 중 추구하고자 하는 방향을 작성해보세요
+          </Text>
+          <Text className="text-body-medium text-gray-600">
+            하나만 골라서 작성
+          </Text>
+        </div>
+        <TextInputStep
+          value={orientation}
+          onChange={onOrientationChange}
+          placeholder="영역 중 추구하고자 하는 방향을 작성해보세요"
+        />
+      </div>
+    );
+  }
+
+  if (stepIndex === 2) {
+    return (
+      <div className="flex flex-1 flex-col gap-4">
+        <div className="flex flex-col gap-2">
+          <Text className="text-title-medium font-bold">
+            그걸 막는 장애물은? 작성해보세요
+          </Text>
+          <Text className="text-body-medium text-gray-600">
+            그걸 막는 장애물을 작성해보세요
+          </Text>
+        </div>
+        <TextInputStep
+          value={obstacle}
+          onChange={onObstacleChange}
+          placeholder="그걸 막는 장애물을 작성해보세요"
+        />
+      </div>
     );
   }
 
   return (
-    <TextInputStep
-      i18nKey={step.i18nKey}
-      value={action}
-      onChange={onActionChange}
-    />
+    <div className="flex flex-1 flex-col gap-4">
+      <div className="flex flex-col gap-2">
+        <Text className="text-title-medium font-bold">
+          할 수 있는 구체적이고 작은 일을 입력해보세요
+        </Text>
+        <Text className="text-body-medium text-gray-600">
+          작고 구체적인 일, 지금 당장 할 수 있는 일
+        </Text>
+      </div>
+      <TextInputStep
+        value={action}
+        onChange={onActionChange}
+        placeholder="투두 입력"
+      />
+    </div>
   );
 }

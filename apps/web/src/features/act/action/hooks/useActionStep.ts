@@ -21,15 +21,40 @@ export function useActionStep() {
     leisure: null,
     relationship: null,
   });
-  const [reason, setReason] = useState('');
+
+  const getLowestDomains = (values: Value): string[] => {
+    let minScore = Infinity;
+
+    return Object.entries(values).reduce((acc: string[], [key, value]) => {
+      // 값이 null인 경우는 진단되지 않은 것으로 간주하여 제외
+      if (value === null) return acc;
+
+      if (value < minScore) {
+        // 새로운 최저점을 발견하면 기존 배열을 버리고 새 키를 담음
+        minScore = value;
+        return [key];
+      } else if (value === minScore) {
+        // 최저점과 동점이면 배열에 추가 (중복 허용)
+        return [...acc, key];
+      }
+
+      return acc;
+    }, []);
+  };
+
+  const [selectedDomain, setSelectedDomain] = useState<keyof Value>('work');
+  const [orientation, setOrientation] = useState('');
+  const [obstacle, setObstacle] = useState('');
   const [action, setAction] = useState('');
 
   const step = ACTION_STEPS[stepIndex];
 
   const isNextDisabled = () => {
-    if (stepIndex === 0) return !selectedValue;
-    if (stepIndex === 1) return reason.trim().length === 0;
-    if (stepIndex === 2) return action.trim().length === 0;
+    if (stepIndex === 0)
+      return Object.values(selectedValue).some((v) => v === null);
+    if (stepIndex === 1) return orientation.trim().length === 0;
+    if (stepIndex === 2) return obstacle.trim().length === 0;
+    if (stepIndex === 3) return action.trim().length === 0;
     return false;
   };
 
@@ -40,8 +65,16 @@ export function useActionStep() {
     });
   };
 
-  const handleReasonChange = (text: string) => {
-    setReason(text);
+  const handleSelectDomain = (domain: keyof Value) => {
+    setSelectedDomain(domain);
+  };
+
+  const handleOrientationChange = (text: string) => {
+    setOrientation(text);
+  };
+
+  const handleObstacleChange = (text: string) => {
+    setObstacle(text);
   };
 
   const handleActionChange = (text: string) => {
@@ -49,15 +82,17 @@ export function useActionStep() {
   };
 
   const handleNext = () => {
-    if (stepIndex < STEP_COUNT - 1) {
+    if (stepIndex === 0) {
+      setSelectedDomain(getLowestDomains(selectedValue)[0] as keyof Value);
+      setStepIndex((prev) => prev + 1);
+    } else if (stepIndex < STEP_COUNT - 1) {
       setStepIndex((prev) => prev + 1);
     } else {
-      // 마지막 스텝에서는 데이터 전송
-      console.log(selectedValue);
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
         data: {
           value: selectedValue,
-          reason,
+          orientation,
+          obstacle,
           action,
         },
       });
@@ -84,11 +119,16 @@ export function useActionStep() {
     step,
     stepIndex,
     selectedValue,
-    reason,
+    selectedDomain,
+    orientation,
+    obstacle,
     action,
+    getLowestDomains,
     isNextDisabled: isNextDisabled(),
     handleSelectValue,
-    handleReasonChange,
+    handleSelectDomain,
+    handleOrientationChange,
+    handleObstacleChange,
     handleActionChange,
     handleNext,
     handleExit,
