@@ -7,6 +7,7 @@ import {
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
+import { setIsOnboarded } from '@src/lib';
 import { safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { createWebViewMessageHandler } from '@src/lib/webview';
@@ -18,6 +19,7 @@ export default function OnboardScreen() {
   const handleMessage = createWebViewMessageHandler({
     onNavigate: (action) => {
       if (action === 'LOGIN') {
+        setIsOnboarded(true);
         router.replace(ROUTES.LOGIN);
       }
     },

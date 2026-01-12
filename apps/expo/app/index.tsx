@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
-import { router } from 'expo-router';
+import { Redirect, router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Alert, Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -19,6 +19,7 @@ import {
   useHomeListData,
   useHomePageState,
 } from '@src/features/home/hooks';
+import { isOnboarded } from '@src/lib';
 import { historyAPI } from '@src/lib/api/history';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
@@ -35,6 +36,8 @@ export default function HomeScreen(): React.ReactNode {
 
   const [modalType, setModalType] = useState<ModalType | null>(null);
   const [detail, setDetail] = useState<ActHistory | null>(null);
+
+  const onboarded = isOnboarded();
 
   const detailMutation = useMutation({
     mutationFn: historyAPI.getDetail,
@@ -60,6 +63,10 @@ export default function HomeScreen(): React.ReactNode {
     page,
     historyPages: data?.pages,
   });
+
+  if (!onboarded) {
+    return <Redirect href={ROUTES.ONBOARD} />;
+  }
 
   if (!isLoggedIn) {
     Alert.alert(t('common.error.loginRequired'), t('common.error.goToLogin'), [
