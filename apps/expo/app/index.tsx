@@ -49,7 +49,7 @@ export default function HomeScreen(): React.ReactNode {
     },
   });
 
-  const handleModalOpen = (id: number, type: ACTType, date: string) => {
+  const handleModalOpen = (id: string, type: ACTType, date: string) => {
     detailMutation.mutate(id);
     setModalType({ type, date });
   };

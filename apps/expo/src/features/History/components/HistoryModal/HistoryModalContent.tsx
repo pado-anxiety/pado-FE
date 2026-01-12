@@ -3,6 +3,7 @@ import { ActHistory } from '@src/features/History/types';
 import {
   AcceptanceContent,
   CognitiveDefusionContent,
+  CommittedActionContent,
   ContactWithPresentContent,
   EmotionNoteContent,
   ValuesContent,
@@ -41,6 +42,13 @@ export function HistoryModalContent({ data, date }: HistoryModalContentProps) {
     case 'VALUES':
       return (
         <ValuesContent
+          date={date}
+          data={data.data}
+        />
+      );
+    case 'COMMITTED_ACTION':
+      return (
+        <CommittedActionContent
           date={date}
           data={data.data}
         />

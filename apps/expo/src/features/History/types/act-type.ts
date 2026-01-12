@@ -28,6 +28,13 @@ export type ValuesData = {
   action: string;
 };
 
+export type CommittedActionData = {
+  matter: string;
+  value: string;
+  barrier: string;
+  action: string;
+};
+
 // API response wrapper types
 export type ContactWithPresent = {
   type: 'CONTACT_WITH_PRESENT';
@@ -52,6 +59,11 @@ export type Acceptance = {
 export type Values = {
   type: 'VALUES';
   data: ValuesData;
+};
+
+export type CommittedAction = {
+  type: 'COMMITTED_ACTION';
+  data: CommittedActionData;
 };
 
 export type ActHistory =
