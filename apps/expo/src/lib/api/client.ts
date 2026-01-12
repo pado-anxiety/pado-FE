@@ -45,12 +45,8 @@ apiClient.interceptors.response.use(
     if (status === 401 && !config._retry) {
       config._retry = true;
 
-      console.log('토큰 재발급 시도');
-
       try {
         const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
-
-        console.log('토큰 재발급: ', accessToken);
 
         useAuth.getState().setAuthToken(accessToken, refreshToken);
 

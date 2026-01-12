@@ -98,7 +98,7 @@ export function SkySection({
             />
           </TouchableOpacity>
 
-          {/* <TouchableOpacity
+          <TouchableOpacity
             className="flex flex-col"
             onPress={() => router.push(ROUTES.ONBOARD)}
           >
@@ -127,7 +127,7 @@ export function SkySection({
               className="mt-1 h-[1.5px] w-full bg-slate-300"
               entering={FadeIn.duration(2000)}
             />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </View>
     </View>

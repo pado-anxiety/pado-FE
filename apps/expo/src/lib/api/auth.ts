@@ -1,9 +1,12 @@
 import axios from 'axios';
 
-import { authStorage } from '../auth';
+import { useAuth } from '../auth';
+import { ENV } from '../env';
 
 export const ROUTES = {
   REFRESH: '/tokens/reissue',
+  GOOGLE: '/login/google',
+  KAKAO: '/login/kakao',
 } as const;
 
 export const authAPI = {
@@ -12,11 +15,9 @@ export const authAPI = {
     refreshToken: string;
   }> => {
     const response: { accessToken: string; refreshToken: string } =
-      await axios.post(`https://nyangtodac-dev.site/tokens/reissue`, {
-        refreshToken: authStorage.getRefreshToken(),
+      await axios.post(`${ENV.BASE_URL}${ROUTES.REFRESH}`, {
+        refreshToken: useAuth.getState().refreshToken,
       });
-
-    console.log('토큰 재발급 response: ', response);
 
     return response.data;
   },
@@ -31,25 +32,19 @@ export const authAPI = {
     redirectUri: string;
     platform: 'ANDROID' | 'IOS';
   }): Promise<{ accessToken: string; refreshToken: string }> => {
-    const response = await axios.post(
-      'https://nyangtodac-dev.site/login/google',
-      {
-        codeVerifier,
-        authorizationCode,
-        redirectUri,
-        platform,
-      },
-    );
+    const response = await axios.post(`${ENV.BASE_URL}${ROUTES.GOOGLE}`, {
+      codeVerifier,
+      authorizationCode,
+      redirectUri,
+      platform,
+    });
 
     return response.data;
   },
   getKaKaoAccessToken: async (accessToken: string) => {
-    const response = await axios.post(
-      'https://nyangtodac-dev.site/login/kakao',
-      {
-        accessToken,
-      },
-    );
+    const response = await axios.post(`${ENV.BASE_URL}${ROUTES.KAKAO}`, {
+      accessToken,
+    });
 
     return response.data;
   },

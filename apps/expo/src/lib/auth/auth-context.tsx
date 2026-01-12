@@ -57,6 +57,7 @@ export const useAuth = create<AuthState>((set) => ({
       }
 
       authStorage.setAuthToken(token.accessToken, token.refreshToken);
+
       set({
         accessToken: token.accessToken,
         refreshToken: token.refreshToken,
@@ -72,7 +73,9 @@ export const useAuth = create<AuthState>((set) => ({
 
   logout: () => {
     set({ isLoading: true });
+
     authStorage.clearAuthToken();
+
     set({
       accessToken: null,
       refreshToken: null,
@@ -82,6 +85,8 @@ export const useAuth = create<AuthState>((set) => ({
   },
 
   setAuthToken: (accessToken: string, refreshToken: string) => {
+    authStorage.setAuthToken(accessToken, refreshToken);
+
     set({
       accessToken: accessToken,
       refreshToken: refreshToken,

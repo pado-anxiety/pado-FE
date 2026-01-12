@@ -173,7 +173,7 @@ export default function SettingsScreen() {
           <View className="flex flex-col gap-2">
             <BottomSheetTextInput
               placeholder="피드백을 남겨주세요."
-              className="h-48 rounded-2xl border border-gray-300 bg-white/20 px-4 text-body-medium"
+              className="h-48 rounded-xl border border-gray-300 bg-white/20 px-4 text-body-medium"
               value={feedback}
               onChangeText={setFeedback}
               multiline={true}
@@ -183,7 +183,7 @@ export default function SettingsScreen() {
             <Button
               text="피드백 보내기"
               onPress={() => handleSendFeedback(feedback)}
-              className="rounded-2xl bg-btn-act-page"
+              className="rounded-xl bg-btn-act-page"
             />
           </View>
         </Pressable>
