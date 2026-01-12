@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 전체 요소에 적용 */
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea {
+  -webkit-touch-callout: default;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;

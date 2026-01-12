@@ -55,7 +55,7 @@ function ActStepPage({
 }: ActStepPageProps) {
   return (
     <PageLayout className="bg-act-page">
-      <div className="flex flex-col w-full flex-1 justify-between">
+      <div className="flex flex-col w-full flex-1 justify-between gap-2">
         <ActStepHeader
           leftButton={leftButton}
           rightButton={rightButton}

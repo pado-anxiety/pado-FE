@@ -1,10 +1,10 @@
 'use client';
 
+import { ChevronsDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Text } from '@pado/ui';
-import { ChevronsDown } from 'lucide-react';
 
 import ActResultPage from '@/components/act/ActResultPage';
 import { DiaryResult } from '@/features/act/diary/types';
@@ -25,6 +25,12 @@ export default function DiaryResultView() {
     });
   };
 
+  const qKey = [
+    'act.diary.step.step1.question',
+    'act.diary.step.step2.question',
+    'act.diary.step.step3.question',
+  ];
+
   return (
     <ActResultPage
       title={[t('act.diary.result.title')]}
@@ -40,12 +46,12 @@ export default function DiaryResultView() {
           >
             <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm w-full">
               <Text className="text-body-medium font-bold">
-                {item.question}
+                {t(qKey[index])}
               </Text>
               <Text className="text-body-medium text-gray-700 break-words leading-relaxed">
                 {item.answer}
               </Text>
-              {item.feels && (
+              {/* {item.feels && (
                 <div className="flex flex-row gap-2">
                   {item.feels.map((feel, index) => (
                     <Text
@@ -56,7 +62,7 @@ export default function DiaryResultView() {
                     </Text>
                   ))}
                 </div>
-              )}
+              )} */}
             </div>
             {index !== parsedData.length - 1 && <ChevronsDown size={30} />}
           </div>
