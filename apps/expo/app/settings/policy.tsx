@@ -1,10 +1,8 @@
-import { Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { ScrollView } from 'react-native';
-import { scale } from 'react-native-size-matters';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
-import { Pressable, Text, View } from '@src/components/ui';
+import { NavButton, Text, View } from '@src/components/ui';
 
 export default function PrivacyPolicyScreen() {
   const router = useRouter();
@@ -15,13 +13,11 @@ export default function PrivacyPolicyScreen() {
         className="mt-4 flex-1"
         showsVerticalScrollIndicator={false}
       >
-        <Pressable onPress={() => router.back()}>
-          <Feather
-            name="arrow-left"
-            size={scale(30)}
-            color="black"
-          />
-        </Pressable>
+        <NavButton
+          variant="back"
+          size="large"
+          onPress={() => router.back()}
+        />
         <View className="mt-4 gap-6 pb-8">
           <Text className="text-body-medium font-bold">개인정보 처리방침</Text>
 

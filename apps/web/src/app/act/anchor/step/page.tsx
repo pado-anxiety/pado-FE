@@ -1,12 +1,12 @@
 'use client';
 
-import { ArrowLeft, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
-import { Button, Text } from '@pado/ui';
+import { Text } from '@pado/ui';
 
 import ActStepPage from '@/components/act/ActStepPage';
+import { NavButton } from '@/components/ui';
 import {
   CountButtons,
   ExampleSection,
@@ -51,29 +51,19 @@ export default function AnchorStepPage() {
   };
 
   const leftButton = (
-    <Button
-      size="sm"
-      color="link"
+    <NavButton
+      variant="back"
+      size="large"
       onClick={handleGoBack}
-    >
-      <ArrowLeft
-        size={30}
-        color="black"
-      />
-    </Button>
+    />
   );
 
   const rightButton = (
-    <Button
-      size="sm"
-      color="link"
+    <NavButton
+      variant="close"
+      size="large"
       onClick={handleGoHome}
-    >
-      <X
-        size={30}
-        color="black"
-      />
-    </Button>
+    />
   );
 
   return (

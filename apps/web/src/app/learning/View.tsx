@@ -1,10 +1,10 @@
 'use client';
 
-import { X } from 'lucide-react';
 import { motion } from 'motion/react';
 
 import { Button } from '@pado/ui';
 
+import { NavButton } from '@/components/ui';
 import { LearningStepContent, useLearningStep } from '@/features/learning';
 
 export default function LearningView() {
@@ -35,17 +35,12 @@ export default function LearningView() {
     >
       <div className="flex w-full flex-1 flex-col justify-between">
         {/* 상단 헤더 - Exit 버튼만 왼쪽에 */}
-        <div className="flex w-full justify-start  px-8">
-          <Button
-            size="sm"
-            color="link"
+        <div className="flex w-full justify-start px-8">
+          <NavButton
+            variant="close"
+            size="large"
             onClick={handleExit}
-          >
-            <X
-              size={30}
-              color="black"
-            />
-          </Button>
+          />
         </div>
 
         {/* 메인 콘텐츠 */}

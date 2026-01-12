@@ -1,4 +1,4 @@
-import { X } from 'lucide-react';
+import { NavButton } from '@/components/ui';
 
 type StepHeaderProps = {
   onExit: () => void;
@@ -7,9 +7,9 @@ type StepHeaderProps = {
 export function StepHeader({ onExit }: StepHeaderProps) {
   return (
     <div className="flex flex-row gap-2 items-center justify-between">
-      <X
-        size={30}
-        color="black"
+      <NavButton
+        variant="close"
+        size="large"
         onClick={onExit}
       />
     </div>

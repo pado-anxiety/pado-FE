@@ -1,9 +1,9 @@
-import { Feather, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { scale } from 'react-native-size-matters';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
-import { Pressable, Text, View } from '@src/components/ui';
+import { NavButton, Pressable, Text, View } from '@src/components/ui';
 import { useLanguage } from '@src/lib/i18n';
 
 export default function LanguageScreen() {
@@ -16,13 +16,11 @@ export default function LanguageScreen() {
 
   return (
     <PageSafeAreaView className="mt-4 gap-2 bg-page px-8">
-      <Pressable onPress={() => router.back()}>
-        <Feather
-          name="arrow-left"
-          size={scale(24)}
-          color="black"
-        />
-      </Pressable>
+      <NavButton
+        variant="back"
+        size="large"
+        onPress={() => router.back()}
+      />
       <View className="mt-4 flex flex-col gap-6">
         <Pressable
           className="flex flex-row items-center justify-between"

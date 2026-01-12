@@ -1,7 +1,6 @@
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
-import { Button } from '@pado/ui';
-import { ArrowLeft, X } from 'lucide-react';
 
+import { NavButton } from '@/components/ui';
 import { handlePostMessage } from '@/lib';
 
 export function EmbraceStepHeader() {
@@ -12,26 +11,16 @@ export function EmbraceStepHeader() {
 
   return (
     <div className="z-20 flex flex-row w-full justify-between px-8">
-      <Button
-        size="sm"
-        color="link"
+      <NavButton
+        variant="back"
+        size="large"
         onClick={handleGoBack}
-      >
-        <ArrowLeft
-          size={30}
-          color="black"
-        />
-      </Button>
-      <Button
-        size="sm"
-        color="link"
+      />
+      <NavButton
+        variant="close"
+        size="large"
         onClick={handleGoHome}
-      >
-        <X
-          size={30}
-          color="black"
-        />
-      </Button>
+      />
     </div>
   );
 }

@@ -1,7 +1,8 @@
 'use client';
 
-import { Button, Text } from '@pado/ui';
 import { X } from 'lucide-react';
+
+import { Button, Text } from '@pado/ui';
 
 interface ActIntroHeaderProps {
   title: string;

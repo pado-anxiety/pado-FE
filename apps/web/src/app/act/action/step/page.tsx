@@ -1,11 +1,9 @@
 'use client';
 
-import { ArrowLeft, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { Button } from '@pado/ui';
-
 import ActStepPage from '@/components/act/ActStepPage';
+import { NavButton } from '@/components/ui';
 import { StepContent, useActionStep } from '@/features/act/action';
 
 export default function ActionStepPage() {
@@ -30,29 +28,19 @@ export default function ActionStepPage() {
   } = useActionStep();
 
   const leftButton = (
-    <Button
-      size="sm"
-      color="link"
+    <NavButton
+      variant="back"
+      size="large"
       onClick={() => handlePrevStep(stepIndex)}
-    >
-      <ArrowLeft
-        size={30}
-        color="black"
-      />
-    </Button>
+    />
   );
 
   const rightButton = (
-    <Button
-      size="sm"
-      color="link"
+    <NavButton
+      variant="close"
+      size="large"
       onClick={handleExit}
-    >
-      <X
-        size={30}
-        color="black"
-      />
-    </Button>
+    />
   );
 
   return (

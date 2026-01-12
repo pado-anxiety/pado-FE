@@ -1,8 +1,7 @@
-import { Feather } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
-import { AnimatedText, Pressable, View } from '@src/components/ui';
+import { AnimatedText, NavButton, View } from '@src/components/ui';
 import HistorySkySection from '@src/features/History/HistorySkySection';
 import { triggerHaptic } from '@src/lib/haptics';
 
@@ -40,18 +39,14 @@ export const HomeListHeader = ({ page, setPage }: HomeListHeaderProps) => {
         className="flex flex-col items-start justify-center gap-4 bg-page px-8 pt-12"
         style={{ paddingTop: insets.top }}
       >
-        <Pressable
+        <NavButton
+          variant="back"
+          size="large"
           onPress={() => {
             triggerHaptic('NAVIGATE');
             setPage('HOME');
           }}
-        >
-          <Feather
-            name="arrow-left"
-            size={scale(30)}
-            color="black"
-          />
-        </Pressable>
+        />
         <View
           className="flex flex-col gap-2"
           style={{ paddingTop: scale(50) }}

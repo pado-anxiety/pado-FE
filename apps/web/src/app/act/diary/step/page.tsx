@@ -1,12 +1,9 @@
 'use client';
 
-import { ArrowLeft, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { Button } from '@pado/ui';
-
 import ActStepPage from '@/components/act/ActStepPage';
-import { Divide } from '@/components/ui';
+import { Divide, NavButton } from '@/components/ui';
 import {
   AnswerArea,
   HistoryCards,
@@ -27,29 +24,19 @@ export default function DiaryStepPage() {
   } = useDiaryStep();
 
   const leftButton = (
-    <Button
-      size="sm"
-      color="link"
+    <NavButton
+      variant="back"
+      size="large"
       onClick={() => handlePrevStep(stepIndex)}
-    >
-      <ArrowLeft
-        size={30}
-        color="black"
-      />
-    </Button>
+    />
   );
 
   const rightButton = (
-    <Button
-      size="sm"
-      color="link"
+    <NavButton
+      variant="close"
+      size="large"
       onClick={handleExit}
-    >
-      <X
-        size={30}
-        color="black"
-      />
-    </Button>
+    />
   );
 
   return (
