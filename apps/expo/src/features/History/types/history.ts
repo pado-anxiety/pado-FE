@@ -1,6 +1,6 @@
 import { ACTType } from './act-type';
 
 export interface HistoryItem {
-  id: number;
+  id: string;
   type: ACTType;
 }

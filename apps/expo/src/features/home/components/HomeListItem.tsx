@@ -12,7 +12,7 @@ import { DeepSeaSection } from './DeepSeaSection';
 
 interface HomeListItemProps {
   item: HomeListItemType;
-  handleModalOpen: (id: number, type: ACTType, date: string) => void;
+  handleModalOpen: (id: string, type: ACTType, date: string) => void;
 }
 
 export const HomeListItem = ({ item, handleModalOpen }: HomeListItemProps) => {

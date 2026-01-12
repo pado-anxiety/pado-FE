@@ -9,7 +9,7 @@ import { ACTType } from './types';
 
 type HistoryCardProps = {
   item: HistoryItemWithIndex;
-  handleModalOpen: (id: number, type: ACTType, date: string) => void;
+  handleModalOpen: (id: string, type: ACTType, date: string) => void;
 };
 
 const ACT_TYPE_I18N_KEY: Record<ACTType, string> = {

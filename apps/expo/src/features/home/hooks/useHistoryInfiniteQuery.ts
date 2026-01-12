@@ -13,7 +13,7 @@ export const useHistoryInfiniteQuery = ({
   const { data, fetchNextPage, hasNextPage, isPending, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ['history'],
-      queryFn: ({ pageParam }: { pageParam: number | null }) =>
+      queryFn: ({ pageParam }: { pageParam: string | null }) =>
         historyAPI.getHistory(pageParam),
       initialPageParam: null,
       getNextPageParam: (lastPage) =>
