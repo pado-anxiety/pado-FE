@@ -18,7 +18,9 @@ export default function DetachResultView() {
     });
   };
 
-  const title = t('act.detach.result.title', { returnObjects: true }) as string[];
+  const title = t('act.detach.result.title', {
+    returnObjects: true,
+  }) as string[];
 
   return (
     <ActResultPage

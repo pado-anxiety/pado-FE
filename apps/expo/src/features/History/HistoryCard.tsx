@@ -18,6 +18,7 @@ const ACT_TYPE_I18N_KEY: Record<ACTType, string> = {
   COGNITIVE_DEFUSION: 'act.common.historyType.cognitiveDefusion',
   ACCEPTANCE: 'act.common.historyType.acceptance',
   VALUES: 'act.common.historyType.values',
+  COMMITTED_ACTION: '가치 & 전념행동',
 };
 
 export default function HistoryCard({

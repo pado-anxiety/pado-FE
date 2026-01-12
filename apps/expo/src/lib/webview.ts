@@ -24,6 +24,7 @@ export const createWebViewMessageHandler = (
     onNavigate?: (action: string) => void;
     onData?: (data: unknown) => void;
     onError?: (error: string) => void;
+    onValidate?: (title: string, message: string) => void;
   } = {},
 ) => {
   return (event: WebViewMessageEvent) => {
@@ -48,6 +49,8 @@ export const createWebViewMessageHandler = (
       handlers.onData(data);
     } else if (type === WEBVIEW_MESSAGE_TYPE.ERROR && handlers.onError) {
       handlers.onError(data.error);
+    } else if (type === WEBVIEW_MESSAGE_TYPE.VALIDATE && handlers.onValidate) {
+      handlers.onValidate(data.title, data.message);
     }
   };
 };

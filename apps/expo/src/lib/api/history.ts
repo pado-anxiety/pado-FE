@@ -1,5 +1,6 @@
 import { ACTType, ActHistory } from '@src/features/History/types';
 
+import { useAuth } from '../auth';
 import { apiClient } from './client';
 
 export type HistoryAPI = {
@@ -18,9 +19,13 @@ export const historyAPI = {
     if (cursor) {
       url += `?cursor=${cursor}`;
     }
+    console.log(useAuth.getState().accessToken);
+    console.log('url: ', url);
     const response: HistoryAPI = await apiClient.get(url);
 
     // await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    console.log('response: ', response);
 
     return response;
   },

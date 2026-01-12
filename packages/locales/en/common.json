@@ -14,6 +14,10 @@
     "loginRequired": "Login is required.",
     "goToLogin": "Redirecting to login page."
   },
+  "validation": {
+    "charLimitExceeded": "Character limit exceeded.",
+    "charLimitMessage": "Maximum {{maxLength}} characters allowed. (Current: {{currentLength}})"
+  },
   "empty": {
     "noRecords": "No records found."
   },

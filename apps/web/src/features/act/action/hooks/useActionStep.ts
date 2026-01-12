@@ -1,10 +1,14 @@
 import { useMemo, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 
 import { STEP_COUNT } from '../constants';
+
+const MAX_CHAR_LIMIT = 500;
 
 export type Value = {
   work: number | null;
@@ -14,6 +18,7 @@ export type Value = {
 };
 
 export function useActionStep() {
+  const { t } = useTranslation();
   const [stepIndex, setStepIndex] = useState(0);
   const [selectedValue, setSelectedValue] = useState<Value>({
     work: null,
@@ -82,7 +87,33 @@ export function useActionStep() {
     setAction(text);
   };
 
+  const validateCharLimit = (text: string): boolean => {
+    if (text.length > MAX_CHAR_LIMIT) {
+      handlePostMessage(WEBVIEW_MESSAGE_TYPE.VALIDATE, {
+        title: t('common.validation.charLimitExceeded'),
+        message: t('common.validation.charLimitMessage', {
+          maxLength: MAX_CHAR_LIMIT,
+          currentLength: text.length,
+        }),
+      });
+      return false;
+    }
+    return true;
+  };
+
   const handleNext = () => {
+    // Validate character limit for text input steps
+    if (stepIndex === 1 && !validateCharLimit(orientation)) {
+      return;
+    }
+    if (stepIndex === 2 && !validateCharLimit(obstacle)) {
+      return;
+    }
+    if (stepIndex === 3 && !validateCharLimit(action)) {
+      return;
+    }
+
+    triggerHaptic('NAVIGATE');
     if (stepIndex === 0) {
       if (lowestDomains.length > 0) {
         setSelectedDomain(lowestDomains[0]);

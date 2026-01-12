@@ -1,5 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import { handlePostMessage, triggerHaptic } from '@/lib';
@@ -7,7 +9,10 @@ import { handlePostMessage, triggerHaptic } from '@/lib';
 import { DETACH_STEPS, STEP_COUNT } from '../constants';
 import { DetachStep, UserTextToken } from '../types';
 
+const MAX_CHAR_LIMIT = 100;
+
 export function useDetachStep() {
+  const { t } = useTranslation();
   const [stepIndex, setStepIndex] = useState<number>(0);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [userTextTokens, setUserTextTokens] = useState<UserTextToken[]>([]);
@@ -22,9 +27,30 @@ export function useDetachStep() {
     textarea.style.height = `${textarea.scrollHeight}px`;
   }, []);
 
+  const validateCharLimit = useCallback(
+    (text: string): boolean => {
+      if (text.length > MAX_CHAR_LIMIT) {
+        handlePostMessage(WEBVIEW_MESSAGE_TYPE.VALIDATE, {
+          title: t('common.validation.charLimitExceeded'),
+          message: t('common.validation.charLimitMessage', {
+            maxLength: MAX_CHAR_LIMIT,
+            currentLength: text.length,
+          }),
+        });
+        return false;
+      }
+      return true;
+    },
+    [t],
+  );
+
   const handleNext = useCallback(() => {
     if (stepIndex < STEP_COUNT - 1) {
       if (!textareaRef.current?.value) {
+        return;
+      }
+      // Validate character limit for text input step
+      if (stepIndex === 0 && !validateCharLimit(textareaRef.current.value)) {
         return;
       }
       triggerHaptic('NAVIGATE');
@@ -41,7 +67,7 @@ export function useDetachStep() {
         data: userTextTokens,
       });
     }
-  }, [stepIndex, userTextTokens]);
+  }, [stepIndex, userTextTokens, validateCharLimit]);
 
   const handleExit = useCallback(() => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {

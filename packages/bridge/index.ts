@@ -3,6 +3,7 @@ export const WEBVIEW_MESSAGE_TYPE = {
     DATA: 'DATA',
     ERROR: 'ERROR',
     HAPTIC: 'HAPTIC',
+    VALIDATE: 'VALIDATE',
 } as const;
 
 export interface WebViewMessagePayload {
@@ -17,6 +18,10 @@ export interface WebViewMessagePayload {
     },
     [WEBVIEW_MESSAGE_TYPE.HAPTIC]: {
         type: string;
+    },
+    [WEBVIEW_MESSAGE_TYPE.VALIDATE]: {
+        title: string;
+        message: string;
     },
     // ex)
     // [WEBVIEW_MESSAGE_TYPE.SHOW_TOAST]: { message: string; duration?: number };

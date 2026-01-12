@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import { Alert } from 'react-native';
 import WebView from 'react-native-webview';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
@@ -31,6 +32,9 @@ export default function DiaryStepScreen() {
           data: safeStringify(data),
         },
       });
+    },
+    onValidate: (title, message) => {
+      Alert.alert(title, message, [{ text: '확인', onPress: () => {} }]);
     },
   });
 

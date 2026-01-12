@@ -10,6 +10,8 @@ import { safeStringify } from '@/lib/json';
 import { DIARY_STEPS, STEP_COUNT } from '../constants';
 import { DiaryStep, HistoryCard } from '../types';
 
+const MAX_CHAR_LIMIT = 500;
+
 export function useDiaryStep() {
   const { t } = useTranslation();
   const [stepIndex, setStepIndex] = useState<number>(0);
@@ -18,11 +20,36 @@ export function useDiaryStep() {
 
   const step: DiaryStep = DIARY_STEPS[stepIndex];
 
+  const validateCharLimit = useCallback(
+    (text: string): boolean => {
+      if (text.length > MAX_CHAR_LIMIT) {
+        handlePostMessage(WEBVIEW_MESSAGE_TYPE.VALIDATE, {
+          title: t('common.validation.charLimitExceeded'),
+          message: t('common.validation.charLimitMessage', {
+            maxLength: MAX_CHAR_LIMIT,
+            currentLength: text.length,
+          }),
+        });
+        return false;
+      }
+      return true;
+    },
+    [t],
+  );
+
   const handleNext = useCallback(() => {
     if (
       textareaRef.current?.value ||
       (stepIndex === STEP_COUNT - 1 && textareaRef.current?.value !== '')
     ) {
+      // Validate character limit for text input
+      if (
+        textareaRef.current?.value &&
+        !validateCharLimit(textareaRef.current.value)
+      ) {
+        return;
+      }
+
       triggerHaptic('NAVIGATE');
       const newHistoryCard: HistoryCard = {
         question: t(step.i18nKey),
@@ -45,7 +72,7 @@ export function useDiaryStep() {
         textareaRef.current.value = '';
       }
     }
-  }, [stepIndex, historyCards, t, step]);
+  }, [stepIndex, historyCards, t, step, validateCharLimit]);
 
   const handleExit = useCallback(() => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
