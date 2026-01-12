@@ -47,7 +47,7 @@ export function TokenSelector({
     }
 
     const diffY = Math.abs(e.clientY - startY.current);
-    if (diffY > 10) {
+    if (diffY > 30) {
       return;
     }
 
@@ -70,25 +70,28 @@ export function TokenSelector({
     selectedMode.current = null;
   };
 
-  // TODO: 스크롤 넘침 문제
   return (
-    <div
-      className="max-h-1000 flex flex-row gap-1 flex-wrap mt-4 p-4 bg-white/50 rounded-xl border border-white scrollbar-hide"
-      onPointerMove={onDragging}
-      onPointerUp={onDraggingEnd}
-      onPointerDown={onDraggingStart}
-    >
-      {userTextTokens.map(({ text, isSelected }, index) => (
-        <Text
-          data-index={index}
-          key={`${text + index}`}
-          className="text-body-medium"
-          style={{ backgroundColor: isSelected ? 'yellow' : 'transparent' }}
-          onClick={() => updateHighlight(index)}
+    <div className="relative flex-1 w-full min-h-0">
+      <div className="absolute inset-0">
+        <div
+          className="h-full overflow-y-auto scrollbar-hide flex flex-row gap-1 flex-wrap content-start p-4 bg-white/50 rounded-xl border border-white touch-pan-y"
+          onPointerMove={onDragging}
+          onPointerUp={onDraggingEnd}
+          onPointerDown={onDraggingStart}
         >
-          {text}
-        </Text>
-      ))}
+          {userTextTokens.map(({ text, isSelected }, index) => (
+            <Text
+              data-index={index}
+              key={`${text + index}`}
+              className="text-body-medium break-all"
+              style={{ backgroundColor: isSelected ? 'yellow' : 'transparent' }}
+              onClick={() => updateHighlight(index)}
+            >
+              {text}
+            </Text>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

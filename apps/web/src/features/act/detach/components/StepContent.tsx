@@ -30,7 +30,7 @@ export function StepContent({
 
   if (stepIndex === 0) {
     return (
-      <div className="flex flex-1 flex-col w-full gap-4">
+      <div className="flex flex-1 flex-col w-full gap-4 flex-shrink-0 min-h-0">
         <div className="flex flex-col gap-2">
           <Text className="text-title-medium">
             {title.map((line, index) => (
@@ -53,24 +53,22 @@ export function StepContent({
   }
 
   return (
-    <div className="flex flex-1 flex-col w-full gap-4 justify-between">
-      <div className="flex flex-col gap-2">
-        <Text className="text-title-medium">
-          {title.map((line, index) => (
-            <span key={index}>
-              {line}
-              {index < title.length - 1 && <br />}
-            </span>
-          ))}
-        </Text>
-        <Text className="text-body-medium">
-          {t(`${step.i18nKey}.description`)}
-        </Text>
-        <TokenSelector
-          userTextTokens={userTextTokens}
-          setUserTextTokens={setUserTextTokens}
-        />
-      </div>
+    <div className="flex flex-col flex-1 w-full gap-2 min-h-0 h-full">
+      <Text className="text-title-medium">
+        {title.map((line, index) => (
+          <span key={index}>
+            {line}
+            {index < title.length - 1 && <br />}
+          </span>
+        ))}
+      </Text>
+      <Text className="text-body-medium">
+        {t(`${step.i18nKey}.description`)}
+      </Text>
+      <TokenSelector
+        userTextTokens={userTextTokens}
+        setUserTextTokens={setUserTextTokens}
+      />
     </div>
   );
 }
