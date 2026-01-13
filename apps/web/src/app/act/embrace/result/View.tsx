@@ -30,7 +30,7 @@ export default function EmbraceResultView() {
       buttonText={t('common.button.next')}
       onButtonClick={handleStart}
     >
-      <Text className="text-body-large bg-white/60 p-4 rounded-2xl border border-white shadow-sm w-full">
+      <Text className="text-body-medium bg-white/60 p-4 rounded-2xl border border-white shadow-sm w-full">
         {t('act.embrace.result.breathTime', { seconds: data })}
       </Text>
     </ActResultPage>

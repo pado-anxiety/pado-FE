@@ -1,6 +1,5 @@
 'use client';
 
-import { ChevronsDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
@@ -69,7 +68,6 @@ export default function DiaryResultView() {
                 </div>
               )} */}
             </div>
-            {index !== parsedData.length - 1 && <ChevronsDown size={30} />}
           </div>
         ))}
       </div>

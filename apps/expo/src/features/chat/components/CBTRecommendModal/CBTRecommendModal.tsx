@@ -1,9 +1,10 @@
 import { RefObject } from 'react';
 
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet';
-import { Modal, Pressable, Text, View } from '@src/components/ui';
 
 import colors from '@pado/tailwind-design-tokens/colors';
+
+import { Modal, Pressable, Text, View } from '@src/components/ui';
 
 import { CBT_MODAL_MESSAGES, CBT_STEP, CBT_STEPS } from '../../constants';
 import { useCBTStep } from '../../hooks';
@@ -48,13 +49,13 @@ export default function CBTRecommendModal({
       handleIndicatorStyle={{ backgroundColor: 'transparent' }}
       onDismiss={reset}
     >
-      <BottomSheetView className="px-5 pt-2 pb-14">
+      <BottomSheetView className="px-5 pb-14 pt-2">
         {/* 스텝 인디케이터 */}
-        <View className="flex flex-row justify-center gap-2 mb-5">
+        <View className="mb-5 flex flex-row justify-center gap-2">
           {CBT_STEPS.map((step) => (
             <View
               key={step}
-              className={`w-2 h-2 rounded-full ${
+              className={`h-2 w-2 rounded-full ${
                 step === currentStep ? 'bg-neutral-600' : 'bg-neutral-400'
               }`}
             />
@@ -83,11 +84,11 @@ export default function CBTRecommendModal({
         )}
 
         {/* 하단 버튼 */}
-        <View className="flex flex-row items-center justify-between mt-6">
+        <View className="mt-6 flex flex-row items-center justify-between">
           <Pressable
             onPress={handleNext}
             disabled={isNextDisabled}
-            className="flex-1 py-4 rounded-2xl items-center justify-center"
+            className="flex-1 items-center justify-center rounded-2xl py-4"
           >
             <Text
               className={`text-body-medium font-semibold ${

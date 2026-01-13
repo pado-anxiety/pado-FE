@@ -1,7 +1,8 @@
 import Slider from '@react-native-community/slider';
-import { Text, View } from '@src/components/ui';
 
 import colors from '@pado/tailwind-design-tokens/colors';
+
+import { Text, View } from '@src/components/ui';
 
 import { CBT_MODAL_MESSAGES } from '../../constants';
 import {
@@ -42,7 +43,7 @@ export default function IntensityStep({
       title={title}
       subtitle={subtitle}
     >
-      <View className="items-center mt-4 w-full px-2">
+      <View className="mt-4 w-full items-center px-2">
         <Slider
           style={{ width: '100%', height: 50 }}
           minimumValue={1}
@@ -55,7 +56,7 @@ export default function IntensityStep({
           thumbTintColor={colors.neutral[700]}
         />
 
-        <View className="flex-row justify-between w-full px-3 mt-2">
+        <View className="mt-2 w-full flex-row justify-between px-3">
           {INTENSITY_LEVELS.map((level) => (
             <Text
               key={level}
@@ -68,7 +69,7 @@ export default function IntensityStep({
           ))}
         </View>
 
-        <View className="flex-row justify-between w-full mt-3 px-1">
+        <View className="mt-3 w-full flex-row justify-between px-1">
           <Text className="text-body-medium text-neutral-650">
             {CBT_MODAL_MESSAGES.STEP.INTENSITY.SUBTITLE_LIGHT}
           </Text>

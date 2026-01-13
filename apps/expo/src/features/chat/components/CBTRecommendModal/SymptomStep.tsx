@@ -20,16 +20,16 @@ export default function SymptomStep({
           <Pressable
             key={option.value}
             onPress={() => onSelect(option.value)}
-            className={`py-4 px-5 rounded-2xl border-[1.5px] ${
+            className={`rounded-2xl border-[1.5px] px-5 py-4 ${
               selectedSymptom === option.value
-                ? 'bg-neutral-600 border-neutral-650'
-                : 'bg-neutral-100 border-neutral-300'
+                ? 'border-neutral-650 bg-neutral-600'
+                : 'border-neutral-300 bg-neutral-100'
             }`}
           >
             <Text
-              className={`text-body-medium text-center ${
+              className={`text-center text-body-medium ${
                 selectedSymptom === option.value
-                  ? 'text-white font-semibold'
+                  ? 'font-semibold text-white'
                   : 'text-neutral-900'
               }`}
             >

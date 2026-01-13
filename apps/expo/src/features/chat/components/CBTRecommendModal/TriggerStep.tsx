@@ -18,21 +18,21 @@ export default function TriggerStep({
       title={CBT_MODAL_MESSAGES.STEP.TRIGGER.TITLE}
       subtitle={CBT_MODAL_MESSAGES.STEP.TRIGGER.SUBTITLE}
     >
-      <View className="flex flex-row flex-wrap justify-center gap-3 mt-2">
+      <View className="mt-2 flex flex-row flex-wrap justify-center gap-3">
         {TRIGGER_OPTIONS.map((option) => (
           <Pressable
             key={option.value}
             onPress={() => onSelect(option.value)}
-            className={`py-3 px-5 rounded-full border-2 ${
+            className={`rounded-full border-2 px-5 py-3 ${
               selectedTrigger === option.value
-                ? 'bg-neutral-600 border-neutral-650'
-                : 'bg-neutral-100 border-neutral-300'
+                ? 'border-neutral-650 bg-neutral-600'
+                : 'border-neutral-300 bg-neutral-100'
             }`}
           >
             <Text
               className={`text-body-medium ${
                 selectedTrigger === option.value
-                  ? 'text-white font-semibold'
+                  ? 'font-semibold text-white'
                   : 'text-neutral-900'
               }`}
             >

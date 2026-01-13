@@ -2,7 +2,7 @@
 
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { ErrorFallback } from '@/components/ui';
+import { Divide, ErrorFallback } from '@/components/ui';
 
 import PageLayout from '../../ui/layout';
 import ActResultButton from './ActResultButton';
@@ -37,6 +37,7 @@ const ActResultPageContent = ({
           <ActResultTitle title={title} />
           <ActResultDescription description={description} />
         </div>
+        <Divide />
         <ActResultContent>{children}</ActResultContent>
       </div>
     </ErrorBoundary>

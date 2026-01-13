@@ -14,13 +14,13 @@ export default function StepLayout({
   children,
 }: StepLayoutProps) {
   return (
-    <View className="flex flex-col gap-4 mt-4">
+    <View className="mt-4 flex flex-col gap-4">
       <View className="flex flex-col gap-2">
-        <Text className="text-title-small text-neutral-900 text-center font-medium leading-relaxed">
+        <Text className="text-center text-title-small font-medium leading-relaxed text-neutral-900">
           {title}
         </Text>
         {subtitle && (
-          <Text className="text-body-large text-neutral-800 text-center">
+          <Text className="text-center text-body-large text-neutral-800">
             {subtitle}
           </Text>
         )}
