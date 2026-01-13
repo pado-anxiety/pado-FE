@@ -42,7 +42,7 @@ export default function EmbraceResultScreen() {
       if (!hasMutated.current) {
         hasMutated.current = true;
         embraceMutation.mutate({
-          breathingTime: parsedData.breathingTime,
+          breathingTime: parsedData.embraceResult,
         });
       }
       router.replace(ROUTES.HOME);
