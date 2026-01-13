@@ -1,3 +1,4 @@
+export { DescriptionList } from './DescriptionList';
 export { Divide } from './Divide';
 export { default as ErrorFallback } from './ErrorFallback';
 export { NavButton } from './NavButton';

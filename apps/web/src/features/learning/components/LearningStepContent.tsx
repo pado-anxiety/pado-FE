@@ -1,6 +1,6 @@
 'use client';
 
-import { Text } from '@pado/ui';
+import { DescriptionList } from '@/components/ui';
 
 import { LearningStep } from '../types';
 
@@ -10,19 +10,11 @@ interface LearningStepContentProps {
 
 export function LearningStepContent({ step }: LearningStepContentProps) {
   return (
-    <div className="flex flex-1 flex-col gap-2">
-      <Text className="text-title-medium">{step.title}</Text>
-
-      <div className="flex flex-col gap-4">
-        {step.content.map((content) => (
-          <Text
-            key={content}
-            className="text-body-medium"
-          >
-            {content}
-          </Text>
-        ))}
-      </div>
+    <div className="flex flex-1 flex-col">
+      <DescriptionList
+        title={step.title}
+        items={step.content}
+      />
     </div>
   );
 }

@@ -2,13 +2,11 @@
 
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { Divide, ErrorFallback } from '@/components/ui';
+import { DescriptionList, Divide, ErrorFallback } from '@/components/ui';
 
 import PageLayout from '../../ui/layout';
 import ActResultButton from './ActResultButton';
 import ActResultContent from './ActResultContent';
-import ActResultDescription from './ActResultDescription';
-import ActResultTitle from './ActResultTitle';
 
 interface ActResultPageProps {
   title: string[];
@@ -33,10 +31,11 @@ const ActResultPageContent = ({
   return (
     <ErrorBoundary fallbackRender={() => <ErrorFallback />}>
       <div className="flex flex-col gap-4 w-full">
-        <div className="flex flex-col gap-2">
-          <ActResultTitle title={title} />
-          <ActResultDescription description={description} />
-        </div>
+        <DescriptionList
+          title={title}
+          items={description}
+          itemClassName="text-body-medium font-normal"
+        />
         <Divide />
         <ActResultContent>{children}</ActResultContent>
       </div>
