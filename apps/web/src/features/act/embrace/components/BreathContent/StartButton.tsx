@@ -17,7 +17,7 @@ export function StartButton({ onClick }: StartButtonProps) {
       className="bg-btn-act-page px-12 py-5 rounded-2xl shadow-lg"
       onClick={onClick}
     >
-      <Text className="text-body-small text-white font-bold">
+      <Text className="text-body-medium text-white font-bold">
         {t('act.embrace.step.startButton')}
       </Text>
     </Button>

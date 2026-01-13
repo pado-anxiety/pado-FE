@@ -30,7 +30,7 @@ export function NextButton({ sessionCount }: NextButtonProps) {
       text={t('common.button.next')}
       size="default"
       fullWidth={false}
-      className="bg-btn-act-page text-xl px-14 py-4 rounded-2xl shadow-lg"
+      className="bg-btn-act-page text-body-medium px-14 py-4 rounded-2xl shadow-lg"
       onClick={handleClick}
     />
   );

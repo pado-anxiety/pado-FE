@@ -18,7 +18,7 @@ export function RestartButton({ onClick }: RestartButtonProps) {
       className="px-20 py-5 rounded-2xl shadow-lg bg-transparent"
       onClick={onClick}
     >
-      <Text className="text-body-small font-bold text-white underline">
+      <Text className="text-body-medium font-bold text-white underline">
         {t('act.embrace.step.restartButton')}
       </Text>
     </Button>
