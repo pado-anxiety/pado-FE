@@ -25,12 +25,6 @@ export default function DiaryResultView() {
     triggerHaptic('NAVIGATE');
   };
 
-  const qKey = [
-    'act.diary.step.step1.question',
-    'act.diary.step.step2.question',
-    'act.diary.step.step3.question',
-  ];
-
   return (
     <ActResultPage
       title={[t('act.diary.result.title')]}
@@ -42,7 +36,7 @@ export default function DiaryResultView() {
       buttonText={t('common.button.complete')}
       onButtonClick={handleComplete}
     >
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         {parsedData.map((item: DiaryResult, index: number) => (
           <div
             key={item.question}
@@ -50,23 +44,11 @@ export default function DiaryResultView() {
           >
             <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm w-full">
               <Text className="text-body-medium font-bold">
-                {t(qKey[index])}
+                {t(`act.diary.step.step${index + 1}.question`)}
               </Text>
               <Text className="text-body-medium text-gray-700 break-words leading-relaxed">
                 {item.answer}
               </Text>
-              {/* {item.feels && (
-                <div className="flex flex-row gap-2">
-                  {item.feels.map((feel, index) => (
-                    <Text
-                      key={feel}
-                      className="text-body-small text-gray-700"
-                    >
-                      {feel + (index !== item.feels!.length - 1 ? ',' : '')}
-                    </Text>
-                  ))}
-                </div>
-              )} */}
             </div>
           </div>
         ))}

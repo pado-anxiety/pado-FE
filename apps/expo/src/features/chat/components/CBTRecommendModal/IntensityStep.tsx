@@ -1,7 +1,3 @@
-import Slider from '@react-native-community/slider';
-
-import colors from '@pado/tailwind-design-tokens/colors';
-
 import { Text, View } from '@src/components/ui';
 
 import { CBT_MODAL_MESSAGES } from '../../constants';
@@ -44,7 +40,7 @@ export default function IntensityStep({
       subtitle={subtitle}
     >
       <View className="mt-4 w-full items-center px-2">
-        <Slider
+        {/* <Slider
           style={{ width: '100%', height: 50 }}
           minimumValue={1}
           maximumValue={5}
@@ -54,7 +50,7 @@ export default function IntensityStep({
           minimumTrackTintColor={colors.neutral[600]}
           maximumTrackTintColor={colors.neutral[300]}
           thumbTintColor={colors.neutral[700]}
-        />
+        /> */}
 
         <View className="mt-2 w-full flex-row justify-between px-3">
           {INTENSITY_LEVELS.map((level) => (
