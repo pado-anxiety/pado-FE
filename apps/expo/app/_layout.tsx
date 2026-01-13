@@ -13,6 +13,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { getHapticState, setHapticState } from '@src/lib/haptics';
 import { I18nProvider, useLanguage } from '@src/lib/i18n';
 import { getWebViewBaseURL } from '@src/lib/route';
+import { useWaveSoundStore } from '@src/lib/sound';
 import { useTheme } from '@src/lib/theme';
 
 import '../global.css';
@@ -20,6 +21,12 @@ import '../global.css';
 function NavigationContent() {
   const { themeStyle } = useTheme();
   const { language } = useLanguage();
+
+  const { play } = useWaveSoundStore();
+
+  useEffect(() => {
+    play();
+  }, [play]);
 
   useEffect(() => {
     const setLangCookie = async () => {
