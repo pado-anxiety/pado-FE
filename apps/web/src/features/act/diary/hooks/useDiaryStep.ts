@@ -52,7 +52,7 @@ export function useDiaryStep() {
 
       triggerHaptic('NAVIGATE');
       const newHistoryCard: HistoryCard = {
-        question: t(step.i18nKey),
+        question: t(`${step.i18nKey}.question`),
         answer: textareaRef.current?.value || '',
       };
 

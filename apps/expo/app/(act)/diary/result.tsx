@@ -47,10 +47,14 @@ export default function DiaryResultScreen() {
       if (action === 'HOME') {
         if (!hasMutated.current) {
           hasMutated.current = true;
+          const parsedData = parseJSON(diaryData as string, () => {
+            Alert.alert('오류가 발생했습니다');
+            router.replace(ROUTES.HOME);
+          });
           diaryMutation.mutate({
-            situation: diaryData.situation,
-            thoughts: diaryData.thoughts,
-            feelings: diaryData.feelings,
+            situation: parsedData[0].answer,
+            thoughts: parsedData[1].answer,
+            feelings: parsedData[2].answer,
           });
         }
         router.replace(ROUTES.HOME);

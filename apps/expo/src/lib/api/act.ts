@@ -21,6 +21,9 @@ export const actAPI = {
     thoughts: string;
     feelings: string;
   }): Promise<void> => {
+    console.log('situation', situation);
+    console.log('thoughts', thoughts);
+    console.log('feelings', feelings);
     await apiClient.post(ROUTES.DIARY, {
       situation,
       thoughts,
