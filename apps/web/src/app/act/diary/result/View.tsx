@@ -8,7 +8,7 @@ import { Text } from '@pado/ui';
 
 import ActResultPage from '@/components/act/ActResultPage';
 import { DiaryResult } from '@/features/act/diary/types';
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 import { parseJSON } from '@/lib/json';
 
 export default function DiaryResultView() {
@@ -23,6 +23,7 @@ export default function DiaryResultView() {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
     });
+    triggerHaptic('NAVIGATE');
   };
 
   const qKey = [

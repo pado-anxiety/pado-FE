@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import ActResultPage from '@/components/act/ActResultPage';
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 
 export default function AnchorResultPage() {
   const { t } = useTranslation();
@@ -14,6 +14,7 @@ export default function AnchorResultPage() {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
     });
+    triggerHaptic('NAVIGATE');
   };
 
   return (

@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 
-import { ActivityIndicator, View } from '@src/components/ui';
 import { FlatList } from 'react-native-gesture-handler';
+
+import { LoadingSpinner, View } from '@src/components/ui';
 
 import { ROLE } from '../../constants';
 import { useChatModal } from '../../context';
@@ -78,14 +79,11 @@ export default function ChatList({
         ListHeaderComponent={() => {
           if (isChatLoading) {
             return (
-              <View className="flex flex-row items-start gap-3 max-w-[90%]">
-                <View className="w-12 h-12 bg-chat-assistant rounded-full" />
+              <View className="flex max-w-[90%] flex-row items-start gap-3">
+                <View className="h-12 w-12 rounded-full bg-chat-assistant" />
                 <View className="flex flex-col items-start gap-2">
-                  <View className="mr-10 bg-chat-assistant rounded-xl p-4">
-                    <ActivityIndicator
-                      size="small"
-                      color="white"
-                    />
+                  <View className="mr-10 rounded-xl bg-chat-assistant p-4">
+                    <LoadingSpinner />
                   </View>
                 </View>
               </View>

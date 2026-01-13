@@ -20,6 +20,7 @@ export function SkySection({
   setPage: (page: 'HOME' | 'HISTORY' | 'CHAT' | 'LEARNING') => void;
 }): React.ReactNode {
   const { t } = useTranslation();
+  // const { logout } = useAuth();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -97,8 +98,8 @@ export function SkySection({
               entering={FadeIn.duration(2000)}
             />
           </TouchableOpacity>
-
-          {/* <TouchableOpacity
+          {/* 
+          <TouchableOpacity
             className="flex flex-col"
             onPress={() => router.push(ROUTES.ONBOARD)}
           >
@@ -122,6 +123,25 @@ export function SkySection({
               className="text-4xl font-medium text-slate-700"
             >
               {t('home.menu.login')}
+            </AnimatedText>
+            <Animated.View
+              className="mt-1 h-[1.5px] w-full bg-slate-300"
+              entering={FadeIn.duration(2000)}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            className="flex flex-col"
+            onPress={() => {
+              triggerHaptic('NAVIGATE');
+              setIsOnboarded(false);
+              logout();
+            }}
+          >
+            <AnimatedText
+              delay={2000}
+              className="text-4xl font-medium text-slate-700"
+            >
+              초기화 버튼
             </AnimatedText>
             <Animated.View
               className="mt-1 h-[1.5px] w-full bg-slate-300"

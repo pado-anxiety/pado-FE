@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { Redirect, router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Alert, Pressable } from 'react-native';
+import { Alert, Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
-import { Text, View } from '@src/components/ui';
+import { LoadingSpinner, Text, View } from '@src/components/ui';
 import { HistoryModalContent } from '@src/features/History';
 import { ACTType, ActHistory } from '@src/features/History/types';
 import {
@@ -30,6 +30,8 @@ interface ModalType {
 }
 
 export default function HomeScreen(): React.ReactNode {
+  console.log(useAuth.getState().accessToken);
+
   const { t } = useTranslation();
   const { isLoggedIn } = useAuth();
   const { page, setPage } = useHomePageState();
@@ -152,10 +154,7 @@ export default function HomeScreen(): React.ReactNode {
                   />
                 ) : (
                   <View className="py-10">
-                    <ActivityIndicator
-                      size="small"
-                      color="#3B5B88"
-                    />
+                    <LoadingSpinner />
                   </View>
                 )}
               </View>

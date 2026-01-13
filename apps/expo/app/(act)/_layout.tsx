@@ -10,7 +10,6 @@ export default function ACTLayout() {
         <Stack.Screen name="diary" />
         <Stack.Screen name="detach" />
         <Stack.Screen name="embrace" />
-        <Stack.Screen name="observer" />
         <Stack.Screen name="action" />
       </Stack>
     </View>

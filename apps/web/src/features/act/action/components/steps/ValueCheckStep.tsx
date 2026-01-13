@@ -4,11 +4,17 @@ import { useTranslation } from 'react-i18next';
 
 import { Text } from '@pado/ui';
 
+import { Loading } from '@/components/ui';
+
 import { Value } from '../../hooks/useActionStep';
 
 const ValueCircleView = dynamic(() => import('../ValueCircle'), {
   ssr: false,
-  loading: () => <div className="flex-1" />,
+  loading: () => (
+    <div className="flex flex-1 items-center justify-center">
+      <Loading />
+    </div>
+  ),
 });
 
 type ValueCheckStepProps = {

@@ -1,10 +1,16 @@
-import { ActivityIndicator } from 'react-native';
+import { useRef } from 'react';
 
-export function LoadingSpinner({ color = 'black' }: { color?: string }) {
+import LottieView from 'lottie-react-native';
+
+export function LoadingSpinner() {
+  const animation = useRef(null);
+
   return (
-    <ActivityIndicator
-      size="large"
-      color={color}
+    <LottieView
+      autoPlay
+      ref={animation}
+      style={{ width: 150, height: 150 }}
+      source={require('../../../assets/pado-loading.json')}
     />
   );
 }

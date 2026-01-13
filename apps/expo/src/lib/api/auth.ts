@@ -32,7 +32,7 @@ export const authAPI = {
     redirectUri: string;
     platform: 'ANDROID' | 'IOS';
   }): Promise<{ accessToken: string; refreshToken: string }> => {
-    const response = await axios.post(`${ENV.BASE_URL}${ROUTES.GOOGLE}`, {
+    const response = await axios.post(`${ENV.BASE_URL}/login/google`, {
       codeVerifier,
       authorizationCode,
       redirectUri,
@@ -42,7 +42,7 @@ export const authAPI = {
     return response.data;
   },
   getKaKaoAccessToken: async (accessToken: string) => {
-    const response = await axios.post(`${ENV.BASE_URL}${ROUTES.KAKAO}`, {
+    const response = await axios.post(`${ENV.BASE_URL}/login/kakao`, {
       accessToken,
     });
 

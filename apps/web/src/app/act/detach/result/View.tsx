@@ -6,7 +6,7 @@ import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import ActResultPage from '@/components/act/ActResultPage';
 import { ResultDisplay } from '@/features/act/detach';
-import { handlePostMessage } from '@/lib';
+import { handlePostMessage, triggerHaptic } from '@/lib';
 
 export default function DetachResultView() {
   const { t } = useTranslation();
@@ -16,6 +16,7 @@ export default function DetachResultView() {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
     });
+    triggerHaptic('NAVIGATE');
   };
 
   const title = t('act.detach.result.title', {

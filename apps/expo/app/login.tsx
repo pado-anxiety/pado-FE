@@ -23,7 +23,7 @@ export default function LoginScreen() {
       Alert.alert(result.errorMessage);
       return;
     }
-    router.push(ROUTES.HOME);
+    router.replace(ROUTES.HOME);
   };
 
   const handleKakaoLogin = async () => {
@@ -32,7 +32,7 @@ export default function LoginScreen() {
       Alert.alert(result.errorMessage);
       return;
     }
-    router.push(ROUTES.HOME);
+    router.replace(ROUTES.HOME);
   };
 
   return (

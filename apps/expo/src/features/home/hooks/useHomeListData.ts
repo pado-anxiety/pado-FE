@@ -5,7 +5,7 @@ import { ACTType, HistoryItem } from '@src/features/History/types';
 import { HomeListItem, PageType } from '../types';
 
 interface HistoryPageItem {
-  id: number;
+  id: string;
   type: ACTType;
   time: string;
 }
@@ -48,7 +48,7 @@ export const useHomeListData = ({
         (acc, cur) => {
           const dateKey = cur.time;
           if (!acc[dateKey]) acc[dateKey] = [];
-          acc[dateKey].push({ id: cur.id, type: cur.type });
+          acc[dateKey].push({ id: cur.id.toString(), type: cur.type });
           return acc;
         },
         {} as Record<string, HistoryItem[]>,

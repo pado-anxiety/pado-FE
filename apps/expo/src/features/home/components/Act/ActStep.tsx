@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 
+import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 
-import { useRouter } from 'expo-router';
-
 import { Pressable, Text, View } from '@src/components/ui';
+import { triggerHaptic } from '@src/lib/haptics';
 import { getActRoute } from '@src/lib/route/route';
 
 import { BubbleSize, Point } from './types';
@@ -54,6 +54,7 @@ export function ActStep({
         <Pressable
           className="flex-1 items-center justify-center gap-2"
           onPress={() => {
+            triggerHaptic('NAVIGATE');
             router.push(getActRoute(item.slug));
           }}
           onLayout={handleLayout}

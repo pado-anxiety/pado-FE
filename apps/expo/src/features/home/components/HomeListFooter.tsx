@@ -1,7 +1,6 @@
-import { ActivityIndicator } from 'react-native';
 import { scale } from 'react-native-size-matters';
 
-import { View } from '@src/components/ui';
+import { LoadingSpinner, View } from '@src/components/ui';
 
 import { PageType } from '../types';
 
@@ -23,10 +22,7 @@ export const HomeListFooter = ({
   if (page === 'HISTORY' && isPending) {
     return (
       <View className="w-full flex-1 items-center justify-center bg-transparent">
-        <ActivityIndicator
-          size="large"
-          color="white"
-        />
+        <LoadingSpinner />
       </View>
     );
   }
@@ -39,10 +35,7 @@ export const HomeListFooter = ({
           paddingVertical: scale(50),
         }}
       >
-        <ActivityIndicator
-          size="large"
-          color="white"
-        />
+        <LoadingSpinner />
       </View>
     );
   }

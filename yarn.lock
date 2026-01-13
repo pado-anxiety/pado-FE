@@ -12209,6 +12209,42 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lottie-react-native@npm:~7.3.1":
+  version: 7.3.5
+  resolution: "lottie-react-native@npm:7.3.5"
+  peerDependencies:
+    "@lottiefiles/dotlottie-react": ^0.13.5
+    react: "*"
+    react-native: ">=0.46"
+    react-native-windows: ">=0.63.x"
+  peerDependenciesMeta:
+    "@lottiefiles/dotlottie-react":
+      optional: true
+    react-native-windows:
+      optional: true
+  checksum: 10c0/db84e188b25d15c7b92b15104e18b7f925e31ac0a0293d2e3ad9ee70a4834220e57e7e4535a493cd89ba9a008e41a555b40d9f88fccd8216d22c106b76d71174
+  languageName: node
+  linkType: hard
+
+"lottie-react@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "lottie-react@npm:2.4.1"
+  dependencies:
+    lottie-web: "npm:^5.10.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/7f6a0a2cf2af25deabe7b4d4c9917e47d12016673613c59dcdd8ef52e10e914dd0c1f71d4a275d56aaba03fe9d85b333087f7c8d40a8f967ece4a0444c7a3cdf
+  languageName: node
+  linkType: hard
+
+"lottie-web@npm:^5.10.2":
+  version: 5.13.0
+  resolution: "lottie-web@npm:5.13.0"
+  checksum: 10c0/b463ad462169df3f7e04b7f3716274e269842554f1d72b8303ca7245628f2512982a59ae31698b3d57fbcda886228ae160fcb2aa518c6cecd8a95974db2458ee
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^10.0.1, lru-cache@npm:^10.2.0":
   version: 10.4.3
   resolution: "lru-cache@npm:10.4.3"
@@ -13658,6 +13694,7 @@ __metadata:
     expo-updates: "npm:~29.0.15"
     expo-web-browser: "npm:~15.0.9"
     i18next: "npm:^25.7.1"
+    lottie-react-native: "npm:~7.3.1"
     nativewind: "npm:^4.2.1"
     prettier: "npm:^3.7.4"
     prettier-plugin-tailwindcss: "npm:^0.5.11"
@@ -13708,6 +13745,7 @@ __metadata:
     eslint: "npm:^9.39.1"
     eslint-config-next: "npm:^16.0.7"
     i18next: "npm:^25.7.1"
+    lottie-react: "npm:^2.4.1"
     lucide-react: "npm:^0.562.0"
     motion: "npm:^12.23.26"
     next: "npm:16.0.7"
