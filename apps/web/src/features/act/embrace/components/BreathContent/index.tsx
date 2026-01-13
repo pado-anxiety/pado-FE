@@ -1,5 +1,6 @@
-import { Text } from '@pado/ui';
 import { motion } from 'motion/react';
+
+import { Text } from '@pado/ui';
 
 import { NextButton } from './NextButton';
 import { RestartButton } from './RestartButton';

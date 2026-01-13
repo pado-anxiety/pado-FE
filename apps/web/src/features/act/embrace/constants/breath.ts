@@ -70,6 +70,7 @@ export const GRADIENT_COLORS = {
 
 export const CANVAS_CONFIG = {
   WAVE_STEP: 4,
+  TIME_INCREMENT: 0.015,
 } as const;
 
 export const TIME_CALCULATION = {

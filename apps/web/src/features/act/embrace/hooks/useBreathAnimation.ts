@@ -17,8 +17,12 @@ import {
   WAVE_MOVEMENT,
 } from '../constants';
 
-const BaseYValue = window.innerHeight * ANIMATION_VALUES.BASE_Y_RATIO;
 const HAPTIC_INTERVAL = 500; // 0.5초마다 진동
+
+const getBaseYValue = () =>
+  typeof window !== 'undefined'
+    ? window.innerHeight * ANIMATION_VALUES.BASE_Y_RATIO
+    : 0;
 
 export function useBreathAnimation() {
   const { t } = useTranslation();
@@ -29,7 +33,7 @@ export function useBreathAnimation() {
   const [sessionCount, setSessionCount] = useState(0);
 
   const breathProgress = useMotionValue(0);
-  const baseYValue = useMotionValue(BaseYValue);
+  const baseYValue = useMotionValue(getBaseYValue());
 
   const amplitude = useTransform(
     breathProgress,
@@ -71,7 +75,7 @@ export function useBreathAnimation() {
     setIsStarted(true);
     startHapticLoop();
 
-    const startY = BaseYValue;
+    const startY = getBaseYValue();
     baseYValue.set(startY);
 
     const risePerCycle = startY / BREATH_TIMING.CYCLE_COUNT;
@@ -127,7 +131,7 @@ export function useBreathAnimation() {
     setBreathText(t(BREATH_TEXT_KEYS.RESTART));
     setTimer(0);
     breathProgress.set(0);
-    await animate(baseYValue, BaseYValue, {
+    await animate(baseYValue, getBaseYValue(), {
       duration: BREATH_TIMING.RESTART_ANIMATION_DURATION,
       ease: 'easeInOut',
     });
