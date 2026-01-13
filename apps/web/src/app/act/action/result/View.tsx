@@ -22,7 +22,11 @@ export default function ActionResultView() {
   return (
     <ActResultPage
       title={[t('act.values.result.title')]}
-      description={t('act.values.result.description')}
+      description={
+        t('act.values.result.description', {
+          returnObjects: true,
+        }) as string[]
+      }
       buttonText={t('common.button.complete')}
       onButtonClick={handleComplete}
     >

@@ -48,7 +48,12 @@
   },
   "result": {
     "title": "You've safely anchored yourself",
-    "description": "You've awakened your senses one by one and anchored yourself in the present. Now, instead of confusing thoughts, you can fully focus on the peace of this moment. You're ready. Start practicing discovering your true emotions through the next step, the Emotion Diary."
+    "description": [
+      "You've awakened your senses one by one and anchored yourself in the present.",
+      "Now, instead of confusing thoughts, you can fully focus on the peace of this moment.",
+      "You're ready.",
+      "Start practicing discovering your true emotions through the next step, the Emotion Diary."
+    ]
   },
   "history": {
     "completed": "Completed 5-4-3-2-1 exercise"

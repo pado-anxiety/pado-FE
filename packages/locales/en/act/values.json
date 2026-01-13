@@ -45,7 +45,11 @@
   },
   "result": {
     "title": "You've taken the first step toward your values",
-    "description": "The value you chose becomes your life's compass. Even when anxiety comes, remember this value and keep moving forward one step at a time. Small committed actions build a meaningful life.",
+    "description": [
+      "The value you chose becomes your life's compass.",
+      "Even when anxiety comes, remember this value and keep moving forward one step at a time.",
+      "Small committed actions build a meaningful life."
+    ],
     "selectedDomain": "Selected Area",
     "orientation": "Direction to Pursue",
     "obstacle": "Obstacle",

@@ -12,7 +12,7 @@ import ActResultTitle from './ActResultTitle';
 
 interface ActResultPageProps {
   title: string[];
-  description: string;
+  description: string[];
   children: React.ReactNode;
   buttonText: string;
   onButtonClick: () => void;
@@ -21,7 +21,7 @@ interface ActResultPageProps {
 
 interface ActResultPageContentProps {
   title: string[];
-  description: string;
+  description: string[];
   children: React.ReactNode;
 }
 

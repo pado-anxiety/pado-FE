@@ -26,7 +26,11 @@ export default function DetachResultView() {
   return (
     <ActResultPage
       title={title}
-      description={t('act.detach.result.description')}
+      description={
+        t('act.detach.result.description', {
+          returnObjects: true,
+        }) as string[]
+      }
       buttonText={t('common.button.next')}
       onButtonClick={handleStart}
     >

@@ -36,7 +36,10 @@
   },
   "result": {
     "title": "We've examined what wind created the wave called 'anxiety'",
-    "description": "The high waves are just momentary ripples created by the wind called 'thoughts'. When the wind passes, the waves will become calm again."
+    "description": [
+      "The high waves are just momentary ripples created by the wind called 'thoughts'.",
+      "When the wind passes, the waves will become calm again."
+    ]
   },
   "history": {
     "situationQuestion": "What situation occurred?",

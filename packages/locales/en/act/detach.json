@@ -28,7 +28,10 @@
   },
   "result": {
     "title": ["The foam of thoughts has cleared,", "only facts remain."],
-    "description": "Like the sentence that became transparent, thoughts are just thoughts. You can now take a breath on the solid ground of facts."
+    "description": [
+      "Like the sentence that became transparent, thoughts are just thoughts.",
+      "You can now take a breath on the solid ground of facts."
+    ]
   },
   "history": {
     "description": "Separated thoughts from facts"

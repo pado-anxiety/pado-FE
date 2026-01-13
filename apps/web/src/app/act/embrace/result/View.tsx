@@ -22,7 +22,11 @@ export default function EmbraceResultView() {
   return (
     <ActResultPage
       title={[t('act.embrace.result.title')]}
-      description={t('act.embrace.result.description')}
+      description={
+        t('act.embrace.result.description', {
+          returnObjects: true,
+        }) as string[]
+      }
       buttonText={t('common.button.next')}
       onButtonClick={handleStart}
     >

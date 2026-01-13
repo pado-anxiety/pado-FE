@@ -20,7 +20,11 @@ export default function AnchorResultPage() {
   return (
     <ActResultPage
       title={[t('act.anchor.result.title')]}
-      description={t('act.anchor.result.description')}
+      description={
+        t('act.anchor.result.description', {
+          returnObjects: true,
+        }) as string[]
+      }
       buttonText={t('common.button.complete')}
       onButtonClick={handleComplete}
     >

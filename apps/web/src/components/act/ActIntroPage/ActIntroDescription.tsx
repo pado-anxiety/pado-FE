@@ -8,7 +8,7 @@ interface ActIntroDescriptionProps {
 
 function ActIntroDescription({ description }: ActIntroDescriptionProps) {
   return (
-    <>
+    <div className="flex flex-col gap-4">
       {description.map((desc) => (
         <Text
           key={desc}
@@ -17,7 +17,7 @@ function ActIntroDescription({ description }: ActIntroDescriptionProps) {
           {desc}
         </Text>
       ))}
-    </>
+    </div>
   );
 }
 

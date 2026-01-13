@@ -10,10 +10,10 @@ interface LearningStepContentProps {
 
 export function LearningStepContent({ step }: LearningStepContentProps) {
   return (
-    <div className="flex flex-1 flex-col gap-4">
+    <div className="flex flex-1 flex-col gap-2">
       <Text className="text-title-medium">{step.title}</Text>
 
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-4">
         {step.content.map((content) => (
           <Text
             key={content}

@@ -29,7 +29,13 @@
   },
   "result": {
     "title": "Your inner ocean has expanded",
-    "description": "The waves of anxiety sometimes surge and come to us. We often try to eliminate or reduce those waves, but in fact, we cannot control the size of the waves as we wish. But within us, there is an ocean that can embrace these waves. Instead of forcefully pushing away the waves, you have expanded your ocean where the waves stay through breathing. Even if the size of the waves remains the same, your ocean has now become vast enough to embrace any anxiety.",
+    "description": [
+      "The waves of anxiety sometimes surge and come to us.",
+      "We often try to eliminate or reduce those waves, but in fact, we cannot control the size of the waves as we wish.",
+      "But within us, there is an ocean that can embrace these waves.",
+      "Instead of forcefully pushing away the waves, you have expanded your ocean where the waves stay through breathing.",
+      "Even if the size of the waves remains the same, your ocean has now become vast enough to embrace any anxiety."
+    ],
     "breathTime": "You breathed for a total of {{seconds}} seconds."
   },
   "history": {

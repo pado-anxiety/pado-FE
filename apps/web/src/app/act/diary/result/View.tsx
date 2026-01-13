@@ -35,7 +35,11 @@ export default function DiaryResultView() {
   return (
     <ActResultPage
       title={[t('act.diary.result.title')]}
-      description={t('act.diary.result.description')}
+      description={
+        t('act.diary.result.description', {
+          returnObjects: true,
+        }) as string[]
+      }
       buttonText={t('common.button.complete')}
       onButtonClick={handleComplete}
     >
