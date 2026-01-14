@@ -153,7 +153,7 @@ export default function HomeScreen(): React.ReactNode {
                     date={modalType.date}
                   />
                 ) : (
-                  <View className="py-10">
+                  <View className="items-center justify-center py-10">
                     <LoadingSpinner />
                   </View>
                 )}
