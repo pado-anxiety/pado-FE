@@ -3,7 +3,8 @@ export type ACTType =
   | 'EMOTION_NOTE'
   | 'COGNITIVE_DEFUSION'
   | 'ACCEPTANCE'
-  | 'VALUES';
+  | 'VALUES'
+  | 'COMMITTED_ACTION';
 
 // API response data types
 export type ContactWithPresentData = Record<string, never>;
@@ -71,4 +72,5 @@ export type ActHistory =
   | EmotionNote
   | CognitiveDefusion
   | Acceptance
-  | Values;
+  | Values
+  | CommittedAction;

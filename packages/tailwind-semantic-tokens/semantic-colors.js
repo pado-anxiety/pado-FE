@@ -24,7 +24,7 @@ const semanticColors = {
     '--bg-chat-user': colors.neutral[750],
 
     // Text colors
-    '--text-primary': colors.neutral[900],
+    '--text-primary': colors.neutral[800],
     '--text-secondary': colors.neutral[600],
     '--text-tertiary': colors.neutral[500],
     '--text-inverse': colors.white,

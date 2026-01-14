@@ -36,17 +36,17 @@ export default function DiaryResultView() {
       buttonText={t('common.button.complete')}
       onButtonClick={handleComplete}
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         {parsedData.map((item: DiaryResult, index: number) => (
           <div
             key={item.question}
             className="flex flex-col gap-2 justify-center items-center w-full"
           >
             <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm w-full">
-              <Text className="text-body-medium font-bold">
+              <Text className="text-body-small text-sub">
                 {t(`act.diary.step.step${index + 1}.question`)}
               </Text>
-              <Text className="text-body-medium text-gray-700 break-words leading-relaxed">
+              <Text className="text-body-medium break-words leading-relaxed">
                 {item.answer}
               </Text>
             </div>
