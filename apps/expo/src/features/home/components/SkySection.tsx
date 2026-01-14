@@ -131,7 +131,7 @@ export function SkySection({
       </View>
       <View className="flex w-full flex-col gap-8 pt-4">
         <View className="px-12 py-20">
-          <AnimatedText className="text-body-medium font-medium">
+          <AnimatedText className="text-center text-body-medium font-medium">
             &quot;{getRandomMessage().text}&quot;
           </AnimatedText>
         </View>

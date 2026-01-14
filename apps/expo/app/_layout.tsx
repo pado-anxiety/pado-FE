@@ -5,6 +5,7 @@ import CookieManager from '@react-native-cookies/cookies';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
 import { View } from 'react-native';
+import { AlertNotificationRoot } from 'react-native-alert-notification';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import 'react-native-reanimated';
@@ -63,19 +64,20 @@ function NavigationContent() {
   return (
     <View style={[{ flex: 1 }, themeStyle]}>
       <BottomSheetModalProvider>
-        {/* <Slot /> */}
-        <Stack
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="index" />
-          <Stack.Screen name="(act)" />
-          <Stack.Screen name="login" />
-          <Stack.Screen name="learning" />
-          <Stack.Screen name="settings" />
-          <Stack.Screen name="onboard" />
-        </Stack>
+        <AlertNotificationRoot>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(act)" />
+            <Stack.Screen name="login" />
+            <Stack.Screen name="learning" />
+            <Stack.Screen name="settings" />
+            <Stack.Screen name="onboard" />
+          </Stack>
+        </AlertNotificationRoot>
       </BottomSheetModalProvider>
     </View>
   );

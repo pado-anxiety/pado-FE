@@ -51,7 +51,7 @@ export default function LearningView() {
 
         {/* 하단 버튼 영역 - 뒤로가기, 다음 버튼 나란히 */}
         <div
-          className="flex w-full flex-col gap-3 pt-4 bg-blue-500 px-8"
+          className="flex w-full flex-col gap-4 pt-4 bg-blue-500 px-8"
           style={{ paddingBottom: insets.bottom }}
         >
           {/* 프로그래스바 */}

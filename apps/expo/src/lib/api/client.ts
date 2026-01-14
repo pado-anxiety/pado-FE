@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { router } from 'expo-router';
-import { Alert } from 'react-native';
 
+import { showAlert } from '../alert';
 import { useAuth } from '../auth';
 import { ENV } from '../env';
 import { ROUTES } from '../route';
@@ -58,9 +58,11 @@ apiClient.interceptors.response.use(
     }
 
     if (config._retry) {
-      Alert.alert('로그인이 필요합니다.', '로그인 페이지로 이동합니다.', [
-        { text: '확인', onPress: () => router.replace(ROUTES.LOGIN) },
-      ]);
+      showAlert.warning(
+        '로그인이 필요합니다.',
+        '로그인 페이지로 이동합니다.',
+        () => router.replace(ROUTES.LOGIN),
+      );
     }
   },
 );

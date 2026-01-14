@@ -1,6 +1,5 @@
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
@@ -8,6 +7,7 @@ import { Text } from '@pado/ui';
 
 import { Image, Pressable, View } from '@src/components/ui';
 import { WaveHorizon } from '@src/features/home';
+import { showAlert } from '@src/lib/alert';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 
@@ -20,7 +20,7 @@ export default function LoginScreen() {
   const handleGoogleLogin = async () => {
     const result = await login('google');
     if (result && 'errorMessage' in result) {
-      Alert.alert(result.errorMessage);
+      showAlert.error(result.errorMessage);
       return;
     }
     router.replace(ROUTES.HOME);
@@ -29,7 +29,7 @@ export default function LoginScreen() {
   const handleKakaoLogin = async () => {
     const result = await login('kakao');
     if (result && 'errorMessage' in result) {
-      Alert.alert(result.errorMessage);
+      showAlert.error(result.errorMessage);
       return;
     }
     router.replace(ROUTES.HOME);

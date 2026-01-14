@@ -1,5 +1,4 @@
 import { useRouter } from 'expo-router';
-import { Alert } from 'react-native';
 import WebView from 'react-native-webview';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
@@ -8,6 +7,7 @@ import {
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
+import { showAlert } from '@src/lib/alert';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { createWebViewMessageHandler } from '@src/lib/webview';
 
@@ -25,7 +25,7 @@ export default function AnchorStepScreen() {
       }
     },
     onValidate: (title, message) => {
-      Alert.alert(title, message, [{ text: '확인', onPress: () => {} }]);
+      showAlert.validation(title, message);
     },
   });
 

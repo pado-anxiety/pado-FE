@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { Redirect, router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { LoadingSpinner, Text, View } from '@src/components/ui';
@@ -19,7 +19,7 @@ import {
   useHomeListData,
   useHomePageState,
 } from '@src/features/home/hooks';
-import { isOnboarded } from '@src/lib';
+import { isOnboarded, showAlert } from '@src/lib';
 import { historyAPI } from '@src/lib/api/history';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
@@ -45,9 +45,13 @@ export default function HomeScreen(): React.ReactNode {
       setDetail(data);
     },
     onError: () => {
-      Alert.alert(t('common.error.generic'), t('common.error.tryLater'));
+      showAlert.error(t('common.error.generic'), t('common.error.tryLater'));
     },
   });
+
+  // useEffect(() => {
+  //   useAuth.getState().setAuthToken('test', 'test');
+  // }, []);
 
   const handleModalOpen = (id: string, type: ACTType, date: string) => {
     detailMutation.mutate(id);
@@ -69,12 +73,11 @@ export default function HomeScreen(): React.ReactNode {
   }
 
   if (!isLoggedIn) {
-    Alert.alert(t('common.error.loginRequired'), t('common.error.goToLogin'), [
-      {
-        text: t('common.button.complete'),
-        onPress: () => router.replace(ROUTES.LOGIN),
-      },
-    ]);
+    showAlert.warning(
+      t('common.error.loginRequired'),
+      t('common.error.goToLogin'),
+      () => router.replace(ROUTES.LOGIN),
+    );
   }
 
   const handleEndReached = () => {
