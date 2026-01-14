@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { router } from 'expo-router';
 
-import { showAlert } from '../alert';
+import { showAlert } from '../alert/alert';
 import { useAuth } from '../auth';
 import { ENV } from '../env';
 import { ROUTES } from '../route';
@@ -63,6 +63,7 @@ apiClient.interceptors.response.use(
         '로그인 페이지로 이동합니다.',
         () => router.replace(ROUTES.LOGIN),
       );
+      return;
     }
   },
 );

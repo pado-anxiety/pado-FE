@@ -23,8 +23,9 @@ export default function DetachResultScreen() {
   const router = useRouter();
   const hasMutated = useRef(false);
   const parsedData = parseJSON(data as string, () => {
-    showAlert.error(t('common.error.generic'), t('common.error.tryLater'));
-    router.replace(ROUTES.HOME);
+    showAlert.error(t('common.error.generic'), t('common.error.tryLater'), () =>
+      router.replace(ROUTES.HOME),
+    );
   });
 
   // TODO: offline-first save

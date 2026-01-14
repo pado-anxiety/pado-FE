@@ -22,8 +22,9 @@ export default function DiaryResultScreen() {
   const hasMutated = useRef(false);
 
   const diaryData = parseJSON(data as string, () => {
-    showAlert.error('오류가 발생했습니다');
-    router.replace(ROUTES.HOME);
+    showAlert.error('오류가 발생했습니다', '다시 시도해주세요', () =>
+      router.replace(ROUTES.HOME),
+    );
   });
 
   // TODO: offline-first save
@@ -48,7 +49,7 @@ export default function DiaryResultScreen() {
         if (!hasMutated.current) {
           hasMutated.current = true;
           const parsedData = parseJSON(diaryData as string, () => {
-            showAlert.error('오류가 발생했습니다');
+            showAlert.error('오류가 발생했습니다', '다시 시도해주세요');
             router.replace(ROUTES.HOME);
           });
           diaryMutation.mutate({

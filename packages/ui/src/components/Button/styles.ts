@@ -36,7 +36,7 @@ export const button = tv({
       },
       sm: {
         container: 'py-3',
-        label: 'text-base',
+        label: 'text-lg',
       },
       lg: {
         container: 'py-5',

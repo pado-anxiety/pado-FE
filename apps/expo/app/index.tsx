@@ -19,7 +19,8 @@ import {
   useHomeListData,
   useHomePageState,
 } from '@src/features/home/hooks';
-import { isOnboarded, showAlert } from '@src/lib';
+import { isOnboarded } from '@src/lib';
+import { showAlert } from '@src/lib/alert';
 import { historyAPI } from '@src/lib/api/history';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
@@ -49,10 +50,6 @@ export default function HomeScreen(): React.ReactNode {
     },
   });
 
-  // useEffect(() => {
-  //   useAuth.getState().setAuthToken('test', 'test');
-  // }, []);
-
   const handleModalOpen = (id: string, type: ACTType, date: string) => {
     detailMutation.mutate(id);
     setModalType({ type, date });
@@ -76,8 +73,9 @@ export default function HomeScreen(): React.ReactNode {
     showAlert.warning(
       t('common.error.loginRequired'),
       t('common.error.goToLogin'),
-      () => router.replace(ROUTES.LOGIN),
     );
+    router.replace(ROUTES.LOGIN);
+    return;
   }
 
   const handleEndReached = () => {
