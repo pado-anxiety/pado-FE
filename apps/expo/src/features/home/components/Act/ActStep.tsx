@@ -70,7 +70,6 @@ export function ActStep({
     { scale: 1.2, opacity: 0.5, border: 1.5 },
     { scale: 1.5, opacity: 0.25, border: 1 },
     { scale: 1.9, opacity: 0.1, border: 1 },
-    { scale: 2.4, opacity: 0.08, border: 0.5 },
   ];
 
   return (
