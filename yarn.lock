@@ -13716,7 +13716,6 @@ __metadata:
     react-hook-form: "npm:^7.68.0"
     react-i18next: "npm:^16.4.0"
     react-native: "npm:0.81.5"
-    react-native-alert-notification: "npm:^0.4.2"
     react-native-gesture-handler: "npm:~2.28.0"
     react-native-keyboard-controller: "npm:^1.20.1"
     react-native-mmkv: "npm:^4.1.0"
@@ -14432,17 +14431,6 @@ __metadata:
   version: 19.2.1
   resolution: "react-is@npm:19.2.1"
   checksum: 10c0/0ebeaedb4ff615055cbcd758c7e22ba9644e21110adbd293dd1aada3591abf7399152a786cd120e324c10706d75e28c2130c27d1b9b5ae637aef4c52f4d17a91
-  languageName: node
-  linkType: hard
-
-"react-native-alert-notification@npm:^0.4.2":
-  version: 0.4.2
-  resolution: "react-native-alert-notification@npm:0.4.2"
-  peerDependencies:
-    react: "*"
-    react-native: ">=0.62.0"
-    react-native-safe-area-context: "*"
-  checksum: 10c0/3e017a90c5e1eec83e22dea298a33d6568352c99909cfa345d5fc7a4e57c5526d682472dc7dfb94efbc73ad4595265f75d083ddb942e84031816a77af720cef0
   languageName: node
   linkType: hard
 
