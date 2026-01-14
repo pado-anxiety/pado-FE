@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
 
+import anxietyImage from '@assets/images/learning/anxiety.png';
+import padoImage from '@assets/images/learning/pado.png';
+
 import { ACTType, HistoryItem } from '@src/features/History/types';
 
 import { HomeListItem, PageType } from '../types';
@@ -23,7 +26,7 @@ const learningItems = [
     title: '불안은 왜 생기는 걸까요?',
     description:
       '불안은 우리를 괴롭히려는 적이 아니라, 우리를 지키기 위한 마음의 신호예요.',
-    image: '',
+    image: anxietyImage,
   },
   {
     id: '2',
@@ -32,7 +35,7 @@ const learningItems = [
     title: 'ACT와 함께 파도 타기',
     description:
       '불안과 싸우는 대신, 불안과 함께 내가 원하는 삶의 방향으로 나아가는 법을 배워요.',
-    image: '',
+    image: padoImage,
   },
 ];
 

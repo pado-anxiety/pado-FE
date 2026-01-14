@@ -34,6 +34,14 @@ type ActButtonProps = {
   onReportLayout: (point: Point) => void;
 };
 
+const STEP_CIRCLE_COLORS = {
+  anchor: '#002E5B',
+  diary: '#00254A',
+  detach: '#012245',
+  embrace: '#011731',
+  action: '#010C1F',
+};
+
 export function ActStep({
   item,
   index,
@@ -103,7 +111,10 @@ export function ActStep({
               style={{
                 width: BubbleSize,
                 height: BubbleSize,
-                backgroundColor: '#94A3B8',
+                backgroundColor:
+                  STEP_CIRCLE_COLORS[
+                    items[index] as keyof typeof STEP_CIRCLE_COLORS
+                  ],
                 borderWidth: 1.5,
                 borderColor: 'rgba(255, 255, 255, 0.2)',
               }}

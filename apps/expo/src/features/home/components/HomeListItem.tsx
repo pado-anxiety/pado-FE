@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
-import { Pressable, Text, View } from '@src/components/ui';
+import { Image, Pressable, Text, View } from '@src/components/ui';
 import HistoryCard from '@src/features/History/HistoryCard';
 import { ACTType } from '@src/features/History/types';
 import { triggerHaptic } from '@src/lib/haptics';
@@ -46,7 +46,11 @@ export const HomeListItem = ({ item, handleModalOpen }: HomeListItemProps) => {
             });
           }}
         >
-          <View className="aspect-[3/2] w-full rounded-t-2xl bg-blue-400" />
+          <Image
+            source={item.image}
+            className="aspect-[3/2] w-full rounded-t-2xl"
+            contentFit="cover"
+          />
           <View className="p-4">
             <Text className="text-body-medium">{item.title}</Text>
             <Text className="text-body-small">{item.description}</Text>

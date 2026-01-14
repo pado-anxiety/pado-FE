@@ -28,9 +28,7 @@ export const historyAPI = {
     return response;
   },
   getDetail: async (id: string): Promise<ActHistory> => {
-    console.log('id: ', id);
     const response: ActHistory = await apiClient.get(`/records/${id}`);
-    console.log('세부 정보: ', response);
     return response;
   },
 };
