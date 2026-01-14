@@ -58,6 +58,13 @@ export function ActStep({
     }
   };
 
+  const ripples = [
+    { scale: 1.2, opacity: 0.5, border: 1.5 },
+    { scale: 1.5, opacity: 0.25, border: 1 },
+    { scale: 1.9, opacity: 0.1, border: 1 },
+    { scale: 2.4, opacity: 0.08, border: 0.5 },
+  ];
+
   return (
     <View className="w-full flex-col gap-40">
       <View
@@ -75,26 +82,48 @@ export function ActStep({
           onLayout={handleLayout}
         >
           <View className="relative items-center justify-center">
+            {/* 파동(Ripples) 레이어 */}
+            {ripples.map((ripple, i) => (
+              <View
+                key={i}
+                className="absolute rounded-full"
+                style={{
+                  width: BubbleSize * ripple.scale,
+                  height: BubbleSize * ripple.scale,
+                  borderWidth: ripple.border,
+                  borderColor: 'white',
+                  opacity: ripple.opacity,
+                }}
+              />
+            ))}
+
             <View
               ref={circleRef}
-              className="rounded-full bg-white p-4"
+              className="items-center justify-center rounded-full shadow-2xl"
               style={{
                 width: BubbleSize,
                 height: BubbleSize,
+                backgroundColor: '#94A3B8',
+                borderWidth: 1.5,
+                borderColor: 'rgba(255, 255, 255, 0.2)',
               }}
-            />
-            <Image
-              className="absolute"
-              source={itemImages[items[index] as keyof typeof itemImages]}
-              style={{
-                width: BubbleSize * 0.8,
-                height: BubbleSize * 0.8,
-              }}
-            />
+            >
+              <Image
+                source={itemImages[items[index] as keyof typeof itemImages]}
+                style={{
+                  width: BubbleSize * 0.8,
+                  height: BubbleSize * 0.8,
+                }}
+                contentFit="contain"
+              />
+            </View>
           </View>
-          <Text className="rounded-lg bg-white p-2 text-label-medium">
-            {t(item.i18nKey)}
-          </Text>
+
+          <View className="border-white/2 mt-4 rounded-3xl bg-white px-4 py-1.5">
+            <Text className="text-label-medium font-bold">
+              {t(item.i18nKey)}
+            </Text>
+          </View>
         </Pressable>
       </View>
     </View>
