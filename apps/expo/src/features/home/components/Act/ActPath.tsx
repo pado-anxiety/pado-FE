@@ -69,7 +69,7 @@ export function ActPath({ points, height }: ActPathProps): React.ReactNode {
       </Fill>
       <Path
         path={drawPath(points)}
-        color="white"
+        color="#CBD5E1"
         style="stroke"
         strokeWidth={scale(6)}
         strokeCap="round"

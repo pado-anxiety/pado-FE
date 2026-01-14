@@ -145,7 +145,7 @@ export function SkySection({
           >
             <AnimatedText
               delay={1500}
-              className="pb-0.2 self-start border-b border-slate-700 text-title-small font-medium text-slate-700"
+              className="pb-0.2 self-start border-b border-slate-600 text-title-small font-medium text-slate-700"
             >
               {t('home.menu.viewActHistory')}
             </AnimatedText>
@@ -160,7 +160,7 @@ export function SkySection({
           >
             <AnimatedText
               delay={2000}
-              className="pb-0.2 self-start border-b border-slate-700 text-title-small font-medium text-slate-700"
+              className="pb-0.2 self-start border-b border-slate-600 text-title-small font-medium text-slate-700"
             >
               {t('home.menu.learning')}
             </AnimatedText>

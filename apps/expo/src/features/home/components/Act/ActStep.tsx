@@ -67,9 +67,24 @@ export function ActStep({
   };
 
   const ripples = [
-    { scale: 1.2, opacity: 0.5, border: 1.5 },
-    { scale: 1.5, opacity: 0.25, border: 1 },
-    { scale: 1.9, opacity: 0.1, border: 1 },
+    {
+      scale: 1.25,
+      opacity: 0.4,
+      border: 1.2,
+      color: '#CBD5E1',
+    },
+    {
+      scale: 1.6,
+      opacity: 0.2,
+      border: 1,
+      color: '#94A3B8',
+    },
+    {
+      scale: 2.1,
+      opacity: 0.08,
+      border: 0.8,
+      color: '#64748B',
+    },
   ];
 
   return (
@@ -129,7 +144,7 @@ export function ActStep({
             </View>
           </View>
 
-          <View className="border-white/2 mt-4 rounded-3xl bg-white px-4 py-1.5">
+          <View className="border-white/2 mt-4 rounded-3xl bg-[#F3F4F6] px-4 py-1.5">
             <Text className="text-label-medium font-bold">
               {t(item.i18nKey)}
             </Text>
