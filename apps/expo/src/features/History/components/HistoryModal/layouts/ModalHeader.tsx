@@ -9,9 +9,9 @@ interface ModalHeaderProps {
 export function ModalHeader({ title, date }: ModalHeaderProps) {
   return (
     <View className="flex flex-col gap-2">
-      <View className="flex flex-col gap-1">
-        <Text className="text-body-large font-bold">{title}</Text>
-        <Text className="text-body-medium text-blue-500">
+      <View className="flex flex-col">
+        <Text className="text-body-medium font-bold">{title}</Text>
+        <Text className="text-body-small text-sub">
           {formatToKoreanDate(date)}
         </Text>
       </View>

@@ -21,7 +21,9 @@ export function AcceptanceContent({ date, data }: AcceptanceContentProps) {
       />
       <ContentBox>
         <Text className="text-body-small">
-          {t('act.embrace.history.description', { seconds: data.breathingTime })}
+          {t('act.embrace.history.description', {
+            seconds: data.breathingTime,
+          })}
         </Text>
       </ContentBox>
     </ModalScrollContainer>

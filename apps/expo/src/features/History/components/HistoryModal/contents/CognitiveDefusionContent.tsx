@@ -23,7 +23,6 @@ export function CognitiveDefusionContent({
         date={date}
       />
       <View className="flex w-full flex-col gap-2">
-        <Text className="text-body-small">{t('act.detach.history.description')}</Text>
         <ContentBox>
           <View className="flex-row flex-wrap gap-1">
             {data.userTextToken.map((item, index) => (

@@ -21,28 +21,28 @@ export function ValuesContent({ date, data }: ValuesContentProps) {
       />
       <View className="flex w-full flex-col gap-3">
         <View className="flex flex-col gap-1">
-          <Text className="text-body-small text-gray-500">
-            {t('act.values.result.selectedValue')}
-          </Text>
           <ContentBox>
+            <Text className="text-body-small text-gray-500">
+              {t('act.values.result.selectedValue')}
+            </Text>
             <Text className="text-body-medium font-bold text-blue-600">
               {data.value}
             </Text>
           </ContentBox>
         </View>
         <View className="flex flex-col gap-1">
-          <Text className="text-body-small text-gray-500">
-            {t('act.values.result.reason')}
-          </Text>
           <ContentBox>
+            <Text className="text-body-small text-gray-500">
+              {t('act.values.result.reason')}
+            </Text>
             <Text className="text-body-small">{data.reason}</Text>
           </ContentBox>
         </View>
         <View className="flex flex-col gap-1">
-          <Text className="text-body-small text-gray-500">
-            {t('act.values.result.action')}
-          </Text>
           <ContentBox>
+            <Text className="text-body-small text-gray-500">
+              {t('act.values.result.action')}
+            </Text>
             <Text className="text-body-small">{data.action}</Text>
           </ContentBox>
         </View>

@@ -39,6 +39,6 @@
     "breathTime": "총 {{seconds}}초 동안 호흡했어요."
   },
   "history": {
-    "description": "호흡법을 {{seconds}}초 동안 수행했어요"
+    "description": "4-7-8 호흡법을 {{seconds}}초 동안 수행했어요"
   }
 }

@@ -145,8 +145,8 @@ export default function HomeScreen(): React.ReactNode {
             onPress={(e) => e.stopPropagation()}
             className="w-full "
           >
-            <View className="w-full rounded-3xl border-[3px] border-blue-500 bg-act-page shadow-xl shadow-blue-900/10">
-              <View className="p-6">
+            <View className="w-full rounded-3xl bg-act-page ">
+              <View className="p-8">
                 {detail ? (
                   <HistoryModalContent
                     data={detail}
