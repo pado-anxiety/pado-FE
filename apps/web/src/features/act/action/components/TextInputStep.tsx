@@ -12,7 +12,7 @@ export function TextInputStep({
   return (
     <div className="flex flex-col gap-4 flex-1">
       <textarea
-        className="flex-1 min-h-[200px] p-4 text-body-medium resize-none scrollbar-hide focus:outline-none focus:ring-0 bg-white/60 rounded-2xl border border-white shadow-sm"
+        className="flex-1 h-full p-4 text-body-medium resize-none scrollbar-hide focus:outline-none focus:ring-0 bg-white/60 rounded-2xl border border-white shadow-sm"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
