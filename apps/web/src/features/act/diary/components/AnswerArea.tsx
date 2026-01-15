@@ -18,9 +18,9 @@ export function AnswerArea({ textareaRef, stepIndex }: AnswerTextareaProps) {
       return t('act.diary.step.placeholder');
     }
 
-    const exampleBad = t(`${step.i18nKey}.exampleBad`);
+    // const exampleBad = t(`${step.i18nKey}.exampleBad`);
     const exampleGood = t(`${step.i18nKey}.exampleGood`);
-    return `${t('common.example')})\n${exampleBad}\n${exampleGood}`;
+    return `${t('common.example')}) ${exampleGood}`;
   };
 
   return (
