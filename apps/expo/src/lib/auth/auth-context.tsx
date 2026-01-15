@@ -1,5 +1,8 @@
+import { router } from 'expo-router';
 import { create } from 'zustand';
 
+import { authAPI } from '../api/auth';
+import { ROUTES } from '../route';
 import { SignInWithGoogle } from './google-login';
 import { SignInWithKakao } from './kakao-login';
 import { authStorage } from './utils';
@@ -71,17 +74,26 @@ export const useAuth = create<AuthState>((set) => ({
     }
   },
 
-  logout: () => {
-    set({ isLoading: true });
+  logout: async () => {
+    try {
+      await authAPI.logout();
 
-    authStorage.clearAuthToken();
+      set({ isLoading: true });
 
-    set({
-      accessToken: null,
-      refreshToken: null,
-      isLoggedIn: false,
-      isLoading: false,
-    });
+      authStorage.clearAuthToken();
+
+      set({
+        accessToken: null,
+        refreshToken: null,
+        isLoggedIn: false,
+        isLoading: false,
+      });
+    } catch (error) {
+      console.error(error);
+      return { errorMessage: '로그아웃 중 예상치 못한 오류가 발생했습니다.' };
+    } finally {
+      router.replace(ROUTES.HOME);
+    }
   },
 
   setAuthToken: (accessToken: string, refreshToken: string) => {

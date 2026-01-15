@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { useAuth } from '../auth';
 import { ENV } from '../env';
+import { apiClient } from './client';
 
 function combineUrl(base: string, path: string) {
   return base.replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '');
@@ -11,6 +12,7 @@ export const ROUTES = {
   REFRESH: '/tokens/reissue',
   GOOGLE: '/login/google',
   KAKAO: '/login/kakao',
+  LOGOUT: '/logout',
 } as const;
 
 export const authAPI = {
@@ -51,5 +53,8 @@ export const authAPI = {
     });
 
     return response.data;
+  },
+  logout: async () => {
+    await apiClient.post(combineUrl(ENV.BASE_URL, ROUTES.LOGOUT));
   },
 };

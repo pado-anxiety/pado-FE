@@ -29,7 +29,7 @@
   - 먼가 파도 애니메이션 이후부터 빨라진거 같은데
 
 - [x] 인트로 온보딩 줄바꿈
-- [ ] placeholder 수정
+- [x] placeholder 수정
 - [ ] 호흡 애니메이션 너무 높이 올라감
 - [ ] textarea 에서 placeholder 가 줄바꿈 되면 사라지는 문제
 - [ ] 피드백 TextInput 오류
