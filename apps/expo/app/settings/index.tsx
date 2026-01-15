@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -27,13 +27,15 @@ export default function SettingsScreen() {
   const router = useRouter();
   const { logout } = useAuth();
 
-  const [feedback, setFeedback] = useState('');
+  const feedbackRef = useRef<string>('');
+  const inputRef = useRef(null);
 
   const { ref: modalRef, present, dismiss } = useModal();
 
   const handleDismiss = () => {
     dismiss();
-    setFeedback('');
+    feedbackRef.current = '';
+    inputRef.current?.clear();
   };
 
   const { data: user } = useQuery({
@@ -204,19 +206,19 @@ export default function SettingsScreen() {
           <Text className="text-body-small">
             {t('common.settings.feedback.description')}
           </Text>
-          <View className="flex flex-col gap-4">
+          <View className="flex flex-col gap-3">
             <BottomSheetTextInput
               placeholder={t('common.settings.feedback.placeholder')}
               className="h-48 rounded-xl border border-gray-300 bg-white/20 px-4 text-body-medium"
-              value={feedback}
-              onChangeText={setFeedback}
+              ref={inputRef}
               multiline={true}
               textAlignVertical="top"
               autoCorrect={false}
+              onChangeText={(text) => (feedbackRef.current = text)}
             />
             <Button
               text={t('common.settings.feedback.send')}
-              onPress={() => handleSendFeedback(feedback)}
+              onPress={() => handleSendFeedback(feedbackRef.current)}
               className="rounded-xl bg-btn-act-page"
             />
           </View>
