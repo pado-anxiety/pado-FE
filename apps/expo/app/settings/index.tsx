@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Keyboard } from 'react-native';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
@@ -22,6 +23,7 @@ import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 
 export default function SettingsScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { logout } = useAuth();
 
@@ -66,7 +68,7 @@ export default function SettingsScreen() {
           size="large"
           onPress={() => router.back()}
         />
-        <Text className="text-body-large">설정</Text>
+        <Text className="text-body-large">{t('common.settings.title')}</Text>
         <View className="w-6" />
       </View>
       <View className="mt-4 flex flex-col gap-6">
@@ -74,7 +76,9 @@ export default function SettingsScreen() {
         <View className="mt-4 gap-2 overflow-hidden">
           {/* 이름 행 */}
           <View className="flex flex-row items-center justify-between gap-4">
-            <Text className="shrink-0 text-label-medium font-medium">이름</Text>
+            <Text className="shrink-0 text-label-medium font-medium">
+              {t('common.settings.user.name')}
+            </Text>
             <Text
               numberOfLines={1}
               className="flex-1 text-right text-label-medium font-medium"
@@ -86,7 +90,7 @@ export default function SettingsScreen() {
           {/* 이메일 행 */}
           <View className="flex flex-row items-center justify-between gap-4">
             <Text className="shrink-0 text-label-medium font-medium">
-              이메일
+              {t('common.settings.user.email')}
             </Text>
             <Text
               numberOfLines={1}
@@ -105,7 +109,9 @@ export default function SettingsScreen() {
             className="flex flex-row items-center justify-between"
           >
             <View className="flex flex-row items-center">
-              <Text className="text-label-medium font-medium">언어 설정</Text>
+              <Text className="text-label-medium font-medium">
+                {t('common.settings.language')}
+              </Text>
             </View>
             <NavButton
               variant="right"
@@ -116,7 +122,9 @@ export default function SettingsScreen() {
             onPress={() => router.push(ROUTES.SETTINGS.VIBRATION)}
             className="flex flex-row items-center justify-between"
           >
-            <Text className="text-label-medium font-medium">진동</Text>
+            <Text className="text-label-medium font-medium">
+              {t('common.settings.vibration')}
+            </Text>
             <NavButton
               variant="right"
               size="small"
@@ -130,7 +138,9 @@ export default function SettingsScreen() {
             onPress={() => present()}
             className="flex flex-row items-center justify-between"
           >
-            <Text className="text-label-medium font-medium">피드백</Text>
+            <Text className="text-label-medium font-medium">
+              {t('common.settings.feedback.title')}
+            </Text>
             <NavButton
               variant="right"
               size="small"
@@ -141,7 +151,7 @@ export default function SettingsScreen() {
             className="flex flex-row items-center justify-between"
           >
             <Text className="text-label-medium font-medium">
-              개인정보 처리 방침
+              {t('common.settings.privacyPolicy')}
             </Text>
             <NavButton
               variant="right"
@@ -152,7 +162,9 @@ export default function SettingsScreen() {
             onPress={() => router.push(ROUTES.SETTINGS.TERMS_OF_SERVICE)}
             className="flex flex-row items-center justify-between"
           >
-            <Text className="text-label-medium font-medium">이용약관</Text>
+            <Text className="text-label-medium font-medium">
+              {t('common.settings.termsOfService')}
+            </Text>
             <NavButton
               variant="right"
               size="small"
@@ -164,10 +176,10 @@ export default function SettingsScreen() {
           >
             <View className="flex flex-row items-center gap-2">
               <Text className="text-label-medium font-medium">
-                앱 버전 {ENV.VERSION}
+                {t('common.settings.appVersion')} {ENV.VERSION}
               </Text>
               <Text className="text-label-medium font-medium text-sub">
-                라이선스 정보
+                {t('common.settings.licenseInfo')}
               </Text>
             </View>
             <NavButton
@@ -180,7 +192,7 @@ export default function SettingsScreen() {
       <View className="mt-12 flex flex-row items-center justify-center">
         <Pressable onPress={handleLogout}>
           <Text className="text-label-medium font-medium text-destructive">
-            로그아웃
+            {t('common.settings.logout')}
           </Text>
         </Pressable>
       </View>
@@ -189,10 +201,12 @@ export default function SettingsScreen() {
           onPress={() => Keyboard.dismiss()}
           className="flex w-full flex-1 flex-col gap-4 px-6"
         >
-          <Text className="text-body-small">자유롭게 의견을 남겨주세요</Text>
+          <Text className="text-body-small">
+            {t('common.settings.feedback.description')}
+          </Text>
           <View className="flex flex-col gap-4">
             <BottomSheetTextInput
-              placeholder="피드백을 남겨주세요."
+              placeholder={t('common.settings.feedback.placeholder')}
               className="h-48 rounded-xl border border-gray-300 bg-white/20 px-4 text-body-medium"
               value={feedback}
               onChangeText={setFeedback}
@@ -201,7 +215,7 @@ export default function SettingsScreen() {
               autoCorrect={false}
             />
             <Button
-              text="피드백 보내기"
+              text={t('common.settings.feedback.send')}
               onPress={() => handleSendFeedback(feedback)}
               className="rounded-xl bg-btn-act-page"
             />

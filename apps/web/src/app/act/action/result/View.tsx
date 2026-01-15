@@ -33,7 +33,7 @@ export default function ActionResultView() {
       <div className="flex flex-col gap-3 w-full">
         <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm">
           <Text className="text-body-small text-sub mb-1">
-            {t('act.values.result.selectedDomain')}
+            {t('act.values.history.matterQuestion')}
           </Text>
           <Text className="text-body-medium break-words leading-relaxed">
             {t(`act.values.domain.${data?.selectedDomain}`)}
@@ -41,7 +41,7 @@ export default function ActionResultView() {
         </div>
         <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm">
           <Text className="text-body-small text-sub mb-1">
-            {t('act.values.result.orientation')}
+            {t('act.values.history.valueQuestion')}
           </Text>
           <Text className="text-body-medium break-words leading-relaxed">
             {data?.orientation}
@@ -49,7 +49,7 @@ export default function ActionResultView() {
         </div>
         <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm">
           <Text className="text-body-small text-sub mb-1">
-            {t('act.values.result.obstacle')}
+            {t('act.values.history.barrierQuestion')}
           </Text>
           <Text className="text-body-medium break-words leading-relaxed">
             {data?.obstacle}
@@ -57,7 +57,7 @@ export default function ActionResultView() {
         </div>
         <div className="bg-white/60 p-4 rounded-2xl border border-white shadow-sm">
           <Text className="text-body-small text-sub mb-1">
-            {t('act.values.result.action')}
+            {t('act.values.history.actionQuestion')}
           </Text>
           <Text className="text-body-medium break-words leading-relaxed">
             {data?.action}

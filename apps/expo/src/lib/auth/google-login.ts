@@ -61,6 +61,7 @@ const SignInWithGoogleOnIOS = async (): Promise<AuthResult> => {
     });
 
     const { accessToken, refreshToken } = parseAuthToken(response);
+
     return { accessToken, refreshToken };
   } catch (error) {
     console.error(error);

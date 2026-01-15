@@ -51,12 +51,22 @@
       "작은 전념행동이 당신의 삶을 중심으로 이끌어 줄 거에요."
     ],
     "selectedDomain": "가장 멀리 있는 영역",
+    "selectedValue": "선택한 가치",
     "orientation": "추구하는 가치",
+    "reason": "그 이유",
     "obstacle": "마주할 장애물",
     "action": "오늘의 전념행동"
   },
   "history": {
     "title": "나의 가치 여정",
-    "description": "가치와 전념행동을 기록하며 중심으로 다가가고 있어요."
+    "description": "가치와 전념행동을 기록하며 중심으로 다가가고 있어요.",
+    "matterQuestion": "나의 이상과 가장 거리가 있는 영역은 무엇인가요?",
+    "valueQuestion": "그 영역에서 추구하는 가치는 무엇인가요?",
+    "barrierQuestion": "어떤 장애물이 가로막고 있나요?",
+    "actionQuestion": "그 가치를 이루기 위해 지금 당장 할 수 있는 일은 무엇인가요?",
+    "work": "일",
+    "growth": "성장",
+    "leisure": "여가",
+    "relationship": "관계"
   }
 }

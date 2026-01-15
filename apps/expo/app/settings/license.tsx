@@ -1,10 +1,12 @@
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { ScrollView } from 'react-native';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import { NavButton, Text, View } from '@src/components/ui';
 
 export default function LicenseScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const dependencies = [
@@ -92,10 +94,12 @@ export default function LicenseScreen() {
           onPress={() => router.back()}
         />
         <View className="mt-4 gap-6 pb-8">
-          <Text className="text-body-medium font-bold">라이선스 정보</Text>
+          <Text className="text-body-medium font-bold">
+            {t('common.settings.licenseInfo')}
+          </Text>
 
           <Text className="text-body-small">
-            본 앱은 아래의 오픈소스 라이브러리를 사용하고 있습니다.
+            {t('common.settings.licenseDescription')}
           </Text>
 
           <View className="gap-3">

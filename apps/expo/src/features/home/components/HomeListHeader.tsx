@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
@@ -15,6 +16,7 @@ interface HomeListHeaderProps {
 }
 
 export const HomeListHeader = ({ page, setPage }: HomeListHeaderProps) => {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
   let SkyContent = null;
@@ -55,13 +57,13 @@ export const HomeListHeader = ({ page, setPage }: HomeListHeaderProps) => {
             delay={1000}
             className="text-title-large font-medium"
           >
-            학습
+            {t('home.learning.title')}
           </AnimatedText>
           <AnimatedText
             delay={1500}
             className="text-body-large font-medium"
           >
-            불안에 대해 학습해봐요
+            {t('home.learning.subtitle')}
           </AnimatedText>
         </View>
       </View>

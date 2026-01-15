@@ -10,6 +10,13 @@ interface CommittedActionContentProps {
   data: CommittedActionData;
 }
 
+const actionKeys = {
+  LEISURE: 'act.values.history.leisure',
+  RELATIONSHIP: 'act.values.history.relationship',
+  GROWTH: 'act.values.history.growth',
+  WORK: 'act.values.history.work',
+};
+
 export function CommittedActionContent({
   date,
   data,
@@ -26,15 +33,17 @@ export function CommittedActionContent({
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
             <Text className="text-body-small text-sub">
-              나의 이상과 가장 거리가 있는 영역은 무엇인가요?
+              {t('act.values.history.matterQuestion')}
             </Text>
-            <Text className="text-body-small">{data.matter}</Text>
+            <Text className="text-body-small">
+              {t(actionKeys[data.matter as keyof typeof actionKeys])}
+            </Text>
           </ContentBox>
         </View>
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
             <Text className="text-body-small text-sub">
-              그 영역에서 추구하는 가치는 무엇인가요?
+              {t('act.values.history.valueQuestion')}
             </Text>
             <Text className="text-body-small">{data.value}</Text>
           </ContentBox>
@@ -42,7 +51,7 @@ export function CommittedActionContent({
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
             <Text className="text-body-small text-sub">
-              어떤 장애물이 가로막고 있나요?
+              {t('act.values.history.barrierQuestion')}
             </Text>
             <Text className="text-body-small">{data.barrier}</Text>
           </ContentBox>
@@ -50,7 +59,7 @@ export function CommittedActionContent({
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
             <Text className="text-body-small text-sub">
-              그 가치를 이루기 위해 지금 당장 할 수 있는 일은 무엇인가요?
+              {t('act.values.history.actionQuestion')}
             </Text>
             <Text className="text-body-small">{data.action}</Text>
           </ContentBox>

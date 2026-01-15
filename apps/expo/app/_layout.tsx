@@ -5,6 +5,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import CookieManager from '@react-native-cookies/cookies';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
@@ -22,6 +23,7 @@ import { useTheme } from '@src/lib/theme';
 import '../global.css';
 
 function NavigationContent() {
+  const { t } = useTranslation();
   const { themeStyle } = useTheme();
   const { language } = useLanguage();
 
@@ -101,7 +103,7 @@ function NavigationContent() {
                 <Text className="text-body-small text-sub">{message}</Text>
               </View>
               <Button
-                text="확인"
+                text={t('common.button.confirm')}
                 size="sm"
                 onPress={() => closeAlert()}
                 className="bg-btn-act-page"

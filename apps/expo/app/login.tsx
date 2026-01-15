@@ -20,7 +20,7 @@ export default function LoginScreen() {
   const handleGoogleLogin = async () => {
     const result = await login('google');
     if (result && 'errorMessage' in result) {
-      showAlert.error(result.errorMessage, '다시 시도해주세요');
+      showAlert.error(result.errorMessage, t('common.error.tryLater'));
       return;
     }
     router.replace(ROUTES.HOME);
@@ -29,7 +29,7 @@ export default function LoginScreen() {
   const handleKakaoLogin = async () => {
     const result = await login('kakao');
     if (result && 'errorMessage' in result) {
-      showAlert.error(result.errorMessage, '다시 시도해주세요');
+      showAlert.error(result.errorMessage, t('common.error.tryLater'));
       return;
     }
     router.replace(ROUTES.HOME);

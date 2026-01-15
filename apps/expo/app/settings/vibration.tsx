@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { scale } from 'react-native-size-matters';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
@@ -9,6 +10,7 @@ import { NavButton, Pressable, Text, View } from '@src/components/ui';
 import { getHapticState, setHapticState } from '@src/lib/haptics';
 
 export default function VibrationScreen() {
+  const { t } = useTranslation();
   const [hapticEnabled, setHapticEnabled] = useState(getHapticState());
   const router = useRouter();
 
@@ -28,7 +30,9 @@ export default function VibrationScreen() {
             setHapticEnabled(newHapticState);
           }}
         >
-          <Text className="text-body-small">진동</Text>
+          <Text className="text-body-small">
+            {t('common.settings.vibration')}
+          </Text>
           <Ionicons
             name={hapticEnabled ? 'radio-button-on' : 'radio-button-off'}
             size={scale(24)}

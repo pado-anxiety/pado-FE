@@ -2,6 +2,7 @@ import { useRef } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import WebView from 'react-native-webview';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
@@ -17,13 +18,16 @@ import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { createWebViewMessageHandler } from '@src/lib/webview';
 
 export default function DiaryResultScreen() {
+  const { t } = useTranslation();
   const { data } = useLocalSearchParams();
   const router = useRouter();
   const hasMutated = useRef(false);
 
   const diaryData = parseJSON(data as string, () => {
-    showAlert.error('오류가 발생했습니다', '다시 시도해주세요', () =>
-      router.replace(ROUTES.HOME),
+    showAlert.error(
+      t('common.error.generic'),
+      t('common.error.tryLater'),
+      () => router.replace(ROUTES.HOME),
     );
   });
 
@@ -49,7 +53,7 @@ export default function DiaryResultScreen() {
         if (!hasMutated.current) {
           hasMutated.current = true;
           const parsedData = parseJSON(diaryData as string, () => {
-            showAlert.error('오류가 발생했습니다', '다시 시도해주세요');
+            showAlert.error(t('common.error.generic'), t('common.error.tryLater'));
             router.replace(ROUTES.HOME);
           });
           diaryMutation.mutate({
