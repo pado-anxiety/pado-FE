@@ -1,62 +1,68 @@
 {
   "intro": {
-    "title": "Values & Committed Action",
+    "title": "Finding My Heart's Direction",
     "description": [
-      "Find the direction of life you truly want without being swept away by anxiety.",
-      "Values are like a compass, not a destination.",
-      "Discover what's important in your life and take a small step toward those values."
+      "Instead of being swept away by waves, find the direction your ocean truly wants to flow.",
+      "Values are not a shore to reach, but a lighthouse that guides the flow of your entire sea.",
+      "Check if your current is flowing toward that light, and create a small ripple toward the center."
     ],
-    "contentTitle": "Discovering Values & Committed Action",
-    "contentDescription": "Discover values that will become your life's compass, and plan specific actions aligned with those values.",
+    "contentTitle": "My Life's Bull's Eye",
+    "contentDescription": "Discover what truly matters to you and plan small, intentional steps that align with that direction.",
     "steps": [
-      "1. Check how well each area matches your expectations.",
-      "2. Write the direction you want to pursue in the lowest area.",
-      "3. Identify obstacles blocking that direction.",
-      "4. Plan a small committed action toward that value."
+      "1. Mark your current position on the 4-domain target.",
+      "2. Define the 'Value' for the area furthest from the center.",
+      "3. Identify the obstacles standing in your way.",
+      "4. Decide on a small 'committed action' to take, even with those obstacles."
     ],
-    "tip": "Tip: Values are not goals to achieve. They are the direction of living and the criteria for every choice."
+    "tip": "Tip: A value is not a 'goal' to achieve, but a constant direction of 'who you want to be' as an ocean."
   },
   "step": {
     "step1": {
-      "title": "How well does each area match your expectations?",
-      "description": "Check how well your current life matches your expectations in work, growth, leisure, and relationships."
+      "title": "How close are your current actions to your values?",
+      "description": "Please tap all 4 areas to mark your spot. The closer you are to the center (Bull's Eye), the more you are living in line with your values."
     },
     "step2": {
-      "title": "Write the direction you want to pursue in this area",
-      "description": "Choose one and write it down.",
-      "placeholder": "The direction I want to pursue..."
+      "title": "Who do you want to be in this area?",
+      "description": "These are the areas furthest from the center. If there were no obstacles, what kind of person (value) would you want to be here?",
+      "placeholder": "e.g., Someone who knows how to pause and reflect for growth."
     },
     "step3": {
-      "title": "What obstacles are blocking that direction?",
-      "description": "What's getting in the way?",
-      "placeholder": "Write the obstacles..."
+      "title": "What obstacles are holding you back?",
+      "description": "Write down the thoughts, feelings, or situations that stop you from living a value-driven life.",
+      "placeholder": "e.g., Anxiety about falling behind, the pressure to be perfect."
     },
     "step4": {
-      "title": "Write a small, specific action you can take",
-      "description": "Something small and concrete you can do right now",
-      "placeholder": "A small action I can do today..."
+      "title": "A small ripple to move 1cm closer",
+      "description": "Choose a very small, specific action you can take for your values, even when obstacles appear.",
+      "placeholder": "e.g., Gently reflecting on my day for 5 minutes."
     }
   },
   "domain": {
     "work": "Work",
-    "growth": "Growth",
     "leisure": "Leisure",
-    "relationship": "Relationship"
+    "relationship": "Relationships",
+    "growth": "Health & Growth"
   },
   "result": {
-    "title": "You've taken the first step toward your values",
+    "title": "Finding My Values and Direction",
     "description": [
-      "The value you chose becomes your life's compass.",
-      "Even when anxiety comes, remember this value and keep moving forward one step at a time.",
-      "Small committed actions build a meaningful life."
+      "A lighthouse is now shining over your deepened ocean.",
+      "Even if rough waves shake you, your current can now flow steadily toward that light.",
+      "The small ripples you created today will eventually complete the vast ocean you dream of."
     ],
-    "selectedDomain": "Selected Area",
-    "orientation": "Direction to Pursue",
-    "obstacle": "Obstacle",
-    "action": "Today's Committed Action"
+    "selectedDomain": "Area furthest from the center",
+    "selectedValue": "Chosen value",
+    "orientation": "Value pursued",
+    "reason": "The reason",
+    "obstacle": "Obstacles to face",
+    "action": "Today's committed action"
   },
   "history": {
-    "title": "Values",
-    "description": "Recorded values and committed actions"
+    "title": "My Ocean's Journey",
+    "description": "Recording the movements of your current as it flows toward the center of your heart.",
+    "matterQuestion": "Which area is furthest from your ideal self?",
+    "valueQuestion": "What is the value you wish to pursue in that area?",
+    "barrierQuestion": "What obstacles are standing in your way?",
+    "actionQuestion": "What is one small thing you can do right now for that value?"
   }
 }

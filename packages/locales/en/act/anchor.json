@@ -1,61 +1,61 @@
 {
   "intro": {
-    "title": "Focus on the Present",
+    "title": "Grounding in the Present",
     "description": [
-      "When waves of anxiety hit, the first thing to do is to anchor yourself in the \"here and now\".",
-      "Before letting go of anxiety, you need to pause and take a breath.",
-      "Turn off the complex thoughts for a moment and focus only on the sensations your body and surroundings are sending you right now.",
-      "This process becomes the strongest foundation for safely letting anxiety pass."
+      "When waves of anxiety rise high, the mist can often cloud your vision, making you lose sight of the 'present moment'.",
+      "We may not be able to stop the waves right away, but to avoid being swept away, we must focus on the sensations touching the surface of your ocean.",
+      "Instead of the whirlpool of dizzying thoughts, try to focus on the actual sights and sounds surrounding your sea right now.",
+      "This process is a firm beginning that helps your ocean find its balance, even amidst high waves."
     ],
     "contentTitle": "5-4-3-2-1 Sensory Observation",
-    "contentDescription": "A grounding technique that uses your five senses to anchor your mind.",
+    "contentDescription": "This is a practice to awaken your senses and find the 'here and now' amidst the surging waves.",
     "steps": [
       "1. Find 5 things you can see",
       "2. Feel 4 things you can touch",
-      "3. Focus on 3 sounds you can hear",
-      "4. Find 2 scents you can smell",
-      "5. Notice 1 taste in your mouth"
+      "3. Focus on 3 things you can hear",
+      "4. Find 2 things you can smell",
+      "5. Sense 1 thing you can taste"
     ],
-    "tip": "Tip: Focus slowly on the sensations as they are, without judgment."
+    "tip": "Tip: Try to focus slowly on each sensation just as it is, without judgment."
   },
   "step": {
     "step1": {
-      "subject": "5 Things You Can See",
-      "description": ["Find 5 objects", "that you can see"],
-      "example": "Shapes, colors of objects, etc."
+      "subject": "5 things you see now",
+      "description": ["Look for 5 objects", "you can see around you"],
+      "example": "Shapes, colors, etc."
     },
     "step2": {
-      "subject": "4 Things You Can Touch",
+      "subject": "4 things you can touch",
       "description": ["Focus on 4 sensations", "touching your body"],
-      "example": "The firmness of a chair, texture of clothes, etc."
+      "example": "Hardness of a chair, texture of clothes, etc."
     },
     "step3": {
-      "subject": "3 Things You Can Hear",
-      "description": ["Listen to 3 sounds", "around you"],
-      "example": "Distant noise, ticking of a clock, etc."
+      "subject": "3 things you can hear",
+      "description": ["Listen for 3 sounds", "around you"],
+      "example": "Distant noise, the ticking of a clock, etc."
     },
     "step4": {
-      "subject": "2 Things You Can Smell",
-      "description": ["Find 2 scents", "around you"],
-      "example": "Subtle fragrances nearby"
+      "subject": "2 things you can smell",
+      "description": ["Notice 2 scents", "drifting past your nose"],
+      "example": "A faint fragrance nearby"
     },
     "step5": {
-      "subject": "1 Thing You Can Taste",
-      "description": ["You can also imagine", "a taste you like"],
-      "example": "The sensation in your mouth or aftertaste of water you just drank"
+      "subject": "1 thing you can taste",
+      "description": ["You can also imagine", "a flavor you like"],
+      "example": "The feeling in your mouth or the aftertaste of water"
     },
-    "hint": "* Press the button when you find a sensation"
+    "hint": "* Tap the button once you've found each sensation"
   },
   "result": {
-    "title": "You've safely anchored yourself",
+    "title": "You are present in this moment",
     "description": [
-      "You've awakened your senses one by one and anchored yourself in the present.",
-      "Now, instead of confusing thoughts, you can fully focus on the peace of this moment.",
-      "You're ready.",
-      "Start practicing discovering your true emotions through the next step, the Emotion Diary."
+      "Amidst high waves, you have awakened your senses and faced the 'here and now' clearly.",
+      "The waves are still rolling, but you are now firmly present, no longer swept away.",
+      "Is your vision a bit clearer now? It is time to take a steady look at the waves rippling over your ocean.",
+      "In the next step, 'Recording Today’s Waves', let's discover the true emotions swaying within you."
     ]
   },
   "history": {
-    "completed": "Completed 5-4-3-2-1 exercise"
+    "completed": "Even amidst rough waves, you stayed grounded in the sensations of this moment."
   }
 }

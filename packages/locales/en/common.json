@@ -2,26 +2,55 @@
   "button": {
     "start": "Start",
     "next": "Next",
-    "complete": "Complete",
+    "prev": "Back",
+    "complete": "Done",
     "back": "Back",
     "close": "Close",
-    "restart": "Restart"
+    "restart": "Start Over",
+    "send": "Send",
+    "goHome": "Back to Home",
+    "confirm": "Confirm"
   },
-  "loading": "Loading...",
+  "loading": "Calming the waves...",
   "error": {
-    "generic": "An error occurred.",
+    "generic": "Something went wrong.",
+    "occurred": "Oops! An error occurred.",
     "tryLater": "Please try again later.",
-    "loginRequired": "Login is required.",
-    "goToLogin": "Redirecting to login page."
+    "tryAgainLater": "Please try again in a little while.",
+    "loginRequired": "Please log in first.",
+    "goToLogin": "Moving to the login page...",
+    "pageNotFound": "We couldn't find this page.",
+    "cannotLoadScreen": "Unable to load the screen."
   },
   "validation": {
     "charLimitExceeded": "Character limit exceeded.",
-    "charLimitMessage": "Maximum {{maxLength}} characters allowed. (Current: {{currentLength}})"
+    "charLimitMessage": "Maximum {{maxLength}} characters. (Current: {{currentLength}})"
   },
   "empty": {
-    "noRecords": "No records found."
+    "noRecords": "No memories found yet."
   },
   "example": "Example",
   "or": "or",
-  "writeYourOwn": "Write your own"
+  "writeYourOwn": "Write your own",
+  "settings": {
+    "title": "Settings",
+    "user": {
+      "name": "Name",
+      "email": "Email"
+    },
+    "language": "Language",
+    "vibration": "Vibration",
+    "feedback": {
+      "title": "Feedback",
+      "description": "Feel free to share your thoughts with us.",
+      "placeholder": "Tell us what's on your mind...",
+      "send": "Send Feedback"
+    },
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "appVersion": "App Version",
+    "licenseInfo": "Licenses",
+    "licenseDescription": "This app uses the following open-source libraries.",
+    "logout": "Log out"
+  }
 }

@@ -1,39 +1,40 @@
 {
   "intro": {
-    "title": "Cognitive Defusion",
+    "title": "Separating the Wind from the Waves",
     "description": [
-      "Your thoughts are not facts. They are just noise created by your mind.",
-      "Shall we take a step back from your thoughts? We'll practice letting them pass by without holding on tight.",
-      "Let's reduce the sound of the false alarm called anxiety and face the real reality."
+      "The rough waves crashing over you right now were created by the wind called 'thoughts.'",
+      "To avoid being swept away by the waves, you need to take a step back from the wind shaking your surface.",
+      "Just realizing that the wind is what causes the waves will begin to ease the power of your anxiety."
     ],
-    "contentTitle": "The Process of Reducing the Power of Thoughts",
-    "contentDescription": "Practice recognizing thoughts as mere 'words' passing by, not mistaking them for reality.",
+    "contentTitle": "Separating Thoughts from Facts",
+    "contentDescription": "Let's practice understanding and separating thoughts from objective facts.",
     "steps": [
-      "1. Write a sentence: Write down the thoughts that make you anxious in sentences.",
-      "2. Separate thoughts: Drag and select the parts of the sentence that are 'my thoughts', not facts.",
-      "3. Let go: Watch the selected thoughts become transparent and disappear, leaving only objective facts."
+      "1. Write it down: Write the thoughts making you anxious into a sentence.",
+      "2. Separate thoughts: Drag and select the 'thought' part that isn't a fact.",
+      "3. Let it flow: Watch the selected thought fade away, leaving only the objective fact behind."
     ],
-    "tip": "Tip: Thoughts are like 'false alarms' sent by the brain. Don't react to the sound, just notice that a sound is heard.",
-    "button": "Start Defusion"
+    "tip": "Tip: The wind can shake your surface, but it can never reach the depths of your ocean. Just calmly watch the wind as it blows by.",
+    "button": "Start Distancing from the Wind"
   },
   "step": {
     "step1": {
-      "title": ["What thoughts are", "floating in your mind right now?"],
-      "description": "Write down what you hear in your mind without judgment. It's okay if it's long, and even a trivial sentence is fine."
+      "title": ["What thoughts are", "floating in your head?"],
+      "description": "Write down the voices in your head exactly as they sound, without judgment. Long or short, any sentence is fine.",
+      "placeholder": "e.g., \"I'll never get anything right,\" \"What if everyone hates me?\" "
     },
     "step2": {
-      "title": ["Where in this sentence", "are my 'thoughts'?"],
-      "description": "Try dragging only the interpretation or judgment parts."
+      "title": ["How much of this sentence", "is just a 'thought'?"],
+      "description": "Drag and select only the part that is an interpretation or a judgment."
     }
   },
   "result": {
-    "title": ["The foam of thoughts has cleared,", "only facts remain."],
+    "title": ["You've separated the waves and the wind"],
     "description": [
-      "Like the sentence that became transparent, thoughts are just thoughts.",
-      "You can now take a breath on the solid ground of facts."
+      "Just like the text that turned transparent, the wind of thoughts only brushes across your ocean for a moment.",
+      "As the wind loses its strength, the rough waves will soon settle into a calm stillness."
     ]
   },
   "history": {
-    "description": "Separated thoughts from facts"
+    "description": "Separated thoughts from objective facts"
   }
 }

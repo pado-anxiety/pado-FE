@@ -1,58 +1,58 @@
 {
   "steps": {
     "step1": {
-      "texts": ["Hello. Welcome to 'Pado', where you face the waves of your heart."],
+      "texts": ["Hi there.", "Welcome to Pado,", "a place for your heart to rest a while."],
       "button": "Nice to meet you!"
     },
     "step2": {
-      "texts": ["Are you short of breath or feeling heavy", " because of daily anxiety?"],
-      "button": "Yes"
+      "texts": ["Do you ever feel like rough waves are crashing in,", "making it hard to breathe and your heart feel heavy?"],
+      "button": "Yes, I do"
     },
     "step3": {
-      "texts": ["Trapped in anxiety,", " are you missing this present moment?"],
-      "button": "Yes"
+      "texts": ["Do you feel swept away by high waves,", "losing touch with the precious 'now'?"],
+      "button": "Sometimes, yes"
     },
     "step4": {
       "texts": [
-        "Acceptance and Commitment Therapy (ACT) says",
-        "anxiety is not something to overcome,",
-        "but something to let flow by."
-      ],
-      "button": "How can I let it flow?"
-    },
-    "step5": {
-      "texts": [
-        "That's why 'Pado' compares the anxiety in our hearts to 'waves' that come and go.",
-        "And just as waves are part of the ocean,",
-        "our hearts are also a deep and vast ocean that embraces those waves."
+        "ACT (Acceptance and Commitment Therapy) teaches us:",
+        "Anxiety isn't something we must fight or overcome.",
+        "It's something we can simply let flow through us."
       ],
       "button": "I understand"
     },
+    "step5": {
+      "texts": [
+        "Just as waves are naturally part of the ocean,",
+        "think of your heart as a deep, vast sea",
+        "that can gently hold those waves within."
+      ],
+      "button": "I like that"
+    },
     "step6": {
-      "texts": ["Now let's expand the ocean of your heart with 'Pado'"],
-      "button": "Sounds good"
+      "texts": ["Shall we explore how to make your inner sea a bit calmer and deeper together?"],
+      "button": "Let's begin"
     },
     "step7": {
       "texts": [
-        "Let's simply practice the 4-7-8 breathing technique.",
+        "Before we start,",
+        "let's catch our breath with the rhythm of the waves.",
         "Breathe in deeply for 4 seconds,",
-        "Hold for 7 seconds,",
-        "Exhale slowly for 8 seconds.",
-        "This will help calm your mind before we start."
+        "hold it for 7 seconds,",
+        "and exhale slowly for 8 seconds."
       ],
-      "button": "Let's try it!"
+      "button": "I'll give it a try"
     },
     "step8": {
       "texts": [
-        "Well done. Do you feel more at ease?",
-        "Now let's expand the ocean of your heart with 'Pado'"
+        "Well done. Even just breathing helps the waves settle down.",
+        "Shall we head out to your calm inner sea now?"
       ],
       "button": "Start"
     }
   },
   "breath": {
-    "inhale": "Take a deep breath in",
-    "hold": "Hold your breath and wait",
-    "exhale": "Slowly exhale"
+    "inhale": "Breathe in deeply",
+    "hold": "Hold it gently",
+    "exhale": "Exhale slowly"
   }
 }

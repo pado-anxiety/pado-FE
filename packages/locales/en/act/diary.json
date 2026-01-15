@@ -1,48 +1,49 @@
 {
   "intro": {
-    "title": "Mind Diary",
+    "title": "Recording Today's Wave",
     "description": [
-      "Anxiety doesn't start from the event itself, but from my \"interpretation\" of the event.",
-      "Therefore, we need to find the \"automatic thoughts\" hidden between the situation and emotions that make us anxious.",
-      "Shall we go discover the thoughts that caused your anxiety?"
+      "We often get swept away by a huge wave called 'anxiety' without knowing exactly what we're feeling in the moment.",
+      "But this wave isn't just one emotion; it's often a single wave made of many different feelings layered together.",
+      "Shall we take a moment to discover which emotions make up the waves rolling toward you?"
     ],
-    "contentTitle": "3 Steps to Read Your Mind's Flow",
-    "contentDescription": "A 'thought separation' technique that organizes tangled feelings into situation, thought, and emotion.",
+    "contentTitle": "Writing an Emotion Diary",
+    "contentDescription": "A practice of breaking down vague anxiety into specific emotions to face your true heart.",
     "steps": [
       "1. Situation (Fact): When, where, and what happened?",
-      "2. Thought: What thoughts crossed your mind at that moment?",
-      "3. Emotion: What emotions did you feel because of those thoughts?"
+      "2. Thought (Thought): What thoughts crossed your mind at that moment?",
+      "3. Emotion (Emotion): What emotions did those thoughts make you feel?"
     ],
-    "tip": "Tip: 'Thoughts' are not facts. The key is to discover how I interpreted the situation."
+    "tip": "Tip: 'Thoughts' are just like the wind—they have no substance. The key is to discover how you interpreted the situation."
   },
   "step": {
     "step1": {
-      "question": "What situation occurred?",
-      "description": "Write down the facts of the moment when your emotions were shaken, objectively like a CCTV recording.",
-      "exampleBad": "X: My friend ignored me and didn't contact me.",
-      "exampleGood": "O: I didn't receive a reply for 3 hours after sending a message to my friend."
+      "question": "What happened?",
+      "description": "Record the facts of the moment your inner sea wavered, as if captured objectively by a CCTV camera.",
+      "exampleBad": "X: I felt pathetic because I was lazy and didn't study at all.",
+      "exampleGood": "O: I planned to study for 3 hours, but I actually spent all 3 hours on my smartphone."
     },
     "step2": {
       "question": "What thoughts crossed your mind?",
-      "description": "Write down your interpretations or passing thoughts added to the facts.",
-      "exampleBad": "X: I was annoyed and angry. (This is an emotion)",
-      "exampleGood": "O: I thought \"Do they hate me?\" or \"Did I make a mistake?\""
+      "description": "Write down the interpretations or thoughts that brushed across your surface, added to the facts.",
+      "exampleBad": "X: I felt a sense of failure and didn't want to study. (This is a feeling/emotion)",
+      "exampleGood": "O: I thought, 'I have no willpower,' or 'What if I fail the exam because of this?'"
     },
     "step3": {
       "question": "What emotions did you feel?",
-      "description": "Select or write down the emotions or physical sensations that came because of those thoughts."
+      "description": "Select or write down the true identity of the wave or physical sensations brought by those thoughts."
     },
-    "placeholder": "Or write your own"
+    "placeholder": "Feel free to write down the emotions you felt at the time."
   },
   "result": {
-    "title": "We've examined what wind created the wave called 'anxiety'",
+    "title": "We've discovered the true emotions within the wave",
     "description": [
-      "The high waves are just momentary ripples created by the wind called 'thoughts'.",
-      "When the wind passes, the waves will become calm again."
+      "Now, this wave is no longer just a giant, mysterious anxiety.",
+      "The moment you gave it a name, the wave became a 'specific feeling' that you can face and embrace.",
+      "Shall we move to the next step and observe this wave as it is, without trying to suppress it?"
     ]
   },
   "history": {
-    "situationQuestion": "What situation occurred?",
+    "situationQuestion": "What happened?",
     "thoughtQuestion": "What thoughts crossed your mind?",
     "emotionQuestion": "What emotions did you feel?"
   }

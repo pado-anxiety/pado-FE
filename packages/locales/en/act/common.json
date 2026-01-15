@@ -1,21 +1,21 @@
 {
   "title": {
-    "anchor": "Contact with Present",
-    "diary": "Mind Diary",
-    "detach": "Cognitive Defusion",
-    "embrace": "Willingly Accept",
-    "values": "Values & Committed Action"
+    "anchor": "Grounding in the Present",
+    "diary": "Recording Today’s Waves",
+    "detach": "Separating the Wind and Waves",
+    "embrace": "Deepening the Sea of My Heart",
+    "values": "Finding My True Direction"
   },
   "history": {
-    "title": "View ACT History",
-    "subtitle": "You can check your ACT history so far.",
-    "viewHistory": "View ACT History"
+    "title": "Memories of Past Waves",
+    "subtitle": "Reflect on the moments that have stayed in your ocean.",
+    "viewHistory": "Check My Records"
   },
   "historyType": {
-    "contactWithPresent": "Contact with Present",
-    "emotionNote": "Emotion Note",
-    "cognitiveDefusion": "Cognitive Defusion",
-    "acceptance": "Acceptance",
-    "values": "Values & Committed Action"
+    "contactWithPresent": "Grounding",
+    "emotionNote": "Emotion Diary",
+    "cognitiveDefusion": "Separating Wind",
+    "acceptance": "Deepening the Sea",
+    "values": "Values & Action"
   }
 }
