@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
-import { Redirect, useRouter } from 'expo-router';
+import { Redirect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -31,12 +31,9 @@ interface ModalType {
 }
 
 export default function HomeScreen(): React.ReactNode {
-  console.log(useAuth.getState().accessToken);
-  console.log(useAuth.getState().refreshToken);
   const { t } = useTranslation();
   const { isLoggedIn } = useAuth();
   const { page, setPage } = useHomePageState();
-  const router = useRouter();
 
   const [modalType, setModalType] = useState<ModalType | null>(null);
   const [detail, setDetail] = useState<ActHistory | null>(null);
@@ -73,10 +70,6 @@ export default function HomeScreen(): React.ReactNode {
   }
 
   if (!isLoggedIn) {
-    showAlert.warning(
-      t('common.error.loginRequired'),
-      t('common.error.goToLogin'),
-    );
     return <Redirect href={ROUTES.LOGIN} />;
   }
 

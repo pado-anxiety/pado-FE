@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { router } from 'expo-router';
 
-import { showAlert } from '../alert/alert';
+import { showAlert } from '../alert';
 import { useAuth } from '../auth';
 import { ENV } from '../env';
 import { ROUTES } from '../route';

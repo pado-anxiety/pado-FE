@@ -37,7 +37,7 @@ export default function LoginScreen() {
 
   return (
     <View
-      className="flex flex-1 flex-col justify-between"
+      className="flex flex-1 flex-col justify-between bg-page"
       style={{
         paddingTop: insets.top,
       }}

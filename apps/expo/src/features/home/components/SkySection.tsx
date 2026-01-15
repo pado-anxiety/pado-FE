@@ -165,56 +165,6 @@ export function SkySection({
               {t('home.menu.learning')}
             </AnimatedText>
           </TouchableOpacity>
-          {/* 
-          <TouchableOpacity
-            className="flex flex-col"
-            onPress={() => router.push(ROUTES.ONBOARD)}
-          >
-            <AnimatedText
-              delay={2000}
-              className="text-4xl font-medium text-slate-700"
-            >
-              {t('home.menu.onboarding')}
-            </AnimatedText>
-            <Animated.View
-              className="mt-1 h-[1.5px] w-full bg-slate-300"
-              entering={FadeIn.duration(2000)}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="flex flex-col"
-            onPress={() => router.push(ROUTES.LOGIN)}
-          >
-            <AnimatedText
-              delay={2000}
-              className="text-4xl font-medium text-slate-700"
-            >
-              {t('home.menu.login')}
-            </AnimatedText>
-            <Animated.View
-              className="mt-1 h-[1.5px] w-full bg-slate-300"
-              entering={FadeIn.duration(2000)}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="flex flex-col"
-            onPress={() => {
-              triggerHaptic('NAVIGATE');
-              setIsOnboarded(false);
-              logout();
-            }}
-          >
-            <AnimatedText
-              delay={2000}
-              className="text-4xl font-medium text-slate-700"
-            >
-              초기화 버튼
-            </AnimatedText>
-            <Animated.View
-              className="mt-1 h-[1.5px] w-full bg-slate-300"
-              entering={FadeIn.duration(2000)}
-            />
-          </TouchableOpacity> */}
         </View>
       </View>
     </View>
