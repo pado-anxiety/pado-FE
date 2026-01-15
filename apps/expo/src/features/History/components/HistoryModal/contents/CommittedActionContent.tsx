@@ -11,10 +11,10 @@ interface CommittedActionContentProps {
 }
 
 const actionKeys = {
-  LEISURE: 'act.values.history.leisure',
-  RELATIONSHIP: 'act.values.history.relationship',
-  GROWTH: 'act.values.history.growth',
-  WORK: 'act.values.history.work',
+  LEISURE: 'act.values.domain.leisure',
+  RELATIONSHIP: 'act.values.domain.relationship',
+  GROWTH: 'act.values.domain.growth',
+  WORK: 'act.values.domain.work',
 };
 
 export function CommittedActionContent({

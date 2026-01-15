@@ -15,19 +15,19 @@
   "error": {
     "generic": "오류가 발생했습니다.",
     "occurred": "오류가 발생했어요!",
-    "tryLater": "나중에 다시 시도해주세요.",
+    "tryLater": "나중에 다시 시도해주세요",
     "tryAgainLater": "잠시후 다시 시도해주세요",
-    "loginRequired": "로그인이 필요합니다.",
-    "goToLogin": "로그인 페이지로 이동합니다.",
+    "loginRequired": "로그인이 필요합니다",
+    "goToLogin": "로그인 페이지로 이동합니다",
     "pageNotFound": "페이지를 찾을 수 없습니다",
-    "cannotLoadScreen": "화면을 불러올 수 없습니다."
+    "cannotLoadScreen": "화면을 불러올 수 없습니다"
   },
   "validation": {
-    "charLimitExceeded": "글자 수 제한을 초과했습니다.",
-    "charLimitMessage": "최대 {{maxLength}}자까지 입력할 수 있습니다. (현재 {{currentLength}}자)"
+    "charLimitExceeded": "글자 수 제한을 초과했습니다",
+    "charLimitMessage": "최대 {{maxLength}}자까지 입력할 수 있어요. (현재 {{currentLength}}자)"
   },
   "empty": {
-    "noRecords": "기록이 없습니다."
+    "noRecords": "기록이 없습니다"
   },
   "example": "예시",
   "or": "또는",
@@ -43,7 +43,7 @@
     "feedback": {
       "title": "피드백",
       "description": "자유롭게 의견을 남겨주세요",
-      "placeholder": "피드백을 남겨주세요.",
+      "placeholder": "피드백을 남겨주세요",
       "send": "피드백 보내기"
     },
     "privacyPolicy": "개인정보 처리 방침",

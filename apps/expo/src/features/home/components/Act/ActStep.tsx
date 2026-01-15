@@ -145,7 +145,9 @@ export function ActStep({
           </View>
 
           <View className="border-white/2 mt-4 rounded-3xl bg-[#F3F4F6] px-4 py-1.5">
-            <Text className="text-label-medium">{t(item.i18nKey)}</Text>
+            <Text className="text-label-medium font-bold">
+              {t(item.i18nKey)}
+            </Text>
           </View>
         </Pressable>
       </View>
