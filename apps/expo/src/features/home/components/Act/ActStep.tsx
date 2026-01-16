@@ -6,6 +6,7 @@ import detachImage from '@assets/images/home/detach.png';
 import diaryImage from '@assets/images/home/diary.png';
 import embraceImage from '@assets/images/home/embrace.png';
 import { useRouter } from 'expo-router';
+import { usePostHog } from 'posthog-react-native';
 import { useTranslation } from 'react-i18next';
 
 import { Image, Pressable, Text, View } from '@src/components/ui';
@@ -48,9 +49,19 @@ export function ActStep({
   containerRef,
   onReportLayout,
 }: ActButtonProps): React.ReactNode {
+  const posthog = usePostHog();
+
   const { t } = useTranslation();
   const circleRef = useRef<View>(null);
   const router = useRouter();
+
+  const handlePress = () => {
+    triggerHaptic('NAVIGATE');
+    posthog.capture('act_step_pressed', {
+      act_step: item.slug,
+    });
+    router.push(getActRoute(item.slug));
+  };
 
   const handleLayout = () => {
     if (circleRef.current && containerRef.current) {
@@ -97,10 +108,7 @@ export function ActStep({
       >
         <Pressable
           className="relative flex-1 items-center justify-center gap-2"
-          onPress={() => {
-            triggerHaptic('NAVIGATE');
-            router.push(getActRoute(item.slug));
-          }}
+          onPress={handlePress}
           onLayout={handleLayout}
         >
           <View className="relative items-center justify-center">

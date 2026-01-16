@@ -1,8 +1,9 @@
 import { useRef } from 'react';
 
 import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
+import { usePostHog } from 'posthog-react-native';
 import { useTranslation } from 'react-i18next';
 import { Keyboard } from 'react-native';
 
@@ -17,7 +18,6 @@ import {
   useModal,
 } from '@src/components/ui';
 import { ENV } from '@src/lib';
-import { API_KEY } from '@src/lib/api';
 import { userAPI } from '@src/lib/api/user';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
@@ -25,7 +25,8 @@ import { ROUTES } from '@src/lib/route';
 export default function SettingsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { logout } = useAuth();
+  const { logout, name, email } = useAuth();
+  const posthog = usePostHog();
 
   const feedbackRef = useRef<string>('');
   const inputRef = useRef(null);
@@ -37,11 +38,6 @@ export default function SettingsScreen() {
     feedbackRef.current = '';
     inputRef.current?.clear();
   };
-
-  const { data: user } = useQuery({
-    queryKey: [API_KEY.USER],
-    queryFn: () => userAPI.getUser(),
-  });
 
   const feedbackMutation = useMutation({
     mutationFn: userAPI.sendFeedback,
@@ -59,6 +55,7 @@ export default function SettingsScreen() {
 
   const handleLogout = async () => {
     await logout();
+    posthog.reset();
     router.replace(ROUTES.LOGIN);
   };
 
@@ -85,7 +82,7 @@ export default function SettingsScreen() {
               numberOfLines={1}
               className="flex-1 text-right text-label-medium font-medium"
             >
-              {user?.name}
+              {name}
             </Text>
           </View>
 
@@ -99,7 +96,7 @@ export default function SettingsScreen() {
               ellipsizeMode="tail"
               className="flex-1 text-right text-label-medium font-medium"
             >
-              {user?.email}
+              {email}
             </Text>
           </View>
         </View>

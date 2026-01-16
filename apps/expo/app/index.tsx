@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import { Redirect } from 'expo-router';
+import { usePostHog } from 'posthog-react-native';
 import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -32,13 +33,24 @@ interface ModalType {
 
 export default function HomeScreen(): React.ReactNode {
   const { t } = useTranslation();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, name, email, accessToken } = useAuth();
   const { page, setPage } = useHomePageState();
 
   const [modalType, setModalType] = useState<ModalType | null>(null);
   const [detail, setDetail] = useState<ActHistory | null>(null);
 
   const onboarded = isOnboarded();
+
+  const posthog = usePostHog();
+
+  useEffect(() => {
+    if (posthog && isLoggedIn && name && email && accessToken) {
+      posthog.identify(accessToken, {
+        name,
+        email,
+      });
+    }
+  }, [posthog, isLoggedIn, name, email, accessToken]);
 
   const detailMutation = useMutation({
     mutationFn: historyAPI.getDetail,

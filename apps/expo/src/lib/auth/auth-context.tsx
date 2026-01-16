@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { create } from 'zustand';
 
 import { authAPI } from '../api/auth';
+import { userAPI } from '../api/user';
 import { i18n } from '../i18n';
 import { ROUTES } from '../route';
 import { SignInWithGoogle } from './google-login';
@@ -9,6 +10,8 @@ import { SignInWithKakao } from './kakao-login';
 import { authStorage } from './utils';
 
 interface AuthState {
+  name: string | null;
+  email: string | null;
   accessToken: string | null;
   refreshToken: string | null;
   isLoggedIn: boolean;
@@ -20,10 +23,17 @@ interface AuthState {
 
   logout: () => void;
 
-  setAuthToken: (accessToken: string, refreshToken: string) => void;
+  setAuthToken: (
+    accessToken: string,
+    refreshToken: string,
+    name: string,
+    email: string,
+  ) => void;
 }
 
 export const useAuth = create<AuthState>((set) => ({
+  name: authStorage.getName(),
+  email: authStorage.getEmail(),
   accessToken: authStorage.getAccessToken(),
   refreshToken: authStorage.getRefreshToken(),
   isLoggedIn: !!authStorage.getAccessToken(),
@@ -60,13 +70,33 @@ export const useAuth = create<AuthState>((set) => ({
         };
       }
 
-      authStorage.setAuthToken(token.accessToken, token.refreshToken);
-
       set({
         accessToken: token.accessToken,
         refreshToken: token.refreshToken,
-        isLoggedIn: true,
       });
+
+      try {
+        const user = await userAPI.getUser();
+
+        const name = user.name;
+        const email = user.email;
+
+        authStorage.setAuthInfo(
+          token.accessToken,
+          token.refreshToken,
+          name,
+          email,
+        );
+
+        set({
+          name: name,
+          email: email,
+          isLoggedIn: true,
+        });
+      } catch (error) {
+        console.error('Failed to load user:', error);
+        return { errorMessage: i18n.t('auth.error.unexpected') };
+      }
     } catch (error) {
       console.error(error);
       return { errorMessage: i18n.t('auth.error.unexpected') };
@@ -81,9 +111,11 @@ export const useAuth = create<AuthState>((set) => ({
 
       set({ isLoading: true });
 
-      authStorage.clearAuthToken();
+      authStorage.clearAuthInfo();
 
       set({
+        name: null,
+        email: null,
         accessToken: null,
         refreshToken: null,
         isLoggedIn: false,
@@ -97,10 +129,17 @@ export const useAuth = create<AuthState>((set) => ({
     }
   },
 
-  setAuthToken: (accessToken: string, refreshToken: string) => {
-    authStorage.setAuthToken(accessToken, refreshToken);
+  setAuthToken: (
+    accessToken: string,
+    refreshToken: string,
+    name: string,
+    email: string,
+  ) => {
+    authStorage.setAuthInfo(accessToken, refreshToken, name, email);
 
     set({
+      name: name,
+      email: email,
       accessToken: accessToken,
       refreshToken: refreshToken,
       isLoggedIn: true,

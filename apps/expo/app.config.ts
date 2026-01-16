@@ -92,7 +92,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     BASE_URL: 'https://pado-anxiety.site',
     IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
     ANDROID_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
-    // BASE_URL: 'https://nyangtodac-dev.site',
     // IOS_WEBVIEW_URL: 'http://localhost:3000',
     // ANDROID_WEBVIEW_URL: 'http://10.0.2.2:3000',
   },

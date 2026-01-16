@@ -1,8 +1,9 @@
-import { useLanguage } from '@src/lib/i18n';
 import { View } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 import { Text } from '@pado/ui';
+
+import { useLanguage } from '@src/lib/i18n';
 
 export default function TextPage() {
   const { language } = useLanguage();
@@ -49,7 +50,7 @@ export default function TextPage() {
         tx="hello"
         className="text-label-small text-body"
       />
-      <View className="w-full h-1/2 mt-2">
+      <View className="mt-2 h-1/2 w-full">
         <WebView
           source={{ uri: url }}
           sharedCookiesEnabled={true}
