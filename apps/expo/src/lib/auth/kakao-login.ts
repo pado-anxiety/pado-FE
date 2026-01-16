@@ -1,6 +1,7 @@
 import { login } from '@react-native-seoul/kakao-login';
 
 import { authAPI } from '../api/auth';
+import { i18n } from '../i18n';
 import { parseAuthToken } from './utils';
 
 type AuthResult =
@@ -12,7 +13,7 @@ export const SignInWithKakao = async (): Promise<AuthResult> => {
     const token = await login();
 
     if (!token || !token.accessToken) {
-      return { errorMessage: '카카오 로그인에 실패했습니다.' };
+      return { errorMessage: i18n.t('auth.error.kakaoFailed') };
     }
 
     const response = await authAPI.getKaKaoAccessToken(token.accessToken);
@@ -22,6 +23,6 @@ export const SignInWithKakao = async (): Promise<AuthResult> => {
     return { accessToken, refreshToken };
   } catch (error) {
     console.error(error);
-    return { errorMessage: '카카오 로그인 중 오류가 발생했습니다.' };
+    return { errorMessage: i18n.t('auth.error.kakaoError') };
   }
 };

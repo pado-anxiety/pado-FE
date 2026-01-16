@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { create } from 'zustand';
 
 import { authAPI } from '../api/auth';
+import { i18n } from '../i18n';
 import { ROUTES } from '../route';
 import { SignInWithGoogle } from './google-login';
 import { SignInWithKakao } from './kakao-login';
@@ -55,7 +56,7 @@ export const useAuth = create<AuthState>((set) => ({
 
       if (!token.accessToken || !token.refreshToken) {
         return {
-          errorMessage: '로그인에 실패했습니다. 토큰을 받아올 수 없습니다.',
+          errorMessage: i18n.t('auth.error.tokenFailed'),
         };
       }
 
@@ -68,7 +69,7 @@ export const useAuth = create<AuthState>((set) => ({
       });
     } catch (error) {
       console.error(error);
-      return { errorMessage: '로그인 중 예상치 못한 오류가 발생했습니다.' };
+      return { errorMessage: i18n.t('auth.error.unexpected') };
     } finally {
       set({ isLoading: false });
     }
@@ -90,7 +91,7 @@ export const useAuth = create<AuthState>((set) => ({
       });
     } catch (error) {
       console.error(error);
-      return { errorMessage: '로그아웃 중 예상치 못한 오류가 발생했습니다.' };
+      return { errorMessage: i18n.t('auth.error.logoutUnexpected') };
     } finally {
       router.replace(ROUTES.HOME);
     }

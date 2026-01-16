@@ -5,6 +5,7 @@ import { Platform } from 'react-native';
 
 import { authAPI } from '../api/auth';
 import { ENV } from '../env';
+import { i18n } from '../i18n';
 import {
   generateCodeChallenge,
   generateCodeVerifier,
@@ -43,14 +44,14 @@ const SignInWithGoogleOnIOS = async (): Promise<AuthResult> => {
     const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUri);
 
     if (result.type !== 'success' || !result.url) {
-      return { errorMessage: 'Google 로그인 인증이 취소되었습니다.' };
+      return { errorMessage: i18n.t('auth.error.googleAuthCanceled') };
     }
 
     const params = Linking.parse(result.url).queryParams;
     const authCode = params?.code;
 
     if (!authCode || typeof authCode !== 'string') {
-      return { errorMessage: 'Google 로그인 인증 코드를 받아올 수 없습니다.' };
+      return { errorMessage: i18n.t('auth.error.googleAuthCodeFailed') };
     }
 
     const response = await authAPI.getGoogleAccessToken({
@@ -65,7 +66,7 @@ const SignInWithGoogleOnIOS = async (): Promise<AuthResult> => {
     return { accessToken, refreshToken };
   } catch (error) {
     console.error(error);
-    return { errorMessage: 'Google 로그인 중 오류가 발생했습니다.' };
+    return { errorMessage: i18n.t('auth.error.googleError') };
   }
 };
 
@@ -76,7 +77,7 @@ const SignInWithGoogleOnAndroid = async (): Promise<AuthResult> => {
     const userInfo = await GoogleSignin.signIn();
 
     if (!userInfo?.data || !userInfo.data.serverAuthCode) {
-      return { errorMessage: 'Google 로그인 인증 정보를 받아올 수 없습니다.' };
+      return { errorMessage: i18n.t('auth.error.googleAuthInfoFailed') };
     }
 
     const response = await authAPI.getGoogleAccessToken({
@@ -90,6 +91,6 @@ const SignInWithGoogleOnAndroid = async (): Promise<AuthResult> => {
     return { accessToken, refreshToken };
   } catch (error) {
     console.error(error);
-    return { errorMessage: 'Google 로그인 중 오류가 발생했습니다.' };
+    return { errorMessage: i18n.t('auth.error.googleError') };
   }
 };
