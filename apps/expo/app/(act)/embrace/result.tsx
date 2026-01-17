@@ -12,6 +12,7 @@ import {
   WebViewLoadingView,
 } from '@src/components/ui';
 import { showAlert } from '@src/lib/alert';
+import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
 import { WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
@@ -23,6 +24,9 @@ export default function EmbraceResultScreen() {
   const router = useRouter();
   const { data } = useLocalSearchParams();
   const hasMutated = useRef(false);
+
+  const { trackFunnelComplete } = useAnalytics();
+
   const parsedData = parseJSON(data as string, () => {
     showAlert.error(t('common.error.generic'), t('common.error.tryLater'), () =>
       router.replace(ROUTES.HOME),
@@ -46,6 +50,7 @@ export default function EmbraceResultScreen() {
           breathingTime: parsedData.embraceResult,
         });
       }
+      trackFunnelComplete(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN);
       router.replace(ROUTES.HOME);
     },
   });

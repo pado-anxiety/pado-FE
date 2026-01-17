@@ -7,17 +7,21 @@ import {
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
+import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { createWebViewMessageHandler } from '@src/lib/webview';
 
 export default function EmbraceScreen() {
   const router = useRouter();
 
+  const { trackFunnelIntroExit } = useAnalytics();
+
   const handleMessage = createWebViewMessageHandler({
     onNavigate: (action) => {
       if (action === 'NEXT') {
         router.push(ROUTES.ACT.EMBRACE.STEP);
       } else if (action === 'HOME') {
+        trackFunnelIntroExit(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN);
         router.back();
       }
     },

@@ -45,6 +45,11 @@ export function useDetachStep() {
   );
 
   const handleNext = useCallback(() => {
+    const currentStep = stepIndex;
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'NEXT',
+      step: currentStep,
+    });
     if (stepIndex < STEP_COUNT - 1) {
       if (!textareaRef.current?.value) {
         return;
@@ -72,13 +77,15 @@ export function useDetachStep() {
   const handleExit = useCallback(() => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
+      step: stepIndex,
     });
-  }, []);
+  }, [stepIndex]);
 
   const handlePrevStep = useCallback((currentStepIndex: number) => {
     if (currentStepIndex === 0) {
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
         action: 'BACK',
+        step: currentStepIndex,
       });
       return;
     }

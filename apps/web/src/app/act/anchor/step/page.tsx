@@ -41,12 +41,14 @@ export default function AnchorStepPage() {
     }
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'BACK',
+      step: stepIndex,
     });
   };
 
   const handleGoHome = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
+      step: stepIndex,
     });
   };
 

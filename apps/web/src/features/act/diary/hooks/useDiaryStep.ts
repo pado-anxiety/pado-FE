@@ -56,12 +56,14 @@ export function useDiaryStep() {
         answer: textareaRef.current?.value || '',
       };
 
+      const currentStep = stepIndex;
+      handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+        action: 'NEXT',
+        step: currentStep,
+      });
       if (stepIndex === STEP_COUNT - 1) {
         handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
           data: safeStringify([...historyCards, newHistoryCard]),
-        });
-        handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
-          action: 'NEXT',
         });
         return;
       }
@@ -77,14 +79,16 @@ export function useDiaryStep() {
   const handleExit = useCallback(() => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
+      step: stepIndex,
     });
-  }, []);
+  }, [stepIndex]);
 
   const handlePrevStep = useCallback(
     (stepIndex: number) => {
       if (stepIndex === 0) {
         handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
           action: 'BACK',
+          step: stepIndex,
         });
         return;
       }

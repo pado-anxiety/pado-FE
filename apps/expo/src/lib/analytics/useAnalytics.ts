@@ -27,6 +27,13 @@ export const useAnalytics = () => {
     });
   };
 
+  const trackFunnelPrev = (title: string, step: number) => {
+    posthog.capture('pado_funnel_prev', {
+      title,
+      step,
+    });
+  };
+
   // 퍼널구조 이탈
   //  step 은 현재 스텝을 의미
   //  0 = 0번 스텝 화면
@@ -40,8 +47,7 @@ export const useAnalytics = () => {
   };
 
   // 퍼널구조 완료
-  //  step 의 마지막에서 완료버튼을 클릭한 경우
-  //  즉, 결과 화면으로 넘어가는 것을 의미
+  //  result 화면에서 완료 버튼 클릭
   const trackFunnelComplete = (title: string) => {
     posthog.capture('pado_funnel_complete', {
       title,
@@ -59,6 +65,7 @@ export const useAnalytics = () => {
     trackContent,
     trackFunnelIntroExit,
     trackFunnelNext,
+    trackFunnelPrev,
     trackFunnelExit,
     trackFunnelComplete,
     identifyUser,

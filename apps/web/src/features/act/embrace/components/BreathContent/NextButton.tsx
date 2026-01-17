@@ -20,10 +20,15 @@ export function NextButton({ sessionCount }: NextButtonProps) {
     return totalSeconds;
   };
 
-  const handleClick = () =>
+  const handleClick = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
       data: { embraceResult: calculateTotalTime() },
     });
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'NEXT',
+      step: 0,
+    });
+  };
 
   return (
     <Button

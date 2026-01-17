@@ -19,6 +19,11 @@ export function useAnchorStep() {
       return;
     }
     triggerHaptic('NAVIGATE');
+    const currentStep = stepIndex;
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'NEXT',
+      step: currentStep,
+    });
     if (stepIndex < ANCHOR_STEPS.length - 1) {
       setStepIndex(stepIndex + 1);
       setSelectedIndex(0);
@@ -26,7 +31,8 @@ export function useAnchorStep() {
     }
 
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
-      action: 'NEXT',
+      action: 'RESULT',
+      step: currentStep,
     });
   }, [selectedIndex, step.count, stepIndex, setStepIndex, setSelectedIndex]);
 

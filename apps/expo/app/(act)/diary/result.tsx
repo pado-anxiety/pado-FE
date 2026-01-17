@@ -12,6 +12,7 @@ import {
   WebViewLoadingView,
 } from '@src/components/ui';
 import { showAlert } from '@src/lib/alert';
+import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
@@ -22,6 +23,8 @@ export default function DiaryResultScreen() {
   const { data } = useLocalSearchParams();
   const router = useRouter();
   const hasMutated = useRef(false);
+
+  const { trackFunnelComplete } = useAnalytics();
 
   const diaryData = parseJSON(data as string, () => {
     showAlert.error(
@@ -62,6 +65,7 @@ export default function DiaryResultScreen() {
             feelings: parsedData[2].answer,
           });
         }
+        trackFunnelComplete(ANALYTICS_KEY.ACT.DIARY.EMOTION);
         router.replace(ROUTES.HOME);
       }
     },

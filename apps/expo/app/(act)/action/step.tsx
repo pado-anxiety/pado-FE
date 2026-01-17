@@ -17,13 +17,12 @@ import { createWebViewMessageHandler } from '@src/lib/webview';
 export default function ActionStepScreen() {
   const router = useRouter();
 
-  const { trackFunnelNext, trackFunnelExit, trackFunnelComplete } =
-    useAnalytics();
+  const { trackFunnelNext, trackFunnelExit, trackFunnelPrev } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
     onNavigate: (action, step) => {
       if (action === 'BACK') {
-        trackFunnelExit(ANALYTICS_KEY.ACT.ACTION.VALUES, step);
+        trackFunnelPrev(ANALYTICS_KEY.ACT.ACTION.VALUES, step);
         router.back();
       } else if (action === 'HOME') {
         trackFunnelExit(ANALYTICS_KEY.ACT.ACTION.VALUES, step);
@@ -34,7 +33,6 @@ export default function ActionStepScreen() {
     },
     onData: (payload) => {
       const { data } = payload as { data: unknown };
-      trackFunnelComplete(ANALYTICS_KEY.ACT.ACTION.VALUES);
       router.push({
         pathname: ROUTES.ACT.ACTION.RESULT,
         params: {
