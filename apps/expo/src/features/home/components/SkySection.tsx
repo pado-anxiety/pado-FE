@@ -115,6 +115,17 @@ export function SkySection({
             </AnimatedText>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          className="flex flex-col"
+          onPress={() => {
+            triggerHaptic('NAVIGATE');
+            router.push(ROUTES.ONBOARD);
+          }}
+        >
+          <AnimatedText className="text-title-small font-medium">
+            {t('home.menu.logout')}
+          </AnimatedText>
+        </TouchableOpacity>
       </View>
     </View>
   );

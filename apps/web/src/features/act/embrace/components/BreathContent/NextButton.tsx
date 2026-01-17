@@ -22,13 +22,13 @@ export function NextButton({ sessionCount, getDuration }: NextButtonProps) {
   };
 
   const handleClick = () => {
-    handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
-      data: { embraceResult: calculateTotalTime() },
-    });
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'NEXT',
       step: 0,
       duration: getDuration(),
+    });
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
+      data: { embraceResult: calculateTotalTime() },
     });
   };
 
