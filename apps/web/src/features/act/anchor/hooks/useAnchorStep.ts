@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import { handlePostMessage, triggerHaptic } from '@/lib';
+import { useDuration } from '@/lib/analytics/useDuration';
 
 import { ANCHOR_STEPS } from '../constants';
 import { Step } from '../types';
@@ -10,6 +11,7 @@ import { Step } from '../types';
 export function useAnchorStep() {
   const [stepIndex, setStepIndex] = useState<number>(0);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const { getDuration } = useDuration();
 
   const step: Step = ANCHOR_STEPS[stepIndex];
   const unit = (100 / step.count) * 0.01;
@@ -23,6 +25,7 @@ export function useAnchorStep() {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'NEXT',
       step: currentStep,
+      duration: getDuration(),
     });
     if (stepIndex < ANCHOR_STEPS.length - 1) {
       setStepIndex(stepIndex + 1);
@@ -33,8 +36,16 @@ export function useAnchorStep() {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'RESULT',
       step: currentStep,
+      duration: getDuration(),
     });
-  }, [selectedIndex, step.count, stepIndex, setStepIndex, setSelectedIndex]);
+  }, [
+    selectedIndex,
+    step.count,
+    stepIndex,
+    setStepIndex,
+    setSelectedIndex,
+    getDuration,
+  ]);
 
   const handleSelectIndex = useCallback((index: number) => {
     setSelectedIndex(index);

@@ -17,12 +17,12 @@ export default function DetachScreen() {
   const { trackFunnelIntroExit, trackFunnelIntroNext } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action) => {
+    onNavigate: (action, duration) => {
       if (action === 'NEXT') {
-        trackFunnelIntroNext(ANALYTICS_KEY.ACT.DETACH.SEPARATE);
+        trackFunnelIntroNext(ANALYTICS_KEY.ACT.DETACH.SEPARATE, duration);
         router.push(ROUTES.ACT.DETACH.STEP);
       } else if (action === 'HOME') {
-        trackFunnelIntroExit(ANALYTICS_KEY.ACT.DETACH.SEPARATE);
+        trackFunnelIntroExit(ANALYTICS_KEY.ACT.DETACH.SEPARATE, duration);
         router.replace(ROUTES.HOME);
       }
     },

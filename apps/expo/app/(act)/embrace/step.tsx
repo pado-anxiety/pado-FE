@@ -19,15 +19,15 @@ export default function EmbraceStepScreen() {
   const { trackFunnelNext, trackFunnelExit, trackFunnelPrev } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action, step) => {
+    onNavigate: (action, duration, step) => {
       if (action === 'BACK') {
-        trackFunnelPrev(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, step);
+        trackFunnelPrev(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, duration, step ?? -1);
         router.back();
       } else if (action === 'HOME') {
-        trackFunnelExit(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, step);
+        trackFunnelExit(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, duration, step ?? -1);
         router.replace(ROUTES.HOME);
       } else if (action === 'NEXT') {
-        trackFunnelNext(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, step);
+        trackFunnelNext(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, duration, step ?? -1);
       }
     },
     onData: (payload) => {

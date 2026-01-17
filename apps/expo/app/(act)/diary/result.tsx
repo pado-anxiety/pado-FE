@@ -27,10 +27,8 @@ export default function DiaryResultScreen() {
   const { trackFunnelComplete } = useAnalytics();
 
   const diaryData = parseJSON(data as string, () => {
-    showAlert.error(
-      t('common.error.generic'),
-      t('common.error.tryLater'),
-      () => router.replace(ROUTES.HOME),
+    showAlert.error(t('common.error.generic'), t('common.error.tryLater'), () =>
+      router.replace(ROUTES.HOME),
     );
   });
 
@@ -51,12 +49,15 @@ export default function DiaryResultScreen() {
   });
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action) => {
+    onNavigate: (action, duration) => {
       if (action === 'HOME') {
         if (!hasMutated.current) {
           hasMutated.current = true;
           const parsedData = parseJSON(diaryData as string, () => {
-            showAlert.error(t('common.error.generic'), t('common.error.tryLater'));
+            showAlert.error(
+              t('common.error.generic'),
+              t('common.error.tryLater'),
+            );
             router.replace(ROUTES.HOME);
           });
           diaryMutation.mutate({
@@ -65,7 +66,7 @@ export default function DiaryResultScreen() {
             feelings: parsedData[2].answer,
           });
         }
-        trackFunnelComplete(ANALYTICS_KEY.ACT.DIARY.EMOTION);
+        trackFunnelComplete(ANALYTICS_KEY.ACT.DIARY.EMOTION, duration);
         router.replace(ROUTES.HOME);
       }
     },

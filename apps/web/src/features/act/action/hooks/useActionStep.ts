@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import { handlePostMessage, triggerHaptic } from '@/lib';
+import { useDuration } from '@/lib/analytics/useDuration';
 
 import { STEP_COUNT } from '../constants';
 
@@ -30,6 +31,8 @@ export function useActionStep() {
   const [orientation, setOrientation] = useState('');
   const [obstacle, setObstacle] = useState('');
   const [action, setAction] = useState('');
+
+  const { getDuration } = useDuration();
 
   const lowestDomains = useMemo((): (keyof Value)[] => {
     const entries = Object.entries(selectedValue) as [
@@ -123,14 +126,14 @@ export function useActionStep() {
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
         action: 'NEXT',
         step,
-        // duration: Date.now() - startTime,
+        duration: getDuration(),
       });
     } else if (stepIndex < STEP_COUNT - 1) {
       setStepIndex((prev) => prev + 1);
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
         action: 'NEXT',
         step,
-        // duration: Date.now() - startTime,
+        duration: getDuration(),
       });
     } else {
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
@@ -149,7 +152,7 @@ export function useActionStep() {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
       step: stepIndex,
-      // duration: Date.now() - startTime,
+      duration: getDuration(),
     });
   };
 
@@ -160,7 +163,7 @@ export function useActionStep() {
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
         action: 'BACK',
         step: currentStepIndex,
-        // duration: Date.now() - startTime,
+        duration: getDuration(),
       });
     }
   };

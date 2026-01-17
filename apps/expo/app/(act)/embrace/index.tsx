@@ -17,12 +17,12 @@ export default function EmbraceScreen() {
   const { trackFunnelIntroExit, trackFunnelIntroNext } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action) => {
+    onNavigate: (action, duration) => {
       if (action === 'NEXT') {
-        trackFunnelIntroNext(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN);
+        trackFunnelIntroNext(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, duration);
         router.push(ROUTES.ACT.EMBRACE.STEP);
       } else if (action === 'HOME') {
-        trackFunnelIntroExit(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN);
+        trackFunnelIntroExit(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, duration);
         router.back();
       }
     },

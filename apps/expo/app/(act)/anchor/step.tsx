@@ -18,17 +18,17 @@ export default function AnchorStepScreen() {
   const { trackFunnelNext, trackFunnelExit, trackFunnelPrev } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action, step) => {
+    onNavigate: (action, duration, step) => {
       if (action === 'BACK') {
-        trackFunnelPrev(ANALYTICS_KEY.ACT.ANCHOR.FIVE, step);
+        trackFunnelPrev(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration, step ?? -1);
         router.back();
       } else if (action === 'HOME') {
-        trackFunnelExit(ANALYTICS_KEY.ACT.ANCHOR.FIVE, step);
+        trackFunnelExit(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration, step ?? -1);
         router.replace(ROUTES.HOME);
       } else if (action === 'RESULT') {
         router.push(ROUTES.ACT.ANCHOR.RESULT);
       } else if (action === 'NEXT') {
-        trackFunnelNext(ANALYTICS_KEY.ACT.ANCHOR.FIVE, step);
+        trackFunnelNext(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration, step ?? -1);
       }
     },
     onValidate: (title, message) => {

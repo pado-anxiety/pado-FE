@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import { handlePostMessage, triggerHaptic } from '@/lib';
+import { useDuration } from '@/lib/analytics/useDuration';
 import { safeStringify } from '@/lib/json';
 
 import { DIARY_STEPS, STEP_COUNT } from '../constants';
@@ -17,6 +18,7 @@ export function useDiaryStep() {
   const [stepIndex, setStepIndex] = useState<number>(0);
   const [historyCards, setHistoryCards] = useState<HistoryCard[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const { getDuration } = useDuration();
 
   const step: DiaryStep = DIARY_STEPS[stepIndex];
 
@@ -60,6 +62,7 @@ export function useDiaryStep() {
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
         action: 'NEXT',
         step: currentStep,
+        duration: getDuration(),
       });
       if (stepIndex === STEP_COUNT - 1) {
         handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
@@ -74,14 +77,15 @@ export function useDiaryStep() {
         textareaRef.current.value = '';
       }
     }
-  }, [stepIndex, historyCards, t, step, validateCharLimit]);
+  }, [stepIndex, historyCards, t, step, validateCharLimit, getDuration]);
 
   const handleExit = useCallback(() => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
       step: stepIndex,
+      duration: getDuration(),
     });
-  }, [stepIndex]);
+  }, [stepIndex, getDuration]);
 
   const handlePrevStep = useCallback(
     (stepIndex: number) => {
@@ -89,6 +93,7 @@ export function useDiaryStep() {
         handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
           action: 'BACK',
           step: stepIndex,
+          duration: getDuration(),
         });
         return;
       }
@@ -99,7 +104,7 @@ export function useDiaryStep() {
       setHistoryCards(historyCards.slice(0, -1));
       setStepIndex(stepIndex - 1);
     },
-    [historyCards, setHistoryCards, setStepIndex],
+    [historyCards, setHistoryCards, setStepIndex, getDuration],
   );
 
   return {

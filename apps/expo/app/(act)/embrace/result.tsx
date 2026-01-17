@@ -43,14 +43,14 @@ export default function EmbraceResultScreen() {
   });
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: () => {
+    onNavigate: (_, duration) => {
       if (!hasMutated.current) {
         hasMutated.current = true;
         embraceMutation.mutate({
           breathingTime: parsedData.embraceResult,
         });
       }
-      trackFunnelComplete(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN);
+      trackFunnelComplete(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, duration);
       router.replace(ROUTES.HOME);
     },
   });

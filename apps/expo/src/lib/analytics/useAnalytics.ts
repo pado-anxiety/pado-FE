@@ -9,15 +9,17 @@ export const useAnalytics = () => {
     });
   };
 
-  const trackFunnelIntroNext = (title: string) => {
+  const trackFunnelIntroNext = (title: string, duration: number) => {
     posthog.capture('pado_funnel_intro_next', {
       title,
+      duration,
     });
   };
 
-  const trackFunnelIntroExit = (title: string) => {
+  const trackFunnelIntroExit = (title: string, duration: number) => {
     posthog.capture('pado_funnel_intro_exit', {
       title,
+      duration,
     });
   };
 
@@ -26,17 +28,19 @@ export const useAnalytics = () => {
   //  0 = 0번 스텝 화면
   //  1 = 1번 스텝 화면
   // ...
-  const trackFunnelNext = (title: string, step: number) => {
+  const trackFunnelNext = (title: string, step: number, duration: number) => {
     posthog.capture('pado_funnel_next', {
       title,
       step,
+      duration,
     });
   };
 
-  const trackFunnelPrev = (title: string, step: number) => {
+  const trackFunnelPrev = (title: string, step: number, duration: number) => {
     posthog.capture('pado_funnel_prev', {
       title,
       step,
+      duration,
     });
   };
 
@@ -45,18 +49,20 @@ export const useAnalytics = () => {
   //  0 = 0번 스텝 화면
   //  1 = 1번 스텝 화면
   // ...
-  const trackFunnelExit = (title: string, step: number) => {
+  const trackFunnelExit = (title: string, step: number, duration: number) => {
     posthog.capture('pado_funnel_exit', {
       title,
       step,
+      duration,
     });
   };
 
   // 퍼널구조 완료
   //  result 화면에서 완료 버튼 클릭
-  const trackFunnelComplete = (title: string) => {
+  const trackFunnelComplete = (title: string, duration: number) => {
     posthog.capture('pado_funnel_complete', {
       title,
+      duration,
     });
   };
 

@@ -6,13 +6,16 @@ import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import ActResultPage from '@/components/act/ActResultPage';
 import { handlePostMessage, triggerHaptic } from '@/lib';
+import { useDuration } from '@/lib/analytics/useDuration';
 
 export default function AnchorResultPage() {
   const { t } = useTranslation();
+  const { getDuration } = useDuration();
 
   const handleComplete = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
+      duration: getDuration(),
     });
     triggerHaptic('NAVIGATE');
   };

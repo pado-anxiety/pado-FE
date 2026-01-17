@@ -6,13 +6,17 @@ import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import ActIntroPage from '@/components/act/ActIntroPage/ActIntroPage';
 import { handlePostMessage, triggerHaptic } from '@/lib';
+import { useDuration } from '@/lib/analytics/useDuration';
 
 export default function AnchorPage() {
   const { t } = useTranslation();
 
+  const { getDuration } = useDuration();
+
   const handleStart = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'NEXT',
+      duration: getDuration(),
     });
     triggerHaptic('NAVIGATE');
   };
@@ -20,6 +24,7 @@ export default function AnchorPage() {
   const handleClose = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
+      duration: getDuration(),
     });
   };
 

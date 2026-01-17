@@ -58,7 +58,7 @@ export default function ActionResultScreen() {
   });
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action) => {
+    onNavigate: (action, duration) => {
       if (action === 'HOME') {
         if (!hasMutated.current) {
           hasMutated.current = true;
@@ -71,7 +71,7 @@ export default function ActionResultScreen() {
             action: parsedData.action,
           });
         }
-        trackFunnelComplete(ANALYTICS_KEY.ACT.ACTION.VALUES);
+        trackFunnelComplete(ANALYTICS_KEY.ACT.ACTION.VALUES, duration);
         router.replace(ROUTES.HOME);
       }
     },

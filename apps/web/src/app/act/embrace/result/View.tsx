@@ -7,14 +7,17 @@ import { Text } from '@pado/ui';
 
 import ActResultPage from '@/components/act/ActResultPage';
 import { handlePostMessage, triggerHaptic } from '@/lib';
+import { useDuration } from '@/lib/analytics/useDuration';
 
 export default function EmbraceResultView() {
   const { t } = useTranslation();
+  const { getDuration } = useDuration();
   const data = window.embraceResult;
 
   const handleStart = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
+      duration: getDuration(),
     });
     triggerHaptic('NAVIGATE');
   };

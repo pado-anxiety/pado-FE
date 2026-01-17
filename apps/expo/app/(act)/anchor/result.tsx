@@ -31,12 +31,12 @@ export default function AnchorResultScreen() {
   });
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: () => {
+    onNavigate: (_, duration) => {
       if (!hasMutated.current) {
         hasMutated.current = true;
         anchorMutation.mutate();
       }
-      trackFunnelComplete(ANALYTICS_KEY.ACT.ANCHOR.FIVE);
+      trackFunnelComplete(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration);
       router.replace(ROUTES.HOME);
     },
   });

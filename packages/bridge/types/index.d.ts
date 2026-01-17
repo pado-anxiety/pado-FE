@@ -8,8 +8,8 @@ export declare const WEBVIEW_MESSAGE_TYPE: {
 export interface WebViewMessagePayload {
     [WEBVIEW_MESSAGE_TYPE.NAVIGATE]: {
         action: string;
-        step: number;
-        duration?: number;
+        step?: number;
+        duration: number;
     };
     [WEBVIEW_MESSAGE_TYPE.DATA]: {
         data: any;

@@ -17,12 +17,12 @@ export default function DiaryScreen() {
   const { trackFunnelIntroExit, trackFunnelIntroNext } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action) => {
+    onNavigate: (action, duration) => {
       if (action === 'NEXT') {
-        trackFunnelIntroNext(ANALYTICS_KEY.ACT.DIARY.EMOTION);
+        trackFunnelIntroNext(ANALYTICS_KEY.ACT.DIARY.EMOTION, duration);
         router.push(ROUTES.ACT.DIARY.STEP);
       } else if (action === 'HOME') {
-        trackFunnelIntroExit(ANALYTICS_KEY.ACT.DIARY.EMOTION);
+        trackFunnelIntroExit(ANALYTICS_KEY.ACT.DIARY.EMOTION, duration);
         router.back();
       }
     },

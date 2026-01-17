@@ -7,14 +7,17 @@ import { Text } from '@pado/ui';
 
 import ActResultPage from '@/components/act/ActResultPage';
 import { handlePostMessage, triggerHaptic } from '@/lib';
+import { useDuration } from '@/lib/analytics/useDuration';
 
 export default function ActionResultView() {
   const { t } = useTranslation();
+  const { getDuration } = useDuration();
   const data = window.actionResult;
 
   const handleComplete = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
+      duration: getDuration(),
     });
     triggerHaptic('NAVIGATE');
   };

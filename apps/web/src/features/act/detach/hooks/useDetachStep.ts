@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import { handlePostMessage, triggerHaptic } from '@/lib';
+import { useDuration } from '@/lib/analytics/useDuration';
 
 import { DETACH_STEPS, STEP_COUNT } from '../constants';
 import { DetachStep, UserTextToken } from '../types';
@@ -16,6 +17,8 @@ export function useDetachStep() {
   const [stepIndex, setStepIndex] = useState<number>(0);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [userTextTokens, setUserTextTokens] = useState<UserTextToken[]>([]);
+
+  const { getDuration } = useDuration();
 
   const step: DetachStep = DETACH_STEPS[stepIndex];
 
@@ -49,6 +52,7 @@ export function useDetachStep() {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'NEXT',
       step: currentStep,
+      duration: getDuration(),
     });
     if (stepIndex < STEP_COUNT - 1) {
       if (!textareaRef.current?.value) {
@@ -72,27 +76,32 @@ export function useDetachStep() {
         data: userTextTokens,
       });
     }
-  }, [stepIndex, userTextTokens, validateCharLimit]);
+  }, [stepIndex, userTextTokens, validateCharLimit, getDuration]);
 
   const handleExit = useCallback(() => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
       step: stepIndex,
+      duration: getDuration(),
     });
-  }, [stepIndex]);
+  }, [stepIndex, getDuration]);
 
-  const handlePrevStep = useCallback((currentStepIndex: number) => {
-    if (currentStepIndex === 0) {
-      handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
-        action: 'BACK',
-        step: currentStepIndex,
-      });
-      return;
-    }
+  const handlePrevStep = useCallback(
+    (currentStepIndex: number) => {
+      if (currentStepIndex === 0) {
+        handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+          action: 'BACK',
+          step: currentStepIndex,
+          duration: getDuration(),
+        });
+        return;
+      }
 
-    setStepIndex(currentStepIndex - 1);
-    setUserTextTokens([]);
-  }, []);
+      setStepIndex(currentStepIndex - 1);
+      setUserTextTokens([]);
+    },
+    [getDuration],
+  );
 
   return {
     step,

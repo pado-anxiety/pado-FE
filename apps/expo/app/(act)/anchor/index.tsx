@@ -17,12 +17,12 @@ export default function AnchorScreen() {
   const { trackFunnelIntroExit, trackFunnelIntroNext } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action) => {
+    onNavigate: (action, duration) => {
       if (action === 'NEXT') {
-        trackFunnelIntroNext(ANALYTICS_KEY.ACT.ANCHOR.FIVE);
+        trackFunnelIntroNext(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration);
         router.push(ROUTES.ACT.ANCHOR.STEP);
       } else if (action === 'HOME') {
-        trackFunnelIntroExit(ANALYTICS_KEY.ACT.ANCHOR.FIVE);
+        trackFunnelIntroExit(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration);
         router.back();
       }
     },

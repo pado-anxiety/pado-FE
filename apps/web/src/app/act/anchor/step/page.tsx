@@ -15,6 +15,7 @@ import {
   useAnchorStep,
 } from '@/features/act/anchor';
 import { handlePostMessage } from '@/lib';
+import { useDuration } from '@/lib/analytics/useDuration';
 
 export default function AnchorStepPage() {
   const { t } = useTranslation();
@@ -28,6 +29,7 @@ export default function AnchorStepPage() {
     handleNextStep,
     handleSelectIndex,
   } = useAnchorStep();
+  const { getDuration } = useDuration();
 
   const radius = 42; // svg viewbox percentage, 0 ~ 100
   const strokeWidth = 9;
@@ -42,6 +44,7 @@ export default function AnchorStepPage() {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'BACK',
       step: stepIndex,
+      duration: getDuration(),
     });
   };
 
@@ -49,6 +52,7 @@ export default function AnchorStepPage() {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
       step: stepIndex,
+      duration: getDuration(),
     });
   };
 

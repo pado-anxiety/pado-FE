@@ -20,15 +20,15 @@ export default function ActionStepScreen() {
   const { trackFunnelNext, trackFunnelExit, trackFunnelPrev } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action, step) => {
+    onNavigate: (action, duration, step) => {
       if (action === 'BACK') {
-        trackFunnelPrev(ANALYTICS_KEY.ACT.ACTION.VALUES, step);
+        trackFunnelPrev(ANALYTICS_KEY.ACT.ACTION.VALUES, duration, step ?? -1);
         router.back();
       } else if (action === 'HOME') {
-        trackFunnelExit(ANALYTICS_KEY.ACT.ACTION.VALUES, step);
+        trackFunnelExit(ANALYTICS_KEY.ACT.ACTION.VALUES, duration, step ?? -1);
         router.replace(ROUTES.HOME);
       } else if (action === 'NEXT') {
-        trackFunnelNext(ANALYTICS_KEY.ACT.ACTION.VALUES, step);
+        trackFunnelNext(ANALYTICS_KEY.ACT.ACTION.VALUES, duration, step ?? -1);
       }
     },
     onData: (payload) => {

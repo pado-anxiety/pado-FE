@@ -20,15 +20,27 @@ export default function DetachStepScreen() {
   const { trackFunnelNext, trackFunnelExit, trackFunnelPrev } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action, step) => {
+    onNavigate: (action, duration, step) => {
       if (action === 'BACK') {
-        trackFunnelPrev(ANALYTICS_KEY.ACT.DETACH.SEPARATE, step);
+        trackFunnelPrev(
+          ANALYTICS_KEY.ACT.DETACH.SEPARATE,
+          duration,
+          step ?? -1,
+        );
         router.back();
       } else if (action === 'HOME') {
-        trackFunnelExit(ANALYTICS_KEY.ACT.DETACH.SEPARATE, step);
+        trackFunnelExit(
+          ANALYTICS_KEY.ACT.DETACH.SEPARATE,
+          duration,
+          step ?? -1,
+        );
         router.replace(ROUTES.HOME);
       } else if (action === 'NEXT') {
-        trackFunnelNext(ANALYTICS_KEY.ACT.DETACH.SEPARATE, step);
+        trackFunnelNext(
+          ANALYTICS_KEY.ACT.DETACH.SEPARATE,
+          duration,
+          step ?? -1,
+        );
       }
     },
     onData: (payload) => {

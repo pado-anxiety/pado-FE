@@ -45,14 +45,14 @@ export default function DetachResultScreen() {
   });
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: () => {
+    onNavigate: (_, duration) => {
       if (!hasMutated.current) {
         hasMutated.current = true;
         detachMutation.mutate({
           userTextToken: parsedData,
         });
       }
-      trackFunnelComplete(ANALYTICS_KEY.ACT.DETACH.SEPARATE);
+      trackFunnelComplete(ANALYTICS_KEY.ACT.DETACH.SEPARATE, duration);
       router.replace(ROUTES.HOME);
     },
   });

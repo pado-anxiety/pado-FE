@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import { Redirect } from 'expo-router';
@@ -41,10 +41,13 @@ export default function HomeScreen(): React.ReactNode {
 
   const onboarded = isOnboarded();
 
+  const isIdentified = useRef<boolean>(false);
+
   const { identifyUser } = useAnalytics();
 
   useEffect(() => {
-    if (isLoggedIn && name && email) {
+    if (isLoggedIn && name && email && !isIdentified.current) {
+      isIdentified.current = true;
       identifyUser({ name, email });
     }
   }, [identifyUser, isLoggedIn, name, email]);
