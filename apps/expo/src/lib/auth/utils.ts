@@ -56,10 +56,10 @@ export const authStorage = {
     name: string,
     email: string,
   ) => {
-    storage.set(ACCESS_TOKEN_KEY, accessToken);
-    storage.set(REFRESH_TOKEN_KEY, refreshToken);
-    storage.set(USER_KEY, name);
-    storage.set(USER_EMAIL_KEY, email);
+    if (accessToken) storage.set(ACCESS_TOKEN_KEY, accessToken);
+    if (refreshToken) storage.set(REFRESH_TOKEN_KEY, refreshToken);
+    if (name) storage.set(USER_KEY, name);
+    if (email) storage.set(USER_EMAIL_KEY, email);
   },
 
   clearAuthInfo: () => {
