@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import { Redirect } from 'expo-router';
-import { usePostHog } from 'posthog-react-native';
 import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -22,6 +21,7 @@ import {
 } from '@src/features/home/hooks';
 import { isOnboarded } from '@src/lib';
 import { showAlert } from '@src/lib/alert';
+import { useAnalytics } from '@src/lib/analytics';
 import { historyAPI } from '@src/lib/api/history';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
@@ -33,7 +33,7 @@ interface ModalType {
 
 export default function HomeScreen(): React.ReactNode {
   const { t } = useTranslation();
-  const { isLoggedIn, name, email, accessToken } = useAuth();
+  const { isLoggedIn, name, email } = useAuth();
   const { page, setPage } = useHomePageState();
 
   const [modalType, setModalType] = useState<ModalType | null>(null);
@@ -41,16 +41,13 @@ export default function HomeScreen(): React.ReactNode {
 
   const onboarded = isOnboarded();
 
-  const posthog = usePostHog();
+  const { identifyUser } = useAnalytics();
 
   useEffect(() => {
-    if (posthog && isLoggedIn && name && email && accessToken) {
-      posthog.identify(accessToken, {
-        name,
-        email,
-      });
+    if (isLoggedIn && name && email) {
+      identifyUser({ name, email });
     }
-  }, [posthog, isLoggedIn, name, email, accessToken]);
+  }, [identifyUser, isLoggedIn, name, email]);
 
   const detailMutation = useMutation({
     mutationFn: historyAPI.getDetail,

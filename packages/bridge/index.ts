@@ -9,6 +9,8 @@ export const WEBVIEW_MESSAGE_TYPE = {
 export interface WebViewMessagePayload {
     [WEBVIEW_MESSAGE_TYPE.NAVIGATE]: {
         action: string;
+        step: number;
+        duration?: number; // 소모한 시간 (ms)
     },
     [WEBVIEW_MESSAGE_TYPE.DATA]: {
         data: any;

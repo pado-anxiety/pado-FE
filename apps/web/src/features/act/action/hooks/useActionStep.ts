@@ -113,14 +113,25 @@ export function useActionStep() {
       return;
     }
 
+    const step = stepIndex;
     triggerHaptic('NAVIGATE');
     if (stepIndex === 0) {
       if (lowestDomains.length > 0) {
         setSelectedDomain(lowestDomains[0]);
       }
       setStepIndex((prev) => prev + 1);
+      handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+        action: 'NEXT',
+        step,
+        // duration: Date.now() - startTime,
+      });
     } else if (stepIndex < STEP_COUNT - 1) {
       setStepIndex((prev) => prev + 1);
+      handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+        action: 'NEXT',
+        step,
+        // duration: Date.now() - startTime,
+      });
     } else {
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
         data: {
@@ -137,6 +148,8 @@ export function useActionStep() {
   const handleExit = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
+      step: stepIndex,
+      // duration: Date.now() - startTime,
     });
   };
 
@@ -146,6 +159,8 @@ export function useActionStep() {
     } else {
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
         action: 'BACK',
+        step: currentStepIndex,
+        // duration: Date.now() - startTime,
       });
     }
   };
