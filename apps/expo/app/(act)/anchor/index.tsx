@@ -14,11 +14,12 @@ import { createWebViewMessageHandler } from '@src/lib/webview';
 export default function AnchorScreen() {
   const router = useRouter();
 
-  const { trackFunnelIntroExit } = useAnalytics();
+  const { trackFunnelIntroExit, trackFunnelIntroNext } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
     onNavigate: (action) => {
       if (action === 'NEXT') {
+        trackFunnelIntroNext(ANALYTICS_KEY.ACT.ANCHOR.FIVE);
         router.push(ROUTES.ACT.ANCHOR.STEP);
       } else if (action === 'HOME') {
         trackFunnelIntroExit(ANALYTICS_KEY.ACT.ANCHOR.FIVE);

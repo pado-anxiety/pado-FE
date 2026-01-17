@@ -14,11 +14,12 @@ import { createWebViewMessageHandler } from '@src/lib/webview';
 export default function DetachScreen() {
   const router = useRouter();
 
-  const { trackFunnelIntroExit } = useAnalytics();
+  const { trackFunnelIntroExit, trackFunnelIntroNext } = useAnalytics();
 
   const handleMessage = createWebViewMessageHandler({
     onNavigate: (action) => {
       if (action === 'NEXT') {
+        trackFunnelIntroNext(ANALYTICS_KEY.ACT.DETACH.SEPARATE);
         router.push(ROUTES.ACT.DETACH.STEP);
       } else if (action === 'HOME') {
         trackFunnelIntroExit(ANALYTICS_KEY.ACT.DETACH.SEPARATE);

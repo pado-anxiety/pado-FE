@@ -9,6 +9,12 @@ export const useAnalytics = () => {
     });
   };
 
+  const trackFunnelIntroNext = (title: string) => {
+    posthog.capture('pado_funnel_intro_next', {
+      title,
+    });
+  };
+
   const trackFunnelIntroExit = (title: string) => {
     posthog.capture('pado_funnel_intro_exit', {
       title,
@@ -63,6 +69,7 @@ export const useAnalytics = () => {
 
   return {
     trackContent,
+    trackFunnelIntroNext,
     trackFunnelIntroExit,
     trackFunnelNext,
     trackFunnelPrev,
