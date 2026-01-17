@@ -8,6 +8,8 @@ import {
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
+import { ANALYTICS_KEY } from '@src/features/learning/components/LearningCard';
+import { useAnalytics } from '@src/lib/analytics';
 import { safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { createWebViewMessageHandler } from '@src/lib/webview';
@@ -17,10 +19,16 @@ export default function LearningScreen() {
   const router = useRouter();
   const { subject, title, description } = useLocalSearchParams();
 
+  const { trackFunnelNext } = useAnalytics();
+
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action) => {
+    onNavigate: (action, duration, step) => {
       if (action === 'NEXT') {
-        router.push(ROUTES.ACT.EMBRACE.STEP);
+        const analyticsTitle =
+          ANALYTICS_KEY[subject as keyof typeof ANALYTICS_KEY];
+        if (analyticsTitle) {
+          trackFunnelNext(analyticsTitle, duration, step ?? -1);
+        }
       } else if (action === 'HOME') {
         router.back();
       }

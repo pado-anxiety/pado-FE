@@ -2,6 +2,7 @@ import { useRouter } from 'expo-router';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { Image, Pressable, Text, View } from '@src/components/ui';
+import { useAnalytics } from '@src/lib/analytics';
 import { triggerHaptic } from '@src/lib/haptics';
 import { ROUTES } from '@src/lib/route';
 
@@ -11,8 +12,15 @@ type LearningCardProps = {
   item: LearningItem;
 };
 
+export const ANALYTICS_KEY = {
+  anxiety_info: '불안은 왜 생기는 걸까요?',
+  act_guide: 'ACT와 함께 파도 타기',
+} as const;
+
 export function LearningCard({ item }: LearningCardProps) {
   const router = useRouter();
+
+  const { trackContent } = useAnalytics();
 
   return (
     <Animated.View
@@ -22,6 +30,9 @@ export function LearningCard({ item }: LearningCardProps) {
       <Pressable
         onPress={() => {
           triggerHaptic('NAVIGATE');
+          trackContent(
+            ANALYTICS_KEY[item.subject as keyof typeof ANALYTICS_KEY],
+          );
           router.push({
             pathname: ROUTES.LEARNING,
             params: {
