@@ -28,19 +28,19 @@ export const useAnalytics = () => {
   //  0 = 0번 스텝 화면
   //  1 = 1번 스텝 화면
   // ...
-  const trackFunnelNext = (title: string, step: number, duration: number) => {
+  const trackFunnelNext = (title: string, duration: number, step: number) => {
     posthog.capture('pado_funnel_next', {
       title,
-      step,
       duration,
+      step,
     });
   };
 
-  const trackFunnelPrev = (title: string, step: number, duration: number) => {
+  const trackFunnelPrev = (title: string, duration: number, step: number) => {
     posthog.capture('pado_funnel_prev', {
       title,
-      step,
       duration,
+      step,
     });
   };
 
@@ -49,11 +49,11 @@ export const useAnalytics = () => {
   //  0 = 0번 스텝 화면
   //  1 = 1번 스텝 화면
   // ...
-  const trackFunnelExit = (title: string, step: number, duration: number) => {
+  const trackFunnelExit = (title: string, duration: number, step: number) => {
     posthog.capture('pado_funnel_exit', {
       title,
-      step,
       duration,
+      step,
     });
   };
 

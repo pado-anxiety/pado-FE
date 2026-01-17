@@ -8,10 +8,12 @@ import {
   WaveCanvas,
 } from '@/features/act/embrace/components';
 import { useBreathAnimation } from '@/features/act/embrace/hooks';
+import { useDuration } from '@/lib/analytics/useDuration';
 
 export default function EmbraceStepView() {
   const topInsets = window.topInsets;
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { getDuration } = useDuration();
 
   const {
     isStarted,
@@ -41,6 +43,7 @@ export default function EmbraceStepView() {
         sessionCount={sessionCount}
         onStartClick={handleStartClick}
         onRestart={handleRestart}
+        getDuration={getDuration}
       />
 
       <WaveCanvas

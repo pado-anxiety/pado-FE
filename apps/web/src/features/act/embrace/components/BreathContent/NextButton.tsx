@@ -4,17 +4,16 @@ import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 import { Button } from '@pado/ui';
 
 import { handlePostMessage } from '@/lib';
-import { useDuration } from '@/lib/analytics/useDuration';
 
 import { TIME_CALCULATION } from '../../constants';
 
 type NextButtonProps = {
   sessionCount: number;
+  getDuration: () => number;
 };
 
-export function NextButton({ sessionCount }: NextButtonProps) {
+export function NextButton({ sessionCount, getDuration }: NextButtonProps) {
   const { t } = useTranslation();
-  const { getDuration } = useDuration();
 
   const calculateTotalTime = () => {
     const secondsPerSession = TIME_CALCULATION.getSecondsPerSession();
