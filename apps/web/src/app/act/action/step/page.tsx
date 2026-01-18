@@ -50,6 +50,7 @@ export default function ActionStepPage() {
       buttonText={t('common.button.next')}
       onButtonClick={handleNext}
       buttonDisabled={isNextDisabled}
+      scrollable={true}
     >
       <StepContent
         stepIndex={stepIndex}

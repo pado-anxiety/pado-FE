@@ -3,7 +3,7 @@
   "menu": {
     "viewActHistory": "Record of Past Waves",
     "chatWithWind": "Sharing My Heart",
-    "learning": "Learning More About Anxiety",
+    "learning": "Understanding Anxiety",
     "onboarding": "Onboarding",
     "login": "Login"
   },
@@ -13,7 +13,7 @@
     "description": "ACT-based anxiety management"
   },
   "learning": {
-    "title": "Learning More About Anxiety",
+    "title": "Understanding Anxiety",
     "subtitle": "Waves only stay for a moment. Learn how to wait for the wave of anxiety to pass."
   },
   "messages": {
