@@ -2,67 +2,67 @@
   "greeting": "Hello there,",
   "menu": {
     "viewActHistory": "Record of Past Waves",
-    "chatWithWind": "Whisper to the Wind",
-    "learning": "Learn about Anxiety",
+    "chatWithWind": "Sharing My Heart",
+    "learning": "Learning More About Anxiety",
     "onboarding": "Onboarding",
     "login": "Login"
   },
   "app": {
     "name": "Pado",
-    "tagline": "A time to embrace your inner waves",
+    "tagline": "A time to embrace the waves as they are",
     "description": "ACT-based anxiety management"
   },
   "learning": {
-    "title": "Learn about Anxiety",
-    "subtitle": "Waves only stay for a moment. Learn to meet the deep stillness within you."
+    "title": "Learning More About Anxiety",
+    "subtitle": "Waves only stay for a moment. Learn how to wait for the wave of anxiety to pass."
   },
   "messages": {
     "acceptance": {
       "acc_01": {
-        "text": "The waves may rise high, but you, the ocean, remain deep and vast.",
-        "subText": "It’s okay if you don't force the anxiety to settle."
+        "text": "The waves may rise high, but they will soon settle down.",
+        "subText": "It’s okay if you don't force the anxiety to stay calm."
       },
       "acc_02": {
-        "text": "You are not the crashing waves, but the ocean that embraces them.",
-        "subText": "Anxiety is just white foam that vanishes as it reaches the shore."
+        "text": "The crashing waves are only a part of you, not all of you.",
+        "subText": "Anxiety is just something that passes through you for a moment."
       },
       "acc_03": {
-        "text": "No matter how rough the surface is, your deepest sea is always still.",
-        "subText": "Take a breath and feel the deep calm within you."
+        "text": "No matter how rough the waves are, your core remains steady.",
+        "subText": "Take a breath and focus on the sensations of the present."
       }
     },
     "values": {
       "val_01": {
-        "text": "The lighthouse shining over your ocean is as bright as ever.",
-        "subText": "Where does your ocean want to head in this very moment?"
+        "text": "Look beyond the waves to where you truly want to go.",
+        "subText": "What is the most important thing to you at this very moment?"
       },
       "val_02": {
-        "text": "Wherever the waves may pull, just looking at the horizon is enough.",
-        "subText": "It's not about how high the waves are, but the direction you hold."
+        "text": "Wherever the waves pull, simply holding your own direction is enough.",
+        "subText": "It's not about how high the waves are, but the direction you choose."
       }
     },
     "action": {
       "act_01": {
-        "text": "A single shift in the current can change your entire ocean.",
-        "subText": "What is the smallest move you can make right now?"
+        "text": "A single small move you make now creates a big difference.",
+        "subText": "What is the smallest thing you can do right now, even if you feel anxious?"
       },
       "act_02": {
-        "text": "The tiny ripple you start today will eventually reach the shore you dream of.",
-        "subText": "There is true strength in the flow your will creates."
+        "text": "The small steps you take will eventually lead you to your destination.",
+        "subText": "There is true strength in the direction your will creates."
       },
       "act_03": {
-        "text": "Believe in the traces your waves leave today, more than grand changes.",
-        "subText": "Small flows gather to complete your own beautiful ocean."
+        "text": "Believe in the small steps you took today, rather than grand changes.",
+        "subText": "Small actions gather to complete your precious daily life."
       }
     },
     "rest": {
       "rest_01": {
-        "text": "It’s okay to sink into the deep sea and rest. Stillness is part of the ocean, too.",
-        "subText": "Pause every flow for a moment and just be there for yourself."
+        "text": "It’s okay to stop and rest for a while. Stillness is a precious moment, too.",
+        "subText": "Pause all activities for a moment and just be there for yourself."
       },
       "rest_02": {
-        "text": "Instead of trying to beat the waves, let them flow and catch your breath.",
-        "subText": "Even without effort, your ocean is always right here."
+        "text": "Instead of trying to beat the waves, let them flow by and catch your breath.",
+        "subText": "Even without great effort, you are doing more than enough."
       }
     }
   }
