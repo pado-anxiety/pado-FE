@@ -23,12 +23,9 @@ interface AuthState {
 
   logout: () => void;
 
-  setAuthToken: (
-    accessToken: string,
-    refreshToken: string,
-    name: string,
-    email: string,
-  ) => void;
+  setAuthToken: (accessToken: string, refreshToken: string) => void;
+
+  setUserInfo: (name: string, email: string) => void;
 }
 
 export const useAuth = create<AuthState>((set) => ({
@@ -75,18 +72,15 @@ export const useAuth = create<AuthState>((set) => ({
         refreshToken: token.refreshToken,
       });
 
+      authStorage.setAuthToken(token.accessToken, token.refreshToken);
+
       try {
         const user = await userAPI.getUser();
 
         const name = user.name;
         const email = user.email;
 
-        authStorage.setAuthInfo(
-          token.accessToken,
-          token.refreshToken,
-          name,
-          email,
-        );
+        authStorage.setUserInfo(name, email);
 
         set({
           name: name,
@@ -129,21 +123,23 @@ export const useAuth = create<AuthState>((set) => ({
     }
   },
 
-  setAuthToken: (
-    accessToken: string,
-    refreshToken: string,
-    name: string,
-    email: string,
-  ) => {
-    authStorage.setAuthInfo(accessToken, refreshToken, name, email);
+  setAuthToken: (accessToken: string, refreshToken: string) => {
+    authStorage.setAuthToken(accessToken, refreshToken);
 
     set({
-      name: name,
-      email: email,
       accessToken: accessToken,
       refreshToken: refreshToken,
       isLoggedIn: true,
       isLoading: false,
+    });
+  },
+
+  setUserInfo: (name: string, email: string) => {
+    authStorage.setUserInfo(name, email);
+
+    set({
+      name: name,
+      email: email,
     });
   },
 }));

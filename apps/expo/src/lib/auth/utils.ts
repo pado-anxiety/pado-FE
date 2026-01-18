@@ -50,14 +50,12 @@ export const authStorage = {
     return refreshToken;
   },
 
-  setAuthInfo: (
-    accessToken: string,
-    refreshToken: string,
-    name: string,
-    email: string,
-  ) => {
+  setAuthToken: (accessToken: string, refreshToken: string) => {
     if (accessToken) storage.set(ACCESS_TOKEN_KEY, accessToken);
     if (refreshToken) storage.set(REFRESH_TOKEN_KEY, refreshToken);
+  },
+
+  setUserInfo: (name: string, email: string) => {
     if (name) storage.set(USER_KEY, name);
     if (email) storage.set(USER_EMAIL_KEY, email);
   },

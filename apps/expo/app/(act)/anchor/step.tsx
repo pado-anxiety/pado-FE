@@ -26,6 +26,7 @@ export default function AnchorStepScreen() {
         trackFunnelExit(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration, step ?? -1);
         router.replace(ROUTES.HOME);
       } else if (action === 'RESULT') {
+        console.log('RESULT');
         router.push(ROUTES.ACT.ANCHOR.RESULT);
       } else if (action === 'NEXT') {
         trackFunnelNext(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration, step ?? -1);

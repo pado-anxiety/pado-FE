@@ -34,6 +34,7 @@ interface ModalType {
 export default function HomeScreen(): React.ReactNode {
   const { t } = useTranslation();
   const { isLoggedIn, name, email } = useAuth();
+
   const { page, setPage } = useHomePageState();
 
   const [modalType, setModalType] = useState<ModalType | null>(null);
