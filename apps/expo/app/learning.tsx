@@ -1,4 +1,5 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import WebView from 'react-native-webview';
 
@@ -8,7 +9,6 @@ import {
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
-import { ANALYTICS_KEY } from '@src/features/learning/components/LearningCard';
 import { useAnalytics } from '@src/lib/analytics';
 import { safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
@@ -18,17 +18,22 @@ export default function LearningScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { subject, title, description } = useLocalSearchParams();
+  const { t } = useTranslation();
 
   const { trackFunnelNext } = useAnalytics();
+
+  const getAnalyticsKey = (subject: string) => {
+    return t(`learning.${subject}.analyticsKey`);
+  };
 
   const handleMessage = createWebViewMessageHandler({
     onNavigate: (action, duration, step) => {
       if (action === 'NEXT') {
-        const analyticsTitle =
-          ANALYTICS_KEY[subject as keyof typeof ANALYTICS_KEY];
-        if (analyticsTitle) {
-          trackFunnelNext(analyticsTitle, duration, step ?? -1);
-        }
+        trackFunnelNext(
+          getAnalyticsKey(subject as string),
+          duration,
+          step ?? -1,
+        );
       } else if (action === 'HOME') {
         router.back();
       }

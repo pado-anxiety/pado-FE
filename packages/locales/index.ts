@@ -9,6 +9,7 @@ import enActValues from './en/act/values.json';
 import enHome from './en/home.json';
 import enAuth from './en/auth.json';
 import enOnboard from './en/onboard.json';
+import enLearning from './en/learning.json';
 
 // Korean
 import koCommon from './ko/common.json';
@@ -21,6 +22,7 @@ import koActValues from './ko/act/values.json';
 import koHome from './ko/home.json';
 import koAuth from './ko/auth.json';
 import koOnboard from './ko/onboard.json';
+import koLearning from './ko/learning.json';
 
 const resources = {
     en: {
@@ -37,6 +39,7 @@ const resources = {
             home: enHome,
             auth: enAuth,
             onboard: enOnboard,
+            learning: enLearning,
         },
     },
     ko: {
@@ -53,6 +56,7 @@ const resources = {
             home: koHome,
             auth: koAuth,
             onboard: koOnboard,
+            learning: koLearning,
         },
     },
 } as const;

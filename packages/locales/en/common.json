@@ -39,7 +39,7 @@
       "email": "Email"
     },
     "language": "Language",
-    "vibration": "Vibration",
+    "vibration": "Haptics",
     "feedback": {
       "title": "Feedback",
       "description": "Feel free to share your thoughts with us.",

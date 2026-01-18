@@ -1,18 +1,21 @@
 import { useCallback, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import { handlePostMessage, triggerHaptic } from '@/lib';
 import { useDuration } from '@/lib/analytics/useDuration';
 
-import { LEARNING_DATA } from '../constants';
+import { getLearningData } from '../constants';
 import { LearningData, LearningStep } from '../types';
 
 export function useLearningStep(subject: string) {
   const [stepIndex, setStepIndex] = useState<number>(0);
   const { getDuration } = useDuration();
+  const { t } = useTranslation();
 
-  const learningData: LearningData | undefined = LEARNING_DATA[subject];
+  const learningData: LearningData | undefined = getLearningData(t)[subject];
   const steps: LearningStep[] = learningData?.steps || [];
   const currentStep: LearningStep | undefined = steps[stepIndex];
   const totalSteps = steps.length;

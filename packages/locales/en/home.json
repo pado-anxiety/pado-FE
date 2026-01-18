@@ -3,7 +3,7 @@
   "menu": {
     "viewActHistory": "Record of Past Waves",
     "chatWithWind": "Whisper to the Wind",
-    "learning": "Discovering My Ocean",
+    "learning": "Learn about Anxiety",
     "onboarding": "Onboarding",
     "login": "Login"
   },
@@ -13,7 +13,7 @@
     "description": "ACT-based anxiety management"
   },
   "learning": {
-    "title": "Discovering My Ocean",
+    "title": "Learn about Anxiety",
     "subtitle": "Waves only stay for a moment. Learn to meet the deep stillness within you."
   },
   "messages": {

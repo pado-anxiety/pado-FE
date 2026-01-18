@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 
 import { Value } from '../hooks/useActionStep';
 
@@ -65,6 +66,7 @@ export default function ValueCircle({
   selectedValue,
   onSelectValue,
 }: ValueCircleProps) {
+  const { t } = useTranslation();
   const maxRadius = VIEWBOX_SIZE / 2;
   const textRingWidth = 8;
   const gameRadius = maxRadius - textRingWidth;
@@ -84,7 +86,32 @@ export default function ValueCircle({
     { start: 90, end: 180 },
     { start: 180, end: 270 },
   ];
-  const v = ['일', '성장', '여가', '관계', 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3];
+
+  const domainLabels = [
+    t('act.values.domain.work'),
+    t('act.values.domain.growth'),
+    t('act.values.domain.leisure'),
+    t('act.values.domain.relationship'),
+  ];
+
+  const v = [
+    domainLabels[0],
+    domainLabels[1],
+    domainLabels[2],
+    domainLabels[3],
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+  ];
 
   const sectors: {
     path: string;
@@ -140,7 +167,7 @@ export default function ValueCircle({
                 fontWeight={isSelected ? 'bold' : 'normal'}
                 style={{ pointerEvents: 'none', userSelect: 'none' }}
               >
-                {s.value}
+                {typeof s.value === 'string' ? s.value : s.value}
               </text>
             </motion.g>
           );

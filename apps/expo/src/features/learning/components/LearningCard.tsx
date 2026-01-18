@@ -1,4 +1,5 @@
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { Image, Pressable, Text, View } from '@src/components/ui';
@@ -12,15 +13,15 @@ type LearningCardProps = {
   item: LearningItem;
 };
 
-export const ANALYTICS_KEY = {
-  anxiety_info: '불안은 왜 생기는 걸까요?',
-  act_guide: 'ACT와 함께 파도 타기',
-} as const;
-
 export function LearningCard({ item }: LearningCardProps) {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const { trackContent } = useAnalytics();
+
+  const getAnalyticsKey = (subject: string) => {
+    return t(`learning.${subject}.analyticsKey`);
+  };
 
   return (
     <Animated.View
@@ -30,9 +31,7 @@ export function LearningCard({ item }: LearningCardProps) {
       <Pressable
         onPress={() => {
           triggerHaptic('NAVIGATE');
-          trackContent(
-            ANALYTICS_KEY[item.subject as keyof typeof ANALYTICS_KEY],
-          );
+          trackContent(getAnalyticsKey(item.subject));
           router.push({
             pathname: ROUTES.LEARNING,
             params: {
@@ -49,8 +48,12 @@ export function LearningCard({ item }: LearningCardProps) {
           contentFit="cover"
         />
         <View className="p-4">
-          <Text className="text-body-medium">{item.title}</Text>
-          <Text className="text-body-small">{item.description}</Text>
+          <Text className="text-body-medium">
+            {t(`learning.${item.subject}.title`)}
+          </Text>
+          <Text className="text-body-small">
+            {t(`learning.${item.subject}.description`)}
+          </Text>
         </View>
       </Pressable>
     </Animated.View>

@@ -3,7 +3,7 @@
   "menu": {
     "viewActHistory": "지나온 파도 기록",
     "chatWithWind": "바람에게 털어놓기",
-    "learning": "나의 바다 알아가기",
+    "learning": "불안에 대해 더 알아보기",
     "onboarding": "온보딩",
     "login": "로그인"
   },
@@ -13,7 +13,7 @@
     "description": "ACT 기반 불안 관리 앱"
   },
   "learning": {
-    "title": "나의 바다 알아가기",
+    "title": "불안에 대해 더 알아보기",
     "subtitle": "파도는 잠시 머물다 갈 뿐이에요. 내 안의 깊은 고요를 만나는 법을 익혀봐요."
   },
   "messages": {
