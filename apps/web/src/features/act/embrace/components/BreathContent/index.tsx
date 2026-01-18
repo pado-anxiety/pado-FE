@@ -14,6 +14,7 @@ type BreathContentProps = {
   sessionCount: number;
   onStartClick: () => void;
   onRestart: () => void;
+  getDuration: () => number;
 };
 
 export function BreathContent({
@@ -24,6 +25,7 @@ export function BreathContent({
   sessionCount,
   onStartClick,
   onRestart,
+  getDuration,
 }: BreathContentProps) {
   return (
     <div className="z-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[60%] flex flex-col items-center justify-center w-full px-4">
@@ -49,7 +51,10 @@ export function BreathContent({
           {isCompleted && (
             <div className="flex flex-col items-center gap-4 mt-4">
               <RestartButton onClick={onRestart} />
-              <NextButton sessionCount={sessionCount} />
+              <NextButton
+                sessionCount={sessionCount}
+                getDuration={getDuration}
+              />
             </div>
           )}
         </div>

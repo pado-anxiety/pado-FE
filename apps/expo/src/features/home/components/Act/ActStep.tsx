@@ -9,6 +9,7 @@ import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 
 import { Image, Pressable, Text, View } from '@src/components/ui';
+import { useAnalytics } from '@src/lib/analytics';
 import { triggerHaptic } from '@src/lib/haptics';
 import { getActRoute } from '@src/lib/route/route';
 
@@ -48,9 +49,17 @@ export function ActStep({
   containerRef,
   onReportLayout,
 }: ActButtonProps): React.ReactNode {
+  const { trackContent } = useAnalytics();
+
   const { t } = useTranslation();
   const circleRef = useRef<View>(null);
   const router = useRouter();
+
+  const handlePress = () => {
+    triggerHaptic('NAVIGATE');
+    trackContent(item.slug);
+    router.push(getActRoute(item.slug));
+  };
 
   const handleLayout = () => {
     if (circleRef.current && containerRef.current) {
@@ -97,10 +106,7 @@ export function ActStep({
       >
         <Pressable
           className="relative flex-1 items-center justify-center gap-2"
-          onPress={() => {
-            triggerHaptic('NAVIGATE');
-            router.push(getActRoute(item.slug));
-          }}
+          onPress={handlePress}
           onLayout={handleLayout}
         >
           <View className="relative items-center justify-center">
@@ -145,7 +151,7 @@ export function ActStep({
           </View>
 
           <View className="border-white/2 mt-4 rounded-3xl bg-[#F3F4F6] px-4 py-1.5">
-            <Text className="text-label-medium font-bold">
+            <Text className="text-center text-label-medium font-bold">
               {t(item.i18nKey)}
             </Text>
           </View>

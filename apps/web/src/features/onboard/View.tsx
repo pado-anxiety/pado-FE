@@ -9,6 +9,7 @@ import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import PageLayout from '@/components/ui/layout';
 import { handlePostMessage, triggerHaptic } from '@/lib';
+import { useDuration } from '@/lib/analytics/useDuration';
 
 import { BreathContent, StepContent, WaveCanvas } from './components';
 import {
@@ -31,6 +32,7 @@ export default function OnboardView() {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gapValue = useMotionValue<number>(WAVE_CONFIG.GAP_NORMAL);
+  const { getDuration } = useDuration();
 
   const insets = window.insets;
 
@@ -88,9 +90,16 @@ export default function OnboardView() {
     triggerHaptic('NAVIGATE');
     setShowButton(false);
 
+    const step = currentStep;
+
     if (currentStep === BREATHING_STEP_INDEX) {
       const completed = await startBreathing();
       if (completed) {
+        handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+          action: 'NEXT',
+          step,
+          duration: getDuration(),
+        });
         setCurrentStep((prev) => prev + 1);
       }
       return;
@@ -99,9 +108,17 @@ export default function OnboardView() {
     if (isLastStep) {
       handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
         action: 'LOGIN',
+        step,
+        duration: getDuration(),
       });
       return;
     }
+
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'NEXT',
+      step,
+      duration: getDuration(),
+    });
 
     setIsExiting(true);
 

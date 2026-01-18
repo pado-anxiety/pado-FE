@@ -6,9 +6,9 @@
     "embrace": "마음의 바다 넓히기",
     "values": "나의 가치와 방향 찾기"
   },
-"history": {
+  "history": {
     "title": "지나온 파도의 기록",
-    "subtitle": "지금까지 당신의 바다에 머물렀던 순간들을 확인할 수 있어요.",
+    "subtitle": "지금까지의 ACT 기록들을 확인할 수 있어요.",
     "viewHistory": "기록 확인하기"
   },
   "historyType": {

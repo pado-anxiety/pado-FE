@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import { Redirect } from 'expo-router';
@@ -21,6 +21,7 @@ import {
 } from '@src/features/home/hooks';
 import { isOnboarded } from '@src/lib';
 import { showAlert } from '@src/lib/alert';
+import { useAnalytics } from '@src/lib/analytics';
 import { historyAPI } from '@src/lib/api/history';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
@@ -32,13 +33,25 @@ interface ModalType {
 
 export default function HomeScreen(): React.ReactNode {
   const { t } = useTranslation();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, name, email } = useAuth();
+
   const { page, setPage } = useHomePageState();
 
   const [modalType, setModalType] = useState<ModalType | null>(null);
   const [detail, setDetail] = useState<ActHistory | null>(null);
 
   const onboarded = isOnboarded();
+
+  const isIdentified = useRef<boolean>(false);
+
+  const { identifyUser } = useAnalytics();
+
+  useEffect(() => {
+    if (isLoggedIn && name && email && !isIdentified.current) {
+      isIdentified.current = true;
+      identifyUser({ name, email });
+    }
+  }, [identifyUser, isLoggedIn, name, email]);
 
   const detailMutation = useMutation({
     mutationFn: historyAPI.getDetail,

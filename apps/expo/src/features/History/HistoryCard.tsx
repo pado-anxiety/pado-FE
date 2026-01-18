@@ -2,7 +2,8 @@ import { useTranslation } from 'react-i18next';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { Pressable, Text, View } from '@src/components/ui';
-import { formatToKoreanDate } from '@src/lib/time';
+import { useLanguage } from '@src/lib/i18n';
+import { formatToLocaleDate } from '@src/lib/time';
 
 import { HistoryItemWithIndex } from '../home';
 import { ACTType } from './types';
@@ -26,6 +27,7 @@ export default function HistoryCard({
   handleModalOpen,
 }: HistoryCardProps) {
   const { t } = useTranslation();
+  const { language } = useLanguage();
 
   return (
     <Animated.View entering={FadeIn.delay(1000)}>
@@ -33,7 +35,7 @@ export default function HistoryCard({
         <View className="flex flex-row items-start justify-between gap-2">
           <View className="pt-1">
             <Text className="text-body-small font-bold text-white/60">
-              {formatToKoreanDate(item.date)}
+              {formatToLocaleDate(item.date, language)}
             </Text>
           </View>
           <View className="flex flex-1 flex-row flex-wrap gap-2">

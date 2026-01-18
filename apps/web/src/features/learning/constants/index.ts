@@ -1,118 +1,100 @@
+import { TFunction } from 'i18next';
+
 import { LearningData } from '../types';
 
-export const LEARNING_DATA: Record<string, LearningData> = {
-  anxiety_info: {
-    title: '불안은 왜 생기는 걸까요?',
-    description:
-      '불안은 우리를 괴롭히려는 적이 아니라, 우리를 지키기 위한 마음의 신호예요.',
-    steps: [
-      {
-        step: 1,
-        title: '불안은 생존을 위한 알람이에요',
-        content: [
-          '아주 먼 옛날부터 불안은 위험으로부터 우리를 보호하는 고마운 알람이었어요.',
-          '뇌가 "조심해!"라고 외치는 아주 본능적인 신호인 셈이죠.',
-          '그러니 불안을 느낀다는 건 당신의 생존 본능이 아주 건강하게 작동하고 있다는 뜻이기도 해요.',
-        ],
-        image: '/images/learning/anxiety_step1.png',
-      },
-      {
-        step: 2,
-        title: '파도처럼 밀려왔다 사라져요',
-        content: [
-          '불안은 영원히 우리 마음에 머물지 않아요.',
-          '바다의 파도처럼 서서히 올라왔다가 정점을 찍고는 다시 부드럽게 내려가죠.',
-          '지금 이 불안이 영원할 것 같아 무섭겠지만, 파도는 반드시 지나가기 마련이에요.',
-        ],
-        image: '/images/learning/anxiety_step2.png',
-      },
-      {
-        step: 3,
-        title: '막으려 할수록 더 커져요',
-        content: [
-          '밀려오는 파도를 맨몸으로 막으려고 하면 어떻게 될까요?',
-          '아마 더 큰 충격을 받거나 물에 휩쓸리기 쉬울 거예요.',
-          '불안도 마찬가지예요. 억지로 없애려고 저항할수록 불안은 더 거세게 우리를 덮쳐온답니다.',
-        ],
-        image: '/images/learning/anxiety_step3.png',
-      },
-      {
-        step: 4,
-        title: '예민해진 알람을 다독여주세요',
-        content: [
-          '현대 사회에서는 실제 위험이 없어도 알람이 너무 자주 울리곤 해요.',
-          '이럴 땐 알람을 고장 내려고 애쓰기보다, 상태를 먼저 인정해 주는 것이 중요해요.',
-          '"지금 알람이 울리고 있구나, 내가 긴장했네"라고 부드럽게 말을 걸어주세요.',
-        ],
-        image: '/images/learning/anxiety_step4.png',
-      },
-      {
-        step: 5,
-        title: '불안과 함께 나아가기',
-        content: [
-          '불안을 완전히 없애야만 행복해질 수 있는 건 아니에요.',
-          '파도가 치는 바다에서도 배는 목적지를 향해 갈 수 있듯이,',
-          '우리도 불안을 품은 채로 우리가 원하는 삶을 향해 충분히 나아갈 수 있어요.',
-        ],
-        image: '/images/learning/anxiety_step5.png',
-      },
-    ],
-  },
-  act_guide: {
-    title: 'ACT와 함께 파도 타기',
-    description:
-      '불안과 싸우는 대신, 불안을 태우고 내가 원하는 삶의 방향으로 노를 젓는 법을 배워요.',
-    steps: [
-      {
-        step: 1,
-        title: 'ACT가 무엇인가요?',
-        content: [
-          'ACT(수용전념치료)는 불안을 억누르는 대신 그대로 인정(수용)하고,',
-          '내가 중요하게 여기는 가치를 위해 행동(전념)하도록 돕는 심리학이에요.',
-          '우리 앱은 이 과정을 여러분이 쉽게 따라 할 수 있도록 6개의 단계에 담았어요.',
-        ],
-        image: '/images/learning/act_step1.png',
-      },
-      {
-        step: 2,
-        title: '지금 이 순간에 닻 내리기',
-        content: [
-          '생각의 소용돌이에 빠졌을 땐 1단계(5-4-3-2-1)와 2단계(마음 일기)를 해보세요.',
-          '주변의 감각에 집중하고 내 마음의 날씨를 차분히 기록하다 보면,',
-          '거친 파도 속에서도 중심을 잡는 닻을 내릴 수 있어요.',
-        ],
-        image: '/images/learning/act_step2.png',
-      },
-      {
-        step: 3,
-        title: '생각과 사실을 분리하기',
-        content: [
-          '3단계(생각 거리두기)는 "나는 실패할 거야"라는 생각을 객관적으로 보게 도와줘요.',
-          '문장 속에서 "생각" 부분만 따로 떼어내어 바라보는 연습이죠.',
-          '생각은 단지 머릿속을 스쳐 가는 구름일 뿐, 절대적인 사실이 아니라는 걸 기억하세요.',
-        ],
-        image: '/images/learning/act_step3.png',
-      },
-      {
-        step: 4,
-        title: '파도의 리듬에 몸 맡기기',
-        content: [
-          '4단계(기꺼이 수용하기)에서는 파도가 오르내리는 애니메이션에 맞춰 호흡해 보세요.',
-          '불안을 밀어내지 않고, 마치 파도를 타듯 내 몸 안에 머물 공간을 내어주는 거예요.',
-          '숨을 들이마시고 내뱉으며 불안이 그저 흘러가게 두세요.',
-        ],
-        image: '/images/learning/act_step4.png',
-      },
-      {
-        step: 5,
-        title: '나만의 북극성 향해 가기',
-        content: [
-          '마지막 단계에서는 내가 진짜 소중히 여기는 가치를 찾고 행동해요.',
-          '불안이 파도처럼 출렁여도, 우리는 우리만의 북극성을 보며 노를 저어야 하니까요.',
-          '불안을 태운 채로, 오늘 당신이 할 수 있는 작은 일부터 시작해 봐요.',
-        ],
-        image: '/images/learning/act_step5.png',
-      },
-    ],
-  },
+export const getLearningData = (t: TFunction): Record<string, LearningData> => {
+  return {
+    anxiety_info: {
+      title: t('learning.anxiety_info.title'),
+      description: t('learning.anxiety_info.description'),
+      steps: [
+        {
+          step: 1,
+          title: t('learning.anxiety_info.steps.step1.title'),
+          content: t('learning.anxiety_info.steps.step1.content', {
+            returnObjects: true,
+          }) as string[],
+          image: '/images/learning/anxiety_step1.png',
+        },
+        {
+          step: 2,
+          title: t('learning.anxiety_info.steps.step2.title'),
+          content: t('learning.anxiety_info.steps.step2.content', {
+            returnObjects: true,
+          }) as string[],
+          image: '/images/learning/anxiety_step2.png',
+        },
+        {
+          step: 3,
+          title: t('learning.anxiety_info.steps.step3.title'),
+          content: t('learning.anxiety_info.steps.step3.content', {
+            returnObjects: true,
+          }) as string[],
+          image: '/images/learning/anxiety_step3.png',
+        },
+        {
+          step: 4,
+          title: t('learning.anxiety_info.steps.step4.title'),
+          content: t('learning.anxiety_info.steps.step4.content', {
+            returnObjects: true,
+          }) as string[],
+          image: '/images/learning/anxiety_step4.png',
+        },
+        {
+          step: 5,
+          title: t('learning.anxiety_info.steps.step5.title'),
+          content: t('learning.anxiety_info.steps.step5.content', {
+            returnObjects: true,
+          }) as string[],
+          image: '/images/learning/anxiety_step5.png',
+        },
+      ],
+    },
+    act_guide: {
+      title: t('learning.act_guide.title'),
+      description: t('learning.act_guide.description'),
+      steps: [
+        {
+          step: 1,
+          title: t('learning.act_guide.steps.step1.title'),
+          content: t('learning.act_guide.steps.step1.content', {
+            returnObjects: true,
+          }) as string[],
+          image: '/images/learning/act_step1.png',
+        },
+        {
+          step: 2,
+          title: t('learning.act_guide.steps.step2.title'),
+          content: t('learning.act_guide.steps.step2.content', {
+            returnObjects: true,
+          }) as string[],
+          image: '/images/learning/act_step2.png',
+        },
+        {
+          step: 3,
+          title: t('learning.act_guide.steps.step3.title'),
+          content: t('learning.act_guide.steps.step3.content', {
+            returnObjects: true,
+          }) as string[],
+          image: '/images/learning/act_step3.png',
+        },
+        {
+          step: 4,
+          title: t('learning.act_guide.steps.step4.title'),
+          content: t('learning.act_guide.steps.step4.content', {
+            returnObjects: true,
+          }) as string[],
+          image: '/images/learning/act_step4.png',
+        },
+        {
+          step: 5,
+          title: t('learning.act_guide.steps.step5.title'),
+          content: t('learning.act_guide.steps.step5.content', {
+            returnObjects: true,
+          }) as string[],
+          image: '/images/learning/act_step5.png',
+        },
+      ],
+    },
+  };
 };

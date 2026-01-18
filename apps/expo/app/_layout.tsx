@@ -5,6 +5,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import CookieManager from '@react-native-cookies/cookies';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
+import { PostHogProvider } from 'posthog-react-native';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -120,16 +121,47 @@ export const queryClient = new QueryClient();
 
 export default function RootLayout(): React.ReactNode {
   return (
-    <SafeAreaProvider>
-      <QueryClientProvider client={queryClient}>
-        <I18nProvider>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <KeyboardProvider>
-              <NavigationContent />
-            </KeyboardProvider>
-          </GestureHandlerRootView>
-        </I18nProvider>
-      </QueryClientProvider>
-    </SafeAreaProvider>
+    <PostHogProvider
+      apiKey="phc_STfQdw7sqejGKYfg1kZOhlKOKiSfr9KrebaKA8MucxW"
+      options={{
+        host: 'https://us.i.posthog.com',
+
+        // check https://posthog.com/docs/session-replay/installation?tab=React+Native
+        // for more config and to learn about how we capture sessions on mobile
+        // and what to expect
+        enableSessionReplay: true,
+        sessionReplayConfig: {
+          // Whether text inputs are masked. Default is true.
+          // Password inputs are always masked regardless
+          maskAllTextInputs: true,
+          // Whether images are masked. Default is true.
+          maskAllImages: true,
+          // Capture logs automatically. Default is true.
+          // Android only (Native Logcat only)
+          captureLog: true,
+          // Whether network requests are captured in recordings. Default is true
+          // Only metric-like data like speed, size, and response code are captured.
+          // No data is captured from the request or response body.
+          // iOS only
+          captureNetworkTelemetry: true,
+          // Throttling delay used to reduce the number of snapshots captured and reduce performance impact
+          // The lower the number more snapshots will be captured but higher the performance impact
+          // Default is 1000ms
+          throttleDelayMs: 1000,
+        },
+      }}
+    >
+      <SafeAreaProvider>
+        <QueryClientProvider client={queryClient}>
+          <I18nProvider>
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              <KeyboardProvider>
+                <NavigationContent />
+              </KeyboardProvider>
+            </GestureHandlerRootView>
+          </I18nProvider>
+        </QueryClientProvider>
+      </SafeAreaProvider>
+    </PostHogProvider>
   );
 }

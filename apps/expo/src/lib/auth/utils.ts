@@ -2,6 +2,8 @@ import { storage } from '../store';
 
 const ACCESS_TOKEN_KEY = 'accessToken';
 const REFRESH_TOKEN_KEY = 'refreshToken';
+const USER_KEY = 'userName';
+const USER_EMAIL_KEY = 'userEmail';
 
 export const parseAuthToken = (token: {
   accessToken: string;
@@ -14,6 +16,22 @@ export const parseAuthToken = (token: {
 };
 
 export const authStorage = {
+  getName: () => {
+    const name = storage.getString(USER_KEY);
+    if (!name) {
+      return null;
+    }
+    return name;
+  },
+
+  getEmail: () => {
+    const email = storage.getString(USER_EMAIL_KEY);
+    if (!email) {
+      return null;
+    }
+    return email;
+  },
+
   getAccessToken: () => {
     const accessToken = storage.getString(ACCESS_TOKEN_KEY);
     if (!accessToken) {
@@ -33,12 +51,19 @@ export const authStorage = {
   },
 
   setAuthToken: (accessToken: string, refreshToken: string) => {
-    storage.set(ACCESS_TOKEN_KEY, accessToken);
-    storage.set(REFRESH_TOKEN_KEY, refreshToken);
+    if (accessToken) storage.set(ACCESS_TOKEN_KEY, accessToken);
+    if (refreshToken) storage.set(REFRESH_TOKEN_KEY, refreshToken);
   },
 
-  clearAuthToken: () => {
+  setUserInfo: (name: string, email: string) => {
+    if (name) storage.set(USER_KEY, name);
+    if (email) storage.set(USER_EMAIL_KEY, email);
+  },
+
+  clearAuthInfo: () => {
     storage.remove(ACCESS_TOKEN_KEY);
     storage.remove(REFRESH_TOKEN_KEY);
+    storage.remove(USER_KEY);
+    storage.remove(USER_EMAIL_KEY);
   },
 };

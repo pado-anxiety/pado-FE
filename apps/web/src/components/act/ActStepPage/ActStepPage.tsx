@@ -16,6 +16,7 @@ interface ActStepPageProps {
   buttonText: string;
   onButtonClick: () => void;
   buttonDisabled?: boolean;
+  scrollable?: boolean;
 }
 
 interface ActStepPageContentProps {
@@ -52,9 +53,12 @@ function ActStepPage({
   buttonText,
   onButtonClick,
   buttonDisabled,
+  scrollable = false,
 }: ActStepPageProps) {
   return (
-    <PageLayout className="bg-act-page">
+    <PageLayout
+      className={`bg-act-page ${scrollable ? 'overflow-y-auto scrollbar-hide' : ''}`}
+    >
       <div className="flex flex-col w-full flex-1 justify-between gap-2">
         <ActStepHeader
           leftButton={leftButton}

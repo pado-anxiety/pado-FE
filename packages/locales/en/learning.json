@@ -1,0 +1,96 @@
+{
+  "anxiety_info": {
+    "title": "Why do we feel anxious?",
+    "description": "Anxiety is not an enemy trying to hurt us; it’s a signal from the heart to keep us safe.",
+    "analyticsKey": "Why do we feel anxious?",
+    "steps": {
+      "step1": {
+        "title": "Anxiety is an alarm for survival",
+        "content": [
+          "Since ancient times, anxiety has been a helpful alarm protecting us from danger.",
+          "It's an instinctive signal from the brain shouting, \"Be careful!\"",
+          "So, feeling anxious means your survival instinct is working perfectly and healthily."
+        ]
+      },
+      "step2": {
+        "title": "It rolls in and out like waves",
+        "content": [
+          "Anxiety doesn't stay in our hearts forever.",
+          "Just like waves in the ocean, it slowly rises, reaches its peak, and then gently subsides.",
+          "This anxiety might feel like it will last forever, but remember, every wave is bound to pass."
+        ]
+      },
+      "step3": {
+        "title": "The more you block it, the bigger it gets",
+        "content": [
+          "What happens if you try to block a rushing wave with your bare body?",
+          "You'll likely feel a greater impact or be swept away more easily.",
+          "Anxiety is the same. The more you resist it, the more fiercely it crashes over your surface."
+        ]
+      },
+      "step4": {
+        "title": "Soothe your sensitive alarm",
+        "content": [
+          "In modern life, the alarm often rings even when there’s no real danger.",
+          "Instead of trying to break the alarm, it’s important to acknowledge its state first.",
+          "Gently say to yourself, \"The alarm is ringing right now. I'm feeling tense.\""
+        ]
+      },
+      "step5": {
+        "title": "Moving forward with anxiety",
+        "content": [
+          "You don't have to get rid of anxiety entirely to be happy.",
+          "Just as the deep current doesn't lose its way even when surface waves are high,",
+          "we can move toward the life we want while holding our anxiety within."
+        ]
+      }
+    }
+  },
+  "act_guide": {
+    "title": "Moving Forward with Anxiety",
+    "description": "Instead of fighting anxiety, let's learn about ACT—a way to move toward the life you want, even when you feel anxious.",
+    "analyticsKey": "Moving Forward with Anxiety",
+    "steps": {
+      "step1": {
+        "title": "What is ACT?",
+        "content": [
+          "ACT (Acceptance and Commitment Therapy) is a psychology that helps you accept anxiety as it is,",
+          "and commit to taking action toward the values you hold dear.",
+          "Our app breaks this process down into 5 easy steps for you to follow."
+        ]
+      },
+      "step2": {
+        "title": "Rising to the surface of the present",
+        "content": [
+          "When you're caught in a whirlpool of thoughts, try Step 1 (Grounding) and Step 2 (Emotion Diary).",
+          "By focusing on your senses and recording the weather of your heart,",
+          "you'll find your deep, calm sea that stays steady amidst the rough waves."
+        ]
+      },
+      "step3": {
+        "title": "Separating thoughts from facts",
+        "content": [
+          "Step 3 (Separating Wind and Waves) helps you view thoughts like \"I will fail\" objectively.",
+          "It's a practice of separating the \"thought\" part from the rest of the sentence.",
+          "Remember, thoughts are just wind brushing across the surface, not absolute facts."
+        ]
+      },
+      "step4": {
+        "title": "Flowing with the rhythm of waves",
+        "content": [
+          "In Step 4 (Deepening the Sea), try breathing along with the rising and falling wave animations.",
+          "Instead of pushing anxiety away, create a space within your deep sea for it to simply stay.",
+          "As you breathe in and out, let the wave of anxiety just flow through you."
+        ]
+      },
+      "step5": {
+        "title": "Moving toward my own values",
+        "content": [
+          "In the final step, discover the values you truly cherish and take action.",
+          "Even if you feel anxious, you can still take small steps toward your values.",
+          "Start with a small action today, while holding your anxiety within."
+        ]
+      }
+    }
+  }
+}

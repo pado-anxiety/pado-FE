@@ -12,6 +12,7 @@ import {
   WebViewLoadingView,
 } from '@src/components/ui';
 import { showAlert } from '@src/lib/alert';
+import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
@@ -22,6 +23,9 @@ export default function DetachResultScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const hasMutated = useRef(false);
+
+  const { trackFunnelComplete } = useAnalytics();
+
   const parsedData = parseJSON(data as string, () => {
     showAlert.error(t('common.error.generic'), t('common.error.tryLater'), () =>
       router.replace(ROUTES.HOME),
@@ -41,13 +45,14 @@ export default function DetachResultScreen() {
   });
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: () => {
+    onNavigate: (_, duration) => {
       if (!hasMutated.current) {
         hasMutated.current = true;
         detachMutation.mutate({
           userTextToken: parsedData,
         });
       }
+      trackFunnelComplete(ANALYTICS_KEY.ACT.DETACH.SEPARATE, duration);
       router.replace(ROUTES.HOME);
     },
   });

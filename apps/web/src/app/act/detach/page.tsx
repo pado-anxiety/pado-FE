@@ -5,22 +5,27 @@ import { useTranslation } from 'react-i18next';
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import ActIntroPage from '@/components/act/ActIntroPage/ActIntroPage';
+import { useDuration } from '@/lib/analytics/useDuration';
 import { triggerHaptic } from '@/lib/haptic';
 import { handlePostMessage } from '@/lib/webview';
 
 export default function DefusionPage() {
   const { t } = useTranslation();
 
+  const { getDuration } = useDuration();
+
   const handleStart = () => {
     triggerHaptic('NAVIGATE');
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'NEXT',
+      duration: getDuration(),
     });
   };
 
   const handleClose = () => {
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
       action: 'HOME',
+      duration: getDuration(),
     });
   };
 

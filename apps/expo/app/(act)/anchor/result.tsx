@@ -10,6 +10,7 @@ import {
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
+import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
 import { actAPI } from '@src/lib/api/act';
 import { WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { ROUTES } from '@src/lib/route/route';
@@ -18,6 +19,8 @@ import { createWebViewMessageHandler } from '@src/lib/webview';
 export default function AnchorResultScreen() {
   const router = useRouter();
   const hasMutated = useRef(false);
+
+  const { trackFunnelComplete } = useAnalytics();
 
   // TODO: offline-first save
   const anchorMutation = useMutation({
@@ -28,11 +31,12 @@ export default function AnchorResultScreen() {
   });
 
   const handleMessage = createWebViewMessageHandler({
-    onNavigate: () => {
+    onNavigate: (_, duration) => {
       if (!hasMutated.current) {
         hasMutated.current = true;
         anchorMutation.mutate();
       }
+      trackFunnelComplete(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration);
       router.replace(ROUTES.HOME);
     },
   });

@@ -4717,6 +4717,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@posthog/core@npm:1.9.1":
+  version: 1.9.1
+  resolution: "@posthog/core@npm:1.9.1"
+  dependencies:
+    cross-spawn: "npm:^7.0.6"
+  checksum: 10c0/fc46bd4369c82834fc37e594d2432bb8eca1173d54896f229e9c88024b0597b89fbfc38b595c461a9a8eea3f2b4bc852f96d9acbafbeeb64e03de34c2dbbf8b2
+  languageName: node
+  linkType: hard
+
 "@radix-ui/primitive@npm:1.1.3":
   version: 1.1.3
   resolution: "@radix-ui/primitive@npm:1.1.3"
@@ -7910,6 +7919,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"boolbase@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "boolbase@npm:1.0.0"
+  checksum: 10c0/e4b53deb4f2b85c52be0e21a273f2045c7b6a6ea002b0e139c744cb6f95e9ec044439a52883b0d74dedd1ff3da55ed140cfdddfed7fb0cccbed373de5dce1bcf
+  languageName: node
+  linkType: hard
+
 "bowser@npm:^2.11.0":
   version: 2.13.1
   resolution: "bowser@npm:2.13.1"
@@ -8534,6 +8550,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"css-select@npm:^5.1.0":
+  version: 5.2.2
+  resolution: "css-select@npm:5.2.2"
+  dependencies:
+    boolbase: "npm:^1.0.0"
+    css-what: "npm:^6.1.0"
+    domhandler: "npm:^5.0.2"
+    domutils: "npm:^3.0.1"
+    nth-check: "npm:^2.0.1"
+  checksum: 10c0/d79fffa97106007f2802589f3ed17b8c903f1c961c0fc28aa8a051eee0cbad394d8446223862efd4c1b40445a6034f626bb639cf2035b0bfc468544177593c99
+  languageName: node
+  linkType: hard
+
+"css-tree@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "css-tree@npm:1.1.3"
+  dependencies:
+    mdn-data: "npm:2.0.14"
+    source-map: "npm:^0.6.1"
+  checksum: 10c0/499a507bfa39b8b2128f49736882c0dd636b0cd3370f2c69f4558ec86d269113286b7df469afc955de6a68b0dba00bc533e40022a73698081d600072d5d83c1c
+  languageName: node
+  linkType: hard
+
+"css-what@npm:^6.1.0":
+  version: 6.2.2
+  resolution: "css-what@npm:6.2.2"
+  checksum: 10c0/91e24c26fb977b4ccef30d7007d2668c1c10ac0154cc3f42f7304410e9594fb772aea4f30c832d2993b132ca8d99338050866476210316345ec2e7d47b248a56
+  languageName: node
+  linkType: hard
+
 "cssesc@npm:^3.0.0":
   version: 3.0.0
   resolution: "cssesc@npm:3.0.0"
@@ -8753,6 +8799,44 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dom-serializer@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "dom-serializer@npm:2.0.0"
+  dependencies:
+    domelementtype: "npm:^2.3.0"
+    domhandler: "npm:^5.0.2"
+    entities: "npm:^4.2.0"
+  checksum: 10c0/d5ae2b7110ca3746b3643d3ef60ef823f5f078667baf530cec096433f1627ec4b6fa8c072f09d079d7cda915fd2c7bc1b7b935681e9b09e591e1e15f4040b8e2
+  languageName: node
+  linkType: hard
+
+"domelementtype@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "domelementtype@npm:2.3.0"
+  checksum: 10c0/686f5a9ef0fff078c1412c05db73a0dce096190036f33e400a07e2a4518e9f56b1e324f5c576a0a747ef0e75b5d985c040b0d51945ce780c0dd3c625a18cd8c9
+  languageName: node
+  linkType: hard
+
+"domhandler@npm:^5.0.2, domhandler@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "domhandler@npm:5.0.3"
+  dependencies:
+    domelementtype: "npm:^2.3.0"
+  checksum: 10c0/bba1e5932b3e196ad6862286d76adc89a0dbf0c773e5ced1eb01f9af930c50093a084eff14b8de5ea60b895c56a04d5de8bbc4930c5543d029091916770b2d2a
+  languageName: node
+  linkType: hard
+
+"domutils@npm:^3.0.1":
+  version: 3.2.2
+  resolution: "domutils@npm:3.2.2"
+  dependencies:
+    dom-serializer: "npm:^2.0.0"
+    domelementtype: "npm:^2.3.0"
+    domhandler: "npm:^5.0.3"
+  checksum: 10c0/47938f473b987ea71cd59e59626eb8666d3aa8feba5266e45527f3b636c7883cca7e582d901531961f742c519d7514636b7973353b648762b2e3bedbf235fada
+  languageName: node
+  linkType: hard
+
 "dooboolab-welcome@npm:^1.3.2":
   version: 1.3.2
   resolution: "dooboolab-welcome@npm:1.3.2"
@@ -8894,6 +8978,13 @@ __metadata:
     ansi-colors: "npm:^4.1.1"
     strip-ansi: "npm:^6.0.1"
   checksum: 10c0/43850479d7a51d36a9c924b518dcdc6373b5a8ae3401097d336b7b7e258324749d0ad37a1fcaa5706f04799baa05585cd7af19ebdf7667673e7694435fcea918
+  languageName: node
+  linkType: hard
+
+"entities@npm:^4.2.0":
+  version: 4.5.0
+  resolution: "entities@npm:4.5.0"
+  checksum: 10c0/5b039739f7621f5d1ad996715e53d964035f75ad3b9a4d38c6b3804bb226e282ffeae2443624d8fdd9c47d8e926ae9ac009c54671243f0c3294c26af7cc85250
   languageName: node
   linkType: hard
 
@@ -9731,6 +9822,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-application@npm:~7.0.8":
+  version: 7.0.8
+  resolution: "expo-application@npm:7.0.8"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/3926cb3e0be1ea82ee991cab55c0b7baf40a5b4ec5812857fc4c8fe1cb63b9dc5e94b2a7030b0cb1d6288d2a4877459f775118075d72b868fd19b57b5b789981
+  languageName: node
+  linkType: hard
+
 "expo-asset@npm:~12.0.11":
   version: 12.0.11
   resolution: "expo-asset@npm:12.0.11"
@@ -9829,6 +9929,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-device@npm:~8.0.10":
+  version: 8.0.10
+  resolution: "expo-device@npm:8.0.10"
+  dependencies:
+    ua-parser-js: "npm:^0.7.33"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/5e18593cd5589687fb26dab37bcad03bbbd76c3cbd54a0c7f894736530b8802ffe5492731d9356a5204aea18a802f7ccf1f0fa6e17b613b4869ded0fc9fa2262
+  languageName: node
+  linkType: hard
+
 "expo-eas-client@npm:~1.0.8":
   version: 1.0.8
   resolution: "expo-eas-client@npm:1.0.8"
@@ -9843,6 +9954,16 @@ __metadata:
     expo: "*"
     react-native: "*"
   checksum: 10c0/e918adde597231c8d9934ee6e968b0cdbda85a2b14f5e25dde469259555921fd615606e9e3bf4317084e25df43659447d32d991da4ebb9195a133c7cb9020c45
+  languageName: node
+  linkType: hard
+
+"expo-file-system@npm:~19.0.21":
+  version: 19.0.21
+  resolution: "expo-file-system@npm:19.0.21"
+  peerDependencies:
+    expo: "*"
+    react-native: "*"
+  checksum: 10c0/0ece34f86beda2048f8bf1f3218e57f6c7c14a875fe8be0f0dd2704d968ee61f979ddf0561b8769f4d46cfeb77ac759da0a030c5a77128cf2a06ce0bb9e3959b
   languageName: node
   linkType: hard
 
@@ -9913,7 +10034,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-localization@npm:^17.0.8":
+"expo-localization@npm:~17.0.8":
   version: 17.0.8
   resolution: "expo-localization@npm:17.0.8"
   dependencies:
@@ -12331,6 +12452,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mdn-data@npm:2.0.14":
+  version: 2.0.14
+  resolution: "mdn-data@npm:2.0.14"
+  checksum: 10c0/67241f8708c1e665a061d2b042d2d243366e93e5bf1f917693007f6d55111588b952dcbfd3ea9c2d0969fb754aad81b30fdcfdcc24546495fc3b24336b28d4bd
+  languageName: node
+  linkType: hard
+
 "media-typer@npm:^1.1.0":
   version: 1.1.0
   resolution: "media-typer@npm:1.1.0"
@@ -13361,6 +13489,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nth-check@npm:^2.0.1":
+  version: 2.1.1
+  resolution: "nth-check@npm:2.1.1"
+  dependencies:
+    boolbase: "npm:^1.0.0"
+  checksum: 10c0/5fee7ff309727763689cfad844d979aedd2204a817fbaaf0e1603794a7c20db28548d7b024692f953557df6ce4a0ee4ae46cd8ebd9b36cfb300b9226b567c479
+  languageName: node
+  linkType: hard
+
 "nullthrows@npm:^1.1.1":
   version: 1.1.1
   resolution: "nullthrows@npm:1.1.1"
@@ -13690,15 +13827,18 @@ __metadata:
     eslint: "npm:^9.25.0"
     eslint-config-expo: "npm:~10.0.0"
     expo: "npm:^54.0.27"
+    expo-application: "npm:~7.0.8"
     expo-audio: "npm:~1.1.1"
     expo-constants: "npm:^18.0.11"
     expo-crypto: "npm:~15.0.8"
     expo-dev-client: "npm:^6.0.20"
+    expo-device: "npm:~8.0.10"
+    expo-file-system: "npm:~19.0.21"
     expo-font: "npm:~14.0.10"
     expo-haptics: "npm:~15.0.8"
     expo-image: "npm:^3.0.11"
     expo-linking: "npm:~8.0.9"
-    expo-localization: "npm:^17.0.8"
+    expo-localization: "npm:~17.0.8"
     expo-router: "npm:~6.0.16"
     expo-splash-screen: "npm:~31.0.11"
     expo-status-bar: "npm:~3.0.8"
@@ -13709,6 +13849,8 @@ __metadata:
     i18next: "npm:^25.7.1"
     lottie-react-native: "npm:~7.3.1"
     nativewind: "npm:^4.2.1"
+    posthog-react-native: "npm:^4.18.0"
+    posthog-react-native-session-replay: "npm:^1.2.3"
     prettier: "npm:^3.7.4"
     prettier-plugin-tailwindcss: "npm:^0.5.11"
     react: "npm:19.1.0"
@@ -13724,6 +13866,7 @@ __metadata:
     react-native-safe-area-context: "npm:~5.6.0"
     react-native-screens: "npm:~4.16.0"
     react-native-size-matters: "npm:^0.4.2"
+    react-native-svg: "npm:^15.15.1"
     react-native-webview: "npm:^13.16.0"
     react-native-worklets: "npm:0.5.1"
     tailwind-merge: "npm:^3.4.0"
@@ -14059,6 +14202,61 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/f1b3f17aaf36d136f59ec373459f18129908235e65dbdc3aee5eef8eba0756106f52de5ec4682e29a2eab53eb25170e7e871b3e4b52a8f1de3d344a514306be3
+  languageName: node
+  linkType: hard
+
+"posthog-react-native-session-replay@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "posthog-react-native-session-replay@npm:1.2.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/0d2adeaabb25aab4cfcc4dc425c3dfe28579ed7c0a14583166cb774312d1463d4436b0a823103fcc1042a2f636a2a8c3f474e3d860c44364545c020bbbadacb2
+  languageName: node
+  linkType: hard
+
+"posthog-react-native@npm:^4.18.0":
+  version: 4.18.0
+  resolution: "posthog-react-native@npm:4.18.0"
+  dependencies:
+    "@posthog/core": "npm:1.9.1"
+  peerDependencies:
+    "@react-native-async-storage/async-storage": ">=1.0.0"
+    "@react-navigation/native": ">= 5.0.0"
+    expo-application: ">= 4.0.0"
+    expo-device: ">= 4.0.0"
+    expo-file-system: ">= 13.0.0"
+    expo-localization: ">= 11.0.0"
+    posthog-react-native-session-replay: ">= 1.2.0"
+    react-native-device-info: ">= 10.0.0"
+    react-native-localize: ">= 3.0.0"
+    react-native-navigation: ">= 6.0.0"
+    react-native-safe-area-context: ">= 4.0.0"
+    react-native-svg: ">= 15.0.0"
+  peerDependenciesMeta:
+    "@react-native-async-storage/async-storage":
+      optional: true
+    "@react-navigation/native":
+      optional: true
+    expo-application:
+      optional: true
+    expo-device:
+      optional: true
+    expo-file-system:
+      optional: true
+    expo-localization:
+      optional: true
+    posthog-react-native-session-replay:
+      optional: true
+    react-native-device-info:
+      optional: true
+    react-native-localize:
+      optional: true
+    react-native-navigation:
+      optional: true
+    react-native-safe-area-context:
+      optional: true
+  checksum: 10c0/a553c5441061f38d2de931cd9aee838806c4fa58510d31f9cca35409eda7f737adc3c3af15d0816e7094c81da4e9c7a68cec2ba0df9458ac265c4a82714722b6
   languageName: node
   linkType: hard
 
@@ -14561,6 +14759,20 @@ __metadata:
   peerDependencies:
     react-native: "*"
   checksum: 10c0/56715d33d02f10d4ca358761420cc9a971b3872c11b9fa403afd4f0b2bbf74148fd3c4c799959727fb61c576a474e3e1155ffadc247c12d70fadcb562b4a9f29
+  languageName: node
+  linkType: hard
+
+"react-native-svg@npm:^15.15.1":
+  version: 15.15.1
+  resolution: "react-native-svg@npm:15.15.1"
+  dependencies:
+    css-select: "npm:^5.1.0"
+    css-tree: "npm:^1.1.3"
+    warn-once: "npm:0.1.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/9e047e8afdd5121296a3402c5c37363b9b37fbddc41f7b0b49b923ac4d2898954c8b57a6784a625321236987e494ee54f594e22f9de815f807e03a3433d7fefd
   languageName: node
   linkType: hard
 
@@ -15667,7 +15879,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map@npm:^0.6.0":
+"source-map@npm:^0.6.0, source-map@npm:^0.6.1":
   version: 0.6.1
   resolution: "source-map@npm:0.6.1"
   checksum: 10c0/ab55398007c5e5532957cb0beee2368529618ac0ab372d789806f5718123cc4367d57de3904b4e6a4170eb5a0b0f41373066d02ca0735a0c4d75c7d328d3e011
@@ -16438,6 +16650,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ua-parser-js@npm:^0.7.33":
+  version: 0.7.41
+  resolution: "ua-parser-js@npm:0.7.41"
+  bin:
+    ua-parser-js: script/cli.js
+  checksum: 10c0/b134bc0d8da10c76e07740a0ade61c193fd4c4d120ba2cb2530e26931f6b550dd60b6e801d8891f6d9c23dfebadf5590294739069edff94396f173cc8cc5767e
+  languageName: node
+  linkType: hard
+
 "unbox-primitive@npm:^1.1.0":
   version: 1.1.0
   resolution: "unbox-primitive@npm:1.1.0"
@@ -16786,7 +17007,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"warn-once@npm:^0.1.0, warn-once@npm:^0.1.1":
+"warn-once@npm:0.1.1, warn-once@npm:^0.1.0, warn-once@npm:^0.1.1":
   version: 0.1.1
   resolution: "warn-once@npm:0.1.1"
   checksum: 10c0/f531e7b2382124f51e6d8f97b8c865246db8ab6ff4e53257a2d274e0f02b97d7201eb35db481843dc155815e154ad7afb53b01c4d4db15fb5aa073562496aff7

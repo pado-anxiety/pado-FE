@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { showAlert } from '../alert';
 import { useAuth } from '../auth';
 import { ENV } from '../env';
+import { i18n } from '../i18n';
 import { ROUTES } from '../route';
 import { authAPI } from './auth';
 
@@ -48,6 +49,7 @@ apiClient.interceptors.response.use(
       try {
         const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
 
+        console.log('=====재발급 결과=====', accessToken, refreshToken);
         useAuth.getState().setAuthToken(accessToken, refreshToken);
 
         return apiClient(config);
@@ -58,9 +60,10 @@ apiClient.interceptors.response.use(
     }
 
     if (config._retry) {
+      await useAuth.getState().logout();
       showAlert.warning(
-        '로그인이 필요합니다.',
-        '로그인 페이지로 이동합니다.',
+        i18n.t('common.error.loginRequired'),
+        i18n.t('common.error.goToLogin'),
         () => router.replace(ROUTES.LOGIN),
       );
       return;

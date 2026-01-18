@@ -20,6 +20,7 @@ export const authAPI = {
     accessToken: string;
     refreshToken: string;
   }> => {
+    console.log(combineUrl(ENV.BASE_URL, ROUTES.REFRESH));
     const response: { accessToken: string; refreshToken: string } =
       await axios.post(combineUrl(ENV.BASE_URL, ROUTES.REFRESH), {
         refreshToken: useAuth.getState().refreshToken,

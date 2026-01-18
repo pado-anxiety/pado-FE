@@ -9,9 +9,10 @@ import { TIME_CALCULATION } from '../../constants';
 
 type NextButtonProps = {
   sessionCount: number;
+  getDuration: () => number;
 };
 
-export function NextButton({ sessionCount }: NextButtonProps) {
+export function NextButton({ sessionCount, getDuration }: NextButtonProps) {
   const { t } = useTranslation();
 
   const calculateTotalTime = () => {
@@ -20,10 +21,16 @@ export function NextButton({ sessionCount }: NextButtonProps) {
     return totalSeconds;
   };
 
-  const handleClick = () =>
+  const handleClick = () => {
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
+      action: 'NEXT',
+      step: 0,
+      duration: getDuration(),
+    });
     handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
       data: { embraceResult: calculateTotalTime() },
     });
+  };
 
   return (
     <Button
