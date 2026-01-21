@@ -38,35 +38,37 @@ apiClient.interceptors.response.use(
     return response.data;
   },
   async (error) => {
-    const {
-      config,
-      response: { status },
-    } = error;
+    const config = error.config;
+    const status = error.response?.status;
 
-    if (status === 401 && !config._retry) {
-      config._retry = true;
-
-      try {
-        const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
-
-        console.log('=====재발급 결과=====', accessToken, refreshToken);
-        useAuth.getState().setAuthToken(accessToken, refreshToken);
-
-        return apiClient(config);
-      } catch (error) {
-        console.error('토큰 재발급 오류가 발생했습니다: ', error);
-        router.replace(ROUTES.LOGIN);
-      }
+    if (status !== 401 || config._retry) {
+      return Promise.reject(error);
     }
 
-    if (config._retry) {
-      await useAuth.getState().logout();
+    // 이미 로그아웃 상태(토큰 없음)인 경우 재발급 시도하지 않음
+    const currentRefreshToken = useAuth.getState().refreshToken;
+    if (!currentRefreshToken) {
+      return Promise.reject(error);
+    }
+
+    config._retry = true;
+
+    try {
+      const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
+
+      useAuth.getState().setAuthToken(accessToken, refreshToken);
+
+      return apiClient(config);
+    } catch (reissueError) {
+      useAuth.getState().clearAuth();
+
       showAlert.warning(
         i18n.t('common.error.loginRequired'),
         i18n.t('common.error.goToLogin'),
         () => router.replace(ROUTES.LOGIN),
       );
-      return;
+
+      return Promise.reject(reissueError);
     }
   },
 );

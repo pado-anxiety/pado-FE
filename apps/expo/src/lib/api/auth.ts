@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import { useAuth } from '../auth';
 import { ENV } from '../env';
-import { apiClient } from './client';
 
 function combineUrl(base: string, path: string) {
   return base.replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '');
@@ -55,7 +54,18 @@ export const authAPI = {
 
     return response.data;
   },
-  logout: async () => {
-    await apiClient.post(combineUrl(ENV.BASE_URL, ROUTES.LOGOUT));
+  // interceptor를 우회하기 위해 일반 axios 사용, 토큰을 파라미터로 받음
+  logout: async (accessToken: string | null) => {
+    if (!accessToken) return;
+
+    await axios.post(
+      combineUrl(ENV.BASE_URL, ROUTES.LOGOUT),
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
   },
 };
