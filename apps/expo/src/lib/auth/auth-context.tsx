@@ -5,6 +5,7 @@ import { authAPI } from '../api/auth';
 import { userAPI } from '../api/user';
 import { i18n } from '../i18n';
 import { ROUTES } from '../route';
+import { SignInWithApple } from './apple-login';
 import { SignInWithGoogle } from './google-login';
 import { SignInWithKakao } from './kakao-login';
 import { authStorage } from './utils';
@@ -18,10 +19,13 @@ interface AuthState {
   isLoading: boolean;
 
   login: (
-    platform: 'google' | 'kakao',
+    platform: 'google' | 'kakao' | 'apple',
   ) => Promise<void | { errorMessage: string }>;
 
   logout: () => void;
+
+  // API 호출 없이 로컬 인증 정보만 정리 (interceptor에서 사용)
+  clearAuth: () => void;
 
   setAuthToken: (accessToken: string, refreshToken: string) => void;
 
@@ -59,6 +63,13 @@ export const useAuth = create<AuthState>((set) => ({
         }
         token.accessToken = result.accessToken;
         token.refreshToken = result.refreshToken;
+      } else if (platform === 'apple') {
+        const result = await SignInWithApple();
+        // if ('errorMessage' in result) {
+        //   return { errorMessage: result.errorMessage };
+        // }
+        // token.accessToken = result.accessToken;
+        // token.refreshToken = result.refreshToken;
       }
 
       if (!token.accessToken || !token.refreshToken) {
@@ -100,27 +111,46 @@ export const useAuth = create<AuthState>((set) => ({
   },
 
   logout: async () => {
+    // 토큰을 먼저 저장 (API 호출에 사용)
+    const currentAccessToken = useAuth.getState().accessToken;
+
+    set({ isLoading: true });
+
+    // 로컬 상태와 스토리지 정리
+    authStorage.clearAuthInfo();
+
+    set({
+      name: null,
+      email: null,
+      accessToken: null,
+      refreshToken: null,
+      isLoggedIn: false,
+      isLoading: false,
+    });
+
+    // API 호출은 상태 정리 후에 수행하고, 실패해도 무시
+    // 일반 axios를 사용하므로 interceptor 우회
     try {
-      await authAPI.logout();
-
-      set({ isLoading: true });
-
-      authStorage.clearAuthInfo();
-
-      set({
-        name: null,
-        email: null,
-        accessToken: null,
-        refreshToken: null,
-        isLoggedIn: false,
-        isLoading: false,
-      });
+      await authAPI.logout(currentAccessToken);
     } catch (error) {
-      console.error(error);
-      return { errorMessage: i18n.t('auth.error.logoutUnexpected') };
-    } finally {
-      router.replace(ROUTES.HOME);
+      console.error('Logout API failed (ignored):', error);
     }
+
+    router.replace(ROUTES.HOME);
+  },
+
+  // API 호출 없이 로컬 인증 정보만 정리 (interceptor에서 사용)
+  clearAuth: () => {
+    authStorage.clearAuthInfo();
+
+    set({
+      name: null,
+      email: null,
+      accessToken: null,
+      refreshToken: null,
+      isLoggedIn: false,
+      isLoading: false,
+    });
   },
 
   setAuthToken: (accessToken: string, refreshToken: string) => {

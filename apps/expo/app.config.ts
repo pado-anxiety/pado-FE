@@ -8,16 +8,18 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   slug: ClientEnv.SLUG,
   version: ClientEnv.VERSION,
   orientation: 'portrait',
-  icon: './assets/images/icon.png',
+  icon: './assets/icon.png',
   scheme: ClientEnv.SCHEME,
   userInterfaceStyle: 'automatic',
   newArchEnabled: true,
   ios: {
-    supportsTablet: true,
+    icon: './assets/icon.png',
+    supportsTablet: false,
     infoPlist: {
       CFBundleLocalizations: ['en', 'ko'],
       CFBundleDisplayName: ClientEnv.NAME,
     },
+    usesAppleSignIn: true,
     bundleIdentifier: ClientEnv.IOS_BUNDLE_IDENTIFIER,
   },
   android: {
@@ -93,7 +95,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     // IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
     // ANDROID_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
     IOS_WEBVIEW_URL: 'http://localhost:3000',
-    ANDROID_WEBVIEW_URL: 'http://10.0.2.2:3000',
+    ANDROID_WEBVIEW_URL: 'http://localhost:3000',
   },
   updates: {
     url: 'https://u.expo.dev/30195066-b4b9-406a-9236-c2eaa162bf54',

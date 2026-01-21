@@ -17,6 +17,13 @@ export default function LoginScreen() {
   const { login } = useAuth();
   const router = useRouter();
 
+  const handleAppleLogin = async () => {
+    const result = await login('apple');
+    if (result && 'errorMessage' in result) {
+      showAlert.error(result.errorMessage, t('common.error.tryLater'));
+      return;
+    }
+  };
   const handleGoogleLogin = async () => {
     const result = await login('google');
     if (result && 'errorMessage' in result) {
@@ -70,12 +77,27 @@ export default function LoginScreen() {
           style={{ paddingBottom: insets.bottom + scale(32) }}
         >
           <Pressable
+            onPress={handleAppleLogin}
+            className="flex-row items-center justify-center gap-2 rounded-[32px] bg-black py-5"
+          >
+            <Image
+              source={require('../assets/images/login/apple.png')}
+              className="h-6 w-6"
+              contentFit="contain"
+            />
+            <Text className="text-body-medium text-white">
+              {t('auth.login.continueWithApple')}
+            </Text>
+          </Pressable>
+
+          <Pressable
             onPress={handleGoogleLogin}
             className="flex-row items-center justify-center gap-2 rounded-[32px] border border-gray-200 bg-white py-5"
           >
             <Image
               source={require('../assets/images/login/google.svg')}
               className="h-6 w-6"
+              contentFit="contain"
             />
             <Text className="text-body-medium">
               {t('auth.login.continueWithGoogle')}
@@ -89,6 +111,7 @@ export default function LoginScreen() {
             <Image
               source={require('../assets/images/login/kakao.svg')}
               className="h-6 w-6"
+              contentFit="contain"
             />
             <Text className="text-body-medium">
               {t('auth.login.continueWithKakao')}
