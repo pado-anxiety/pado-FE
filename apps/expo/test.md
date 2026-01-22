@@ -4,13 +4,165 @@
 
 ## 1. 인증 (Authentication)
 
-- [ ] 로그인 화면이 올바르게 렌더링되는지 확인합니다.
-- [ ] 카카오/구글/애플 소셜 로그인 버튼이 표시되고 클릭 가능한지 확인합니다.
-- [ ] 로그인 성공 시 홈 화면으로 이동하는지 확인합니다.
-- [ ] 로그아웃 기능이 정상적으로 동작하고 로그인 화면으로 돌아가는지 확인합니다.
-- [ ] 인증 컨텍스트가 사용자 세션을 올바르게 관리하는지 확인합니다.
-- [ ] accessToken 이 변경되었을 시 엑세스토큰을 재발급 받고 새로운 accessToken, refreshToken 으로 변경한 뒤 api 재요청
-  - 이때 재발급된 엑세스토큰은 mocking
+> 테스트 파일 위치:
+> - `app/login.test.tsx` - 로그인 화면 UI 테스트
+> - `src/lib/auth/utils.test.ts` - authStorage 테스트
+> - `src/lib/auth/auth-context.test.ts` - useAuth 스토어 테스트
+> - `src/lib/api/auth.test.ts` - authAPI 테스트
+> - `src/lib/api/client.test.ts` - apiClient interceptor 테스트
+
+### 1.1 로그인 화면 (`app/login.test.tsx`)
+
+- **렌더링**
+  - [x] 로그인 화면이 올바르게 렌더링되는지 확인 (앱 이름, 태그라인, 설명)
+  - [x] Apple 로그인 버튼이 표시되는지 확인
+  - [x] Google 로그인 버튼이 표시되는지 확인
+  - [x] 카카오 로그인 버튼이 표시되는지 확인
+  - [x] 이용약관 동의 텍스트가 표시되는지 확인
+
+- **Apple 로그인**
+  - [x] Apple 로그인 버튼 클릭 시 `login('apple')` 호출
+  - [x] Apple 로그인 실패 시 에러 알림 표시
+  - [x] Apple 로그인 실패 시 홈 화면으로 이동하지 않음
+
+- **Google 로그인**
+  - [x] Google 로그인 버튼 클릭 시 `login('google')` 호출
+  - [x] Google 로그인 성공 시 홈 화면으로 이동
+  - [x] Google 로그인 실패 시 에러 알림 표시
+  - [x] Google 로그인 실패 시 홈 화면으로 이동하지 않음
+
+- **카카오 로그인**
+  - [x] 카카오 로그인 버튼 클릭 시 `login('kakao')` 호출
+  - [x] 카카오 로그인 성공 시 홈 화면으로 이동
+  - [x] 카카오 로그인 실패 시 에러 알림 표시
+  - [x] 카카오 로그인 실패 시 홈 화면으로 이동하지 않음
+
+### 1.2 authStorage (`src/lib/auth/utils.test.ts`)
+
+- **토큰 조회**
+  - [x] `getAccessToken()`: storage에 accessToken이 있으면 반환
+  - [x] `getAccessToken()`: storage에 accessToken이 없으면 null 반환
+  - [x] `getRefreshToken()`: storage에 refreshToken이 있으면 반환
+  - [x] `getRefreshToken()`: storage에 refreshToken이 없으면 null 반환
+
+- **사용자 정보 조회**
+  - [x] `getName()`: storage에 userName이 있으면 반환
+  - [x] `getName()`: storage에 userName이 없으면 null 반환
+  - [x] `getEmail()`: storage에 userEmail이 있으면 반환
+  - [x] `getEmail()`: storage에 userEmail이 없으면 null 반환
+
+- **토큰 저장**
+  - [x] `setAuthToken()`: accessToken과 refreshToken을 storage에 저장
+  - [x] `setAuthToken()`: 빈 문자열은 저장하지 않음
+
+- **사용자 정보 저장**
+  - [x] `setUserInfo()`: name과 email을 storage에 저장
+  - [x] `setUserInfo()`: 빈 문자열은 저장하지 않음
+
+- **인증 정보 삭제**
+  - [x] `clearAuthInfo()`: accessToken, refreshToken, userName, userEmail 모두 삭제
+
+- **유틸리티**
+  - [x] `parseAuthToken()`: 토큰 객체에서 accessToken과 refreshToken 추출
+
+### 1.3 authAPI (`src/lib/api/auth.test.ts`)
+
+- **토큰 재발급 (reissueAuthToken)**
+  - [x] 정상적인 refreshToken으로 요청 시 새로운 accessToken, refreshToken 반환
+  - [x] `/tokens/reissue` 엔드포인트로 POST 요청 전송
+  - [x] 유효하지 않은 refreshToken으로 요청 시 에러 발생
+
+- **Google 토큰 교환 (getGoogleAccessToken)**
+  - [x] iOS 플랫폼에서 올바른 파라미터로 토큰 요청
+  - [x] Android 플랫폼에서 올바른 파라미터로 토큰 요청
+  - [x] `/login/google` 엔드포인트로 POST 요청 전송
+
+- **Kakao 토큰 교환 (getKaKaoAccessToken)**
+  - [x] 유효한 accessToken으로 요청 시 토큰 반환
+  - [x] `/login/kakao` 엔드포인트로 POST 요청 전송
+
+- **로그아웃 (logout)**
+  - [x] accessToken이 있으면 Authorization 헤더와 함께 `/logout`으로 POST 요청
+  - [x] accessToken이 null이면 API를 호출하지 않음
+  - [x] accessToken이 빈 문자열이면 API를 호출하지 않음
+
+### 1.4 useAuth 스토어 (`src/lib/auth/auth-context.test.ts`)
+
+- **초기 상태**
+  - [x] authStorage에서 초기 값 로드
+  - [x] accessToken이 있으면 isLoggedIn이 true
+  - [x] accessToken이 없으면 isLoggedIn이 false
+
+- **login 함수**
+  - [x] platform='google'이면 SignInWithGoogle 호출
+  - [x] platform='kakao'이면 SignInWithKakao 호출
+  - [x] platform='apple'이면 SignInWithApple 호출
+  - [x] 로그인 시작 시 isLoading이 true로 설정
+  - [x] 소셜 로그인 성공 후 토큰이 state와 storage에 저장
+  - [x] 소셜 로그인 성공 후 userAPI.getUser() 호출
+  - [x] userAPI.getUser() 성공 시 name, email이 state와 storage에 저장
+  - [x] userAPI.getUser() 성공 시 isLoggedIn이 true로 설정
+  - [x] 소셜 로그인 실패 시 errorMessage 반환
+  - [x] 토큰을 받지 못하면 'auth.error.tokenFailed' 에러 메시지 반환
+  - [x] userAPI.getUser() 실패 시 'auth.error.unexpected' 에러 메시지 반환
+  - [x] 로그인 완료/실패 후 isLoading이 false로 설정
+
+- **logout 함수**
+  - [x] 로그아웃 시작 시 현재 accessToken 저장
+  - [x] authStorage.clearAuthInfo() 호출하여 로컬 storage 정리
+  - [x] state 초기화 (name, email, accessToken, refreshToken = null, isLoggedIn = false)
+  - [x] authAPI.logout()이 저장된 accessToken으로 호출
+  - [x] authAPI.logout() 실패해도 에러를 무시하고 로그아웃 완료
+  - [x] 로그아웃 후 router.replace(ROUTES.HOME)으로 이동
+
+- **clearAuth 함수**
+  - [x] authStorage.clearAuthInfo() 호출
+  - [x] state 초기화 (API 호출 없이 로컬만 정리)
+  - [x] logout과 달리 router 이동 없음
+  - [x] logout과 달리 API 호출 없음
+
+- **setAuthToken 함수**
+  - [x] authStorage.setAuthToken() 호출
+  - [x] state에 accessToken, refreshToken 설정
+  - [x] isLoggedIn이 true로 설정
+  - [x] isLoading이 false로 설정
+
+- **setUserInfo 함수**
+  - [x] authStorage.setUserInfo() 호출
+  - [x] state에 name, email 설정
+
+### 1.5 apiClient Interceptor (`src/lib/api/client.test.ts`)
+
+- **Request Interceptor**
+  - [x] accessToken이 있으면 Authorization 헤더에 `Bearer {token}` 형식으로 설정
+  - [x] accessToken이 없으면 Authorization 헤더를 설정하지 않음
+
+- **Response Interceptor - 성공**
+  - [x] 정상 응답 시 response.data 반환
+
+- **Response Interceptor - 401 에러 처리**
+  - [x] 401 에러 발생 시 authAPI.reissueAuthToken() 호출
+  - [x] 토큰 재발급 성공 시 useAuth.setAuthToken()으로 새 토큰 저장
+  - [x] 토큰 재발급 성공 시 원래 요청을 새 토큰으로 재시도
+  - [x] 이미 retry한 요청(_retry=true)은 재발급 시도하지 않고 에러 반환
+  - [x] refreshToken이 없는 상태에서는 재발급 시도하지 않음
+
+- **Response Interceptor - 재발급 실패**
+  - [x] 토큰 재발급 실패 시 useAuth.clearAuth() 호출
+  - [x] showAlert.warning()으로 로그인 필요 알림 표시
+  - [x] 알림 확인 시 router.replace(ROUTES.LOGIN)으로 이동
+
+- **401 이외의 에러**
+  - [x] 401이 아닌 에러(400, 403, 404, 500)는 그대로 reject
+
+### 1.6 통합 시나리오 테스트
+
+- **토큰 재발급 플로우**
+  - [x] API 요청 → 401 에러 → 토큰 재발급 → 원래 요청 재시도 전체 플로우
+  - [x] 재발급된 토큰으로 state와 storage 모두 업데이트
+
+- **세션 만료 플로우**
+  - [x] API 요청 → 401 에러 → 토큰 재발급 실패 → clearAuth → 알림
 
 ## 2. 온보딩 (Onboarding)
 

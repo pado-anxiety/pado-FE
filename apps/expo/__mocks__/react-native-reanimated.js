@@ -1,0 +1,23 @@
+module.exports = {
+  default: {
+    createAnimatedComponent: (component) => component,
+    Value: jest.fn(),
+    event: jest.fn(),
+    add: jest.fn(),
+    eq: jest.fn(),
+    set: jest.fn(),
+    cond: jest.fn(),
+    interpolate: jest.fn(),
+    Extrapolate: { CLAMP: jest.fn() },
+    useSharedValue: jest.fn(() => ({ value: 0 })),
+    useAnimatedStyle: jest.fn(() => ({})),
+    withTiming: jest.fn((val) => val),
+    withSpring: jest.fn((val) => val),
+    runOnJS: jest.fn((fn) => fn),
+  },
+  useSharedValue: jest.fn(() => ({ value: 0 })),
+  useAnimatedStyle: jest.fn(() => ({})),
+  withTiming: jest.fn((val) => val),
+  withSpring: jest.fn((val) => val),
+  runOnJS: jest.fn((fn) => fn),
+};
