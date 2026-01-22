@@ -1,4 +1,3 @@
-// Import after mocks
 import { router } from 'expo-router';
 
 import { authAPI } from '../api/auth';
@@ -8,8 +7,6 @@ import { useAuth } from './auth-context';
 import { SignInWithGoogle } from './google-login';
 import { SignInWithKakao } from './kakao-login';
 import { authStorage } from './utils';
-
-// All mocks must be defined inside jest.mock factory to avoid hoisting issues
 
 jest.mock('./utils', () => ({
   authStorage: {
@@ -66,7 +63,6 @@ jest.mock('../route', () => ({
   },
 }));
 
-// Get mock references
 const mockAuthStorage = authStorage as jest.Mocked<typeof authStorage>;
 const mockSignInWithGoogle = SignInWithGoogle as jest.Mock;
 const mockSignInWithKakao = SignInWithKakao as jest.Mock;
@@ -79,7 +75,6 @@ describe('useAuth store', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    // Reset store state
     useAuth.setState({
       name: null,
       email: null,

@@ -1,9 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 
-// Import after mocks are set up
 import { apiClient } from './client';
 
-// Mock dependencies before importing client
 const mockGetState = jest.fn();
 const mockSetAuthToken = jest.fn();
 const mockClearAuth = jest.fn();

@@ -1,6 +1,7 @@
-# Nyangtodac Expo App 테스트 리스트
+# Pado Expo App 테스트 리스트
 
-이 문서는 Nyangtodac Expo 앱의 핵심 기능에 대한 테스트 케이스 목록입니다.
+### 테스트 작성 시 제한사항
+- text 는 packages/locales 에 번역 키가 있음. i18n 을 사용할 것
 
 ## 1. 인증 (Authentication)
 

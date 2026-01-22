@@ -1,6 +1,5 @@
 import { authStorage, parseAuthToken } from './utils';
 
-// Mock MMKV storage
 const mockStorage = {
   getString: jest.fn(),
   set: jest.fn(),

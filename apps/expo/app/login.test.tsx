@@ -2,10 +2,12 @@ import React from 'react';
 
 import { fireEvent, render, waitFor } from '@testing-library/react-native';
 
-// Import after mocks
+import koAuth from '@pado/locales/ko/auth.json';
+import koCommon from '@pado/locales/ko/common.json';
+import koHome from '@pado/locales/ko/home.json';
+
 import LoginScreen from './login';
 
-// Mock dependencies
 const mockLogin = jest.fn();
 const mockRouterReplace = jest.fn();
 const mockShowAlertError = jest.fn();
@@ -50,22 +52,35 @@ jest.mock('@/lib/route', () => ({
   },
 }));
 
+// 번역 키 조회 헬퍼
+const getNestedValue = (obj: Record<string, unknown>, path: string): string => {
+  const keys = path.split('.');
+  let result: unknown = obj;
+  for (const key of keys) {
+    result = (result as Record<string, unknown>)?.[key];
+  }
+  return (result as string) || path;
+};
+
+// 실제 번역 파일 기반 t 함수
+const translations: Record<string, Record<string, unknown>> = {
+  home: koHome,
+  auth: koAuth,
+  common: koCommon,
+};
+
+const t = (key: string): string => {
+  const [namespace, ...rest] = key.split('.');
+  const namespaceObj = translations[namespace];
+  if (!namespaceObj) return key;
+  return getNestedValue(
+    namespaceObj as Record<string, unknown>,
+    rest.join('.'),
+  );
+};
+
 jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key: string) => {
-      const translations: Record<string, string> = {
-        'home.app.name': '냥토닥',
-        'home.app.tagline': '불안과 함께하는',
-        'home.app.description': '마음 챙김 앱',
-        'auth.login.continueWithApple': 'Apple로 계속하기',
-        'auth.login.continueWithGoogle': 'Google로 계속하기',
-        'auth.login.continueWithKakao': '카카오로 계속하기',
-        'auth.login.termsAgreement': '로그인 시 이용약관에 동의합니다',
-        'common.error.tryLater': '잠시 후 다시 시도해주세요',
-      };
-      return translations[key] || key;
-    },
-  }),
+  useTranslation: () => ({ t }),
 }));
 
 jest.mock('@pado/ui', () => ({
@@ -91,33 +106,33 @@ describe('LoginScreen', () => {
     it('로그인 화면이 올바르게 렌더링된다', () => {
       const { getByText } = render(<LoginScreen />);
 
-      expect(getByText('냥토닥')).toBeTruthy();
-      expect(getByText('불안과 함께하는')).toBeTruthy();
-      expect(getByText('마음 챙김 앱')).toBeTruthy();
+      expect(getByText(t('home.app.name'))).toBeTruthy();
+      expect(getByText(t('home.app.tagline'))).toBeTruthy();
+      expect(getByText(t('home.app.description'))).toBeTruthy();
     });
 
     it('Apple 로그인 버튼이 표시된다', () => {
       const { getByText } = render(<LoginScreen />);
 
-      expect(getByText('Apple로 계속하기')).toBeTruthy();
+      expect(getByText(t('auth.login.continueWithApple'))).toBeTruthy();
     });
 
     it('Google 로그인 버튼이 표시된다', () => {
       const { getByText } = render(<LoginScreen />);
 
-      expect(getByText('Google로 계속하기')).toBeTruthy();
+      expect(getByText(t('auth.login.continueWithGoogle'))).toBeTruthy();
     });
 
     it('카카오 로그인 버튼이 표시된다', () => {
       const { getByText } = render(<LoginScreen />);
 
-      expect(getByText('카카오로 계속하기')).toBeTruthy();
+      expect(getByText(t('auth.login.continueWithKakao'))).toBeTruthy();
     });
 
     it('이용약관 동의 텍스트가 표시된다', () => {
       const { getByText } = render(<LoginScreen />);
 
-      expect(getByText('로그인 시 이용약관에 동의합니다')).toBeTruthy();
+      expect(getByText(t('auth.login.termsAgreement'))).toBeTruthy();
     });
   });
 
@@ -126,7 +141,7 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue(undefined);
 
       const { getByText } = render(<LoginScreen />);
-      const appleButton = getByText('Apple로 계속하기');
+      const appleButton = getByText(t('auth.login.continueWithApple'));
 
       fireEvent.press(appleButton);
 
@@ -139,14 +154,14 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue({ errorMessage: 'Apple 로그인 실패' });
 
       const { getByText } = render(<LoginScreen />);
-      const appleButton = getByText('Apple로 계속하기');
+      const appleButton = getByText(t('auth.login.continueWithApple'));
 
       fireEvent.press(appleButton);
 
       await waitFor(() => {
         expect(mockShowAlertError).toHaveBeenCalledWith(
           'Apple 로그인 실패',
-          '잠시 후 다시 시도해주세요',
+          t('common.error.tryLater'),
         );
       });
     });
@@ -155,7 +170,7 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue({ errorMessage: 'Apple 로그인 실패' });
 
       const { getByText } = render(<LoginScreen />);
-      const appleButton = getByText('Apple로 계속하기');
+      const appleButton = getByText(t('auth.login.continueWithApple'));
 
       fireEvent.press(appleButton);
 
@@ -172,7 +187,7 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue(undefined);
 
       const { getByText } = render(<LoginScreen />);
-      const googleButton = getByText('Google로 계속하기');
+      const googleButton = getByText(t('auth.login.continueWithGoogle'));
 
       fireEvent.press(googleButton);
 
@@ -185,7 +200,7 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue(undefined);
 
       const { getByText } = render(<LoginScreen />);
-      const googleButton = getByText('Google로 계속하기');
+      const googleButton = getByText(t('auth.login.continueWithGoogle'));
 
       fireEvent.press(googleButton);
 
@@ -198,14 +213,14 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue({ errorMessage: 'Google 로그인 실패' });
 
       const { getByText } = render(<LoginScreen />);
-      const googleButton = getByText('Google로 계속하기');
+      const googleButton = getByText(t('auth.login.continueWithGoogle'));
 
       fireEvent.press(googleButton);
 
       await waitFor(() => {
         expect(mockShowAlertError).toHaveBeenCalledWith(
           'Google 로그인 실패',
-          '잠시 후 다시 시도해주세요',
+          t('common.error.tryLater'),
         );
       });
     });
@@ -214,7 +229,7 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue({ errorMessage: 'Google 로그인 실패' });
 
       const { getByText } = render(<LoginScreen />);
-      const googleButton = getByText('Google로 계속하기');
+      const googleButton = getByText(t('auth.login.continueWithGoogle'));
 
       fireEvent.press(googleButton);
 
@@ -231,7 +246,7 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue(undefined);
 
       const { getByText } = render(<LoginScreen />);
-      const kakaoButton = getByText('카카오로 계속하기');
+      const kakaoButton = getByText(t('auth.login.continueWithKakao'));
 
       fireEvent.press(kakaoButton);
 
@@ -244,7 +259,7 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue(undefined);
 
       const { getByText } = render(<LoginScreen />);
-      const kakaoButton = getByText('카카오로 계속하기');
+      const kakaoButton = getByText(t('auth.login.continueWithKakao'));
 
       fireEvent.press(kakaoButton);
 
@@ -257,14 +272,14 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue({ errorMessage: '카카오 로그인 실패' });
 
       const { getByText } = render(<LoginScreen />);
-      const kakaoButton = getByText('카카오로 계속하기');
+      const kakaoButton = getByText(t('auth.login.continueWithKakao'));
 
       fireEvent.press(kakaoButton);
 
       await waitFor(() => {
         expect(mockShowAlertError).toHaveBeenCalledWith(
           '카카오 로그인 실패',
-          '잠시 후 다시 시도해주세요',
+          t('common.error.tryLater'),
         );
       });
     });
@@ -273,7 +288,7 @@ describe('LoginScreen', () => {
       mockLogin.mockResolvedValue({ errorMessage: '카카오 로그인 실패' });
 
       const { getByText } = render(<LoginScreen />);
-      const kakaoButton = getByText('카카오로 계속하기');
+      const kakaoButton = getByText(t('auth.login.continueWithKakao'));
 
       fireEvent.press(kakaoButton);
 
