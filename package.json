@@ -6,7 +6,8 @@
   ],
   "scripts": {
     "start:all:ios:development": "concurrently \"yarn workspace pado-expo start:ios:development\" \"yarn workspace pado-web dev\"",
-    "start:all:android:development": "concurrently \"yarn workspace pado-expo start:android:development\" \"yarn workspace pado-web dev\""
+    "start:all:android:development": "concurrently \"yarn workspace pado-expo start:android:development\" \"yarn workspace pado-web dev\"",
+    "test:all": "yarn workspace pado-expo test && yarn workspace pado-web test"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
