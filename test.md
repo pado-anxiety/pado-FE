@@ -167,11 +167,63 @@
 
 ## 2. 온보딩 (Onboarding)
 
-- [ ] 신규 사용자에게 온보딩 화면이 표시되는지 확인합니다.
-- [ ] 온보딩 플로우를 순서대로 진행하고 완료할 수 있는지 확인합니다.
-  - 각 스텝별 문구가 정상적으로 표시되는지 확인합니다.
-- [ ] 온보딩 완료 후 웹뷰에서 postMessage 가 규약에 맞게 호출되는지 확인합니다.
-- [ ] 네이티브에서 온보딩 완료 후 홈 로그인 화면으로 이동하는지 확인합니다.
+> 테스트 파일 위치:
+> - `apps/expo/app/onboard.test.tsx` - 온보딩 화면 테스트 (네이티브)
+> - `apps/expo/src/lib/onboard.test.ts` - onboard 유틸리티 테스트
+> - `apps/expo/src/lib/webview.test.ts` - 웹뷰 메시지 핸들러 테스트
+> - `apps/web/src/features/onboard/components/StepContent.test.tsx` - 웹뷰 StepContent 컴포넌트 테스트
+> - `apps/web/src/lib/webview.test.ts` - 웹뷰 postMessage 테스트
+
+### 2.1 온보딩 상태 관리 (`apps/expo/src/lib/onboard.test.ts`)
+
+- **isOnboarded**
+  - [x] storage에 값이 없으면 false를 반환하고 false로 설정
+  - [x] storage에 true가 있으면 true를 반환
+  - [x] storage에 false가 있으면 false를 반환
+
+- **setIsOnboarded**
+  - [x] true로 설정 가능
+  - [x] false로 설정 가능
+
+### 2.2 웹뷰 메시지 핸들링 (`apps/expo/src/lib/webview.test.ts`)
+
+- **handleOnMessage**
+  - [x] 타입이 일치하면 콜백 호출
+  - [x] 타입이 일치하지 않으면 콜백 호출 안 함
+
+- **createWebViewMessageHandler**
+  - [x] NAVIGATE 메시지를 onNavigate 핸들러로 전달
+  - [x] DATA 메시지를 onData 핸들러로 전달
+  - [x] ERROR 메시지를 onError 핸들러로 전달
+  - [x] VALIDATE 메시지를 onValidate 핸들러로 전달
+  - [x] HAPTIC 메시지는 triggerHaptic 호출
+
+### 2.3 온보딩 화면 (`apps/expo/app/onboard.test.tsx`)
+
+- **렌더링**
+  - [x] 온보딩 화면이 렌더링된다
+
+- **웹뷰 메시지 핸들링**
+  - [x] LOGIN 액션 수신 시 온보딩 완료 설정 후 로그인 화면으로 이동
+  - [x] NEXT 액션 수신 시 네비게이션하지 않음
+
+### 2.4 웹뷰 StepContent 컴포넌트 (`apps/web/src/features/onboard/components/StepContent.test.tsx`)
+
+- **렌더링**
+  - [x] 스텝 텍스트가 렌더링된다
+  - [x] 버튼 텍스트가 렌더링된다
+
+- **상호작용**
+  - [x] 버튼 클릭 시 onNext가 호출된다
+  - [x] showButton이 false일 때 버튼이 비활성화된다
+  - [x] isExiting이 true일 때 버튼이 비활성화된다
+
+### 2.5 웹뷰 postMessage (`apps/web/src/lib/webview.test.ts`)
+
+- **handlePostMessage**
+  - [x] ReactNativeWebView가 없으면 에러를 던진다
+  - [x] NAVIGATE 메시지를 올바른 형식으로 전송한다
+  - [x] 온보딩 완료 시 LOGIN 액션으로 postMessage를 호출한다
 
 ## 3. 홈 화면 (Home)
 
@@ -228,160 +280,3 @@
 - [ ] ACT 활동 결과 전송 API 연동 및 예외 처리 테스트
 - [ ] 기록 조회 API 연동 및 예외 처리 테스트
 
-## 10. 로그인 (Authentication Logic)
-
-### 10.1 authStorage (src/lib/auth/utils.ts)
-
-- **토큰 저장/조회**
-  - [ ] `getAccessToken()`: storage에 accessToken이 있으면 반환, 없으면 null 반환
-  - [ ] `getRefreshToken()`: storage에 refreshToken이 있으면 반환, 없으면 null 반환
-  - [ ] `setAuthToken()`: accessToken과 refreshToken이 storage에 올바르게 저장되는지 확인
-  - [ ] `setAuthToken()`: 빈 문자열이나 null 값은 저장하지 않는지 확인
-
-- **사용자 정보 저장/조회**
-  - [ ] `getName()`: storage에 userName이 있으면 반환, 없으면 null 반환
-  - [ ] `getEmail()`: storage에 userEmail이 있으면 반환, 없으면 null 반환
-  - [ ] `setUserInfo()`: name과 email이 storage에 올바르게 저장되는지 확인
-
-- **인증 정보 삭제**
-  - [ ] `clearAuthInfo()`: accessToken, refreshToken, userName, userEmail 모두 삭제되는지 확인
-
-### 10.2 authAPI (src/lib/api/auth.ts)
-
-- **토큰 재발급 (reissueAuthToken)**
-  - [ ] 정상적인 refreshToken으로 요청 시 새로운 accessToken, refreshToken 반환
-  - [ ] 유효하지 않은 refreshToken으로 요청 시 에러 발생 (mocking)
-  - [ ] 올바른 엔드포인트(`/tokens/reissue`)로 POST 요청이 전송되는지 확인
-
-- **Google 토큰 교환 (getGoogleAccessToken)**
-  - [ ] iOS: codeVerifier, authorizationCode, redirectUri, platform='IOS'로 요청 시 토큰 반환 (mocking)
-  - [ ] Android: platform='ANDROID'로 요청 시 토큰 반환 (mocking)
-  - [ ] 올바른 엔드포인트(`/login/google`)로 POST 요청이 전송되는지 확인
-
-- **Kakao 토큰 교환 (getKaKaoAccessToken)**
-  - [ ] 유효한 accessToken으로 요청 시 토큰 반환 (mocking)
-  - [ ] 올바른 엔드포인트(`/login/kakao`)로 POST 요청이 전송되는지 확인
-
-- **로그아웃 (logout)**
-  - [ ] accessToken이 있으면 Authorization 헤더와 함께 `/logout` 엔드포인트로 POST 요청
-  - [ ] accessToken이 null이면 API 호출하지 않음
-
-### 10.3 useAuth 스토어 (src/lib/auth/auth-context.tsx)
-
-- **초기 상태**
-  - [ ] 앱 시작 시 authStorage에서 accessToken, refreshToken, name, email을 로드
-  - [ ] accessToken이 있으면 isLoggedIn이 true, 없으면 false
-
-- **login 함수**
-  - [ ] platform='google' 시 SignInWithGoogle 호출
-  - [ ] platform='kakao' 시 SignInWithKakao 호출
-  - [ ] platform='apple' 시 SignInWithApple 호출
-  - [ ] 로그인 시작 시 isLoading이 true로 설정
-  - [ ] 소셜 로그인 성공 후 토큰이 state와 storage에 저장되는지 확인
-  - [ ] 소셜 로그인 성공 후 userAPI.getUser()가 호출되는지 확인
-  - [ ] userAPI.getUser() 성공 시 name, email이 state와 storage에 저장되는지 확인
-  - [ ] userAPI.getUser() 성공 시 isLoggedIn이 true로 설정
-  - [ ] 소셜 로그인 실패 시 errorMessage 반환
-  - [ ] 소셜 로그인에서 토큰을 받지 못하면 'auth.error.tokenFailed' 에러 메시지 반환
-  - [ ] userAPI.getUser() 실패 시 'auth.error.unexpected' 에러 메시지 반환
-  - [ ] 로그인 완료/실패 후 isLoading이 false로 설정 (finally)
-
-- **logout 함수**
-  - [ ] 로그아웃 시작 시 현재 accessToken 저장
-  - [ ] isLoading이 true로 설정
-  - [ ] authStorage.clearAuthInfo()가 호출되어 로컬 storage 정리
-  - [ ] state가 초기화 (name, email, accessToken, refreshToken = null, isLoggedIn = false)
-  - [ ] authAPI.logout()이 저장된 accessToken으로 호출 (interceptor 우회)
-  - [ ] authAPI.logout() 실패해도 에러를 무시하고 로그아웃 완료
-  - [ ] 로그아웃 후 router.replace(ROUTES.HOME)으로 이동
-
-- **clearAuth 함수**
-  - [ ] authStorage.clearAuthInfo() 호출
-  - [ ] state 초기화 (API 호출 없이 로컬만 정리)
-  - [ ] logout과 달리 router 이동 없음
-
-- **setAuthToken 함수**
-  - [ ] authStorage.setAuthToken() 호출
-  - [ ] state에 accessToken, refreshToken 설정
-  - [ ] isLoggedIn이 true로 설정
-
-- **setUserInfo 함수**
-  - [ ] authStorage.setUserInfo() 호출
-  - [ ] state에 name, email 설정
-
-### 10.4 apiClient Interceptor (src/lib/api/client.ts)
-
-- **Request Interceptor**
-  - [ ] accessToken이 있으면 Authorization 헤더에 `Bearer {token}` 형식으로 설정
-  - [ ] accessToken이 없으면 Authorization 헤더 없이 요청
-
-- **Response Interceptor - 성공**
-  - [ ] 정상 응답 시 response.data 반환
-
-- **Response Interceptor - 401 에러 처리**
-  - [ ] 401 에러 발생 시 authAPI.reissueAuthToken() 호출
-  - [ ] 토큰 재발급 성공 시 useAuth.setAuthToken()으로 새 토큰 저장
-  - [ ] 토큰 재발급 성공 시 원래 요청을 새 토큰으로 재시도
-  - [ ] 이미 retry한 요청(_retry=true)은 재발급 시도하지 않고 에러 반환
-  - [ ] refreshToken이 없는 상태(로그아웃 상태)에서는 재발급 시도하지 않음
-
-- **Response Interceptor - 재발급 실패**
-  - [ ] 토큰 재발급 실패 시 useAuth.clearAuth() 호출
-  - [ ] showAlert.warning()으로 로그인 필요 알림 표시
-  - [ ] 알림 확인 시 router.replace(ROUTES.LOGIN)으로 이동
-
-- **401 이외의 에러**
-  - [ ] 401이 아닌 에러는 그대로 reject
-
-### 10.5 소셜 로그인 함수
-
-- **SignInWithGoogle (src/lib/auth/google-login.ts)**
-  - [ ] iOS에서는 SignInWithGoogleOnIOS 호출
-  - [ ] Android에서는 SignInWithGoogleOnAndroid 호출
-  - [ ] iOS: PKCE flow로 codeVerifier, codeChallenge 생성
-  - [ ] iOS: WebBrowser.openAuthSessionAsync로 Google 인증 페이지 오픈
-  - [ ] iOS: 인증 성공 시 authorizationCode 추출하여 authAPI.getGoogleAccessToken 호출
-  - [ ] iOS: 인증 취소 시 'auth.error.googleAuthCanceled' 에러 반환
-  - [ ] iOS: authorizationCode 없으면 'auth.error.googleAuthCodeFailed' 에러 반환
-  - [ ] Android: GoogleSignin.signIn()으로 serverAuthCode 획득
-  - [ ] Android: serverAuthCode로 authAPI.getGoogleAccessToken 호출
-  - [ ] Android: userInfo 없거나 serverAuthCode 없으면 'auth.error.googleAuthInfoFailed' 에러 반환
-  - [ ] 예외 발생 시 'auth.error.googleError' 에러 반환
-
-- **SignInWithKakao (src/lib/auth/kakao-login.ts)**
-  - [ ] @react-native-seoul/kakao-login의 login() 호출
-  - [ ] login() 성공 시 accessToken으로 authAPI.getKaKaoAccessToken 호출
-  - [ ] 토큰 교환 성공 시 accessToken, refreshToken 반환
-  - [ ] login() 실패 또는 토큰 없으면 'auth.error.kakaoFailed' 에러 반환
-  - [ ] 예외 발생 시 'auth.error.kakaoError' 에러 반환
-
-- **SignInWithApple (src/lib/auth/apple-login.ts)**
-  - [ ] AppleAuthentication.signInAsync() 호출
-  - [ ] requestedScopes에 FULL_NAME, EMAIL 포함
-  - [ ] credential에서 identityToken, authorizationCode, fullName, email 추출
-  - [ ] (TODO: 백엔드 연동 구현 후) 토큰 교환 및 반환 테스트
-  - [ ] 예외 발생 시 'common.error.generic' 에러 반환
-
-### 10.6 PKCE 유틸리티 (src/lib/auth/pkce.ts)
-
-- [ ] `generateCodeVerifier()`: 32바이트 랜덤 값을 base64url 인코딩하여 반환
-- [ ] `generateCodeChallenge()`: codeVerifier를 SHA256 해시 후 base64url 인코딩
-- [ ] `getGoogleClientId()`: iOS에서 ENV.IOS_GOOGLE_CLIENT_ID 반환
-
-### 10.7 통합 시나리오 테스트
-
-- **로그인 전체 플로우**
-  - [ ] 소셜 로그인 → 토큰 저장 → 사용자 정보 조회 → 상태 업데이트 전체 플로우 확인
-  - [ ] 로그인 중 isLoading 상태 변화 확인 (false → true → false)
-
-- **토큰 재발급 플로우**
-  - [ ] API 요청 → 401 에러 → 토큰 재발급 → 원래 요청 재시도 전체 플로우 확인
-  - [ ] 재발급된 토큰으로 state와 storage 모두 업데이트되는지 확인
-
-- **세션 만료 플로우**
-  - [ ] API 요청 → 401 에러 → 토큰 재발급 실패 → clearAuth → 로그인 화면 이동 확인
-  - [ ] 알림이 올바르게 표시되는지 확인
-
-- **로그아웃 전체 플로우**
-  - [ ] 로그아웃 버튼 클릭 → 로컬 정리 → API 호출 → 홈 화면 이동 확인
-  - [ ] API 실패해도 로그아웃 완료되는지 확인

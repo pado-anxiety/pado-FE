@@ -17,6 +17,7 @@ module.exports = {
     // Expo HMR/Winter 모듈 모킹 (location.protocol 에러 방지)
     '^expo/src/winter(.*)$': '<rootDir>/__mocks__/expo-winter.js',
     // jest-expo가 커버하지 않는 서드파티 모듈
+    '^expo-haptics$': '<rootDir>/__mocks__/expo-haptics.js',
     '^nativewind$': '<rootDir>/__mocks__/nativewind.js',
     '^react-native-css-interop$':
       '<rootDir>/__mocks__/react-native-css-interop.js',
