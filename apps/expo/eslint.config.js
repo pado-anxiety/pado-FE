@@ -1,13 +1,14 @@
-// https://docs.expo.dev/guides/using-eslint/
 const { defineConfig, globalIgnores } = require('eslint/config');
 const expoConfig = require('eslint-config-expo/flat');
 const globals = require('globals');
 const eslintConfigCustom = require('@pado/eslint-config-custom');
 
 module.exports = defineConfig([
-  globalIgnores(['dist/*', '/.expo', 'node_modules']),
-  expoConfig,
-  ...eslintConfigCustom,
+  globalIgnores(['dist/*', '.expo/*', 'node_modules/*', 'web-build/*']),
+
+  ...[].concat(expoConfig),
+  ...[].concat(eslintConfigCustom),
+
   {
     rules: {
       'import/order': 'off',
@@ -21,13 +22,25 @@ module.exports = defineConfig([
       ],
     },
   },
+
   {
-    files: ['babel.config.js', 'env.js'],
+    files: ['*.config.js', 'env.js'],
     languageOptions: {
-      globals: globals.node,
+      globals: {
+        ...globals.node,
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
+
   {
-    ignores: ['tailwind.config.js', 'eslint.config.js', 'metro.config.js'],
+    files: ['**/*.test.ts', '**/*.test.tsx', 'jest-setup.js', '__mocks__/**'],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+      },
+    },
   },
 ]);

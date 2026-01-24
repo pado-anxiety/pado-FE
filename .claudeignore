@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+
+# Yarn
+.yarn/cache
+.yarn/install-state.gz
+.yarn/build-state.yml
+.pnp.*
+
+# Build outputs
+.expo/
+dist/
+web-build/
+.next/
+out/
+build/
+
+# Generated / transpiled
+*.tsbuildinfo
+expo-env.d.ts
+next-env.d.ts
+packages/*/types/
+
+# Environment & secrets
+.env
+.env.*
+.env*.local
+
+# IDE & OS
+.DS_Store
+Thumbs.db
+.idea/
+.cursor/
+
+# Logs & debug
+*.log
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+.metro-health-check*
+
+# Test / coverage
+coverage/
+
+# Vercel
+.vercel
+
+# Lock file (large, rarely needed for code context)
+yarn.lock
+
+# Expo: generated native
+apps/expo/ios/
+apps/expo/android/
+
+# Native / signing (sensitive)
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.pem
+google-services.json
