@@ -237,25 +237,7 @@
 
 ## 4. ACT (수용전념치료) 활동
 
-> 테스트 파일 위치 (공통 패턴):
-> - `apps/expo/app/(act)/anchor/index.test.tsx` - Intro 화면 테스트
-> - `apps/expo/app/(act)/anchor/step.test.tsx` - Step 화면 테스트
-> - `apps/expo/app/(act)/anchor/result.test.tsx` - Result 화면 테스트
-> - `apps/expo/app/(act)/diary/step.test.tsx` - 데이터 전달 Step 테스트
-> - `apps/expo/app/(act)/diary/result.test.tsx` - 데이터 수신 Result 테스트
-
-- **공통**
-    - [x] 각 활동의 시작(Intro) 화면으로 정상적으로 이동하는지 확인합니다.
-    - [x] 각 활동의 단계별(step) 진행이 가능한지 확인합니다.
-    - [x] 각 활동 완료 후 결과(Result) 화면이 올바르게 표시되는지 확인합니다.
-    - [x] 각 스텝 별 웹뷰 메시지 핸들링이 정상적으로 이루어지는지 확인합니다(네이티브, 웹뷰).
-    - [x] 각 컨텐츠 별 result 화면에서 이전스텝의 데이터가 정상적으로 받아지는지 확인(데이터가 있는 경우)
-- **개별 활동 테스트**
-    - [ ] 현재 접촉하기(anchor): 스텝별 UI 및 상호작용 테스트
-    - [ ] 일기 쓰기(diary): 스텝별 UI 및 상호작용 테스트, 현재 스탭에서 이전 스텝의 제목과 내용이 보이는지 체크
-    - [ ] 생각과 사실 분리하기(detach): 텍스트 입력 및 저장 기능 테스트, 드래그 이벤트
-    - [ ] 수용하기(embrace): 호흡 애니메이션 진행 여부, 다시하기, 호흡 시간 계산
-    - [ ] 행동하기: 불스아이 터치 가능 여부, 불스아이 각 영역 별 텍스트 표시 여부
+> 상세 테스트 목록은 [10. ACT](#10-act) 참조
 
 ## 5. 기록 (History)
 
@@ -304,5 +286,105 @@
 - [x] ACT 활동 결과 전송 API 연동 및 예외 처리 테스트
 - [x] 기록 조회 API 연동 및 예외 처리 테스트
 
-## 10. Analytics
+## 10. ACT
 
+> 테스트 파일 위치 (공통 패턴):
+> - `apps/expo/app/(act)/[activity]/index.test.tsx` - Intro 화면 테스트
+> - `apps/expo/app/(act)/[activity]/step.test.tsx` - Step 화면 테스트
+> - `apps/expo/app/(act)/[activity]/result.test.tsx` - Result 화면 테스트
+
+### 10.1 현재 집중하기 (anchor)
+
+- **인트로 (`app/(act)/anchor/index.test.tsx`)**
+  - [x] 인트로 페이지가 정상적으로 렌더링됨
+  - [x] HOME 액션 수신 시 이전 화면으로 이동
+  - [x] NEXT 액션 수신 시 스텝 화면으로 이동
+  - [x] HAPTIC 메시지 수신 시 네비게이션 변화 없음
+
+- **스텝 (`app/(act)/anchor/step.test.tsx`)**
+  - [x] BACK 액션 수신 시 이전 화면으로 이동
+  - [x] HOME 액션 수신 시 홈 화면으로 이동
+  - [x] RESULT 액션 수신 시 결과 화면으로 이동
+  - [x] NEXT 액션 수신 시 네비게이션 변화 없음 (웹뷰 내부 스텝 전환)
+  - [x] VALIDATE 메시지 수신 시 title과 message로 알림 표시
+  - [x] HAPTIC 메시지 수신 시 네비게이션 변화 없음
+
+- **결과 (`app/(act)/anchor/result.test.tsx`)**
+  - [x] 결과 화면이 정상적으로 렌더링됨
+  - [x] HOME 액션 수신 시 actAPI.anchor() 호출 후 홈 화면으로 이동
+  - [x] HOME 액션 중복 수신 시 API는 1회만 호출됨
+
+### 10.2 일기 쓰기 (diary)
+
+- **인트로 (`app/(act)/diary/index.test.tsx`)**
+  - [x] 인트로 페이지가 정상적으로 렌더링됨
+  - [x] HOME 액션 수신 시 이전 화면으로 이동
+  - [x] NEXT 액션 수신 시 스텝 화면으로 이동
+
+- **스텝 (`app/(act)/diary/step.test.tsx`)**
+  - [x] BACK 액션 수신 시 이전 화면으로 이동
+  - [x] HOME 액션 수신 시 홈 화면으로 이동
+  - [x] VALIDATE 메시지 수신 시 알림 표시
+  - [x] DATA 메시지 수신 시 데이터를 직렬화하여 결과 화면으로 전달
+
+- **결과 (`app/(act)/diary/result.test.tsx`)**
+  - [x] route params에서 data를 파싱하여 window.diaryResult로 웹뷰에 주입
+  - [x] HOME 액션 수신 시 actAPI.diary({ situation, thoughts, feelings }) 호출 후 홈으로 이동
+  - [x] HOME 액션 중복 수신 시 API는 1회만 호출됨
+
+### 10.3 생각과 사실 분리하기 (detach)
+
+- **인트로 (`app/(act)/detach/index.test.tsx`)**
+  - [x] 인트로 페이지가 정상적으로 렌더링됨
+  - [x] HOME 액션 수신 시 이전 화면으로 이동
+  - [x] NEXT 액션 수신 시 스텝 화면으로 이동
+
+- **스텝 (`app/(act)/detach/step.test.tsx`)**
+  - [x] BACK 액션 수신 시 이전 화면으로 이동
+  - [x] HOME 액션 수신 시 홈 화면으로 이동
+  - [x] VALIDATE 메시지 수신 시 알림 표시
+  - [x] DATA 메시지 수신 시 토큰 배열 데이터를 직렬화하여 결과 화면으로 전달
+
+- **결과 (`app/(act)/detach/result.test.tsx`)**
+  - [x] route params에서 data를 파싱하여 window.detachResult로 웹뷰에 주입
+  - [x] HOME 액션 수신 시 actAPI.detach({ userTextToken }) 호출 후 홈으로 이동
+  - [x] HOME 액션 중복 수신 시 API는 1회만 호출됨
+
+### 10.4 수용하기 (embrace)
+
+- **인트로 (`app/(act)/embrace/index.test.tsx`)**
+  - [x] 인트로 페이지가 정상적으로 렌더링됨
+  - [x] HOME 액션 수신 시 이전 화면으로 이동
+  - [x] NEXT 액션 수신 시 스텝 화면으로 이동
+
+- **스텝 (`app/(act)/embrace/step.test.tsx`)**
+  - [x] window.topInsets에 safe area top 값이 주입됨
+  - [x] BACK 액션 수신 시 이전 화면으로 이동
+  - [x] HOME 액션 수신 시 홈 화면으로 이동
+  - [x] NEXT 액션 수신 시 네비게이션 변화 없음
+  - [x] DATA 메시지 수신 시 embraceResult(호흡 시간, ms 단위)를 결과 화면으로 전달
+
+- **결과 (`app/(act)/embrace/result.test.tsx`)**
+  - [x] route params에서 data를 파싱하여 window.embraceResult로 웹뷰에 주입
+  - [x] HOME 액션 수신 시 actAPI.embrace({ breathingTime }) 호출 후 홈으로 이동
+  - [x] HOME 액션 중복 수신 시 API는 1회만 호출됨
+
+### 10.5 행동하기 (action)
+
+- **인트로 (`app/(act)/action/index.test.tsx`)**
+  - [x] 인트로 페이지가 정상적으로 렌더링됨
+  - [x] HOME 액션 수신 시 이전 화면으로 이동
+  - [x] NEXT 액션 수신 시 스텝 화면으로 이동
+
+- **스텝 (`app/(act)/action/step.test.tsx`)**
+  - [x] BACK 액션 수신 시 이전 화면으로 이동
+  - [x] HOME 액션 수신 시 홈 화면으로 이동
+  - [x] VALIDATE 메시지 수신 시 알림 표시
+  - [x] DATA 메시지 수신 시 복합 데이터를 직렬화하여 결과 화면으로 전달
+
+- **결과 (`app/(act)/action/result.test.tsx`)**
+  - [x] route params에서 data를 파싱하여 window.actionResult로 웹뷰에 주입
+  - [x] HOME 액션 수신 시 actAPI.values({ diagnosis, matter, value, barrier, action }) 호출 후 홈으로 이동
+  - [x] HOME 액션 중복 수신 시 API는 1회만 호출됨
+
+## 11. Analytics
