@@ -16,11 +16,13 @@ jest.mock('react-native-safe-area-context', () => ({
 }));
 
 jest.mock('react-native-webview', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const React = require('react');
   return {
     __esModule: true,
     default: ({ onMessage }: { onMessage: (event: unknown) => void }) => {
       // 컴포넌트를 ref로 노출하여 테스트에서 메시지를 보낼 수 있게 함
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       React.useEffect(() => {
         (
           global as unknown as { __webViewOnMessage: typeof onMessage }

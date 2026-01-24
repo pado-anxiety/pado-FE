@@ -84,6 +84,7 @@ describe('webview utils', () => {
     });
 
     it('HAPTIC 메시지는 triggerHaptic을 호출한다', () => {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
       const { triggerHaptic } = require('./haptics');
       const handler = createWebViewMessageHandler({});
 

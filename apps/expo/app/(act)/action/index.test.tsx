@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import { render } from '@testing-library/react-native';
 import { useRouter } from 'expo-router';
 
@@ -16,8 +17,11 @@ jest.mock('react-native-webview', () => {
   return {
     __esModule: true,
     default: ({ onMessage }: { onMessage: (event: unknown) => void }) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       React.useEffect(() => {
-        (global as unknown as { __webViewOnMessage: typeof onMessage }).__webViewOnMessage = onMessage;
+        (
+          global as unknown as { __webViewOnMessage: typeof onMessage }
+        ).__webViewOnMessage = onMessage;
       }, [onMessage]);
       return null;
     },
@@ -26,7 +30,12 @@ jest.mock('react-native-webview', () => {
 
 jest.mock('@src/components/layout/page-safe-area-view', () => {
   const { View } = require('react-native');
-  return { __esModule: true, default: ({ children }: { children: React.ReactNode }) => <View>{children}</View> };
+  return {
+    __esModule: true,
+    default: ({ children }: { children: React.ReactNode }) => (
+      <View>{children}</View>
+    ),
+  };
 });
 
 jest.mock('@src/components/ui', () => ({
@@ -50,7 +59,9 @@ jest.mock('@src/lib/route', () => ({
 }));
 
 const sendMessage = (type: string, data: unknown) => {
-  const onMessage = (global as unknown as { __webViewOnMessage: (e: unknown) => void }).__webViewOnMessage;
+  const onMessage = (
+    global as unknown as { __webViewOnMessage: (e: unknown) => void }
+  ).__webViewOnMessage;
   onMessage({ nativeEvent: { data: JSON.stringify({ type, data }) } });
 };
 
@@ -66,7 +77,9 @@ describe('ActionScreen (Intro)', () => {
 
   it('렌더링된다', () => {
     render(<ActionScreen />);
-    expect((global as unknown as { __webViewOnMessage: unknown }).__webViewOnMessage).toBeDefined();
+    expect(
+      (global as unknown as { __webViewOnMessage: unknown }).__webViewOnMessage,
+    ).toBeDefined();
   });
 
   it('NEXT 액션 수신 시 Step 화면으로 이동한다', () => {
