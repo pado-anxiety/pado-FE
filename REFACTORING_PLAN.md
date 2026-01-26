@@ -215,7 +215,7 @@ const data = window.diaryResult;    // any
 - 런타임에 `undefined` 접근 가능
 
 **체크리스트**:
-- [ ] `global.d.ts` 파일 생성
+- [x] `global.d.ts` 파일 생성
   ```typescript
   declare global {
     interface Window {
@@ -231,7 +231,7 @@ const data = window.diaryResult;    // any
     }
   }
   ```
-- [ ] 각 Result View에서 타입 가드 추가
+- [x] 각 Result View에서 타입 가드 추가 (선택적 프로퍼티로 정의하여 `undefined` 체크 강제)
 
 ---
 

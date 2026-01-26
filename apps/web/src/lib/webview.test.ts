@@ -10,7 +10,6 @@ describe('handlePostMessage', () => {
   });
 
   it('ReactNativeWebView가 없으면 에러를 던진다', () => {
-    // @ts-expect-error - 테스트를 위해 undefined로 설정
     window.ReactNativeWebView = undefined;
 
     expect(() =>
