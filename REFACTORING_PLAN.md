@@ -76,7 +76,7 @@ const name = user.name;  // 타입 체크 불가
 
 ---
 
-### 3. chatAPI.getChatHistory() 응답 구조 불일치
+### ~~3. chatAPI.getChatHistory() 응답 구조 불일치~~
 
 **파일**: `/apps/expo/src/lib/api/chat.ts`
 
@@ -264,7 +264,7 @@ const data = window.diaryResult;    // any
 
 ## Medium - 중요 개선사항
 
-### 9. 시맨틱 토큰 불완전 연결
+### 9. 시맨틱 토큰 불완전 연결 ✅
 
 **파일**: `/packages/tailwind-semantic-tokens/`, `/packages/tailwind-design-tokens/`
 
@@ -294,13 +294,16 @@ textColor: {
 - 토큰 사용 가이드 부재
 
 **체크리스트**:
-- [ ] 모든 하드코딩된 색상을 디자인 토큰 참조로 변경
-- [ ] 누락된 시맨틱 토큰 Tailwind 클래스 매핑 추가
-  - [ ] `backgroundColor` 전체 커버리지 확인
-  - [ ] `textColor` 전체 커버리지 확인
-  - [ ] `borderColor` 전체 커버리지 확인
-- [ ] 토큰 사용 가이드 문서 작성
-- [ ] 앱별 `tailwind.config` 구조 통일
+- [x] 모든 하드코딩된 색상을 디자인 토큰 참조로 변경
+  - `colors.act.page`, `colors.act.button` 추가 후 시맨틱 토큰에서 참조
+  - 다크모드 토큰도 추가 (`colors.act.pageDark`, `colors.act.buttonDark`)
+- [x] 누락된 시맨틱 토큰 Tailwind 클래스 매핑 추가
+  - [x] `backgroundColor` 전체 커버리지 확인
+  - [x] `textColor` 전체 커버리지 확인
+  - [x] `borderColor` 전체 커버리지 확인
+- [x] 불필요한 시맨틱 토큰 정리 (btn-primary-*, btn-secondary-*, btn-destructive-*, cbt-* 제거)
+- [ ] 토큰 사용 가이드 문서 작성 (→ #18 문서화로 이동)
+- [ ] 앱별 `tailwind.config` 구조 통일 (→ 별도 작업)
 
 ---
 
@@ -540,10 +543,10 @@ return (event: WebViewMessageEvent) => {
 | Phase | 항목 | 상태 | 담당자 | 완료일 |
 |-------|------|------|-------|-------|
 | 1 | Bridge 타입 강화 | [ ] 미시작 | - | - |
-| 1 | API 타입 수정 | [ ] 미시작 | - | - |
+| 1 | API 타입 수정 | [x] 완료 (#1, #4) | - | 2026-01-27 |
 | 2 | 공통 퍼널 훅 | [ ] 미시작 | - | - |
 | 2 | Props Drilling 제거 | [ ] 미시작 | - | - |
-| 3 | 시맨틱 토큰 | [ ] 미시작 | - | - |
+| 3 | 시맨틱 토큰 | [x] 완료 (#9) | - | 2026-01-27 |
 | 4 | 코드 품질 | [ ] 미시작 | - | - |
 | 4 | 기타 개선 | [ ] 미시작 | - | - |
 
