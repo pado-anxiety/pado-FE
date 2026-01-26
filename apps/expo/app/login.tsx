@@ -24,6 +24,7 @@ export default function LoginScreen() {
       return;
     }
   };
+
   const handleGoogleLogin = async () => {
     const result = await login('google');
     if (result && 'errorMessage' in result) {

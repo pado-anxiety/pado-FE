@@ -128,8 +128,6 @@ export const useAuth = create<AuthState>((set) => ({
       isLoading: false,
     });
 
-    // API 호출은 상태 정리 후에 수행하고, 실패해도 무시
-    // 일반 axios를 사용하므로 interceptor 우회
     try {
       await authAPI.logout(currentAccessToken);
     } catch (error) {
@@ -139,7 +137,6 @@ export const useAuth = create<AuthState>((set) => ({
     router.replace(ROUTES.HOME);
   },
 
-  // API 호출 없이 로컬 인증 정보만 정리 (interceptor에서 사용)
   clearAuth: () => {
     authStorage.clearAuthInfo();
 
