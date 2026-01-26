@@ -41,10 +41,10 @@ const name = user.name;  // 타입 체크 불가
 - 런타임에 프로퍼티 접근 오류 발생 가능
 
 **체크리스트**:
-- [ ] `User` 인터페이스 정의
-- [ ] `userAPI.getUser()` 반환 타입 `Promise<User>` 명시
-- [ ] `userAPI.sendFeedback()` 반환 타입 명시
-- [ ] `auth-context.tsx`에서 타입 안전하게 사용하도록 수정
+- [x] `User` 인터페이스 정의
+- [x] `userAPI.getUser()` 반환 타입 `Promise<User>` 명시
+- [x] `userAPI.sendFeedback()` 반환 타입 명시
+- [x] `auth-context.tsx`에서 타입 안전하게 사용하도록 수정
 
 ---
 
@@ -120,9 +120,9 @@ return response.data;  // AxiosResponse에서 .data 접근하지만 타입 어�
 - TypeScript 타입 시스템을 우회하고 있음
 
 **체크리스트**:
-- [ ] `axios.post<T>()` 제네릭 활용하도록 수정
-- [ ] 또는 `apiClient` 사용으로 통일
-- [ ] `reissueAuthToken`, `getGoogleAccessToken`, `getKaKaoAccessToken` 모두 수정
+- [x] `axios.post<T>()` 제네릭 활용하도록 수정
+- [ ] ~~또는 `apiClient` 사용으로 통일~~ (interceptor 우회 필요로 axios 직접 사용 유지)
+- [x] `reissueAuthToken`, `getGoogleAccessToken`, `getKaKaoAccessToken` 모두 수정
 
 ---
 

@@ -14,16 +14,19 @@ export const ROUTES = {
   LOGOUT: '/logout',
 } as const;
 
+interface AuthToken {
+  accessToken: string;
+  refreshToken: string;
+}
+
 export const authAPI = {
-  reissueAuthToken: async (): Promise<{
-    accessToken: string;
-    refreshToken: string;
-  }> => {
-    console.log(combineUrl(ENV.BASE_URL, ROUTES.REFRESH));
-    const response: { accessToken: string; refreshToken: string } =
-      await axios.post(combineUrl(ENV.BASE_URL, ROUTES.REFRESH), {
+  reissueAuthToken: async (): Promise<AuthToken> => {
+    const response = await axios.post<AuthToken>(
+      combineUrl(ENV.BASE_URL, ROUTES.REFRESH),
+      {
         refreshToken: useAuth.getState().refreshToken,
-      });
+      },
+    );
 
     return response.data;
   },
@@ -37,20 +40,26 @@ export const authAPI = {
     authorizationCode: string;
     redirectUri: string;
     platform: 'ANDROID' | 'IOS';
-  }): Promise<{ accessToken: string; refreshToken: string }> => {
-    const response = await axios.post(combineUrl(ENV.BASE_URL, ROUTES.GOOGLE), {
-      codeVerifier,
-      authorizationCode,
-      redirectUri,
-      platform,
-    });
+  }): Promise<AuthToken> => {
+    const response = await axios.post<AuthToken>(
+      combineUrl(ENV.BASE_URL, ROUTES.GOOGLE),
+      {
+        codeVerifier,
+        authorizationCode,
+        redirectUri,
+        platform,
+      },
+    );
 
     return response.data;
   },
-  getKaKaoAccessToken: async (accessToken: string) => {
-    const response = await axios.post(combineUrl(ENV.BASE_URL, ROUTES.KAKAO), {
-      accessToken,
-    });
+  getKaKaoAccessToken: async (accessToken: string): Promise<AuthToken> => {
+    const response = await axios.post<AuthToken>(
+      combineUrl(ENV.BASE_URL, ROUTES.KAKAO),
+      {
+        accessToken,
+      },
+    );
 
     return response.data;
   },

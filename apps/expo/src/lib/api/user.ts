@@ -1,12 +1,16 @@
 import { apiClient } from './client';
 
+export interface User {
+  name: string;
+  email: string;
+}
+
 export const userAPI = {
-  getUser: async () => {
-    const response = await apiClient.get('/users');
+  getUser: async (): Promise<User> => {
+    const response: User = await apiClient.get('/users');
     return response;
   },
-  sendFeedback: async (feedback: string) => {
-    const response = await apiClient.post('/feedbacks', { feedback });
-    return response;
+  sendFeedback: async (feedback: string): Promise<void> => {
+    await apiClient.post('/feedbacks', { feedback });
   },
 };
