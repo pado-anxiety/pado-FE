@@ -9,7 +9,7 @@ import { LearningStepContent, useLearningStep } from '@/features/learning';
 
 export default function LearningView() {
   const data = window.learningData;
-  const insets = window.insets;
+  const insets = window.insets ?? { top: 0, bottom: 0 };
 
   const {
     currentStep,
@@ -20,9 +20,9 @@ export default function LearningView() {
     handleNext,
     handlePrev,
     handleExit,
-  } = useLearningStep(data.subject);
+  } = useLearningStep(data?.subject ?? '');
 
-  if (!currentStep) {
+  if (!currentStep || !data) {
     return null;
   }
 

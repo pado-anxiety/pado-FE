@@ -1,5 +1,6 @@
-import type { UserTextToken } from '@/features/act/detach/types';
 import type { Value } from '@/features/act/action/hooks/useActionStep';
+import type { UserTextToken } from '@/features/act/detach/types';
+import type { WindowLearningData } from '@/features/learning';
 
 /**
  * Action 결과 데이터 타입
@@ -28,6 +29,12 @@ declare global {
 
     /** Safe area top inset 값 */
     topInsets?: number;
+
+    /** Safe area insets */
+    insets?: { top: number; bottom: number };
+
+    /** Learning 데이터 */
+    learningData?: WindowLearningData;
 
     /** React Native WebView 브릿지 */
     ReactNativeWebView?: {
