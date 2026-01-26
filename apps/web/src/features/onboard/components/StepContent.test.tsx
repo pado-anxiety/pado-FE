@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import koOnboard from '@pado/locales/ko/onboard.json';
 
@@ -57,14 +57,6 @@ describe('StepContent', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    window.ReactNativeWebView = {
-      postMessage: vi.fn(),
-    };
-  });
-
-  afterEach(() => {
-    // @ts-expect-error - deleting for cleanup
-    delete window.ReactNativeWebView;
   });
 
   it('스텝 텍스트가 렌더링된다', () => {
@@ -81,7 +73,7 @@ describe('StepContent', () => {
     expect(screen.getByTestId('next-button')).toHaveTextContent(step1.button);
   });
 
-  it('isLastStep이 true가 아닐 때 버튼 클릭 시 onNext가 호출된다', () => {
+  it('버튼 클릭 시 onNext가 호출된다', () => {
     render(<StepContent {...defaultProps} />);
 
     fireEvent.click(screen.getByTestId('next-button'));
@@ -111,28 +103,4 @@ describe('StepContent', () => {
     expect(screen.getByTestId('next-button')).toBeDisabled();
   });
 
-  it('다음 스텝 이동 시 NEXT 액션으로 postMessage를 호출한다', () => {
-    render(<StepContent {...defaultProps} />);
-    fireEvent.click(screen.getByTestId('next-button'));
-
-    expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
-      '{"type":"NEXT"}',
-    );
-    expect(mockOnNext).toHaveBeenCalledTimes(1);
-  });
-
-  it('온보딩 완료 시 LOGIN 액션으로 postMessage를 호출한다', () => {
-    render(
-      <StepContent
-        {...defaultProps}
-        isLastStep={true}
-      />,
-    );
-    fireEvent.click(screen.getByTestId('next-button'));
-
-    expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
-      '{"type":"LOGIN"}',
-    );
-    expect(mockOnNext).not.toHaveBeenCalled();
-  });
 });

@@ -2,8 +2,6 @@ import { motion } from 'motion/react';
 
 import { Button } from '@pado/ui';
 
-import { handlePostMessage } from '@/lib/webview';
-
 import { FADE_IN_DURATION, FADE_OUT_DURATION } from '../constants';
 import type { Step } from '../types';
 
@@ -13,7 +11,6 @@ type StepContentProps = {
   showButton: boolean;
   isExiting: boolean;
   onNext: () => void;
-  isLastStep?: boolean;
 };
 
 export function StepContent({
@@ -22,15 +19,9 @@ export function StepContent({
   showButton,
   isExiting,
   onNext,
-  isLastStep,
 }: StepContentProps) {
   const handleClick = () => {
-    if (isLastStep) {
-      handlePostMessage('LOGIN');
-    } else {
-      handlePostMessage('NEXT');
-      onNext();
-    }
+    onNext();
   };
 
   return (
