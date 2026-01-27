@@ -78,19 +78,19 @@ export function ActStep({
   const ripples = [
     {
       scale: 1.25,
-      opacity: 0.4,
+      opacity: 0.3,
       border: 1.2,
       color: '#CBD5E1',
     },
     {
       scale: 1.6,
-      opacity: 0.2,
+      opacity: 0.15,
       border: 1,
       color: '#94A3B8',
     },
     {
       scale: 2.1,
-      opacity: 0.08,
+      opacity: 0.06,
       border: 0.8,
       color: '#64748B',
     },
@@ -136,7 +136,7 @@ export function ActStep({
                     items[index] as keyof typeof STEP_CIRCLE_COLORS
                   ],
                 borderWidth: 1.5,
-                borderColor: 'rgba(255, 255, 255, 0.2)',
+                borderColor: 'rgba(255, 255, 255, 0.5)',
               }}
             >
               <Image
