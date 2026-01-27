@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -11,11 +13,31 @@ import { showAlert } from '@src/lib/alert';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 
+const BYPASS_TAP_COUNT = 5;
+const BYPASS_TIME_WINDOW = 5000;
+
 export default function LoginScreen() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
-  const { login } = useAuth();
+  const { login, setAuthToken, setUserInfo } = useAuth();
   const router = useRouter();
+
+  const tapTimestamps = useRef<number[]>([]);
+
+  const handleBypassTap = () => {
+    const now = Date.now();
+    tapTimestamps.current = tapTimestamps.current.filter(
+      (ts) => now - ts < BYPASS_TIME_WINDOW,
+    );
+    tapTimestamps.current.push(now);
+
+    if (tapTimestamps.current.length >= BYPASS_TAP_COUNT) {
+      tapTimestamps.current = [];
+      setAuthToken('bypass-access-token', 'bypass-refresh-token');
+      setUserInfo('테스트 유저', 'test@bypass.dev');
+      router.replace(ROUTES.HOME);
+    }
+  };
 
   const handleAppleLogin = async () => {
     const result = await login('apple');
@@ -60,9 +82,11 @@ export default function LoginScreen() {
           className="flex-1 items-center gap-4"
           style={{ marginTop: -scale(50) }}
         >
-          <Text className="text-5xl font-bold text-white">
-            {t('home.app.name')}
-          </Text>
+          <Pressable onPress={handleBypassTap}>
+            <Text className="text-5xl font-bold text-white">
+              {t('home.app.name')}
+            </Text>
+          </Pressable>
           <View className="flex-col items-center">
             <Text className="text-body-medium text-white">
               {t('home.app.tagline')}
