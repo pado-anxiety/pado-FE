@@ -1,5 +1,5 @@
 import { Divider, Text, View } from '@src/components/ui';
-import { formatToKoreanDate } from '@src/lib/time';
+import { formatToLocaleDate } from '@src/lib/time';
 
 interface ModalHeaderProps {
   title: string;
@@ -12,7 +12,7 @@ export function ModalHeader({ title, date }: ModalHeaderProps) {
       <View className="flex flex-col">
         <Text className="text-body-medium font-bold">{title}</Text>
         <Text className="text-body-small text-sub">
-          {formatToKoreanDate(date)}
+          {formatToLocaleDate(date)}
         </Text>
       </View>
       <Divider />
