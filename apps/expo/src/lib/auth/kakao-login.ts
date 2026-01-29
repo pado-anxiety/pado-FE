@@ -12,11 +12,14 @@ export const SignInWithKakao = async (): Promise<AuthResult> => {
   try {
     const token = await login();
 
-    if (!token || !token.accessToken) {
+    if (!token || !token.idToken || !token.refreshToken) {
       return { errorMessage: i18n.t('auth.error.kakaoFailed') };
     }
 
-    const response = await authAPI.getKaKaoAccessToken(token.accessToken);
+    const response = await authAPI.getKaKaoAccessToken({
+      identityToken: token.idToken,
+      refreshToken: token.refreshToken,
+    });
 
     const { accessToken, refreshToken } = parseAuthToken(response);
 
