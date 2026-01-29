@@ -6,9 +6,12 @@ export const WEBVIEW_MESSAGE_TYPE = {
     VALIDATE: 'VALIDATE',
 } as const;
 
+export type NavigateAction = 'NEXT' | 'HOME' | 'BACK' | 'LOGIN';
+export type HapticType = 'NAVIGATE' | 'EFFECT' | 'SELECT';
+
 export interface WebViewMessagePayload {
     [WEBVIEW_MESSAGE_TYPE.NAVIGATE]: {
-        action: string;
+        action: NavigateAction;
         step?: number;
         duration: number;
     },
@@ -19,7 +22,7 @@ export interface WebViewMessagePayload {
         error: string;
     },
     [WEBVIEW_MESSAGE_TYPE.HAPTIC]: {
-        type: string;
+        type: HapticType;
     },
     [WEBVIEW_MESSAGE_TYPE.VALIDATE]: {
         title: string;
