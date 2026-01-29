@@ -29,7 +29,7 @@ export default function AnchorStepScreen() {
         trackFunnelNext(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration, step ?? -1);
       }
     },
-    onData: () => {
+    onComplete: () => {
       router.push(ROUTES.ACT.ANCHOR.RESULT);
     },
     onValidate: (title, message) => {

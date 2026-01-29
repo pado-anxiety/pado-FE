@@ -22,7 +22,7 @@ export const handleOnMessage = <T>(
 export const createWebViewMessageHandler = (
   handlers: {
     onNavigate?: (action: string, duration: number, step?: number) => void;
-    onData?: (data: unknown) => void;
+    onComplete?: (data: unknown) => void;
     onError?: (error: string) => void;
     onValidate?: (title: string, message: string) => void;
   } = {},
@@ -45,8 +45,8 @@ export const createWebViewMessageHandler = (
     // 다른 메시지 타입은 핸들러로 전달
     if (type === WEBVIEW_MESSAGE_TYPE.NAVIGATE && handlers.onNavigate) {
       handlers.onNavigate(data.action, data.duration, data.step);
-    } else if (type === WEBVIEW_MESSAGE_TYPE.DATA && handlers.onData) {
-      handlers.onData(data);
+    } else if (type === WEBVIEW_MESSAGE_TYPE.COMPLETE && handlers.onComplete) {
+      handlers.onComplete(data);
     } else if (type === WEBVIEW_MESSAGE_TYPE.ERROR && handlers.onError) {
       handlers.onError(data.error);
     } else if (type === WEBVIEW_MESSAGE_TYPE.VALIDATE && handlers.onValidate) {

@@ -80,3 +80,4 @@ export let dark: {
     '--shadow-lg': string;
     '--shadow-xl': string;
 };
+//# sourceMappingURL=semantic-colors.d.ts.map

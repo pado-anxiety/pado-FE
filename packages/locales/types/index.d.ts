@@ -5,17 +5,29 @@ declare const resources: {
                 button: {
                     start: string;
                     next: string;
+                    prev: string;
                     complete: string;
                     back: string;
                     close: string;
                     restart: string;
+                    send: string;
+                    goHome: string;
+                    confirm: string;
                 };
                 loading: string;
                 error: {
                     generic: string;
+                    occurred: string;
                     tryLater: string;
+                    tryAgainLater: string;
                     loginRequired: string;
                     goToLogin: string;
+                    pageNotFound: string;
+                    cannotLoadScreen: string;
+                };
+                validation: {
+                    charLimitExceeded: string;
+                    charLimitMessage: string;
                 };
                 empty: {
                     noRecords: string;
@@ -23,6 +35,27 @@ declare const resources: {
                 example: string;
                 or: string;
                 writeYourOwn: string;
+                settings: {
+                    title: string;
+                    user: {
+                        name: string;
+                        email: string;
+                    };
+                    language: string;
+                    vibration: string;
+                    feedback: {
+                        title: string;
+                        description: string;
+                        placeholder: string;
+                        send: string;
+                    };
+                    privacyPolicy: string;
+                    termsOfService: string;
+                    appVersion: string;
+                    licenseInfo: string;
+                    licenseDescription: string;
+                    logout: string;
+                };
             };
             readonly act: {
                 readonly common: {
@@ -85,7 +118,7 @@ declare const resources: {
                     };
                     result: {
                         title: string;
-                        description: string;
+                        description: string[];
                     };
                     history: {
                         completed: string;
@@ -121,7 +154,7 @@ declare const resources: {
                     };
                     result: {
                         title: string;
-                        description: string;
+                        description: string[];
                     };
                     history: {
                         situationQuestion: string;
@@ -143,6 +176,7 @@ declare const resources: {
                         step1: {
                             title: string[];
                             description: string;
+                            placeholder: string;
                         };
                         step2: {
                             title: string[];
@@ -151,7 +185,7 @@ declare const resources: {
                     };
                     result: {
                         title: string[];
-                        description: string;
+                        description: string[];
                     };
                     history: {
                         description: string;
@@ -179,7 +213,7 @@ declare const resources: {
                     };
                     result: {
                         title: string;
-                        description: string;
+                        description: string[];
                         breathTime: string;
                     };
                     history: {
@@ -187,9 +221,58 @@ declare const resources: {
                     };
                 };
                 readonly values: {
-                    title: string;
+                    intro: {
+                        title: string;
+                        description: string[];
+                        contentTitle: string;
+                        contentDescription: string;
+                        steps: string[];
+                        tip: string;
+                    };
+                    step: {
+                        step1: {
+                            title: string;
+                            description: string;
+                        };
+                        step2: {
+                            title: string;
+                            description: string;
+                            placeholder: string;
+                        };
+                        step3: {
+                            title: string;
+                            description: string;
+                            placeholder: string;
+                        };
+                        step4: {
+                            title: string;
+                            description: string;
+                            placeholder: string;
+                        };
+                    };
+                    domain: {
+                        work: string;
+                        leisure: string;
+                        relationship: string;
+                        growth: string;
+                    };
+                    result: {
+                        title: string;
+                        description: string[];
+                        selectedDomain: string;
+                        selectedValue: string;
+                        orientation: string;
+                        reason: string;
+                        obstacle: string;
+                        action: string;
+                    };
                     history: {
                         title: string;
+                        description: string;
+                        matterQuestion: string;
+                        valueQuestion: string;
+                        barrierQuestion: string;
+                        actionQuestion: string;
                     };
                 };
             };
@@ -207,12 +290,78 @@ declare const resources: {
                     tagline: string;
                     description: string;
                 };
+                learning: {
+                    title: string;
+                    subtitle: string;
+                };
+                messages: {
+                    acceptance: {
+                        acc_01: {
+                            text: string;
+                            subText: string;
+                        };
+                        acc_02: {
+                            text: string;
+                            subText: string;
+                        };
+                        acc_03: {
+                            text: string;
+                            subText: string;
+                        };
+                    };
+                    values: {
+                        val_01: {
+                            text: string;
+                            subText: string;
+                        };
+                        val_02: {
+                            text: string;
+                            subText: string;
+                        };
+                    };
+                    action: {
+                        act_01: {
+                            text: string;
+                            subText: string;
+                        };
+                        act_02: {
+                            text: string;
+                            subText: string;
+                        };
+                        act_03: {
+                            text: string;
+                            subText: string;
+                        };
+                    };
+                    rest: {
+                        rest_01: {
+                            text: string;
+                            subText: string;
+                        };
+                        rest_02: {
+                            text: string;
+                            subText: string;
+                        };
+                    };
+                };
             };
             readonly auth: {
                 login: {
+                    continueWithApple: string;
                     continueWithGoogle: string;
                     continueWithKakao: string;
                     termsAgreement: string;
+                };
+                error: {
+                    tokenFailed: string;
+                    unexpected: string;
+                    logoutUnexpected: string;
+                    googleAuthCanceled: string;
+                    googleAuthCodeFailed: string;
+                    googleAuthInfoFailed: string;
+                    googleError: string;
+                    kakaoFailed: string;
+                    kakaoError: string;
                 };
             };
             readonly onboard: {
@@ -254,6 +403,62 @@ declare const resources: {
                     inhale: string;
                     hold: string;
                     exhale: string;
+                };
+            };
+            readonly learning: {
+                anxiety_info: {
+                    title: string;
+                    description: string;
+                    analyticsKey: string;
+                    steps: {
+                        step1: {
+                            title: string;
+                            content: string[];
+                        };
+                        step2: {
+                            title: string;
+                            content: string[];
+                        };
+                        step3: {
+                            title: string;
+                            content: string[];
+                        };
+                        step4: {
+                            title: string;
+                            content: string[];
+                        };
+                        step5: {
+                            title: string;
+                            content: string[];
+                        };
+                    };
+                };
+                act_guide: {
+                    title: string;
+                    description: string;
+                    analyticsKey: string;
+                    steps: {
+                        step1: {
+                            title: string;
+                            content: string[];
+                        };
+                        step2: {
+                            title: string;
+                            content: string[];
+                        };
+                        step3: {
+                            title: string;
+                            content: string[];
+                        };
+                        step4: {
+                            title: string;
+                            content: string[];
+                        };
+                        step5: {
+                            title: string;
+                            content: string[];
+                        };
+                    };
                 };
             };
         };
@@ -264,17 +469,29 @@ declare const resources: {
                 button: {
                     start: string;
                     next: string;
+                    prev: string;
                     complete: string;
                     back: string;
                     close: string;
                     restart: string;
+                    send: string;
+                    goHome: string;
+                    confirm: string;
                 };
                 loading: string;
                 error: {
                     generic: string;
+                    occurred: string;
                     tryLater: string;
+                    tryAgainLater: string;
                     loginRequired: string;
                     goToLogin: string;
+                    pageNotFound: string;
+                    cannotLoadScreen: string;
+                };
+                validation: {
+                    charLimitExceeded: string;
+                    charLimitMessage: string;
                 };
                 empty: {
                     noRecords: string;
@@ -282,6 +499,27 @@ declare const resources: {
                 example: string;
                 or: string;
                 writeYourOwn: string;
+                settings: {
+                    title: string;
+                    user: {
+                        name: string;
+                        email: string;
+                    };
+                    language: string;
+                    vibration: string;
+                    feedback: {
+                        title: string;
+                        description: string;
+                        placeholder: string;
+                        send: string;
+                    };
+                    privacyPolicy: string;
+                    termsOfService: string;
+                    appVersion: string;
+                    licenseInfo: string;
+                    licenseDescription: string;
+                    logout: string;
+                };
             };
             readonly act: {
                 readonly common: {
@@ -344,7 +582,7 @@ declare const resources: {
                     };
                     result: {
                         title: string;
-                        description: string;
+                        description: string[];
                     };
                     history: {
                         completed: string;
@@ -380,7 +618,7 @@ declare const resources: {
                     };
                     result: {
                         title: string;
-                        description: string;
+                        description: string[];
                     };
                     history: {
                         situationQuestion: string;
@@ -402,6 +640,7 @@ declare const resources: {
                         step1: {
                             title: string[];
                             description: string;
+                            placeholder: string;
                         };
                         step2: {
                             title: string[];
@@ -410,7 +649,7 @@ declare const resources: {
                     };
                     result: {
                         title: string[];
-                        description: string;
+                        description: string[];
                     };
                     history: {
                         description: string;
@@ -438,7 +677,7 @@ declare const resources: {
                     };
                     result: {
                         title: string;
-                        description: string;
+                        description: string[];
                         breathTime: string;
                     };
                     history: {
@@ -446,9 +685,58 @@ declare const resources: {
                     };
                 };
                 readonly values: {
-                    title: string;
+                    intro: {
+                        title: string;
+                        description: string[];
+                        contentTitle: string;
+                        contentDescription: string;
+                        steps: string[];
+                        tip: string;
+                    };
+                    step: {
+                        step1: {
+                            title: string;
+                            description: string;
+                        };
+                        step2: {
+                            title: string;
+                            description: string;
+                            placeholder: string;
+                        };
+                        step3: {
+                            title: string;
+                            description: string;
+                            placeholder: string;
+                        };
+                        step4: {
+                            title: string;
+                            description: string;
+                            placeholder: string;
+                        };
+                    };
+                    domain: {
+                        work: string;
+                        leisure: string;
+                        relationship: string;
+                        growth: string;
+                    };
+                    result: {
+                        title: string;
+                        description: string[];
+                        selectedDomain: string;
+                        selectedValue: string;
+                        orientation: string;
+                        reason: string;
+                        obstacle: string;
+                        action: string;
+                    };
                     history: {
                         title: string;
+                        description: string;
+                        matterQuestion: string;
+                        valueQuestion: string;
+                        barrierQuestion: string;
+                        actionQuestion: string;
                     };
                 };
             };
@@ -466,12 +754,78 @@ declare const resources: {
                     tagline: string;
                     description: string;
                 };
+                learning: {
+                    title: string;
+                    subtitle: string;
+                };
+                messages: {
+                    acceptance: {
+                        acc_01: {
+                            text: string;
+                            subText: string;
+                        };
+                        acc_02: {
+                            text: string;
+                            subText: string;
+                        };
+                        acc_03: {
+                            text: string;
+                            subText: string;
+                        };
+                    };
+                    values: {
+                        val_01: {
+                            text: string;
+                            subText: string;
+                        };
+                        val_02: {
+                            text: string;
+                            subText: string;
+                        };
+                    };
+                    action: {
+                        act_01: {
+                            text: string;
+                            subText: string;
+                        };
+                        act_02: {
+                            text: string;
+                            subText: string;
+                        };
+                        act_03: {
+                            text: string;
+                            subText: string;
+                        };
+                    };
+                    rest: {
+                        rest_01: {
+                            text: string;
+                            subText: string;
+                        };
+                        rest_02: {
+                            text: string;
+                            subText: string;
+                        };
+                    };
+                };
             };
             readonly auth: {
                 login: {
+                    continueWithApple: string;
                     continueWithGoogle: string;
                     continueWithKakao: string;
                     termsAgreement: string;
+                };
+                error: {
+                    tokenFailed: string;
+                    unexpected: string;
+                    logoutUnexpected: string;
+                    googleAuthCanceled: string;
+                    googleAuthCodeFailed: string;
+                    googleAuthInfoFailed: string;
+                    googleError: string;
+                    kakaoFailed: string;
+                    kakaoError: string;
                 };
             };
             readonly onboard: {
@@ -513,6 +867,62 @@ declare const resources: {
                     inhale: string;
                     hold: string;
                     exhale: string;
+                };
+            };
+            readonly learning: {
+                anxiety_info: {
+                    title: string;
+                    description: string;
+                    analyticsKey: string;
+                    steps: {
+                        step1: {
+                            title: string;
+                            content: string[];
+                        };
+                        step2: {
+                            title: string;
+                            content: string[];
+                        };
+                        step3: {
+                            title: string;
+                            content: string[];
+                        };
+                        step4: {
+                            title: string;
+                            content: string[];
+                        };
+                        step5: {
+                            title: string;
+                            content: string[];
+                        };
+                    };
+                };
+                act_guide: {
+                    title: string;
+                    description: string;
+                    analyticsKey: string;
+                    steps: {
+                        step1: {
+                            title: string;
+                            content: string[];
+                        };
+                        step2: {
+                            title: string;
+                            content: string[];
+                        };
+                        step3: {
+                            title: string;
+                            content: string[];
+                        };
+                        step4: {
+                            title: string;
+                            content: string[];
+                        };
+                        step5: {
+                            title: string;
+                            content: string[];
+                        };
+                    };
                 };
             };
         };

@@ -1,5 +1,11 @@
 export let white: string;
 export let black: string;
+export namespace act {
+    let page: string;
+    let pageDark: string;
+    let button: string;
+    let buttonDark: string;
+}
 export let blue: {
     50: string;
     100: string;

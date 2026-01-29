@@ -31,7 +31,7 @@ export default function DiaryStepScreen() {
         trackFunnelNext(ANALYTICS_KEY.ACT.DIARY.EMOTION, duration, step ?? -1);
       }
     },
-    onData: (payload) => {
+    onComplete: (payload) => {
       const { data } = payload as { data: unknown };
       router.push({
         pathname: ROUTES.ACT.DIARY.RESULT,

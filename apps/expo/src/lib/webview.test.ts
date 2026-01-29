@@ -30,7 +30,7 @@ describe('webview utils', () => {
 
     it('타입이 일치하지 않으면 콜백을 호출하지 않는다', () => {
       const callback = jest.fn();
-      const event = createMockEvent('DATA', { value: 'test' });
+      const event = createMockEvent('COMPLETE', { value: 'test' });
 
       handleOnMessage(event, 'NAVIGATE', callback);
 
@@ -54,13 +54,13 @@ describe('webview utils', () => {
       expect(onNavigate).toHaveBeenCalledWith('LOGIN', 5000, 7);
     });
 
-    it('DATA 메시지를 onData 핸들러로 전달한다', () => {
-      const onData = jest.fn();
-      const handler = createWebViewMessageHandler({ onData });
+    it('COMPLETE 메시지를 onComplete 핸들러로 전달한다', () => {
+      const onComplete = jest.fn();
+      const handler = createWebViewMessageHandler({ onComplete });
 
-      handler(createMockEvent('DATA', { data: { test: 'value' } }));
+      handler(createMockEvent('COMPLETE', { data: { test: 'value' } }));
 
-      expect(onData).toHaveBeenCalledWith({ data: { test: 'value' } });
+      expect(onComplete).toHaveBeenCalledWith({ data: { test: 'value' } });
     });
 
     it('ERROR 메시지를 onError 핸들러로 전달한다', () => {

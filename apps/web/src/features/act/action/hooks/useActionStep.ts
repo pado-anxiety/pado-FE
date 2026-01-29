@@ -136,7 +136,7 @@ export function useActionStep() {
         duration: getDuration(),
       });
     } else {
-      handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
+      handlePostMessage(WEBVIEW_MESSAGE_TYPE.COMPLETE, {
         data: {
           selectedValue,
           selectedDomain,

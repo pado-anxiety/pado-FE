@@ -32,7 +32,7 @@ export function useAnchorStep() {
       setSelectedIndex(0);
       return;
     }
-    handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.COMPLETE, {
       data: {},
     });
   }, [

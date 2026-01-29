@@ -31,7 +31,7 @@ export default function ActionStepScreen() {
         trackFunnelNext(ANALYTICS_KEY.ACT.ACTION.VALUES, duration, step ?? -1);
       }
     },
-    onData: (payload) => {
+    onComplete: (payload) => {
       const { data } = payload as { data: unknown };
       router.push({
         pathname: ROUTES.ACT.ACTION.RESULT,

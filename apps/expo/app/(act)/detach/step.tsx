@@ -43,7 +43,7 @@ export default function DetachStepScreen() {
         );
       }
     },
-    onData: (payload) => {
+    onComplete: (payload) => {
       const { data } = payload as { data: unknown };
       router.push({
         pathname: ROUTES.ACT.DETACH.RESULT,

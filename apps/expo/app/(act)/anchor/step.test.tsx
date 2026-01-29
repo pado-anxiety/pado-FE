@@ -82,9 +82,9 @@ describe('AnchorStepScreen', () => {
     expect(mockReplace).toHaveBeenCalledWith('/');
   });
 
-  it('DATA 메시지 수신 시 결과 화면으로 이동한다', () => {
+  it('COMPLETE 메시지 수신 시 결과 화면으로 이동한다', () => {
     render(<AnchorStepScreen />);
-    sendMessage('DATA', { data: {} });
+    sendMessage('COMPLETE', { data: {} });
     expect(mockPush).toHaveBeenCalledWith('/(act)/anchor/result');
   });
 

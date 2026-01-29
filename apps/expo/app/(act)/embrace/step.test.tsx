@@ -102,10 +102,10 @@ describe('EmbraceStepScreen', () => {
     expect(mockReplace).not.toHaveBeenCalled();
   });
 
-  it('DATA 메시지 수신 시 호흡 시간을 결과 화면으로 전달한다', () => {
+  it('COMPLETE 메시지 수신 시 호흡 시간을 결과 화면으로 전달한다', () => {
     render(<EmbraceStepScreen />);
 
-    sendMessage('DATA', { data: { embraceResult: 60000 } });
+    sendMessage('COMPLETE', { data: { embraceResult: 60000 } });
 
     expect(mockPush).toHaveBeenCalledWith({
       pathname: '/(act)/embrace/result',

@@ -74,7 +74,7 @@ describe('DiaryStepScreen', () => {
     });
   });
 
-  it('DATA 메시지 수신 시 결과 화면으로 데이터를 전달하며 이동한다', () => {
+  it('COMPLETE 메시지 수신 시 결과 화면으로 데이터를 전달하며 이동한다', () => {
     render(<DiaryStepScreen />);
 
     const diaryData = [
@@ -83,7 +83,7 @@ describe('DiaryStepScreen', () => {
       { question: '감정', answer: '불안' },
     ];
 
-    sendMessage('DATA', { data: diaryData });
+    sendMessage('COMPLETE', { data: diaryData });
 
     expect(mockPush).toHaveBeenCalledWith({
       pathname: '/(act)/diary/result',

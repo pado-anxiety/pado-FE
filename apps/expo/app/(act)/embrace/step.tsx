@@ -30,7 +30,7 @@ export default function EmbraceStepScreen() {
         trackFunnelNext(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, duration, step ?? -1);
       }
     },
-    onData: (payload) => {
+    onComplete: (payload) => {
       const { data } = payload as { data: { embraceResult: number } };
       const { embraceResult } = data;
       router.push({

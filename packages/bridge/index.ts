@@ -1,6 +1,6 @@
 export const WEBVIEW_MESSAGE_TYPE = {
     NAVIGATE: 'NAVIGATE',
-    DATA: 'DATA',
+    COMPLETE: 'COMPLETE',
     ERROR: 'ERROR',
     HAPTIC: 'HAPTIC',
     VALIDATE: 'VALIDATE',
@@ -15,7 +15,7 @@ export interface WebViewMessagePayload {
         step?: number;
         duration: number;
     },
-    [WEBVIEW_MESSAGE_TYPE.DATA]: {
+    [WEBVIEW_MESSAGE_TYPE.COMPLETE]: {
         data: any;
     },
     [WEBVIEW_MESSAGE_TYPE.ERROR]: {
