@@ -53,13 +53,17 @@ export const authAPI = {
 
     return response.data;
   },
-  getKaKaoAccessToken: async (accessToken: string): Promise<AuthToken> => {
-    const response = await axios.post<AuthToken>(
-      combineUrl(ENV.BASE_URL, ROUTES.KAKAO),
-      {
-        accessToken,
-      },
-    );
+  getKaKaoAccessToken: async ({
+    identityToken,
+    refreshToken,
+  }: {
+    identityToken: string;
+    refreshToken: string;
+  }) => {
+    const response = await axios.post(combineUrl(ENV.BASE_URL, ROUTES.KAKAO), {
+      identityToken,
+      refreshToken,
+    });
 
     return response.data;
   },

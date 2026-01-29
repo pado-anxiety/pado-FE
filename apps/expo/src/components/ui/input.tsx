@@ -94,7 +94,7 @@ function Input({
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
-      {error && <Text className="text-destructive text-sm mt-1">{error}</Text>}
+      {error && <Text className="tex mt-1 mt-1 text-sm text-sm">{error}</Text>}
     </View>
   );
 }
