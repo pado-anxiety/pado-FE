@@ -1,10 +1,6 @@
 import { WebViewMessageEvent } from 'react-native-webview';
 
-import {
-  HapticType,
-  NavigateAction,
-  WEBVIEW_MESSAGE_TYPE,
-} from '@pado/bridge';
+import { HapticType, NavigateAction, WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
 
 import { triggerHaptic } from './haptics';
 import { parseJSON } from './json/parse-json';

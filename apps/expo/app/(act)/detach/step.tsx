@@ -7,54 +7,17 @@ import {
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
-import { showAlert } from '@src/lib/alert';
-import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
-import { safeStringify } from '@src/lib/json';
+import { ANALYTICS_KEY } from '@src/lib/analytics';
 import { WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { ROUTES } from '@src/lib/route/route';
-import { createWebViewMessageHandler } from '@src/lib/webview';
+import { useActStepMessageHandler } from '@src/hooks/use-act-step-message-handler';
 
 export default function DetachStepScreen() {
   const router = useRouter();
 
-  const { trackFunnelNext, trackFunnelExit, trackFunnelPrev } = useAnalytics();
-
-  const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action, duration, step) => {
-      if (action === 'BACK') {
-        trackFunnelPrev(
-          ANALYTICS_KEY.ACT.DETACH.SEPARATE,
-          duration,
-          step ?? -1,
-        );
-        router.back();
-      } else if (action === 'HOME') {
-        trackFunnelExit(
-          ANALYTICS_KEY.ACT.DETACH.SEPARATE,
-          duration,
-          step ?? -1,
-        );
-        router.replace(ROUTES.HOME);
-      } else if (action === 'NEXT') {
-        trackFunnelNext(
-          ANALYTICS_KEY.ACT.DETACH.SEPARATE,
-          duration,
-          step ?? -1,
-        );
-      }
-    },
-    onComplete: (payload) => {
-      const { data } = payload as { data: unknown };
-      router.push({
-        pathname: ROUTES.ACT.DETACH.RESULT,
-        params: {
-          data: safeStringify(data),
-        },
-      });
-    },
-    onValidate: (title, message) => {
-      showAlert.validation(title, message);
-    },
+  const handleMessage = useActStepMessageHandler({
+    analyticsKey: ANALYTICS_KEY.ACT.DETACH.SEPARATE,
+    resultRoute: ROUTES.ACT.DETACH.RESULT,
   });
 
   return (

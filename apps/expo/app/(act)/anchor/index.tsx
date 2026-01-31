@@ -7,25 +7,16 @@ import {
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
-import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
+import { useActIntroMessageHandler } from '@src/hooks/use-act-intro-message-handler';
+import { ANALYTICS_KEY } from '@src/lib/analytics';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
-import { createWebViewMessageHandler } from '@src/lib/webview';
 
 export default function AnchorScreen() {
   const router = useRouter();
 
-  const { trackFunnelIntroExit, trackFunnelIntroNext } = useAnalytics();
-
-  const handleMessage = createWebViewMessageHandler({
-    onNavigate: (action, duration) => {
-      if (action === 'NEXT') {
-        trackFunnelIntroNext(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration);
-        router.push(ROUTES.ACT.ANCHOR.STEP);
-      } else if (action === 'HOME') {
-        trackFunnelIntroExit(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration);
-        router.back();
-      }
-    },
+  const handleMessage = useActIntroMessageHandler({
+    analyticsKey: ANALYTICS_KEY.ACT.ANCHOR.FIVE,
+    stepRoute: ROUTES.ACT.ANCHOR.STEP,
   });
 
   return (
