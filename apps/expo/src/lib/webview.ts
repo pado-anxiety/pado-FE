@@ -1,19 +1,13 @@
 import { WebViewMessageEvent } from 'react-native-webview';
 
-import { WEBVIEW_MESSAGE_TYPE, WebViewMessageType } from '@pado/bridge';
+import {
+  HapticType,
+  NavigateAction,
+  WEBVIEW_MESSAGE_TYPE,
+} from '@pado/bridge';
 
 import { triggerHaptic } from './haptics';
-
-export const handleOnMessage = <T>(
-  event: WebViewMessageEvent,
-  type: WebViewMessageType,
-  callback: (data?: T) => void,
-) => {
-  const parsedData = JSON.parse(event.nativeEvent.data);
-  if (parsedData.type === type) {
-    callback(parsedData.data);
-  }
-};
+import { parseJSON } from './json/parse-json';
 
 /**
  * 웹뷰에서 온 메시지를 파싱하고, HAPTIC 메시지는 자동으로 처리합니다.
@@ -21,23 +15,25 @@ export const handleOnMessage = <T>(
  */
 export const createWebViewMessageHandler = (
   handlers: {
-    onNavigate?: (action: string, duration: number, step?: number) => void;
+    onNavigate?: (
+      action: NavigateAction,
+      duration: number,
+      step?: number,
+    ) => void;
     onComplete?: (data: unknown) => void;
     onError?: (error: string) => void;
     onValidate?: (title: string, message: string) => void;
   } = {},
 ) => {
   return (event: WebViewMessageEvent) => {
-    const parsedData = JSON.parse(event.nativeEvent.data);
+    const parsedData = parseJSON(event.nativeEvent.data, () => {});
+    if (parsedData.errorMessage) return;
+
     const { type, data } = parsedData;
 
     // HAPTIC 메시지는 자동으로 처리
     if (type === WEBVIEW_MESSAGE_TYPE.HAPTIC) {
-      const hapticType = data?.type as
-        | 'NAVIGATE'
-        | 'EFFECT'
-        | 'SELECT'
-        | undefined;
+      const hapticType = data?.type as HapticType | undefined;
       triggerHaptic(hapticType || 'SELECT');
       return;
     }

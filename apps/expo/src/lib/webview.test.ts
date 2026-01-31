@@ -1,6 +1,6 @@
 import { WebViewMessageEvent } from 'react-native-webview';
 
-import { createWebViewMessageHandler, handleOnMessage } from './webview';
+import { createWebViewMessageHandler } from './webview';
 
 jest.mock('./haptics', () => ({
   triggerHaptic: jest.fn(),
@@ -13,84 +13,62 @@ const createMockEvent = (type: string, data: unknown): WebViewMessageEvent =>
     },
   }) as WebViewMessageEvent;
 
-describe('webview utils', () => {
+describe('createWebViewMessageHandler', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('handleOnMessage', () => {
-    it('타입이 일치하면 콜백을 호출한다', () => {
-      const callback = jest.fn();
-      const event = createMockEvent('NAVIGATE', { action: 'NEXT' });
+  it('NAVIGATE 메시지를 onNavigate 핸들러로 전달한다', () => {
+    const onNavigate = jest.fn();
+    const handler = createWebViewMessageHandler({ onNavigate });
 
-      handleOnMessage(event, 'NAVIGATE', callback);
+    handler(
+      createMockEvent('NAVIGATE', {
+        action: 'LOGIN',
+        duration: 5000,
+        step: 7,
+      }),
+    );
 
-      expect(callback).toHaveBeenCalledWith({ action: 'NEXT' });
-    });
-
-    it('타입이 일치하지 않으면 콜백을 호출하지 않는다', () => {
-      const callback = jest.fn();
-      const event = createMockEvent('COMPLETE', { value: 'test' });
-
-      handleOnMessage(event, 'NAVIGATE', callback);
-
-      expect(callback).not.toHaveBeenCalled();
-    });
+    expect(onNavigate).toHaveBeenCalledWith('LOGIN', 5000, 7);
   });
 
-  describe('createWebViewMessageHandler', () => {
-    it('NAVIGATE 메시지를 onNavigate 핸들러로 전달한다', () => {
-      const onNavigate = jest.fn();
-      const handler = createWebViewMessageHandler({ onNavigate });
+  it('COMPLETE 메시지를 onComplete 핸들러로 전달한다', () => {
+    const onComplete = jest.fn();
+    const handler = createWebViewMessageHandler({ onComplete });
 
-      handler(
-        createMockEvent('NAVIGATE', {
-          action: 'LOGIN',
-          duration: 5000,
-          step: 7,
-        }),
-      );
+    handler(createMockEvent('COMPLETE', { data: { test: 'value' } }));
 
-      expect(onNavigate).toHaveBeenCalledWith('LOGIN', 5000, 7);
-    });
+    expect(onComplete).toHaveBeenCalledWith({ data: { test: 'value' } });
+  });
 
-    it('COMPLETE 메시지를 onComplete 핸들러로 전달한다', () => {
-      const onComplete = jest.fn();
-      const handler = createWebViewMessageHandler({ onComplete });
+  it('ERROR 메시지를 onError 핸들러로 전달한다', () => {
+    const onError = jest.fn();
+    const handler = createWebViewMessageHandler({ onError });
 
-      handler(createMockEvent('COMPLETE', { data: { test: 'value' } }));
+    handler(createMockEvent('ERROR', { error: 'Something went wrong' }));
 
-      expect(onComplete).toHaveBeenCalledWith({ data: { test: 'value' } });
-    });
+    expect(onError).toHaveBeenCalledWith('Something went wrong');
+  });
 
-    it('ERROR 메시지를 onError 핸들러로 전달한다', () => {
-      const onError = jest.fn();
-      const handler = createWebViewMessageHandler({ onError });
+  it('VALIDATE 메시지를 onValidate 핸들러로 전달한다', () => {
+    const onValidate = jest.fn();
+    const handler = createWebViewMessageHandler({ onValidate });
 
-      handler(createMockEvent('ERROR', { error: 'Something went wrong' }));
+    handler(
+      createMockEvent('VALIDATE', { title: 'Title', message: 'Message' }),
+    );
 
-      expect(onError).toHaveBeenCalledWith('Something went wrong');
-    });
+    expect(onValidate).toHaveBeenCalledWith('Title', 'Message');
+  });
 
-    it('VALIDATE 메시지를 onValidate 핸들러로 전달한다', () => {
-      const onValidate = jest.fn();
-      const handler = createWebViewMessageHandler({ onValidate });
+  it('HAPTIC 메시지는 triggerHaptic을 호출한다', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { triggerHaptic } = require('./haptics');
+    const handler = createWebViewMessageHandler({});
 
-      handler(
-        createMockEvent('VALIDATE', { title: 'Title', message: 'Message' }),
-      );
+    handler(createMockEvent('HAPTIC', { type: 'NAVIGATE' }));
 
-      expect(onValidate).toHaveBeenCalledWith('Title', 'Message');
-    });
-
-    it('HAPTIC 메시지는 triggerHaptic을 호출한다', () => {
-      // eslint-disable-next-line @typescript-eslint/no-require-imports
-      const { triggerHaptic } = require('./haptics');
-      const handler = createWebViewMessageHandler({});
-
-      handler(createMockEvent('HAPTIC', { type: 'NAVIGATE' }));
-
-      expect(triggerHaptic).toHaveBeenCalledWith('NAVIGATE');
-    });
+    expect(triggerHaptic).toHaveBeenCalledWith('NAVIGATE');
   });
 });

@@ -1,10 +1,9 @@
+import { HapticType } from '@pado/bridge';
 import * as Haptics from 'expo-haptics';
 
 import { storage } from './store';
 
 const HAPTIC_STATE_KEY = 'haptics_state';
-
-export type HapticType = 'NAVIGATE' | 'EFFECT' | 'SELECT';
 
 export const getHapticState = () => {
   const state = storage.getBoolean(HAPTIC_STATE_KEY);
