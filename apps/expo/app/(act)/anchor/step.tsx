@@ -9,6 +9,7 @@ import {
 } from '@src/components/ui';
 import { showAlert } from '@src/lib/alert';
 import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
+import { safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { createWebViewMessageHandler } from '@src/lib/webview';
 
@@ -29,8 +30,14 @@ export default function AnchorStepScreen() {
         trackFunnelNext(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration, step ?? -1);
       }
     },
-    onComplete: () => {
-      router.push(ROUTES.ACT.ANCHOR.RESULT);
+    onComplete: (payload) => {
+      const { data } = payload as { data: unknown };
+      router.push({
+        pathname: ROUTES.ACT.ANCHOR.RESULT,
+        params: {
+          data: safeStringify(data),
+        },
+      });
     },
     onValidate: (title, message) => {
       showAlert.validation(title, message);

@@ -31,12 +31,11 @@ export default function EmbraceStepScreen() {
       }
     },
     onComplete: (payload) => {
-      const { data } = payload as { data: { embraceResult: number } };
-      const { embraceResult } = data;
+      const { data } = payload as { data: unknown };
       router.push({
         pathname: ROUTES.ACT.EMBRACE.RESULT,
         params: {
-          data: safeStringify({ embraceResult }),
+          data: safeStringify(data),
         },
       });
     },

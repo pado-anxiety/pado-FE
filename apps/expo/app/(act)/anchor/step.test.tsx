@@ -49,6 +49,10 @@ jest.mock('@src/lib/analytics', () => ({
   }),
 }));
 
+jest.mock('@src/lib/json', () => ({
+  safeStringify: (obj: unknown) => JSON.stringify(obj),
+}));
+
 jest.mock('@src/lib/route', () => ({
   ROUTES: { HOME: '/', ACT: { ANCHOR: { RESULT: '/(act)/anchor/result' } } },
   WEBVIEW_ROUTES: { ACT: { ANCHOR: { STEP: '/act/anchor/step' } } },
@@ -85,7 +89,10 @@ describe('AnchorStepScreen', () => {
   it('COMPLETE 메시지 수신 시 결과 화면으로 이동한다', () => {
     render(<AnchorStepScreen />);
     sendMessage('COMPLETE', { data: {} });
-    expect(mockPush).toHaveBeenCalledWith('/(act)/anchor/result');
+    expect(mockPush).toHaveBeenCalledWith({
+      pathname: '/(act)/anchor/result',
+      params: { data: JSON.stringify({}) },
+    });
   });
 
   it('NEXT 액션 수신 시 화면 이동 없이 처리된다', () => {
