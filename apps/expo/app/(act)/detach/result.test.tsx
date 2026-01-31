@@ -120,7 +120,8 @@ describe('DetachResultScreen', () => {
     render(<DetachResultScreen />);
     sendMessage('NAVIGATE', { action: 'HOME', duration: 5000 });
 
-    expect(mockMutate).toHaveBeenCalledWith({
+    const { actAPI } = require('@src/lib/api/act');
+    expect(actAPI.detach).toHaveBeenCalledWith({
       userTextToken: tokenData,
     });
     expect(mockReplace).toHaveBeenCalledWith('/');
@@ -130,6 +131,7 @@ describe('DetachResultScreen', () => {
     render(<DetachResultScreen />);
     sendMessage('NAVIGATE', { action: 'HOME', duration: 3000 });
     sendMessage('NAVIGATE', { action: 'HOME', duration: 4000 });
-    expect(mockMutate).toHaveBeenCalledTimes(1);
+    const { actAPI } = require('@src/lib/api/act');
+    expect(actAPI.detach).toHaveBeenCalledTimes(1);
   });
 });

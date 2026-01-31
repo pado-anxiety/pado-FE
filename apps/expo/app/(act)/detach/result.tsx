@@ -1,6 +1,3 @@
-import { useRef } from 'react';
-
-import { useMutation } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import WebView from 'react-native-webview';
@@ -11,20 +8,17 @@ import {
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
+import { useActResultData } from '@src/hooks/use-act-result-data';
 import { showAlert } from '@src/lib/alert';
-import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
+import { ANALYTICS_KEY } from '@src/lib/analytics';
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
 import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
-import { createWebViewMessageHandler } from '@src/lib/webview';
 
 export default function DetachResultScreen() {
   const { data } = useLocalSearchParams();
   const { t } = useTranslation();
   const router = useRouter();
-  const hasMutated = useRef(false);
-
-  const { trackFunnelComplete } = useAnalytics();
 
   const parsedData = parseJSON(data as string, () => {
     showAlert.error(t('common.error.generic'), t('common.error.tryLater'), () =>
@@ -32,29 +26,9 @@ export default function DetachResultScreen() {
     );
   });
 
-  // TODO: offline-first save
-  const detachMutation = useMutation({
-    mutationFn: ({
-      userTextToken,
-    }: {
-      userTextToken: { text: string; isSelected: boolean }[];
-    }) => actAPI.detach({ userTextToken }),
-    onError: (error) => {
-      console.error('Failed to save detach result', error);
-    },
-  });
-
-  const handleMessage = createWebViewMessageHandler({
-    onNavigate: (_, duration) => {
-      if (!hasMutated.current) {
-        hasMutated.current = true;
-        detachMutation.mutate({
-          userTextToken: parsedData,
-        });
-      }
-      trackFunnelComplete(ANALYTICS_KEY.ACT.DETACH.SEPARATE, duration);
-      router.replace(ROUTES.HOME);
-    },
+  const handleMessage = useActResultData({
+    analyticsKey: ANALYTICS_KEY.ACT.DETACH.SEPARATE,
+    mutationFn: () => actAPI.detach({ userTextToken: parsedData }),
   });
 
   return (

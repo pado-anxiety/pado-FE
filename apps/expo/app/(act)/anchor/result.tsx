@@ -1,6 +1,3 @@
-import { useRef } from 'react';
-
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import WebView from 'react-native-webview';
 
@@ -10,35 +7,18 @@ import {
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
-import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
+import { useActResultData } from '@src/hooks/use-act-result-data';
+import { ANALYTICS_KEY } from '@src/lib/analytics';
 import { actAPI } from '@src/lib/api/act';
 import { WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 import { ROUTES } from '@src/lib/route/route';
-import { createWebViewMessageHandler } from '@src/lib/webview';
 
 export default function AnchorResultScreen() {
   const router = useRouter();
-  const hasMutated = useRef(false);
 
-  const { trackFunnelComplete } = useAnalytics();
-
-  // TODO: offline-first save
-  const anchorMutation = useMutation({
+  const handleMessage = useActResultData({
+    analyticsKey: ANALYTICS_KEY.ACT.ANCHOR.FIVE,
     mutationFn: () => actAPI.anchor(),
-    onError: (error) => {
-      console.error(error);
-    },
-  });
-
-  const handleMessage = createWebViewMessageHandler({
-    onNavigate: (_, duration) => {
-      if (!hasMutated.current) {
-        hasMutated.current = true;
-        anchorMutation.mutate();
-      }
-      trackFunnelComplete(ANALYTICS_KEY.ACT.ANCHOR.FIVE, duration);
-      router.replace(ROUTES.HOME);
-    },
   });
 
   return (

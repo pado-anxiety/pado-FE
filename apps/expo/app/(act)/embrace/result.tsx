@@ -1,31 +1,24 @@
-import { useRef } from 'react';
-
-import { useMutation } from '@tanstack/react-query';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import WebView from 'react-native-webview';
 
-import { PageSafeAreaView } from '@src/components/layout/indext';
+import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import {
   LoadingSpinner,
   WebViewErrorView,
   WebViewLoadingView,
 } from '@src/components/ui';
+import { useActResultData } from '@src/hooks/use-act-result-data';
 import { showAlert } from '@src/lib/alert';
-import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
+import { ANALYTICS_KEY } from '@src/lib/analytics';
 import { actAPI } from '@src/lib/api/act';
 import { parseJSON, safeStringify } from '@src/lib/json';
-import { WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
-import { ROUTES } from '@src/lib/route/route';
-import { createWebViewMessageHandler } from '@src/lib/webview';
+import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
 
 export default function EmbraceResultScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { data } = useLocalSearchParams();
-  const hasMutated = useRef(false);
-
-  const { trackFunnelComplete } = useAnalytics();
 
   const parsedData = parseJSON(data as string, () => {
     showAlert.error(t('common.error.generic'), t('common.error.tryLater'), () =>
@@ -33,26 +26,10 @@ export default function EmbraceResultScreen() {
     );
   });
 
-  // TODO: offline-first save
-  const embraceMutation = useMutation({
-    mutationFn: ({ breathingTime }: { breathingTime: number }) =>
-      actAPI.embrace({ breathingTime }),
-    onError: (error) => {
-      console.error('Failed to save embrace result', error);
-    },
-  });
-
-  const handleMessage = createWebViewMessageHandler({
-    onNavigate: (_, duration) => {
-      if (!hasMutated.current) {
-        hasMutated.current = true;
-        embraceMutation.mutate({
-          breathingTime: parsedData.embraceResult,
-        });
-      }
-      trackFunnelComplete(ANALYTICS_KEY.ACT.EMBRACE.DEEPEN, duration);
-      router.replace(ROUTES.HOME);
-    },
+  const handleMessage = useActResultData({
+    analyticsKey: ANALYTICS_KEY.ACT.EMBRACE.DEEPEN,
+    mutationFn: () =>
+      actAPI.embrace({ breathingTime: parsedData.embraceResult }),
   });
 
   return (
