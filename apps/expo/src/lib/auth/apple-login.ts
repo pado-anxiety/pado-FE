@@ -1,6 +1,8 @@
 import * as AppleAuthentication from 'expo-apple-authentication';
 
+import { authAPI } from '../api/auth';
 import { i18n } from '../i18n';
+import { parseAuthToken } from './utils';
 
 export const SignInWithApple = async () => {
   try {
@@ -11,17 +13,29 @@ export const SignInWithApple = async () => {
       ],
     });
 
-    // 1. 프론트가 받는 결과물
-    const { identityToken, authorizationCode, fullName, email } = credential;
+    const { authorizationCode, fullName } = credential;
+    console.log(authorizationCode, fullName);
 
-    console.log('=====Apple Authentication Result=====', {
-      identityToken,
+    if (!authorizationCode) {
+      return { errorMessage: i18n.t('common.error.generic') };
+    }
+
+    let userName: string | null = null;
+    if (fullName && (fullName.familyName || fullName.givenName)) {
+      userName =
+        `${fullName.familyName ?? ''}${fullName.givenName ?? ''}`.trim();
+    }
+
+    const response = await authAPI.getAppleAccessToken({
       authorizationCode,
-      fullName,
-      email,
+      fullName: userName,
     });
 
-    // 백엔드 요청
+    const { accessToken, refreshToken } = parseAuthToken(response);
+
+    console.log(accessToken, refreshToken);
+
+    return { accessToken, refreshToken };
   } catch (error) {
     console.error(error);
     return { errorMessage: i18n.t('common.error.generic') };

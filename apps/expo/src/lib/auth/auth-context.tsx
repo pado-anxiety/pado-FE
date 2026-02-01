@@ -65,11 +65,11 @@ export const useAuth = create<AuthState>((set) => ({
         token.refreshToken = result.refreshToken;
       } else if (platform === 'apple') {
         const result = await SignInWithApple();
-        // if ('errorMessage' in result) {
-        //   return { errorMessage: result.errorMessage };
-        // }
-        // token.accessToken = result.accessToken;
-        // token.refreshToken = result.refreshToken;
+        if ('errorMessage' in result) {
+          return { errorMessage: result.errorMessage };
+        }
+        token.accessToken = result.accessToken;
+        token.refreshToken = result.refreshToken;
       }
 
       if (!token.accessToken || !token.refreshToken) {
