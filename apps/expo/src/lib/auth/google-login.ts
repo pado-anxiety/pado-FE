@@ -15,7 +15,8 @@ import { parseAuthToken } from './utils';
 
 type AuthResult =
   | { accessToken: string; refreshToken: string }
-  | { errorMessage: string };
+  | { errorMessage: string }
+  | { cancelled: true };
 
 export const SignInWithGoogle = (): Promise<AuthResult> => {
   if (Platform.OS === 'ios') {
@@ -44,7 +45,7 @@ const SignInWithGoogleOnIOS = async (): Promise<AuthResult> => {
     const result = await WebBrowser.openAuthSessionAsync(authUrl, redirectUri);
 
     if (result.type !== 'success' || !result.url) {
-      return { errorMessage: i18n.t('auth.error.googleAuthCanceled') };
+      return { cancelled: true };
     }
 
     const params = Linking.parse(result.url).queryParams;
@@ -65,9 +66,24 @@ const SignInWithGoogleOnIOS = async (): Promise<AuthResult> => {
 
     return { accessToken, refreshToken };
   } catch (error) {
+    if (isGoogleCancelError(error)) {
+      return { cancelled: true };
+    }
     console.error(error);
     return { errorMessage: i18n.t('auth.error.googleError') };
   }
+};
+
+const isGoogleCancelError = (error: unknown): boolean => {
+  if (error && typeof error === 'object' && 'code' in error) {
+    const code = (error as { code: string }).code;
+    return (
+      code === 'SIGN_IN_CANCELLED' ||
+      code === 'ERR_REQUEST_CANCELED' ||
+      code === '-5'
+    );
+  }
+  return false;
 };
 
 const SignInWithGoogleOnAndroid = async (): Promise<AuthResult> => {
@@ -90,6 +106,9 @@ const SignInWithGoogleOnAndroid = async (): Promise<AuthResult> => {
     const { accessToken, refreshToken } = parseAuthToken(response);
     return { accessToken, refreshToken };
   } catch (error) {
+    if (isGoogleCancelError(error)) {
+      return { cancelled: true };
+    }
     console.error(error);
     return { errorMessage: i18n.t('auth.error.googleError') };
   }

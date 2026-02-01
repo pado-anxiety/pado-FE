@@ -12,6 +12,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   scheme: ClientEnv.SCHEME,
   userInterfaceStyle: 'automatic',
   newArchEnabled: true,
+  splash: {
+    backgroundColor: '#ffffff',
+    resizeMode: 'contain',
+  },
   ios: {
     icon: './assets/icon.png',
     supportsTablet: false,
@@ -21,6 +25,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
     usesAppleSignIn: true,
     bundleIdentifier: ClientEnv.IOS_BUNDLE_IDENTIFIER,
+    splash: {
+      dark: {
+        backgroundColor: '#000000',
+      },
+    },
   },
   android: {
     adaptiveIcon: {
@@ -28,6 +37,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       foregroundImage: './assets/images/android-icon-foreground.png',
       backgroundImage: './assets/images/android-icon-background.png',
       monochromeImage: './assets/images/android-icon-monochrome.png',
+    },
+    splash: {
+      dark: {
+        backgroundColor: '#000000',
+      },
     },
     edgeToEdgeEnabled: true,
     package: ClientEnv.ANDROID_PACKAGE,
@@ -72,8 +86,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-splash-screen',
       {
-        image: './assets/images/splash-icon.png',
-        imageWidth: 200,
         resizeMode: 'contain',
         backgroundColor: '#ffffff',
         dark: {

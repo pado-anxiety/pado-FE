@@ -4,7 +4,12 @@ import { authAPI } from '../api/auth';
 import { i18n } from '../i18n';
 import { parseAuthToken } from './utils';
 
-export const SignInWithApple = async () => {
+type AuthResult =
+  | { accessToken: string; refreshToken: string }
+  | { errorMessage: string }
+  | { cancelled: true };
+
+export const SignInWithApple = async (): Promise<AuthResult> => {
   try {
     const credential = await AppleAuthentication.signInAsync({
       requestedScopes: [
@@ -36,7 +41,10 @@ export const SignInWithApple = async () => {
     console.log(accessToken, refreshToken);
 
     return { accessToken, refreshToken };
-  } catch (error) {
+  } catch (error: any) {
+    if (error?.code === 'ERR_REQUEST_CANCELED') {
+      return { cancelled: true };
+    }
     console.error(error);
     return { errorMessage: i18n.t('common.error.generic') };
   }

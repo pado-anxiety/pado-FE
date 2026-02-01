@@ -20,7 +20,7 @@ interface AuthState {
 
   login: (
     platform: 'google' | 'kakao' | 'apple',
-  ) => Promise<void | { errorMessage: string }>;
+  ) => Promise<void | { errorMessage: string } | { cancelled: true }>;
 
   logout: () => void;
 
@@ -51,6 +51,7 @@ export const useAuth = create<AuthState>((set) => ({
 
       if (platform === 'google') {
         const result = await SignInWithGoogle();
+        if ('cancelled' in result) return { cancelled: true };
         if ('errorMessage' in result) {
           return { errorMessage: result.errorMessage };
         }
@@ -58,6 +59,7 @@ export const useAuth = create<AuthState>((set) => ({
         token.refreshToken = result.refreshToken;
       } else if (platform === 'kakao') {
         const result = await SignInWithKakao();
+        if ('cancelled' in result) return { cancelled: true };
         if ('errorMessage' in result) {
           return { errorMessage: result.errorMessage };
         }
@@ -65,6 +67,7 @@ export const useAuth = create<AuthState>((set) => ({
         token.refreshToken = result.refreshToken;
       } else if (platform === 'apple') {
         const result = await SignInWithApple();
+        if ('cancelled' in result) return { cancelled: true };
         if ('errorMessage' in result) {
           return { errorMessage: result.errorMessage };
         }
