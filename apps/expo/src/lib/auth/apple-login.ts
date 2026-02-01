@@ -19,16 +19,14 @@ export const SignInWithApple = async (): Promise<AuthResult> => {
     });
 
     const { authorizationCode, fullName } = credential;
-    console.log(authorizationCode, fullName);
 
     if (!authorizationCode) {
       return { errorMessage: i18n.t('common.error.generic') };
     }
 
     let userName: string | null = null;
-    if (fullName && (fullName.familyName || fullName.givenName)) {
-      userName =
-        `${fullName.familyName ?? ''}${fullName.givenName ?? ''}`.trim();
+    if (fullName?.familyName && fullName?.givenName) {
+      userName = `${fullName.familyName} ${fullName.givenName}`.trim();
     }
 
     const response = await authAPI.getAppleAccessToken({
@@ -37,8 +35,6 @@ export const SignInWithApple = async (): Promise<AuthResult> => {
     });
 
     const { accessToken, refreshToken } = parseAuthToken(response);
-
-    console.log(accessToken, refreshToken);
 
     return { accessToken, refreshToken };
   } catch (error: any) {

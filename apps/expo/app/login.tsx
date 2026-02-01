@@ -46,6 +46,7 @@ export default function LoginScreen() {
       showAlert.error(result.errorMessage, t('common.error.tryLater'));
       return;
     }
+    router.replace(ROUTES.HOME);
   };
 
   const handleGoogleLogin = async () => {
