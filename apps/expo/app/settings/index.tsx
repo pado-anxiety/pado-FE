@@ -18,6 +18,7 @@ import {
   useModal,
 } from '@src/components/ui';
 import { ENV } from '@src/lib';
+import { showAlert } from '@src/lib/alert';
 import { userAPI } from '@src/lib/api/user';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
@@ -53,16 +54,28 @@ export default function SettingsScreen() {
     feedbackMutation.mutate(feedback);
   };
 
-  const handleLogout = async () => {
-    await logout();
-    posthog.reset();
-    router.replace(ROUTES.LOGIN);
+  const handleLogout = () => {
+    showAlert.confirm(
+      t('common.settings.logoutConfirmTitle'),
+      t('common.settings.logoutConfirmMessage'),
+      async () => {
+        await logout();
+        posthog.reset();
+        router.replace(ROUTES.LOGIN);
+      },
+    );
   };
 
-  const handleDeleteAccount = async () => {
-    await deleteAccount();
-    posthog.reset();
-    router.replace(ROUTES.LOGIN);
+  const handleDeleteAccount = () => {
+    showAlert.confirm(
+      t('common.settings.deleteAccountConfirmTitle'),
+      t('common.settings.deleteAccountConfirmMessage'),
+      async () => {
+        await deleteAccount();
+        posthog.reset();
+        router.replace(ROUTES.LOGIN);
+      },
+    );
   };
 
   return (
