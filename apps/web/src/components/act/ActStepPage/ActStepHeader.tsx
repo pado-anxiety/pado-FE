@@ -9,7 +9,7 @@ interface ActStepHeaderProps {
 function ActStepHeader({ leftButton, rightButton }: ActStepHeaderProps) {
   return (
     <div className="flex flex-row w-full justify-between">
-      {leftButton || <div />}
+      <div style={{ marginLeft: -7 }}>{leftButton || <div />}</div>
       {rightButton || <div />}
     </div>
   );

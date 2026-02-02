@@ -93,6 +93,7 @@ export default function HomeScreen(): React.ReactNode {
   };
 
   console.log('base: ', ENV.BASE_URL);
+  console.log('ios webview url: ', ENV.IOS_WEBVIEW_URL);
 
   return (
     <View className="flex-1 bg-red-100">

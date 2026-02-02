@@ -12,6 +12,7 @@ dotenv.config({ path: envPath, override: true });
 console.log('loading env from:', envPath);
 
 console.log('BASE_URL: ', process.env.BASE_URL);
+console.log('IOS_WEBVIEW_URL: ', process.env.IOS_WEBVIEW_URL);
 
 const NAME = '파도';
 const VERSION = packageJson.version;
@@ -24,7 +25,7 @@ const IOS_REDIRECT_URI =
   'com.googleusercontent.apps.462769921210-ocj5vrpss8iu7brqoh55amrq3bj76l4f:/oauth2redirect/google';
 const IOS_GOOGLE_CLIENT_ID =
   '462769921210-ocj5vrpss8iu7brqoh55amrq3bj76l4f.apps.googleusercontent.com';
-const IOS_BUNDLE_IDENTIFIER = 'com.taewoongheo.pado';
+const IOS_BUNDLE_IDENTIFIER = 'com.taewoongheo.padoapp';
 const ANDROID_PACKAGE = 'com.taewoongheo.pado';
 const WEB_CLIENT_ID =
   '462769921210-uoli77o7e6u25cou915jusrmcfnfal83.apps.googleusercontent.com';
