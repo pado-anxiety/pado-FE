@@ -18,7 +18,6 @@ import {
   useModal,
 } from '@src/components/ui';
 import { ENV } from '@src/lib';
-import { showAlert } from '@src/lib/alert';
 import { userAPI } from '@src/lib/api/user';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
@@ -54,40 +53,29 @@ export default function SettingsScreen() {
     feedbackMutation.mutate(feedback);
   };
 
-  const handleLogout = () => {
-    showAlert.confirm(
-      t('common.settings.logoutConfirmTitle'),
-      t('common.settings.logoutConfirmMessage'),
-      async () => {
-        await logout();
-        posthog.reset();
-        router.replace(ROUTES.LOGIN);
-      },
-    );
+  const handleLogout = async () => {
+    await logout();
+    posthog.reset();
+    router.replace(ROUTES.LOGIN);
   };
 
-  const handleDeleteAccount = () => {
-    showAlert.confirm(
-      t('common.settings.deleteAccountConfirmTitle'),
-      t('common.settings.deleteAccountConfirmMessage'),
-      async () => {
-        await deleteAccount();
-        posthog.reset();
-        router.replace(ROUTES.LOGIN);
-      },
-    );
+  const handleDeleteAccount = async () => {
+    await deleteAccount();
+    posthog.reset();
+    router.replace(ROUTES.LOGIN);
   };
 
   return (
     <PageSafeAreaView className="mt-4 gap-4 bg-page px-8">
-      <View className="flex flex-row items-center justify-between gap-2">
-        <NavButton
-          variant="back"
-          size="large"
-          onPress={() => router.back()}
-        />
+      <View className="relative flex items-center justify-between">
+        <View className="absolute left-[-8px]">
+          <NavButton
+            variant="back"
+            size="large"
+            onPress={() => router.back()}
+          />
+        </View>
         <Text className="text-body-large">{t('common.settings.title')}</Text>
-        <View className="w-6" />
       </View>
       <View className="mt-4 flex flex-col gap-6">
         {/* 사용자 정보 */}

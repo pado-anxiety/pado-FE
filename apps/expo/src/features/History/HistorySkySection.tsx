@@ -15,20 +15,24 @@ export default function HistorySkySection({
 
   return (
     <View
-      className="flex flex-col items-start justify-center gap-4 bg-page px-8 pt-12"
+      className="flex flex-col items-start justify-center gap-4 bg-page px-8"
       style={{ paddingTop: insets.top }}
     >
-      <NavButton
-        variant="back"
-        size="large"
-        onPress={() => {
-          triggerHaptic('NAVIGATE');
-          setPage('HOME');
-        }}
-      />
+      <View className="relative w-full">
+        <View className="absolute left-[-8px]">
+          <NavButton
+            variant="back"
+            size="large"
+            onPress={() => {
+              triggerHaptic('NAVIGATE');
+              setPage('HOME');
+            }}
+          />
+        </View>
+      </View>
       <View
-        className="flex flex-col gap-2"
-        style={{ paddingTop: scale(50) }}
+        className="flex flex-col gap-2 "
+        style={{ paddingTop: scale(80) }}
       >
         <AnimatedText
           delay={1000}
