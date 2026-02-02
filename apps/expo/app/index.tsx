@@ -19,7 +19,7 @@ import {
   useHomeListData,
   useHomePageState,
 } from '@src/features/home/hooks';
-import { isOnboarded } from '@src/lib';
+import { ENV, isOnboarded } from '@src/lib';
 import { showAlert } from '@src/lib/alert';
 import { useAnalytics } from '@src/lib/analytics';
 import { historyAPI } from '@src/lib/api/history';
@@ -91,6 +91,8 @@ export default function HomeScreen(): React.ReactNode {
       fetchNextPage();
     }
   };
+
+  console.log('base: ', ENV.BASE_URL);
 
   return (
     <View className="flex-1 bg-red-100">

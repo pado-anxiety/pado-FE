@@ -33,6 +33,11 @@ apiClient.interceptors.request.use(
   },
 );
 
+let refreshPromise: Promise<{
+  accessToken: string;
+  refreshToken: string;
+}> | null = null;
+
 apiClient.interceptors.response.use(
   (response) => {
     return response.data;
@@ -54,7 +59,12 @@ apiClient.interceptors.response.use(
     config._retry = true;
 
     try {
-      const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
+      // 이미 진행 중인 refresh가 없을 때만 새로 시작
+      if (!refreshPromise) {
+        refreshPromise = authAPI.reissueAuthToken();
+      }
+
+      const { accessToken, refreshToken } = await refreshPromise;
 
       useAuth.getState().setAuthToken(accessToken, refreshToken);
 
@@ -69,6 +79,8 @@ apiClient.interceptors.response.use(
       );
 
       return Promise.reject(reissueError);
+    } finally {
+      refreshPromise = null;
     }
   },
 );

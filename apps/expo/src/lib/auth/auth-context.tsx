@@ -30,6 +30,8 @@ interface AuthState {
   setAuthToken: (accessToken: string, refreshToken: string) => void;
 
   setUserInfo: (name: string, email: string) => void;
+
+  deleteAccount: () => Promise<void | { errorMessage: string }>;
 }
 
 export const useAuth = create<AuthState>((set) => ({
@@ -171,5 +173,30 @@ export const useAuth = create<AuthState>((set) => ({
       name: name,
       email: email,
     });
+  },
+
+  deleteAccount: async () => {
+    set({ isLoading: true });
+
+    try {
+      await userAPI.deleteUser();
+    } catch (error) {
+      console.error('Delete account API failed:', error);
+      set({ isLoading: false });
+      return { errorMessage: i18n.t('auth.error.unexpected') };
+    }
+
+    authStorage.clearAuthInfo();
+
+    set({
+      name: null,
+      email: null,
+      accessToken: null,
+      refreshToken: null,
+      isLoggedIn: false,
+      isLoading: false,
+    });
+
+    router.replace(ROUTES.HOME);
   },
 }));

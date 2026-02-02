@@ -9,4 +9,8 @@ export const userAPI = {
     const response = await apiClient.post('/feedbacks', { feedback });
     return response;
   },
+  deleteUser: async () => {
+    const response = await apiClient.delete('/users');
+    return response;
+  },
 };

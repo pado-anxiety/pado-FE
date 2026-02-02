@@ -25,7 +25,7 @@ import { ROUTES } from '@src/lib/route';
 export default function SettingsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { logout, name, email } = useAuth();
+  const { logout, deleteAccount, name, email } = useAuth();
   const posthog = usePostHog();
 
   const feedbackRef = useRef<string>('');
@@ -55,6 +55,12 @@ export default function SettingsScreen() {
 
   const handleLogout = async () => {
     await logout();
+    posthog.reset();
+    router.replace(ROUTES.LOGIN);
+  };
+
+  const handleDeleteAccount = async () => {
+    await deleteAccount();
     posthog.reset();
     router.replace(ROUTES.LOGIN);
   };
@@ -188,10 +194,15 @@ export default function SettingsScreen() {
           </Pressable>
         </View>
       </View>
-      <View className="mt-12 flex flex-row items-center justify-center">
+      <View className="mt-12 flex flex-col items-center justify-center gap-4">
         <Pressable onPress={handleLogout}>
           <Text className="text-label-medium font-medium text-destructive">
             {t('common.settings.logout')}
+          </Text>
+        </Pressable>
+        <Pressable onPress={handleDeleteAccount}>
+          <Text className="text-label-medium font-medium text-sub">
+            {t('common.settings.deleteAccount')}
           </Text>
         </Pressable>
       </View>

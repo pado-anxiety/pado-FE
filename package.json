@@ -1,7 +1,10 @@
 {
   "private": true,
   "workspaces": {
-    "packages": ["apps/*", "packages/*"]
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ]
   },
   "scripts": {
     "start:all:ios:development": "concurrently \"yarn workspace pado-expo start:ios:development\" \"yarn workspace pado-web dev\"",
@@ -21,7 +24,6 @@
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.46.3"
   },
-  
   "packageManager": "yarn@4.12.0",
   "dependencies": {
     "expo-updates": "~29.0.15"

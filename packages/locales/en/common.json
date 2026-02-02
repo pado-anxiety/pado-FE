@@ -51,6 +51,9 @@
     "appVersion": "App Version",
     "licenseInfo": "Licenses",
     "licenseDescription": "This app uses the following open-source libraries.",
-    "logout": "Log out"
+    "logout": "Log out",
+    "deleteAccount": "Delete Account",
+    "deleteAccountConfirmTitle": "Delete your account?",
+    "deleteAccountConfirmMessage": "All your data will be permanently deleted and cannot be recovered."
   }
 }

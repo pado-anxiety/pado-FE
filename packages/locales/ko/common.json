@@ -51,6 +51,9 @@
     "appVersion": "앱 버전",
     "licenseInfo": "라이선스 정보",
     "licenseDescription": "본 앱은 아래의 오픈소스 라이브러리를 사용하고 있습니다.",
-    "logout": "로그아웃"
+    "logout": "로그아웃",
+    "deleteAccount": "회원탈퇴",
+    "deleteAccountConfirmTitle": "정말 탈퇴하시겠어요?",
+    "deleteAccountConfirmMessage": "탈퇴하면 모든 데이터가 삭제되며 복구할 수 없습니다."
   }
 }
