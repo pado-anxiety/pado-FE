@@ -9,7 +9,8 @@
     "restart": "다시 시작",
     "send": "보내기",
     "goHome": "홈으로 돌아가기",
-    "confirm": "확인"
+    "confirm": "확인",
+    "cancel": "취소"
   },
   "loading": "로딩중...",
   "error": {
@@ -52,6 +53,8 @@
     "licenseInfo": "라이선스 정보",
     "licenseDescription": "본 앱은 아래의 오픈소스 라이브러리를 사용하고 있습니다.",
     "logout": "로그아웃",
+    "logoutConfirmTitle": "로그아웃 하시겠어요?",
+    "logoutConfirmMessage": "다시 로그인하면 이용할 수 있어요.",
     "deleteAccount": "회원탈퇴",
     "deleteAccountConfirmTitle": "정말 탈퇴하시겠어요?",
     "deleteAccountConfirmMessage": "탈퇴하면 모든 데이터가 삭제되며 복구할 수 없습니다."

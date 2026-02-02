@@ -66,7 +66,8 @@ function NavigationContent() {
     setHapticState(hapticState);
   }, []);
 
-  const { isAlertOpen, title, message, closeAlert } = useAlert();
+  const { isAlertOpen, title, message, isConfirm, closeAlert, confirmAlert } =
+    useAlert();
 
   return (
     <View style={[{ flex: 1 }, themeStyle]}>
@@ -103,12 +104,30 @@ function NavigationContent() {
                 <Text className="text-body-medium">{title}</Text>
                 <Text className="text-body-small text-sub">{message}</Text>
               </View>
-              <Button
-                text={t('common.button.confirm')}
-                size="sm"
-                onPress={() => closeAlert()}
-                className="bg-btn-act-page"
-              />
+              {isConfirm ? (
+                <View className="flex flex-row gap-2">
+                  <Button
+                    text={t('common.button.cancel')}
+                    size="sm"
+                    onPress={() => closeAlert()}
+                    className="flex-1 bg-gray-300"
+                    textClassName="text-body"
+                  />
+                  <Button
+                    text={t('common.button.confirm')}
+                    size="sm"
+                    onPress={() => confirmAlert()}
+                    className="flex-1 bg-btn-act-page"
+                  />
+                </View>
+              ) : (
+                <Button
+                  text={t('common.button.confirm')}
+                  size="sm"
+                  onPress={() => closeAlert()}
+                  className="bg-btn-act-page"
+                />
+              )}
             </View>
           </Animated.View>
         </Pressable>

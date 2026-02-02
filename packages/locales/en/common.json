@@ -9,7 +9,8 @@
     "restart": "Start Over",
     "send": "Send",
     "goHome": "Back to Home",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
   "loading": "Calming the waves...",
   "error": {
@@ -52,6 +53,8 @@
     "licenseInfo": "Licenses",
     "licenseDescription": "This app uses the following open-source libraries.",
     "logout": "Log out",
+    "logoutConfirmTitle": "Log out?",
+    "logoutConfirmMessage": "You can log back in anytime.",
     "deleteAccount": "Delete Account",
     "deleteAccountConfirmTitle": "Delete your account?",
     "deleteAccountConfirmMessage": "All your data will be permanently deleted and cannot be recovered."

@@ -45,4 +45,8 @@ export const showAlert = {
   validation: (title: string, message: string, onPress?: () => void): void => {
     useAlert.getState().openAlert(title, message, onPress);
   },
+
+  confirm: (title: string, message: string, onConfirm: () => void): void => {
+    useAlert.getState().openConfirm(title, message, onConfirm);
+  },
 };
