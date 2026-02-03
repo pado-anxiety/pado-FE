@@ -12,7 +12,7 @@ interface DescriptionListProps {
 export function DescriptionList({
   title,
   items,
-  titleClassName = 'text-title-medium',
+  titleClassName = 'text-title-small',
   itemClassName = 'text-body-medium',
 }: DescriptionListProps) {
   const renderTitle = () => {

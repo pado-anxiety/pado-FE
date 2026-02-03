@@ -95,12 +95,12 @@ export default function SettingsScreen() {
         <View className="mt-4 gap-2 overflow-hidden">
           {/* 이름 행 */}
           <View className="flex flex-row items-center justify-between gap-4">
-            <Text className="shrink-0 text-label-medium font-medium">
+            <Text className="shrink-0 text-label-large font-medium">
               {t('common.settings.user.name')}
             </Text>
             <Text
               numberOfLines={1}
-              className="flex-1 text-right text-label-medium font-medium"
+              className="flex-1 text-right text-label-large font-medium"
             >
               {name}
             </Text>
@@ -108,13 +108,13 @@ export default function SettingsScreen() {
 
           {/* 이메일 행 */}
           <View className="flex flex-row items-center justify-between gap-4">
-            <Text className="shrink-0 text-label-medium font-medium">
+            <Text className="shrink-0 text-label-large font-medium">
               {t('common.settings.user.email')}
             </Text>
             <Text
               numberOfLines={1}
               ellipsizeMode="tail"
-              className="flex-1 text-right text-label-medium font-medium"
+              className="flex-1 text-right text-label-large font-medium"
             >
               {email}
             </Text>
