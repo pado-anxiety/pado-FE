@@ -148,7 +148,7 @@ export default function RootLayout(): React.ReactNode {
         // check https://posthog.com/docs/session-replay/installation?tab=React+Native
         // for more config and to learn about how we capture sessions on mobile
         // and what to expect
-        enableSessionReplay: true,
+        enableSessionReplay: false,
         sessionReplayConfig: {
           // Whether text inputs are masked. Default is true.
           // Password inputs are always masked regardless
