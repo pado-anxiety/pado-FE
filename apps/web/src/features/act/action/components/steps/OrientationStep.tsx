@@ -48,10 +48,10 @@ export function OrientationStep({
       )}
       <div className="flex flex-col gap-2">
         <div className="flex flex-row items-center gap-2 flex-wrap">
-          <Text className="text-title-medium font-bold">
+          <Text className="text-body-large font-bold">
             <Text
               as="span"
-              className="text-title-medium bg-btn-act-page text-white font-bold py-1 px-3 rounded-xl"
+              className="text-body-large bg-btn-act-page text-white font-bold py-1 px-3 rounded-xl"
             >
               {domainLabel}
             </Text>

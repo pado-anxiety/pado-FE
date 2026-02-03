@@ -84,15 +84,19 @@ export default function LicenseScreen() {
 
   return (
     <PageSafeAreaView className="bg-page px-8">
+      <View className="relative mt-4">
+        <View className="absolute left-[-7px]">
+          <NavButton
+            variant="back"
+            size="large"
+            onPress={() => router.back()}
+          />
+        </View>
+      </View>
       <ScrollView
-        className="mt-4 flex-1"
+        className="mt-14 flex-1"
         showsVerticalScrollIndicator={false}
       >
-        <NavButton
-          variant="back"
-          size="large"
-          onPress={() => router.back()}
-        />
         <View className="mt-4 gap-6 pb-8">
           <Text className="text-body-medium font-bold">
             {t('common.settings.licenseInfo')}
