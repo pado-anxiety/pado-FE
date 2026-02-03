@@ -1,44 +1,44 @@
 {
   "intro": {
-    "title": "Recording Today's Wave",
+    "title": "Recording Today's Waves",
     "description": [
-      "We often get swept away by a huge wave called 'anxiety' without knowing exactly what we're feeling in the moment.",
-      "But this wave isn't just one emotion; it's often a single wave made of many different feelings layered together.",
+      "We often get swept away by a huge wave called 'anxiety,' without knowing exactly what we're feeling right now.",
+      "This wave isn't just one emotion—it's a single wave made of many feelings layered together.",
       "Shall we take a moment to discover which emotions make up the waves rolling toward you?"
     ],
     "contentTitle": "Writing an Emotion Diary",
-    "contentDescription": "A practice of breaking down vague anxiety into specific emotions to face your true heart.",
+    "contentDescription": "A practice of breaking down vague anxiety into specific emotions to face the true feelings within.",
     "steps": [
       "1. Situation (Fact): When, where, and what happened?",
       "2. Thought (Thought): What thoughts crossed your mind at that moment?",
-      "3. Emotion (Emotion): What emotions did those thoughts make you feel?"
+      "3. Emotion (Emotion): What emotions did those thoughts bring?"
     ],
-    "tip": "Tip: 'Thoughts' are just like the wind—they have no substance. The key is to discover how you interpreted the situation."
+    "tip": "Tip: 'Thoughts' are just wind with no substance. The key is discovering how you interpreted the situation."
   },
   "step": {
     "step1": {
       "question": "What happened?",
-      "description": "Record the facts of the moment your inner sea wavered, as if captured objectively by a CCTV camera.",
+      "description": "Write down the facts of the moment that shook your ocean—objectively, as if a camera were recording it.",
       "exampleBad": "X: I felt pathetic because I was lazy and didn't study at all.",
-      "exampleGood": "O: I planned to study for 3 hours, but I actually spent all 3 hours on my smartphone."
+      "exampleGood": "I planned to study for 3 hours today, but ended up spending all 3 hours on my phone."
     },
     "step2": {
       "question": "What thoughts crossed your mind?",
-      "description": "Write down the interpretations or thoughts that brushed across your surface, added to the facts.",
-      "exampleBad": "X: I felt a sense of failure and didn't want to study. (This is a feeling/emotion)",
-      "exampleGood": "O: I thought, 'I have no willpower,' or 'What if I fail the exam because of this?'"
+      "description": "Write down the interpretations or thoughts that brushed across your surface, layered on top of the facts.",
+      "exampleBad": "X: I felt defeated and didn't want to study anymore. (This is an emotion.)",
+      "exampleGood": "I thought, \"I have no willpower,\" and \"What if I fail the exam because of this?\""
     },
     "step3": {
       "question": "What emotions did you feel?",
-      "description": "Select or write down the true identity of the wave or physical sensations brought by those thoughts."
+      "description": "Find the true identity of the wave or any physical sensations those thoughts brought."
     },
-    "placeholder": "Feel free to write down the emotions you felt at the time."
+    "placeholder": "Freely write down the emotions you felt at the time."
   },
   "result": {
-    "title": "We've discovered the true emotions within the wave",
+    "title": "You've found the true emotions within the wave",
     "description": [
-      "Now, this wave is no longer just a giant, mysterious anxiety.",
-      "The moment you gave it a name, the wave became a 'specific feeling' that you can face and embrace.",
+      "This wave is no longer a mysterious, overwhelming anxiety.",
+      "The moment you gave it a name, the wave became a 'specific feeling' you can face and embrace.",
       "Shall we move to the next step and observe this wave as it is, without trying to suppress it?"
     ]
   },

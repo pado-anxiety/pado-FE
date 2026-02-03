@@ -1,7 +1,7 @@
 {
   "greeting": "안녕하세요",
   "menu": {
-    "viewActHistory": "지나온 파도의 기록",
+    "viewActHistory": "파도 기록 살펴보기",
     "chatWithWind": "마음 털어놓기",
     "learning": "불안에 대해 더 알아보기",
     "onboarding": "온보딩",
@@ -9,7 +9,7 @@
   },
   "app": {
     "name": "파도",
-    "tagline": "밀려오는 파도를 있는 그대로 품어주는 시간",
+    "tagline": "파도를 마주하고, 나만의 리듬으로 나아가는 시간",
     "description": "ACT 기반 불안 관리 앱"
   },
   "learning": {

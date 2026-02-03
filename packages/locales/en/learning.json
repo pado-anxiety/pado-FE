@@ -1,38 +1,38 @@
 {
   "anxiety_info": {
     "title": "Why do we feel anxious?",
-    "description": "Anxiety is not an enemy trying to hurt us; it’s a signal from the heart to keep us safe.",
+    "description": "Anxiety isn't an enemy trying to hurt us—it's a signal from the heart to keep us safe.",
     "analyticsKey": "Why do we feel anxious?",
     "steps": {
       "step1": {
-        "title": "Anxiety is an alarm for survival",
+        "title": "Anxiety is a survival alarm",
         "content": [
           "Since ancient times, anxiety has been a helpful alarm protecting us from danger.",
           "It's an instinctive signal from the brain shouting, \"Be careful!\"",
-          "So, feeling anxious means your survival instinct is working perfectly and healthily."
+          "So feeling anxious means your survival instinct is working perfectly and healthily."
         ]
       },
       "step2": {
-        "title": "It rolls in and out like waves",
+        "title": "It rolls in and fades like waves",
         "content": [
           "Anxiety doesn't stay in our hearts forever.",
-          "Just like waves in the ocean, it slowly rises, reaches its peak, and then gently subsides.",
-          "This anxiety might feel like it will last forever, but remember, every wave is bound to pass."
+          "Like waves in the ocean, it slowly rises, peaks, and gently subsides again.",
+          "This anxiety may feel like it will last forever, but remember—every wave is bound to pass."
         ]
       },
       "step3": {
         "title": "The more you block it, the bigger it gets",
         "content": [
           "What happens if you try to block a rushing wave with your bare body?",
-          "You'll likely feel a greater impact or be swept away more easily.",
-          "Anxiety is the same. The more you resist it, the more fiercely it crashes over your surface."
+          "You'll likely feel a greater impact or get swept away more easily.",
+          "Anxiety is the same. The more you resist, the more fiercely it crashes over your surface."
         ]
       },
       "step4": {
         "title": "Soothe your sensitive alarm",
         "content": [
-          "In modern life, the alarm often rings even when there’s no real danger.",
-          "Instead of trying to break the alarm, it’s important to acknowledge its state first.",
+          "In modern life, the alarm often rings even when there's no real danger.",
+          "Instead of trying to break the alarm, it's important to acknowledge its state first.",
           "Gently say to yourself, \"The alarm is ringing right now. I'm feeling tense.\""
         ]
       },
@@ -54,32 +54,32 @@
       "step1": {
         "title": "What is ACT?",
         "content": [
-          "ACT (Acceptance and Commitment Therapy) is a psychology that helps you accept anxiety as it is,",
-          "and commit to taking action toward the values you hold dear.",
-          "Our app breaks this process down into 5 easy steps for you to follow."
+          "ACT (Acceptance and Commitment Therapy) helps you accept anxiety as it is,",
+          "rather than suppressing it, and commit to acting toward the values you hold dear.",
+          "Our app breaks this process into 5 steps you can easily follow."
         ]
       },
       "step2": {
         "title": "Rising to the surface of the present",
         "content": [
-          "When you're caught in a whirlpool of thoughts, try Step 1 (Grounding) and Step 2 (Emotion Diary).",
-          "By focusing on your senses and recording the weather of your heart,",
-          "you'll find your deep, calm sea that stays steady amidst the rough waves."
+          "When caught in a whirlpool of thoughts, try Step 1 (Grounding) and Step 2 (Emotion Diary).",
+          "By focusing on your senses and calmly recording the weather of your heart,",
+          "you can find your own calm deep sea that stays centered amidst the rough waves."
         ]
       },
       "step3": {
-        "title": "Sorting Thoughts and Facts",
+        "title": "Separating thoughts from facts",
         "content": [
-          "Step 3 (Sorting Thoughts and Facts) helps you view thoughts like \"I will fail\" objectively.",
-          "It's a practice of separating the \"thought\" part from the rest of the sentence.",
-          "Remember, thoughts are just wind brushing across the surface, not absolute facts."
+          "Step 3 (Separating Thoughts from Facts) helps you see thoughts like \"I will fail\" objectively.",
+          "It's a practice of isolating just the 'thought'—the wind—from the rest of the sentence.",
+          "Remember, thoughts are merely wind brushing across the surface, not absolute facts of the ocean."
         ]
       },
       "step4": {
-        "title": "Flowing with the rhythm of waves",
+        "title": "Flowing with the rhythm of the waves",
         "content": [
-          "In Step 4 (Deepening the Sea), try breathing along with the rising and falling wave animations.",
-          "Instead of pushing anxiety away, create a space within your deep sea for it to simply stay.",
+          "In Step 4 (Expanding the Sea Within), breathe along with the rising and falling wave animation.",
+          "Instead of pushing anxiety away, make space within your deep sea for it to simply stay.",
           "As you breathe in and out, let the wave of anxiety just flow through you."
         ]
       },
@@ -88,7 +88,7 @@
         "content": [
           "In the final step, discover the values you truly cherish and take action.",
           "Even if you feel anxious, you can still take small steps toward your values.",
-          "Start with a small action today, while holding your anxiety within."
+          "Holding your anxiety within, start with a small action you can take today."
         ]
       }
     }

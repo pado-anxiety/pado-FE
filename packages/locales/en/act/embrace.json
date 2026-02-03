@@ -1,20 +1,20 @@
 {
   "intro": {
-    "title": "Deepening the Sea of Your Heart",
+    "title": "Expanding the Sea Within",
     "description": [
-      "It’s okay not to force the waves of anxiety to settle.",
-      "We cannot control the height of the waves, but we can make the depth of your inner sea even deeper.",
-      "Let's expand your sea now, creating a space where even the roughest waves can stay.",
-      "Through deep and calm breaths, meet the version of yourself that is much larger and deeper than any wave."
+      "It's okay not to force the waves of anxiety to settle.",
+      "We can't control the height of the waves, but we can deepen the sea within your heart.",
+      "Let's expand your sea now, creating space to hold even the roughest waves.",
+      "Through deep, calm breaths, meet the version of yourself that is far vaster and deeper than any wave."
     ],
-    "contentTitle": "4-7-8 Breathing Technique",
-    "contentDescription": "This is a practice of breathing with the rhythm of the waves to deepen your capacity to accept anxiety.",
+    "contentTitle": "4-7-8 Breathing",
+    "contentDescription": "A practice of breathing with the rhythm of the waves, deepening your capacity to hold anxiety.",
     "steps": [
-      "1. As the wave rises, breathe in deeply and expand the sea of your heart.",
-      "2. As the wave falls, breathe out slowly and let the anxiety simply be there.",
-      "3. Beneath the rolling waves, feel the deep, unwavering sea that is 'you'."
+      "1. As the wave rises, breathe in deeply and expand the sea within.",
+      "2. As the wave falls, breathe out slowly and let the anxiety simply be.",
+      "3. Beneath the rolling waves, feel the deep, unshaken sea that is 'you.'"
     ],
-    "tip": "Tip: Instead of pushing the waves away, imagine making your sea deeper so you can hold them gently within."
+    "tip": "Tip: Rather than pushing the waves away, imagine deepening your sea so it can hold them with ease."
   },
   "step": {
     "startButton": "Start Breathing",
@@ -22,23 +22,23 @@
   },
   "breath": {
     "inhale": "Breathe in deeply",
-    "hold": "Hold your breath for a moment",
+    "hold": "Hold your breath gently",
     "exhale": "Breathe out slowly",
     "completed": "Breathing complete",
     "restart": "Shall we take another breath \nto settle our hearts?"
   },
   "result": {
-    "title": "The sea of your heart has grown deeper",
+    "title": "The sea within has grown deeper",
     "description": [
-      "Waves of anxiety sometimes find us, rolling in with great force.",
-      "We often try to stop or shrink those waves, but their size is not ours to decide.",
-      "Yet, within you lies a deep, vast sea that can hold these waves.",
-      "Instead of forcing the waves out, you've used your breath to make the sea where they stay even larger and deeper.",
-      "The waves may stay the same size, but your sea is now deep enough to hold any anxiety gently."
+      "Waves of anxiety sometimes come crashing in with great force.",
+      "We often try to stop or shrink those waves, but the size of the waves isn't ours to decide.",
+      "Yet within you lies a deep sea that can hold these waves.",
+      "Instead of forcing the waves away, you used your breath to expand the sea where they rest—making it larger and deeper.",
+      "The waves may remain the same size, but your sea is now deep enough to hold any anxiety with ease."
     ],
-    "breathTime": "You've spent {{seconds}} seconds deepening the sea of your heart."
+    "breathTime": "You spent {{seconds}} seconds expanding the sea within."
   },
   "history": {
-    "description": "Deepened the sea of the heart for {{seconds}} seconds."
+    "description": "Expanded the sea within for {{seconds}} seconds."
   }
 }

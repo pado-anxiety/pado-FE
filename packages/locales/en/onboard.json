@@ -1,35 +1,35 @@
 {
   "steps": {
     "step1": {
-      "texts": ["Hi there.", "Welcome to Pado,", "a place for your heart to rest a while."],
+      "texts": ["Hello.", "A place where your heart can rest a while—", "this is 'Pado.'"],
       "button": "Nice to meet you!"
     },
     "step2": {
-      "texts": ["Do you ever feel like rough waves are crashing in,", "making it hard to breathe and your heart feel heavy?"],
+      "texts": ["Like rough waves crashing in,", "do you sometimes feel short of breath and heavy at heart?"],
       "button": "Yes, I do"
     },
     "step3": {
-      "texts": ["Do you feel swept away by high waves,", "losing touch with the precious 'now'?"],
+      "texts": ["Swept away by high waves,", "are you losing touch with the precious 'now'?"],
       "button": "Sometimes, yes"
     },
     "step4": {
       "texts": [
-        "ACT (Acceptance and Commitment Therapy) teaches us:",
-        "Anxiety isn't something we must fight or overcome.",
-        "It's something we can simply let flow through us."
+        "Acceptance and Commitment Therapy (ACT) says:",
+        "Anxiety isn't something to overcome—",
+        "it's something to simply let flow by."
       ],
-      "button": "I understand"
+      "button": "I see"
     },
     "step5": {
       "texts": [
-        "Just as waves are naturally part of the ocean,",
+        "Just as waves are part of the ocean,",
         "think of your heart as a deep, vast sea",
         "that can gently hold those waves within."
       ],
       "button": "I like that"
     },
     "step6": {
-      "texts": ["Shall we explore how to make your inner sea a bit calmer and deeper together?"],
+      "texts": ["Shall we make your inner sea calmer and wider together with 'Pado'?"],
       "button": "Let's begin"
     },
     "step7": {
@@ -37,22 +37,22 @@
         "Before we start,",
         "let's catch our breath with the rhythm of the waves.",
         "Breathe in deeply for 4 seconds,",
-        "hold it for 7 seconds,",
+        "hold for 7 seconds,",
         "and exhale slowly for 8 seconds."
       ],
       "button": "I'll give it a try"
     },
     "step8": {
       "texts": [
-        "Well done. Even just breathing helps the waves settle down.",
-        "Shall we head out to your calm inner sea now?"
+        "Well done. Just breathing helps the waves settle a little.",
+        "Shall we set out to your calm inner sea now?"
       ],
       "button": "Start"
     }
   },
   "breath": {
     "inhale": "Breathe in deeply",
-    "hold": "Hold it gently",
-    "exhale": "Exhale slowly"
+    "hold": "Hold your breath gently",
+    "exhale": "Breathe out slowly"
   }
 }

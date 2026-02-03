@@ -1,21 +1,21 @@
 {
   "title": {
     "anchor": "Grounding \nin the Present",
-    "diary": "Recording \nToday’s Waves",
-    "detach": "Sorting \nThoughts and Facts",
-    "embrace": "Deepening \nthe Sea of My Heart",
-    "values": "Finding \nMy True Direction"
+    "diary": "Recording \nToday's Waves",
+    "detach": "Separating \nThoughts from Facts",
+    "embrace": "Expanding \nthe Sea Within",
+    "values": "Finding \nMy Values and Direction"
   },
   "history": {
-    "title": "Records of Past Waves",
-    "subtitle": "Check the records of your past ACT activities.",
-    "viewHistory": "Check My Records"
+    "title": "Looking Back at Wave Records",
+    "subtitle": "You can check your ACT records so far.",
+    "viewHistory": "View Records"
   },
   "historyType": {
-    "contactWithPresent": "Grounding",
-    "emotionNote": "Emotion Diary",
-    "cognitiveDefusion": "Separating Wind",
-    "acceptance": "Deepening the Sea",
-    "values": "Values & Action"
+    "contactWithPresent": "Grounding in the Present",
+    "emotionNote": "Recording Today's Waves",
+    "cognitiveDefusion": "Separating Thoughts from Facts",
+    "acceptance": "Expanding the Sea Within",
+    "values": "Finding My Values and Direction"
   }
 }

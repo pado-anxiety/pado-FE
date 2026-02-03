@@ -13,6 +13,7 @@ export function LearningStepContent({ step }: LearningStepContentProps) {
     <div className="flex flex-1 flex-col">
       <DescriptionList
         title={step.title}
+        titleClassName="text-body-large font-bold"
         items={step.content}
       />
     </div>
