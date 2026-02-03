@@ -2,7 +2,7 @@ import { AudioPlayer, createAudioPlayer } from 'expo-audio';
 import { create } from 'zustand';
 
 interface WaveState {
-  player: AudioPlayer;
+  player: AudioPlayer | null;
   isPlaying: boolean;
   play: () => void;
   pause: () => void;
@@ -10,31 +10,41 @@ interface WaveState {
 }
 
 const waveSource = require('../../../assets/audio/ocean.mp3');
-const singletonPlayer = createAudioPlayer(waveSource);
 
-singletonPlayer.loop = true;
+let singletonPlayer: AudioPlayer | null = null;
+
+function getPlayer(): AudioPlayer {
+  if (!singletonPlayer) {
+    singletonPlayer = createAudioPlayer(waveSource);
+    singletonPlayer.loop = true;
+  }
+  return singletonPlayer;
+}
 
 export const useWaveSoundStore = create<WaveState>((set) => ({
-  player: singletonPlayer,
+  player: null,
   isPlaying: false,
 
   play: () => {
-    singletonPlayer.play();
-    set({ isPlaying: true });
+    const player = getPlayer();
+    player.play();
+    set({ player, isPlaying: true });
   },
 
   pause: () => {
-    singletonPlayer.pause();
+    const player = getPlayer();
+    player.pause();
     set({ isPlaying: false });
   },
 
   toggle: () => {
-    if (singletonPlayer.playing) {
-      singletonPlayer.pause();
+    const player = getPlayer();
+    if (player.playing) {
+      player.pause();
       set({ isPlaying: false });
     } else {
-      singletonPlayer.play();
-      set({ isPlaying: true });
+      player.play();
+      set({ player, isPlaying: true });
     }
   },
 }));
