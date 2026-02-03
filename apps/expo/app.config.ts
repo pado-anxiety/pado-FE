@@ -15,12 +15,16 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   splash: {
     backgroundColor: '#F9F8F6',
   },
+  locales: {
+    ko: './languages/ko.json',
+    en: './languages/en.json',
+  },
   ios: {
     icon: './assets/icon.png',
     supportsTablet: false,
     infoPlist: {
+      CFBundleAllowMixedLocalizations: true,
       CFBundleLocalizations: ['en', 'ko'],
-      CFBundleDisplayName: ClientEnv.NAME,
     },
     usesAppleSignIn: true,
     bundleIdentifier: ClientEnv.IOS_BUNDLE_IDENTIFIER,
