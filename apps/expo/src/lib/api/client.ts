@@ -70,6 +70,11 @@ apiClient.interceptors.response.use(
 
       return apiClient(config);
     } catch (reissueError) {
+      // ACT 결과 저장 등 조용히 실패해야 하는 요청은 clearAuth/알림 없이 넘김
+      if (config._silentAuthFailure) {
+        return Promise.reject(reissueError);
+      }
+
       useAuth.getState().clearAuth();
 
       showAlert.warning(

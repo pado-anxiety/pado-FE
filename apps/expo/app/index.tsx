@@ -49,9 +49,14 @@ export default function HomeScreen(): React.ReactNode {
 
   useEffect(() => {
     if (isLoggedIn) {
-      userAPI.getUser().then((user) => {
-        setUserInfo(user.name, user.email);
-      });
+      userAPI
+        .getUser()
+        .then((user) => {
+          setUserInfo(user.name, user.email);
+        })
+        .catch(() => {
+          // 토큰 유효성 검사 목적 — 401은 interceptor가 처리하고, 그 외 오류는 무시
+        });
     }
   }, [isLoggedIn, setUserInfo]);
 
