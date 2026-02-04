@@ -12,12 +12,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   scheme: ClientEnv.SCHEME,
   userInterfaceStyle: 'light',
   newArchEnabled: true,
-  splash: {
-    backgroundColor: '#F9F8F6',
-  },
   locales: {
-    ko: './languages/ko.json',
     en: './languages/en.json',
+    ko: './languages/ko.json',
   },
   ios: {
     icon: './assets/icon.png',
@@ -25,6 +22,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     infoPlist: {
       CFBundleAllowMixedLocalizations: true,
       CFBundleLocalizations: ['en', 'ko'],
+      CFBundleDisplayName: ClientEnv.NAME,
     },
     usesAppleSignIn: true,
     bundleIdentifier: ClientEnv.IOS_BUNDLE_IDENTIFIER,
@@ -107,8 +105,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: '30195066-b4b9-406a-9236-c2eaa162bf54',
     },
     ...env.ClientEnv,
-    // BASE_URL: 'https://pado-anxiety.site',
-    // IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
+    BASE_URL: 'https://pado-anxiety.site',
+    IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
   },
   updates: {
     url: 'https://u.expo.dev/30195066-b4b9-406a-9236-c2eaa162bf54',

@@ -1,3 +1,8 @@
 {
-  "CFBundleDisplayName": "Pado"
+  "ios": {
+    "CFBundleDisplayName": "Pado"
+  },
+  "android": {
+    "app_name": "Pado"
+  }
 }
