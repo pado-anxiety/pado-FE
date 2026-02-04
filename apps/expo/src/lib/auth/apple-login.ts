@@ -1,8 +1,15 @@
 import * as AppleAuthentication from 'expo-apple-authentication';
 
+import { authAPI } from '../api/auth';
 import { i18n } from '../i18n';
+import { parseAuthToken } from './utils';
 
-export const SignInWithApple = async () => {
+type AuthResult =
+  | { accessToken: string; refreshToken: string }
+  | { errorMessage: string }
+  | { cancelled: true };
+
+export const SignInWithApple = async (): Promise<AuthResult> => {
   try {
     const credential = await AppleAuthentication.signInAsync({
       requestedScopes: [
@@ -11,18 +18,29 @@ export const SignInWithApple = async () => {
       ],
     });
 
-    // 1. 프론트가 받는 결과물
-    const { identityToken, authorizationCode, fullName, email } = credential;
+    const { authorizationCode, fullName } = credential;
 
-    console.log('=====Apple Authentication Result=====', {
-      identityToken,
+    if (!authorizationCode) {
+      return { errorMessage: i18n.t('common.error.generic') };
+    }
+
+    let userName: string | null = null;
+    if (fullName?.familyName && fullName?.givenName) {
+      userName = `${fullName.familyName} ${fullName.givenName}`.trim();
+    }
+
+    const response = await authAPI.getAppleAccessToken({
       authorizationCode,
-      fullName,
-      email,
+      fullName: userName,
     });
 
-    // 백엔드 요청
-  } catch (error) {
+    const { accessToken, refreshToken } = parseAuthToken(response);
+
+    return { accessToken, refreshToken };
+  } catch (error: any) {
+    if (error?.code === 'ERR_REQUEST_CANCELED') {
+      return { cancelled: true };
+    }
     console.error(error);
     return { errorMessage: i18n.t('common.error.generic') };
   }

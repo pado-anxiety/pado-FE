@@ -1,16 +1,20 @@
 import { apiClient } from './client';
 
-export interface User {
+interface User {
   name: string;
   email: string;
 }
 
 export const userAPI = {
   getUser: async (): Promise<User> => {
-    const response: User = await apiClient.get('/users');
-    return response;
+    const response = await apiClient.get<User>('/users');
+    return response as User;
   },
   sendFeedback: async (feedback: string): Promise<void> => {
     await apiClient.post('/feedbacks', { feedback });
+  },
+  deleteUser: async () => {
+    const response = await apiClient.delete('/users');
+    return response;
   },
 };

@@ -75,7 +75,7 @@ function ActIntroPage({
           />
           <DescriptionList
             items={description}
-            itemClassName="text-body-small"
+            itemClassName="text-body-medium"
           />
         </div>
 

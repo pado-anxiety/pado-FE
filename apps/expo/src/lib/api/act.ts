@@ -8,9 +8,11 @@ export const ROUTES = {
   VALUES: '/records/committed-action',
 } as const;
 
+const SILENT_CONFIG = { _silentAuthFailure: true } as const;
+
 export const actAPI = {
   anchor: async (): Promise<void> => {
-    await apiClient.post(ROUTES.ANCHOR);
+    await apiClient.post(ROUTES.ANCHOR, null, SILENT_CONFIG);
   },
   diary: async ({
     situation,
@@ -21,29 +23,25 @@ export const actAPI = {
     thoughts: string;
     feelings: string;
   }): Promise<void> => {
-    await apiClient.post(ROUTES.DIARY, {
-      situation,
-      thoughts,
-      feelings,
-    });
+    await apiClient.post(
+      ROUTES.DIARY,
+      { situation, thoughts, feelings },
+      SILENT_CONFIG,
+    );
   },
   detach: async ({
     userTextToken,
   }: {
     userTextToken: { text: string; isSelected: boolean }[];
   }): Promise<void> => {
-    await apiClient.post(ROUTES.DETACH, {
-      userTextToken,
-    });
+    await apiClient.post(ROUTES.DETACH, { userTextToken }, SILENT_CONFIG);
   },
   embrace: async ({
     breathingTime,
   }: {
     breathingTime: number;
   }): Promise<void> => {
-    await apiClient.post(ROUTES.EMBRACE, {
-      breathingTime,
-    });
+    await apiClient.post(ROUTES.EMBRACE, { breathingTime }, SILENT_CONFIG);
   },
   values: async ({
     diagnosis,
@@ -63,17 +61,21 @@ export const actAPI = {
     barrier: string;
     action: string;
   }): Promise<void> => {
-    await apiClient.post(ROUTES.VALUES, {
-      diagnosis: {
-        work: diagnosis.work,
-        growth: diagnosis.growth,
-        leisure: diagnosis.leisure,
-        relationship: diagnosis.relationship,
+    await apiClient.post(
+      ROUTES.VALUES,
+      {
+        diagnosis: {
+          work: diagnosis.work,
+          growth: diagnosis.growth,
+          leisure: diagnosis.leisure,
+          relationship: diagnosis.relationship,
+        },
+        matter: matter,
+        value: value,
+        barrier: barrier,
+        action: action,
       },
-      matter: matter,
-      value: value,
-      barrier: barrier,
-      action: action,
-    });
+      SILENT_CONFIG,
+    );
   },
 };

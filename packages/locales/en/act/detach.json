@@ -1,40 +1,40 @@
 {
   "intro": {
-    "title": "Sorting Thoughts and Facts",
+    "title": "Separating Thoughts from Facts",
     "description": [
-      "The rough waves crashing over you right now were created by the wind called 'thoughts.'",
-      "To avoid being swept away by the waves, you need to take a step back from the wind shaking your surface.",
-      "Just realizing that the wind is what causes the waves will begin to ease the power of your anxiety."
+      "The fierce waves crashing over you right now were stirred up by a wind called 'thoughts.'",
+      "To keep from being swept away, you need to step back from the wind shaking your surface.",
+      "Simply realizing that the wind is what creates the waves—that alone begins to weaken the grip of anxiety."
     ],
-    "contentTitle": "Coloring Thoughts with a Highlighter",
-    "contentDescription": "Let's practice understanding and separating thoughts from objective facts.",
+    "contentTitle": "Highlighting Your Thoughts",
+    "contentDescription": "A practice of understanding that thoughts and facts are separate, and learning to tell them apart.",
     "steps": [
-      "1. Write it down: Write the thoughts making you anxious into a sentence.",
-      "2. Separate thoughts: Drag and select the 'thought' part that isn't a fact.",
-      "3. Let it flow: Watch the selected thought fade away, leaving only the objective fact behind."
+      "1. Write it down: Write the thoughts that make you anxious as a sentence.",
+      "2. Separate the thoughts: Drag and select the parts that are 'your thoughts,' not facts.",
+      "3. Let them go: Watch the selected thoughts fade away, leaving only the objective facts behind."
     ],
-    "tip": "Tip: The wind can shake your surface, but it can never reach the depths of your ocean. Just calmly watch the wind as it blows by.",
-    "button": "Start Sorting Thoughts and Facts"
+    "tip": "Tip: The wind can shake your surface, but it can never reach the depths of your ocean. Just quietly watch the wind as it blows by.",
+    "button": "Start"
   },
   "step": {
     "step1": {
-      "title": ["What thoughts are", "floating in your head?"],
-      "description": "Write down the voices in your head exactly as they sound, without judgment. Long or short, any sentence is fine.",
-      "placeholder": "e.g., \"I'll never get anything right,\" \"What if everyone hates me?\" "
+      "title": ["What thoughts are", "floating in your mind?"],
+      "description": "Without judging, write down the voices in your head exactly as they sound. Long or short, any sentence is fine.",
+      "placeholder": "e.g., \"I'll never get anything right,\" \"What if everyone hates me?\""
     },
     "step2": {
       "title": ["How much of this sentence", "is just a 'thought'?"],
-      "description": "Drag and select only the part that is an interpretation or a judgment."
+      "description": "Drag and select only the interpretation or judgment."
     }
   },
   "result": {
-    "title": ["You've separated the waves and the wind"],
+    "title": ["You've separated the waves from the wind"],
     "description": [
-      "Just like the text that turned transparent, the wind of thoughts only brushes across your ocean for a moment.",
-      "As the wind loses its strength, the rough waves will soon settle into a calm stillness."
+      "Just like the text that turned transparent, the wind of thoughts only brushes past your ocean for a moment.",
+      "As the wind loses its strength, the rough waves will soon settle into calm."
     ]
   },
   "history": {
-    "description": "Separated thoughts from objective facts"
+    "description": "Separated thoughts from facts"
   }
 }

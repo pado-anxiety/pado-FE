@@ -9,25 +9,26 @@
     "restart": "Start Over",
     "send": "Send",
     "goHome": "Back to Home",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   },
-  "loading": "Calming the waves...",
+  "loading": "Loading...",
   "error": {
-    "generic": "Something went wrong.",
-    "occurred": "Oops! An error occurred.",
+    "generic": "An error occurred.",
+    "occurred": "An error occurred!",
     "tryLater": "Please try again later.",
-    "tryAgainLater": "Please try again in a little while.",
+    "tryAgainLater": "Please try again in a moment.",
     "loginRequired": "Please log in first.",
-    "goToLogin": "Moving to the login page...",
-    "pageNotFound": "We couldn't find this page.",
+    "goToLogin": "Moving to the login page.",
+    "pageNotFound": "Page not found.",
     "cannotLoadScreen": "Unable to load the screen."
   },
   "validation": {
     "charLimitExceeded": "Character limit exceeded.",
-    "charLimitMessage": "Maximum {{maxLength}} characters. (Current: {{currentLength}})"
+    "charLimitMessage": "Up to {{maxLength}} characters allowed. (Currently {{currentLength}})"
   },
   "empty": {
-    "noRecords": "No memories found yet."
+    "noRecords": "No records found."
   },
   "example": "Example",
   "or": "or",
@@ -42,15 +43,20 @@
     "vibration": "Haptics",
     "feedback": {
       "title": "Feedback",
-      "description": "Feel free to share your thoughts with us.",
-      "placeholder": "Tell us what's on your mind...",
+      "description": "Feel free to share your thoughts.",
+      "placeholder": "Leave your feedback here",
       "send": "Send Feedback"
     },
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
     "appVersion": "App Version",
-    "licenseInfo": "Licenses",
+    "licenseInfo": "License Information",
     "licenseDescription": "This app uses the following open-source libraries.",
-    "logout": "Log out"
+    "logout": "Log Out",
+    "logoutConfirmTitle": "Log out?",
+    "logoutConfirmMessage": "You can log back in anytime.",
+    "deleteAccount": "Delete Account",
+    "deleteAccountConfirmTitle": "Are you sure you want to delete your account?",
+    "deleteAccountConfirmMessage": "All data will be permanently deleted and cannot be recovered."
   }
 }

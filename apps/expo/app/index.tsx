@@ -23,6 +23,7 @@ import { isOnboarded } from '@src/lib';
 import { showAlert } from '@src/lib/alert';
 import { useAnalytics } from '@src/lib/analytics';
 import { historyAPI } from '@src/lib/api/history';
+import { userAPI } from '@src/lib/api/user';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 
@@ -33,7 +34,7 @@ interface ModalType {
 
 export default function HomeScreen(): React.ReactNode {
   const { t } = useTranslation();
-  const { isLoggedIn, name, email } = useAuth();
+  const { isLoggedIn, name, email, setUserInfo } = useAuth();
 
   const { page, setPage } = useHomePageState();
 
@@ -45,6 +46,19 @@ export default function HomeScreen(): React.ReactNode {
   const isIdentified = useRef<boolean>(false);
 
   const { identifyUser } = useAnalytics();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      userAPI
+        .getUser()
+        .then((user) => {
+          setUserInfo(user.name, user.email);
+        })
+        .catch(() => {
+          // 토큰 유효성 검사 목적 — 401은 interceptor가 처리하고, 그 외 오류는 무시
+        });
+    }
+  }, [isLoggedIn, setUserInfo]);
 
   useEffect(() => {
     if (isLoggedIn && name && email && !isIdentified.current) {

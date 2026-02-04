@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "CFBundleDisplayName": "파도"
+  },
+  "android": {
+    "app_name": "파도"
+  }
+}

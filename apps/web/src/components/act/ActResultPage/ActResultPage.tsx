@@ -33,8 +33,9 @@ const ActResultPageContent = ({
       <div className="flex flex-col gap-4 w-full">
         <DescriptionList
           title={title}
+          titleClassName="text-body-large font-bold"
           items={description}
-          itemClassName="text-body-medium font-normal"
+          itemClassName="text-body-medium"
         />
         <Divide />
         <ActResultContent>{children}</ActResultContent>

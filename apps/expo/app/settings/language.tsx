@@ -16,12 +16,16 @@ export default function LanguageScreen() {
 
   return (
     <PageSafeAreaView className="mt-4 gap-2 bg-page px-8">
-      <NavButton
-        variant="back"
-        size="large"
-        onPress={() => router.back()}
-      />
-      <View className="mt-4 flex flex-col gap-6">
+      <View className="relative">
+        <View className="absolute left-[-7px]">
+          <NavButton
+            variant="back"
+            size="large"
+            onPress={() => router.back()}
+          />
+        </View>
+      </View>
+      <View className="mt-16 flex flex-col gap-6">
         <Pressable
           className="flex flex-row items-center justify-between"
           onPress={() => handleChangeLanguage('en')}

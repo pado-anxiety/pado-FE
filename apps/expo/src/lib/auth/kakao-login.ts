@@ -6,7 +6,8 @@ import { parseAuthToken } from './utils';
 
 type AuthResult =
   | { accessToken: string; refreshToken: string }
-  | { errorMessage: string };
+  | { errorMessage: string }
+  | { cancelled: true };
 
 export const SignInWithKakao = async (): Promise<AuthResult> => {
   try {
@@ -24,7 +25,16 @@ export const SignInWithKakao = async (): Promise<AuthResult> => {
     const { accessToken, refreshToken } = parseAuthToken(response);
 
     return { accessToken, refreshToken };
-  } catch (error) {
+  } catch (error: any) {
+    const errorStr = String(error);
+    if (
+      /cancel/i.test(errorStr) ||
+      errorStr.includes('취소') ||
+      /SdkError.+?2/i.test(errorStr) ||
+      error?.code === 'E_CANCELLED_OPERATION'
+    ) {
+      return { cancelled: true };
+    }
     console.error(error);
     return { errorMessage: i18n.t('auth.error.kakaoError') };
   }

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '@pado/ui';
 
@@ -9,7 +10,8 @@ import { LearningStepContent, useLearningStep } from '@/features/learning';
 
 export default function LearningView() {
   const data = window.learningData;
-  const insets = window.insets ?? { top: 0, bottom: 0 };
+  const insets = window.insets;
+  const { t } = useTranslation();
 
   const {
     currentStep,
@@ -67,14 +69,18 @@ export default function LearningView() {
             {!isFirstStep ? (
               <Button
                 size="default"
-                text="이전"
+                text={t('common.button.prev')}
                 onClick={handlePrev}
                 className="flex-[0.3] border-2 border-solid border-btn-act-page bg-blue-500"
               />
             ) : null}
             <Button
               size="default"
-              text={isLastStep ? '완료' : '다음'}
+              text={
+                isLastStep
+                  ? t('common.button.complete')
+                  : t('common.button.next')
+              }
               onClick={handleNext}
               className={`${isFirstStep ? 'flex-1' : 'flex-[0.7]'} bg-btn-act-page border-2 border-solid border-btn-act-page`}
             />

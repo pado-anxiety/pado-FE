@@ -11,6 +11,7 @@ export const ROUTES = {
   REFRESH: '/tokens/reissue',
   GOOGLE: '/login/google',
   KAKAO: '/login/kakao',
+  APPLE: '/login/apple',
   LOGOUT: '/logout',
 } as const;
 
@@ -20,13 +21,16 @@ interface AuthToken {
 }
 
 export const authAPI = {
-  reissueAuthToken: async (): Promise<AuthToken> => {
-    const response = await axios.post<AuthToken>(
-      combineUrl(ENV.BASE_URL, ROUTES.REFRESH),
-      {
-        refreshToken: useAuth.getState().refreshToken,
-      },
-    );
+  reissueAuthToken: async (): Promise<{
+    accessToken: string;
+    refreshToken: string;
+  }> => {
+    const response = await axios.post<{
+      accessToken: string;
+      refreshToken: string;
+    }>(combineUrl(ENV.BASE_URL, ROUTES.REFRESH), {
+      refreshToken: useAuth.getState().refreshToken,
+    });
 
     return response.data;
   },
@@ -63,6 +67,20 @@ export const authAPI = {
     const response = await axios.post(combineUrl(ENV.BASE_URL, ROUTES.KAKAO), {
       identityToken,
       refreshToken,
+    });
+
+    return response.data;
+  },
+  getAppleAccessToken: async ({
+    authorizationCode,
+    fullName,
+  }: {
+    authorizationCode: string;
+    fullName: string | null;
+  }) => {
+    const response = await axios.post(combineUrl(ENV.BASE_URL, ROUTES.APPLE), {
+      authorizationCode,
+      fullName,
     });
 
     return response.data;

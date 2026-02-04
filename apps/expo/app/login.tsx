@@ -41,14 +41,17 @@ export default function LoginScreen() {
 
   const handleAppleLogin = async () => {
     const result = await login('apple');
+    if (result && 'cancelled' in result) return;
     if (result && 'errorMessage' in result) {
       showAlert.error(result.errorMessage, t('common.error.tryLater'));
       return;
     }
+    router.replace(ROUTES.HOME);
   };
 
   const handleGoogleLogin = async () => {
     const result = await login('google');
+    if (result && 'cancelled' in result) return;
     if (result && 'errorMessage' in result) {
       showAlert.error(result.errorMessage, t('common.error.tryLater'));
       return;
@@ -58,6 +61,7 @@ export default function LoginScreen() {
 
   const handleKakaoLogin = async () => {
     const result = await login('kakao');
+    if (result && 'cancelled' in result) return;
     if (result && 'errorMessage' in result) {
       showAlert.error(result.errorMessage, t('common.error.tryLater'));
       return;

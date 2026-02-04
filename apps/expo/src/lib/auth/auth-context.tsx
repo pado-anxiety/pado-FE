@@ -20,7 +20,7 @@ interface AuthState {
 
   login: (
     platform: 'google' | 'kakao' | 'apple',
-  ) => Promise<void | { errorMessage: string }>;
+  ) => Promise<void | { errorMessage: string } | { cancelled: true }>;
 
   logout: () => void;
 
@@ -30,6 +30,8 @@ interface AuthState {
   setAuthToken: (accessToken: string, refreshToken: string) => void;
 
   setUserInfo: (name: string, email: string) => void;
+
+  deleteAccount: () => Promise<void | { errorMessage: string }>;
 }
 
 export const useAuth = create<AuthState>((set) => ({
@@ -51,6 +53,7 @@ export const useAuth = create<AuthState>((set) => ({
 
       if (platform === 'google') {
         const result = await SignInWithGoogle();
+        if ('cancelled' in result) return { cancelled: true };
         if ('errorMessage' in result) {
           return { errorMessage: result.errorMessage };
         }
@@ -58,6 +61,7 @@ export const useAuth = create<AuthState>((set) => ({
         token.refreshToken = result.refreshToken;
       } else if (platform === 'kakao') {
         const result = await SignInWithKakao();
+        if ('cancelled' in result) return { cancelled: true };
         if ('errorMessage' in result) {
           return { errorMessage: result.errorMessage };
         }
@@ -65,11 +69,12 @@ export const useAuth = create<AuthState>((set) => ({
         token.refreshToken = result.refreshToken;
       } else if (platform === 'apple') {
         const result = await SignInWithApple();
-        // if ('errorMessage' in result) {
-        //   return { errorMessage: result.errorMessage };
-        // }
-        // token.accessToken = result.accessToken;
-        // token.refreshToken = result.refreshToken;
+        if ('cancelled' in result) return { cancelled: true };
+        if ('errorMessage' in result) {
+          return { errorMessage: result.errorMessage };
+        }
+        token.accessToken = result.accessToken;
+        token.refreshToken = result.refreshToken;
       }
 
       if (!token.accessToken || !token.refreshToken) {
@@ -168,5 +173,30 @@ export const useAuth = create<AuthState>((set) => ({
       name: name,
       email: email,
     });
+  },
+
+  deleteAccount: async () => {
+    set({ isLoading: true });
+
+    try {
+      await userAPI.deleteUser();
+    } catch (error) {
+      console.error('Delete account API failed:', error);
+      set({ isLoading: false });
+      return { errorMessage: i18n.t('auth.error.unexpected') };
+    }
+
+    authStorage.clearAuthInfo();
+
+    set({
+      name: null,
+      email: null,
+      accessToken: null,
+      refreshToken: null,
+      isLoggedIn: false,
+      isLoading: false,
+    });
+
+    router.replace(ROUTES.HOME);
   },
 }));

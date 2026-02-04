@@ -19,8 +19,8 @@ export const useTheme = () => {
   const { colorScheme, setColorScheme } = useColorScheme();
 
   useEffect(() => {
-    const savedTheme = storage.getString(THEME_KEY) ?? 'light';
-    setColorScheme(savedTheme as ThemeType);
+    setColorScheme('light');
+    storage.set(THEME_KEY, 'light');
   }, [setColorScheme]);
 
   const changeTheme = useCallback(

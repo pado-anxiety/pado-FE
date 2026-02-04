@@ -33,6 +33,11 @@ apiClient.interceptors.request.use(
   },
 );
 
+let refreshPromise: Promise<{
+  accessToken: string;
+  refreshToken: string;
+}> | null = null;
+
 apiClient.interceptors.response.use(
   (response) => {
     return response.data;
@@ -54,12 +59,22 @@ apiClient.interceptors.response.use(
     config._retry = true;
 
     try {
-      const { accessToken, refreshToken } = await authAPI.reissueAuthToken();
+      // 이미 진행 중인 refresh가 없을 때만 새로 시작
+      if (!refreshPromise) {
+        refreshPromise = authAPI.reissueAuthToken();
+      }
+
+      const { accessToken, refreshToken } = await refreshPromise;
 
       useAuth.getState().setAuthToken(accessToken, refreshToken);
 
       return apiClient(config);
     } catch (reissueError) {
+      // ACT 결과 저장 등 조용히 실패해야 하는 요청은 clearAuth/알림 없이 넘김
+      if (config._silentAuthFailure) {
+        return Promise.reject(reissueError);
+      }
+
       useAuth.getState().clearAuth();
 
       showAlert.warning(
@@ -69,6 +84,8 @@ apiClient.interceptors.response.use(
       );
 
       return Promise.reject(reissueError);
+    } finally {
+      refreshPromise = null;
     }
   },
 );

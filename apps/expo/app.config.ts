@@ -10,17 +10,28 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   orientation: 'portrait',
   icon: './assets/icon.png',
   scheme: ClientEnv.SCHEME,
-  userInterfaceStyle: 'automatic',
+  userInterfaceStyle: 'light',
   newArchEnabled: true,
+  locales: {
+    en: './languages/en.json',
+    ko: './languages/ko.json',
+  },
   ios: {
     icon: './assets/icon.png',
     supportsTablet: false,
     infoPlist: {
+      CFBundleAllowMixedLocalizations: true,
       CFBundleLocalizations: ['en', 'ko'],
       CFBundleDisplayName: ClientEnv.NAME,
     },
     usesAppleSignIn: true,
     bundleIdentifier: ClientEnv.IOS_BUNDLE_IDENTIFIER,
+    splash: {
+      backgroundColor: '#F9F8F6',
+      dark: {
+        backgroundColor: '#1C2533',
+      },
+    },
   },
   android: {
     adaptiveIcon: {
@@ -28,6 +39,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       foregroundImage: './assets/images/android-icon-foreground.png',
       backgroundImage: './assets/images/android-icon-background.png',
       monochromeImage: './assets/images/android-icon-monochrome.png',
+    },
+    splash: {
+      backgroundColor: '#F9F8F6',
+      dark: {
+        backgroundColor: '#1C2533',
+      },
     },
     edgeToEdgeEnabled: true,
     package: ClientEnv.ANDROID_PACKAGE,
@@ -72,12 +89,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-splash-screen',
       {
-        image: './assets/images/splash-icon.png',
-        imageWidth: 200,
-        resizeMode: 'contain',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#F9F8F6',
         dark: {
-          backgroundColor: '#000000',
+          backgroundColor: '#1C2533',
         },
       },
     ],
@@ -91,11 +105,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: '30195066-b4b9-406a-9236-c2eaa162bf54',
     },
     ...env.ClientEnv,
-    // BASE_URL: 'https://pado-anxiety.site',
-    // IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
-    // ANDROID_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
-    // IOS_WEBVIEW_URL: 'http://localhost:3000',
-    // ANDROID_WEBVIEW_URL: 'http://localhost:3000',
+    BASE_URL: 'https://pado-anxiety.site',
+    IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
   },
   updates: {
     url: 'https://u.expo.dev/30195066-b4b9-406a-9236-c2eaa162bf54',
