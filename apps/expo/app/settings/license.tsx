@@ -27,14 +27,19 @@ export default function LicenseScreen() {
     'axios ^1.13.2',
     'dotenv ^17.2.3',
     'expo ^54.0.27',
+    'expo-apple-authentication ~8.0.8',
+    'expo-application ~7.0.8',
+    'expo-audio ~1.1.1',
     'expo-constants ^18.0.11',
     'expo-crypto ~15.0.8',
     'expo-dev-client ^6.0.20',
+    'expo-device ~8.0.10',
+    'expo-file-system ~19.0.21',
     'expo-font ~14.0.10',
     'expo-haptics ~15.0.8',
     'expo-image ^3.0.11',
     'expo-linking ~8.0.9',
-    'expo-localization ^17.0.8',
+    'expo-localization ~17.0.8',
     'expo-router ~6.0.16',
     'expo-splash-screen ~31.0.11',
     'expo-status-bar ~3.0.8',
@@ -43,7 +48,10 @@ export default function LicenseScreen() {
     'expo-updates ~29.0.15',
     'expo-web-browser ~15.0.9',
     'i18next ^25.7.1',
+    'lottie-react-native ~7.3.1',
     'nativewind ^4.2.1',
+    'posthog-react-native ^4.18.0',
+    'posthog-react-native-session-replay ^1.2.3',
     'react 19.1.0',
     'react-dom 19.1.0',
     'react-hook-form ^7.68.0',
@@ -57,6 +65,7 @@ export default function LicenseScreen() {
     'react-native-safe-area-context ~5.6.0',
     'react-native-screens ~4.16.0',
     'react-native-size-matters ^0.4.2',
+    'react-native-svg ^15.15.1',
     'react-native-webview ^13.16.0',
     'react-native-worklets 0.5.1',
     'tailwind-merge ^3.4.0',
@@ -71,15 +80,26 @@ export default function LicenseScreen() {
     '@pado/tailwind-semantic-tokens workspace:*',
     '@pado/ui workspace:*',
     '@tanstack/eslint-plugin-query ^5.91.2',
+    '@testing-library/jest-native ^5.4.3',
+    '@testing-library/react-native ^13.3.3',
     '@trivago/prettier-plugin-sort-imports ^6.0.0',
+    '@types/jest ^30.0.0',
     '@types/react ~19.1.0',
+    'axios-mock-adapter ^2.1.0',
     'cross-env ^10.1.0',
     'eslint ^9.25.0',
     'eslint-config-expo ~10.0.0',
+    'jest ^30.2.0',
+    'jest-expo ^54.0.16',
     'prettier ^3.7.4',
     'prettier-plugin-tailwindcss ^0.5.11',
     'tailwind-variants ^3.2.2',
     'tailwindcss ^3.4.17',
+  ];
+
+  const soundCredits = [
+    'Pixabay - Wave Sounds (Pixabay License)',
+    'jackmichaelking - Wave Sounds (Freesound.org)',
   ];
 
   return (
@@ -127,6 +147,20 @@ export default function LicenseScreen() {
                 className="text-body-small"
               >
                 • {dep}
+              </Text>
+            ))}
+          </View>
+
+          <View className="gap-3">
+            <Text className="text-body-medium font-semibold">
+              Sound Credits
+            </Text>
+            {soundCredits.map((credit, index) => (
+              <Text
+                key={index}
+                className="text-body-small"
+              >
+                • {credit}
               </Text>
             ))}
           </View>
