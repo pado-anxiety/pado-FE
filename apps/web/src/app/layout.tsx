@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
-import { cookies } from 'next/headers';
 
 import I18nProvider from '@/lib/i18n/i18n-provider';
 import { ThemeProvider } from '@/lib/theme';
@@ -28,14 +27,11 @@ export const viewport: Viewport = {
   // interactiveWidget: 'resizes-content',
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = await cookies();
-  const language = cookieStore.get('lang')?.value || 'en';
-
   return (
     <html suppressHydrationWarning>
       <body className={`${nanumSquareNeo.variable}`}>
@@ -48,7 +44,7 @@ export default async function RootLayout({
           <Suspense fallback={null}>
             <ThemeSync />
           </Suspense>
-          <I18nProvider lang={language}>
+          <I18nProvider>
             <div className="mobile-view">{children}</div>
           </I18nProvider>
         </ThemeProvider>

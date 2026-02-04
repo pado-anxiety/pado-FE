@@ -1,16 +1,12 @@
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import WebView from 'react-native-webview';
 
-import {
-  LoadingSpinner,
-  WebViewErrorView,
-  WebViewLoadingView,
-} from '@src/components/ui';
+import { CustomWebView } from '@src/components/custom-webview';
+import { WebViewErrorView } from '@src/components/ui';
 import { useActStepMessageHandler } from '@src/hooks/use-act-step-message-handler';
 import { ANALYTICS_KEY } from '@src/lib/analytics';
 import { safeStringify } from '@src/lib/json';
-import { ROUTES, WEBVIEW_ROUTES, getWebViewBaseURL } from '@src/lib/route';
+import { ROUTES, WEBVIEW_ROUTES } from '@src/lib/route';
 
 export default function EmbraceStepScreen() {
   const router = useRouter();
@@ -22,18 +18,9 @@ export default function EmbraceStepScreen() {
   });
 
   return (
-    <WebView
-      source={{
-        uri: `${getWebViewBaseURL()}${WEBVIEW_ROUTES.ACT.EMBRACE.STEP}`,
-      }}
+    <CustomWebView
+      route={WEBVIEW_ROUTES.ACT.EMBRACE.STEP}
       startInLoadingState={true}
-      sharedCookiesEnabled={true}
-      thirdPartyCookiesEnabled={true}
-      renderLoading={() => (
-        <WebViewLoadingView>
-          <LoadingSpinner />
-        </WebViewLoadingView>
-      )}
       renderError={() => (
         <WebViewErrorView onPressHome={() => router.replace(ROUTES.HOME)} />
       )}
