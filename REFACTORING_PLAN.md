@@ -65,13 +65,13 @@ const name = user.name;  // 타입 체크 불가
 - Expo 앱에서 `onData` 핸들러가 받는 데이터 구조 예측 불가
 
 **체크리스트**:
-- [ ] 각 ACT 단계별 데이터 페이로드 인터페이스 정의
-  - [ ] `DetachDataPayload`
-  - [ ] `ActionDataPayload`
-  - [ ] `DiaryDataPayload`
-  - [ ] `EmbraceDataPayload`
-  - [ ] `AnchorDataPayload`
-- [ ] `WebViewMessagePayload[DATA]`를 유니온 타입으로 변경
+- [x] 각 ACT 단계별 데이터 페이로드 인터페이스 정의
+  - [x] `DetachCompletePayload`
+  - [x] `ActionCompletePayload`
+  - [x] `DiaryCompletePayload`
+  - [x] `EmbraceCompletePayload`
+  - [x] `AnchorCompletePayload`
+- [x] `WebViewMessagePayload[COMPLETE]`를 유니온 타입으로 변경
 - [ ] 각 웹 훅에서 타입에 맞는 데이터 전송하도록 수정
 
 ---
@@ -153,8 +153,8 @@ return response.data;  // AxiosResponse에서 .data 접근하지만 타입 어�
 - ERROR 타입이 정의되어 있으나 사용 사례 없음
 
 **체크리스트**:
-- [ ] `NavigateAction` 유니온 타입 정의: `'NEXT' | 'HOME' | 'BACK' | 'LOGIN'`
-- [ ] `HapticType` 유니온 타입 정의: `'NAVIGATE' | 'EFFECT' | 'SELECT'`
+- [x] `NavigateAction` 유니온 타입 정의: `'NEXT' | 'HOME' | 'BACK' | 'LOGIN'`
+- [x] `HapticType` 유니온 타입 정의: `'NAVIGATE' | 'EFFECT' | 'SELECT'`
 - [ ] `step` 필드 사용 규칙 명확화 및 일관되게 적용
 - [ ] ERROR 메시지 타입 활용 방안 정의 또는 제거
 - [ ] 통신 규격 명세서 작성
@@ -542,7 +542,7 @@ return (event: WebViewMessageEvent) => {
 
 | Phase | 항목 | 상태 | 담당자 | 완료일 |
 |-------|------|------|-------|-------|
-| 1 | Bridge 타입 강화 | [ ] 미시작 | - | - |
+| 1 | Bridge 타입 강화 | [~] 진행 중 (#2 타입 정의 완료, #5 부분 완료) | - | - |
 | 1 | API 타입 수정 | [x] 완료 (#1, #4) | - | 2026-01-27 |
 | 2 | 공통 퍼널 훅 | [ ] 미시작 | - | - |
 | 2 | Props Drilling 제거 | [ ] 미시작 | - | - |
