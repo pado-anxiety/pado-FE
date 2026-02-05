@@ -15,6 +15,11 @@ export const ROUTES = {
   LOGOUT: '/logout',
 } as const;
 
+interface AuthToken {
+  accessToken: string;
+  refreshToken: string;
+}
+
 export const authAPI = {
   reissueAuthToken: async (): Promise<{
     accessToken: string;
@@ -39,13 +44,16 @@ export const authAPI = {
     authorizationCode: string;
     redirectUri: string;
     platform: 'ANDROID' | 'IOS';
-  }): Promise<{ accessToken: string; refreshToken: string }> => {
-    const response = await axios.post(combineUrl(ENV.BASE_URL, ROUTES.GOOGLE), {
-      codeVerifier,
-      authorizationCode,
-      redirectUri,
-      platform,
-    });
+  }): Promise<AuthToken> => {
+    const response = await axios.post<AuthToken>(
+      combineUrl(ENV.BASE_URL, ROUTES.GOOGLE),
+      {
+        codeVerifier,
+        authorizationCode,
+        redirectUri,
+        platform,
+      },
+    );
 
     return response.data;
   },

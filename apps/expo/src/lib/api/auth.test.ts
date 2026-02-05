@@ -160,7 +160,10 @@ describe('authAPI', () => {
       };
       mockedAxios.post.mockResolvedValue(mockResponse);
 
-      const result = await authAPI.getKaKaoAccessToken('kakao-oauth-token');
+      const result = await authAPI.getKaKaoAccessToken({
+        identityToken: 'kakao-oauth-token',
+        refreshToken: 'kakao-refresh-token',
+      });
 
       expect(result).toEqual({
         accessToken: 'kakao-access-token',
@@ -170,14 +173,20 @@ describe('authAPI', () => {
 
     it('/login/kakao 엔드포인트로 POST 요청을 전송한다', async () => {
       mockedAxios.post.mockResolvedValue({
-        data: { accessToken: 'token', refreshToken: 'token' },
+        data: { identityToken: 'token', refreshToken: 'token' },
       });
 
-      await authAPI.getKaKaoAccessToken('kakao-oauth-token');
+      await authAPI.getKaKaoAccessToken({
+        identityToken: 'kakao-oauth-token',
+        refreshToken: 'kakao-refresh-token',
+      });
 
       expect(mockedAxios.post).toHaveBeenCalledWith(
         'https://api.test.com/login/kakao',
-        { accessToken: 'kakao-oauth-token' },
+        {
+          identityToken: 'kakao-oauth-token',
+          refreshToken: 'kakao-refresh-token',
+        },
       );
     });
   });

@@ -104,7 +104,7 @@ describe('DetachStepScreen', () => {
     expect(mockShowAlertValidation).toHaveBeenCalledWith('입력 오류', '텍스트를 입력해주세요');
   });
 
-  it('DATA 메시지 수신 시 결과 화면으로 토큰 데이터를 전달하며 이동한다', () => {
+  it('COMPLETE 메시지 수신 시 결과 화면으로 토큰 데이터를 전달하며 이동한다', () => {
     render(<DetachStepScreen />);
 
     const tokenData = [
@@ -112,7 +112,7 @@ describe('DetachStepScreen', () => {
       { text: '실패자다', isSelected: true },
     ];
 
-    sendMessage('DATA', { data: tokenData });
+    sendMessage('COMPLETE', { data: tokenData });
 
     expect(mockPush).toHaveBeenCalledWith({
       pathname: '/(act)/detach/result',

@@ -10,9 +10,8 @@ export const userAPI = {
     const response = await apiClient.get<User>('/users');
     return response as User;
   },
-  sendFeedback: async (feedback: string) => {
-    const response = await apiClient.post('/feedbacks', { feedback });
-    return response;
+  sendFeedback: async (feedback: string): Promise<void> => {
+    await apiClient.post('/feedbacks', { feedback });
   },
   deleteUser: async () => {
     const response = await apiClient.delete('/users');

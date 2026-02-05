@@ -118,7 +118,8 @@ describe('ActionResultScreen', () => {
     render(<ActionResultScreen />);
     sendMessage('NAVIGATE', { action: 'HOME', duration: 5000 });
 
-    expect(mockMutate).toHaveBeenCalledWith({
+    const { actAPI } = require('@src/lib/api/act');
+    expect(actAPI.values).toHaveBeenCalledWith({
       diagnosis: { work: 7, growth: 5, leisure: 3, relationship: 8 },
       matter: 'RELATIONSHIP',
       value: '가족과 시간 보내기',
@@ -132,6 +133,7 @@ describe('ActionResultScreen', () => {
     render(<ActionResultScreen />);
     sendMessage('NAVIGATE', { action: 'HOME', duration: 3000 });
     sendMessage('NAVIGATE', { action: 'HOME', duration: 4000 });
-    expect(mockMutate).toHaveBeenCalledTimes(1);
+    const { actAPI } = require('@src/lib/api/act');
+    expect(actAPI.values).toHaveBeenCalledTimes(1);
   });
 });

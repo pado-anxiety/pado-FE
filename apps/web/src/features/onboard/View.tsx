@@ -34,7 +34,7 @@ export default function OnboardView() {
   const gapValue = useMotionValue<number>(WAVE_CONFIG.GAP_NORMAL);
   const { getDuration } = useDuration();
 
-  const insets = window.insets;
+  const insets = window.insets ?? { top: 0, bottom: 0 };
 
   // Get step data from i18n - memoized to prevent infinite loop
   const getStep = useCallback(

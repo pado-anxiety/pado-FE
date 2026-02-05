@@ -75,9 +75,9 @@ describe('DetachScreen (Intro)', () => {
     expect(mockPush).toHaveBeenCalledWith('/(act)/detach/step');
   });
 
-  it('HOME 액션 수신 시 홈으로 이동한다', () => {
+  it('HOME 액션 수신 시 뒤로 이동한다', () => {
     render(<DetachScreen />);
     sendMessage('NAVIGATE', { action: 'HOME', duration: 2000 });
-    expect(mockReplace).toHaveBeenCalledWith('/');
+    expect(mockBack).toHaveBeenCalled();
   });
 });

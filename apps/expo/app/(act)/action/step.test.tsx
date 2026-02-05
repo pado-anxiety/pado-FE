@@ -104,7 +104,7 @@ describe('ActionStepScreen', () => {
     expect(mockShowAlertValidation).toHaveBeenCalledWith('입력 오류', '값을 선택해주세요');
   });
 
-  it('DATA 메시지 수신 시 결과 화면으로 복합 데이터를 전달하며 이동한다', () => {
+  it('COMPLETE 메시지 수신 시 결과 화면으로 복합 데이터를 전달하며 이동한다', () => {
     render(<ActionStepScreen />);
 
     const actionData = {
@@ -115,7 +115,7 @@ describe('ActionStepScreen', () => {
       action: '매주 일요일 저녁 가족 식사',
     };
 
-    sendMessage('DATA', { data: actionData });
+    sendMessage('COMPLETE', { data: actionData });
 
     expect(mockPush).toHaveBeenCalledWith({
       pathname: '/(act)/action/result',

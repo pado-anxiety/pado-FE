@@ -66,7 +66,7 @@
 - **유틸리티**
   - [x] `parseAuthToken()`: 토큰 객체에서 accessToken과 refreshToken 추출
 
-### 1.3 authAPI (`src/lib/api/auth.test.ts`)
+### 1.3 authAPI (`src/lib/api/`)
 
 - **토큰 재발급 (reissueAuthToken)**
   - [x] 정상적인 refreshToken으로 요청 시 새로운 accessToken, refreshToken 반환

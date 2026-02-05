@@ -2,6 +2,14 @@ module.exports = {
   white: '#ffffff',
   black: '#000000',
 
+  // ACT 페이지 전용 색상
+  act: {
+    page: '#DEE4E9',
+    pageDark: '#1A2530',
+    button: '#FF8A65',
+    buttonDark: '#E57654',
+  },
+
   blue: {
     50: "#B9CDE5", 
     100: "#98B4D4",

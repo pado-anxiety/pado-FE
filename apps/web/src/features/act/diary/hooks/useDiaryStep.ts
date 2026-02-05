@@ -65,7 +65,7 @@ export function useDiaryStep() {
         duration: getDuration(),
       });
       if (stepIndex === STEP_COUNT - 1) {
-        handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
+        handlePostMessage(WEBVIEW_MESSAGE_TYPE.COMPLETE, {
           data: safeStringify([...historyCards, newHistoryCard]),
         });
         return;

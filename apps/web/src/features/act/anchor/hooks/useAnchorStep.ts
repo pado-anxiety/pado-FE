@@ -32,11 +32,8 @@ export function useAnchorStep() {
       setSelectedIndex(0);
       return;
     }
-    console.log('RESULT', currentStep);
-    handlePostMessage(WEBVIEW_MESSAGE_TYPE.NAVIGATE, {
-      action: 'RESULT',
-      step: currentStep,
-      duration: getDuration(),
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.COMPLETE, {
+      data: {},
     });
   }, [
     selectedIndex,

@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'motion/react';
-
 import { useTranslation } from 'react-i18next';
 
 import { Button } from '@pado/ui';
@@ -23,9 +22,9 @@ export default function LearningView() {
     handleNext,
     handlePrev,
     handleExit,
-  } = useLearningStep(data.subject);
+  } = useLearningStep(data?.subject ?? '');
 
-  if (!currentStep) {
+  if (!currentStep || !data) {
     return null;
   }
 
@@ -77,7 +76,11 @@ export default function LearningView() {
             ) : null}
             <Button
               size="default"
-              text={isLastStep ? t('common.button.complete') : t('common.button.next')}
+              text={
+                isLastStep
+                  ? t('common.button.complete')
+                  : t('common.button.next')
+              }
               onClick={handleNext}
               className={`${isFirstStep ? 'flex-1' : 'flex-[0.7]'} bg-btn-act-page border-2 border-solid border-btn-act-page`}
             />

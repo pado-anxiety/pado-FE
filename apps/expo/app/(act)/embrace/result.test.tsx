@@ -44,9 +44,9 @@ jest.mock('react-native-webview', () => {
   };
 });
 
-jest.mock('@src/components/layout/indext', () => {
+jest.mock('@src/components/layout/page-safe-area-view', () => {
   const { View } = require('react-native');
-  return { PageSafeAreaView: ({ children }: { children: React.ReactNode }) => <View>{children}</View> };
+  return { __esModule: true, default: ({ children }: { children: React.ReactNode }) => <View>{children}</View> };
 });
 
 jest.mock('@src/components/ui', () => ({
@@ -81,6 +81,7 @@ jest.mock('@src/lib/json', () => ({
 }));
 
 jest.mock('@src/lib/route', () => ({
+  ROUTES: { HOME: '/' },
   WEBVIEW_ROUTES: { ACT: { EMBRACE: { RESULT: '/act/embrace/result' } } },
   getWebViewBaseURL: () => 'https://example.com',
 }));
@@ -115,7 +116,8 @@ describe('EmbraceResultScreen', () => {
     render(<EmbraceResultScreen />);
     sendMessage('NAVIGATE', { action: 'HOME', duration: 5000 });
 
-    expect(mockMutate).toHaveBeenCalledWith({
+    const { actAPI } = require('@src/lib/api/act');
+    expect(actAPI.embrace).toHaveBeenCalledWith({
       breathingTime: 60000,
     });
     expect(mockReplace).toHaveBeenCalledWith('/');
@@ -125,6 +127,7 @@ describe('EmbraceResultScreen', () => {
     render(<EmbraceResultScreen />);
     sendMessage('NAVIGATE', { action: 'HOME', duration: 3000 });
     sendMessage('NAVIGATE', { action: 'HOME', duration: 4000 });
-    expect(mockMutate).toHaveBeenCalledTimes(1);
+    const { actAPI } = require('@src/lib/api/act');
+    expect(actAPI.embrace).toHaveBeenCalledTimes(1);
   });
 });

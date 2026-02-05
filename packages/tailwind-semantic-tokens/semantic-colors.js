@@ -11,10 +11,9 @@ const semanticColors = {
     '--bg-success': colors.success[500],
     '--bg-warning': colors.warning[500],
 
-    // act content
-    '--bg-act-page': '#DEE4E9',
-    // '--bg-act-page': '#EBF2F7',
-    '--btn-act-page': '#FF8A65',
+    // ACT page colors
+    '--bg-act-page': colors.act.page,
+    '--btn-act-page': colors.act.button,
     '--btn-act-page-selected': colors.blue[500],
     '--btn-act-page-unselected': colors.blue[50],
 
@@ -43,17 +42,6 @@ const semanticColors = {
     '--border-destructive': colors.danger[500],
     '--border-success': colors.success[500],
 
-    // Button colors
-    '--btn-primary-bg': colors.primary[500],
-    '--btn-primary-text': colors.white,
-    '--btn-primary-hover': colors.primary[600],
-    '--btn-secondary-bg': colors.neutral[200],
-    '--btn-secondary-text': colors.neutral[900],
-    '--btn-secondary-hover': colors.neutral[300],
-    '--btn-destructive-bg': colors.danger[500],
-    '--btn-destructive-text': colors.white,
-    '--btn-destructive-hover': colors.danger[600],
-
     // Input colors
     '--input-bg': colors.white,
     '--input-border': colors.neutral[300],
@@ -62,13 +50,6 @@ const semanticColors = {
     '--input-placeholder': colors.neutral[500],
     '--input-disabled-bg': colors.neutral[100],
     '--input-disabled-text': colors.neutral[400],
-
-    // CBT content colors
-    '--cbt-cognitive': colors.pink[200],
-    '--cbt-breathing': colors.lavender[200],
-    '--cbt-diary': colors.primary[200],
-    '--cbt-learning': colors.peach[200],
-    '--cbt-grounding': colors.cream[200],
 
     // Shadow colors
     '--shadow-sm': 'rgba(42, 40, 37, 0.05)',
@@ -86,6 +67,12 @@ const semanticColors = {
     '--bg-destructive': colors.danger[700],
     '--bg-success': colors.success[700],
     '--bg-warning': colors.warning[700],
+
+    // ACT page colors
+    '--bg-act-page': colors.act.pageDark,
+    '--btn-act-page': colors.act.buttonDark,
+    '--btn-act-page-selected': colors.blue[400],
+    '--btn-act-page-unselected': colors.blue[800],
 
     // Chat specific backgrounds
     '--bg-chat-overlay': 'rgba(16, 22, 28, 0.95)',
@@ -112,17 +99,6 @@ const semanticColors = {
     '--border-destructive': colors.danger[400],
     '--border-success': colors.success[400],
 
-    // Button colors
-    '--btn-primary-bg': colors.primary[600],
-    '--btn-primary-text': colors.white,
-    '--btn-primary-hover': colors.primary[700],
-    '--btn-secondary-bg': colors.dark[400],
-    '--btn-secondary-text': colors.white,
-    '--btn-secondary-hover': colors.dark[300],
-    '--btn-destructive-bg': colors.danger[600],
-    '--btn-destructive-text': colors.white,
-    '--btn-destructive-hover': colors.danger[700],
-
     // Input colors
     '--input-bg': colors.dark[500],
     '--input-border': colors.dark[400],
@@ -131,13 +107,6 @@ const semanticColors = {
     '--input-placeholder': colors.neutral[500],
     '--input-disabled-bg': colors.dark[700],
     '--input-disabled-text': colors.neutral[600],
-
-    // CBT content colors
-    '--cbt-cognitive': colors.pink[300],
-    '--cbt-breathing': colors.lavender[300],
-    '--cbt-diary': colors.primary[300],
-    '--cbt-learning': colors.peach[300],
-    '--cbt-grounding': colors.cream[300],
 
     // Shadow colors
     '--shadow-sm': 'rgba(0, 0, 0, 0.1)',

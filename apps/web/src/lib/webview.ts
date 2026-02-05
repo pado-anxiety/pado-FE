@@ -18,7 +18,7 @@ export const handlePostMessage = <T extends WebViewMessageType>(
   try {
     const message: WebViewMessage<T> = { type, data };
 
-    window.ReactNativeWebView.postMessage(JSON.stringify(message));
+    window.ReactNativeWebView!.postMessage(JSON.stringify(message));
   } catch (error) {
     console.error(`[Bridge Error] 메시지 전송 중 오류 발생:`, error);
   }

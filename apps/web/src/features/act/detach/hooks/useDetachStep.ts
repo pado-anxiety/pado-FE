@@ -72,7 +72,7 @@ export function useDetachStep() {
       setStepIndex(stepIndex + 1);
     } else {
       triggerHaptic('NAVIGATE');
-      handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
+      handlePostMessage(WEBVIEW_MESSAGE_TYPE.COMPLETE, {
         data: userTextTokens,
       });
     }

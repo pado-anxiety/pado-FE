@@ -27,7 +27,7 @@ export function NextButton({ sessionCount, getDuration }: NextButtonProps) {
       step: 0,
       duration: getDuration(),
     });
-    handlePostMessage(WEBVIEW_MESSAGE_TYPE.DATA, {
+    handlePostMessage(WEBVIEW_MESSAGE_TYPE.COMPLETE, {
       data: { embraceResult: calculateTotalTime() },
     });
   };

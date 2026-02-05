@@ -118,7 +118,8 @@ describe('DiaryResultScreen', () => {
     render(<DiaryResultScreen />);
     sendMessage('NAVIGATE', { action: 'HOME', duration: 5000 });
 
-    expect(mockMutate).toHaveBeenCalledWith({
+    const { actAPI } = require('@src/lib/api/act');
+    expect(actAPI.diary).toHaveBeenCalledWith({
       situation: '회사에서',
       thoughts: '힘들다',
       feelings: '불안',
@@ -130,6 +131,7 @@ describe('DiaryResultScreen', () => {
     render(<DiaryResultScreen />);
     sendMessage('NAVIGATE', { action: 'HOME', duration: 3000 });
     sendMessage('NAVIGATE', { action: 'HOME', duration: 4000 });
-    expect(mockMutate).toHaveBeenCalledTimes(1);
+    const { actAPI } = require('@src/lib/api/act');
+    expect(actAPI.diary).toHaveBeenCalledTimes(1);
   });
 });
