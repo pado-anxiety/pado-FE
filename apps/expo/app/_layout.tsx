@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 
 import alertImage from '@assets/images/alert.png';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import * as Sentry from '@sentry/react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Constants from 'expo-constants';
 import { Stack } from 'expo-router';
 import { PostHogProvider } from 'posthog-react-native';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +22,18 @@ import { useWaveSoundStore } from '@src/lib/sound';
 import { useTheme } from '@src/lib/theme';
 
 import '../global.css';
+
+const SENTRY_DSN = Constants.expoConfig?.extra?.SENTRY_DSN;
+
+Sentry.init({
+  dsn: SENTRY_DSN,
+  debug: __DEV__,
+  enabled: !__DEV__,
+  tracesSampleRate: 1.0,
+  enableAutoSessionTracking: true,
+  attachScreenshot: true,
+  attachViewHierarchy: true,
+});
 
 function NavigationContent() {
   const { t } = useTranslation();
@@ -108,7 +122,7 @@ function NavigationContent() {
 
 export const queryClient = new QueryClient();
 
-export default function RootLayout(): React.ReactNode {
+function RootLayout(): React.ReactNode {
   return (
     <PostHogProvider
       apiKey="phc_STfQdw7sqejGKYfg1kZOhlKOKiSfr9KrebaKA8MucxW"
@@ -138,3 +152,5 @@ export default function RootLayout(): React.ReactNode {
     </PostHogProvider>
   );
 }
+
+export default Sentry.wrap(RootLayout);

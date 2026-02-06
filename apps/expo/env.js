@@ -70,6 +70,7 @@ const _clientEnv = {
   BASE_URL: process.env.BASE_URL,
   IOS_WEBVIEW_URL: process.env.IOS_WEBVIEW_URL,
   ANDROID_WEBVIEW_URL: process.env.ANDROID_WEBVIEW_URL,
+  SENTRY_DSN: process.env.SENTRY_DSN,
 };
 
 const _buildTimeEnv = {
