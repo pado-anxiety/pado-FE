@@ -114,7 +114,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ...env.ClientEnv,
     BASE_URL: 'https://pado-anxiety.site',
     IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
-    SENTRY_DSN: env.ClientEnv.SENTRY_DSN,
+    SENTRY_DSN:
+      'https://8cd430bfd56b4ee468174ef67db0418f@o4510090058792960.ingest.us.sentry.io/4510837084585984',
   },
   updates: {
     url: 'https://u.expo.dev/30195066-b4b9-406a-9236-c2eaa162bf54',
