@@ -3,9 +3,9 @@ import { useCallback, useMemo, useState } from 'react';
 /**
  * 퍼널의 각 스텝 정의
  */
-export interface FunnelStep<TContext> {
+export interface FunnelStep<TContext, TStepId extends string> {
   /** 스텝 고유 ID */
-  id: string;
+  id: TStepId;
   /** 스텝 진입 시 실행할 비동기 작업 (optional) */
   onEnter?: (context: TContext) => Promise<void> | void;
   /** 다음 스텝으로 이동 전 실행할 비동기 작업 (optional) */
@@ -24,7 +24,7 @@ export interface UseFunnelOptions<
   /** 퍼널 고유 ID */
   id: string;
   /** 스텝 정의 배열 */
-  steps: readonly FunnelStep<TContext>[];
+  steps: readonly FunnelStep<TContext, TStepId>[];
   /** 초기 컨텍스트 */
   initialContext: TContext;
   /** 퍼널 완료 시 콜백 */
@@ -53,7 +53,7 @@ export interface UseFunnelReturn<
   /** 현재 컨텍스트 */
   context: TContext;
   /** 현재 스텝 정의 */
-  step: FunnelStep<TContext>;
+  step: FunnelStep<TContext, TStepId>;
   /** 히스토리 관리 객체 */
   history: {
     /** 다음 스텝으로 이동 */
@@ -85,23 +85,26 @@ export interface UseFunnelReturn<
  *
  * @example
  * ```tsx
- * const funnel = useFunnel({
+ * const funnel = useFunnel<StepId, Context>({
  *   id: 'onboard',
  *   steps: [
  *     { id: 'welcome' },
- *     { id: 'breathing', onNext: async () => { await doBreathing(); return true; } },
+ *     { id: 'breathing' },
  *     { id: 'complete' },
  *   ],
  *   initialContext: {},
  *   onComplete: (ctx) => router.replace('/login'),
  * });
  *
+ * const handleNext = () => funnel.history.push();
+ *
+ * // 조건부 렌더링으로 현재 스텝 표시
  * return (
- *   <funnel.Render
- *     welcome={({ history }) => <Welcome onNext={() => history.push()} />}
- *     breathing={({ history }) => <Breathing onNext={() => history.push()} />}
- *     complete={({ history }) => <Complete onFinish={() => funnel.complete()} />}
- *   />
+ *   <>
+ *     {funnel.currentStep === 'welcome' && <Welcome onNext={handleNext} />}
+ *     {funnel.currentStep === 'breathing' && <Breathing onNext={handleNext} />}
+ *     {funnel.currentStep === 'complete' && <Complete />}
+ *   </>
  * );
  * ```
  */

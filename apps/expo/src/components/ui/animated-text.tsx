@@ -25,7 +25,7 @@ export function AnimatedText({
   delay = 1000,
   children,
   style,
-  weight = 'regular',
+  weight = 'bold',
   ...props
 }: AnimatedTextProps) {
   return (

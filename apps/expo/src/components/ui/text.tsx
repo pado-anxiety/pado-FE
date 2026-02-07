@@ -29,15 +29,15 @@ const FONT_MAP: Record<FontWeight, string> = {
 };
 
 const SIZE_MAP: Record<FontSize, { fontSize: number; lineHeight: number }> = {
-  'title-large': { fontSize: scale(28), lineHeight: scale(38) },
-  'title-medium': { fontSize: scale(26), lineHeight: scale(36) },
-  'title-small': { fontSize: scale(24), lineHeight: scale(34) },
-  'body-large': { fontSize: scale(22), lineHeight: scale(32) },
-  'body-medium': { fontSize: scale(20), lineHeight: scale(30) },
-  'body-small': { fontSize: scale(18), lineHeight: scale(26) },
-  'label-large': { fontSize: scale(19), lineHeight: scale(28) },
-  'label-medium': { fontSize: scale(17), lineHeight: scale(24) },
-  'label-small': { fontSize: scale(15), lineHeight: scale(20) },
+  'title-large': { fontSize: scale(26), lineHeight: scale(36) },
+  'title-medium': { fontSize: scale(24), lineHeight: scale(34) },
+  'title-small': { fontSize: scale(22), lineHeight: scale(32) },
+  'body-large': { fontSize: scale(20), lineHeight: scale(30) },
+  'body-medium': { fontSize: scale(18), lineHeight: scale(26) },
+  'body-small': { fontSize: scale(16), lineHeight: scale(24) },
+  'label-large': { fontSize: scale(17), lineHeight: scale(26) },
+  'label-medium': { fontSize: scale(15), lineHeight: scale(22) },
+  'label-small': { fontSize: scale(13), lineHeight: scale(18) },
 };
 
 interface TextProps extends NTextProps {
@@ -53,7 +53,7 @@ export function Text({
   className,
   tx,
   style,
-  weight = 'regular',
+  weight = 'bold',
   size,
   ...props
 }: TextProps) {

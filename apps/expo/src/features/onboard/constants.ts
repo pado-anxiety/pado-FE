@@ -6,7 +6,10 @@ import type { OnboardContext, OnboardStepId, OnboardStepMeta } from './types';
  * 온보딩 스텝 정의
  * 각 스텝의 ID와 메타데이터를 선언적으로 정의
  */
-export const ONBOARD_STEPS: readonly FunnelStep<OnboardContext>[] = [
+export const ONBOARD_STEPS: readonly FunnelStep<
+  OnboardContext,
+  OnboardStepId
+>[] = [
   {
     id: 'welcome' satisfies OnboardStepId,
     meta: { i18nKey: 'onboard.steps.step1' } satisfies OnboardStepMeta,
