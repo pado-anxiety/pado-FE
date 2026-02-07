@@ -31,8 +31,7 @@
       "autoIncrement": true,
       "channel": "production",
       "env": {
-        "APP_ENV": "production",
-        "SENTRY_DSN": "YOUR_SENTRY_DSN_HERE"
+        "APP_ENV": "production"
       }
     }
   },

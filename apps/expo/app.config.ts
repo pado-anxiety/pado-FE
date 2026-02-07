@@ -59,8 +59,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       '@sentry/react-native/expo',
       {
-        organization: 'pado-anxiety',
-        project: 'pado-expo',
+        organization: 'taewoong-heo',
+        project: 'pado',
       },
     ],
     [
