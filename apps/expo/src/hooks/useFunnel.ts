@@ -59,11 +59,11 @@ export interface UseFunnelReturn<
     /** 다음 스텝으로 이동 */
     push: (
       nextStepId?: TStepId,
-      newContext?: Partial<TContext> | ((prev: TContext) => TContext)
+      newContext?: Partial<TContext> | ((prev: TContext) => TContext),
     ) => Promise<void>;
     /** 현재 스텝의 컨텍스트만 업데이트 */
     replace: (
-      newContext: Partial<TContext> | ((prev: TContext) => TContext)
+      newContext: Partial<TContext> | ((prev: TContext) => TContext),
     ) => void;
     /** 이전 스텝으로 이동 */
     back: () => void;
@@ -109,7 +109,7 @@ export function useFunnel<
   TStepId extends string,
   TContext extends Record<string, unknown> = Record<string, unknown>,
 >(
-  options: UseFunnelOptions<TStepId, TContext>
+  options: UseFunnelOptions<TStepId, TContext>,
 ): UseFunnelReturn<TStepId, TContext> {
   const { steps, initialContext, onComplete } = options;
 
@@ -133,7 +133,7 @@ export function useFunnel<
   const push = useCallback(
     async (
       nextStepId?: TStepId,
-      newContext?: Partial<TContext> | ((prev: TContext) => TContext)
+      newContext?: Partial<TContext> | ((prev: TContext) => TContext),
     ) => {
       const currentCtx = historyStack[historyIndex].context;
 
@@ -183,7 +183,14 @@ export function useFunnel<
         await targetStep.onEnter(updatedContext);
       }
     },
-    [historyStack, historyIndex, currentStep, currentStepIndex, steps, onComplete]
+    [
+      historyStack,
+      historyIndex,
+      currentStep,
+      currentStepIndex,
+      steps,
+      onComplete,
+    ],
   );
 
   // 현재 스텝 컨텍스트 업데이트
@@ -203,7 +210,7 @@ export function useFunnel<
         return newStack;
       });
     },
-    [historyIndex]
+    [historyIndex],
   );
 
   // 이전 스텝으로 이동
@@ -220,12 +227,12 @@ export function useFunnel<
         setHistoryIndex(index);
       }
     },
-    [historyStack.length]
+    [historyStack.length],
   );
 
   const history = useMemo(
     () => ({ push, replace, back, go }),
-    [push, replace, back, go]
+    [push, replace, back, go],
   );
 
   return {

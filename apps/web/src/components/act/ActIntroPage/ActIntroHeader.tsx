@@ -2,7 +2,9 @@
 
 import { X } from 'lucide-react';
 
-import { Button, Text } from '@pado/ui';
+import { Text } from '@pado/ui';
+
+import { Button } from '@/components/ui/Button';
 
 interface ActIntroHeaderProps {
   title: string;
@@ -12,7 +14,7 @@ interface ActIntroHeaderProps {
 function ActIntroHeader({ title, onClose }: ActIntroHeaderProps) {
   return (
     <div className="flex flex-row justify-between items-center">
-      <Text className="text-title-medium">{title}</Text>
+      <Text className="text-title-medium font-semibold">{title}</Text>
       <Button
         size="sm"
         color="link"

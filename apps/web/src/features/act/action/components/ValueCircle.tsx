@@ -116,10 +116,10 @@ export default function ValueCircle({
   return (
     <div className="w-full aspect-square relative">
       <div className="flex-1 flex flex-row justify-between items-center px-12">
-        <Text className="text-label-medium font-bold text-slate-700   bg-blue-100 px-3 py-1 rounded-xl">
+        <Text className="text-label-medium font-semibold text-slate-700   bg-blue-100 px-3 py-1 rounded-xl">
           {domainLabels[0]}
         </Text>
-        <Text className="text-label-medium font-bold text-slate-700 bg-blue-100 px-3 py-1 rounded-xl">
+        <Text className="text-label-medium font-semibold text-slate-700 bg-blue-100 px-3 py-1 rounded-xl">
           {domainLabels[1]}
         </Text>
       </div>
@@ -162,10 +162,10 @@ export default function ValueCircle({
       </svg>
 
       <div className="flex-1 flex flex-row justify-between items-center px-12">
-        <Text className="text-label-medium font-bold text-slate-700 bg-blue-100 px-3 py-1 rounded-xl">
+        <Text className="text-label-medium font-semibold text-slate-700 bg-blue-100 px-3 py-1 rounded-xl">
           {domainLabels[2]}
         </Text>
-        <Text className="text-label-medium font-bold text-slate-700 bg-blue-100 px-3 py-1 rounded-xl">
+        <Text className="text-label-medium font-semibold text-slate-700 bg-blue-100 px-3 py-1 rounded-xl">
           {domainLabels[3]}
         </Text>
       </div>

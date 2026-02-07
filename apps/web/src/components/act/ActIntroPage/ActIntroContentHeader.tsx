@@ -13,7 +13,7 @@ function ActIntroContentHeader({
 }: ActIntroContentHeaderProps) {
   return (
     <div className="flex flex-col gap-1">
-      <Text className="text-body-medium font-bold">{title}</Text>
+      <Text className="text-body-medium font-semibold">{title}</Text>
       <Text className="text-body-small text-sub">{description}</Text>
     </div>
   );

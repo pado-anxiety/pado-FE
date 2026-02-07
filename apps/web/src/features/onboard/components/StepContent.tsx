@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 
-import { Button } from '@pado/ui';
+import { Button } from '@/components/ui/Button';
 
 import { FADE_IN_DURATION, FADE_OUT_DURATION } from '../constants';
 import type { Step } from '../types';

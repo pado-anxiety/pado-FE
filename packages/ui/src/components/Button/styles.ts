@@ -1,5 +1,7 @@
 import { tv } from 'tailwind-variants';
 
+// TODO: action 에서 하이드레이션 오류
+
 export const button = tv({
   slots: {
     container: 'flex items-center justify-center rounded-md',

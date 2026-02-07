@@ -3,7 +3,7 @@
 import { motion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
 
-import { Button } from '@pado/ui';
+import { Button } from '@/components/ui/Button';
 
 import { NavButton } from '@/components/ui';
 import { LearningStepContent, useLearningStep } from '@/features/learning';

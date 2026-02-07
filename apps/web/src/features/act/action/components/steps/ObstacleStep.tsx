@@ -18,7 +18,7 @@ export function ObstacleStep({
   return (
     <div className="flex flex-1 flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <Text className="text-body-large font-bold">
+        <Text className="text-body-large font-semibold">
           {t('act.values.step.step3.title')}
         </Text>
         <Text className="text-body-medium text-gray-600">
