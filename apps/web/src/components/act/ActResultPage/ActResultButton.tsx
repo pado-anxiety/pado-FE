@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@pado/ui';
+import { Button } from '@/components/ui/Button';
 
 import { triggerHaptic } from '@/lib/haptic';
 

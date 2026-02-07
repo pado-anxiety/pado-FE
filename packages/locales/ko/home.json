@@ -9,7 +9,8 @@
   },
   "app": {
     "name": "파도",
-    "tagline": "파도를 마주하고, 나만의 리듬으로 나아가는 시간",
+    "tagline1": "파도를 마주하고,",
+    "tagline2": "나만의 리듬으로 나아가는 시간",
     "description": "ACT 기반 불안 관리 앱"
   },
   "learning": {

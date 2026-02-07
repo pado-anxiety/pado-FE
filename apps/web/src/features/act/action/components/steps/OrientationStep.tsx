@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
-import { Button, Text } from '@pado/ui';
+import { Text } from '@pado/ui';
+
+import { Button } from '@/components/ui/Button';
 
 import { Value } from '../../hooks/useActionStep';
 import { TextInputStep } from '../TextInputStep';
@@ -36,7 +38,7 @@ export function OrientationStep({
               className={`py-2 px-4 rounded-2xl ${
                 selectedDomain !== domain
                   ? 'bg-blue-100 text-black'
-                  : 'bg-btn-act-page text-white font-bold'
+                  : 'bg-btn-act-page text-white font-semibold'
               }`}
             >
               <Text className="text-body-small">
@@ -48,10 +50,10 @@ export function OrientationStep({
       )}
       <div className="flex flex-col gap-2">
         <div className="flex flex-row items-center gap-2 flex-wrap">
-          <Text className="text-body-large font-bold">
+          <Text className="text-body-large font-semibold">
             <Text
               as="span"
-              className="text-body-large bg-btn-act-page text-white font-bold py-1 px-3 rounded-xl"
+              className="text-body-large bg-btn-act-page text-white font-semibold py-1 px-3 rounded-xl"
             >
               {domainLabel}
             </Text>

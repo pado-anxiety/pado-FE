@@ -5,7 +5,9 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import * as Sentry from '@sentry/react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Constants from 'expo-constants';
+import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { PostHogProvider } from 'posthog-react-native';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
@@ -22,6 +24,8 @@ import { useWaveSoundStore } from '@src/lib/sound';
 import { useTheme } from '@src/lib/theme';
 
 import '../global.css';
+
+SplashScreen.preventAutoHideAsync();
 
 const SENTRY_DSN = Constants.expoConfig?.extra?.SENTRY_DSN;
 
@@ -123,6 +127,22 @@ function NavigationContent() {
 export const queryClient = new QueryClient();
 
 function RootLayout(): React.ReactNode {
+  const [fontsLoaded] = useFonts({
+    'NanumSquareNeo-Light': require('../assets/fonts/NanumSquareNeoTTF-aLt.ttf'),
+    'NanumSquareNeo-Regular': require('../assets/fonts/NanumSquareNeoTTF-bRg.ttf'),
+    'NanumSquareNeo-Bold': require('../assets/fonts/NanumSquareNeoTTF-cBd.ttf'),
+    'NanumSquareNeo-ExtraBold': require('../assets/fonts/NanumSquareNeoTTF-dEb.ttf'),
+    'NanumSquareNeo-Heavy': require('../assets/fonts/NanumSquareNeoTTF-eHv.ttf'),
+  });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return null;
+
   return (
     <PostHogProvider
       apiKey="phc_STfQdw7sqejGKYfg1kZOhlKOKiSfr9KrebaKA8MucxW"

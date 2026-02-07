@@ -1,5 +1,7 @@
 import { tv } from 'tailwind-variants';
 
+// TODO: action 에서 하이드레이션 오류
+
 export const button = tv({
   slots: {
     container: 'flex items-center justify-center rounded-md',
@@ -32,15 +34,12 @@ export const button = tv({
     size: {
       default: {
         container: 'py-4',
-        label: 'text-xl',
       },
       sm: {
         container: 'py-3',
-        label: 'text-lg',
       },
       lg: {
         container: 'py-5',
-        label: 'text-2xl',
       },
     },
     disabled: {

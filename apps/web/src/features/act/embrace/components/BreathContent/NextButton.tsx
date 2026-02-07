@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { WEBVIEW_MESSAGE_TYPE } from '@pado/bridge';
-import { Button } from '@pado/ui';
+import { Button } from '@/components/ui/Button';
 
 import { handlePostMessage } from '@/lib';
 

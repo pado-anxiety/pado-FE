@@ -32,7 +32,7 @@ export function StepContent({
     return (
       <div className="flex flex-1 flex-col w-full gap-4 flex-shrink-0 min-h-0">
         <div className="flex flex-col gap-2">
-          <Text className="text-body-large font-bold">
+          <Text className="text-body-large font-semibold">
             {title.map((line, index) => (
               <span key={index}>
                 {line}
@@ -54,7 +54,7 @@ export function StepContent({
 
   return (
     <div className="flex flex-col flex-1 w-full gap-2 min-h-0 h-full">
-      <Text className="text-body-large font-bold">
+      <Text className="text-body-large font-semibold">
         {title.map((line, index) => (
           <span key={index}>
             {line}

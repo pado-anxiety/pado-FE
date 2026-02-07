@@ -18,7 +18,7 @@ export function HistoryCards({ cards }: HistoryCardsProps) {
           key={card.question + card.answer}
           className="flex flex-col gap-1 border-l-2 border-gray-400 pl-4 w-full min-w-0"
         >
-          <Text className="text-label-small font-bold text-gray-500">
+          <Text className="text-label-small font-semibold text-gray-500">
             {t(`act.diary.step.step${index + 1}.question`)}
           </Text>
           <div className="w-full min-w-0 flex-shrink">

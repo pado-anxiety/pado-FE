@@ -1,7 +1,7 @@
 {
   "greeting": "Hello",
   "menu": {
-    "viewActHistory": "Looking Back at Wave Records",
+    "viewActHistory": "View Wave Records",
     "chatWithWind": "Sharing My Heart",
     "learning": "Learn More About Anxiety",
     "onboarding": "Onboarding",
@@ -9,8 +9,9 @@
   },
   "app": {
     "name": "Pado",
-    "tagline": "A time to face the waves and move forward at your own rhythm",
-    "description": "ACT-based anxiety management app"
+    "tagline1": "Face the waves,",
+    "tagline2": "move at your own rhythm",
+    "description": "ACT-based anxiety care"
   },
   "learning": {
     "title": "Learn More About Anxiety",

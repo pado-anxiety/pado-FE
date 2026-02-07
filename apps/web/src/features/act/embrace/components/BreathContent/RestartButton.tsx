@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
-import { Button, Text } from '@pado/ui';
+import { Text } from '@pado/ui';
+
+import { Button } from '@/components/ui/Button';
 
 type RestartButtonProps = {
   onClick: () => void;
@@ -18,7 +20,7 @@ export function RestartButton({ onClick }: RestartButtonProps) {
       className="px-20 py-5 rounded-2xl shadow-lg bg-transparent"
       onClick={onClick}
     >
-      <Text className="text-body-medium font-bold text-white underline">
+      <Text className="text-body-medium font-semibold text-white underline">
         {t('act.embrace.step.restartButton')}
       </Text>
     </Button>

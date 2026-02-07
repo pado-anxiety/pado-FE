@@ -13,7 +13,7 @@ export function QuestionSection({ step }: QuestionSectionProps) {
 
   return (
     <div className="flex flex-col gap-1">
-      <Text className="text-body-large font-bold">
+      <Text className="text-body-large font-semibold">
         {t(`${step.i18nKey}.question`)}
       </Text>
       <Text className="text-body-medium">
