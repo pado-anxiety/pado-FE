@@ -24,15 +24,12 @@ export declare const button: import("tailwind-variants").TVReturnType<{
     size: {
         default: {
             container: string;
-            label: string;
         };
         sm: {
             container: string;
-            label: string;
         };
         lg: {
             container: string;
-            label: string;
         };
     };
     disabled: {
@@ -78,15 +75,12 @@ export declare const button: import("tailwind-variants").TVReturnType<{
     size: {
         default: {
             container: string;
-            label: string;
         };
         sm: {
             container: string;
-            label: string;
         };
         lg: {
             container: string;
-            label: string;
         };
     };
     disabled: {
@@ -132,15 +126,12 @@ export declare const button: import("tailwind-variants").TVReturnType<{
     size: {
         default: {
             container: string;
-            label: string;
         };
         sm: {
             container: string;
-            label: string;
         };
         lg: {
             container: string;
-            label: string;
         };
     };
     disabled: {

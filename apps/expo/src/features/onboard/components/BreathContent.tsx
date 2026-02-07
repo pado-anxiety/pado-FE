@@ -25,11 +25,19 @@ export function BreathContent({ breathText, timer }: BreathContentProps) {
         exiting={FadeOut.duration(400)}
         className="items-center"
       >
-        <Text className="rounded-2xl bg-black/50 px-4 py-3 text-center text-title-medium text-white">
+        <Text
+          className="rounded-2xl bg-black/50 px-4 py-3 text-center text-white"
+          size="title-medium"
+          weight="bold"
+        >
           {breathText}
         </Text>
         {timer > 0 && (
-          <Text className="mt-6 rounded-2xl bg-black/50 px-4 py-3 text-6xl font-bold text-white">
+          <Text
+            className="mt-6 rounded-2xl bg-black/50 px-4 py-3 text-white"
+            weight="heavy"
+            style={{ fontSize: 48 }}
+          >
             {timer}
           </Text>
         )}

@@ -80,7 +80,12 @@ export function StepContent({
             key={`${stepKey}-text-${index}`}
             entering={FadeIn.duration(ANIMATION.TEXT_FADE_IN)}
           >
-            <Text className="mb-2 text-body-large text-white">{text}</Text>
+            <Text
+              className="mb-2 text-white"
+              size="body-large"
+            >
+              {text}
+            </Text>
           </Animated.View>
         ))}
       </View>
@@ -89,11 +94,15 @@ export function StepContent({
       <Animated.View style={buttonAnimatedStyle}>
         {showButton && (
           <Button
-            size="sm"
+            size="default"
             onPress={onNext}
             className="bg-btn-act-page"
           >
-            <Text className="text-body-large font-semibold text-white">
+            <Text
+              className="text-white"
+              weight="bold"
+              size="body-small"
+            >
               {buttonText}
             </Text>
           </Button>

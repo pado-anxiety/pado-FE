@@ -83,7 +83,7 @@ export default function LoginScreen() {
         style={{ marginTop: -scale(10) }}
       >
         <View
-          className="flex-1 items-center gap-4"
+          className="flex-1 items-center justify-center gap-4 px-8"
           style={{ marginTop: -scale(50) }}
         >
           <Pressable onPress={handleBypassTap}>
@@ -91,11 +91,11 @@ export default function LoginScreen() {
               {t('home.app.name')}
             </Text>
           </Pressable>
-          <View className="flex-col items-center">
-            <Text className="text-body-medium text-white">
+          <View className="flex-col items-center justify-center">
+            <Text className="text-center text-body-medium text-white">
               {t('home.app.tagline')}
             </Text>
-            <Text className="text-body-medium text-white">
+            <Text className="text-center text-body-medium text-white">
               {t('home.app.description')}
             </Text>
           </View>

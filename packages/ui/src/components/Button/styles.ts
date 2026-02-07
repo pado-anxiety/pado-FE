@@ -32,15 +32,12 @@ export const button = tv({
     size: {
       default: {
         container: 'py-4',
-        label: 'text-xl',
       },
       sm: {
         container: 'py-3',
-        label: 'text-lg',
       },
       lg: {
         container: 'py-5',
-        label: 'text-2xl',
       },
     },
     disabled: {

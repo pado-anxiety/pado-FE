@@ -8,7 +8,10 @@ import Button from '../../../../../packages/ui/src/components/Button';
 describe('Button', () => {
   it('text prop이 올바르게 렌더링된다', () => {
     const { getByText } = render(
-      <Button text="확인" testID="btn" />,
+      <Button
+        text="확인"
+        testID="btn"
+      />,
     );
     expect(getByText('확인')).toBeTruthy();
   });
@@ -16,7 +19,11 @@ describe('Button', () => {
   it('onPress 이벤트가 정상 호출된다', () => {
     const onPress = jest.fn();
     const { getByTestId } = render(
-      <Button text="클릭" testID="btn" onPress={onPress} />,
+      <Button
+        text="클릭"
+        testID="btn"
+        onPress={onPress}
+      />,
     );
     fireEvent.press(getByTestId('btn'));
     expect(onPress).toHaveBeenCalledTimes(1);
@@ -24,7 +31,11 @@ describe('Button', () => {
 
   it('disabled=true일 때 Pressable이 disabled된다', () => {
     const { getByTestId } = render(
-      <Button text="비활성" testID="btn" disabled={true} />,
+      <Button
+        text="비활성"
+        testID="btn"
+        disabled={true}
+      />,
     );
     expect(getByTestId('btn').props.accessibilityState?.disabled).toBe(true);
   });
@@ -32,7 +43,12 @@ describe('Button', () => {
   it('disabled=true일 때 onPress가 호출되지 않는다', () => {
     const onPress = jest.fn();
     const { getByTestId } = render(
-      <Button text="비활성" testID="btn" disabled={true} onPress={onPress} />,
+      <Button
+        text="비활성"
+        testID="btn"
+        disabled={true}
+        onPress={onPress}
+      />,
     );
     fireEvent.press(getByTestId('btn'));
     expect(onPress).not.toHaveBeenCalled();
@@ -40,7 +56,11 @@ describe('Button', () => {
 
   it('isLoading=true일 때 ActivityIndicator가 표시된다', () => {
     const { getByTestId } = render(
-      <Button text="로딩" testID="btn" isLoading={true} />,
+      <Button
+        text="로딩"
+        testID="btn"
+        isLoading={true}
+      />,
     );
     expect(getByTestId('btn-activity-indicator')).toBeTruthy();
   });
@@ -48,7 +68,12 @@ describe('Button', () => {
   it('isLoading=true일 때 onPress가 호출되지 않는다', () => {
     const onPress = jest.fn();
     const { getByTestId } = render(
-      <Button text="로딩" testID="btn" isLoading={true} onPress={onPress} />,
+      <Button
+        text="로딩"
+        testID="btn"
+        isLoading={true}
+        onPress={onPress}
+      />,
     );
     fireEvent.press(getByTestId('btn'));
     expect(onPress).not.toHaveBeenCalled();

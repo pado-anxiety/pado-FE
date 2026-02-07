@@ -1,4 +1,4 @@
-export { Button } from '@pado/ui';
+export { Button } from './button';
 export { AnimatedText } from './animated-text';
 export { Image, preloadImages } from './image';
 export { ControlledInput } from './input';
