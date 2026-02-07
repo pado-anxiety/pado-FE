@@ -52,11 +52,11 @@ export const ONBOARD_STEPS: readonly FunnelStep<OnboardContext>[] = [
  */
 export const ANIMATION = {
   /** 텍스트 페이드인 지속시간 (ms) */
-  TEXT_FADE_IN: 600,
+  TEXT_FADE_IN: 500,
   /** 텍스트 간 딜레이 (ms) */
-  TEXT_DELAY: 600,
+  TEXT_DELAY: 500,
   /** 버튼 표시 딜레이 배율 */
-  BUTTON_DELAY_MULTIPLIER: 100,
+  BUTTON_DELAY_MULTIPLIER: 500,
   /** 스텝 전환 페이드아웃 (ms) */
   STEP_FADE_OUT: 400,
 } as const;

@@ -30,8 +30,14 @@ export function OnboardScreen() {
   const { t } = useTranslation();
   const { trackFunnelNext } = useAnalytics();
   const { getDuration, resetDuration } = useDuration();
-  const { isBreathing, breathText, breathTimer, waveOffset, startBreathing } =
-    useBreathing();
+  const {
+    isBreathing,
+    breathText,
+    breathTimer,
+    waveOffset,
+    waveGapScale,
+    startBreathing,
+  } = useBreathing();
 
   // 퍼널 완료 시 로그인 화면으로 이동
   const handleComplete = useCallback(() => {
@@ -101,9 +107,9 @@ export function OnboardScreen() {
       className="flex-1 bg-page"
       style={{ paddingTop: insets.top }}
     >
-      {/* 파도 애니메이션 - translateY로 위아래 이동 */}
+      {/* 파도 애니메이션 - translateY로 위아래 이동, gapScale로 수평선 간격 조절 */}
       <Animated.View style={waveAnimatedStyle}>
-        <WaveHorizon />
+        <WaveHorizon gapScale={waveGapScale} />
       </Animated.View>
 
       {/* 컨텐츠 영역 - 파도와 겹침 */}
