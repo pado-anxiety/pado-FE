@@ -16,7 +16,7 @@ export function StepContent({ step }: StepContentProps) {
 
   return (
     <div className="flex-1 flex flex-col gap-2 justify-center items-center absolute top-0 left-0 w-full aspect-square z-100">
-      <Text className="text-title-medium bg-act-page rounded-lg p-2">
+      <Text className="text-title-medium font-bold bg-act-page rounded-lg p-2">
         {t(`${step.i18nKey}.subject`)}
       </Text>
       <div className="flex flex-col items-center">
