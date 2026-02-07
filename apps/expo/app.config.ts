@@ -57,6 +57,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   plugins: [
     [
+      '@sentry/react-native/expo',
+      {
+        organization: 'taewoong-heo',
+        project: 'pado',
+      },
+    ],
+    [
       'expo-audio',
       {
         playsInSilentModeIOS: true,
@@ -105,8 +112,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: '30195066-b4b9-406a-9236-c2eaa162bf54',
     },
     ...env.ClientEnv,
-    // BASE_URL: 'https://pado-anxiety.site',
-    // IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
+    BASE_URL: 'https://pado-anxiety.site',
+    IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
+    SENTRY_DSN:
+      'https://8cd430bfd56b4ee468174ef67db0418f@o4510090058792960.ingest.us.sentry.io/4510837084585984',
   },
   updates: {
     url: 'https://u.expo.dev/30195066-b4b9-406a-9236-c2eaa162bf54',

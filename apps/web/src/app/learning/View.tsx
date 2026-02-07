@@ -33,7 +33,7 @@ export default function LearningView() {
   return (
     <div
       className="bg-act-page flex-1 flex"
-      style={{ paddingTop: insets.top }}
+      style={{ paddingTop: insets?.top ?? 0 }}
     >
       <div className="flex w-full flex-1 flex-col justify-between">
         {/* 상단 헤더 - Exit 버튼만 왼쪽에 */}
@@ -54,7 +54,7 @@ export default function LearningView() {
         {/* 하단 버튼 영역 - 뒤로가기, 다음 버튼 나란히 */}
         <div
           className="flex w-full flex-col gap-4 pt-4 bg-blue-500 px-8"
-          style={{ paddingBottom: insets.bottom }}
+          style={{ paddingBottom: insets?.bottom ?? 0 }}
         >
           {/* 프로그래스바 */}
           <div className="h-[10px] w-full overflow-hidden rounded-full bg-neutral-300">

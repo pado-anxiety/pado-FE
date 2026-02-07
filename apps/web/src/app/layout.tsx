@@ -44,9 +44,11 @@ export default function RootLayout({
           <Suspense fallback={null}>
             <ThemeSync />
           </Suspense>
-          <I18nProvider>
-            <div className="mobile-view">{children}</div>
-          </I18nProvider>
+          <Suspense fallback={null}>
+            <I18nProvider>
+              <div className="mobile-view">{children}</div>
+            </I18nProvider>
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>
