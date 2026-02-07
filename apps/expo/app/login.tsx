@@ -5,9 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
-import { Text } from '@pado/ui';
-
-import { Image, Pressable, View } from '@src/components/ui';
+import { Image, Pressable, Text, View } from '@src/components/ui';
 import { WaveHorizon } from '@src/features/home';
 import { showAlert } from '@src/lib/alert';
 import { useAuth } from '@src/lib/auth';
@@ -84,18 +82,34 @@ export default function LoginScreen() {
       >
         <View
           className="flex-1 items-center justify-center gap-4 px-8"
-          style={{ marginTop: -scale(50) }}
+          style={{ marginTop: -scale(100) }}
         >
           <Pressable onPress={handleBypassTap}>
-            <Text className="text-5xl font-bold text-white">
+            <Text
+              className="text-white"
+              weight="heavy"
+              style={{ fontSize: 36 }}
+            >
               {t('home.app.name')}
             </Text>
           </Pressable>
-          <View className="flex-col items-center justify-center">
-            <Text className="text-center text-body-medium text-white">
-              {t('home.app.tagline')}
+          <View className="flex-col items-center justify-center text-center">
+            <Text
+              className="text-white"
+              size="body-medium"
+            >
+              {t('home.app.tagline1')}
             </Text>
-            <Text className="text-center text-body-medium text-white">
+            <Text
+              className="text-center text-white"
+              size="body-medium"
+            >
+              {t('home.app.tagline2')}
+            </Text>
+            <Text
+              className="text-center text-white"
+              size="body-medium"
+            >
               {t('home.app.description')}
             </Text>
           </View>
@@ -114,7 +128,10 @@ export default function LoginScreen() {
               className="h-6 w-6"
               contentFit="contain"
             />
-            <Text className="text-body-medium text-white">
+            <Text
+              className="text-white"
+              size="body-medium"
+            >
               {t('auth.login.continueWithApple')}
             </Text>
           </Pressable>
@@ -128,9 +145,7 @@ export default function LoginScreen() {
               className="h-6 w-6"
               contentFit="contain"
             />
-            <Text className="text-body-medium">
-              {t('auth.login.continueWithGoogle')}
-            </Text>
+            <Text size="body-medium">{t('auth.login.continueWithGoogle')}</Text>
           </Pressable>
 
           <Pressable
@@ -142,11 +157,12 @@ export default function LoginScreen() {
               className="h-6 w-6"
               contentFit="contain"
             />
-            <Text className="text-body-medium">
-              {t('auth.login.continueWithKakao')}
-            </Text>
+            <Text size="body-medium">{t('auth.login.continueWithKakao')}</Text>
           </Pressable>
-          <Text className="text-center text-body-small text-sub">
+          <Text
+            className="text-center text-sub"
+            size="body-small"
+          >
             {t('auth.login.termsAgreement')}
           </Text>
         </View>
