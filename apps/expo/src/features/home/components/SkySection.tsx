@@ -1,4 +1,3 @@
-import { Entypo } from '@expo/vector-icons';
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +11,6 @@ import {
 } from '@src/components/ui';
 import { triggerHaptic } from '@src/lib/haptics';
 import { ROUTES } from '@src/lib/route';
-import { useWaveSoundStore } from '@src/lib/sound';
 import { ICONS_SIZE } from '@src/lib/styles';
 
 const messageIds = [
@@ -34,7 +32,7 @@ export function SkySection({
   setPage: (page: 'HOME' | 'HISTORY' | 'CHAT' | 'LEARNING') => void;
 }): React.ReactNode {
   const { t } = useTranslation();
-  const { pause, play, isPlaying } = useWaveSoundStore();
+  // const { pause, play, isPlaying } = useWaveSoundStore();
   // const { logout } = useAuth();
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -63,13 +61,13 @@ export function SkySection({
       }}
     >
       <View className="flex w-full flex-row items-end justify-end gap-4">
-        <Pressable onPress={() => (isPlaying ? pause() : play())}>
+        {/* <Pressable onPress={() => (isPlaying ? pause() : play())}>
           <Entypo
             name={isPlaying ? 'sound' : 'sound-mute'}
             size={ICONS_SIZE.large}
             color="black"
           />
-        </Pressable>
+        </Pressable> */}
         <Pressable onPress={() => router.push(ROUTES.SETTINGS.BASE)}>
           <MaterialIcons
             name="settings"

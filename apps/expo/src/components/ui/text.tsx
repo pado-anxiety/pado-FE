@@ -5,7 +5,7 @@ import type {
   TextStyle,
 } from 'react-native';
 import { Text as RNText } from 'react-native';
-import { scale } from 'react-native-size-matters';
+
 
 export type FontWeight = 'light' | 'regular' | 'bold' | 'extrabold' | 'heavy';
 
@@ -29,15 +29,15 @@ const FONT_MAP: Record<FontWeight, string> = {
 };
 
 const SIZE_MAP: Record<FontSize, { fontSize: number; lineHeight: number }> = {
-  'title-large': { fontSize: scale(26), lineHeight: scale(36) },
-  'title-medium': { fontSize: scale(24), lineHeight: scale(34) },
-  'title-small': { fontSize: scale(22), lineHeight: scale(32) },
-  'body-large': { fontSize: scale(20), lineHeight: scale(30) },
-  'body-medium': { fontSize: scale(18), lineHeight: scale(26) },
-  'body-small': { fontSize: scale(16), lineHeight: scale(24) },
-  'label-large': { fontSize: scale(17), lineHeight: scale(26) },
-  'label-medium': { fontSize: scale(15), lineHeight: scale(22) },
-  'label-small': { fontSize: scale(13), lineHeight: scale(18) },
+  'title-large': { fontSize: 26, lineHeight: 36 },
+  'title-medium': { fontSize: 24, lineHeight: 34 },
+  'title-small': { fontSize: 22, lineHeight: 32 },
+  'body-large': { fontSize: 20, lineHeight: 30 },
+  'body-medium': { fontSize: 18, lineHeight: 26 },
+  'body-small': { fontSize: 16, lineHeight: 24 },
+  'label-large': { fontSize: 17, lineHeight: 26 },
+  'label-medium': { fontSize: 15, lineHeight: 22 },
+  'label-small': { fontSize: 13, lineHeight: 18 },
 };
 
 interface TextProps extends NTextProps {

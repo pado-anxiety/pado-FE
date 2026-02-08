@@ -20,7 +20,6 @@ import { Button, Image, Text } from '@src/components/ui';
 import { useAlert } from '@src/lib/alert';
 import { getHapticState, setHapticState } from '@src/lib/haptics';
 import { I18nProvider } from '@src/lib/i18n';
-import { useWaveSoundStore } from '@src/lib/sound';
 import { useTheme } from '@src/lib/theme';
 
 import '../global.css';
@@ -43,11 +42,11 @@ function NavigationContent() {
   const { t } = useTranslation();
   const { themeStyle } = useTheme();
 
-  const { play } = useWaveSoundStore();
+  // const { play } = useWaveSoundStore();
 
-  useEffect(() => {
-    play();
-  }, [play]);
+  // useEffect(() => {
+  //   play();
+  // }, [play]);
 
   useEffect(() => {
     const hapticState = getHapticState();

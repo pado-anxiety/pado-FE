@@ -85,3 +85,6 @@ yarn-error.*
 *.tsbuildinfo
 
 google-services.json
+scripts/build-ios-local.sh
+
+*.ipa
