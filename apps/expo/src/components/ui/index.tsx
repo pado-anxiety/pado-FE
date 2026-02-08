@@ -6,6 +6,7 @@ export { LoadingSpinner } from './loading-spinner';
 export { Modal, useModal } from './modal';
 export { NavButton } from './nav-button';
 export { Text } from './text';
+export type { TextPreset } from './text';
 export { WebViewErrorView } from './webview-error-view';
 export { WebViewLoadingView } from './webview-loading-view';
 export { Divider } from './divider';

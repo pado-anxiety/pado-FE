@@ -26,17 +26,16 @@ export function BreathContent({ breathText, timer }: BreathContentProps) {
         className="items-center"
       >
         <Text
+          preset="title"
           className="rounded-2xl bg-black/50 px-4 py-3 text-center text-white"
-          size="title-medium"
-          weight="bold"
         >
           {breathText}
         </Text>
         {timer > 0 && (
           <Text
+            preset="title"
+            bold
             className="mt-6 rounded-2xl bg-black/50 px-4 py-3 text-white"
-            weight="heavy"
-            style={{ fontSize: 48 }}
           >
             {timer}
           </Text>

@@ -36,29 +36,17 @@ export function ActResultContent({
       >
         <View className="gap-4">
           {/* Title */}
-          <Text
-            size="title-medium"
-            weight="bold"
-          >
-            {title}
-          </Text>
+          <Text preset="title">{title}</Text>
 
-          {/* Description with fade-in animation */}
+          {/* Description */}
           <View className="gap-4">
             {description.map((line, index) => (
               <Text
                 key={`result-${index}`}
-                size="body-medium"
-                weight="regular"
+                preset="body"
               >
                 {line}
               </Text>
-              // <FadeInText
-              //   key={`result-${index}`}
-              //   delay={index * ACT_ANIMATION.TEXT_DELAY}
-              // >
-              //   {line}
-              // </FadeInText>
             ))}
           </View>
 
@@ -76,29 +64,3 @@ export function ActResultContent({
     </View>
   );
 }
-
-// function FadeInText({ children, delay }: { children: string; delay: number }) {
-//   const opacity = useSharedValue(0);
-
-//   useEffect(() => {
-//     opacity.value = withDelay(
-//       delay,
-//       withTiming(1, { duration: ACT_ANIMATION.FADE_IN }),
-//     );
-//   }, [delay, opacity]);
-
-//   const animatedStyle = useAnimatedStyle(() => ({
-//     opacity: opacity.value,
-//   }));
-
-//   return (
-//     <Animated.View style={animatedStyle}>
-//       <Text
-//         size="body-medium"
-//         weight="regular"
-//       >
-//         {children}
-//       </Text>
-//     </Animated.View>
-//   );
-// }

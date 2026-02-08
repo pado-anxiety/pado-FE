@@ -88,8 +88,7 @@ export function AnchorStepContent({
             style={{ width: circleSize, height: circleSize }}
           >
             <Text
-              size="title-large"
-              weight="bold"
+              preset="title"
               className="rounded-lg bg-act-page p-2"
             >
               {subject}
@@ -98,8 +97,7 @@ export function AnchorStepContent({
               {description.map((desc) => (
                 <Text
                   key={desc}
-                  size="body-medium"
-                  weight="regular"
+                  preset="body"
                 >
                   {desc}
                 </Text>
@@ -109,10 +107,9 @@ export function AnchorStepContent({
         </View>
 
         {/* Example text */}
-        <View className="mt-6 items-center gap-3">
+        <View className="mt-5 items-center gap-3">
           <Text
-            size="body-small"
-            weight="regular"
+            preset="sub"
             className="text-sub"
           >
             {stepIndex === 0 ? `${t('common.example')}) ` : ''}
@@ -121,15 +118,14 @@ export function AnchorStepContent({
         </View>
 
         {/* Count buttons + hint */}
-        <View className="mt-12 w-full items-center gap-6">
+        <View className="mt-8 w-full items-center gap-4">
           <CountButtons
             count={count}
             selectedIndex={selectedIndex}
             onSelect={handleSelect}
           />
           <Text
-            size="label-medium"
-            weight="regular"
+            preset="caption"
             className="text-sub"
           >
             {hint}

@@ -127,11 +127,9 @@ export const queryClient = new QueryClient();
 
 function RootLayout(): React.ReactNode {
   const [fontsLoaded] = useFonts({
-    'NanumSquareNeo-Light': require('../assets/fonts/NanumSquareNeoTTF-aLt.ttf'),
-    'NanumSquareNeo-Regular': require('../assets/fonts/NanumSquareNeoTTF-bRg.ttf'),
-    'NanumSquareNeo-Bold': require('../assets/fonts/NanumSquareNeoTTF-cBd.ttf'),
-    'NanumSquareNeo-ExtraBold': require('../assets/fonts/NanumSquareNeoTTF-dEb.ttf'),
-    'NanumSquareNeo-Heavy': require('../assets/fonts/NanumSquareNeoTTF-eHv.ttf'),
+    'Pretendard-Regular': require('../assets/fonts/Pretendard-Regular.otf'),
+    'Pretendard-SemiBold': require('../assets/fonts/Pretendard-SemiBold.otf'),
+    'Hahmlet-Medium': require('../assets/fonts/Hahmlet-Medium.ttf'),
   });
 
   useEffect(() => {

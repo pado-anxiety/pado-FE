@@ -1,6 +1,6 @@
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { Button, Text, View } from '@src/components/ui';
+import { Button, View } from '@src/components/ui';
 
 interface ActStepLayoutProps {
   leftButton?: React.ReactNode;
@@ -24,7 +24,7 @@ export function ActStepLayout({
   return (
     <View
       className="flex-1 bg-act-page px-5"
-      style={{ paddingTop: insets.top + 8, paddingBottom: insets.bottom + 16 }}
+      style={{ paddingTop: insets.top + 12, paddingBottom: insets.bottom + 16 }}
     >
       {/* Header */}
       <View className="flex-row items-center justify-between">
@@ -38,18 +38,11 @@ export function ActStepLayout({
       {/* Bottom button */}
       <Button
         size="default"
+        text={buttonText}
         onPress={onButtonClick}
         disabled={buttonDisabled}
         className="bg-btn-act-page"
-      >
-        <Text
-          className="text-white"
-          weight="bold"
-          size="body-small"
-        >
-          {buttonText}
-        </Text>
-      </Button>
+      />
     </View>
   );
 }

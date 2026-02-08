@@ -81,8 +81,8 @@ export function StepContent({
             entering={FadeIn.duration(ANIMATION.TEXT_FADE_IN)}
           >
             <Text
+              preset="heading"
               className="mb-2 text-white"
-              size="body-large"
             >
               {text}
             </Text>
@@ -94,17 +94,11 @@ export function StepContent({
       <Animated.View style={buttonAnimatedStyle}>
         {showButton && (
           <Button
+            text={buttonText}
             size="default"
             onPress={onNext}
             className="bg-btn-act-page"
-          >
-            <Text
-              className="text-white"
-              size="body-small"
-            >
-              {buttonText}
-            </Text>
-          </Button>
+          />
         )}
       </Animated.View>
     </View>

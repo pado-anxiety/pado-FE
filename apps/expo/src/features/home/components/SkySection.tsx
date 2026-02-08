@@ -78,7 +78,10 @@ export function SkySection({
       </View>
       <View className="flex w-full flex-col gap-8 pt-4">
         <View className="px-12 py-20">
-          <AnimatedText className="text-center text-body-large font-medium">
+          <AnimatedText
+            preset="quote"
+            className="text-center"
+          >
             &quot;{getRandomMessage().text}&quot;
           </AnimatedText>
         </View>
@@ -92,7 +95,8 @@ export function SkySection({
           >
             <AnimatedText
               delay={1500}
-              className="pb-0.2 self-start border-b border-slate-600 text-title-small font-medium text-slate-700"
+              preset="title"
+              className="pb-0.2 self-start text-slate-700"
             >
               {t('home.menu.viewActHistory')}
             </AnimatedText>
@@ -107,7 +111,8 @@ export function SkySection({
           >
             <AnimatedText
               delay={2000}
-              className="pb-0.2 self-start border-b border-slate-600 text-title-small font-medium text-slate-700"
+              preset="title"
+              className="pb-0.2 self-start text-slate-700"
             >
               {t('home.menu.learning')}
             </AnimatedText>
@@ -121,7 +126,8 @@ export function SkySection({
           >
             <AnimatedText
               delay={2000}
-              className="pb-0.2 self-start border-b border-slate-600 text-title-small font-medium text-slate-700"
+              preset="title"
+              className="pb-0.2 self-start text-slate-700"
             >
               온보딩
             </AnimatedText>

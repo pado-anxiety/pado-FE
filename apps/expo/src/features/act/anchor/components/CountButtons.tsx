@@ -44,8 +44,8 @@ export function CountButtons({
             }}
           >
             <Text
-              size="body-medium"
-              weight="bold"
+              preset="body"
+              bold
               style={{ color: isSelected ? '#FFFFFF' : '#000000' }}
             >
               {buttonIndex}

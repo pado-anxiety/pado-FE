@@ -34,15 +34,10 @@ export function ActIntroContent({
       className="flex-1 bg-act-page px-5 pt-4"
       style={{ paddingTop: insets.top + 16, paddingBottom: insets.bottom + 16 }}
     >
-      <View className="flex-1 gap-4">
+      <View className="flex-1 gap-5">
         {/* Header: title + close button */}
         <View className="flex-row items-center justify-between">
-          <Text
-            size="title-medium"
-            weight="bold"
-          >
-            {title}
-          </Text>
+          <Text preset="title">{title}</Text>
           <NavButton
             variant="close"
             onPress={onClose}
@@ -54,8 +49,7 @@ export function ActIntroContent({
           {description.map((line, index) => (
             <Text
               key={`desc-${index}`}
-              size="body-medium"
-              weight="regular"
+              preset="body"
             >
               {line}
             </Text>
@@ -66,21 +60,15 @@ export function ActIntroContent({
 
         {/* Content area */}
         <ScrollView
-          className="mb-4 flex-1"
+          className="mb-5 flex-1"
           showsVerticalScrollIndicator={false}
         >
-          <View className="gap-4">
+          <View className="gap-5">
             {/* Content title & description */}
-            <View className="gap-1">
+            <View className="gap-2">
+              <Text preset="heading">{contentTitle}</Text>
               <Text
-                size="body-large"
-                weight="bold"
-              >
-                {contentTitle}
-              </Text>
-              <Text
-                size="body-small"
-                weight="regular"
+                preset="sub"
                 className="text-sub"
               >
                 {contentDescription}
@@ -88,12 +76,11 @@ export function ActIntroContent({
             </View>
 
             {/* Steps list */}
-            <View className="gap-2">
+            <View className="gap-3">
               {steps.map((step, index) => (
                 <Text
                   key={`step-${index}`}
-                  size="body-medium"
-                  weight="regular"
+                  preset="body"
                 >
                   {step}
                 </Text>
@@ -103,8 +90,7 @@ export function ActIntroContent({
             {/* Tip box */}
             <View className="rounded-xl border border-white bg-white/50 p-4">
               <Text
-                size="body-small"
-                weight="regular"
+                preset="sub"
                 style={{ fontStyle: 'italic' }}
               >
                 {tipText}
