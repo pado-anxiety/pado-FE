@@ -6,7 +6,6 @@ import type {
 } from 'react-native';
 import { Text as RNText } from 'react-native';
 
-
 export type FontWeight = 'light' | 'regular' | 'bold' | 'extrabold' | 'heavy';
 
 export type FontSize =
@@ -53,7 +52,7 @@ export function Text({
   className,
   tx,
   style,
-  weight = 'bold',
+  weight = 'regular',
   size,
   ...props
 }: TextProps) {

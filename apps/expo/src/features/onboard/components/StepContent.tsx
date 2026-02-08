@@ -100,7 +100,6 @@ export function StepContent({
           >
             <Text
               className="text-white"
-              weight="bold"
               size="body-small"
             >
               {buttonText}

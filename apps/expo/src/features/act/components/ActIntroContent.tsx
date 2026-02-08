@@ -1,0 +1,125 @@
+import { ScrollView } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { Button, Divider, NavButton, Text, View } from '@src/components/ui';
+import { triggerHaptic } from '@src/lib/haptics';
+
+import type { ActIntroData } from '../types';
+
+interface ActIntroContentProps extends ActIntroData {
+  onStart: () => void;
+  onClose: () => void;
+}
+
+export function ActIntroContent({
+  title,
+  description,
+  contentTitle,
+  contentDescription,
+  steps,
+  tipText,
+  buttonText,
+  onStart,
+  onClose,
+}: ActIntroContentProps) {
+  const insets = useSafeAreaInsets();
+
+  const handleStart = () => {
+    triggerHaptic('NAVIGATE');
+    onStart();
+  };
+
+  return (
+    <View
+      className="flex-1 bg-act-page px-5 pt-4"
+      style={{ paddingTop: insets.top + 16, paddingBottom: insets.bottom + 16 }}
+    >
+      <View className="flex-1 gap-4">
+        {/* Header: title + close button */}
+        <View className="flex-row items-center justify-between">
+          <Text
+            size="title-medium"
+            weight="bold"
+          >
+            {title}
+          </Text>
+          <NavButton
+            variant="close"
+            onPress={onClose}
+          />
+        </View>
+
+        {/* Description */}
+        <View className="gap-4">
+          {description.map((line, index) => (
+            <Text
+              key={`desc-${index}`}
+              size="body-medium"
+              weight="regular"
+            >
+              {line}
+            </Text>
+          ))}
+        </View>
+
+        <Divider />
+
+        {/* Content area */}
+        <ScrollView
+          className="mb-4 flex-1"
+          showsVerticalScrollIndicator={false}
+        >
+          <View className="gap-4">
+            {/* Content title & description */}
+            <View className="gap-1">
+              <Text
+                size="body-large"
+                weight="bold"
+              >
+                {contentTitle}
+              </Text>
+              <Text
+                size="body-small"
+                weight="regular"
+                className="text-sub"
+              >
+                {contentDescription}
+              </Text>
+            </View>
+
+            {/* Steps list */}
+            <View className="gap-2">
+              {steps.map((step, index) => (
+                <Text
+                  key={`step-${index}`}
+                  size="body-medium"
+                  weight="regular"
+                >
+                  {step}
+                </Text>
+              ))}
+            </View>
+
+            {/* Tip box */}
+            <View className="rounded-xl border border-white bg-white/50 p-4">
+              <Text
+                size="body-small"
+                weight="regular"
+                style={{ fontStyle: 'italic' }}
+              >
+                {tipText}
+              </Text>
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+
+      {/* Bottom button */}
+      <Button
+        text={buttonText}
+        onPress={handleStart}
+        className="bg-btn-act-page"
+      />
+    </View>
+  );
+}

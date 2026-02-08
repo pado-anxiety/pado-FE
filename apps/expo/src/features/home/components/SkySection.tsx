@@ -112,6 +112,20 @@ export function SkySection({
               {t('home.menu.learning')}
             </AnimatedText>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            className="flex flex-col"
+            onPress={() => {
+              router.replace(ROUTES.ONBOARD);
+            }}
+          >
+            <AnimatedText
+              delay={2000}
+              className="pb-0.2 self-start border-b border-slate-600 text-title-small font-medium text-slate-700"
+            >
+              온보딩
+            </AnimatedText>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
