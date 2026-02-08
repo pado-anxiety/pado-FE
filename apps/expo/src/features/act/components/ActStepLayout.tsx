@@ -23,12 +23,14 @@ export function ActStepLayout({
 
   return (
     <View
-      className="flex-1 bg-act-page px-5"
+      className="flex-1 gap-5 bg-act-page px-5"
       style={{ paddingTop: insets.top + 12, paddingBottom: insets.bottom + 16 }}
     >
       {/* Header */}
       <View className="flex-row items-center justify-between">
-        <View>{leftButton ?? <View className="h-11 w-11" />}</View>
+        <View style={{ marginLeft: -6 }}>
+          {leftButton ?? <View className="h-11 w-11" />}
+        </View>
         <View>{rightButton ?? <View className="h-11 w-11" />}</View>
       </View>
 

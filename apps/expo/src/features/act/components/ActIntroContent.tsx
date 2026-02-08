@@ -60,7 +60,7 @@ export function ActIntroContent({
 
         {/* Content area */}
         <ScrollView
-          className="mb-5 flex-1"
+          className="mb-4 flex-1"
           showsVerticalScrollIndicator={false}
         >
           <View className="gap-5">
