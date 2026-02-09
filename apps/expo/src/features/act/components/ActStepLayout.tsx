@@ -23,7 +23,7 @@ export function ActStepLayout({
 
   return (
     <View
-      className="flex-1 gap-5 bg-act-page px-5"
+      className="flex-1 bg-act-page px-4"
       style={{ paddingTop: insets.top + 12, paddingBottom: insets.bottom + 16 }}
     >
       {/* Header */}
@@ -34,17 +34,19 @@ export function ActStepLayout({
         <View>{rightButton ?? <View className="h-11 w-11" />}</View>
       </View>
 
-      {/* Content */}
-      <View className="flex-1 gap-4">{children}</View>
+      {/* Content — nav 터치 영역(44pt) 내부 여백이 시각적 간격 역할 */}
+      <View className="mt-3 flex-1 gap-4">{children}</View>
 
       {/* Bottom button */}
-      <Button
-        size="default"
-        text={buttonText}
-        onPress={onButtonClick}
-        disabled={buttonDisabled}
-        className="bg-btn-act-page"
-      />
+      <View className="mt-6">
+        <Button
+          size="default"
+          text={buttonText}
+          onPress={onButtonClick}
+          disabled={buttonDisabled}
+          className="bg-btn-act-page"
+        />
+      </View>
     </View>
   );
 }

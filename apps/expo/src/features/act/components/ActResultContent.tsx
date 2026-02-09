@@ -27,19 +27,17 @@ export function ActResultContent({
 
   return (
     <View
-      className="flex-1 bg-act-page px-5 pt-6"
+      className="flex-1 bg-act-page px-4 pt-6"
       style={{ paddingTop: insets.top + 24, paddingBottom: insets.bottom + 16 }}
     >
       <ScrollView
         className="flex-1"
         showsVerticalScrollIndicator={false}
       >
-        <View className="gap-4">
-          {/* Title */}
-          <Text preset="title">{title}</Text>
-
-          {/* Description */}
-          <View className="gap-4">
+        <View className="gap-6">
+          {/* Title + Description */}
+          <View className="gap-3">
+            <Text preset="title">{title}</Text>
             {description.map((line, index) => (
               <Text
                 key={`result-${index}`}
@@ -49,7 +47,6 @@ export function ActResultContent({
               </Text>
             ))}
           </View>
-
           {/* Custom content slot */}
           {children}
         </View>

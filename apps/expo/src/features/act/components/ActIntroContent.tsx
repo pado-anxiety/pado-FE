@@ -31,21 +31,19 @@ export function ActIntroContent({
 
   return (
     <View
-      className="flex-1 bg-act-page px-5 pt-4"
+      className="flex-1 bg-act-page px-4 pt-4"
       style={{ paddingTop: insets.top + 16, paddingBottom: insets.bottom + 16 }}
     >
-      <View className="flex-1 gap-5">
-        {/* Header: title + close button */}
-        <View className="flex-row items-center justify-between">
-          <Text preset="title">{title}</Text>
-          <NavButton
-            variant="close"
-            onPress={onClose}
-          />
-        </View>
-
-        {/* Description */}
-        <View className="gap-4">
+      <View className="flex-1 gap-6">
+        {/* Header + Description */}
+        <View className="gap-3">
+          <View className="flex-row items-center justify-between">
+            <Text preset="title">{title}</Text>
+            <NavButton
+              variant="close"
+              onPress={onClose}
+            />
+          </View>
           {description.map((line, index) => (
             <Text
               key={`desc-${index}`}
@@ -63,7 +61,7 @@ export function ActIntroContent({
           className="mb-4 flex-1"
           showsVerticalScrollIndicator={false}
         >
-          <View className="gap-5">
+          <View className="gap-6">
             {/* Content title & description */}
             <View className="gap-2">
               <Text preset="heading">{contentTitle}</Text>
