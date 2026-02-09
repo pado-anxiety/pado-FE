@@ -22,26 +22,26 @@ export function EmotionNoteContent({ date, data }: EmotionNoteContentProps) {
       <View className="flex flex-col items-center gap-3">
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
-            <Text className="text-body-small text-sub">
+            <Text preset="sub" className="text-sub">
               {t('act.diary.history.situationQuestion')}
             </Text>
-            <Text className="text-body-small">{data.situation}</Text>
+            <Text preset="body">{data.situation}</Text>
           </ContentBox>
         </View>
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
-            <Text className="text-body-small text-sub">
+            <Text preset="sub" className="text-sub">
               {t('act.diary.history.thoughtQuestion')}
             </Text>
-            <Text className="text-body-small">{data.thoughts}</Text>
+            <Text preset="body">{data.thoughts}</Text>
           </ContentBox>
         </View>
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
-            <Text className="text-body-small text-sub">
+            <Text preset="sub" className="text-sub">
               {t('act.diary.history.emotionQuestion')}
             </Text>
-            <Text className="text-body-small">{data.feelings}</Text>
+            <Text preset="body">{data.feelings}</Text>
           </ContentBox>
         </View>
       </View>

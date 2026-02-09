@@ -30,7 +30,7 @@ export default function LanguageScreen() {
           className="flex flex-row items-center justify-between"
           onPress={() => handleChangeLanguage('en')}
         >
-          <Text className="text-body-small">English</Text>
+          <Text preset="body">English</Text>
           <Ionicons
             name={language === 'en' ? 'radio-button-on' : 'radio-button-off'}
             size={scale(24)}
@@ -41,7 +41,7 @@ export default function LanguageScreen() {
           className="flex flex-row items-center justify-between"
           onPress={() => handleChangeLanguage('ko')}
         >
-          <Text className="text-body-small">한국어</Text>
+          <Text preset="body">한국어</Text>
           <Ionicons
             name={language === 'ko' ? 'radio-button-on' : 'radio-button-off'}
             size={scale(24)}

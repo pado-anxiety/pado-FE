@@ -89,6 +89,7 @@ export function AnchorStepContent({
           >
             <Text
               preset="title"
+              bold
               className="rounded-lg bg-act-page p-2"
             >
               {subject}

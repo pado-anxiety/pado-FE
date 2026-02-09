@@ -87,8 +87,8 @@ export default function LoginScreen() {
           <Pressable onPress={handleBypassTap}>
             <Text
               className="text-white"
-              weight="heavy"
-              style={{ fontSize: 36 }}
+              bold
+              style={{ fontSize: 36, lineHeight: 44 }}
             >
               {t('home.app.name')}
             </Text>
@@ -96,19 +96,19 @@ export default function LoginScreen() {
           <View className="flex-col items-center justify-center text-center">
             <Text
               className="text-white"
-              size="body-medium"
+              preset="heading"
             >
               {t('home.app.tagline1')}
             </Text>
             <Text
               className="text-center text-white"
-              size="body-medium"
+              preset="heading"
             >
               {t('home.app.tagline2')}
             </Text>
             <Text
               className="text-center text-white"
-              size="body-medium"
+              preset="heading"
             >
               {t('home.app.description')}
             </Text>
@@ -130,7 +130,8 @@ export default function LoginScreen() {
             />
             <Text
               className="text-white"
-              size="body-medium"
+              preset="body"
+              bold
             >
               {t('auth.login.continueWithApple')}
             </Text>
@@ -145,7 +146,12 @@ export default function LoginScreen() {
               className="h-6 w-6"
               contentFit="contain"
             />
-            <Text size="body-medium">{t('auth.login.continueWithGoogle')}</Text>
+            <Text
+              preset="body"
+              bold
+            >
+              {t('auth.login.continueWithGoogle')}
+            </Text>
           </Pressable>
 
           <Pressable
@@ -157,11 +163,16 @@ export default function LoginScreen() {
               className="h-6 w-6"
               contentFit="contain"
             />
-            <Text size="body-medium">{t('auth.login.continueWithKakao')}</Text>
+            <Text
+              preset="body"
+              bold
+            >
+              {t('auth.login.continueWithKakao')}
+            </Text>
           </Pressable>
           <Text
             className="text-center text-sub"
-            size="body-small"
+            preset="sub"
           >
             {t('auth.login.termsAgreement')}
           </Text>

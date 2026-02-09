@@ -16,7 +16,7 @@ export default function AssistantChatBox({ chat }: AssistantChatBoxProps) {
             key={chat.time + index}
             className="mr-10 bg-chat-assistant rounded-xl p-4"
           >
-            <Text className="text-body-medium text-white">{message}</Text>
+            <Text preset="body" className="text-white">{message}</Text>
           </View>
         ))}
       </View>

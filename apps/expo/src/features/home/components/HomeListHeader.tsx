@@ -59,13 +59,14 @@ export const HomeListHeader = ({ page, setPage }: HomeListHeaderProps) => {
         >
           <AnimatedText
             delay={1000}
-            className="text-title-large font-medium"
+            preset="title"
+            bold
           >
             {t('home.learning.title')}
           </AnimatedText>
           <AnimatedText
             delay={1500}
-            className="text-body-large font-medium"
+            preset="heading"
           >
             {t('home.learning.subtitle')}
           </AnimatedText>

@@ -96,6 +96,7 @@ export function SkySection({
             <AnimatedText
               delay={1500}
               preset="title"
+              bold
               className="pb-0.2 self-start text-slate-700"
             >
               {t('home.menu.viewActHistory')}
@@ -112,6 +113,7 @@ export function SkySection({
             <AnimatedText
               delay={2000}
               preset="title"
+              bold
               className="pb-0.2 self-start text-slate-700"
             >
               {t('home.menu.learning')}
@@ -127,6 +129,7 @@ export function SkySection({
             <AnimatedText
               delay={2000}
               preset="title"
+              bold
               className="pb-0.2 self-start text-slate-700"
             >
               온보딩

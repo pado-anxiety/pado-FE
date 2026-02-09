@@ -30,11 +30,13 @@ export default function TriggerStep({
             }`}
           >
             <Text
-              className={`text-body-medium ${
+              preset="body"
+              bold={selectedTrigger === option.value}
+              className={
                 selectedTrigger === option.value
-                  ? 'font-semibold text-white'
+                  ? 'text-white'
                   : 'text-neutral-900'
-              }`}
+              }
             >
               {option.label}
             </Text>

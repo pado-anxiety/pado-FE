@@ -121,7 +121,12 @@ export function DiaryStepContent({
 
         {/* Question section */}
         <View className="gap-2">
-          <Text preset="heading">{question}</Text>
+          <Text
+            preset="heading"
+            bold
+          >
+            {question}
+          </Text>
           <Text preset="body">{description}</Text>
         </View>
 

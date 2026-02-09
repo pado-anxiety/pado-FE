@@ -43,7 +43,7 @@ export default function ChatModalHeader({ onBack }: ChatModalHeaderProps) {
             size={ICONS_SIZE.small}
             color="rgb(224, 224, 224)"
           />
-          <Text className="text-body-medium text-white">
+          <Text preset="body" className="text-white">
             {remainingQuota?.quota}/5
           </Text>
         </View>

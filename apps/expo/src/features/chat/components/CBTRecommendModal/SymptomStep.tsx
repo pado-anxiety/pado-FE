@@ -27,9 +27,11 @@ export default function SymptomStep({
             }`}
           >
             <Text
-              className={`text-center text-body-medium ${
+              preset="body"
+              bold={selectedSymptom === option.value}
+              className={`text-center ${
                 selectedSymptom === option.value
-                  ? 'font-semibold text-white'
+                  ? 'text-white'
                   : 'text-neutral-900'
               }`}
             >

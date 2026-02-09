@@ -56,9 +56,11 @@ export default function IntensityStep({
           {INTENSITY_LEVELS.map((level) => (
             <Text
               key={level}
-              className={`text-body-medium font-medium ${
+              preset="body"
+              bold
+              className={
                 level === intensity ? 'text-neutral-900' : 'text-neutral-500'
-              }`}
+              }
             >
               {level}
             </Text>

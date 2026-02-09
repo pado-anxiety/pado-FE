@@ -31,7 +31,7 @@ export default function CBTModal({
           );
         }}
       >
-        <Text className="text-body-large text-primary font-medium text-start mb-3">
+        <Text preset="heading" bold className="text-primary text-start mb-3">
           {
             CHAT_MESSAGES.CBT_TYPE_LABELS[
               cbtRecommendation as keyof typeof CHAT_MESSAGES.CBT_TYPE_LABELS

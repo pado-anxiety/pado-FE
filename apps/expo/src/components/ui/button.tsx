@@ -7,22 +7,18 @@ import { buttonStyles } from '@pado/ui';
 import type { ButtonVariants } from '@pado/ui';
 
 import { Text } from './text';
-import type { FontSize, FontWeight } from './text';
+import type { TextPreset } from './text';
 
-/** Apple HIG 기준 버튼 텍스트 크기 */
-const BUTTON_TEXT_SIZE: Record<string, FontSize> = {
-  sm: 'label-small',
-  default: 'label-medium',
-  lg: 'body-medium',
+/** Apple HIG 기준 버튼 텍스트 프리셋 */
+const BUTTON_TEXT_PRESET: Record<string, TextPreset> = {
+  sm: 'sub',
+  default: 'body',
+  lg: 'heading',
 };
 
 interface ButtonProps extends ButtonVariants, Omit<PressableProps, 'disabled'> {
   /** 단일 텍스트. children과 함께 사용 시 children 우선 */
   text?: string;
-  /** 텍스트 크기 (기본: 버튼 size에 따라 자동) */
-  textSize?: FontSize;
-  /** 텍스트 굵기 (기본: bold) */
-  textWeight?: FontWeight;
   isLoading?: boolean;
   className?: string;
   textClassName?: string;
@@ -31,8 +27,6 @@ interface ButtonProps extends ButtonVariants, Omit<PressableProps, 'disabled'> {
 
 export function Button({
   text = '',
-  textSize,
-  textWeight = 'bold',
   isLoading = false,
   className = '',
   textClassName = '',
@@ -49,7 +43,7 @@ export function Button({
     [color, size, disabled, fullWidth],
   );
 
-  const resolvedTextSize = textSize ?? BUTTON_TEXT_SIZE[size ?? 'default'];
+  const resolvedPreset = BUTTON_TEXT_PRESET[size ?? 'default'];
 
   return (
     <Pressable
@@ -72,8 +66,8 @@ export function Button({
           ) : (
             <Text
               testID={`${testID}-text`}
-              weight={textWeight}
-              size={resolvedTextSize}
+              preset={resolvedPreset}
+              bold
               className={styles.label({ className: textClassName })}
             >
               {text}

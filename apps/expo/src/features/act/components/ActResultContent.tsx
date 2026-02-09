@@ -37,7 +37,12 @@ export function ActResultContent({
         <View className="gap-6">
           {/* Title + Description */}
           <View className="gap-3">
-            <Text preset="title">{title}</Text>
+            <Text
+              preset="title"
+              bold
+            >
+              {title}
+            </Text>
             {description.map((line, index) => (
               <Text
                 key={`result-${index}`}

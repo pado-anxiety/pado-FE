@@ -100,11 +100,15 @@ export function DetachStepContent({
       >
         {/* Title */}
         <View className="gap-2">
-          <Text preset="heading">
+          <Text
+            preset="heading"
+            bold
+          >
             {title.map((line, index) => (
               <Text
                 key={index}
                 preset="heading"
+                bold
               >
                 {line}
                 {index < title.length - 1 ? '\n' : ''}

@@ -16,7 +16,7 @@ export function WebViewErrorView({
 }: WebViewErrorViewProps) {
   return (
     <View className="flex-1 bg-act-page justify-center items-center px-8 gap-8 absolute inset-0">
-      <Text className="text-body-medium">{message}</Text>
+      <Text preset="body">{message}</Text>
       <Button
         text="홈으로 돌아가기"
         className="bg-btn-act-page"

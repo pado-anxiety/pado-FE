@@ -28,7 +28,8 @@ export function CognitiveDefusionContent({
             {data.userTextToken.map((item, index) => (
               <Text
                 key={`${item.text + index}`}
-                className={`text-body-small ${item.isSelected ? 'opacity-30' : ''}`}
+                preset="body"
+                className={item.isSelected ? 'opacity-30' : ''}
               >
                 {item.text}
               </Text>

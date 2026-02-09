@@ -91,9 +91,11 @@ export default function CBTRecommendModal({
             className="flex-1 items-center justify-center rounded-2xl py-4"
           >
             <Text
-              className={`text-body-medium font-semibold ${
+              preset="body"
+              bold
+              className={
                 isNextDisabled ? 'opacity-20' : 'opacity-100'
-              }`}
+              }
             >
               {isLastStep
                 ? CBT_MODAL_MESSAGES.BUTTON.COMPLETE

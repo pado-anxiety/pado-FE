@@ -20,7 +20,7 @@ export function AcceptanceContent({ date, data }: AcceptanceContentProps) {
         date={date}
       />
       <ContentBox>
-        <Text className="text-body-small">
+        <Text preset="body">
           {t('act.embrace.history.description', {
             seconds: data.breathingTime,
           })}

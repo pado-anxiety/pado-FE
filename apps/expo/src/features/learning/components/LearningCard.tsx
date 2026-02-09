@@ -48,10 +48,10 @@ export function LearningCard({ item }: LearningCardProps) {
           contentFit="cover"
         />
         <View className="p-4">
-          <Text className="text-body-medium font-bold">
+          <Text preset="heading" bold>
             {t(`learning.${item.subject}.title`)}
           </Text>
-          <Text className="text-body-small">
+          <Text preset="body">
             {t(`learning.${item.subject}.description`)}
           </Text>
         </View>

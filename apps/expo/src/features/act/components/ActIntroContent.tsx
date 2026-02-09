@@ -38,7 +38,12 @@ export function ActIntroContent({
         {/* Header + Description */}
         <View className="gap-3">
           <View className="flex-row items-center justify-between">
-            <Text preset="title">{title}</Text>
+            <Text
+              preset="title"
+              bold
+            >
+              {title}
+            </Text>
             <NavButton
               variant="close"
               onPress={onClose}
@@ -64,7 +69,12 @@ export function ActIntroContent({
           <View className="gap-6">
             {/* Content title & description */}
             <View className="gap-2">
-              <Text preset="heading">{contentTitle}</Text>
+              <Text
+                preset="heading"
+                bold
+              >
+                {contentTitle}
+              </Text>
               <Text
                 preset="sub"
                 className="text-sub"

@@ -10,8 +10,8 @@ export function ModalHeader({ title, date }: ModalHeaderProps) {
   return (
     <View className="flex flex-col gap-2">
       <View className="flex flex-col">
-        <Text className="text-body-medium font-bold">{title}</Text>
-        <Text className="text-body-small text-sub">
+        <Text preset="heading" bold>{title}</Text>
+        <Text preset="sub" className="text-sub">
           {formatToLocaleDate(date)}
         </Text>
       </View>

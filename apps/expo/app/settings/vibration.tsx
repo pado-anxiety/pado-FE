@@ -34,7 +34,7 @@ export default function VibrationScreen() {
             setHapticEnabled(newHapticState);
           }}
         >
-          <Text className="text-body-small">
+          <Text preset="body">
             {t('common.settings.vibration')}
           </Text>
           <Ionicons

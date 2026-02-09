@@ -32,36 +32,36 @@ export function CommittedActionContent({
       <View className="flex flex-col items-center gap-3">
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
-            <Text className="text-body-small text-sub">
+            <Text preset="sub" className="text-sub">
               {t('act.values.history.matterQuestion')}
             </Text>
-            <Text className="text-body-small">
+            <Text preset="body">
               {t(actionKeys[data.matter as keyof typeof actionKeys])}
             </Text>
           </ContentBox>
         </View>
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
-            <Text className="text-body-small text-sub">
+            <Text preset="sub" className="text-sub">
               {t('act.values.history.valueQuestion')}
             </Text>
-            <Text className="text-body-small">{data.value}</Text>
+            <Text preset="body">{data.value}</Text>
           </ContentBox>
         </View>
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
-            <Text className="text-body-small text-sub">
+            <Text preset="sub" className="text-sub">
               {t('act.values.history.barrierQuestion')}
             </Text>
-            <Text className="text-body-small">{data.barrier}</Text>
+            <Text preset="body">{data.barrier}</Text>
           </ContentBox>
         </View>
         <View className="flex w-full flex-col gap-2">
           <ContentBox>
-            <Text className="text-body-small text-sub">
+            <Text preset="sub" className="text-sub">
               {t('act.values.history.actionQuestion')}
             </Text>
-            <Text className="text-body-small">{data.action}</Text>
+            <Text preset="body">{data.action}</Text>
           </ContentBox>
         </View>
       </View>

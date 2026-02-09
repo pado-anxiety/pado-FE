@@ -20,7 +20,7 @@ export function ContactWithPresentContent({
         date={date}
       />
       <ContentBox>
-        <Text className="text-body-small">
+        <Text preset="body">
           {t('act.anchor.history.completed')}
         </Text>
       </ContentBox>

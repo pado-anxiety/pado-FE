@@ -16,11 +16,11 @@ export default function StepLayout({
   return (
     <View className="mt-4 flex flex-col gap-4">
       <View className="flex flex-col gap-2">
-        <Text className="text-center text-title-small font-medium leading-relaxed text-neutral-900">
+        <Text preset="heading" bold className="text-center text-neutral-900">
           {title}
         </Text>
         {subtitle && (
-          <Text className="text-center text-body-large text-neutral-800">
+          <Text preset="body" className="text-center text-neutral-800">
             {subtitle}
           </Text>
         )}

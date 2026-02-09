@@ -88,7 +88,7 @@ export default function SettingsScreen() {
             onPress={() => router.back()}
           />
         </View>
-        <Text size="body-large">{t('common.settings.title')}</Text>
+        <Text preset="heading" bold>{t('common.settings.title')}</Text>
       </View>
       <View className="mt-4 flex flex-col gap-6">
         {/* 사용자 정보 */}
@@ -96,16 +96,14 @@ export default function SettingsScreen() {
           {/* 이름 행 */}
           <View className="flex flex-row items-center justify-between gap-4">
             <Text
-              size="label-large"
-              weight="regular"
+              preset="body"
               className="shrink-0"
             >
               {t('common.settings.user.name')}
             </Text>
             <Text
               numberOfLines={1}
-              size="label-large"
-              weight="regular"
+              preset="body"
               className="flex-1 text-right"
             >
               {name}
@@ -115,8 +113,7 @@ export default function SettingsScreen() {
           {/* 이메일 행 */}
           <View className="flex flex-row items-center justify-between gap-4">
             <Text
-              size="label-large"
-              weight="regular"
+              preset="body"
               className="shrink-0"
             >
               {t('common.settings.user.email')}
@@ -124,8 +121,7 @@ export default function SettingsScreen() {
             <Text
               numberOfLines={1}
               ellipsizeMode="tail"
-              size="label-large"
-              weight="regular"
+              preset="body"
               className="flex-1 text-right"
             >
               {email}
@@ -140,10 +136,7 @@ export default function SettingsScreen() {
             className="flex flex-row items-center justify-between"
           >
             <View className="flex flex-row items-center">
-              <Text
-                size="label-medium"
-                weight="regular"
-              >
+              <Text preset="body">
                 {t('common.settings.language')}
               </Text>
             </View>
@@ -156,10 +149,7 @@ export default function SettingsScreen() {
             onPress={() => router.push(ROUTES.SETTINGS.VIBRATION)}
             className="flex flex-row items-center justify-between"
           >
-            <Text
-              size="label-medium"
-              weight="regular"
-            >
+            <Text preset="body">
               {t('common.settings.vibration')}
             </Text>
             <NavButton
@@ -175,10 +165,7 @@ export default function SettingsScreen() {
             onPress={() => present()}
             className="flex flex-row items-center justify-between"
           >
-            <Text
-              size="label-medium"
-              weight="regular"
-            >
+            <Text preset="body">
               {t('common.settings.feedback.title')}
             </Text>
             <NavButton
@@ -190,10 +177,7 @@ export default function SettingsScreen() {
             onPress={() => router.push(ROUTES.SETTINGS.PRIVACY_POLICY)}
             className="flex flex-row items-center justify-between"
           >
-            <Text
-              size="label-medium"
-              weight="regular"
-            >
+            <Text preset="body">
               {t('common.settings.privacyPolicy')}
             </Text>
             <NavButton
@@ -205,10 +189,7 @@ export default function SettingsScreen() {
             onPress={() => router.push(ROUTES.SETTINGS.TERMS_OF_SERVICE)}
             className="flex flex-row items-center justify-between"
           >
-            <Text
-              size="label-medium"
-              weight="regular"
-            >
+            <Text preset="body">
               {t('common.settings.termsOfService')}
             </Text>
             <NavButton
@@ -221,15 +202,11 @@ export default function SettingsScreen() {
             className="flex flex-row items-center justify-between"
           >
             <View className="flex flex-row items-center gap-2">
-              <Text
-                size="label-medium"
-                weight="regular"
-              >
+              <Text preset="body">
                 {t('common.settings.appVersion')} {ENV.VERSION}
               </Text>
               <Text
-                size="label-medium"
-                weight="regular"
+                preset="body"
                 className="text-sub"
               >
                 {t('common.settings.licenseInfo')}
@@ -245,8 +222,7 @@ export default function SettingsScreen() {
       <View className="mt-12 flex flex-col items-center justify-center gap-8">
         <Pressable onPress={handleLogout}>
           <Text
-            size="label-medium"
-            weight="regular"
+            preset="body"
             className="text-destructive"
           >
             {t('common.settings.logout')}
@@ -254,8 +230,7 @@ export default function SettingsScreen() {
         </Pressable>
         <Pressable onPress={handleDeleteAccount}>
           <Text
-            size="label-medium"
-            weight="regular"
+            preset="body"
             className="text-sub"
           >
             {t('common.settings.deleteAccount')}
@@ -267,16 +242,13 @@ export default function SettingsScreen() {
           onPress={() => Keyboard.dismiss()}
           className="flex w-full flex-1 flex-col gap-4 px-6"
         >
-          <Text
-            size="body-small"
-            weight="regular"
-          >
+          <Text preset="body">
             {t('common.settings.feedback.description')}
           </Text>
           <View className="flex flex-col gap-3">
             <BottomSheetTextInput
               placeholder={t('common.settings.feedback.placeholder')}
-              className="h-48 rounded-xl border border-gray-300 bg-white/20 px-4 text-body-medium"
+              className="h-48 rounded-xl border border-gray-300 bg-white/20 px-4"
               ref={inputRef}
               multiline={true}
               textAlignVertical="top"
