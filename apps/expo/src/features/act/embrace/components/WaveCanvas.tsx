@@ -74,8 +74,9 @@ function WaveLayer({
   const path = useDerivedValue(() => {
     const p = Skia.Path.Make();
     const progress = breathProgress.value;
-    const amplitude =
+    const baseAmplitude =
       AMPLITUDE_MIN + progress * (AMPLITUDE_MAX - AMPLITUDE_MIN);
+    const amplitude = baseAmplitude * config.amplitudeScale;
     const gap = GAP_MIN + progress * (GAP_MAX - GAP_MIN);
     const baseY = waveBaseY.value * height;
     const waveY = baseY + index * gap + height * config.offsetRatio;
@@ -98,8 +99,9 @@ function WaveLayer({
 
   const gradientStart = useDerivedValue(() => {
     const progress = breathProgress.value;
-    const amplitude =
+    const baseAmplitude =
       AMPLITUDE_MIN + progress * (AMPLITUDE_MAX - AMPLITUDE_MIN);
+    const amplitude = baseAmplitude * config.amplitudeScale;
     const gap = GAP_MIN + progress * (GAP_MAX - GAP_MIN);
     const baseY = waveBaseY.value * height;
     return vec(0, baseY + index * gap - amplitude);

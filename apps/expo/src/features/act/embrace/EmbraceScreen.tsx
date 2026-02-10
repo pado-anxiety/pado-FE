@@ -91,14 +91,14 @@ export function EmbraceScreen() {
       router.back();
       return;
     }
-    const duration = getDuration();
-    trackFunnelExit(analyticsKey, duration, funnel.currentIndex);
-    router.replace(ROUTES.HOME);
+    triggerHaptic('NAVIGATE');
+    resetDuration();
+    funnel.history.back();
   }, [
     funnel,
     getDuration,
+    resetDuration,
     trackFunnelIntroExit,
-    trackFunnelExit,
     analyticsKey,
     router,
   ]);
