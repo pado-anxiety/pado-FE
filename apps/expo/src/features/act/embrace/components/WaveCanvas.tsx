@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import {
   Canvas,
   LinearGradient,
@@ -25,8 +23,8 @@ interface WaveCanvasProps {
 const GRADIENT_END_COLOR = '#000814';
 const WAVE_STEP = 4;
 const TIME_INCREMENT = 0.015;
-const AMPLITUDE_MIN = 20;
-const AMPLITUDE_MAX = 30;
+const AMPLITUDE_MIN = 15;
+const AMPLITUDE_MAX = 25;
 const GAP_MIN = 5;
 const GAP_MAX = 30;
 
@@ -76,7 +74,8 @@ function WaveLayer({
   const path = useDerivedValue(() => {
     const p = Skia.Path.Make();
     const progress = breathProgress.value;
-    const amplitude = AMPLITUDE_MIN + progress * (AMPLITUDE_MAX - AMPLITUDE_MIN);
+    const amplitude =
+      AMPLITUDE_MIN + progress * (AMPLITUDE_MAX - AMPLITUDE_MIN);
     const gap = GAP_MIN + progress * (GAP_MAX - GAP_MIN);
     const baseY = waveBaseY.value * height;
     const waveY = baseY + index * gap + height * config.offsetRatio;
@@ -99,7 +98,8 @@ function WaveLayer({
 
   const gradientStart = useDerivedValue(() => {
     const progress = breathProgress.value;
-    const amplitude = AMPLITUDE_MIN + progress * (AMPLITUDE_MAX - AMPLITUDE_MIN);
+    const amplitude =
+      AMPLITUDE_MIN + progress * (AMPLITUDE_MAX - AMPLITUDE_MIN);
     const gap = GAP_MIN + progress * (GAP_MAX - GAP_MIN);
     const baseY = waveBaseY.value * height;
     return vec(0, baseY + index * gap - amplitude);

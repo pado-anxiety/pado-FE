@@ -1,11 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import {
-  Easing,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import { Easing, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { triggerHaptic } from '@src/lib/haptics';
 
@@ -29,7 +25,7 @@ export function useBreathAnimation() {
   // Shared value for wave animation (0 = exhale, 1 = inhale)
   const breathProgress = useSharedValue(0);
   // Shared value for wave base Y position (1 = bottom, 0 = top)
-  const waveBaseY = useSharedValue(0.9);
+  const waveBaseY = useSharedValue(0.55);
 
   const hapticIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const abortRef = useRef(false);
@@ -77,14 +73,18 @@ export function useBreathAnimation() {
     abortRef.current = false;
     setIsStarted(true);
     setIsCompleted(false);
+
+    // 파도를 아래로 내린 뒤 호흡 시작
+    await animateValue(waveBaseY, 0.9, 2);
+
     startHapticLoop();
 
     const startY = 0.9;
     waveBaseY.value = startY;
 
     const risePerCycle = startY / BREATH_TIMING.CYCLE_COUNT;
-    const inhaleRise = risePerCycle * 1.7;
-    const exhaleDrop = risePerCycle * 1;
+    const inhaleRise = risePerCycle * 1.2;
+    const exhaleDrop = risePerCycle * 0.5;
 
     for (let i = 0; i < BREATH_TIMING.CYCLE_COUNT; i++) {
       if (abortRef.current) break;
@@ -93,7 +93,11 @@ export function useBreathAnimation() {
 
       // Inhale
       await Promise.all([
-        animateValue(waveBaseY, currentY - inhaleRise, BREATH_TIMING.INHALE_DURATION),
+        animateValue(
+          waveBaseY,
+          currentY - inhaleRise,
+          BREATH_TIMING.INHALE_DURATION,
+        ),
         animateValue(breathProgress, 1, BREATH_TIMING.INHALE_DURATION),
         runTimer(BREATH_TIMING.INHALE_DURATION, BREATH_TEXT_KEYS.INHALE),
       ]);
@@ -149,7 +153,14 @@ export function useBreathAnimation() {
     await animateValue(waveBaseY, 0.9, 3);
 
     handleStartClick();
-  }, [stopHapticLoop, breathProgress, waveBaseY, animateValue, handleStartClick, t]);
+  }, [
+    stopHapticLoop,
+    breathProgress,
+    waveBaseY,
+    animateValue,
+    handleStartClick,
+    t,
+  ]);
 
   const getTotalBreathingTime = useCallback(() => {
     return SECONDS_PER_SESSION * sessionCount;

@@ -1,9 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import Animated, {
-  FadeIn,
-  FadeOut,
-  ZoomIn,
-} from 'react-native-reanimated';
+import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { Button, NavButton, Text, View } from '@src/components/ui';
 
@@ -57,38 +53,34 @@ export function BreathContent({
           <Button
             text={t('act.embrace.step.startButton')}
             onPress={onStartClick}
-            className="rounded-2xl bg-btn-act-page px-12 py-5 shadow-lg"
+            fullWidth={false}
+            className="rounded-2xl bg-btn-act-page px-8 py-4"
           />
         ) : (
           <Animated.View
-            entering={FadeIn.duration(300)}
-            className="items-center gap-6"
+            entering={FadeIn.duration(400)}
+            exiting={undefined}
+            className="items-center"
           >
-            {/* Breath text */}
-            <View className="rounded-2xl bg-white/30 px-6 py-4">
+            {/* Breath text — breathText가 있을 때만 표시 */}
+            {breathText !== '' && !isCompleted && (
               <Text
                 preset="heading"
-                className="text-center text-gray-900"
+                className="rounded-2xl bg-black/50 px-4 py-3 text-center text-white"
               >
                 {breathText}
               </Text>
-            </View>
+            )}
 
             {/* Timer */}
             {timer > 0 && (
-              <Animated.View
-                key={timer}
-                entering={ZoomIn.duration(200)}
-                className="rounded-2xl bg-white/30 px-6 py-4"
+              <Text
+                preset="heading"
+                bold
+                className="mt-6 rounded-2xl bg-black/50 px-4 py-3 text-white"
               >
-                <Text
-                  preset="title"
-                  bold
-                  className="text-blue-900"
-                >
-                  {timer}
-                </Text>
-              </Animated.View>
+                {timer}
+              </Text>
             )}
 
             {/* Completed buttons */}
@@ -98,15 +90,16 @@ export function BreathContent({
                 className="mt-4 items-center gap-4"
               >
                 <Button
+                  text={t('common.button.next')}
+                  onPress={onNext}
+                  fullWidth={false}
+                  className="rounded-2xl bg-btn-act-page px-12 py-4"
+                />
+                <Button
                   text={t('act.embrace.step.restartButton')}
                   onPress={onRestart}
                   className="rounded-2xl bg-transparent px-20 py-5"
                   textClassName="text-white underline"
-                />
-                <Button
-                  text={t('common.button.next')}
-                  onPress={onNext}
-                  className="rounded-2xl bg-btn-act-page px-14 py-4 shadow-lg"
                 />
               </Animated.View>
             )}

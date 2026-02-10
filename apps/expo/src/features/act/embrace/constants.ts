@@ -44,11 +44,41 @@ export const BREATH_TEXT_KEYS = {
 } as const;
 
 export const WAVE_CONFIGS = [
-  { color: '#D3F3FF', frequency: 1.5, speedMultiplier: 1.2, offsetRatio: -0.18 },
-  { color: '#77AADD', frequency: 1.5, speedMultiplier: 1, offsetRatio: -0.15 },
-  { color: '#3388CC', frequency: 1.5, speedMultiplier: 0.8, offsetRatio: -0.13 },
-  { color: '#005599', frequency: 1.5, speedMultiplier: 1, offsetRatio: -0.09 },
-  { color: '#003366', frequency: 1.5, speedMultiplier: 1.2, offsetRatio: -0.05 },
+  {
+    color: '#D3F3FF',
+    frequency: 1.5,
+    speedMultiplier: 1.4,
+    riseSpeed: 0.7,
+    offsetRatio: -0.18,
+  },
+  {
+    color: '#77AADD',
+    frequency: 1.5,
+    speedMultiplier: 1.1,
+    riseSpeed: 0.85,
+    offsetRatio: -0.15,
+  },
+  {
+    color: '#3388CC',
+    frequency: 1.5,
+    speedMultiplier: 0.8,
+    riseSpeed: 1.0,
+    offsetRatio: -0.13,
+  },
+  {
+    color: '#005599',
+    frequency: 1.5,
+    speedMultiplier: 0.6,
+    riseSpeed: 1.15,
+    offsetRatio: -0.09,
+  },
+  {
+    color: '#003366',
+    frequency: 1.5,
+    speedMultiplier: 0.4,
+    riseSpeed: 1.3,
+    offsetRatio: -0.05,
+  },
 ] as const;
 
 export const HAPTIC_INTERVAL = 500;
