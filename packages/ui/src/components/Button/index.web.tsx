@@ -1,6 +1,15 @@
 import { useMemo } from 'react';
+import Text from '../Text/index.web';
+import type { TextPreset } from '../Text/index.web';
 import { button } from './styles';
 import type { ButtonWebProps } from './types';
+
+/** Apple HIG 기준 버튼 텍스트 프리셋 */
+const BUTTON_TEXT_PRESET: Record<string, TextPreset> = {
+  sm: 'sub',
+  default: 'body',
+  lg: 'heading',
+};
 
 export default function Button({
   text = '',
@@ -20,6 +29,8 @@ export default function Button({
     () => button({ color, size, disabled, fullWidth }),
     [color, size, disabled, fullWidth]
   );
+
+  const resolvedPreset = BUTTON_TEXT_PRESET[size ?? 'default'];
 
   return (
     <button
@@ -56,9 +67,14 @@ export default function Button({
               />
             </svg>
           ) : (
-            <span data-testid={`${testID}-text`} className={styles.label({ className: textClassName })}>
+            <Text
+              as="span"
+              preset={resolvedPreset}
+              bold
+              className={styles.label({ className: textClassName })}
+            >
               {text}
-            </span>
+            </Text>
           )}
         </>
       )}
