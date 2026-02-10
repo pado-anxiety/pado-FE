@@ -194,7 +194,7 @@ export function WaveHorizon({ gapScale }: WaveHorizonProps): React.ReactNode {
   }, [gapScale]);
 
   return (
-    <View className="bg-page">
+    <View className="mb-10 bg-page">
       <Animated.View
         layout={LinearTransition.duration(1000)}
         className="w-full"

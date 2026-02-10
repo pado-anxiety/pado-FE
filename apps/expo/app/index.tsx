@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
+import { getCalendars } from 'expo-localization';
 import { Redirect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
@@ -34,7 +35,7 @@ interface ModalType {
 
 export default function HomeScreen(): React.ReactNode {
   const { t } = useTranslation();
-  const { isLoggedIn, name, email, setUserInfo } = useAuth();
+  const { isLoggedIn, name, email } = useAuth();
 
   const { page, setPage } = useHomePageState();
 
@@ -44,21 +45,19 @@ export default function HomeScreen(): React.ReactNode {
   const onboarded = isOnboarded();
 
   const isIdentified = useRef<boolean>(false);
+  const isUserPosted = useRef<boolean>(false);
 
   const { identifyUser } = useAnalytics();
 
   useEffect(() => {
-    if (isLoggedIn) {
-      userAPI
-        .getUser()
-        .then((user) => {
-          setUserInfo(user.name, user.email);
-        })
-        .catch(() => {
-          // 토큰 유효성 검사 목적 — 401은 interceptor가 처리하고, 그 외 오류는 무시
-        });
+    if (isLoggedIn && !isUserPosted.current) {
+      isUserPosted.current = true;
+      const timezone = getCalendars()[0]?.timeZone ?? 'Asia/Seoul';
+      userAPI.postUser(timezone).catch(() => {
+        // 토큰 유효성 검사 목적 — 401은 interceptor가 처리하고, 그 외 오류는 무시
+      });
     }
-  }, [isLoggedIn, setUserInfo]);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     if (isLoggedIn && name && email && !isIdentified.current) {

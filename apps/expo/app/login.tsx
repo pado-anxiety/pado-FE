@@ -130,8 +130,7 @@ export default function LoginScreen() {
             />
             <Text
               className="text-white"
-              preset="body"
-              bold
+              preset="heading"
             >
               {t('auth.login.continueWithApple')}
             </Text>
@@ -147,8 +146,8 @@ export default function LoginScreen() {
               contentFit="contain"
             />
             <Text
-              preset="body"
-              bold
+              preset="heading"
+              className="text-slate-800"
             >
               {t('auth.login.continueWithGoogle')}
             </Text>
@@ -164,8 +163,8 @@ export default function LoginScreen() {
               contentFit="contain"
             />
             <Text
-              preset="body"
-              bold
+              preset="heading"
+              className="text-slate-800"
             >
               {t('auth.login.continueWithKakao')}
             </Text>

@@ -1,5 +1,6 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import * as Linking from 'expo-linking';
+import { getCalendars } from 'expo-localization';
 import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
 
@@ -55,11 +56,13 @@ const SignInWithGoogleOnIOS = async (): Promise<AuthResult> => {
       return { errorMessage: i18n.t('auth.error.googleAuthCodeFailed') };
     }
 
+    const timezone = getCalendars()[0]?.timeZone ?? 'Asia/Seoul';
     const response = await authAPI.getGoogleAccessToken({
       codeVerifier,
       authorizationCode: authCode,
       redirectUri,
       platform: 'IOS',
+      timezone,
     });
 
     const { accessToken, refreshToken } = parseAuthToken(response);
@@ -96,11 +99,13 @@ const SignInWithGoogleOnAndroid = async (): Promise<AuthResult> => {
       return { errorMessage: i18n.t('auth.error.googleAuthInfoFailed') };
     }
 
+    const timezone = getCalendars()[0]?.timeZone ?? 'Asia/Seoul';
     const response = await authAPI.getGoogleAccessToken({
       codeVerifier: '',
       authorizationCode: userInfo.data.serverAuthCode,
       redirectUri: '',
       platform: 'ANDROID',
+      timezone,
     });
 
     const { accessToken, refreshToken } = parseAuthToken(response);

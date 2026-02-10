@@ -1,4 +1,5 @@
 import * as AppleAuthentication from 'expo-apple-authentication';
+import { getCalendars } from 'expo-localization';
 
 import { authAPI } from '../api/auth';
 import { i18n } from '../i18n';
@@ -29,9 +30,11 @@ export const SignInWithApple = async (): Promise<AuthResult> => {
       userName = `${fullName.familyName} ${fullName.givenName}`.trim();
     }
 
+    const timezone = getCalendars()[0]?.timeZone ?? 'Asia/Seoul';
     const response = await authAPI.getAppleAccessToken({
       authorizationCode,
       fullName: userName,
+      timezone,
     });
 
     const { accessToken, refreshToken } = parseAuthToken(response);

@@ -39,11 +39,13 @@ export const authAPI = {
     authorizationCode,
     redirectUri,
     platform,
+    timezone,
   }: {
     codeVerifier: string;
     authorizationCode: string;
     redirectUri: string;
     platform: 'ANDROID' | 'IOS';
+    timezone: string;
   }): Promise<AuthToken> => {
     const response = await axios.post<AuthToken>(
       combineUrl(ENV.BASE_URL, ROUTES.GOOGLE),
@@ -52,6 +54,7 @@ export const authAPI = {
         authorizationCode,
         redirectUri,
         platform,
+        timezone,
       },
     );
 
@@ -60,13 +63,16 @@ export const authAPI = {
   getKaKaoAccessToken: async ({
     identityToken,
     refreshToken,
+    timezone,
   }: {
     identityToken: string;
     refreshToken: string;
+    timezone: string;
   }) => {
     const response = await axios.post(combineUrl(ENV.BASE_URL, ROUTES.KAKAO), {
       identityToken,
       refreshToken,
+      timezone,
     });
 
     return response.data;
@@ -74,13 +80,16 @@ export const authAPI = {
   getAppleAccessToken: async ({
     authorizationCode,
     fullName,
+    timezone,
   }: {
     authorizationCode: string;
     fullName: string | null;
+    timezone: string;
   }) => {
     const response = await axios.post(combineUrl(ENV.BASE_URL, ROUTES.APPLE), {
       authorizationCode,
       fullName,
+      timezone,
     });
 
     return response.data;

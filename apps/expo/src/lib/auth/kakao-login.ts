@@ -1,4 +1,5 @@
 import { login } from '@react-native-seoul/kakao-login';
+import { getCalendars } from 'expo-localization';
 
 import { authAPI } from '../api/auth';
 import { i18n } from '../i18n';
@@ -17,9 +18,11 @@ export const SignInWithKakao = async (): Promise<AuthResult> => {
       return { errorMessage: i18n.t('auth.error.kakaoFailed') };
     }
 
+    const timezone = getCalendars()[0]?.timeZone ?? 'Asia/Seoul';
     const response = await authAPI.getKaKaoAccessToken({
       identityToken: token.idToken,
       refreshToken: token.refreshToken,
+      timezone,
     });
 
     const { accessToken, refreshToken } = parseAuthToken(response);
