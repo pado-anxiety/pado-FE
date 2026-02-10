@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useWindowDimensions } from 'react-native';
 import Svg, { G, Path, Text as SvgText } from 'react-native-svg';
 
-import { Pressable, Text, View } from '@src/components/ui';
+import { Text, View } from '@src/components/ui';
 
 import type { Value } from '../types';
 
@@ -77,9 +77,10 @@ export function ValueCircle({
   selectedValue,
   onSelectValue,
 }: ValueCircleProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { width } = useWindowDimensions();
   const circleSize = width * 0.9;
+  const labelMinWidth = i18n.language === 'ko' ? 80 : 140;
 
   const maxRadius = VIEWBOX_SIZE / 2;
   const gameRadius = maxRadius - 8;
@@ -112,14 +113,7 @@ export function ValueCircle({
     QUARTERS.forEach((q, qIdx) => {
       sectors.push({
         path: createSectorPath(CX, CY, ring.inner, ring.outer, q.start, q.end),
-        center: getSectorCenter(
-          CX,
-          CY,
-          ring.inner,
-          ring.outer,
-          q.start,
-          q.end,
-        ),
+        center: getSectorCenter(CX, CY, ring.inner, ring.outer, q.start, q.end),
         ringIndex: rIdx,
         value: ringValues[rIdx * 4 + qIdx],
         key: VALUE_LABELS[qIdx],
@@ -130,19 +124,25 @@ export function ValueCircle({
   return (
     <View className="items-center">
       {/* Top labels */}
-      <View className="w-full flex-row justify-between px-8">
-        <View className="rounded-xl bg-blue-100 px-3 py-1">
+      <View className="w-full flex-row justify-between">
+        <View
+          className="items-center rounded-xl bg-blue-50 px-3 py-1"
+          style={{ minWidth: labelMinWidth }}
+        >
           <Text
-            preset="caption"
+            preset="heading"
             bold
             className="text-slate-700"
           >
             {domainLabels[0]}
           </Text>
         </View>
-        <View className="rounded-xl bg-blue-100 px-3 py-1">
+        <View
+          className="items-center rounded-xl bg-blue-50 px-3 py-1"
+          style={{ minWidth: labelMinWidth }}
+        >
           <Text
-            preset="caption"
+            preset="heading"
             bold
             className="text-slate-700"
           >
@@ -186,19 +186,25 @@ export function ValueCircle({
       </Svg>
 
       {/* Bottom labels */}
-      <View className="w-full flex-row justify-between px-8">
-        <View className="rounded-xl bg-blue-100 px-3 py-1">
+      <View className="w-full flex-row justify-between">
+        <View
+          className="items-center rounded-xl bg-blue-50 px-3 py-1"
+          style={{ minWidth: labelMinWidth }}
+        >
           <Text
-            preset="caption"
+            preset="heading"
             bold
             className="text-slate-700"
           >
             {domainLabels[2]}
           </Text>
         </View>
-        <View className="rounded-xl bg-blue-100 px-3 py-1">
+        <View
+          className="items-center rounded-xl bg-blue-50 px-3 py-1"
+          style={{ minWidth: labelMinWidth }}
+        >
           <Text
-            preset="caption"
+            preset="heading"
             bold
             className="text-slate-700"
           >

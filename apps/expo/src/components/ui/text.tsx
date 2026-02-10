@@ -29,7 +29,7 @@ const PRESET_MAP: Record<
   // 13 × 1.38 = 18 (캡션, HIG Footnote 13/18 동일)
   caption: { fontFamily: 'Pretendard-Regular', fontSize: 13, lineHeight: 18 },
   // 19 × 1.58 = 30 (감성 문구는 넉넉하게)
-  quote: { fontFamily: 'Hahmlet-Medium', fontSize: 19, lineHeight: 30 },
+  quote: { fontFamily: 'Pretendard-Regular', fontSize: 19, lineHeight: 30 },
 };
 
 interface TextProps extends NTextProps {

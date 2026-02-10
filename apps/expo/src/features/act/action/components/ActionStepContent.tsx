@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { Keyboard, Pressable, TextInput } from 'react-native';
@@ -227,9 +227,7 @@ function OrientationContent({
               key={domain}
               onPress={() => onSelectDomain(domain)}
               className={`rounded-2xl px-4 py-2 ${
-                selectedDomain === domain
-                  ? 'bg-btn-act-page'
-                  : 'bg-blue-100'
+                selectedDomain === domain ? 'bg-btn-act-page' : 'bg-blue-100'
               }`}
             >
               <Text

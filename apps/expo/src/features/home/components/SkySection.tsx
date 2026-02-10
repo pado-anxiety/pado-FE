@@ -1,6 +1,7 @@
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import {
@@ -76,18 +77,18 @@ export function SkySection({
           />
         </Pressable>
       </View>
-      <View className="flex w-full flex-col gap-8 pt-4">
-        <View className="px-12 py-20">
+      <View className="flex w-full flex-col gap-6 pt-4">
+        <View className="px-6 py-16">
           <AnimatedText
-            preset="quote"
-            className="text-center"
+            preset="heading"
+            className="text-secondary text-center"
           >
-            &quot;{getRandomMessage().text}&quot;
+            {getRandomMessage().text}
           </AnimatedText>
         </View>
-        <View className="flex w-full flex-col gap-4">
+        <View className="flex w-full flex-col gap-3">
           <TouchableOpacity
-            className="flex flex-col"
+            className="flex flex-row items-center"
             onPress={() => {
               triggerHaptic('NAVIGATE');
               setPage('HISTORY');
@@ -95,16 +96,23 @@ export function SkySection({
           >
             <AnimatedText
               delay={1500}
-              preset="title"
+              preset="heading"
               bold
-              className="pb-0.2 self-start text-slate-700"
+              className="text-slate-700"
             >
               {t('home.menu.viewActHistory')}
             </AnimatedText>
+            <Animated.View entering={FadeIn.duration(1500)}>
+              <MaterialIcons
+                name="chevron-right"
+                size={ICONS_SIZE.large}
+                color="#334155"
+              />
+            </Animated.View>
           </TouchableOpacity>
 
           <TouchableOpacity
-            className="flex flex-col"
+            className="flex flex-row items-center"
             onPress={() => {
               triggerHaptic('NAVIGATE');
               setPage('LEARNING');
@@ -112,28 +120,19 @@ export function SkySection({
           >
             <AnimatedText
               delay={2000}
-              preset="title"
+              preset="heading"
               bold
-              className="pb-0.2 self-start text-slate-700"
+              className="text-slate-700"
             >
               {t('home.menu.learning')}
             </AnimatedText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            className="flex flex-col"
-            onPress={() => {
-              router.replace(ROUTES.ONBOARD);
-            }}
-          >
-            <AnimatedText
-              delay={2000}
-              preset="title"
-              bold
-              className="pb-0.2 self-start text-slate-700"
-            >
-              온보딩
-            </AnimatedText>
+            <Animated.View entering={FadeIn.duration(2000)}>
+              <MaterialIcons
+                name="chevron-right"
+                size={ICONS_SIZE.large}
+                color="#334155"
+              />
+            </Animated.View>
           </TouchableOpacity>
         </View>
       </View>

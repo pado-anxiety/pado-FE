@@ -13,28 +13,28 @@ export const FOREGROUND = {
 } as const;
 
 export const FOREGROUND_MID = {
-  SPEED_MULTIPLIER: 0.5,
+  SPEED_MULTIPLIER: 0.8,
   FREQUENCY: 2,
   AMPLITUDE: scale(18),
   OFFSET: -scale(40),
 } as const;
 
 export const MIDGROUND = {
-  SPEED_MULTIPLIER: 0.8,
+  SPEED_MULTIPLIER: 0.6,
   FREQUENCY: 2,
   AMPLITUDE: scale(18),
   OFFSET: -scale(70),
 } as const;
 
 export const MIDGROUND_BACK = {
-  SPEED_MULTIPLIER: 0.3,
+  SPEED_MULTIPLIER: 0.4,
   FREQUENCY: 2,
   AMPLITUDE: scale(18),
   OFFSET: -scale(100),
 } as const;
 
 export const BACKGROUND = {
-  SPEED_MULTIPLIER: 0.7,
+  SPEED_MULTIPLIER: 0.3,
   FREQUENCY: 2,
   AMPLITUDE: scale(18),
   OFFSET: -scale(130),
