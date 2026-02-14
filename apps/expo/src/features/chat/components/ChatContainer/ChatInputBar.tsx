@@ -2,10 +2,13 @@ import { useRef } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
-import { View } from '@src/components/ui';
-import { ICONS_SIZE } from '@src/lib/styles';
+import { useColorScheme } from 'nativewind';
 import { Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+
+import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
+import { View } from '@src/components/ui';
+import { ICONS_SIZE } from '@src/lib/styles';
 
 import { CHAT_MESSAGES } from '../../constants';
 import { useChatModal } from '../../context';
@@ -29,6 +32,8 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
   const isCBTRecommendation = !!cbtRecommendation;
 
   const { handleInputFocus, handleSend } = handlers;
+  const { colorScheme } = useColorScheme();
+  const tokens = colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
 
   const cbtModalRef = useRef<BottomSheetModal>(null);
   const { isChatModalVisible, openModal: openChatModal } = useChatModal();
@@ -48,13 +53,12 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
 
   return (
     <Pressable
-      className="flex flex-row items-center 
-      justify-center gap-2 mt-4 border-input 
-      border-neutral-700
-      border-solid border rounded-full
-      focus:border-neutral-600 py-1 px-1"
+      className="flex flex-row items-center
+      justify-center gap-2 mt-4
+      border-chat border-solid border rounded-full
+      py-1 px-1"
       style={{
-        backgroundColor: 'rgba(65, 65, 65, 0.9)',
+        backgroundColor: tokens['--chat-input-bg'],
         opacity: isCBTRecommendation ? 0.5 : 1,
       }}
       onPress={handlePress}
@@ -69,12 +73,12 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
 
           openCBTModal();
         }}
-        className="bg-neutral-600 aspect-square rounded-full p-3"
+        className="bg-chat-user aspect-square rounded-full p-3"
       >
         <Ionicons
           name="sparkles"
           size={ICONS_SIZE.medium}
-          color="rgb(238, 238, 238)"
+          color={tokens['--chat-icon-default']}
         />
       </Pressable>
       <View
@@ -86,7 +90,7 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
           className="bg-chat-input rounded-xl px-2 text-white grow focus:border-input-focus"
           style={{ fontSize: 17, height: 30 }}
           placeholder={CHAT_MESSAGES.INPUT_PLACEHOLDER}
-          placeholderTextColor="rgba(255, 255, 255, 0.50)"
+          placeholderTextColor={tokens['--chat-placeholder']}
           onFocus={handleInputFocus}
           value={message}
           onChangeText={setMessage}
@@ -102,8 +106,8 @@ export default function ChatInputBar({ input, handlers }: ChatInputBarProps) {
           size={ICONS_SIZE.medium}
           color={
             message.length > 0
-              ? 'rgba(255, 255, 255, 0.8)'
-              : 'rgba(255, 255, 255, 0.5)'
+              ? tokens['--chat-icon-active']
+              : tokens['--chat-icon-default']
           }
           className="pr-4"
         />

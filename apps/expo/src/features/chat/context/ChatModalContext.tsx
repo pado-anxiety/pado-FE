@@ -12,10 +12,12 @@ const ChatModalContext = createContext<ChatModalContextType | undefined>(
 
 export const ChatModalProvider = ({
   children,
+  initialVisible = false,
 }: {
   children: React.ReactNode;
+  initialVisible?: boolean;
 }) => {
-  const [isChatModalVisible, setIsChatModalVisible] = useState(false);
+  const [isChatModalVisible, setIsChatModalVisible] = useState(initialVisible);
 
   const openModal = () => {
     setIsChatModalVisible(true);

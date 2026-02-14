@@ -1,8 +1,10 @@
 import { FontAwesome } from '@expo/vector-icons';
+import { useColorScheme } from 'nativewind';
 import { Platform } from 'react-native';
 import { Pressable } from 'react-native-gesture-handler';
 import { scale } from 'react-native-size-matters';
 
+import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 import { NavButton, Text, View } from '@src/components/ui';
 import { ICONS_SIZE } from '@src/lib/styles';
 
@@ -15,6 +17,8 @@ interface ChatModalHeaderProps {
 
 export default function ChatModalHeader({ onBack }: ChatModalHeaderProps) {
   const { isChatModalVisible } = useChatModal();
+  const { colorScheme } = useColorScheme();
+  const tokens = colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
 
   const { remainingQuota } = useChatQuota();
 
@@ -29,7 +33,7 @@ export default function ChatModalHeader({ onBack }: ChatModalHeaderProps) {
         <NavButton
           variant="chevron"
           size="large"
-          color="rgb(224, 224, 224)"
+          color={tokens['--chat-border']}
           onPress={onBack}
         />
       </View>
@@ -41,9 +45,9 @@ export default function ChatModalHeader({ onBack }: ChatModalHeaderProps) {
           <FontAwesome
             name="send"
             size={ICONS_SIZE.small}
-            color="rgb(224, 224, 224)"
+            color={tokens['--chat-border']}
           />
-          <Text preset="body" className="text-white">
+          <Text preset="body" className="text-chat-assistant">
             {remainingQuota?.quota}/5
           </Text>
         </View>
