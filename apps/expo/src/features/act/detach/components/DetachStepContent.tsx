@@ -1,7 +1,10 @@
 import { useCallback, useState } from 'react';
 
+import { useColorScheme } from 'nativewind';
 import { useTranslation } from 'react-i18next';
 import { Keyboard, Pressable, TextInput } from 'react-native';
+
+import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
 import { NavButton, Text, View } from '@src/components/ui';
 import { showAlert } from '@src/lib/alert';
@@ -33,6 +36,9 @@ export function DetachStepContent({
   setUserTextTokens,
 }: DetachStepContentProps) {
   const { t } = useTranslation();
+  const { colorScheme } = useColorScheme();
+  const tokens =
+    colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
   const [inputText, setInputText] = useState('');
 
   const i18nKey = meta.i18nKey ?? '';
@@ -124,9 +130,9 @@ export function DetachStepContent({
             value={inputText}
             onChangeText={setInputText}
             placeholder={t('act.detach.step.step1.placeholder')}
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor={tokens['--act-input-placeholder']}
             multiline
-            className="flex-1 rounded-2xl border border-white bg-white/60 p-4"
+            className="flex-1 rounded-2xl border border-white bg-white/50 p-4 dark:border-white/10 dark:bg-white/5"
             style={{
               textAlignVertical: 'top',
               fontSize: 17,

@@ -61,7 +61,7 @@ html {
 
   min-height: 100dvh;
 
-  background-color: #fff;
+  background-color: var(--bg-page);
   position: relative;
   overflow-x: hidden;
 

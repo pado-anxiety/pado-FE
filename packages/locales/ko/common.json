@@ -41,6 +41,12 @@
     },
     "language": "언어 설정",
     "vibration": "진동",
+    "theme": "테마",
+    "themeOptions": {
+      "light": "라이트",
+      "dark": "다크",
+      "system": "시스템 설정"
+    },
     "feedback": {
       "title": "피드백",
       "description": "자유롭게 의견을 남겨주세요",

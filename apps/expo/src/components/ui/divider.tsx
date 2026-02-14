@@ -1,5 +1,7 @@
 import { View } from 'react-native';
 
 export function Divider() {
-  return <View className="h-[1px] border border-blue-500 opacity-70" />;
+  return (
+    <View className="h-[1px] border border-blue-500 opacity-70 dark:border-white/15 dark:opacity-100" />
+  );
 }

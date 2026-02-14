@@ -18,7 +18,7 @@ const ICON_SIZES = {
 export function NavButton({
   variant,
   size = 'large',
-  color = 'black',
+  color = 'currentColor',
   onClick,
 }: NavButtonProps) {
   const iconSize = ICON_SIZES[size];

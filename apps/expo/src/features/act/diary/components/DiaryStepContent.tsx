@@ -1,7 +1,10 @@
 import { useCallback, useState } from 'react';
 
+import { useColorScheme } from 'nativewind';
 import { useTranslation } from 'react-i18next';
 import { Keyboard, Pressable, TextInput } from 'react-native';
+
+import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
 import { Divider, NavButton, Text, View } from '@src/components/ui';
 import { showAlert } from '@src/lib/alert';
@@ -28,6 +31,9 @@ export function DiaryStepContent({
   onClose,
 }: DiaryStepContentProps) {
   const { t } = useTranslation();
+  const { colorScheme } = useColorScheme();
+  const tokens =
+    colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
   const [answer, setAnswer] = useState('');
 
   const i18nKey = meta.i18nKey ?? '';
@@ -97,7 +103,7 @@ export function DiaryStepContent({
             {historyCards.map((card, index) => (
               <View
                 key={`history-${index}`}
-                className="border-l-2 border-gray-400 pl-4"
+                className="border-l-2 border-default pl-4"
               >
                 <Text
                   preset="caption"
@@ -135,9 +141,9 @@ export function DiaryStepContent({
           value={answer}
           onChangeText={setAnswer}
           placeholder={getPlaceholder()}
-          placeholderTextColor="#9CA3AF"
+          placeholderTextColor={tokens['--act-input-placeholder']}
           multiline
-          className="flex-1 rounded-2xl border border-white bg-white/60 p-4"
+          className="flex-1 rounded-2xl border border-white bg-white/50 p-4 dark:border-white/10 dark:bg-white/5"
           style={{
             textAlignVertical: 'top',
             fontSize: 17,

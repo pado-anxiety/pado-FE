@@ -22,7 +22,7 @@ const input = tv({
     container: 'grow',
     label: 'text-body text-lg',
     input:
-      'mt-0 rounded-xl border border-solid border-primary px-4 py-3 font-inter text-base font-medium leading-5 text-body',
+      'mt-0 rounded-xl border border-solid border-default px-4 py-3 font-inter text-base font-medium leading-5 text-body',
   },
 
   variants: {

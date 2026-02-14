@@ -94,7 +94,7 @@ export function TokenSelector({
 
   return (
     <GestureDetector gesture={panGesture}>
-      <View className="flex-1 rounded-2xl border border-white bg-white/50 p-4">
+      <View className="flex-1 rounded-2xl border border-subtle bg-surface/50 p-4">
         <View
           className="flex-row flex-wrap gap-1"
           onLayout={(e) => {

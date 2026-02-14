@@ -19,8 +19,9 @@ export const useTheme = () => {
   const { colorScheme, setColorScheme } = useColorScheme();
 
   useEffect(() => {
-    setColorScheme('light');
-    storage.set(THEME_KEY, 'light');
+    const stored = storage.getString(THEME_KEY) as ThemeType | undefined;
+    const theme = stored ?? 'system';
+    setColorScheme(theme);
   }, [setColorScheme]);
 
   const changeTheme = useCallback(
@@ -31,13 +32,23 @@ export const useTheme = () => {
     [setColorScheme],
   );
 
+  const storedTheme: ThemeType =
+    (storage.getString(THEME_KEY) as ThemeType) ?? 'system';
+
   const themeStyle = useMemo(() => {
     return colorScheme === 'dark' ? themeVars.dark : themeVars.light;
   }, [colorScheme]);
 
+  const pageBgColor = useMemo(() => {
+    const tokens = colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
+    return tokens['--bg-page'];
+  }, [colorScheme]);
+
   return {
     theme: colorScheme,
+    storedTheme,
     themeStyle,
+    pageBgColor,
     changeTheme,
   };
 };

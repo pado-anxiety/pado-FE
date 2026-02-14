@@ -31,7 +31,7 @@ export function ActIntroContent({
 
   return (
     <View
-      className="flex-1 bg-act-page px-4 pt-4"
+      className="flex-1 bg-act-page px-6 pt-4"
       style={{ paddingTop: insets.top + 16, paddingBottom: insets.bottom + 16 }}
     >
       <View className="flex-1 gap-6">
@@ -96,7 +96,7 @@ export function ActIntroContent({
             </View>
 
             {/* Tip box */}
-            <View className="rounded-xl border border-white bg-white/50 p-4">
+            <View className="rounded-xl border border-white bg-white/50 p-4 dark:border-white/10 dark:bg-white/5">
               <Text
                 preset="sub"
                 style={{ fontStyle: 'italic' }}

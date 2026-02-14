@@ -27,7 +27,7 @@ export function ActResultContent({
 
   return (
     <View
-      className="flex-1 bg-act-page px-4 pt-6"
+      className="flex-1 bg-act-page px-6 pt-6"
       style={{ paddingTop: insets.top + 24, paddingBottom: insets.bottom + 16 }}
     >
       <ScrollView

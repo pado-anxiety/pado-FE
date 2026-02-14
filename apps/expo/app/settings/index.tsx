@@ -130,7 +130,7 @@ export default function SettingsScreen() {
         </View>
 
         {/* 언어 설정 + 진동 */}
-        <View className="gap-6 overflow-hidden rounded-2xl border border-gray-300 bg-white/20 p-5">
+        <View className="gap-6 overflow-hidden rounded-2xl border border-default bg-surface/20 p-5">
           <Pressable
             onPress={() => router.push(ROUTES.SETTINGS.LANGUAGE)}
             className="flex flex-row items-center justify-between"
@@ -157,10 +157,22 @@ export default function SettingsScreen() {
               size="small"
             />
           </Pressable>
+          <Pressable
+            onPress={() => router.push(ROUTES.SETTINGS.THEME)}
+            className="flex flex-row items-center justify-between"
+          >
+            <Text preset="body">
+              {t('common.settings.theme')}
+            </Text>
+            <NavButton
+              variant="right"
+              size="small"
+            />
+          </Pressable>
         </View>
 
         {/* 개인정보 + 이용약관 + 앱 버전 */}
-        <View className="gap-6 overflow-hidden rounded-2xl border border-gray-300 bg-white/20 p-5">
+        <View className="gap-6 overflow-hidden rounded-2xl border border-default bg-surface/20 p-5">
           <Pressable
             onPress={() => present()}
             className="flex flex-row items-center justify-between"
@@ -248,7 +260,7 @@ export default function SettingsScreen() {
           <View className="flex flex-col gap-3">
             <BottomSheetTextInput
               placeholder={t('common.settings.feedback.placeholder')}
-              className="h-48 rounded-xl border border-gray-300 bg-white/20 px-4"
+              className="h-48 rounded-xl border border-default bg-surface/20 px-4"
               ref={inputRef}
               multiline={true}
               textAlignVertical="top"

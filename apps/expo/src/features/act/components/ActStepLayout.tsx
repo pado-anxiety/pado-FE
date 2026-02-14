@@ -23,7 +23,7 @@ export function ActStepLayout({
 
   return (
     <View
-      className="flex-1 bg-act-page px-4"
+      className="flex-1 bg-act-page px-6"
       style={{ paddingTop: insets.top + 12, paddingBottom: insets.bottom + 16 }}
     >
       {/* Header */}

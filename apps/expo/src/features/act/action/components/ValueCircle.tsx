@@ -1,6 +1,9 @@
+import { useColorScheme } from 'nativewind';
 import { useTranslation } from 'react-i18next';
 import { useWindowDimensions } from 'react-native';
 import Svg, { G, Path, Text as SvgText } from 'react-native-svg';
+
+import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
 import { Text, View } from '@src/components/ui';
 
@@ -53,11 +56,33 @@ function getSectorCenter(
   };
 }
 
-const RING_COLORS = [
-  { base: '#93c5fd', selected: '#005599' },
-  { base: '#60a5fa', selected: '#005599' },
-  { base: '#3b82f6', selected: '#005599' },
-];
+const getRingColors = (
+  tokens: typeof semanticColors.light,
+  isDark: boolean,
+) => {
+  if (isDark) {
+    // 바깥→안쪽으로 갈수록 밝아지는 링 (과녁 느낌)
+    return [
+      { base: '#252A34', selected: tokens['--btn-act-page-selected'] },
+      { base: '#2A3140', selected: tokens['--btn-act-page-selected'] },
+      { base: '#30394A', selected: tokens['--btn-act-page-selected'] },
+    ];
+  }
+  return [
+    {
+      base: tokens['--btn-act-page-unselected'],
+      selected: tokens['--btn-act-page-selected'],
+    },
+    {
+      base: tokens['--btn-act-page-unselected'],
+      selected: tokens['--btn-act-page-selected'],
+    },
+    {
+      base: tokens['--btn-act-page-unselected'],
+      selected: tokens['--btn-act-page-selected'],
+    },
+  ];
+};
 
 const VALUE_LABELS: (keyof Value)[] = [
   'growth',
@@ -78,6 +103,11 @@ export function ValueCircle({
   onSelectValue,
 }: ValueCircleProps) {
   const { t, i18n } = useTranslation();
+  const { colorScheme } = useColorScheme();
+  const tokens =
+    colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
+  const isDark = colorScheme === 'dark';
+  const RING_COLORS = getRingColors(tokens, isDark);
   const { width } = useWindowDimensions();
   const circleSize = width * 0.9;
   const labelMinWidth = i18n.language === 'ko' ? 80 : 140;
@@ -126,25 +156,25 @@ export function ValueCircle({
       {/* Top labels */}
       <View className="w-full flex-row justify-between">
         <View
-          className="items-center rounded-xl bg-blue-50 px-3 py-1"
+          className="items-center rounded-xl bg-act-input px-3 py-1"
           style={{ minWidth: labelMinWidth }}
         >
           <Text
             preset="heading"
             bold
-            className="text-slate-700"
+            className="text-sub"
           >
             {domainLabels[0]}
           </Text>
         </View>
         <View
-          className="items-center rounded-xl bg-blue-50 px-3 py-1"
+          className="items-center rounded-xl bg-act-input px-3 py-1"
           style={{ minWidth: labelMinWidth }}
         >
           <Text
             preset="heading"
             bold
-            className="text-slate-700"
+            className="text-sub"
           >
             {domainLabels[1]}
           </Text>
@@ -165,7 +195,9 @@ export function ValueCircle({
               <Path
                 d={s.path}
                 fill={isSelected ? colors.selected : colors.base}
-                stroke="white"
+                stroke={
+                  isDark ? 'rgba(255,255,255,0.1)' : tokens['--bg-surface']
+                }
                 strokeWidth={0.5}
                 onPress={() => onSelectValue(s.key, s.value)}
               />
@@ -175,7 +207,11 @@ export function ValueCircle({
                 textAnchor="middle"
                 alignmentBaseline="central"
                 fontSize={4}
-                fill={isSelected ? 'white' : '#1e3a5f'}
+                fill={
+                  isSelected
+                    ? tokens['--text-inverse']
+                    : tokens['--text-primary']
+                }
                 fontWeight={isSelected ? 'bold' : 'normal'}
               >
                 {s.value}
@@ -188,25 +224,25 @@ export function ValueCircle({
       {/* Bottom labels */}
       <View className="w-full flex-row justify-between">
         <View
-          className="items-center rounded-xl bg-blue-50 px-3 py-1"
+          className="items-center rounded-xl bg-act-input px-3 py-1"
           style={{ minWidth: labelMinWidth }}
         >
           <Text
             preset="heading"
             bold
-            className="text-slate-700"
+            className="text-sub"
           >
             {domainLabels[2]}
           </Text>
         </View>
         <View
-          className="items-center rounded-xl bg-blue-50 px-3 py-1"
+          className="items-center rounded-xl bg-act-input px-3 py-1"
           style={{ minWidth: labelMinWidth }}
         >
           <Text
             preset="heading"
             bold
-            className="text-slate-700"
+            className="text-sub"
           >
             {domainLabels[3]}
           </Text>

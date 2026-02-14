@@ -1,7 +1,10 @@
 import { useCallback, useMemo } from 'react';
 
+import { useColorScheme } from 'nativewind';
 import { useTranslation } from 'react-i18next';
 import { Keyboard, Pressable, TextInput } from 'react-native';
+
+import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
 import { NavButton, Text, View } from '@src/components/ui';
 import { showAlert } from '@src/lib/alert';
@@ -217,6 +220,9 @@ function OrientationContent({
   placeholder: string;
 }) {
   const { t } = useTranslation();
+  const { colorScheme } = useColorScheme();
+  const tokens =
+    colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
 
   return (
     <View className="flex-1 gap-4">
@@ -227,14 +233,14 @@ function OrientationContent({
               key={domain}
               onPress={() => onSelectDomain(domain)}
               className={`rounded-2xl px-4 py-2 ${
-                selectedDomain === domain ? 'bg-btn-act-page' : 'bg-blue-100'
+                selectedDomain === domain ? 'bg-btn-act-page' : 'bg-act-input'
               }`}
             >
               <Text
                 preset="caption"
                 bold
                 className={
-                  selectedDomain === domain ? 'text-white' : 'text-black'
+                  selectedDomain === domain ? 'text-inverse' : 'text-body'
                 }
               >
                 {t(`act.values.domain.${domain}`)}
@@ -249,7 +255,7 @@ function OrientationContent({
             <Text
               preset="heading"
               bold
-              className="text-white"
+              className="text-inverse"
             >
               {domainLabel}
             </Text>
@@ -272,9 +278,9 @@ function OrientationContent({
         value={orientation}
         onChangeText={onOrientationChange}
         placeholder={placeholder}
-        placeholderTextColor="#9CA3AF"
+        placeholderTextColor={tokens['--act-input-placeholder']}
         multiline
-        className="flex-1 rounded-2xl border border-white bg-white/60 p-4"
+        className="flex-1 rounded-2xl border border-white bg-white/50 p-4 dark:border-white/10 dark:bg-white/5"
         style={{
           textAlignVertical: 'top',
           fontSize: 17,
@@ -300,6 +306,10 @@ function TextInputContent({
   onChange: (text: string) => void;
   placeholder: string;
 }) {
+  const { colorScheme } = useColorScheme();
+  const tokens =
+    colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
+
   return (
     <View className="flex-1 gap-4">
       <View className="gap-2">
@@ -320,9 +330,9 @@ function TextInputContent({
         value={value}
         onChangeText={onChange}
         placeholder={placeholder}
-        placeholderTextColor="#9CA3AF"
+        placeholderTextColor={tokens['--act-input-placeholder']}
         multiline
-        className="flex-1 rounded-2xl border border-white bg-white/60 p-4"
+        className="flex-1 rounded-2xl border border-white bg-white/50 p-4 dark:border-white/10 dark:bg-white/5"
         style={{
           textAlignVertical: 'top',
           fontSize: 17,

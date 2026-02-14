@@ -8,11 +8,13 @@ import { scale } from 'react-native-size-matters';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import { NavButton, Pressable, Text, View } from '@src/components/ui';
 import { getHapticState, setHapticState } from '@src/lib/haptics';
+import { useIconColor } from '@src/lib/theme';
 
 export default function VibrationScreen() {
   const { t } = useTranslation();
   const [hapticEnabled, setHapticEnabled] = useState(getHapticState());
   const router = useRouter();
+  const { iconPrimary } = useIconColor();
 
   return (
     <PageSafeAreaView className="mt-4 gap-2 bg-page px-8">
@@ -40,7 +42,7 @@ export default function VibrationScreen() {
           <Ionicons
             name={hapticEnabled ? 'radio-button-on' : 'radio-button-off'}
             size={scale(24)}
-            color="black"
+            color={iconPrimary}
           />
         </Pressable>
       </View>

@@ -5,6 +5,7 @@ import type {
   TextStyle,
 } from 'react-native';
 import { Text as RNText } from 'react-native';
+import { twMerge } from 'tailwind-merge';
 
 export type TextPreset =
   | 'title'
@@ -64,7 +65,7 @@ export function Text({
     <RNText
       {...props}
       style={[fontStyle, style]}
-      className={className}
+      className={twMerge('text-body', className)}
     >
       {tx ? t(tx) : children}
     </RNText>

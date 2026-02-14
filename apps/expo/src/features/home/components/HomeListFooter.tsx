@@ -30,7 +30,7 @@ export const HomeListFooter = ({
   if (page === 'HISTORY' && isFetchingNextPage) {
     return (
       <View
-        className="w-full flex-1 items-center justify-center bg-[#003366]"
+        className="bg-ocean-front w-full flex-1 items-center justify-center"
         style={{
           paddingVertical: scale(50),
         }}
@@ -42,7 +42,7 @@ export const HomeListFooter = ({
 
   return (
     <View
-      className="flex-1 bg-[#003366]"
+      className="bg-ocean-front flex-1"
       style={{ height: scale(50) }}
     />
   );

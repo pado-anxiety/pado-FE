@@ -13,6 +13,7 @@ import {
 import { triggerHaptic } from '@src/lib/haptics';
 import { ROUTES } from '@src/lib/route';
 import { ICONS_SIZE } from '@src/lib/styles';
+import { useIconColor } from '@src/lib/theme';
 
 const messageIds = [
   { id: 'acc_01', type: 'acceptance' },
@@ -33,15 +34,9 @@ export function SkySection({
   setPage: (page: 'HOME' | 'HISTORY' | 'CHAT' | 'LEARNING') => void;
 }): React.ReactNode {
   const { t } = useTranslation();
-  // const { pause, play, isPlaying } = useWaveSoundStore();
-  // const { logout } = useAuth();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-
-  // const { data: user } = useQuery({
-  //   queryKey: [API_KEY.USER],
-  //   queryFn: () => userAPI.getUser(),
-  // });
+  const { iconPrimary, textSecondary } = useIconColor();
 
   const getRandomMessage = () => {
     const randomIndex = Math.floor(Math.random() * messageIds.length);
@@ -62,18 +57,11 @@ export function SkySection({
       }}
     >
       <View className="flex w-full flex-row items-end justify-end gap-4">
-        {/* <Pressable onPress={() => (isPlaying ? pause() : play())}>
-          <Entypo
-            name={isPlaying ? 'sound' : 'sound-mute'}
-            size={ICONS_SIZE.large}
-            color="black"
-          />
-        </Pressable> */}
         <Pressable onPress={() => router.push(ROUTES.SETTINGS.BASE)}>
           <MaterialIcons
             name="settings"
             size={ICONS_SIZE.large}
-            color="black"
+            color={iconPrimary}
           />
         </Pressable>
       </View>
@@ -81,7 +69,7 @@ export function SkySection({
         <View className="px-6 py-16">
           <AnimatedText
             preset="heading"
-            className="text-secondary text-center"
+            className="text-center text-sub"
           >
             {getRandomMessage().text}
           </AnimatedText>
@@ -98,7 +86,7 @@ export function SkySection({
               delay={1500}
               preset="heading"
               bold
-              className="text-slate-700"
+              className="text-sub"
             >
               {t('home.menu.viewActHistory')}
             </AnimatedText>
@@ -106,7 +94,7 @@ export function SkySection({
               <MaterialIcons
                 name="chevron-right"
                 size={ICONS_SIZE.large}
-                color="#334155"
+                color={textSecondary}
               />
             </Animated.View>
           </TouchableOpacity>
@@ -122,7 +110,7 @@ export function SkySection({
               delay={2000}
               preset="heading"
               bold
-              className="text-slate-700"
+              className="text-sub"
             >
               {t('home.menu.learning')}
             </AnimatedText>
@@ -130,7 +118,31 @@ export function SkySection({
               <MaterialIcons
                 name="chevron-right"
                 size={ICONS_SIZE.large}
-                color="#334155"
+                color={textSecondary}
+              />
+            </Animated.View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className="flex flex-row items-center"
+            onPress={() => {
+              triggerHaptic('NAVIGATE');
+              setPage('CHAT');
+            }}
+          >
+            <AnimatedText
+              delay={2500}
+              preset="heading"
+              bold
+              className="text-sub"
+            >
+              {t('home.menu.chatWithWind')}
+            </AnimatedText>
+            <Animated.View entering={FadeIn.duration(2500)}>
+              <MaterialIcons
+                name="chevron-right"
+                size={ICONS_SIZE.large}
+                color={textSecondary}
               />
             </Animated.View>
           </TouchableOpacity>

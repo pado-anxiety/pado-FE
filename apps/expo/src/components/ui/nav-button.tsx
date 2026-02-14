@@ -2,6 +2,8 @@ import { Entypo, Feather } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
 import { scale } from 'react-native-size-matters';
 
+import { useIconColor } from '@src/lib/theme';
+
 type NavButtonVariant = 'back' | 'close' | 'chevron' | 'right';
 type NavButtonSize = 'large' | 'small';
 
@@ -20,9 +22,11 @@ const ICON_SIZES = {
 export function NavButton({
   variant,
   size = 'large',
-  color = 'black',
+  color,
   onPress,
 }: NavButtonProps) {
+  const { iconPrimary } = useIconColor();
+  const iconColor = color ?? iconPrimary;
   const iconSize = scale(ICON_SIZES[size]);
 
   const renderIcon = () => {
@@ -32,7 +36,7 @@ export function NavButton({
           <Feather
             name="chevron-left"
             size={iconSize}
-            color={color}
+            color={iconColor}
           />
         );
       case 'close':
@@ -40,7 +44,7 @@ export function NavButton({
           <Feather
             name="x"
             size={iconSize}
-            color={color}
+            color={iconColor}
           />
         );
       case 'right':
@@ -48,7 +52,7 @@ export function NavButton({
           <Feather
             name="chevron-right"
             size={iconSize}
-            color={color}
+            color={iconColor}
           />
         );
       case 'chevron':
@@ -56,7 +60,7 @@ export function NavButton({
           <Entypo
             name="chevron-thin-left"
             size={iconSize}
-            color={color}
+            color={iconColor}
           />
         );
       default:

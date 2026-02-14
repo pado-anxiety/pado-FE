@@ -1,4 +1,5 @@
 import { Canvas, Skia } from '@shopify/react-native-skia';
+import { useColorScheme } from 'nativewind';
 import { useWindowDimensions } from 'react-native';
 import Animated, {
   LinearTransition,
@@ -10,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import { View } from '@src/components/ui';
+import { getOceanColors, getWaveColors } from '@src/lib/theme';
 
 import {
   BACKGROUND,
@@ -31,6 +33,10 @@ interface WaveHorizonProps {
 }
 
 export function WaveHorizon({ gapScale }: WaveHorizonProps): React.ReactNode {
+  const { colorScheme } = useColorScheme();
+  const scheme = colorScheme === 'dark' ? 'dark' : 'light';
+  const waveColors = getWaveColors(scheme);
+  const oceanColors = getOceanColors(scheme);
   /**
    * 파도 경로 생성
    * @param extraHeight - gapScale로 인해 추가된 캔버스 상단 높이 (파도 그리기 시 보정용)
@@ -207,17 +213,17 @@ export function WaveHorizon({ gapScale }: WaveHorizonProps): React.ReactNode {
               backgroundColor: 'transparent',
             }}
           >
-            <BackgroundWave path={backgroundWavePath} />
-            <MidgroundBackWave path={midgroundBackWavePath} />
-            <MidgroundWave path={midgroundWavePath} />
-            <ForegroundMidWave path={foregroundMidWavePath} />
-            <ForegroundWave path={foregroundWavePath} />
+            <BackgroundWave path={backgroundWavePath} color={waveColors[0]} />
+            <MidgroundBackWave path={midgroundBackWavePath} color={waveColors[1]} />
+            <MidgroundWave path={midgroundWavePath} color={waveColors[2]} />
+            <ForegroundMidWave path={foregroundMidWavePath} color={waveColors[3]} />
+            <ForegroundWave path={foregroundWavePath} color={waveColors[4]} />
           </Canvas>
         </Animated.View>
 
         <View
           style={{
-            backgroundColor: '#003366',
+            backgroundColor: oceanColors.frontWave,
             paddingBottom: 2000,
             marginBottom: -2000,
             marginTop: -1,

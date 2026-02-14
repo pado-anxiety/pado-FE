@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { useColorScheme } from 'nativewind';
 import Animated, {
   Easing,
   useAnimatedProps,
@@ -7,6 +8,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import Svg, { Circle } from 'react-native-svg';
+
+import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
@@ -21,6 +24,8 @@ interface ProgressCircleProps {
 }
 
 export function ProgressCircle({ progress, size }: ProgressCircleProps) {
+  const { colorScheme } = useColorScheme();
+  const tokens = colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
   const animatedProgress = useSharedValue(0);
 
   useEffect(() => {
@@ -46,7 +51,7 @@ export function ProgressCircle({ progress, size }: ProgressCircleProps) {
         cx="50"
         cy="50"
         fill="none"
-        stroke="#769BC4"
+        stroke={tokens['--btn-act-page-unselected']}
         opacity={0.4}
         strokeWidth={STROKE_WIDTH}
       />
@@ -56,7 +61,7 @@ export function ProgressCircle({ progress, size }: ProgressCircleProps) {
         cx="50"
         cy="50"
         fill="none"
-        stroke="#21344E"
+        stroke={tokens['--btn-act-page-selected']}
         strokeWidth={STROKE_WIDTH}
         strokeDasharray={CIRCUMFERENCE}
         animatedProps={animatedProps}

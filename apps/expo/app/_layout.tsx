@@ -8,6 +8,7 @@ import Constants from 'expo-constants';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { PostHogProvider } from 'posthog-react-native';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
@@ -40,7 +41,7 @@ Sentry.init({
 
 function NavigationContent() {
   const { t } = useTranslation();
-  const { themeStyle } = useTheme();
+  const { themeStyle, pageBgColor } = useTheme();
 
   // const { play } = useWaveSoundStore();
 
@@ -57,11 +58,13 @@ function NavigationContent() {
     useAlert();
 
   return (
-    <View style={[{ flex: 1 }, themeStyle]}>
+    <View style={[{ flex: 1 }, themeStyle, { backgroundColor: pageBgColor }]}>
+      <StatusBar style="auto" />
       <BottomSheetModalProvider>
         <Stack
           screenOptions={{
             headerShown: false,
+            contentStyle: { backgroundColor: 'transparent' },
           }}
         >
           <Stack.Screen name="index" />
@@ -97,7 +100,7 @@ function NavigationContent() {
                     text={t('common.button.cancel')}
                     size="sm"
                     onPress={() => closeAlert()}
-                    className="flex-1 bg-gray-300"
+                    className="flex-1 bg-btn-cancel"
                     textClassName="text-body"
                   />
                   <Button

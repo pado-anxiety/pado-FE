@@ -45,7 +45,6 @@ export const BREATH_TEXT_KEYS = {
 
 export const WAVE_CONFIGS = [
   {
-    color: '#D3F3FF',
     frequency: 1.8,
     speedMultiplier: 0.4,
     amplitudeScale: 1.0,
@@ -53,7 +52,6 @@ export const WAVE_CONFIGS = [
     offsetRatio: -0.12,
   },
   {
-    color: '#77AADD',
     frequency: 1.6,
     speedMultiplier: 0.6,
     amplitudeScale: 1.0,
@@ -61,7 +59,6 @@ export const WAVE_CONFIGS = [
     offsetRatio: -0.11,
   },
   {
-    color: '#3388CC',
     frequency: 1.5,
     speedMultiplier: 0.8,
     amplitudeScale: 1.0,
@@ -69,7 +66,6 @@ export const WAVE_CONFIGS = [
     offsetRatio: -0.08,
   },
   {
-    color: '#005599',
     frequency: 1.4,
     speedMultiplier: 1.1,
     amplitudeScale: 1.0,
@@ -77,7 +73,6 @@ export const WAVE_CONFIGS = [
     offsetRatio: -0.05,
   },
   {
-    color: '#003366',
     frequency: 1.3,
     speedMultiplier: 1.4,
     amplitudeScale: 1.0,

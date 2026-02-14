@@ -10,7 +10,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   orientation: 'portrait',
   icon: './assets/icon.png',
   scheme: ClientEnv.SCHEME,
-  userInterfaceStyle: 'light',
+  userInterfaceStyle: 'automatic',
   newArchEnabled: true,
   locales: {
     en: './languages/en.json',
@@ -27,9 +27,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     usesAppleSignIn: true,
     bundleIdentifier: ClientEnv.IOS_BUNDLE_IDENTIFIER,
     splash: {
-      backgroundColor: '#F9F8F6',
+      backgroundColor: '#F5F5F5',
       dark: {
-        backgroundColor: '#1C2533',
+        backgroundColor: '#1E1F28',
       },
     },
   },
@@ -41,9 +41,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       monochromeImage: './assets/images/android-icon-monochrome.png',
     },
     splash: {
-      backgroundColor: '#F9F8F6',
+      backgroundColor: '#F5F5F5',
       dark: {
-        backgroundColor: '#1C2533',
+        backgroundColor: '#1E1F28',
       },
     },
     edgeToEdgeEnabled: true,
@@ -96,9 +96,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     [
       'expo-splash-screen',
       {
-        backgroundColor: '#F9F8F6',
+        backgroundColor: '#F5F5F5',
         dark: {
-          backgroundColor: '#1C2533',
+          backgroundColor: '#1E1F28',
         },
       },
     ],

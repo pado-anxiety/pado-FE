@@ -7,7 +7,10 @@ import {
   Skia,
   vec,
 } from '@shopify/react-native-skia';
+import { useColorScheme } from 'nativewind';
 import { scale } from 'react-native-size-matters';
+
+import { getOceanColors } from '@src/lib/theme';
 
 import { Point } from './types';
 
@@ -50,6 +53,10 @@ function drawPath(points: Point[]) {
 }
 
 export function ActPath({ points, height }: ActPathProps): React.ReactNode {
+  const { colorScheme } = useColorScheme();
+  const scheme = colorScheme === 'dark' ? 'dark' : 'light';
+  const ocean = getOceanColors(scheme);
+
   return (
     <Canvas
       style={{
@@ -57,19 +64,19 @@ export function ActPath({ points, height }: ActPathProps): React.ReactNode {
         height: height,
         position: 'absolute',
         inset: 0,
-        backgroundColor: '#010C1E',
+        backgroundColor: ocean.deep,
       }}
     >
       <Fill>
         <LinearGradient
           start={vec(0, 0)}
           end={vec(0, height)}
-          colors={['#003366', '#010C1E']}
+          colors={[ocean.frontWave, ocean.deep]}
         />
       </Fill>
       <Path
         path={drawPath(points)}
-        color="#CBD5E1"
+        color={ocean.pathLine}
         style="stroke"
         strokeWidth={scale(6)}
         strokeCap="round"

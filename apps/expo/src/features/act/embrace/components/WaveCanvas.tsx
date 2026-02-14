@@ -5,6 +5,7 @@ import {
   Skia,
   vec,
 } from '@shopify/react-native-skia';
+import { useColorScheme } from 'nativewind';
 import { useWindowDimensions } from 'react-native';
 import {
   SharedValue,
@@ -13,6 +14,8 @@ import {
   useSharedValue,
 } from 'react-native-reanimated';
 
+import { getOceanColors, getWaveColors } from '@src/lib/theme';
+
 import { WAVE_CONFIGS } from '../constants';
 
 interface WaveCanvasProps {
@@ -20,7 +23,6 @@ interface WaveCanvasProps {
   waveBaseY: SharedValue<number>;
 }
 
-const GRADIENT_END_COLOR = '#000814';
 const WAVE_STEP = 4;
 const TIME_INCREMENT = 0.015;
 const AMPLITUDE_MIN = 15;
@@ -30,6 +32,10 @@ const GAP_MAX = 30;
 
 export function WaveCanvas({ breathProgress, waveBaseY }: WaveCanvasProps) {
   const { width, height } = useWindowDimensions();
+  const { colorScheme } = useColorScheme();
+  const scheme = colorScheme === 'dark' ? 'dark' : 'light';
+  const waveColors = getWaveColors(scheme);
+  const ocean = getOceanColors(scheme);
   const time = useSharedValue(0);
 
   useFrameCallback(() => {
@@ -37,13 +43,23 @@ export function WaveCanvas({ breathProgress, waveBaseY }: WaveCanvasProps) {
   });
 
   return (
-    <Canvas style={{ position: 'absolute', top: 0, left: 0, width, height }}>
+    <Canvas
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: -2,
+        width: width + 4,
+        height,
+      }}
+    >
       {WAVE_CONFIGS.map((config, index) => (
         <WaveLayer
           key={index}
           config={config}
+          color={waveColors[index]}
+          gradientEndColor={ocean.deep}
           index={index}
-          width={width}
+          width={width + 4}
           height={height}
           time={time}
           breathProgress={breathProgress}
@@ -56,6 +72,8 @@ export function WaveCanvas({ breathProgress, waveBaseY }: WaveCanvasProps) {
 
 function WaveLayer({
   config,
+  color,
+  gradientEndColor,
   index,
   width,
   height,
@@ -64,6 +82,8 @@ function WaveLayer({
   waveBaseY,
 }: {
   config: (typeof WAVE_CONFIGS)[number];
+  color: string;
+  gradientEndColor: string;
   index: number;
   width: number;
   height: number;
@@ -112,7 +132,7 @@ function WaveLayer({
       <LinearGradient
         start={gradientStart}
         end={vec(0, height)}
-        colors={[config.color, GRADIENT_END_COLOR]}
+        colors={[color, gradientEndColor]}
       />
     </Path>
   );

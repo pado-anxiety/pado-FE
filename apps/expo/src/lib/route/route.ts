@@ -11,6 +11,7 @@ export const ROUTES = {
     BASE: '/settings',
     VIBRATION: '/settings/vibration',
     LANGUAGE: '/settings/language',
+    THEME: '/settings/theme',
     PRIVACY_POLICY: '/settings/policy',
     TERMS_OF_SERVICE: '/settings/terms',
     LICENSE_INFO: '/settings/license',

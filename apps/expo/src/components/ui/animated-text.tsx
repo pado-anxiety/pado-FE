@@ -1,6 +1,7 @@
 import type { TextProps } from 'react-native';
 import { StyleSheet } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { twMerge } from 'tailwind-merge';
 
 import type { TextPreset } from './text';
 
@@ -22,6 +23,7 @@ interface AnimatedTextProps extends TextProps {
   delay?: number;
   preset?: TextPreset;
   bold?: boolean;
+  className?: string;
 }
 
 export function AnimatedText({
@@ -32,6 +34,7 @@ export function AnimatedText({
   style,
   preset,
   bold,
+  className,
   ...props
 }: AnimatedTextProps) {
   const fontStyle = preset
@@ -46,6 +49,7 @@ export function AnimatedText({
       entering={isEntering ? FadeIn.duration(delay) : undefined}
       exiting={isExiting ? FadeOut.duration(delay) : undefined}
       style={[styles.base, fontStyle, style]}
+      className={twMerge('text-body', className)}
       {...props}
     >
       {children}

@@ -6,12 +6,14 @@ import detachImage from '@assets/images/home/detach.png';
 import diaryImage from '@assets/images/home/diary.png';
 import embraceImage from '@assets/images/home/embrace.png';
 import { useRouter } from 'expo-router';
+import { useColorScheme } from 'nativewind';
 import { useTranslation } from 'react-i18next';
 
 import { Image, Pressable, Text, View } from '@src/components/ui';
 import { useAnalytics } from '@src/lib/analytics';
 import { triggerHaptic } from '@src/lib/haptics';
 import { getActRoute } from '@src/lib/route/route';
+import { getOceanColors } from '@src/lib/theme';
 
 import { BubbleSize, Point } from './types';
 
@@ -35,14 +37,6 @@ type ActButtonProps = {
   onReportLayout: (point: Point) => void;
 };
 
-const STEP_CIRCLE_COLORS = {
-  anchor: '#002E5B',
-  diary: '#00254A',
-  detach: '#012245',
-  embrace: '#011731',
-  action: '#010C1F',
-};
-
 export function ActStep({
   item,
   index,
@@ -50,6 +44,17 @@ export function ActStep({
   onReportLayout,
 }: ActButtonProps): React.ReactNode {
   const { trackContent } = useAnalytics();
+  const { colorScheme } = useColorScheme();
+  const scheme = colorScheme === 'dark' ? 'dark' : 'light';
+  const ocean = getOceanColors(scheme);
+
+  // frontWave → deep 그래디언트를 각 원 깊이에 맞춰 보간한 값
+  const STEP_CIRCLE_COLORS =
+    scheme === 'dark'
+      ? // dark: #162A58 → #0A1430
+        ['#152753', '#12234C', '#101F44', '#0E1B3C', '#0B1735']
+      : // light: #1E3D72 → #040B1A
+        ['#1B3767', '#162E58', '#112446', '#0C1A34', '#071125'];
 
   const { t } = useTranslation();
   const circleRef = useRef<View>(null);
@@ -80,19 +85,19 @@ export function ActStep({
       scale: 1.25,
       opacity: 0.3,
       border: 1.2,
-      color: '#CBD5E1',
+      color: ocean.horizon,
     },
     {
       scale: 1.6,
       opacity: 0.15,
       border: 1,
-      color: '#94A3B8',
+      color: ocean.midWave,
     },
     {
       scale: 2.1,
       opacity: 0.06,
       border: 0.8,
-      color: '#64748B',
+      color: ocean.foreWave,
     },
   ];
 
@@ -131,10 +136,7 @@ export function ActStep({
               style={{
                 width: BubbleSize,
                 height: BubbleSize,
-                backgroundColor:
-                  STEP_CIRCLE_COLORS[
-                    items[index] as keyof typeof STEP_CIRCLE_COLORS
-                  ],
+                backgroundColor: STEP_CIRCLE_COLORS[index],
                 borderWidth: 1.5,
                 borderColor: 'rgba(255, 255, 255, 0.5)',
               }}
@@ -150,8 +152,12 @@ export function ActStep({
             </View>
           </View>
 
-          <View className="border-white/2 mt-4 rounded-3xl bg-[#F3F4F6] px-4 py-1.5">
-            <Text preset="body" bold className="text-center">
+          <View className="mt-4 rounded-3xl bg-surface px-4 py-1.5">
+            <Text
+              preset="body"
+              bold
+              className="text-center"
+            >
               {t(item.i18nKey)}
             </Text>
           </View>

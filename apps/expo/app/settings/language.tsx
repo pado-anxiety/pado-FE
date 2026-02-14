@@ -5,10 +5,12 @@ import { scale } from 'react-native-size-matters';
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import { NavButton, Pressable, Text, View } from '@src/components/ui';
 import { useLanguage } from '@src/lib/i18n';
+import { useIconColor } from '@src/lib/theme';
 
 export default function LanguageScreen() {
   const router = useRouter();
   const { changeLanguage, language } = useLanguage();
+  const { iconPrimary } = useIconColor();
 
   const handleChangeLanguage = (language: string) => {
     changeLanguage(language);
@@ -34,7 +36,7 @@ export default function LanguageScreen() {
           <Ionicons
             name={language === 'en' ? 'radio-button-on' : 'radio-button-off'}
             size={scale(24)}
-            color="black"
+            color={iconPrimary}
           />
         </Pressable>
         <Pressable
@@ -45,7 +47,7 @@ export default function LanguageScreen() {
           <Ionicons
             name={language === 'ko' ? 'radio-button-on' : 'radio-button-off'}
             size={scale(24)}
-            color="black"
+            color={iconPrimary}
           />
         </Pressable>
       </View>

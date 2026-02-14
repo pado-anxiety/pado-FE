@@ -41,6 +41,12 @@
     },
     "language": "Language",
     "vibration": "Haptics",
+    "theme": "Theme",
+    "themeOptions": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
     "feedback": {
       "title": "Feedback",
       "description": "Feel free to share your thoughts.",
