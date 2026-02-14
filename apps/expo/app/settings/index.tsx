@@ -88,7 +88,12 @@ export default function SettingsScreen() {
             onPress={() => router.back()}
           />
         </View>
-        <Text preset="heading" bold>{t('common.settings.title')}</Text>
+        <Text
+          preset="heading"
+          bold
+        >
+          {t('common.settings.title')}
+        </Text>
       </View>
       <View className="mt-4 flex flex-col gap-6">
         {/* 사용자 정보 */}
@@ -130,15 +135,23 @@ export default function SettingsScreen() {
         </View>
 
         {/* 언어 설정 + 진동 */}
-        <View className="gap-6 overflow-hidden rounded-2xl border border-default bg-surface/20 p-5">
+        <View className="bg-surface/20 gap-6 overflow-hidden rounded-2xl border border-default p-5">
+          <Pressable
+            onPress={() => router.push(ROUTES.SETTINGS.THEME)}
+            className="flex flex-row items-center justify-between"
+          >
+            <Text preset="body">{t('common.settings.theme')}</Text>
+            <NavButton
+              variant="right"
+              size="small"
+            />
+          </Pressable>
           <Pressable
             onPress={() => router.push(ROUTES.SETTINGS.LANGUAGE)}
             className="flex flex-row items-center justify-between"
           >
             <View className="flex flex-row items-center">
-              <Text preset="body">
-                {t('common.settings.language')}
-              </Text>
+              <Text preset="body">{t('common.settings.language')}</Text>
             </View>
             <NavButton
               variant="right"
@@ -149,21 +162,7 @@ export default function SettingsScreen() {
             onPress={() => router.push(ROUTES.SETTINGS.VIBRATION)}
             className="flex flex-row items-center justify-between"
           >
-            <Text preset="body">
-              {t('common.settings.vibration')}
-            </Text>
-            <NavButton
-              variant="right"
-              size="small"
-            />
-          </Pressable>
-          <Pressable
-            onPress={() => router.push(ROUTES.SETTINGS.THEME)}
-            className="flex flex-row items-center justify-between"
-          >
-            <Text preset="body">
-              {t('common.settings.theme')}
-            </Text>
+            <Text preset="body">{t('common.settings.vibration')}</Text>
             <NavButton
               variant="right"
               size="small"
@@ -172,14 +171,12 @@ export default function SettingsScreen() {
         </View>
 
         {/* 개인정보 + 이용약관 + 앱 버전 */}
-        <View className="gap-6 overflow-hidden rounded-2xl border border-default bg-surface/20 p-5">
+        <View className="bg-surface/20 gap-6 overflow-hidden rounded-2xl border border-default p-5">
           <Pressable
             onPress={() => present()}
             className="flex flex-row items-center justify-between"
           >
-            <Text preset="body">
-              {t('common.settings.feedback.title')}
-            </Text>
+            <Text preset="body">{t('common.settings.feedback.title')}</Text>
             <NavButton
               variant="right"
               size="small"
@@ -189,9 +186,7 @@ export default function SettingsScreen() {
             onPress={() => router.push(ROUTES.SETTINGS.PRIVACY_POLICY)}
             className="flex flex-row items-center justify-between"
           >
-            <Text preset="body">
-              {t('common.settings.privacyPolicy')}
-            </Text>
+            <Text preset="body">{t('common.settings.privacyPolicy')}</Text>
             <NavButton
               variant="right"
               size="small"
@@ -201,9 +196,7 @@ export default function SettingsScreen() {
             onPress={() => router.push(ROUTES.SETTINGS.TERMS_OF_SERVICE)}
             className="flex flex-row items-center justify-between"
           >
-            <Text preset="body">
-              {t('common.settings.termsOfService')}
-            </Text>
+            <Text preset="body">{t('common.settings.termsOfService')}</Text>
             <NavButton
               variant="right"
               size="small"
@@ -254,13 +247,11 @@ export default function SettingsScreen() {
           onPress={() => Keyboard.dismiss()}
           className="flex w-full flex-1 flex-col gap-4 px-6"
         >
-          <Text preset="body">
-            {t('common.settings.feedback.description')}
-          </Text>
+          <Text preset="body">{t('common.settings.feedback.description')}</Text>
           <View className="flex flex-col gap-3">
             <BottomSheetTextInput
               placeholder={t('common.settings.feedback.placeholder')}
-              className="h-48 rounded-xl border border-default bg-surface/20 px-4"
+              className="bg-surface/20 h-48 rounded-xl border border-default px-4"
               ref={inputRef}
               multiline={true}
               textAlignVertical="top"

@@ -123,7 +123,7 @@ export function SkySection({
             </Animated.View>
           </TouchableOpacity>
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
             className="flex flex-row items-center"
             onPress={() => {
               triggerHaptic('NAVIGATE');
@@ -145,7 +145,7 @@ export function SkySection({
                 color={textSecondary}
               />
             </Animated.View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>

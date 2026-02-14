@@ -1,7 +1,7 @@
 {
   "name": "pado-expo",
   "main": "expo-router/entry",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "scripts": {
     "start:android:development": "cross-env APP_ENV=development npx expo start --android",
     "start:ios:development": "cross-env APP_ENV=development npx expo start --ios",

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useColorScheme, vars } from 'nativewind';
 
@@ -24,23 +24,26 @@ export const useTheme = () => {
     setColorScheme(theme);
   }, [setColorScheme]);
 
+  const [storedTheme, setStoredTheme] = useState<ThemeType>(
+    () => (storage.getString(THEME_KEY) as ThemeType) ?? 'system',
+  );
+
   const changeTheme = useCallback(
     (newTheme: ThemeType) => {
       setColorScheme(newTheme);
       storage.set(THEME_KEY, newTheme);
+      setStoredTheme(newTheme);
     },
     [setColorScheme],
   );
-
-  const storedTheme: ThemeType =
-    (storage.getString(THEME_KEY) as ThemeType) ?? 'system';
 
   const themeStyle = useMemo(() => {
     return colorScheme === 'dark' ? themeVars.dark : themeVars.light;
   }, [colorScheme]);
 
   const pageBgColor = useMemo(() => {
-    const tokens = colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
+    const tokens =
+      colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
     return tokens['--bg-page'];
   }, [colorScheme]);
 
