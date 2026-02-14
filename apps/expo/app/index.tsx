@@ -10,6 +10,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { LoadingSpinner, Text, View } from '@src/components/ui';
 import { HistoryModalContent } from '@src/features/History';
 import { ACTType, ActHistory } from '@src/features/History/types';
+import ChatPageLayout from '@src/features/chat/ChatPageLayout';
 import {
   HomeListFooter,
   HomeListHeader,
@@ -104,6 +105,14 @@ export default function HomeScreen(): React.ReactNode {
       fetchNextPage();
     }
   };
+
+  if (page === 'CHAT') {
+    return (
+      <View className="flex-1">
+        <ChatPageLayout onBack={() => setPage('HOME')} />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-red-100">
