@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { Text, View } from '@src/components/ui';
-import { CognitiveDefusionData } from '@src/features/History/types';
+import { CognitiveDefusionData } from '@src/features/history/types';
 
 import { ContentBox, ModalHeader, ModalScrollContainer } from '../layouts';
 

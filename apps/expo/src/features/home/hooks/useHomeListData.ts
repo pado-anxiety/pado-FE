@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import anxietyImage from '@assets/images/learning/anxiety.png';
 import padoImage from '@assets/images/learning/pado.png';
 
-import { ACTType, HistoryItem } from '@src/features/History/types';
+import { ACTType, HistoryItem } from '@src/features/history/types';
 
 import { HomeListItem, PageType } from '../types';
 

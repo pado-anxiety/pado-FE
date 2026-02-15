@@ -1,5 +1,5 @@
-import HistoryCard from '@src/features/History/HistoryCard';
-import { ACTType } from '@src/features/History/types';
+import HistoryCard from '@src/features/history/HistoryCard';
+import { ACTType } from '@src/features/history/types';
 import { LearningCard } from '@src/features/learning';
 
 import { HomeListItem as HomeListItemType } from '../types';

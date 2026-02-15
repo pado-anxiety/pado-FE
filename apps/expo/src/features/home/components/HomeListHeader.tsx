@@ -3,7 +3,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
 import { AnimatedText, NavButton, View } from '@src/components/ui';
-import HistorySkySection from '@src/features/History/HistorySkySection';
+import HistorySkySection from '@src/features/history/HistorySkySection';
 import { triggerHaptic } from '@src/lib/haptics';
 
 import { PageType } from '../types';
@@ -61,14 +61,14 @@ export const HomeListHeader = ({ page, setPage }: HomeListHeaderProps) => {
             delay={1000}
             preset="title"
             bold
-            className="text-slate-700"
+            className="text-sub"
           >
             {t('home.learning.title')}
           </AnimatedText>
           <AnimatedText
             delay={1500}
             preset="heading"
-            className="text-slate-500"
+            className="text-sub"
           >
             {t('home.learning.subtitle')}
           </AnimatedText>

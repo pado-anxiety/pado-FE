@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { Text } from '@src/components/ui';
-import { AcceptanceData } from '@src/features/History/types';
+import { AcceptanceData } from '@src/features/history/types';
 
 import { ContentBox, ModalHeader, ModalScrollContainer } from '../layouts';
 

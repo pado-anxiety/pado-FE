@@ -8,7 +8,7 @@ export function DeepSeaSection(): React.ReactNode {
   return (
     <Animated.View
       entering={FadeIn.delay(1000).duration(1000)}
-      className="bg-ocean-deep flex-1"
+      className="flex-1 bg-ocean-deep"
     >
       <View className="relative z-10 flex-1 items-center">
         <ActList />

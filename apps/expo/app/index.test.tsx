@@ -51,7 +51,7 @@ jest.mock('@src/lib/api/history', () => ({
   historyAPI: { getDetail: jest.fn() },
 }));
 
-jest.mock('@src/features/History', () => ({
+jest.mock('@src/features/history', () => ({
   HistoryModalContent: () => null,
 }));
 

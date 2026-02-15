@@ -1,4 +1,4 @@
-import { HistoryItem } from '@src/features/History/types';
+import { HistoryItem } from '@src/features/history/types';
 
 export type PageType = 'HOME' | 'HISTORY' | 'CHAT' | 'LEARNING';
 

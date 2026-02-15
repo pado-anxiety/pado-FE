@@ -1,2 +1,2 @@
-export { StepContent } from './StepContent';
-export { BreathContent } from './BreathContent';
+export { StepContent } from './OnboardStepContent';
+export { BreathContent } from './OnboardBreathContent';

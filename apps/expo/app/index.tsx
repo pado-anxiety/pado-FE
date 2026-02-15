@@ -8,9 +8,9 @@ import { Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { LoadingSpinner, Text, View } from '@src/components/ui';
-import { HistoryModalContent } from '@src/features/History';
-import { ACTType, ActHistory } from '@src/features/History/types';
 import ChatPageLayout from '@src/features/chat/ChatPageLayout';
+import { HistoryModalContent } from '@src/features/history';
+import { ACTType, ActHistory } from '@src/features/history/types';
 import {
   HomeListFooter,
   HomeListHeader,

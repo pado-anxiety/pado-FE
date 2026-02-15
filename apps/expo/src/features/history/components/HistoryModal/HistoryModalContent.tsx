@@ -1,4 +1,4 @@
-import { ActHistory } from '@src/features/History/types';
+import { ActHistory } from '@src/features/history/types';
 
 import {
   AcceptanceContent,

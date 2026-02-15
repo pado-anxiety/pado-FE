@@ -1,4 +1,4 @@
-import { ACTType, ActHistory } from '@src/features/History/types';
+import { ACTType, ActHistory } from '@src/features/history/types';
 
 import { apiClient } from './client';
 

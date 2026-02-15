@@ -38,14 +38,14 @@ export default function HistorySkySection({
           delay={1000}
           preset="title"
           bold
-          className="text-slate-700"
+          className="text-sub"
         >
           {t('act.common.history.title')}
         </AnimatedText>
         <AnimatedText
           delay={1500}
           preset="heading"
-          className="text-slate-500"
+          className="text-sub"
         >
           {t('act.common.history.subtitle')}
         </AnimatedText>
