@@ -1,3 +1,8 @@
+import {
+  ChatBubbleAssistant,
+  ChatBubbleUser,
+  ChatLoadingBubble,
+} from '@src/features/chat';
 import HistoryCard from '@src/features/history/HistoryCard';
 import { ACTType } from '@src/features/history/types';
 import { LearningCard } from '@src/features/learning';
@@ -30,6 +35,13 @@ export const HomeListItem = ({
         handleModalOpen={handleModalOpen}
       />
     );
+  } else if (item.type === 'CHAT_MESSAGE') {
+    if (item.sender === 'USER') {
+      return <ChatBubbleUser item={item} />;
+    }
+    return <ChatBubbleAssistant item={item} />;
+  } else if (item.type === 'CHAT_LOADING') {
+    return <ChatLoadingBubble />;
   } else if (item.type === 'LEARNING') {
     return <LearningCard item={item} />;
   }

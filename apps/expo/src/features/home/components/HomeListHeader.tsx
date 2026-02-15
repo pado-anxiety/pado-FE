@@ -13,7 +13,7 @@ import {
   Text,
   View,
 } from '@src/components/ui';
-import { useChatQuota } from '@src/features/chat/hooks';
+import { useChatQuota } from '@src/features/chat';
 import HistorySkySection from '@src/features/history/HistorySkySection';
 import { triggerHaptic } from '@src/lib/haptics';
 import { ICONS_SIZE } from '@src/lib/styles';
@@ -101,7 +101,7 @@ export const HomeListHeader = ({
   } else if (page === 'CHAT') {
     SkyContent = (
       <View
-        className="flex flex-row items-center justify-between bg-page px-6"
+        className="flex flex-row items-center justify-between bg-transparent px-6"
         style={{ paddingTop: insets.top + 8, paddingBottom: 8 }}
       >
         <NavButton

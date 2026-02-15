@@ -1,35 +1,37 @@
-import {
-  CBTRecommendationAPI,
-  ChatAPI,
-  ChatAssistantAPI,
-  IntensityLevel,
-  SymptomType,
-  TriggerType,
-} from '@src/features/chat/types';
-
 import { apiClient } from './client';
 
 export const ROUTES = {
   CHATS: '/chats',
   QUOTA: '/chats/quota',
-  CBT_RECOMMENDATION: '/cbt/recommend',
 } as const;
+
+export interface ChatUserAPI {
+  type: 'CHAT';
+  sender: 'USER';
+  message: string;
+  time: string;
+}
+
+export interface ChatAssistantAPI {
+  type: 'CHAT';
+  sender: 'AI';
+  message: string;
+  time: string;
+}
+
+export type ChatAPIMessage = ChatUserAPI | ChatAssistantAPI;
+export type ChatAPIResponse = ChatAPIMessage[];
 
 export interface QuotaResponse {
   quota: number;
   timeToRefill: string;
 }
 
-interface CBTRecommendationParams {
-  symptom: SymptomType;
-  intensity: IntensityLevel;
-  trigger: TriggerType;
-}
-
 export const chatAPI = {
-  getChatHistory: async (): Promise<ChatAPI> => {
-    const response: { content: ChatAPI } = await apiClient.get(ROUTES.CHATS);
-    // console.log('chat history: ', response.content);
+  getChatHistory: async (): Promise<ChatAPIResponse> => {
+    const response: { content: ChatAPIResponse } = await apiClient.get(
+      ROUTES.CHATS,
+    );
     return response.content;
   },
   sendMessage: async (message: string): Promise<ChatAssistantAPI> => {
@@ -40,21 +42,6 @@ export const chatAPI = {
   },
   getRemainingQuota: async (): Promise<QuotaResponse> => {
     const response: QuotaResponse = await apiClient.get(ROUTES.QUOTA);
-    return response;
-  },
-  getCBTRecommendation: async ({
-    symptom,
-    intensity,
-    trigger,
-  }: CBTRecommendationParams): Promise<CBTRecommendationAPI> => {
-    const response: CBTRecommendationAPI = await apiClient.post(
-      ROUTES.CBT_RECOMMENDATION,
-      {
-        symptom,
-        intensity,
-        situation: trigger,
-      },
-    );
     return response;
   },
 };

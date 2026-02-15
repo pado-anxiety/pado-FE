@@ -1,4 +1,0 @@
-export const CHAT_TYPE = {
-  CHAT: 'CHAT',
-  CBT_RECOMMENDATION: 'CBT_RECOMMENDATION',
-} as const;

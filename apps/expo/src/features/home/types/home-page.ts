@@ -14,9 +14,17 @@ export type HistoryItemWithIndex = {
   items: HistoryItem[];
 };
 
-export type ChatItem = {
-  id: 'CHAT';
-  type: 'CHAT';
+export type ChatMessageItem = {
+  id: string;
+  type: 'CHAT_MESSAGE';
+  sender: 'USER' | 'AI';
+  message: string;
+  time: string;
+};
+
+export type ChatLoadingItem = {
+  id: 'CHAT_LOADING';
+  type: 'CHAT_LOADING';
 };
 
 export type LearningItem = {
@@ -31,5 +39,6 @@ export type LearningItem = {
 export type HomeListItem =
   | HomeItem
   | HistoryItemWithIndex
-  | ChatItem
+  | ChatMessageItem
+  | ChatLoadingItem
   | LearningItem;

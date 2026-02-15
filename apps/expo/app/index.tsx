@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import { getCalendars } from 'expo-localization';
@@ -8,8 +8,7 @@ import { Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { LoadingSpinner, Text, View } from '@src/components/ui';
-import ChatContentArea from '@src/features/chat/ChatContentArea';
-import { ChatModalProvider } from '@src/features/chat/context';
+import { ChatInput, useChatInput, useChatQuery } from '@src/features/chat';
 import { HistoryModalContent } from '@src/features/history';
 import { ACTType, ActHistory } from '@src/features/history/types';
 import {
@@ -22,6 +21,7 @@ import {
   useHomeListData,
   useHomePageState,
 } from '@src/features/home/hooks';
+import { HomeListItem as HomeListItemType } from '@src/features/home/types';
 import { isOnboarded } from '@src/lib';
 import { showAlert } from '@src/lib/alert';
 import { useAnalytics } from '@src/lib/analytics';
@@ -68,8 +68,6 @@ export default function HomeScreen(): React.ReactNode {
     }
   }, [identifyUser, isLoggedIn, name, email]);
 
-  const isChatPage = page === 'CHAT';
-  const [headerHeight, setHeaderHeight] = useState(0);
   const [contentHeight, setContentHeight] = useState(0);
 
   const detailMutation = useMutation({
@@ -92,10 +90,44 @@ export default function HomeScreen(): React.ReactNode {
       enabled: page === 'HISTORY',
     });
 
+  // Chat hooks
+  const isChatPage = page === 'CHAT';
+  const {
+    chatItems,
+    isSending,
+    sendMessage,
+    loadOlderMessages,
+    hasOlderMessages,
+  } = useChatQuery({ enabled: isChatPage });
+  const chatInput = useChatInput();
+
   const items = useHomeListData({
     page,
     historyPages: data?.pages,
+    chatItems,
+    isChatSending: isSending,
   });
+
+  const flatListRef = useRef<FlatList<HomeListItemType>>(null);
+
+  // 새 메시지 전송 후 스크롤
+  const handleSend = useCallback(() => {
+    if (!chatInput.message.trim()) return;
+    sendMessage(chatInput.message);
+    chatInput.clear();
+    setTimeout(() => {
+      flatListRef.current?.scrollToEnd({ animated: true });
+    }, 100);
+  }, [chatInput, sendMessage]);
+
+  // chatItems 변경 시 자동 스크롤
+  useEffect(() => {
+    if (isChatPage && chatItems.length > 0) {
+      setTimeout(() => {
+        flatListRef.current?.scrollToEnd({ animated: true });
+      }, 150);
+    }
+  }, [isChatPage, chatItems.length]);
 
   if (!onboarded) {
     return <Redirect href={ROUTES.ONBOARD} />;
@@ -111,18 +143,25 @@ export default function HomeScreen(): React.ReactNode {
     }
   };
 
+  const handleScrollBeginDrag = (e: {
+    nativeEvent: { contentOffset: { y: number } };
+  }) => {
+    if (isChatPage && hasOlderMessages && e.nativeEvent.contentOffset.y <= 0) {
+      loadOlderMessages();
+    }
+  };
+
   return (
     <View className="flex-1">
       <FlatList
-        data={isChatPage ? [] : items}
-        scrollEnabled={!isChatPage}
+        ref={flatListRef}
+        data={items}
         style={{ flex: 1 }}
         contentContainerStyle={{ backgroundColor: 'transparent' }}
         ListHeaderComponent={
           <HomeListHeader
             page={page}
             setPage={setPage}
-            onHeaderLayout={setHeaderHeight}
             gradientHeight={contentHeight}
           />
         }
@@ -139,8 +178,9 @@ export default function HomeScreen(): React.ReactNode {
         showsVerticalScrollIndicator={false}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.2}
+        onScrollBeginDrag={handleScrollBeginDrag}
         ListFooterComponent={
-          !isChatPage ? (
+          page !== 'CHAT' ? (
             <HomeListFooter
               page={page}
               isFetchingNextPage={isFetchingNextPage}
@@ -149,7 +189,6 @@ export default function HomeScreen(): React.ReactNode {
           ) : null
         }
         ListEmptyComponent={
-          !isChatPage &&
           page === 'HISTORY' &&
           !isFetchingNextPage &&
           !isPending &&
@@ -163,15 +202,13 @@ export default function HomeScreen(): React.ReactNode {
         }
       />
 
-      {isChatPage && headerHeight > 0 && (
-        <View
-          className="absolute bottom-0 left-0 right-0"
-          style={{ top: headerHeight }}
-        >
-          <ChatModalProvider initialVisible>
-            <ChatContentArea onBack={() => setPage('HOME')} />
-          </ChatModalProvider>
-        </View>
+      {isChatPage && (
+        <ChatInput
+          inputRef={chatInput.inputRef}
+          message={chatInput.message}
+          onChangeText={chatInput.setMessage}
+          onSend={handleSend}
+        />
       )}
 
       {modalType && (

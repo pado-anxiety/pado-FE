@@ -1,8 +1,8 @@
-import { API_KEY, QuotaResponse, chatAPI } from '@src/lib/api';
 import { useQuery } from '@tanstack/react-query';
 
+import { API_KEY, QuotaResponse, chatAPI } from '@src/lib/api';
+
 interface UseChatQuotaReturn {
-  /** 남은 횟수 */
   remainingQuota: QuotaResponse | undefined;
 }
 

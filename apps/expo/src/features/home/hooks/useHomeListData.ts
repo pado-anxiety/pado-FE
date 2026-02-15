@@ -5,7 +5,7 @@ import padoImage from '@assets/images/learning/pado.png';
 
 import { ACTType, HistoryItem } from '@src/features/history/types';
 
-import { HomeListItem, PageType } from '../types';
+import { ChatMessageItem, HomeListItem, PageType } from '../types';
 
 interface HistoryPageItem {
   id: string;
@@ -16,6 +16,8 @@ interface HistoryPageItem {
 interface UseHomeListDataProps {
   page: PageType;
   historyPages?: HistoryPageItem[];
+  chatItems?: ChatMessageItem[];
+  isChatSending?: boolean;
 }
 
 const learningItems = [
@@ -42,6 +44,8 @@ const learningItems = [
 export const useHomeListData = ({
   page,
   historyPages,
+  chatItems,
+  isChatSending,
 }: UseHomeListDataProps): HomeListItem[] => {
   return useMemo(() => {
     if (page === 'HOME') {
@@ -65,6 +69,12 @@ export const useHomeListData = ({
           items: value,
         }))
         .sort((a, b) => Number(b.date) - Number(a.date));
+    } else if (page === 'CHAT') {
+      const items: HomeListItem[] = [...(chatItems || [])];
+      if (isChatSending) {
+        items.push({ id: 'CHAT_LOADING', type: 'CHAT_LOADING' as const });
+      }
+      return items;
     } else if (page === 'LEARNING') {
       return learningItems.map((item) => ({
         id: item.id,
@@ -76,5 +86,5 @@ export const useHomeListData = ({
       }));
     }
     return [];
-  }, [page, historyPages]);
+  }, [page, historyPages, chatItems, isChatSending]);
 };

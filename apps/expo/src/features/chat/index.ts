@@ -1,18 +1,8 @@
-export { default as ChatScreen } from './ChatScreen';
+export { ChatBubbleUser } from './components/ChatBubbleUser';
+export { ChatBubbleAssistant } from './components/ChatBubbleAssistant';
+export { ChatLoadingBubble } from './components/ChatLoadingBubble';
+export { ChatInput } from './components/ChatInput';
 
-export {
-  AssistantChatBox,
-  CBTRecommendationBox,
-  ChatContainer,
-  ChatModalHeader,
-  ChatOverlay,
-  UserChatBox,
-} from './components';
-
-export { useChat, useChatKeyboard } from './hooks';
-
-export type * from './types';
-
-export { parseChats } from './utils';
-
-export { CHAT_MOCK_DATA, ROLE } from './constants';
+export { useChatQuery } from './hooks/useChatQuery';
+export { useChatQuota } from './hooks/useChatQuota';
+export { useChatInput } from './hooks/useChatInput';

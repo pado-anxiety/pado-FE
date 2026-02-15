@@ -1,4 +1,4 @@
-import { chatAPI, ROUTES } from './chat';
+import { ROUTES, chatAPI } from './chat';
 
 jest.mock('./client', () => ({
   apiClient: {
@@ -6,8 +6,6 @@ jest.mock('./client', () => ({
     post: jest.fn(),
   },
 }));
-
-jest.mock('@src/features/chat/types', () => ({}));
 
 const { apiClient } = require('./client') as {
   apiClient: { get: jest.Mock; post: jest.Mock };
@@ -71,40 +69,6 @@ describe('chatAPI', () => {
       apiClient.get.mockRejectedValue(new Error('Error'));
 
       await expect(chatAPI.getRemainingQuota()).rejects.toThrow('Error');
-    });
-  });
-
-  describe('getCBTRecommendation', () => {
-    it('/cbt/recommend로 올바른 body와 함께 POST 요청한다', async () => {
-      const mockRecommendation = { actType: 'ANCHOR', reason: '추천 이유' };
-      apiClient.post.mockResolvedValue(mockRecommendation);
-
-      const params = {
-        symptom: 'ANXIETY' as any,
-        intensity: 'HIGH' as any,
-        trigger: 'WORK' as any,
-      };
-
-      const result = await chatAPI.getCBTRecommendation(params);
-
-      expect(apiClient.post).toHaveBeenCalledWith(ROUTES.CBT_RECOMMENDATION, {
-        symptom: 'ANXIETY',
-        intensity: 'HIGH',
-        situation: 'WORK',
-      });
-      expect(result).toEqual(mockRecommendation);
-    });
-
-    it('에러 시 reject한다', async () => {
-      apiClient.post.mockRejectedValue(new Error('Error'));
-
-      await expect(
-        chatAPI.getCBTRecommendation({
-          symptom: 'DEPRESSION' as any,
-          intensity: 'LOW' as any,
-          trigger: 'RELATIONSHIP' as any,
-        }),
-      ).rejects.toThrow('Error');
     });
   });
 });
