@@ -8,11 +8,21 @@ import { DeepSeaSection } from './DeepSeaSection';
 interface HomeListItemProps {
   item: HomeListItemType;
   handleModalOpen: (id: string, type: ACTType, date: string) => void;
+  onContentHeight?: (height: number) => void;
 }
 
-export const HomeListItem = ({ item, handleModalOpen }: HomeListItemProps) => {
+export const HomeListItem = ({
+  item,
+  handleModalOpen,
+  onContentHeight,
+}: HomeListItemProps) => {
   if (item.type === 'HOME') {
-    return <DeepSeaSection key="home-sea" />;
+    return (
+      <DeepSeaSection
+        key="home-sea"
+        onContentHeight={onContentHeight}
+      />
+    );
   } else if (item.type === 'HISTORY') {
     return (
       <HistoryCard

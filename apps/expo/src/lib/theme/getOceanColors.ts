@@ -16,6 +16,15 @@ export function getOceanColors(colorScheme: ColorScheme) {
     actPath: tokens['--ocean-act-path'],
     actStep: tokens['--ocean-act-step'],
     pathLine: tokens['--ocean-path-line'],
+    /** frontWave → deep 6단계 보간 (Skia LinearGradient용) */
+    depthGradient: [
+      tokens['--ocean-front-wave'],
+      tokens['--ocean-depth-1'],
+      tokens['--ocean-depth-2'],
+      tokens['--ocean-depth-3'],
+      tokens['--ocean-depth-4'],
+      tokens['--ocean-deep'],
+    ],
   };
 }
 

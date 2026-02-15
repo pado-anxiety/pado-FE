@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import { API_KEY, chatAPI } from '@src/lib/api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+
+import { API_KEY, chatAPI } from '@src/lib/api';
 
 import { ROLE } from '../constants';
 import type { CBTSelections, ChatAPI } from '../types';
@@ -55,6 +56,13 @@ export function useChatMessages(): UseChatMessagesReturn {
 
       // 스냅샷 반환
       return { chatSnapshot };
+    },
+    onSuccess: (data) => {
+      // AI 응답을 캐시에 즉시 반영
+      queryClient.setQueryData<ChatAPI>([API_KEY.CHATS], (old) => [
+        data,
+        ...(old || []),
+      ]);
     },
     onError: (error, _, context) => {
       // chats 를 스냅샷으로 되돌림

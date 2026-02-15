@@ -1,4 +1,4 @@
-import { Canvas } from '@shopify/react-native-skia';
+import { Canvas, Fill, LinearGradient, vec } from '@shopify/react-native-skia';
 import { useColorScheme } from 'nativewind';
 import { useWindowDimensions } from 'react-native';
 import Animated, {
@@ -31,21 +31,29 @@ import { createWavePath, getExtraHeight } from './wave-path-utils';
 interface WaveHorizonProps {
   /** 파도 간격 스케일 - 1.0 = 기본 간격, > 1.0 = 간격 확대, < 1.0 = 간격 축소 */
   gapScale?: SharedValue<number>;
+  /** 파도 속도 배율 - 기본 0.002, 낮을수록 느림 */
+  clockSpeed?: number;
+  /** depth gradient 끝점 (px) - 미지정 시 화면 높이의 45% */
+  gradientHeight?: number;
 }
 
-export function WaveHorizon({ gapScale }: WaveHorizonProps): React.ReactNode {
+export function WaveHorizon({
+  gapScale,
+  clockSpeed = 0.002,
+  gradientHeight,
+}: WaveHorizonProps): React.ReactNode {
   const { colorScheme } = useColorScheme();
   const scheme = colorScheme === 'dark' ? 'dark' : 'light';
   const waveColors = getWaveColors(scheme);
   const oceanColors = getOceanColors(scheme);
 
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
 
   const clock = useSharedValue(0);
 
   useFrameCallback((frameInfo) => {
     if (!frameInfo.timeSincePreviousFrame) return;
-    clock.value += frameInfo.timeSincePreviousFrame * 0.002;
+    clock.value += frameInfo.timeSincePreviousFrame * clockSpeed;
   });
 
   const backgroundWavePath = useDerivedValue(() => {
@@ -151,9 +159,9 @@ export function WaveHorizon({ gapScale }: WaveHorizonProps): React.ReactNode {
   }, [gapScale]);
 
   return (
-    <View className="mb-10 bg-page">
+    <View className="mb-10">
       <Animated.View
-        layout={LinearTransition.duration(1000)}
+        layout={LinearTransition.duration(800)}
         className="w-full"
       >
         <Animated.View style={[{ width: width }, canvasContainerStyle]}>
@@ -189,12 +197,29 @@ export function WaveHorizon({ gapScale }: WaveHorizonProps): React.ReactNode {
 
         <View
           style={{
-            backgroundColor: oceanColors.frontWave,
             paddingBottom: 2000,
             marginBottom: -2000,
-            marginTop: -1,
+            marginTop: -2,
           }}
-        />
+        >
+          <Canvas
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+            }}
+          >
+            <Fill>
+              <LinearGradient
+                start={vec(0, 0)}
+                end={vec(0, gradientHeight ?? height * 0.45)}
+                colors={oceanColors.depthGradient}
+              />
+            </Fill>
+          </Canvas>
+        </View>
       </Animated.View>
     </View>
   );

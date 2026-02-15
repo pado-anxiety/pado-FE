@@ -1,12 +1,4 @@
-import {
-  Canvas,
-  DashPathEffect,
-  Fill,
-  LinearGradient,
-  Path,
-  Skia,
-  vec,
-} from '@shopify/react-native-skia';
+import { Canvas, DashPathEffect, Path, Skia } from '@shopify/react-native-skia';
 import { useColorScheme } from 'nativewind';
 import { scale } from 'react-native-size-matters';
 
@@ -64,16 +56,9 @@ export function ActPath({ points, height }: ActPathProps): React.ReactNode {
         height: height,
         position: 'absolute',
         inset: 0,
-        backgroundColor: ocean.deep,
+        backgroundColor: 'transparent',
       }}
     >
-      <Fill>
-        <LinearGradient
-          start={vec(0, 0)}
-          end={vec(0, height)}
-          colors={[ocean.frontWave, ocean.deep]}
-        />
-      </Fill>
       <Path
         path={drawPath(points)}
         color={ocean.pathLine}

@@ -7,7 +7,11 @@ import { ActPath } from './ActPath';
 import { ActStep } from './ActStep';
 import { Point } from './types';
 
-export function ActList(): React.ReactNode {
+interface ActListProps {
+  onContentHeight?: (height: number) => void;
+}
+
+export function ActList({ onContentHeight }: ActListProps): React.ReactNode {
   const containerRef = useRef<View>(null);
   const [points, setPoints] = useState<Point[]>([]);
   const [height, setHeight] = useState(0);
@@ -17,7 +21,9 @@ export function ActList(): React.ReactNode {
       ref={containerRef}
       className="relative w-full flex-1 pb-24 pt-12"
       onLayout={(event) => {
-        setHeight(event.nativeEvent.layout.height);
+        const h = event.nativeEvent.layout.height;
+        setHeight(h);
+        onContentHeight?.(h);
       }}
     >
       <ActPath

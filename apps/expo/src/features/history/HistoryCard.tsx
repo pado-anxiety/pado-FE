@@ -34,7 +34,11 @@ export default function HistoryCard({
       <View className="px-4 py-4">
         <View className="flex flex-row items-start justify-between gap-2">
           <View className="pt-1">
-            <Text preset="body" bold className="text-white/60">
+            <Text
+              preset="body"
+              bold
+              className="text-white/60"
+            >
               {formatToLocaleDate(item.date, language)}
             </Text>
           </View>
@@ -45,7 +49,10 @@ export default function HistoryCard({
                 onPress={() => handleModalOpen(el.id, el.type, item.date)}
                 className="rounded-full bg-white/10 px-3 py-1.5 active:bg-white/20"
               >
-                <Text preset="body" className="text-white">
+                <Text
+                  preset="body"
+                  className="text-white"
+                >
                   {t(ACT_TYPE_I18N_KEY[el.type])}
                 </Text>
               </Pressable>

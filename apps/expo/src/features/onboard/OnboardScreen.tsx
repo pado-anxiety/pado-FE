@@ -109,7 +109,10 @@ export function OnboardScreen() {
     >
       {/* 파도 애니메이션 - translateY로 위아래 이동, gapScale로 수평선 간격 조절 */}
       <Animated.View style={waveAnimatedStyle}>
-        <WaveHorizon gapScale={waveGapScale} />
+        <WaveHorizon
+          gapScale={waveGapScale}
+          clockSpeed={0.0012}
+        />
       </Animated.View>
 
       {/* 컨텐츠 영역 - 파도와 겹침 */}

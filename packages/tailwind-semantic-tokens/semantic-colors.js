@@ -31,6 +31,11 @@ const semanticColors = {
     "--ocean-act-path": colors.ocean[500],
     "--ocean-act-step": colors.ocean[600],
     "--ocean-path-line": "rgba(255, 255, 255, 0.15)",
+    // ── Ocean Depth Gradient (frontWave → deep 보간) ──
+    "--ocean-depth-1": colors.ocean[500],
+    "--ocean-depth-2": colors.ocean[600],
+    "--ocean-depth-3": colors.ocean[700],
+    "--ocean-depth-4": colors.ocean[800],
 
     // ── Chat (라이트/다크 동일 — 항상 어두운 톤) ──
     "--bg-chat-overlay": "rgba(0, 0, 0, 0.88)",
@@ -113,6 +118,11 @@ const semanticColors = {
     "--ocean-act-path": "#12234C",
     "--ocean-act-step": "#101F44",
     "--ocean-path-line": "rgba(255, 255, 255, 0.25)",
+    // ── Ocean Depth Gradient (frontWave → deep 보간) ──
+    "--ocean-depth-1": "#142650",
+    "--ocean-depth-2": "#112148",
+    "--ocean-depth-3": "#0F1D40",
+    "--ocean-depth-4": "#0C1838",
 
     // ── Chat (라이트/다크 동일) ──
     "--bg-chat-overlay": "rgba(0, 0, 0, 0.88)",

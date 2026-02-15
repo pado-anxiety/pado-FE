@@ -8,7 +8,8 @@ import { Pressable } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 import { LoadingSpinner, Text, View } from '@src/components/ui';
-import ChatPageLayout from '@src/features/chat/ChatPageLayout';
+import ChatContentArea from '@src/features/chat/ChatContentArea';
+import { ChatModalProvider } from '@src/features/chat/context';
 import { HistoryModalContent } from '@src/features/history';
 import { ACTType, ActHistory } from '@src/features/history/types';
 import {
@@ -67,6 +68,10 @@ export default function HomeScreen(): React.ReactNode {
     }
   }, [identifyUser, isLoggedIn, name, email]);
 
+  const isChatPage = page === 'CHAT';
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [contentHeight, setContentHeight] = useState(0);
+
   const detailMutation = useMutation({
     mutationFn: historyAPI.getDetail,
     onSuccess: (data) => {
@@ -106,33 +111,26 @@ export default function HomeScreen(): React.ReactNode {
     }
   };
 
-  if (page === 'CHAT') {
-    return (
-      <View className="flex-1">
-        <ChatPageLayout onBack={() => setPage('HOME')} />
-      </View>
-    );
-  }
-
   return (
-    <View className="flex-1 bg-red-100">
+    <View className="flex-1">
       <FlatList
-        data={items}
-        contentContainerStyle={{
-          display: 'flex',
-          flexGrow: 1,
-          backgroundColor: '#003366',
-        }}
+        data={isChatPage ? [] : items}
+        scrollEnabled={!isChatPage}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ backgroundColor: 'transparent' }}
         ListHeaderComponent={
           <HomeListHeader
             page={page}
             setPage={setPage}
+            onHeaderLayout={setHeaderHeight}
+            gradientHeight={contentHeight}
           />
         }
         renderItem={({ item }) => (
           <HomeListItem
             item={item}
             handleModalOpen={handleModalOpen}
+            onContentHeight={setContentHeight}
           />
         )}
         keyExtractor={(item) => item.id.toString()}
@@ -142,13 +140,16 @@ export default function HomeScreen(): React.ReactNode {
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.2}
         ListFooterComponent={
-          <HomeListFooter
-            page={page}
-            isFetchingNextPage={isFetchingNextPage}
-            isPending={isPending}
-          />
+          !isChatPage ? (
+            <HomeListFooter
+              page={page}
+              isFetchingNextPage={isFetchingNextPage}
+              isPending={isPending}
+            />
+          ) : null
         }
         ListEmptyComponent={
+          !isChatPage &&
           page === 'HISTORY' &&
           !isFetchingNextPage &&
           !isPending &&
@@ -161,6 +162,17 @@ export default function HomeScreen(): React.ReactNode {
           ) : null
         }
       />
+
+      {isChatPage && headerHeight > 0 && (
+        <View
+          className="absolute bottom-0 left-0 right-0"
+          style={{ top: headerHeight }}
+        >
+          <ChatModalProvider initialVisible>
+            <ChatContentArea onBack={() => setPage('HOME')} />
+          </ChatModalProvider>
+        </View>
+      )}
 
       {modalType && (
         <Pressable
