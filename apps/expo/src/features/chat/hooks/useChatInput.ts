@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 
 import { TextInput } from 'react-native-gesture-handler';
 
-interface UseChatInputReturn {
+export interface UseChatInputReturn {
   inputRef: React.RefObject<TextInput | null>;
   message: string;
   setMessage: (text: string) => void;

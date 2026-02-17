@@ -31,8 +31,12 @@ jest.mock('react-native-webview', () => {
       injectedJavaScriptBeforeContentLoaded?: string;
     }) => {
       React.useEffect(() => {
-        (global as unknown as { __webViewOnMessage: typeof onMessage }).__webViewOnMessage = onMessage;
-        (global as unknown as { __injectedJS: string | undefined }).__injectedJS = injectedJavaScriptBeforeContentLoaded;
+        (
+          global as unknown as { __webViewOnMessage: typeof onMessage }
+        ).__webViewOnMessage = onMessage;
+        (
+          global as unknown as { __injectedJS: string | undefined }
+        ).__injectedJS = injectedJavaScriptBeforeContentLoaded;
       }, [onMessage, injectedJavaScriptBeforeContentLoaded]);
       return null;
     },
@@ -61,14 +65,19 @@ jest.mock('@src/lib/route', () => ({
 }));
 
 const sendMessage = (type: string, data: unknown) => {
-  const onMessage = (global as unknown as { __webViewOnMessage: (e: unknown) => void }).__webViewOnMessage;
+  const onMessage = (
+    global as unknown as { __webViewOnMessage: (e: unknown) => void }
+  ).__webViewOnMessage;
   onMessage({ nativeEvent: { data: JSON.stringify({ type, data }) } });
 };
 
 describe('LearningScreen', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    (useRouter as jest.Mock).mockReturnValue({ back: mockBack, replace: mockReplace });
+    (useRouter as jest.Mock).mockReturnValue({
+      back: mockBack,
+      replace: mockReplace,
+    });
     (useLocalSearchParams as jest.Mock).mockReturnValue({
       subject: 'anxiety_info',
       title: '불안은 왜 생기는 걸까요?',
@@ -78,7 +87,8 @@ describe('LearningScreen', () => {
 
   it('학습 데이터를 웹뷰에 주입한다', () => {
     render(<LearningScreen />);
-    const injectedJS = (global as unknown as { __injectedJS: string }).__injectedJS;
+    const injectedJS = (global as unknown as { __injectedJS: string })
+      .__injectedJS;
 
     expect(injectedJS).toContain('window.learningData');
     expect(injectedJS).toContain('anxiety_info');

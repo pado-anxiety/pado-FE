@@ -15,8 +15,8 @@ export const HomeListFooter = ({
   isFetchingNextPage,
   isPending,
 }: HomeListFooterProps) => {
-  if (page === 'HOME') {
-    return;
+  if (page === 'HOME' || page === 'CHAT') {
+    return null;
   }
 
   if (page === 'HISTORY' && isPending) {
@@ -30,7 +30,7 @@ export const HomeListFooter = ({
   if (page === 'HISTORY' && isFetchingNextPage) {
     return (
       <View
-        className="bg-ocean-front w-full flex-1 items-center justify-center"
+        className="w-full flex-1 items-center justify-center bg-ocean-front"
         style={{
           paddingVertical: scale(50),
         }}
@@ -42,7 +42,7 @@ export const HomeListFooter = ({
 
   return (
     <View
-      className="bg-ocean-front flex-1"
+      className="flex-1 bg-ocean-front"
       style={{ height: scale(50) }}
     />
   );

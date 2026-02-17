@@ -1,6 +1,7 @@
 export * from './CbtButton';
 export * from './CbtButtonList';
 export * from './DeepSeaSection';
+export * from './HistoryDetailModal';
 export * from './HomeBackground';
 export * from './HomeListFooter';
 export * from './HomeListHeader';

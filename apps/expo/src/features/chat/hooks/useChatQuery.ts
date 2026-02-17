@@ -5,19 +5,45 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ChatMessageItem } from '@src/features/home/types';
 import {
   API_KEY,
+  ChatAPIMessage,
   ChatAPIResponse,
   ChatAssistantAPI,
   chatAPI,
 } from '@src/lib/api';
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 10;
+const TOTAL_PAIRS = 30;
+const LOADING_DELAY_MS = 800;
+
+// Mock 데이터: 무한 스크롤 테스트용 (최신순 — API 응답과 동일)
+// pairIndex: 1=최신, 30=가장 오래됨 → reverse 후 화면 하단이 1번
+const MOCK_MESSAGES: ChatAPIResponse = Array.from(
+  { length: TOTAL_PAIRS * 2 },
+  (_, i): ChatAPIMessage => {
+    const isUser = i % 2 === 1;
+    const pairIndex = Math.floor(i / 2) + 1;
+    return {
+      type: 'CHAT',
+      sender: isUser ? 'USER' : 'AI',
+      message: isUser
+        ? `사용자 메시지 ${pairIndex}`
+        : `AI 응답 ${pairIndex}입니다. 불안은 자연스러운 감정이에요. 함께 이야기해볼까요?`,
+      time: new Date(Date.now() - i * 60000).toISOString(),
+    };
+  },
+);
+const USE_MOCK = __DEV__;
+
+type SendStatus = 'idle' | 'pending' | 'success' | 'error';
 
 interface UseChatQueryReturn {
   chatItems: ChatMessageItem[];
   isSending: boolean;
+  sendStatus: SendStatus;
   sendMessage: (msg: string) => void;
   loadOlderMessages: () => void;
   hasOlderMessages: boolean;
+  isLoadingOlder: boolean;
   isLoading: boolean;
 }
 
@@ -41,10 +67,12 @@ export function useChatQuery({
 }): UseChatQueryReturn {
   const queryClient = useQueryClient();
   const [displayCount, setDisplayCount] = useState(PAGE_SIZE);
+  const [isLoadingOlder, setIsLoadingOlder] = useState(false);
 
   const { data: rawMessages, isLoading } = useQuery<ChatAPIResponse>({
     queryKey: [API_KEY.CHATS],
-    queryFn: () => chatAPI.getChatHistory(),
+    queryFn: () =>
+      USE_MOCK ? Promise.resolve(MOCK_MESSAGES) : chatAPI.getChatHistory(),
     enabled,
   });
 
@@ -60,7 +88,12 @@ export function useChatQuery({
   const hasOlderMessages = allMessages.length > displayCount;
 
   const loadOlderMessages = () => {
-    setDisplayCount((prev) => prev + PAGE_SIZE);
+    if (isLoadingOlder) return;
+    setIsLoadingOlder(true);
+    setTimeout(() => {
+      setDisplayCount((prev) => prev + PAGE_SIZE);
+      setIsLoadingOlder(false);
+    }, LOADING_DELAY_MS);
   };
 
   const sendMessageMutation = useMutation({
@@ -113,9 +146,11 @@ export function useChatQuery({
   return {
     chatItems,
     isSending: sendMessageMutation.isPending,
+    sendStatus: sendMessageMutation.status as SendStatus,
     sendMessage,
     loadOlderMessages,
     hasOlderMessages,
+    isLoadingOlder,
     isLoading,
   };
 }

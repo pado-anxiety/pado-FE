@@ -9,6 +9,7 @@ import Animated, {
   useFrameCallback,
   useSharedValue,
 } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { View } from '@src/components/ui';
 import { getOceanColors, getWaveColors } from '@src/lib/theme';
@@ -21,6 +22,7 @@ import {
   MIDGROUND_BACK,
   WAVE_LAYOUT,
 } from '../../constants';
+import { PageType } from '../../types';
 import BackgroundWave from './BackgroundWave';
 import ForegroundMidWave from './ForegroundMidWave';
 import ForegroundWave from './ForegroundWave';
@@ -35,12 +37,15 @@ interface WaveHorizonProps {
   clockSpeed?: number;
   /** depth gradient 끝점 (px) - 미지정 시 화면 높이의 45% */
   gradientHeight?: number;
+  /** 현재 페이지 - CHAT일 때 파도가 노치 위로 올라감 */
+  page?: PageType;
 }
 
 export function WaveHorizon({
   gapScale,
   clockSpeed = 0.002,
   gradientHeight,
+  page,
 }: WaveHorizonProps): React.ReactNode {
   const { colorScheme } = useColorScheme();
   const scheme = colorScheme === 'dark' ? 'dark' : 'light';
@@ -158,11 +163,27 @@ export function WaveHorizon({
     };
   }, [gapScale]);
 
+  const insets = useSafeAreaInsets();
+  const isChatPage = page === 'CHAT';
+  const chatOverflow = isChatPage
+    ? -(insets.top + WAVE_LAYOUT.HORIZON_HEIGHT)
+    : 0;
+  // negative marginTop 보상: 첫 번째 채팅 메시지가 상태바 아래에서 시작하도록
+  const chatMarginBottom = isChatPage ? insets.top * 2 + 16 : undefined;
+
   return (
-    <View className="mb-10">
+    <View
+      className="mb-10"
+      style={
+        chatMarginBottom !== undefined
+          ? { marginBottom: chatMarginBottom }
+          : undefined
+      }
+    >
       <Animated.View
         layout={LinearTransition.duration(800)}
         className="w-full"
+        style={{ marginTop: chatOverflow }}
       >
         <Animated.View style={[{ width: width }, canvasContainerStyle]}>
           <Canvas

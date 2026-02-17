@@ -22,11 +22,6 @@ export type ChatMessageItem = {
   time: string;
 };
 
-export type ChatLoadingItem = {
-  id: 'CHAT_LOADING';
-  type: 'CHAT_LOADING';
-};
-
 export type LearningItem = {
   id: string;
   subject: string;
@@ -36,9 +31,4 @@ export type LearningItem = {
   image: string;
 };
 
-export type HomeListItem =
-  | HomeItem
-  | HistoryItemWithIndex
-  | ChatMessageItem
-  | ChatLoadingItem
-  | LearningItem;
+export type HomeListItem = HomeItem | HistoryItemWithIndex | LearningItem;
