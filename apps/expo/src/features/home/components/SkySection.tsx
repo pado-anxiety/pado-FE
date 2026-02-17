@@ -107,7 +107,7 @@ export function SkySection({
             }}
           >
             <AnimatedText
-              delay={2000}
+              delay={1500}
               preset="heading"
               bold
               className="text-sub"
@@ -129,7 +129,7 @@ export function SkySection({
             }}
           >
             <AnimatedText
-              delay={2000}
+              delay={1700}
               preset="heading"
               bold
               className="text-sub"
@@ -153,7 +153,7 @@ export function SkySection({
             }}
           >
             <AnimatedText
-              delay={2500}
+              delay={1700}
               preset="heading"
               bold
               className="text-sub"

@@ -24,7 +24,7 @@ export function ChatBubbleAssistant({ item }: ChatBubbleAssistantProps) {
         {messages.map((msg, index) => (
           <View
             key={`${item.time}-${index}`}
-            className="mr-10 rounded-xl bg-chat-assistant p-4"
+            className="mr-10 rounded-2xl bg-chat-assistant p-4"
           >
             <Text
               preset="body"

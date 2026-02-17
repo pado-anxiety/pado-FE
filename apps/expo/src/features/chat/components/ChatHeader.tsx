@@ -12,33 +12,46 @@ import { ICONS_SIZE } from '@src/lib/styles';
 
 import { useChatQuota } from '../hooks/useChatQuota';
 
-interface ChatSkySectionProps {
+const HEADER_HEIGHT = 48;
+
+interface ChatHeaderProps {
   setPage: (page: PageType) => void;
 }
 
-export default function ChatSkySection({ setPage }: ChatSkySectionProps) {
+export function ChatHeader({ setPage }: ChatHeaderProps) {
   const { colorScheme } = useColorScheme();
   const tokens =
     colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
+  const insets = useSafeAreaInsets();
   const { remainingQuota } = useChatQuota();
-  const inset = useSafeAreaInsets();
 
   return (
-    <View>
+    <View
+      style={{
+        paddingTop: insets.top + scale(8),
+        paddingHorizontal: 24,
+      }}
+      pointerEvents="box-none"
+    >
       <View
-        className="absolute left-0 right-0 z-10 flex-row items-center justify-between px-6"
-        style={{ top: inset.top + scale(8) }}
+        style={{
+          height: HEADER_HEIGHT,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
       >
         <NavButton
           variant="chevron"
           size="small"
+          color="#FFFFFF"
           onPress={() => {
             triggerHaptic('NAVIGATE');
             setPage('HOME');
           }}
         />
         <Pressable hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}>
-          <View className="flex flex-row items-center justify-center gap-4 rounded-full bg-chat-user px-3 py-1.5">
+          <View className="flex flex-row items-center justify-center gap-1.5 rounded-full bg-chat-user px-3 py-1.5">
             <FontAwesome
               name="send"
               size={ICONS_SIZE.small}

@@ -14,7 +14,7 @@ interface ChatInputProps {
   onFocus?: () => void;
 }
 
-const SEND_BUTTON_SIZE = 32;
+const SEND_BUTTON_SIZE = 36;
 
 export function ChatInput({ input, onSend, onFocus }: ChatInputProps) {
   const insets = useSafeAreaInsets();
@@ -28,11 +28,11 @@ export function ChatInput({ input, onSend, onFocus }: ChatInputProps) {
           marginVertical: 8,
           flexDirection: 'row',
           alignItems: 'center',
-          borderRadius: 12,
+          borderRadius: 16,
           backgroundColor: 'rgba(15, 20, 30, 0.8)',
           paddingLeft: 16,
-          paddingRight: 6,
-          paddingVertical: 6,
+          paddingRight: 8,
+          paddingVertical: 10,
         }}
       >
         <TextInput
