@@ -2,10 +2,11 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import { Platform, ScrollView, StyleSheet } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { PageType } from '@src/features/home/types';
+import { PAGE_TRANSITION } from '@src/lib/styles';
 
 import { useChatInput } from '../hooks/useChatInput';
 import { useChatQuery } from '../hooks/useChatQuery';
@@ -24,18 +25,18 @@ export function ChatSection({ setPage }: ChatSectionProps) {
   const {
     chatItems,
     isSending,
-    sendStatus,
     sendMessage,
-    loadOlderMessages,
+    fetchOlderMessages,
     hasOlderMessages,
-    isLoadingOlder,
+    isFetchingOlder,
   } = useChatQuery({ enabled: true });
   const input = useChatInput();
   const hasScrolledToBottom = useRef(false);
 
   const handleSend = useCallback(() => {
-    if (!input.message.trim()) return;
-    sendMessage(input.message);
+    const msg = input.messageRef.current;
+    if (!msg.trim()) return;
+    sendMessage(msg);
     input.clear();
   }, [input, sendMessage]);
 
@@ -45,28 +46,32 @@ export function ChatSection({ setPage }: ChatSectionProps) {
     }, 300);
   }, []);
 
+  const prevItemCount = useRef(0);
+
   useEffect(() => {
-    if (chatItems.length > 0 && !hasScrolledToBottom.current) {
+    if (chatItems.length === 0) return;
+
+    if (!hasScrolledToBottom.current) {
       hasScrolledToBottom.current = true;
       setTimeout(() => {
         scrollRef.current?.scrollToEnd({ animated: false });
       }, 50);
-    }
-  }, [chatItems.length]);
-
-  useEffect(() => {
-    if (sendStatus === 'pending' || sendStatus === 'success') {
+    } else if (chatItems.length > prevItemCount.current) {
       setTimeout(() => {
         scrollRef.current?.scrollToEnd({ animated: true });
-      }, 150);
+      }, 50);
     }
-  }, [sendStatus]);
+
+    prevItemCount.current = chatItems.length;
+  }, [chatItems.length]);
+
+  console.log(chatItems);
 
   return (
     <Animated.View
       style={StyleSheet.absoluteFill}
-      entering={FadeIn.delay(500)}
-      exiting={FadeOut}
+      entering={PAGE_TRANSITION.entering}
+      exiting={PAGE_TRANSITION.exiting}
     >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
@@ -79,9 +84,9 @@ export function ChatSection({ setPage }: ChatSectionProps) {
           ref={scrollRef}
           chatItems={chatItems}
           isSending={isSending}
-          isLoadingOlder={isLoadingOlder}
+          isFetchingOlder={isFetchingOlder}
           hasOlderMessages={hasOlderMessages}
-          onLoadOlder={loadOlderMessages}
+          onLoadOlder={fetchOlderMessages}
         />
         <ChatInput
           input={input}

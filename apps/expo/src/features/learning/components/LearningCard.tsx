@@ -1,11 +1,12 @@
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 import { Image, Pressable, Text, View } from '@src/components/ui';
 import { useAnalytics } from '@src/lib/analytics';
 import { triggerHaptic } from '@src/lib/haptics';
 import { ROUTES } from '@src/lib/route';
+import { PAGE_TRANSITION } from '@src/lib/styles';
 
 import { LearningItem } from '../../home/types';
 
@@ -25,7 +26,8 @@ export function LearningCard({ item }: LearningCardProps) {
 
   return (
     <Animated.View
-      entering={FadeIn.delay(1000)}
+      entering={PAGE_TRANSITION.entering}
+      exiting={PAGE_TRANSITION.exiting}
       className="mx-4 my-4 flex flex-col rounded-2xl bg-act-page"
     >
       <Pressable

@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 
 import { Pressable, Text, View } from '@src/components/ui';
 import { useLanguage } from '@src/lib/i18n';
+import { PAGE_TRANSITION } from '@src/lib/styles';
 import { formatToLocaleDate } from '@src/lib/time';
 
 import { HistoryItemWithIndex } from '../home';
@@ -10,6 +11,7 @@ import { ACTType } from './types';
 
 type HistoryCardProps = {
   item: HistoryItemWithIndex;
+  index: number;
   handleModalOpen: (id: string, type: ACTType, date: string) => void;
 };
 
@@ -24,13 +26,17 @@ const ACT_TYPE_I18N_KEY: Record<ACTType, string> = {
 
 export default function HistoryCard({
   item,
+  index,
   handleModalOpen,
 }: HistoryCardProps) {
   const { t } = useTranslation();
   const { language } = useLanguage();
 
   return (
-    <Animated.View entering={FadeIn.delay(1000)}>
+    <Animated.View
+      entering={PAGE_TRANSITION.staggeredEntering(index)}
+      exiting={PAGE_TRANSITION.exiting}
+    >
       <View className="px-4 py-4">
         <View className="flex flex-row items-start justify-between gap-2">
           <View className="pt-1">

@@ -12,27 +12,27 @@ import { ChatLoadingBubble } from './ChatLoadingBubble';
 interface ChatMessageListProps {
   chatItems: ChatMessageItem[];
   isSending: boolean;
-  isLoadingOlder: boolean;
+  isFetchingOlder: boolean;
   hasOlderMessages: boolean;
   onLoadOlder: () => void;
 }
 
 export const ChatMessageList = forwardRef<ScrollView, ChatMessageListProps>(
   function ChatMessageList(
-    { chatItems, isSending, isLoadingOlder, hasOlderMessages, onLoadOlder },
+    { chatItems, isSending, isFetchingOlder, hasOlderMessages, onLoadOlder },
     ref,
   ) {
     const handleScrollBeginDrag = useCallback(
       (e: { nativeEvent: { contentOffset: { y: number } } }) => {
         if (
           hasOlderMessages &&
-          !isLoadingOlder &&
+          !isFetchingOlder &&
           e.nativeEvent.contentOffset.y <= 0
         ) {
           onLoadOlder();
         }
       },
-      [hasOlderMessages, isLoadingOlder, onLoadOlder],
+      [hasOlderMessages, isFetchingOlder, onLoadOlder],
     );
 
     return (
@@ -40,6 +40,8 @@ export const ChatMessageList = forwardRef<ScrollView, ChatMessageListProps>(
         ref={ref}
         style={{ flex: 1 }}
         contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: 'flex-end',
           paddingTop: 8,
           paddingBottom: 8,
         }}
@@ -47,7 +49,7 @@ export const ChatMessageList = forwardRef<ScrollView, ChatMessageListProps>(
         onScrollBeginDrag={handleScrollBeginDrag}
         maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
       >
-        {isLoadingOlder && (
+        {isFetchingOlder && (
           <View className="items-center py-4">
             <ActivityIndicator
               size="small"

@@ -7,12 +7,14 @@ import { DeepSeaSection } from './DeepSeaSection';
 
 interface HomeListItemProps {
   item: HomeListItemType;
+  index: number;
   handleModalOpen: (id: string, type: ACTType, date: string) => void;
   onContentHeight?: (height: number) => void;
 }
 
 export const HomeListItem = ({
   item,
+  index,
   handleModalOpen,
   onContentHeight,
 }: HomeListItemProps) => {
@@ -27,6 +29,7 @@ export const HomeListItem = ({
     return (
       <HistoryCard
         item={item}
+        index={index}
         handleModalOpen={handleModalOpen}
       />
     );

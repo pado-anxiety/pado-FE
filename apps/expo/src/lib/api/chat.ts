@@ -5,22 +5,16 @@ export const ROUTES = {
   QUOTA: '/chats/quota',
 } as const;
 
-export interface ChatUserAPI {
-  type: 'CHAT';
-  sender: 'USER';
+export interface ChatAPIMessage {
+  sender: 'USER' | 'AI';
   message: string;
   time: string;
 }
 
-export interface ChatAssistantAPI {
-  type: 'CHAT';
-  sender: 'AI';
-  message: string;
-  time: string;
+export interface ChatHistoryResponse {
+  content: ChatAPIMessage[];
+  cursor: number | null;
 }
-
-export type ChatAPIMessage = ChatUserAPI | ChatAssistantAPI;
-export type ChatAPIResponse = ChatAPIMessage[];
 
 export interface QuotaResponse {
   quota: number;
@@ -28,16 +22,22 @@ export interface QuotaResponse {
 }
 
 export const chatAPI = {
-  getChatHistory: async (): Promise<ChatAPIResponse> => {
-    const response: { content: ChatAPIResponse } = await apiClient.get(
-      ROUTES.CHATS,
-    );
-    return response.content;
+  getChatHistory: async (
+    cursor?: number | null,
+  ): Promise<ChatHistoryResponse> => {
+    let url = ROUTES.CHATS;
+    if (cursor != null) {
+      url += `?cursor=${cursor}`;
+    }
+    const response: ChatHistoryResponse = await apiClient.get(url);
+    return response;
   },
-  sendMessage: async (message: string): Promise<ChatAssistantAPI> => {
-    const response: ChatAssistantAPI = await apiClient.post(ROUTES.CHATS, {
-      message,
-    });
+  sendMessage: async (message: string): Promise<ChatAPIMessage> => {
+    const response: ChatAPIMessage = await apiClient.post(
+      ROUTES.CHATS,
+      { message },
+      { timeout: 30000 },
+    );
     return response;
   },
   getRemainingQuota: async (): Promise<QuotaResponse> => {

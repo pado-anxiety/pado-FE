@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable, TextInput } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,8 +9,7 @@ import { View } from '@src/components/ui';
 interface ChatInputProps {
   input: {
     inputRef: React.RefObject<TextInput | null>;
-    message: string;
-    setMessage: (text: string) => void;
+    messageRef: React.RefObject<string>;
   };
   onSend: () => void;
   onFocus?: () => void;
@@ -18,7 +19,17 @@ const SEND_BUTTON_SIZE = 36;
 
 export function ChatInput({ input, onSend, onFocus }: ChatInputProps) {
   const insets = useSafeAreaInsets();
-  const hasText = input.message.trim().length > 0;
+  const [hasText, setHasText] = useState(false);
+
+  const handleChangeText = (text: string) => {
+    input.messageRef.current = text;
+    setHasText(text.trim().length > 0);
+  };
+
+  const handleSend = () => {
+    onSend();
+    setHasText(false);
+  };
 
   return (
     <View style={{ paddingBottom: insets.bottom + 8 }}>
@@ -45,12 +56,11 @@ export function ChatInput({ input, onSend, onFocus }: ChatInputProps) {
           }}
           placeholder="메시지를 입력해주세요"
           placeholderTextColor="rgba(255, 255, 255, 0.35)"
-          value={input.message}
-          onChangeText={input.setMessage}
+          onChangeText={handleChangeText}
           onFocus={onFocus}
         />
         <Pressable
-          onPress={onSend}
+          onPress={handleSend}
           hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
         >
           <View

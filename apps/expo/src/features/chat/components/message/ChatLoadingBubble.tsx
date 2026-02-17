@@ -1,4 +1,6 @@
-import { LoadingSpinner, View } from '@src/components/ui';
+import { ActivityIndicator } from 'react-native';
+
+import { View } from '@src/components/ui';
 
 export function ChatLoadingBubble() {
   return (
@@ -6,7 +8,10 @@ export function ChatLoadingBubble() {
       <View className="h-12 w-12 rounded-full bg-chat-assistant" />
       <View className="flex-col items-start gap-2">
         <View className="mr-10 rounded-2xl bg-chat-assistant p-4">
-          <LoadingSpinner />
+          <ActivityIndicator
+            size="small"
+            color="#FFFFFF"
+          />
         </View>
       </View>
     </View>

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 
 import { useRouter } from 'expo-router';
+import { useColorScheme } from 'nativewind';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
@@ -10,6 +11,7 @@ import { WaveHorizon } from '@src/features/home';
 import { showAlert } from '@src/lib/alert';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
+import { getWaveColors } from '@src/lib/theme';
 
 const BYPASS_TAP_COUNT = 5;
 const BYPASS_TIME_WINDOW = 5000;
@@ -19,6 +21,11 @@ export default function LoginScreen() {
   const insets = useSafeAreaInsets();
   const { login, setAuthToken, setUserInfo } = useAuth();
   const router = useRouter();
+
+  const { colorScheme } = useColorScheme();
+  const frontWaveColor = getWaveColors(
+    colorScheme === 'dark' ? 'dark' : 'light',
+  )[4];
 
   const tapTimestamps = useRef<number[]>([]);
 
@@ -77,7 +84,7 @@ export default function LoginScreen() {
       <WaveHorizon />
 
       <View
-        className="flex-1 flex-col justify-between bg-[#003366]"
+        className="flex-1 flex-col justify-between"
         style={{ marginTop: -scale(10) }}
       >
         <View

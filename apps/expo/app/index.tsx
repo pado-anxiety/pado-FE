@@ -24,8 +24,10 @@ import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 
 export default function HomeScreen(): React.ReactNode {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, accessToken } = useAuth();
   const onboarded = isOnboarded();
+
+  console.log(accessToken);
 
   useAuthInit();
 
@@ -74,9 +76,10 @@ export default function HomeScreen(): React.ReactNode {
             gradientHeight={contentHeight}
           />
         }
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <HomeListItem
             item={item}
+            index={index}
             handleModalOpen={handleModalOpen}
             onContentHeight={setContentHeight}
           />

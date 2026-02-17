@@ -1,22 +1,21 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { TextInput } from 'react-native-gesture-handler';
 
 export interface UseChatInputReturn {
   inputRef: React.RefObject<TextInput | null>;
-  message: string;
-  setMessage: (text: string) => void;
+  messageRef: React.RefObject<string>;
   clear: () => void;
   blur: () => void;
 }
 
 export function useChatInput(): UseChatInputReturn {
   const inputRef = useRef<TextInput>(null);
-  const [message, setMessage] = useState('');
+  const messageRef = useRef('');
 
   const clear = useCallback(() => {
     inputRef.current?.clear();
-    setMessage('');
+    messageRef.current = '';
   }, []);
 
   const blur = useCallback(() => {
@@ -25,8 +24,7 @@ export function useChatInput(): UseChatInputReturn {
 
   return {
     inputRef,
-    message,
-    setMessage,
+    messageRef,
     clear,
     blur,
   };
