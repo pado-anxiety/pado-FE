@@ -20,6 +20,7 @@ export type ChatMessageItem = {
   sender: 'USER' | 'AI';
   message: string;
   time: string;
+  isNew?: boolean;
 };
 
 export type LearningItem = {

@@ -28,13 +28,16 @@ interface UseChatQueryReturn {
   isLoading: boolean;
 }
 
-function apiMessageToChatItem(msg: ChatAPIMessage): ChatMessageItem {
+function apiMessageToChatItem(
+  msg: ChatAPIMessage & { isNew?: boolean },
+): ChatMessageItem {
   return {
     id: `chat-${msg.sender}-${msg.time}`,
     type: 'CHAT_MESSAGE',
     sender: msg.sender,
     message: msg.message,
     time: msg.time,
+    isNew: msg.isNew,
   };
 }
 
@@ -113,7 +116,7 @@ export function useChatQuery({
 
       return { snapshot };
     },
-    onSuccess: (data: ChatAPIMessage) => {
+    onSuccess: (response: ChatAPIMessage) => {
       queryClient.setQueryData<InfiniteData<ChatHistoryResponse>>(
         [API_KEY.CHATS],
         (old) => {
@@ -121,7 +124,7 @@ export function useChatQuery({
           const newPages = [...old.pages];
           newPages[0] = {
             ...newPages[0],
-            content: [data, ...newPages[0].content],
+            content: [{ ...response, isNew: true }, ...newPages[0].content],
           };
           return { ...old, pages: newPages };
         },

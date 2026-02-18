@@ -8,14 +8,20 @@ interface HomeListFooterProps {
   page: PageType;
   isFetchingNextPage: boolean;
   isPending: boolean;
+  isHistoryEmpty?: boolean;
 }
 
 export const HomeListFooter = ({
   page,
   isFetchingNextPage,
   isPending,
+  isHistoryEmpty,
 }: HomeListFooterProps) => {
   if (page === 'HOME' || page === 'CHAT') {
+    return null;
+  }
+
+  if (isHistoryEmpty) {
     return null;
   }
 

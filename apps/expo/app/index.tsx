@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react';
 
 import { Redirect } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { FlatList } from 'react-native-gesture-handler';
+import Animated from 'react-native-reanimated';
 
 import { Text, View } from '@src/components/ui';
 import { ChatSection } from '@src/features/chat';
@@ -19,15 +21,18 @@ import {
   useHomePageState,
 } from '@src/features/home/hooks';
 import { HomeListItem as HomeListItemType } from '@src/features/home/types';
-import { isOnboarded } from '@src/lib';
+import { ENV, isOnboarded } from '@src/lib';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
+import { PAGE_TRANSITION } from '@src/lib/styles';
 
 export default function HomeScreen(): React.ReactNode {
+  const { t } = useTranslation();
   const { isLoggedIn, accessToken } = useAuth();
   const onboarded = isOnboarded();
 
   console.log(accessToken);
+  console.log(ENV.BASE_URL);
 
   useAuthInit();
 
@@ -63,7 +68,7 @@ export default function HomeScreen(): React.ReactNode {
     items.length === 0;
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-page">
       <FlatList
         ref={flatListRef}
         data={items}
@@ -95,15 +100,23 @@ export default function HomeScreen(): React.ReactNode {
             page={page}
             isFetchingNextPage={isFetchingNextPage}
             isPending={isPending}
+            isHistoryEmpty={isHistoryEmpty}
           />
         }
         ListEmptyComponent={
           isHistoryEmpty ? (
-            <View className="flex-1 items-center justify-center bg-transparent">
-              <Text className="text-body-medium text-white">
-                기록이 없습니다
+            <Animated.View
+              entering={PAGE_TRANSITION.entering}
+              exiting={PAGE_TRANSITION.exiting}
+              className="flex-1 items-center justify-center bg-transparent"
+            >
+              <Text
+                preset="body"
+                className="text-white"
+              >
+                {t('common.empty.noRecords')}
               </Text>
-            </View>
+            </Animated.View>
           ) : null
         }
       />

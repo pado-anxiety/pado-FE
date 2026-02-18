@@ -21,14 +21,14 @@ export const ChatBubbleAssistant = memo(function ChatBubbleAssistant({
   item,
 }: ChatBubbleAssistantProps) {
   const messages = useMemo(() => splitMessage(item.message), [item.message]);
-  console.log('messages: ', messages);
-  const alreadyRevealed = revealedIds.has(item.id);
+
+  const shouldAnimate = item.isNew && !revealedIds.has(item.id);
   const [visibleCount, setVisibleCount] = useState(
-    alreadyRevealed ? messages.length : 1,
+    shouldAnimate ? 1 : messages.length,
   );
 
   useEffect(() => {
-    if (alreadyRevealed) return;
+    if (!shouldAnimate) return;
 
     const interval = setInterval(() => {
       setVisibleCount((prev) => {
@@ -42,7 +42,7 @@ export const ChatBubbleAssistant = memo(function ChatBubbleAssistant({
     }, BUBBLE_DELAY_MS);
 
     return () => clearInterval(interval);
-  }, [alreadyRevealed, messages.length, item.id]);
+  }, [shouldAnimate, messages.length, item.id]);
 
   if (messages.length === 0) return null;
 

@@ -9,10 +9,12 @@ import { ChatMessageItem } from '@src/features/home/types';
 import { PageType } from '@src/features/home/types';
 import { PAGE_TRANSITION } from '@src/lib/styles';
 
+import { useActRecommend } from '../hooks/useActRecommend';
 import { useChatInput } from '../hooks/useChatInput';
 import { useChatQuery } from '../hooks/useChatQuery';
 import { ChatHeader } from './ChatHeader';
 import { ChatInput } from './ChatInput';
+import { RecommendCard } from './RecommendCard';
 import { ChatMessageList } from './message';
 
 interface ChatSectionProps {
@@ -32,6 +34,7 @@ export function ChatSection({ setPage }: ChatSectionProps) {
     isFetchingOlder,
   } = useChatQuery({ enabled: true });
   const input = useChatInput();
+  const recommend = useActRecommend();
 
   const handleSend = useCallback(() => {
     const msg = input.messageRef.current;
@@ -68,10 +71,18 @@ export function ChatSection({ setPage }: ChatSectionProps) {
           hasOlderMessages={hasOlderMessages}
           onLoadOlder={fetchOlderMessages}
         />
+        <RecommendCard
+          isVisible={recommend.isVisible}
+          isLoading={recommend.isLoading}
+          data={recommend.data}
+          onDismiss={recommend.dismiss}
+        />
         <ChatInput
           input={input}
           onSend={handleSend}
           onFocus={handleInputFocus}
+          onRecommend={recommend.request}
+          isRecommendLoading={recommend.isLoading}
         />
       </KeyboardAvoidingView>
     </Animated.View>

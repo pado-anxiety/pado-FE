@@ -3,6 +3,7 @@ import { apiClient } from './client';
 export const ROUTES = {
   CHATS: '/chats',
   QUOTA: '/chats/quota',
+  ACT_RECOMMEND: '/act/recommend',
 } as const;
 
 export interface ChatAPIMessage {
@@ -19,6 +20,18 @@ export interface ChatHistoryResponse {
 export interface QuotaResponse {
   quota: number;
   timeToRefill: string;
+}
+
+export type RecommendACTType =
+  | 'CONTACT_WITH_PRESENT'
+  | 'EMOTION_NOTE'
+  | 'COGNITIVE_DEFUSION'
+  | 'ACCEPTANCE'
+  | 'COMMITTED_ACTION';
+
+export interface ActRecommendResponse {
+  act: RecommendACTType;
+  reasons: string[];
 }
 
 export const chatAPI = {
@@ -42,6 +55,16 @@ export const chatAPI = {
   },
   getRemainingQuota: async (): Promise<QuotaResponse> => {
     const response: QuotaResponse = await apiClient.get(ROUTES.QUOTA);
+    return response;
+  },
+  getActRecommend: async (): Promise<ActRecommendResponse> => {
+    console.log('요청시작');
+    const response: ActRecommendResponse = await apiClient.post(
+      ROUTES.ACT_RECOMMEND,
+      null,
+      { timeout: 30000 },
+    );
+    console.log('요청끝');
     return response;
   },
 };

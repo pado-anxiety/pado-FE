@@ -19,7 +19,7 @@ export function ActList({ onContentHeight }: ActListProps): React.ReactNode {
   return (
     <View
       ref={containerRef}
-      className="relative w-full flex-1 pb-24 pt-12"
+      className="relative w-full flex-1 px-4 pb-24 pt-12"
       onLayout={(event) => {
         const h = event.nativeEvent.layout.height;
         setHeight(h);

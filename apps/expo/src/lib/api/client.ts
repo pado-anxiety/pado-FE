@@ -9,6 +9,7 @@ import { ROUTES } from '../route';
 import { authAPI } from './auth';
 
 const BASE_URL = ENV.BASE_URL;
+console.log('BASE_URL: ', BASE_URL);
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
