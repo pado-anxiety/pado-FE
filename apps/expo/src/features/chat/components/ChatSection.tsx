@@ -46,24 +46,26 @@ export function ChatSection({ setPage }: ChatSectionProps) {
     }, 300);
   }, []);
 
-  const prevItemCount = useRef(0);
+  const lastItemId = useRef<string | null>(null);
 
   useEffect(() => {
     if (chatItems.length === 0) return;
+
+    const currentLastId = chatItems[chatItems.length - 1].id;
 
     if (!hasScrolledToBottom.current) {
       hasScrolledToBottom.current = true;
       setTimeout(() => {
         scrollRef.current?.scrollToEnd({ animated: false });
       }, 50);
-    } else if (chatItems.length > prevItemCount.current) {
+    } else if (currentLastId !== lastItemId.current) {
       setTimeout(() => {
         scrollRef.current?.scrollToEnd({ animated: true });
       }, 50);
     }
 
-    prevItemCount.current = chatItems.length;
-  }, [chatItems.length]);
+    lastItemId.current = currentLastId;
+  }, [chatItems]);
 
   console.log(chatItems);
 

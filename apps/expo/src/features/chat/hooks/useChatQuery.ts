@@ -48,7 +48,16 @@ export function useChatQuery({
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
       queryKey: [API_KEY.CHATS],
-      queryFn: ({ pageParam }) => chatAPI.getChatHistory(pageParam),
+      queryFn: async ({ pageParam }) => {
+        if (pageParam != null) {
+          const [result] = await Promise.all([
+            chatAPI.getChatHistory(pageParam),
+            new Promise((r) => setTimeout(r, 1500)),
+          ]);
+          return result;
+        }
+        return chatAPI.getChatHistory(pageParam);
+      },
       initialPageParam: null as number | null,
       getNextPageParam: (lastPage) => lastPage.cursor ?? undefined,
       enabled,
