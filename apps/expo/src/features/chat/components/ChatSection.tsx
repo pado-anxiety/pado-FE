@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
-import { Platform, ScrollView, StyleSheet } from 'react-native';
+import { FlatList, Platform, StyleSheet } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { ChatMessageItem } from '@src/features/home/types';
 import { PageType } from '@src/features/home/types';
 import { PAGE_TRANSITION } from '@src/lib/styles';
 
@@ -20,7 +21,7 @@ interface ChatSectionProps {
 
 export function ChatSection({ setPage }: ChatSectionProps) {
   const insets = useSafeAreaInsets();
-  const scrollRef = useRef<ScrollView>(null);
+  const listRef = useRef<FlatList<ChatMessageItem>>(null);
 
   const {
     chatItems,
@@ -31,43 +32,20 @@ export function ChatSection({ setPage }: ChatSectionProps) {
     isFetchingOlder,
   } = useChatQuery({ enabled: true });
   const input = useChatInput();
-  const hasScrolledToBottom = useRef(false);
 
   const handleSend = useCallback(() => {
     const msg = input.messageRef.current;
     if (!msg.trim()) return;
     sendMessage(msg);
     input.clear();
+    listRef.current?.scrollToOffset({ offset: 0, animated: true });
   }, [input, sendMessage]);
 
   const handleInputFocus = useCallback(() => {
     setTimeout(() => {
-      scrollRef.current?.scrollToEnd({ animated: true });
+      listRef.current?.scrollToOffset({ offset: 0, animated: true });
     }, 300);
   }, []);
-
-  const lastItemId = useRef<string | null>(null);
-
-  useEffect(() => {
-    if (chatItems.length === 0) return;
-
-    const currentLastId = chatItems[chatItems.length - 1].id;
-
-    if (!hasScrolledToBottom.current) {
-      hasScrolledToBottom.current = true;
-      setTimeout(() => {
-        scrollRef.current?.scrollToEnd({ animated: false });
-      }, 50);
-    } else if (currentLastId !== lastItemId.current) {
-      setTimeout(() => {
-        scrollRef.current?.scrollToEnd({ animated: true });
-      }, 50);
-    }
-
-    lastItemId.current = currentLastId;
-  }, [chatItems]);
-
-  console.log(chatItems);
 
   return (
     <Animated.View
@@ -83,7 +61,7 @@ export function ChatSection({ setPage }: ChatSectionProps) {
       >
         <ChatHeader setPage={setPage} />
         <ChatMessageList
-          ref={scrollRef}
+          ref={listRef}
           chatItems={chatItems}
           isSending={isSending}
           isFetchingOlder={isFetchingOlder}

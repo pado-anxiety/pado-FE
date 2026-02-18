@@ -1,6 +1,6 @@
 import { forwardRef, useCallback } from 'react';
 
-import { ActivityIndicator, ScrollView } from 'react-native';
+import { ActivityIndicator, FlatList } from 'react-native';
 
 import { View } from '@src/components/ui';
 import { ChatMessageItem } from '@src/features/home/types';
@@ -17,61 +17,54 @@ interface ChatMessageListProps {
   onLoadOlder: () => void;
 }
 
-export const ChatMessageList = forwardRef<ScrollView, ChatMessageListProps>(
-  function ChatMessageList(
-    { chatItems, isSending, isFetchingOlder, hasOlderMessages, onLoadOlder },
-    ref,
-  ) {
-    const handleScrollBeginDrag = useCallback(
-      (e: { nativeEvent: { contentOffset: { y: number } } }) => {
-        if (
-          hasOlderMessages &&
-          !isFetchingOlder &&
-          e.nativeEvent.contentOffset.y <= 0
-        ) {
-          onLoadOlder();
-        }
-      },
-      [hasOlderMessages, isFetchingOlder, onLoadOlder],
-    );
+const renderItem = ({ item }: { item: ChatMessageItem }) =>
+  item.sender === 'USER' ? (
+    <ChatBubbleUser item={item} />
+  ) : (
+    <ChatBubbleAssistant item={item} />
+  );
 
-    return (
-      <ScrollView
-        ref={ref}
-        style={{ flex: 1 }}
-        contentContainerStyle={{
-          flexGrow: 1,
-          justifyContent: 'flex-end',
-          paddingTop: 8,
-          paddingBottom: 8,
-        }}
-        showsVerticalScrollIndicator={false}
-        onScrollBeginDrag={handleScrollBeginDrag}
-        maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
-      >
-        {isFetchingOlder && (
+const keyExtractor = (item: ChatMessageItem) => item.id;
+
+export const ChatMessageList = forwardRef<
+  FlatList<ChatMessageItem>,
+  ChatMessageListProps
+>(function ChatMessageList(
+  { chatItems, isSending, isFetchingOlder, hasOlderMessages, onLoadOlder },
+  ref,
+) {
+  const handleEndReached = useCallback(() => {
+    if (hasOlderMessages && !isFetchingOlder) {
+      onLoadOlder();
+    }
+  }, [hasOlderMessages, isFetchingOlder, onLoadOlder]);
+
+  return (
+    <FlatList
+      ref={ref}
+      data={chatItems}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+      inverted
+      style={{ flex: 1 }}
+      contentContainerStyle={{
+        paddingTop: 8,
+        paddingBottom: 8,
+      }}
+      showsVerticalScrollIndicator={false}
+      onEndReached={handleEndReached}
+      onEndReachedThreshold={0.1}
+      ListHeaderComponent={isSending ? <ChatLoadingBubble /> : null}
+      ListFooterComponent={
+        isFetchingOlder ? (
           <View className="items-center py-4">
             <ActivityIndicator
               size="small"
               color="#FFFFFF"
             />
           </View>
-        )}
-        {chatItems.map((item) =>
-          item.sender === 'USER' ? (
-            <ChatBubbleUser
-              key={item.id}
-              item={item}
-            />
-          ) : (
-            <ChatBubbleAssistant
-              key={item.id}
-              item={item}
-            />
-          ),
-        )}
-        {isSending && <ChatLoadingBubble />}
-      </ScrollView>
-    );
-  },
-);
+        ) : null
+      }
+    />
+  );
+});

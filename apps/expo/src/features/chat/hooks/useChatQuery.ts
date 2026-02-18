@@ -66,19 +66,16 @@ export function useChatQuery({
       refetchOnReconnect: false,
     });
 
-  // API: 최신순 → 시간순으로 reverse
+  // newest-first 순서 유지 (FlatList inverted에서 data[0] = 최하단)
   const chatItems = useMemo(() => {
     if (!data?.pages) return [];
     const allMessages = data.pages.flatMap((page) => page.content);
     const seen = new Set<string>();
-    return allMessages
-      .reverse()
-      .map(apiMessageToChatItem)
-      .filter((item) => {
-        if (seen.has(item.id)) return false;
-        seen.add(item.id);
-        return true;
-      });
+    return allMessages.map(apiMessageToChatItem).filter((item) => {
+      if (seen.has(item.id)) return false;
+      seen.add(item.id);
+      return true;
+    });
   }, [data?.pages]);
 
   const sendMessageMutation = useMutation({
