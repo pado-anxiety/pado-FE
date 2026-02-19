@@ -13,7 +13,10 @@ export const ChatBubbleUser = memo(function ChatBubbleUser({
   return (
     <View className="items-center px-4 py-1">
       <View className="w-[85%]">
-        <View className="self-start rounded-2xl bg-chat-assistant p-4">
+        <View
+          className="self-start rounded-2xl p-4"
+          style={{ backgroundColor: 'rgba(22, 24, 35, 0.9)' }}
+        >
           <Text
             preset="body"
             className="text-white"

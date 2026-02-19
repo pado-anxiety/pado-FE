@@ -12,3 +12,10 @@ export const PAGE_TRANSITION = {
       DURATION_MS,
     ),
 };
+
+const MODAL_DURATION_MS = 150;
+
+export const MODAL_TRANSITION = {
+  entering: FadeIn.duration(MODAL_DURATION_MS),
+  exiting: FadeOut.duration(MODAL_DURATION_MS),
+};

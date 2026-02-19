@@ -1,8 +1,10 @@
 import { Pressable } from 'react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
 
 import { LoadingSpinner, View } from '@src/components/ui';
 import { HistoryModalContent } from '@src/features/history';
 import { ActHistory } from '@src/features/history/types';
+import { MODAL_TRANSITION } from '@src/lib/styles';
 
 interface HistoryDetailModalProps {
   detail: ActHistory | null;
@@ -16,29 +18,36 @@ export function HistoryDetailModal({
   onClose,
 }: HistoryDetailModalProps) {
   return (
-    <Pressable
-      onPress={onClose}
-      className="absolute inset-0 items-center justify-center bg-black/80 px-8 py-48"
+    <Animated.View
+      entering={FadeIn.duration(200)}
+      className="absolute inset-0"
     >
       <Pressable
-        onPress={(e) => e.stopPropagation()}
-        className="w-full "
+        onPress={onClose}
+        className="flex-1 items-center justify-center bg-black/80 px-8 py-48"
       >
-        <View className="w-full rounded-3xl bg-act-page ">
-          <View className="p-8">
-            {detail ? (
-              <HistoryModalContent
-                data={detail}
-                date={date}
-              />
-            ) : (
-              <View className="items-center justify-center py-10">
-                <LoadingSpinner />
+        <Pressable
+          onPress={(e) => e.stopPropagation()}
+          className="w-full"
+        >
+          <Animated.View entering={MODAL_TRANSITION.entering}>
+            <View className="w-full rounded-3xl bg-act-page">
+              <View className="p-8">
+                {detail ? (
+                  <HistoryModalContent
+                    data={detail}
+                    date={date}
+                  />
+                ) : (
+                  <View className="items-center justify-center py-10">
+                    <LoadingSpinner />
+                  </View>
+                )}
               </View>
-            )}
-          </View>
-        </View>
+            </View>
+          </Animated.View>
+        </Pressable>
       </Pressable>
-    </Pressable>
+    </Animated.View>
   );
 }

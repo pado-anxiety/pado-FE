@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { FlatList, Platform, StyleSheet } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
@@ -15,6 +15,7 @@ import { useChatInput } from '../hooks/useChatInput';
 import { useChatQuery } from '../hooks/useChatQuery';
 import { useChatQuota } from '../hooks/useChatQuota';
 import { ChatHeader } from './ChatHeader';
+import { ChatInfoModal } from './ChatInfoModal';
 import { ChatInput } from './ChatInput';
 import { RecommendCard } from './RecommendCard';
 import { ChatMessageList } from './message';
@@ -38,6 +39,7 @@ export function ChatSection({ setPage }: ChatSectionProps) {
   const input = useChatInput();
   const { remainingQuota } = useChatQuota();
   const recommend = useActRecommend();
+  const [showInfo, setShowInfo] = useState(false);
 
   const handleSend = useCallback(() => {
     const msg = input.messageRef.current;
@@ -72,7 +74,10 @@ export function ChatSection({ setPage }: ChatSectionProps) {
         keyboardVerticalOffset={-insets.bottom}
         pointerEvents="box-none"
       >
-        <ChatHeader setPage={setPage} />
+        <ChatHeader
+          setPage={setPage}
+          onInfoPress={() => setShowInfo(true)}
+        />
         <ChatMessageList
           ref={listRef}
           chatItems={chatItems}
@@ -95,6 +100,7 @@ export function ChatSection({ setPage }: ChatSectionProps) {
           isRecommendLoading={recommend.isLoading}
         />
       </KeyboardAvoidingView>
+      {showInfo && <ChatInfoModal onClose={() => setShowInfo(false)} />}
     </Animated.View>
   );
 }

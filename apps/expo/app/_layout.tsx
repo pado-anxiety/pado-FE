@@ -78,14 +78,14 @@ function NavigationContent() {
       {isAlertOpen && (
         <Pressable
           onPress={() => closeAlert()}
-          className="absolute inset-0 items-center justify-center bg-black/70 px-14 py-12"
+          className="absolute inset-0 items-center justify-center bg-black/70 px-6 py-12"
         >
           <Animated.View
             entering={FadeInDown.duration(300)}
             exiting={FadeOutDown.duration(300)}
-            className="w-full rounded-3xl bg-act-page"
+            className="w-full rounded-3xl bg-surface"
           >
-            <View className="gap-4 p-8">
+            <View className="gap-4 p-6">
               <Image
                 source={alertImage}
                 className="mx-auto mb-4 h-24 w-24"

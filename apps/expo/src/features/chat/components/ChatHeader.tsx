@@ -1,13 +1,9 @@
 import { FontAwesome } from '@expo/vector-icons';
-import { useColorScheme } from 'nativewind';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
-import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
-
 import { NavButton, Pressable, Text, View } from '@src/components/ui';
 import { PageType } from '@src/features/home/types';
-import { showAlert } from '@src/lib/alert';
 import { triggerHaptic } from '@src/lib/haptics';
 import { ICONS_SIZE } from '@src/lib/styles';
 
@@ -17,12 +13,10 @@ const HEADER_HEIGHT = 48;
 
 interface ChatHeaderProps {
   setPage: (page: PageType) => void;
+  onInfoPress: () => void;
 }
 
-export function ChatHeader({ setPage }: ChatHeaderProps) {
-  const { colorScheme } = useColorScheme();
-  const tokens =
-    colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
+export function ChatHeader({ setPage, onInfoPress }: ChatHeaderProps) {
   const insets = useSafeAreaInsets();
   const { remainingQuota } = useChatQuota();
 
@@ -53,18 +47,13 @@ export function ChatHeader({ setPage }: ChatHeaderProps) {
         />
         <Pressable
           hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-          onPress={() => {
-            showAlert.warning(
-              '마음속 깊은 바다',
-              '마음속 깊은 바다와 대화를 나눠보세요.\n내면의 깊은 바다가 메아리로 답해줄 거예요.\n\n대화 횟수는 하루 20회이며, 1시간마다 1개씩 충전됩니다.',
-            );
-          }}
+          onPress={onInfoPress}
         >
           <View className="flex flex-row items-center justify-center gap-1.5 rounded-full bg-chat-user px-3 py-1.5">
             <FontAwesome
               name="send"
               size={ICONS_SIZE.small}
-              color={tokens['--chat-border']}
+              color="rgba(255, 255, 255, 0.45)"
             />
             <Text
               preset="body"
