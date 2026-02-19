@@ -47,21 +47,16 @@ export const ChatBubbleAssistant = memo(function ChatBubbleAssistant({
   if (messages.length === 0) return null;
 
   return (
-    <View className="max-w-[80%] flex-row items-start gap-3 px-4 py-1">
-      <View className="mt-1 h-12 w-12 rounded-full bg-chat-assistant" />
-      <View className="flex-col gap-2">
+    <View className="w-full items-center px-4 py-6">
+      <View className="w-[85%] flex-col gap-4">
         {messages.slice(0, visibleCount).map((msg, index) => (
-          <View
+          <Text
             key={`${item.time}-${index}`}
-            className="self-start rounded-2xl bg-chat-assistant p-4"
+            preset="body"
+            style={{ color: 'rgba(255, 255, 255, 0.85)', textAlign: 'left' }}
           >
-            <Text
-              preset="body"
-              className="text-white"
-            >
-              {msg}
-            </Text>
-          </View>
+            {msg}
+          </Text>
         ))}
       </View>
     </View>

@@ -98,7 +98,6 @@ export default function SettingsScreen() {
       <View className="mt-4 flex flex-col gap-6">
         {/* 사용자 정보 */}
         <View className="mt-4 gap-2 overflow-hidden">
-          {/* 이름 행 */}
           <View className="flex flex-row items-center justify-between gap-4">
             <Text
               preset="body"
@@ -114,8 +113,6 @@ export default function SettingsScreen() {
               {name}
             </Text>
           </View>
-
-          {/* 이메일 행 */}
           <View className="flex flex-row items-center justify-between gap-4">
             <Text
               preset="body"
@@ -134,94 +131,94 @@ export default function SettingsScreen() {
           </View>
         </View>
 
-        {/* 언어 설정 + 진동 */}
-        <View className="bg-surface/20 gap-6 overflow-hidden rounded-2xl border border-default p-5">
-          <Pressable
-            onPress={() => router.push(ROUTES.SETTINGS.THEME)}
-            className="flex flex-row items-center justify-between"
-          >
-            <Text preset="body">{t('common.settings.theme')}</Text>
-            <NavButton
-              variant="right"
-              size="small"
-            />
-          </Pressable>
-          <Pressable
-            onPress={() => router.push(ROUTES.SETTINGS.LANGUAGE)}
-            className="flex flex-row items-center justify-between"
-          >
-            <View className="flex flex-row items-center">
+        {/* 앱 설정 */}
+        <View className="flex-col gap-3">
+          <View className="overflow-hidden rounded-2xl bg-surface p-1">
+            <Pressable
+              onPress={() => router.push(ROUTES.SETTINGS.THEME)}
+              className="flex flex-row items-center justify-between px-5 py-4"
+            >
+              <Text preset="body">{t('common.settings.theme')}</Text>
+              <NavButton
+                variant="right"
+                size="small"
+              />
+            </Pressable>
+            <Pressable
+              onPress={() => router.push(ROUTES.SETTINGS.LANGUAGE)}
+              className="flex flex-row items-center justify-between px-5 py-4"
+            >
               <Text preset="body">{t('common.settings.language')}</Text>
-            </View>
-            <NavButton
-              variant="right"
-              size="small"
-            />
-          </Pressable>
-          <Pressable
-            onPress={() => router.push(ROUTES.SETTINGS.VIBRATION)}
-            className="flex flex-row items-center justify-between"
-          >
-            <Text preset="body">{t('common.settings.vibration')}</Text>
-            <NavButton
-              variant="right"
-              size="small"
-            />
-          </Pressable>
-        </View>
+              <NavButton
+                variant="right"
+                size="small"
+              />
+            </Pressable>
+            <Pressable
+              onPress={() => router.push(ROUTES.SETTINGS.VIBRATION)}
+              className="flex flex-row items-center justify-between px-5 py-4"
+            >
+              <Text preset="body">{t('common.settings.vibration')}</Text>
+              <NavButton
+                variant="right"
+                size="small"
+              />
+            </Pressable>
+          </View>
 
-        {/* 개인정보 + 이용약관 + 앱 버전 */}
-        <View className="bg-surface/20 gap-6 overflow-hidden rounded-2xl border border-default p-5">
-          <Pressable
-            onPress={() => present()}
-            className="flex flex-row items-center justify-between"
-          >
-            <Text preset="body">{t('common.settings.feedback.title')}</Text>
-            <NavButton
-              variant="right"
-              size="small"
-            />
-          </Pressable>
-          <Pressable
-            onPress={() => router.push(ROUTES.SETTINGS.PRIVACY_POLICY)}
-            className="flex flex-row items-center justify-between"
-          >
-            <Text preset="body">{t('common.settings.privacyPolicy')}</Text>
-            <NavButton
-              variant="right"
-              size="small"
-            />
-          </Pressable>
-          <Pressable
-            onPress={() => router.push(ROUTES.SETTINGS.TERMS_OF_SERVICE)}
-            className="flex flex-row items-center justify-between"
-          >
-            <Text preset="body">{t('common.settings.termsOfService')}</Text>
-            <NavButton
-              variant="right"
-              size="small"
-            />
-          </Pressable>
-          <Pressable
-            onPress={() => router.push(ROUTES.SETTINGS.LICENSE_INFO)}
-            className="flex flex-row items-center justify-between"
-          >
-            <View className="flex flex-row items-center gap-2">
-              <Text preset="body">
-                {t('common.settings.appVersion')} {ENV.VERSION}
-              </Text>
-              <Text
-                preset="body"
-                className="text-sub"
-              >
-                {t('common.settings.licenseInfo')}
-              </Text>
-            </View>
-            <NavButton
-              variant="right"
-              size="small"
-            />
-          </Pressable>
+          {/* 정보 */}
+          <View className="overflow-hidden rounded-2xl bg-surface p-1">
+            <Pressable
+              onPress={() => present()}
+              className="flex flex-row items-center justify-between px-5 py-4"
+            >
+              <Text preset="body">{t('common.settings.feedback.title')}</Text>
+              <NavButton
+                variant="right"
+                size="small"
+              />
+            </Pressable>
+            <Pressable
+              onPress={() => router.push(ROUTES.SETTINGS.PRIVACY_POLICY)}
+              className="flex flex-row items-center justify-between px-5 py-4"
+            >
+              <Text preset="body">{t('common.settings.privacyPolicy')}</Text>
+              <NavButton
+                variant="right"
+                size="small"
+              />
+            </Pressable>
+            <Pressable
+              onPress={() => router.push(ROUTES.SETTINGS.TERMS_OF_SERVICE)}
+              className="flex flex-row items-center justify-between px-5 py-4"
+            >
+              <Text preset="body">{t('common.settings.termsOfService')}</Text>
+              <NavButton
+                variant="right"
+                size="small"
+              />
+            </Pressable>
+            <Pressable
+              onPress={() => router.push(ROUTES.SETTINGS.LICENSE_INFO)}
+              className="flex flex-row items-center justify-between px-5 py-4"
+            >
+              <View className="flex flex-row items-center gap-2">
+                <Text preset="body">
+                  {t('common.settings.appVersion')} {ENV.VERSION}
+                </Text>
+                <Text
+                  preset="caption"
+                  className="text-sub"
+                >
+                  {t('common.settings.licenseInfo')}
+                </Text>
+              </View>
+              <NavButton
+                variant="right"
+                size="small"
+              />
+            </Pressable>
+          </View>
         </View>
       </View>
       <View className="mt-12 flex flex-col items-center justify-center gap-8">

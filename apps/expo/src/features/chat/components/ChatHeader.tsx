@@ -7,6 +7,7 @@ import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
 import { NavButton, Pressable, Text, View } from '@src/components/ui';
 import { PageType } from '@src/features/home/types';
+import { showAlert } from '@src/lib/alert';
 import { triggerHaptic } from '@src/lib/haptics';
 import { ICONS_SIZE } from '@src/lib/styles';
 
@@ -50,7 +51,15 @@ export function ChatHeader({ setPage }: ChatHeaderProps) {
             setPage('HOME');
           }}
         />
-        <Pressable hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}>
+        <Pressable
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+          onPress={() => {
+            showAlert.warning(
+              '마음속 깊은 바다',
+              '마음속 깊은 바다와 대화를 나눠보세요.\n내면의 깊은 바다가 메아리로 답해줄 거예요.\n\n대화 횟수는 하루 20회이며, 1시간마다 1개씩 충전됩니다.',
+            );
+          }}
+        >
           <View className="flex flex-row items-center justify-center gap-1.5 rounded-full bg-chat-user px-3 py-1.5">
             <FontAwesome
               name="send"
@@ -61,7 +70,7 @@ export function ChatHeader({ setPage }: ChatHeaderProps) {
               preset="body"
               className="text-chat-assistant"
             >
-              {remainingQuota?.quota}/5
+              {remainingQuota?.quota}/20
             </Text>
           </View>
         </Pressable>

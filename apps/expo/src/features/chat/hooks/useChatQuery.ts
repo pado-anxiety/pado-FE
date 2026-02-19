@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-query';
 
 import { ChatMessageItem } from '@src/features/home/types';
+import { showAlert } from '@src/lib/alert';
 import {
   API_KEY,
   ChatAPIMessage,
@@ -115,6 +116,15 @@ export function useChatQuery({
       );
 
       return { snapshot };
+    },
+    onError: (_error, _variables, context) => {
+      if (context?.snapshot) {
+        queryClient.setQueryData([API_KEY.CHATS], context.snapshot);
+      }
+      showAlert.error(
+        '전송 실패',
+        '메시지를 보내지 못했어요. 다시 시도해주세요.',
+      );
     },
     onSuccess: (response: ChatAPIMessage) => {
       queryClient.setQueryData<InfiniteData<ChatHistoryResponse>>(

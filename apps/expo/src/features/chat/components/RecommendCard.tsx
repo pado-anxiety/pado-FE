@@ -44,10 +44,6 @@ export function RecommendCard({
     router.push(ACT_ROUTE[data.act] as never);
   };
 
-  if (data) {
-    console.log(data.act);
-  }
-
   return (
     <Animated.View
       entering={FadeInDown.duration(250)}

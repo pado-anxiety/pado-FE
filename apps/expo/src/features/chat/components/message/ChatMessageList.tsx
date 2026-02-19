@@ -2,7 +2,7 @@ import { forwardRef, useCallback } from 'react';
 
 import { ActivityIndicator, FlatList } from 'react-native';
 
-import { View } from '@src/components/ui';
+import { Text, View } from '@src/components/ui';
 import { ChatMessageItem } from '@src/features/home/types';
 
 import { ChatBubbleAssistant } from './ChatBubbleAssistant';
@@ -48,6 +48,7 @@ export const ChatMessageList = forwardRef<
       inverted
       style={{ flex: 1 }}
       contentContainerStyle={{
+        flexGrow: 1,
         paddingTop: 8,
         paddingBottom: 8,
       }}
@@ -55,6 +56,26 @@ export const ChatMessageList = forwardRef<
       onEndReached={handleEndReached}
       onEndReachedThreshold={0.1}
       ListHeaderComponent={isSending ? <ChatLoadingBubble /> : null}
+      ListEmptyComponent={
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            transform: [{ scaleY: -1 }],
+          }}
+        >
+          <Text
+            preset="body"
+            style={{
+              color: 'rgba(255, 255, 255, 0.55)',
+              textAlign: 'center',
+            }}
+          >
+            {'당신의 마음속 깊은 바다와\n대화를 시작해보세요'}
+          </Text>
+        </View>
+      }
       ListFooterComponent={
         isFetchingOlder ? (
           <View className="items-center py-4">

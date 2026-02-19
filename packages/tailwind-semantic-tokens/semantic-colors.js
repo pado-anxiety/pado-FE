@@ -3,9 +3,9 @@ const colors = require("@pado/tailwind-design-tokens/colors");
 const semanticColors = {
   light: {
     // ── Surface (배경 계층) ──
-    "--bg-page": colors.neutral[100],
-    "--bg-surface": colors.white,
-    "--bg-elevated": colors.white,
+    "--bg-page": "#E8ECF8",
+    "--bg-surface": "#f2f4fdff",
+    "--bg-elevated": "#F2F4FC",
     "--bg-overlay": "rgba(0, 0, 0, 0.5)",
     "--bg-primary": colors.primary[500],
     "--bg-secondary": colors.neutral[200],
@@ -14,12 +14,12 @@ const semanticColors = {
     "--bg-warning": colors.warning[500],
 
     // ── ACT 도메인 ──
-    "--bg-act-page": colors.act.page,
-    "--btn-act-page": colors.act.button,
+    "--bg-act-page": "#E8ECF8",
+    "--btn-act-page": "#fc8a67ff",
     "--btn-act-page-selected": colors.blue[500],
     "--btn-act-page-unselected": colors.blue[50],
-    "--act-input-bg": "rgba(255, 255, 255, 0.5)",
-    "--act-input-placeholder": colors.blue[700],
+    "--act-input-bg": "rgba(220, 225, 245, 0.5)",
+    "--act-input-placeholder": "rgba(59, 61, 82, 0.35)",
 
     // ── Ocean (바다 시각화 — 가까울수록 진함) ──
     "--ocean-bg-wave": colors.ocean[50],
@@ -40,7 +40,7 @@ const semanticColors = {
     // ── Chat (라이트/다크 동일 — 항상 어두운 톤) ──
     "--bg-chat-overlay": "rgba(0, 0, 0, 0.88)",
     "--bg-chat-assistant": colors.neutral[900],
-    "--bg-chat-user": colors.neutral[800],
+    "--bg-chat-user": colors.ocean[400],
     "--chat-input-bg": "rgba(65, 65, 65, 0.9)",
     "--chat-icon-default": "rgba(255, 255, 255, 0.9)",
     "--chat-icon-active": "#FFFFFF",
@@ -48,7 +48,7 @@ const semanticColors = {
     "--chat-border": "rgb(224, 224, 224)",
 
     // ── Text 계층 (WCAG AA 준수) ──
-    "--text-primary": colors.neutral[800],
+    "--text-primary": "#3B3D52",
     "--text-secondary": colors.neutral[600],
     "--text-tertiary": colors.neutral[500],
     "--text-disabled": colors.neutral[400],
@@ -60,7 +60,7 @@ const semanticColors = {
     "--text-chat-user": colors.neutral[900],
 
     // ── Icon ──
-    "--icon-primary": colors.neutral[800],
+    "--icon-primary": "#3B3D52",
     "--icon-secondary": colors.neutral[500],
 
     // ── Border ──
@@ -106,7 +106,7 @@ const semanticColors = {
     "--btn-act-page-selected": "#5A82AE",
     "--btn-act-page-unselected": "#252A32",
     "--act-input-bg": "rgba(255, 255, 255, 0.05)",
-    "--act-input-placeholder": colors.blue[100],
+    "--act-input-placeholder": "rgba(214, 214, 222, 0.55)",
 
     // ── Ocean (바다 시각화 — 다크: Vivid Indigo hue, 밝기 UP) ──
     "--ocean-bg-wave": "#3A5A90",
@@ -127,7 +127,7 @@ const semanticColors = {
     // ── Chat (라이트/다크 동일) ──
     "--bg-chat-overlay": "rgba(0, 0, 0, 0.88)",
     "--bg-chat-assistant": colors.neutral[900],
-    "--bg-chat-user": colors.neutral[800],
+    "--bg-chat-user": colors.ocean[400],
     "--chat-input-bg": "rgba(65, 65, 65, 0.9)",
     "--chat-icon-default": "rgba(255, 255, 255, 0.9)",
     "--chat-icon-active": "#FFFFFF",
@@ -135,7 +135,7 @@ const semanticColors = {
     "--chat-border": "rgba(255, 255, 255, 0.15)",
 
     // ── Text 계층 ──
-    "--text-primary": colors.neutral[100],
+    "--text-primary": "#D6D6DE",
     "--text-secondary": colors.neutral[300],
     "--text-tertiary": colors.neutral[400],
     "--text-disabled": colors.neutral[600],
@@ -147,7 +147,7 @@ const semanticColors = {
     "--text-chat-user": colors.white,
 
     // ── Icon ──
-    "--icon-primary": colors.neutral[100],
+    "--icon-primary": "#D6D6DE",
     "--icon-secondary": colors.neutral[400],
 
     // ── Border ──
@@ -164,7 +164,7 @@ const semanticColors = {
     "--input-border": colors.neutral[700],
     "--input-border-focus": colors.primary[500],
     "--input-text": colors.neutral[100],
-    "--input-placeholder": colors.neutral[500],
+    "--input-placeholder": colors.neutral[200],
     "--input-disabled-bg": colors.neutral[800],
     "--input-disabled-text": colors.neutral[600],
 

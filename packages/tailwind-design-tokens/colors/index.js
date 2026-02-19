@@ -4,7 +4,7 @@ module.exports = {
 
   // ACT 페이지 전용 색상
   act: {
-    page: "#EAF0F5",
+    page: "#EFF1F5",
     pageDark: "#1A1E24",
     button: "#E8896A",
     buttonDark: "#D88068",

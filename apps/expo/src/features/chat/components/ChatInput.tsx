@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet } from 'react-native';
 import { Pressable, TextInput } from 'react-native-gesture-handler';
-import Animated, {
+import {
   Easing,
   cancelAnimation,
   useAnimatedStyle,
@@ -12,12 +11,6 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Svg, {
-  Circle,
-  Defs,
-  Stop,
-  LinearGradient as SvgLinearGradient,
-} from 'react-native-svg';
 
 import { View } from '@src/components/ui';
 
@@ -34,11 +27,11 @@ interface ChatInputProps {
 
 const INPUT_HEIGHT = 55;
 const INPUT_RADIUS = 16;
-const SEND_BUTTON_PADDING = 4;
+const SEND_BUTTON_PADDING = 7;
 const SEND_BUTTON_SIZE = INPUT_HEIGHT - SEND_BUTTON_PADDING * 2;
-const RECOMMEND_SIZE = 46;
+const RECOMMEND_SIZE = 45;
 const RECOMMEND_RADIUS = RECOMMEND_SIZE / 2;
-const STROKE_WIDTH = 3;
+const STROKE_WIDTH = 2;
 const INACTIVE_BG = 'rgba(255, 255, 255, 0.1)';
 const INACTIVE_ICON = 'rgba(255, 255, 255, 0.4)';
 
@@ -91,7 +84,7 @@ export function ChatInput({
           gap: 8,
         }}
       >
-        <Pressable onPress={onRecommend}>
+        {/* <Pressable onPress={onRecommend}>
           <View
             style={{
               width: RECOMMEND_SIZE,
@@ -164,7 +157,7 @@ export function ChatInput({
               />
             </View>
           </View>
-        </Pressable>
+        </Pressable> */}
         <View
           style={{
             flex: 1,
@@ -185,7 +178,7 @@ export function ChatInput({
               color: '#FFFFFF',
               // paddingVertical: 6,
             }}
-            placeholder="메시지를 입력해주세요"
+            placeholder="지금 무슨 생각이 드나요?"
             placeholderTextColor="rgba(255, 255, 255, 0.35)"
             onChangeText={handleChangeText}
             onFocus={onFocus}
@@ -198,7 +191,7 @@ export function ChatInput({
               style={{
                 width: SEND_BUTTON_SIZE,
                 height: SEND_BUTTON_SIZE,
-                borderRadius: 12,
+                borderRadius: '50%',
                 backgroundColor: hasText
                   ? 'rgba(108, 108, 108, 1)'
                   : INACTIVE_BG,

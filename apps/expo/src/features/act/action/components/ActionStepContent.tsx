@@ -286,6 +286,7 @@ function OrientationContent({
           fontSize: 17,
           lineHeight: 26,
           fontFamily: 'Pretendard-Regular',
+          color: tokens['--text-primary'],
         }}
       />
     </View>
@@ -338,6 +339,7 @@ function TextInputContent({
           fontSize: 17,
           lineHeight: 26,
           fontFamily: 'Pretendard-Regular',
+          color: tokens['--text-primary'],
         }}
       />
     </View>

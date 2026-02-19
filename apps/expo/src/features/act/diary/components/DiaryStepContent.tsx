@@ -149,6 +149,7 @@ export function DiaryStepContent({
             fontSize: 17,
             lineHeight: 26,
             fontFamily: 'Pretendard-Regular',
+            color: tokens['--text-primary'],
           }}
         />
       </ActStepLayout>

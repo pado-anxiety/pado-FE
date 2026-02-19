@@ -58,13 +58,11 @@ export const chatAPI = {
     return response;
   },
   getActRecommend: async (): Promise<ActRecommendResponse> => {
-    console.log('요청시작');
     const response: ActRecommendResponse = await apiClient.post(
       ROUTES.ACT_RECOMMEND,
       null,
       { timeout: 30000 },
     );
-    console.log('요청끝');
     return response;
   },
 };

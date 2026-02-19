@@ -11,14 +11,17 @@ export const ChatBubbleUser = memo(function ChatBubbleUser({
   item,
 }: ChatBubbleUserProps) {
   return (
-    <View className="flex-row justify-end px-4 py-1">
-      <View className="ml-10 max-w-[90%] rounded-2xl bg-chat-user p-4">
-        <Text
-          preset="body"
-          className="text-white"
-        >
-          {item.message}
-        </Text>
+    <View className="items-center px-4 py-1">
+      <View className="w-[85%]">
+        <View className="self-start rounded-2xl bg-chat-assistant p-4">
+          <Text
+            preset="body"
+            className="text-white"
+            style={{ textAlign: 'left' }}
+          >
+            {item.message}
+          </Text>
+        </View>
       </View>
     </View>
   );
