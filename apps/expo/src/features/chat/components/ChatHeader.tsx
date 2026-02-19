@@ -4,6 +4,7 @@ import { scale } from 'react-native-size-matters';
 
 import { NavButton, Pressable, Text, View } from '@src/components/ui';
 import { PageType } from '@src/features/home/types';
+import { useAnalytics } from '@src/lib/analytics';
 import { triggerHaptic } from '@src/lib/haptics';
 import { ICONS_SIZE } from '@src/lib/styles';
 
@@ -19,6 +20,7 @@ interface ChatHeaderProps {
 export function ChatHeader({ setPage, onInfoPress }: ChatHeaderProps) {
   const insets = useSafeAreaInsets();
   const { remainingQuota } = useChatQuota();
+  const { trackChatExit } = useAnalytics();
 
   return (
     <View
@@ -42,12 +44,16 @@ export function ChatHeader({ setPage, onInfoPress }: ChatHeaderProps) {
           color="#FFFFFF"
           onPress={() => {
             triggerHaptic('NAVIGATE');
+            trackChatExit();
             setPage('HOME');
           }}
         />
         <Pressable
           hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
-          onPress={onInfoPress}
+          onPress={() => {
+            triggerHaptic('SELECT');
+            onInfoPress();
+          }}
         >
           <View className="flex flex-row items-center justify-center gap-1.5 rounded-full bg-chat-user px-3 py-1.5">
             <FontAwesome

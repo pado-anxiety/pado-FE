@@ -1,5 +1,6 @@
 export const ANALYTICS_KEY = {
   ONBOARD: '온보딩',
+  CHAT: '채팅',
   ACT: {
     ANCHOR: {
       FIVE: '5-4-3-2-1',

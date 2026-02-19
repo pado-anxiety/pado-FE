@@ -66,6 +66,18 @@ export const useAnalytics = () => {
     });
   };
 
+  const trackChatEnter = () => {
+    posthog.capture('pado_chat_enter');
+  };
+
+  const trackChatExit = () => {
+    posthog.capture('pado_chat_exit');
+  };
+
+  const trackChatSend = () => {
+    posthog.capture('pado_chat_send');
+  };
+
   const identifyUser = (userInfo: { name: string; email: string }) => {
     posthog.identify(userInfo.email, {
       name: userInfo.name,
@@ -81,6 +93,9 @@ export const useAnalytics = () => {
     trackFunnelPrev,
     trackFunnelExit,
     trackFunnelComplete,
+    trackChatEnter,
+    trackChatExit,
+    trackChatSend,
     identifyUser,
   };
 };

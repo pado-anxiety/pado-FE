@@ -1,10 +1,11 @@
-import { forwardRef, useCallback } from 'react';
+import { forwardRef, useCallback, useRef } from 'react';
 
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList } from 'react-native';
+import { ActivityIndicator, FlatList, Keyboard } from 'react-native';
 
 import { Text, View } from '@src/components/ui';
 import { ChatMessageItem } from '@src/features/home/types';
+import { triggerHaptic } from '@src/lib/haptics';
 
 import { ChatBubbleAssistant } from './ChatBubbleAssistant';
 import { ChatBubbleUser } from './ChatBubbleUser';
@@ -35,11 +36,29 @@ export const ChatMessageList = forwardRef<
   ref,
 ) {
   const { t } = useTranslation();
+  const scrollOccurred = useRef(false);
+
   const handleEndReached = useCallback(() => {
     if (hasOlderMessages && !isFetchingOlder) {
+      triggerHaptic('EFFECT');
       onLoadOlder();
     }
   }, [hasOlderMessages, isFetchingOlder, onLoadOlder]);
+
+  const handleTouchStart = useCallback(() => {
+    scrollOccurred.current = false;
+  }, []);
+
+  const handleScrollBeginDrag = useCallback(() => {
+    scrollOccurred.current = true;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (!scrollOccurred.current) {
+      triggerHaptic('SELECT');
+      Keyboard.dismiss();
+    }
+  }, []);
 
   return (
     <FlatList
@@ -57,6 +76,9 @@ export const ChatMessageList = forwardRef<
       showsVerticalScrollIndicator={false}
       onEndReached={handleEndReached}
       onEndReachedThreshold={0.1}
+      onTouchStart={handleTouchStart}
+      onScrollBeginDrag={handleScrollBeginDrag}
+      onTouchEnd={handleTouchEnd}
       ListHeaderComponent={isSending ? <ChatLoadingBubble /> : null}
       ListEmptyComponent={
         <View

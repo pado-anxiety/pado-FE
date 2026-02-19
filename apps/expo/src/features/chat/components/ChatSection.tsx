@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { FlatList, Platform, StyleSheet } from 'react-native';
@@ -9,6 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChatMessageItem } from '@src/features/home/types';
 import { PageType } from '@src/features/home/types';
 import { showAlert } from '@src/lib/alert';
+import { useAnalytics } from '@src/lib/analytics';
 import { PAGE_TRANSITION } from '@src/lib/styles';
 
 import { useActRecommend } from '../hooks/useActRecommend';
@@ -42,6 +43,11 @@ export function ChatSection({ setPage }: ChatSectionProps) {
   const { remainingQuota } = useChatQuota();
   const recommend = useActRecommend();
   const [showInfo, setShowInfo] = useState(false);
+  const { trackChatEnter, trackChatSend } = useAnalytics();
+
+  useEffect(() => {
+    trackChatEnter();
+  }, []);
 
   const handleSend = useCallback(() => {
     const msg = input.messageRef.current;
@@ -55,10 +61,11 @@ export function ChatSection({ setPage }: ChatSectionProps) {
       );
       return;
     }
+    trackChatSend();
     sendMessage(msg);
     input.clear();
     listRef.current?.scrollToOffset({ offset: 0, animated: true });
-  }, [input, sendMessage, remainingQuota, t]);
+  }, [input, sendMessage, remainingQuota, t, trackChatSend]);
 
   const handleInputFocus = useCallback(() => {
     setTimeout(() => {

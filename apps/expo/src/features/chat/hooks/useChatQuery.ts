@@ -16,6 +16,7 @@ import {
   ChatHistoryResponse,
   chatAPI,
 } from '@src/lib/api';
+import { triggerHaptic } from '@src/lib/haptics';
 
 type SendStatus = 'idle' | 'pending' | 'success' | 'error';
 
@@ -122,6 +123,7 @@ export function useChatQuery({
       if (context?.snapshot) {
         queryClient.setQueryData([API_KEY.CHATS], context.snapshot);
       }
+      triggerHaptic('EFFECT');
       showAlert.error(
         i18n.t('chat.sendError.title'),
         i18n.t('chat.sendError.message'),

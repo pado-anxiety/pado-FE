@@ -14,6 +14,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { View } from '@src/components/ui';
+import { triggerHaptic } from '@src/lib/haptics';
 
 interface ChatInputProps {
   input: {
@@ -71,6 +72,7 @@ export function ChatInput({
   };
 
   const handleSend = () => {
+    triggerHaptic('SELECT');
     onSend();
     setHasText(false);
   };
@@ -183,7 +185,10 @@ export function ChatInput({
             placeholder={t('chat.input.placeholder')}
             placeholderTextColor="rgba(255, 255, 255, 0.35)"
             onChangeText={handleChangeText}
-            onFocus={onFocus}
+            onFocus={() => {
+              triggerHaptic('SELECT');
+              onFocus?.();
+            }}
           />
           <Pressable
             onPress={handleSend}
