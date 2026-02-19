@@ -78,7 +78,7 @@ function NavigationContent() {
       {isAlertOpen && (
         <Pressable
           onPress={() => closeAlert()}
-          className="absolute inset-0 items-center justify-center bg-black/70 px-6 py-12"
+          className="absolute inset-0 items-center justify-center bg-black/70 px-12 py-12"
         >
           <Animated.View
             entering={FadeInDown.duration(300)}

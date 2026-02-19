@@ -48,7 +48,7 @@ export const HomeListFooter = ({
 
   return (
     <View
-      className="flex-1 bg-ocean-front"
+      className="flex-1 bg-transparent"
       style={{ height: scale(50) }}
     />
   );

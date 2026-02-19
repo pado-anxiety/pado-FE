@@ -21,18 +21,15 @@ import {
   useHomePageState,
 } from '@src/features/home/hooks';
 import { HomeListItem as HomeListItemType } from '@src/features/home/types';
-import { ENV, isOnboarded } from '@src/lib';
+import { isOnboarded } from '@src/lib';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 import { PAGE_TRANSITION } from '@src/lib/styles';
 
 export default function HomeScreen(): React.ReactNode {
   const { t } = useTranslation();
-  const { isLoggedIn, accessToken } = useAuth();
+  const { isLoggedIn } = useAuth();
   const onboarded = isOnboarded();
-
-  console.log(accessToken);
-  console.log(ENV.BASE_URL);
 
   useAuthInit();
 
