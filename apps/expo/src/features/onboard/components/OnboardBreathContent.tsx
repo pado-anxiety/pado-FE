@@ -1,6 +1,8 @@
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import Animated, { Easing, FadeIn, FadeOut } from 'react-native-reanimated';
 
 import { Text, View } from '@src/components/ui';
+
+const EASE_OUT_CUBIC = Easing.bezier(0.215, 0.61, 0.355, 1);
 
 interface BreathContentProps {
   /** 호흡 안내 텍스트 */
@@ -21,8 +23,8 @@ export function BreathContent({ breathText, timer }: BreathContentProps) {
   return (
     <View className="flex-1 items-center px-8">
       <Animated.View
-        entering={FadeIn.duration(400)}
-        exiting={FadeOut.duration(400)}
+        entering={FadeIn.duration(400).easing(EASE_OUT_CUBIC)}
+        exiting={FadeOut.duration(400).easing(EASE_OUT_CUBIC)}
         className="items-center"
       >
         <Text

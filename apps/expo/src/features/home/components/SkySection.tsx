@@ -79,6 +79,30 @@ export function SkySection({
             className="flex flex-row items-center"
             onPress={() => {
               triggerHaptic('NAVIGATE');
+              setPage('CHAT');
+            }}
+          >
+            <AnimatedText
+              delay={1700}
+              preset="heading"
+              bold
+              className="text-sub"
+            >
+              {t('home.menu.chatWithWind')}
+            </AnimatedText>
+            <Animated.View entering={FadeIn.duration(2500)}>
+              <MaterialIcons
+                name="chevron-right"
+                size={ICONS_SIZE.large}
+                color={textSecondary}
+              />
+            </Animated.View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className="flex flex-row items-center"
+            onPress={() => {
+              triggerHaptic('NAVIGATE');
               setPage('HISTORY');
             }}
           >
@@ -115,52 +139,6 @@ export function SkySection({
               {t('home.menu.learning')}
             </AnimatedText>
             <Animated.View entering={FadeIn.duration(2000)}>
-              <MaterialIcons
-                name="chevron-right"
-                size={ICONS_SIZE.large}
-                color={textSecondary}
-              />
-            </Animated.View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="flex flex-row items-center"
-            onPress={() => {
-              router.push(ROUTES.ONBOARD);
-            }}
-          >
-            <AnimatedText
-              delay={1700}
-              preset="heading"
-              bold
-              className="text-sub"
-            >
-              온보딩
-            </AnimatedText>
-            <Animated.View entering={FadeIn.duration(2000)}>
-              <MaterialIcons
-                name="chevron-right"
-                size={ICONS_SIZE.large}
-                color={textSecondary}
-              />
-            </Animated.View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            className="flex flex-row items-center"
-            onPress={() => {
-              triggerHaptic('NAVIGATE');
-              setPage('CHAT');
-            }}
-          >
-            <AnimatedText
-              delay={1700}
-              preset="heading"
-              bold
-              className="text-sub"
-            >
-              {t('home.menu.chatWithWind')}
-            </AnimatedText>
-            <Animated.View entering={FadeIn.duration(2500)}>
               <MaterialIcons
                 name="chevron-right"
                 size={ICONS_SIZE.large}

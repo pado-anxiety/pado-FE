@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Pressable } from 'react-native';
 import Animated, {
+  Easing,
   FadeIn,
   useAnimatedStyle,
   useSharedValue,
@@ -11,6 +12,9 @@ import Animated, {
 import { Text, View } from '@src/components/ui';
 
 import { ANIMATION } from '../constants';
+
+const EASE_OUT_CUBIC = Easing.bezier(0.215, 0.61, 0.355, 1);
+const EASE_OUT_QUAD = Easing.bezier(0.25, 0.46, 0.45, 0.94);
 
 interface StepContentProps {
   /** 표시할 텍스트 배열 */
@@ -56,7 +60,10 @@ export function StepContent({
     // 모든 텍스트 표시 후 버튼 표시
     const buttonTimeout = setTimeout(() => {
       setShowButton(true);
-      buttonOpacity.value = withTiming(1, { duration: ANIMATION.TEXT_FADE_IN });
+      buttonOpacity.value = withTiming(1, {
+        duration: ANIMATION.TEXT_FADE_IN,
+        easing: EASE_OUT_QUAD,
+      });
     }, texts.length * ANIMATION.BUTTON_DELAY_MULTIPLIER);
     timeouts.push(buttonTimeout);
 
@@ -76,7 +83,9 @@ export function StepContent({
         {texts.slice(0, visibleTextCount).map((text, index) => (
           <Animated.View
             key={`${stepKey}-text-${index}`}
-            entering={FadeIn.duration(ANIMATION.TEXT_FADE_IN)}
+            entering={FadeIn.duration(ANIMATION.TEXT_FADE_IN).easing(
+              EASE_OUT_CUBIC,
+            )}
           >
             <Text
               bold
