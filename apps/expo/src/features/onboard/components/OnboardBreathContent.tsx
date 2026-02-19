@@ -27,6 +27,7 @@ export function BreathContent({ breathText, timer }: BreathContentProps) {
       >
         <Text
           preset="heading"
+          bold
           className="rounded-2xl bg-black/50 px-4 py-3 text-center text-white"
         >
           {breathText}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { Pressable } from 'react-native';
 import Animated, {
   FadeIn,
   useAnimatedStyle,
@@ -7,10 +8,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { Button, Text, View } from '@src/components/ui';
-
-// TODO: 버튼 텍스트 크기 조정
-// TODO: 텍스트 및 애니메이션 fade in 시간 조정
+import { Text, View } from '@src/components/ui';
 
 import { ANIMATION } from '../constants';
 
@@ -73,16 +71,17 @@ export function StepContent({
 
   return (
     <View className="flex-1 justify-between px-8">
-      {/* 텍스트 영역 */}
-      <View className="flex-1">
+      {/* 텍스트 영역 - 중앙 배치 */}
+      <View className="flex-1 items-center justify-start pt-20">
         {texts.slice(0, visibleTextCount).map((text, index) => (
           <Animated.View
             key={`${stepKey}-text-${index}`}
             entering={FadeIn.duration(ANIMATION.TEXT_FADE_IN)}
           >
             <Text
-              preset="heading"
-              className="mb-2 text-white"
+              bold
+              className="text-center text-white"
+              style={{ fontSize: 24, lineHeight: 32 }}
             >
               {text}
             </Text>
@@ -91,14 +90,19 @@ export function StepContent({
       </View>
 
       {/* 버튼 영역 */}
-      <Animated.View style={buttonAnimatedStyle}>
+      <Animated.View
+        style={buttonAnimatedStyle}
+        className="items-center"
+      >
         {showButton && (
-          <Button
-            text={buttonText}
-            size="default"
-            onPress={onNext}
-            className="bg-btn-act-page"
-          />
+          <Pressable onPress={onNext}>
+            <Text
+              preset="caption"
+              className="text-white/60"
+            >
+              {buttonText}
+            </Text>
+          </Pressable>
         )}
       </Animated.View>
     </View>

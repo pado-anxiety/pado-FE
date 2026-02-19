@@ -6,8 +6,7 @@ import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { ChatMessageItem } from '@src/features/home/types';
-import { PageType } from '@src/features/home/types';
+import { ChatMessageItem, PageType } from '@src/features/home/types';
 import { showAlert } from '@src/lib/alert';
 import { useAnalytics } from '@src/lib/analytics';
 import { PAGE_TRANSITION } from '@src/lib/styles';
@@ -47,7 +46,7 @@ export function ChatSection({ setPage }: ChatSectionProps) {
 
   useEffect(() => {
     trackChatEnter();
-  }, []);
+  }, [trackChatEnter]);
 
   const handleSend = useCallback(() => {
     const msg = input.messageRef.current;

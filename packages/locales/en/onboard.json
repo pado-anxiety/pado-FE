@@ -1,53 +1,24 @@
 {
   "steps": {
     "step1": {
-      "texts": ["Hello.", "A place where your heart can rest a while—", "this is 'Pado.'"],
-      "button": "Nice to meet you!"
+      "texts": ["The waves of anxiety\naren't something to overcome."],
+      "button": "Tap to continue"
     },
     "step2": {
-      "texts": ["Like rough waves crashing in,", "do you sometimes feel short of breath and heavy at heart?"],
-      "button": "Yes, I do"
+      "texts": ["They're a natural rhythm\nthat flows with our lives."],
+      "button": "Tap to continue"
     },
     "step3": {
-      "texts": ["Swept away by high waves,", "are you losing touch with the precious 'now'?"],
-      "button": "Sometimes, yes"
+      "texts": ["We help you manage anxiety with ACT (Acceptance and Commitment Therapy)."],
+      "button": "Tap to continue"
     },
     "step4": {
-      "texts": [
-        "Acceptance and Commitment Therapy (ACT) says:",
-        "Anxiety isn't something to overcome—",
-        "it's something to simply let flow by."
-      ],
-      "button": "I see"
+      "texts": ["Let's start with a simple breathing exercise."],
+      "button": "Tap to continue"
     },
     "step5": {
-      "texts": [
-        "Just as waves are part of the ocean,",
-        "think of your heart as a deep, vast sea",
-        "that can gently hold those waves within."
-      ],
-      "button": "I like that"
-    },
-    "step6": {
-      "texts": ["Shall we make your inner sea calmer and wider together with 'Pado'?"],
-      "button": "Let's begin"
-    },
-    "step7": {
-      "texts": [
-        "Before we start,",
-        "let's catch our breath with the rhythm of the waves.",
-        "Breathe in deeply for 4 seconds,",
-        "hold for 7 seconds,",
-        "and exhale slowly for 8 seconds."
-      ],
-      "button": "I'll give it a try"
-    },
-    "step8": {
-      "texts": [
-        "Well done. Just breathing helps the waves settle a little.",
-        "Shall we set out to your calm inner sea now?"
-      ],
-      "button": "Start"
+      "texts": ["Feeling more at ease?\nLet's get started with Pado."],
+      "button": "Tap to continue"
     }
   },
   "breath": {

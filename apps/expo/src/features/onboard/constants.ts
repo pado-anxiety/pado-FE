@@ -11,40 +11,28 @@ export const ONBOARD_STEPS: readonly FunnelStep<
   OnboardStepId
 >[] = [
   {
-    id: 'welcome' satisfies OnboardStepId,
+    id: 'philosophy1' satisfies OnboardStepId,
     meta: { i18nKey: 'onboard.steps.step1' } satisfies OnboardStepMeta,
   },
   {
-    id: 'needs1' satisfies OnboardStepId,
+    id: 'philosophy2' satisfies OnboardStepId,
     meta: { i18nKey: 'onboard.steps.step2' } satisfies OnboardStepMeta,
   },
   {
-    id: 'needs2' satisfies OnboardStepId,
+    id: 'value' satisfies OnboardStepId,
     meta: { i18nKey: 'onboard.steps.step3' } satisfies OnboardStepMeta,
-  },
-  {
-    id: 'actTheory' satisfies OnboardStepId,
-    meta: { i18nKey: 'onboard.steps.step4' } satisfies OnboardStepMeta,
-  },
-  {
-    id: 'metaphor' satisfies OnboardStepId,
-    meta: { i18nKey: 'onboard.steps.step5' } satisfies OnboardStepMeta,
-  },
-  {
-    id: 'startGuide' satisfies OnboardStepId,
-    meta: { i18nKey: 'onboard.steps.step6' } satisfies OnboardStepMeta,
   },
   {
     id: 'breathing' satisfies OnboardStepId,
     meta: {
-      i18nKey: 'onboard.steps.step7',
+      i18nKey: 'onboard.steps.step4',
       isBreathingStep: true,
     } satisfies OnboardStepMeta,
   },
   {
     id: 'complete' satisfies OnboardStepId,
     meta: {
-      i18nKey: 'onboard.steps.step8',
+      i18nKey: 'onboard.steps.step5',
       isFinalStep: true,
     } satisfies OnboardStepMeta,
   },
@@ -75,7 +63,7 @@ export const BREATH = {
   /** 내쉬기 (초) */
   EXHALE: 8,
   /** 반복 횟수 */
-  CYCLE_COUNT: 2,
+  CYCLE_COUNT: 1,
   /** 햅틱 간격 (ms) */
   HAPTIC_INTERVAL: 500,
 } as const;

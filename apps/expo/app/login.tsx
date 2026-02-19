@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 
 import { useRouter } from 'expo-router';
-import { useColorScheme } from 'nativewind';
 import { useTranslation } from 'react-i18next';
+import { useColorScheme } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
@@ -11,7 +11,6 @@ import { WaveHorizon } from '@src/features/home';
 import { showAlert } from '@src/lib/alert';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
-import { getWaveColors } from '@src/lib/theme';
 
 const BYPASS_TAP_COUNT = 5;
 const BYPASS_TIME_WINDOW = 5000;
@@ -22,12 +21,9 @@ export default function LoginScreen() {
   const { login, setAuthToken, setUserInfo } = useAuth();
   const router = useRouter();
 
-  const { colorScheme } = useColorScheme();
-  const frontWaveColor = getWaveColors(
-    colorScheme === 'dark' ? 'dark' : 'light',
-  )[4];
-
   const tapTimestamps = useRef<number[]>([]);
+
+  const colorScheme = useColorScheme();
 
   const handleBypassTap = () => {
     const now = Date.now();
@@ -124,7 +120,10 @@ export default function LoginScreen() {
 
         <View
           className="flex flex-col gap-4 rounded-t-[32px] bg-page px-6 pt-8"
-          style={{ paddingBottom: insets.bottom + scale(32) }}
+          style={{
+            paddingBottom: insets.bottom + scale(32),
+            backgroundColor: colorScheme === 'dark' ? '#242428ff' : '#f1f1f1ff',
+          }}
         >
           <Pressable
             onPress={handleAppleLogin}

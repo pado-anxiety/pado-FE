@@ -2,12 +2,9 @@
  * 온보딩 스텝 ID
  */
 export type OnboardStepId =
-  | 'welcome'
-  | 'needs1'
-  | 'needs2'
-  | 'actTheory'
-  | 'metaphor'
-  | 'startGuide'
+  | 'philosophy1'
+  | 'philosophy2'
+  | 'value'
   | 'breathing'
   | 'complete';
 
