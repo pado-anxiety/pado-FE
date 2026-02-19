@@ -1,0 +1,30 @@
+{
+  "input": {
+    "placeholder": "What's on your mind?"
+  },
+  "empty": "Start a conversation with\nthe deep ocean within you",
+  "sendError": {
+    "title": "Failed to send",
+    "message": "Couldn't send your message. Please try again."
+  },
+  "quotaExhausted": {
+    "title": "Chat limit reached",
+    "message": "You've used all your chats for today. Try again in {{timeToRefill}}."
+  },
+  "recommend": {
+    "label": "Recommended",
+    "start": "Start"
+  },
+  "actName": {
+    "CONTACT_WITH_PRESENT": "Present Moment Contact",
+    "EMOTION_NOTE": "Emotion Journal",
+    "COGNITIVE_DEFUSION": "Cognitive Defusion",
+    "ACCEPTANCE": "Acceptance",
+    "COMMITTED_ACTION": "Committed Action"
+  },
+  "info": {
+    "title": "The Deep Ocean Within",
+    "description": "Write your thoughts and worries freely\nand start a conversation with the deep ocean within.",
+    "quota": "You have 20 chats per day, with 1 chat recharging every hour."
+  }
+}

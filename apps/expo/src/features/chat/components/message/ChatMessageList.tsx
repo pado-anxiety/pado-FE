@@ -1,5 +1,6 @@
 import { forwardRef, useCallback } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList } from 'react-native';
 
 import { Text, View } from '@src/components/ui';
@@ -33,6 +34,7 @@ export const ChatMessageList = forwardRef<
   { chatItems, isSending, isFetchingOlder, hasOlderMessages, onLoadOlder },
   ref,
 ) {
+  const { t } = useTranslation();
   const handleEndReached = useCallback(() => {
     if (hasOlderMessages && !isFetchingOlder) {
       onLoadOlder();
@@ -72,7 +74,7 @@ export const ChatMessageList = forwardRef<
               textAlign: 'center',
             }}
           >
-            {'당신의 마음속 깊은 바다와\n대화를 시작해보세요'}
+            {t('chat.empty')}
           </Text>
         </View>
       }

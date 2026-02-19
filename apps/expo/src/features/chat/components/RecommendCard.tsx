@@ -1,19 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable } from 'react-native';
 import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 
 import { Text, View } from '@src/components/ui';
 import { ActRecommendResponse, RecommendACTType } from '@src/lib/api';
 import { ROUTES } from '@src/lib/route';
-
-const ACT_LABEL: Record<RecommendACTType, string> = {
-  CONTACT_WITH_PRESENT: '현재와의 접촉',
-  EMOTION_NOTE: '감정 일기',
-  COGNITIVE_DEFUSION: '인지적 탈융합',
-  ACCEPTANCE: '수용',
-  COMMITTED_ACTION: '전념 행동',
-};
 
 const ACT_ROUTE: Record<RecommendACTType, string> = {
   CONTACT_WITH_PRESENT: ROUTES.ACT.ANCHOR.BASE,
@@ -36,6 +29,7 @@ export function RecommendCard({
   data,
   onDismiss,
 }: RecommendCardProps) {
+  const { t } = useTranslation();
   if (!isVisible) return null;
 
   const handleNavigate = () => {
@@ -71,14 +65,14 @@ export function RecommendCard({
                 preset="caption"
                 className="text-white/50"
               >
-                추천 활동
+                {t('chat.recommend.label')}
               </Text>
               <Text
                 preset="heading"
                 bold
                 className="text-white"
               >
-                {ACT_LABEL[data.act]}
+                {t(`chat.actName.${data.act}`)}
               </Text>
             </View>
             <Pressable
@@ -120,7 +114,7 @@ export function RecommendCard({
               bold
               className="text-white"
             >
-              시작하기
+              {t('chat.recommend.start')}
             </Text>
             <Ionicons
               name="arrow-forward"

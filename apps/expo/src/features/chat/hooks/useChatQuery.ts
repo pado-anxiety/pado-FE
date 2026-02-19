@@ -6,6 +6,7 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
+import i18n from 'i18next';
 
 import { ChatMessageItem } from '@src/features/home/types';
 import { showAlert } from '@src/lib/alert';
@@ -122,8 +123,8 @@ export function useChatQuery({
         queryClient.setQueryData([API_KEY.CHATS], context.snapshot);
       }
       showAlert.error(
-        '전송 실패',
-        '메시지를 보내지 못했어요. 다시 시도해주세요.',
+        i18n.t('chat.sendError.title'),
+        i18n.t('chat.sendError.message'),
       );
     },
     onSuccess: (response: ChatAPIMessage) => {

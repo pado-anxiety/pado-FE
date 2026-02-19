@@ -1,0 +1,30 @@
+{
+  "input": {
+    "placeholder": "지금 무슨 생각이 드나요?"
+  },
+  "empty": "당신의 마음속 깊은 바다와\n대화를 시작해보세요",
+  "sendError": {
+    "title": "전송 실패",
+    "message": "메시지를 보내지 못했어요. 다시 시도해주세요."
+  },
+  "quotaExhausted": {
+    "title": "대화 횟수 소진",
+    "message": "오늘의 대화 횟수를 모두 사용했어요. {{timeToRefill}} 후에 다시 이용할 수 있어요."
+  },
+  "recommend": {
+    "label": "추천 활동",
+    "start": "시작하기"
+  },
+  "actName": {
+    "CONTACT_WITH_PRESENT": "현재와의 접촉",
+    "EMOTION_NOTE": "감정 일기",
+    "COGNITIVE_DEFUSION": "인지적 탈융합",
+    "ACCEPTANCE": "수용",
+    "COMMITTED_ACTION": "전념 행동"
+  },
+  "info": {
+    "title": "마음속 깊은 바다",
+    "description": "생각과 고민을 자유롭게 작성하고\n내면의 깊은 바다와 대화를 시작해보세요.",
+    "quota": "기본 대화 횟수는 20회이며, 1시간마다 1개씩 충전됩니다."
+  }
+}

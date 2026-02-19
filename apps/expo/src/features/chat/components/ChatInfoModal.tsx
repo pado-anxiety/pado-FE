@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Pressable } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
@@ -9,6 +10,7 @@ interface ChatInfoModalProps {
 }
 
 export function ChatInfoModal({ onClose }: ChatInfoModalProps) {
+  const { t } = useTranslation();
   return (
     <Animated.View
       entering={FadeIn.duration(200)}
@@ -36,7 +38,7 @@ export function ChatInfoModal({ onClose }: ChatInfoModalProps) {
               bold
               style={{ color: 'rgba(255, 255, 255, 0.9)' }}
             >
-              마음속 깊은 바다
+              {t('chat.info.title')}
             </Text>
             <View style={{ marginTop: 14, gap: 18 }}>
               <Text
@@ -46,8 +48,7 @@ export function ChatInfoModal({ onClose }: ChatInfoModalProps) {
                   textAlign: 'left',
                 }}
               >
-                생각과 고민을 자유롭게 작성하고{'\n'}
-                내면의 깊은 바다와 대화를 시작해보세요.
+                {t('chat.info.description')}
               </Text>
               <View
                 style={{
@@ -59,7 +60,7 @@ export function ChatInfoModal({ onClose }: ChatInfoModalProps) {
                 preset="sub"
                 style={{ color: 'rgba(255, 255, 255, 0.4)', textAlign: 'left' }}
               >
-                기본 대화 횟수는 20회이며, 1시간마다 1개씩 충전됩니다.
+                {t('chat.info.quota')}
               </Text>
             </View>
           </Animated.View>

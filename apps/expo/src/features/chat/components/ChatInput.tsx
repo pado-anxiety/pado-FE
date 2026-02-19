@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 import { Pressable, TextInput } from 'react-native-gesture-handler';
 import {
   Easing,
@@ -42,6 +43,7 @@ export function ChatInput({
   onRecommend,
   isRecommendLoading,
 }: ChatInputProps) {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const [hasText, setHasText] = useState(false);
   const rotation = useSharedValue(0);
@@ -178,7 +180,7 @@ export function ChatInput({
               color: '#FFFFFF',
               // paddingVertical: 6,
             }}
-            placeholder="지금 무슨 생각이 드나요?"
+            placeholder={t('chat.input.placeholder')}
             placeholderTextColor="rgba(255, 255, 255, 0.35)"
             onChangeText={handleChangeText}
             onFocus={onFocus}

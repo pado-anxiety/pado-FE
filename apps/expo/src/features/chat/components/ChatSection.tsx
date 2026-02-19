@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { FlatList, Platform, StyleSheet } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import Animated from 'react-native-reanimated';
@@ -25,6 +26,7 @@ interface ChatSectionProps {
 }
 
 export function ChatSection({ setPage }: ChatSectionProps) {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const listRef = useRef<FlatList<ChatMessageItem>>(null);
 
@@ -46,15 +48,17 @@ export function ChatSection({ setPage }: ChatSectionProps) {
     if (!msg.trim()) return;
     if (remainingQuota && remainingQuota.quota <= 0) {
       showAlert.warning(
-        '대화 횟수 소진',
-        `오늘의 대화 횟수를 모두 사용했어요. ${remainingQuota.timeToRefill} 후에 다시 이용할 수 있어요.`,
+        t('chat.quotaExhausted.title'),
+        t('chat.quotaExhausted.message', {
+          timeToRefill: remainingQuota.timeToRefill,
+        }),
       );
       return;
     }
     sendMessage(msg);
     input.clear();
     listRef.current?.scrollToOffset({ offset: 0, animated: true });
-  }, [input, sendMessage, remainingQuota]);
+  }, [input, sendMessage, remainingQuota, t]);
 
   const handleInputFocus = useCallback(() => {
     setTimeout(() => {
