@@ -24,7 +24,7 @@ interface WaveCanvasProps {
 }
 
 const WAVE_STEP = 4;
-const TIME_INCREMENT = 0.015;
+const TIME_INCREMENT = 0.011;
 const AMPLITUDE_MIN = 15;
 const AMPLITUDE_MAX = 25;
 const GAP_MIN = 5;
