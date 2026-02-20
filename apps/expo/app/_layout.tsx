@@ -31,7 +31,7 @@ const SENTRY_DSN = Constants.expoConfig?.extra?.SENTRY_DSN;
 
 Sentry.init({
   dsn: SENTRY_DSN,
-  debug: __DEV__,
+  debug: false,
   enabled: !__DEV__,
   tracesSampleRate: 1.0,
   enableAutoSessionTracking: true,

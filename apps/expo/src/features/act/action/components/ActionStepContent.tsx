@@ -3,6 +3,12 @@ import { useCallback, useMemo } from 'react';
 import { useColorScheme } from 'nativewind';
 import { useTranslation } from 'react-i18next';
 import { Keyboard, Pressable, TextInput } from 'react-native';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
@@ -229,23 +235,13 @@ function OrientationContent({
       {lowestDomains.length > 1 && (
         <View className="flex-row flex-wrap gap-2">
           {lowestDomains.map((domain) => (
-            <Pressable
+            <DomainChip
               key={domain}
+              domain={domain}
+              isSelected={selectedDomain === domain}
+              label={t(`act.values.domain.${domain}`)}
               onPress={() => onSelectDomain(domain)}
-              className={`rounded-2xl px-4 py-2 ${
-                selectedDomain === domain ? 'bg-btn-act-page' : 'bg-act-input'
-              }`}
-            >
-              <Text
-                preset="caption"
-                bold
-                className={
-                  selectedDomain === domain ? 'text-inverse' : 'text-body'
-                }
-              >
-                {t(`act.values.domain.${domain}`)}
-              </Text>
-            </Pressable>
+            />
           ))}
         </View>
       )}
@@ -343,5 +339,54 @@ function TextInputContent({
         }}
       />
     </View>
+  );
+}
+
+const EASE_OUT_CUBIC = Easing.bezier(0.215, 0.61, 0.355, 1);
+
+function DomainChip({
+  isSelected,
+  label,
+  onPress,
+}: {
+  isSelected: boolean;
+  label: string;
+  onPress: () => void;
+}) {
+  const scale = useSharedValue(1);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
+  return (
+    <Animated.View style={animatedStyle}>
+      <Pressable
+        onPress={onPress}
+        onPressIn={() => {
+          scale.value = withTiming(0.95, {
+            duration: 100,
+            easing: EASE_OUT_CUBIC,
+          });
+        }}
+        onPressOut={() => {
+          scale.value = withTiming(1, {
+            duration: 150,
+            easing: EASE_OUT_CUBIC,
+          });
+        }}
+        className={`rounded-2xl px-4 py-2 ${
+          isSelected ? 'bg-btn-act-page' : 'bg-act-input'
+        }`}
+      >
+        <Text
+          preset="caption"
+          bold
+          className={isSelected ? 'text-inverse' : 'text-body'}
+        >
+          {label}
+        </Text>
+      </Pressable>
+    </Animated.View>
   );
 }

@@ -72,6 +72,7 @@ export function NavButton({
     <Pressable
       onPress={onPress}
       hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+      style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
     >
       {renderIcon()}
     </Pressable>
