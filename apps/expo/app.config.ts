@@ -23,8 +23,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       CFBundleAllowMixedLocalizations: true,
       CFBundleLocalizations: ['en', 'ko'],
       CFBundleDisplayName: ClientEnv.NAME,
+      UIBackgroundModes: ['remote-notification'],
     },
     usesAppleSignIn: true,
+    entitlements: {
+      'aps-environment': 'development',
+    },
+    googleServicesFile: './GoogleService-Info.plist',
     bundleIdentifier: ClientEnv.IOS_BUNDLE_IDENTIFIER,
     splash: {
       backgroundColor: '#F5F5F5',
@@ -56,6 +61,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     bundler: 'metro',
   },
   plugins: [
+    '@react-native-firebase/app',
+    '@react-native-firebase/messaging',
+    './plugins/withModularHeaders',
     [
       '@sentry/react-native/expo',
       {
@@ -112,8 +120,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       projectId: '30195066-b4b9-406a-9236-c2eaa162bf54',
     },
     ...env.ClientEnv,
-    BASE_URL: 'https://pado-anxiety.site',
-    IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
+    // BASE_URL: 'https://pado-anxiety.site',
+    // IOS_WEBVIEW_URL: 'https://nyangtodac-web-fe.pages.dev/',
     SENTRY_DSN:
       'https://8cd430bfd56b4ee468174ef67db0418f@o4510090058792960.ingest.us.sentry.io/4510837084585984',
   },

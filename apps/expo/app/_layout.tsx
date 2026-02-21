@@ -18,6 +18,7 @@ import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { Button, Image, Text } from '@src/components/ui';
+import { usePushNotification } from '@src/hooks/usePushNotification';
 import { useAlert } from '@src/lib/alert';
 import { getHapticState, setHapticState } from '@src/lib/haptics';
 import { I18nProvider } from '@src/lib/i18n';
@@ -48,6 +49,8 @@ function NavigationContent() {
   // useEffect(() => {
   //   play();
   // }, [play]);
+
+  usePushNotification();
 
   useEffect(() => {
     const hapticState = getHapticState();
