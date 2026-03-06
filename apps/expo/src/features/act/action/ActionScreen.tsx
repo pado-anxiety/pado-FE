@@ -184,12 +184,9 @@ export function ActionScreen() {
     funnel.history.push();
   }, [funnel]);
 
-  const handleSelectValue = useCallback(
-    (key: keyof Value, value: number) => {
-      setSelectedValue((prev) => ({ ...prev, [key]: value }));
-    },
-    [],
-  );
+  const handleSelectValue = useCallback((key: keyof Value, value: number) => {
+    setSelectedValue((prev) => ({ ...prev, [key]: value }));
+  }, []);
 
   const handleSelectDomain = useCallback((domain: keyof Value) => {
     setSelectedDomain(domain);
@@ -205,9 +202,7 @@ export function ActionScreen() {
         }
         contentTitle={t('act.values.intro.contentTitle')}
         contentDescription={t('act.values.intro.contentDescription')}
-        steps={
-          t('act.values.intro.steps', { returnObjects: true }) as string[]
-        }
+        steps={t('act.values.intro.steps', { returnObjects: true }) as string[]}
         tipText={t('act.values.intro.tip')}
         buttonText={t('common.button.start')}
         onStart={handleIntroStart}

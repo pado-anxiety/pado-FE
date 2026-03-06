@@ -1,13 +1,15 @@
-import { Skia } from '@shopify/react-native-skia';
-import { SharedValue } from 'react-native-reanimated';
+import { Skia, type SkPath } from '@shopify/react-native-skia';
+import { type SharedValue } from 'react-native-reanimated';
 
 import { BACKGROUND, WAVE_LAYOUT } from '../../constants';
 
 /**
  * 파도 경로 생성
+ * @param prev - 이전 프레임의 SkPath (dispose하여 네이티브 메모리 즉시 해제)
  * @param extraHeight - gapScale로 인해 추가된 캔버스 상단 높이 (파도 그리기 시 보정용)
  */
 export function createWavePath(
+  prev: SharedValue<SkPath | null>,
   clock: SharedValue<number>,
   multiplier: number,
   width: number,
@@ -19,6 +21,10 @@ export function createWavePath(
   extraHeight: number,
 ) {
   'worklet';
+
+  if (prev.value) {
+    prev.value.dispose();
+  }
 
   const clockValue = clock.value * multiplier;
 
@@ -32,7 +38,7 @@ export function createWavePath(
 
   path.moveTo(0, verticalOffset);
 
-  for (let x = 0; x <= width + 10; x += 10) {
+  for (let x = 0; x <= width + 20; x += 20) {
     const angle = (x / width) * (Math.PI * frequency) + clockValue;
     const y = amplitude * Math.sin(angle) + verticalOffset + 60;
     path.lineTo(x, y);
@@ -42,6 +48,7 @@ export function createWavePath(
   path.lineTo(0, canvasHeight);
   path.close();
 
+  prev.value = path;
   return path;
 }
 

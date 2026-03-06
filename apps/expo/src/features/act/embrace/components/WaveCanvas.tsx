@@ -3,10 +3,13 @@ import {
   LinearGradient,
   Path,
   Skia,
+  type SkPath,
   vec,
 } from '@shopify/react-native-skia';
+import { useIsFocused } from '@react-navigation/native';
 import { useColorScheme } from 'nativewind';
-import { useWindowDimensions } from 'react-native';
+import { useEffect } from 'react';
+import { AppState, useWindowDimensions } from 'react-native';
 import {
   SharedValue,
   useDerivedValue,
@@ -23,7 +26,7 @@ interface WaveCanvasProps {
   waveBaseY: SharedValue<number>;
 }
 
-const WAVE_STEP = 4;
+const WAVE_STEP = 12;
 const TIME_INCREMENT = 0.011;
 const AMPLITUDE_MIN = 15;
 const AMPLITUDE_MAX = 25;
@@ -38,9 +41,20 @@ export function WaveCanvas({ breathProgress, waveBaseY }: WaveCanvasProps) {
   const ocean = getOceanColors(scheme);
   const time = useSharedValue(0);
 
-  useFrameCallback(() => {
+  const isFocused = useIsFocused();
+
+  const frameCallback = useFrameCallback(() => {
     time.value += TIME_INCREMENT;
   });
+
+  // 화면이 보이지 않거나 앱이 백그라운드일 때 프레임 콜백 중단
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (state) => {
+      frameCallback.setActive(state === 'active' && isFocused);
+    });
+    frameCallback.setActive(isFocused);
+    return () => sub.remove();
+  }, [frameCallback, isFocused]);
 
   return (
     <Canvas
@@ -91,7 +105,14 @@ function WaveLayer({
   breathProgress: SharedValue<number>;
   waveBaseY: SharedValue<number>;
 }) {
+  // 이전 프레임의 Path를 보관 → 다음 프레임에서 dispose하여 네이티브 메모리 즉시 해제
+  const prevPath = useSharedValue<SkPath | null>(null);
+
   const path = useDerivedValue(() => {
+    if (prevPath.value) {
+      prevPath.value.dispose();
+    }
+
     const p = Skia.Path.Make();
     const progress = breathProgress.value;
     const baseAmplitude =
@@ -103,7 +124,7 @@ function WaveLayer({
 
     p.moveTo(0, height);
 
-    for (let x = 0; x <= width; x += WAVE_STEP) {
+    for (let x = 0; x <= width + WAVE_STEP; x += WAVE_STEP) {
       const angle =
         (x / width) * (Math.PI * config.frequency) +
         time.value * config.speedMultiplier;
@@ -114,6 +135,7 @@ function WaveLayer({
     p.lineTo(width, height);
     p.close();
 
+    prevPath.value = p;
     return p;
   }, [time, breathProgress, waveBaseY]);
 

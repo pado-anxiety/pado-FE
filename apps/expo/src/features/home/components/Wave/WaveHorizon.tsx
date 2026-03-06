@@ -1,6 +1,15 @@
-import { Canvas, Fill, LinearGradient, vec } from '@shopify/react-native-skia';
+import { useEffect } from 'react';
+
+import { useIsFocused } from '@react-navigation/native';
+import {
+  Canvas,
+  Fill,
+  LinearGradient,
+  Skia,
+  vec,
+} from '@shopify/react-native-skia';
 import { useColorScheme } from 'nativewind';
-import { useWindowDimensions } from 'react-native';
+import { AppState, useWindowDimensions } from 'react-native';
 import Animated, {
   LinearTransition,
   SharedValue,
@@ -56,16 +65,41 @@ export function WaveHorizon({
 
   const clock = useSharedValue(0);
 
-  useFrameCallback((frameInfo) => {
+  // 이전 프레임의 Path를 보관 → 다음 프레임에서 dispose하여 네이티브 메모리 즉시 해제
+  const prevBg = useSharedValue<ReturnType<typeof Skia.Path.Make> | null>(null);
+  const prevFgMid = useSharedValue<ReturnType<typeof Skia.Path.Make> | null>(
+    null,
+  );
+  const prevMid = useSharedValue<ReturnType<typeof Skia.Path.Make> | null>(
+    null,
+  );
+  const prevMidBack = useSharedValue<ReturnType<typeof Skia.Path.Make> | null>(
+    null,
+  );
+  const prevFg = useSharedValue<ReturnType<typeof Skia.Path.Make> | null>(null);
+
+  const isFocused = useIsFocused();
+
+  const frameCallback = useFrameCallback((frameInfo) => {
     if (!frameInfo.timeSincePreviousFrame) return;
     clock.value += frameInfo.timeSincePreviousFrame * clockSpeed;
   });
+
+  // 화면이 보이지 않거나 앱이 백그라운드일 때 프레임 콜백 중단
+  useEffect(() => {
+    const sub = AppState.addEventListener('change', (state) => {
+      frameCallback.setActive(state === 'active' && isFocused);
+    });
+    frameCallback.setActive(isFocused);
+    return () => sub.remove();
+  }, [frameCallback, isFocused]);
 
   const backgroundWavePath = useDerivedValue(() => {
     const scaleValue = gapScale?.value ?? 1.0;
     const extraHeight = getExtraHeight(scaleValue);
     const canvasHeight = WAVE_LAYOUT.HORIZON_HEIGHT + extraHeight;
     return createWavePath(
+      prevBg,
       clock,
       BACKGROUND.SPEED_MULTIPLIER,
       width,
@@ -83,6 +117,7 @@ export function WaveHorizon({
     const extraHeight = getExtraHeight(scaleValue);
     const canvasHeight = WAVE_LAYOUT.HORIZON_HEIGHT + extraHeight;
     return createWavePath(
+      prevFgMid,
       clock,
       FOREGROUND_MID.SPEED_MULTIPLIER,
       width,
@@ -100,6 +135,7 @@ export function WaveHorizon({
     const extraHeight = getExtraHeight(scaleValue);
     const canvasHeight = WAVE_LAYOUT.HORIZON_HEIGHT + extraHeight;
     return createWavePath(
+      prevMid,
       clock,
       MIDGROUND.SPEED_MULTIPLIER,
       width,
@@ -117,6 +153,7 @@ export function WaveHorizon({
     const extraHeight = getExtraHeight(scaleValue);
     const canvasHeight = WAVE_LAYOUT.HORIZON_HEIGHT + extraHeight;
     return createWavePath(
+      prevMidBack,
       clock,
       MIDGROUND_BACK.SPEED_MULTIPLIER,
       width,
@@ -134,6 +171,7 @@ export function WaveHorizon({
     const extraHeight = getExtraHeight(scaleValue);
     const canvasHeight = WAVE_LAYOUT.HORIZON_HEIGHT + extraHeight;
     return createWavePath(
+      prevFg,
       clock,
       FOREGROUND.SPEED_MULTIPLIER,
       width,

@@ -41,6 +41,7 @@ export function ActIntroContent({
             <Text
               preset="title"
               bold
+              className="flex-1"
             >
               {title}
             </Text>
