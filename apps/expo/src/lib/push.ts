@@ -1,7 +1,6 @@
 import messaging, {
   FirebaseMessagingTypes,
 } from '@react-native-firebase/messaging';
-import { Platform } from 'react-native';
 
 import { apiClient } from './api/client';
 
@@ -15,13 +14,7 @@ export async function requestPushPermission(): Promise<boolean> {
 }
 
 export async function registerPushToken(): Promise<void> {
-  // APNs 토큰 등록 (iOS 필수)
-  if (Platform.OS === 'ios') {
-    await messaging().registerDeviceForRemoteMessages();
-  }
-
   const token = await messaging().getToken();
-  console.log('FCM token', token);
   await sendTokenToServer(token);
 }
 

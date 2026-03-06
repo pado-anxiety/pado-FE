@@ -6649,6 +6649,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-firebase/installations@npm:^23.8.6":
+  version: 23.8.6
+  resolution: "@react-native-firebase/installations@npm:23.8.6"
+  peerDependencies:
+    "@react-native-firebase/app": 23.8.6
+  checksum: 10c0/ea412111370179484feebc3928b99b63859b2a8bf57afd4a31f1e746c0800b92d0b6dd9935d865887e0785485eb22a326fb7b323db2000a4b22e7b6311311dcb
+  languageName: node
+  linkType: hard
+
 "@react-native-firebase/messaging@npm:^23.8.6":
   version: 23.8.6
   resolution: "@react-native-firebase/messaging@npm:23.8.6"
@@ -17502,6 +17511,7 @@ __metadata:
     "@react-native-community/blur": "npm:^4.4.1"
     "@react-native-cookies/cookies": "npm:^6.2.1"
     "@react-native-firebase/app": "npm:^23.8.6"
+    "@react-native-firebase/installations": "npm:^23.8.6"
     "@react-native-firebase/messaging": "npm:^23.8.6"
     "@react-native-google-signin/google-signin": "npm:^16.1.1"
     "@react-native-seoul/kakao-login": "npm:^5.4.2"

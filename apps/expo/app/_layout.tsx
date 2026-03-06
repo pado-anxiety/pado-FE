@@ -17,7 +17,7 @@ import { KeyboardProvider } from 'react-native-keyboard-controller';
 import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { Button, Image, Text } from '@src/components/ui';
+import { Image, Text } from '@src/components/ui';
 import { usePushNotification } from '@src/hooks/usePushNotification';
 import { useAlert } from '@src/lib/alert';
 import { getHapticState, setHapticState } from '@src/lib/haptics';
@@ -99,27 +99,44 @@ function NavigationContent() {
               </View>
               {isConfirm ? (
                 <View className="flex flex-row gap-2">
-                  <Button
-                    text={t('common.button.cancel')}
-                    size="sm"
+                  <Pressable
                     onPress={() => closeAlert()}
-                    className="flex-1 bg-btn-cancel"
-                    textClassName="text-body"
-                  />
-                  <Button
-                    text={t('common.button.confirm')}
-                    size="sm"
+                    className="flex-1 items-center justify-center rounded-md bg-btn-cancel py-3"
+                  >
+                    <Text
+                      preset="sub"
+                      bold
+                      className="text-body"
+                    >
+                      {t('common.button.cancel')}
+                    </Text>
+                  </Pressable>
+                  <Pressable
                     onPress={() => confirmAlert()}
-                    className="flex-1 bg-btn-act-page"
-                  />
+                    className="flex-1 items-center justify-center rounded-md bg-btn-act-page py-3"
+                  >
+                    <Text
+                      preset="sub"
+                      bold
+                      className="text-white"
+                    >
+                      {t('common.button.confirm')}
+                    </Text>
+                  </Pressable>
                 </View>
               ) : (
-                <Button
-                  text={t('common.button.confirm')}
-                  size="sm"
+                <Pressable
                   onPress={() => closeAlert()}
-                  className="bg-btn-act-page"
-                />
+                  className="items-center justify-center rounded-md bg-btn-act-page py-3"
+                >
+                  <Text
+                    preset="sub"
+                    bold
+                    className="text-white"
+                  >
+                    {t('common.button.confirm')}
+                  </Text>
+                </Pressable>
               )}
             </View>
           </Animated.View>

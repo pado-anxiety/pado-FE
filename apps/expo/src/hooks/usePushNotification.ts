@@ -23,22 +23,26 @@ export function usePushNotification() {
     let unsubscribeOpened: (() => void) | undefined;
 
     async function setup() {
-      const permitted = await requestPushPermission();
-      if (!permitted) return;
+      try {
+        const permitted = await requestPushPermission();
+        if (!permitted) return;
 
-      await registerPushToken();
+        await registerPushToken();
 
-      unsubscribeRefresh = onTokenRefresh();
+        unsubscribeRefresh = onTokenRefresh();
 
-      unsubscribeOpened = onNotificationOpened((_message) => {
-        // TODO: 알림 탭으로 앱 열었을 때 처리 (딥링크 등)
-        router.replace(ROUTES.HOME);
-      });
+        unsubscribeOpened = onNotificationOpened((_message) => {
+          // TODO: 알림 탭으로 앱 열었을 때 처리 (딥링크 등)
+          router.replace(ROUTES.HOME);
+        });
 
-      // quit 상태에서 알림 탭으로 열었을 때
-      const initialNotification = await getInitialNotification();
-      if (initialNotification) {
-        // TODO: 초기 알림 처리
+        // quit 상태에서 알림 탭으로 열었을 때
+        const initialNotification = await getInitialNotification();
+        if (initialNotification) {
+          // TODO: 초기 알림 처리
+        }
+      } catch (error) {
+        console.warn('Push notification setup failed:', error);
       }
     }
 

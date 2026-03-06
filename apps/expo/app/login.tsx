@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 
 import { useRouter } from 'expo-router';
+import { getLocales } from 'expo-localization';
 import { useTranslation } from 'react-i18next';
 import { useColorScheme } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -24,6 +25,8 @@ export default function LoginScreen() {
   const tapTimestamps = useRef<number[]>([]);
 
   const colorScheme = useColorScheme();
+  const regionCode = getLocales()[0]?.regionCode;
+  const isKakaoAvailable = regionCode === 'KR';
 
   const handleBypassTap = () => {
     const now = Date.now();
@@ -159,22 +162,24 @@ export default function LoginScreen() {
             </Text>
           </Pressable>
 
-          <Pressable
-            onPress={handleKakaoLogin}
-            className="flex-row items-center justify-center gap-2 rounded-[32px] bg-[#FEE500] py-5"
-          >
-            <Image
-              source={require('../assets/images/login/kakao.svg')}
-              className="h-6 w-6"
-              contentFit="contain"
-            />
-            <Text
-              preset="heading"
-              className="text-slate-800"
+          {isKakaoAvailable && (
+            <Pressable
+              onPress={handleKakaoLogin}
+              className="flex-row items-center justify-center gap-2 rounded-[32px] bg-[#FEE500] py-5"
             >
-              {t('auth.login.continueWithKakao')}
-            </Text>
-          </Pressable>
+              <Image
+                source={require('../assets/images/login/kakao.svg')}
+                className="h-6 w-6"
+                contentFit="contain"
+              />
+              <Text
+                preset="heading"
+                className="text-slate-800"
+              >
+                {t('auth.login.continueWithKakao')}
+              </Text>
+            </Pressable>
+          )}
           <Text
             className="text-center text-sub"
             preset="sub"

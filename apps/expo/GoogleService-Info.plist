@@ -11,7 +11,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>pado-ios</string>
+	<string>com.taewoongheo.padoapp</string>
 	<key>PROJECT_ID</key>
 	<string>pado-482507</string>
 	<key>STORAGE_BUCKET</key>
@@ -27,6 +27,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:462769921210:ios:5f1431d6134c1b5b1d3683</string>
+	<string>1:462769921210:ios:142e537d0999c34c1d3683</string>
 </dict>
 </plist>
