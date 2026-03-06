@@ -51,7 +51,7 @@ jest.mock('@src/components/ui', () => ({
 }));
 
 jest.mock('@src/lib/analytics', () => ({
-  useAnalytics: () => ({ trackFunnelNext: jest.fn() }),
+  useAnalytics: () => ({ trackFunnelNext: jest.fn(), trackLearningComplete: jest.fn() }),
 }));
 
 jest.mock('@src/lib/json', () => ({

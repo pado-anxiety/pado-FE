@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
@@ -28,7 +28,12 @@ export function OnboardScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
-  const { trackFunnelNext } = useAnalytics();
+  const {
+    trackFunnelNext,
+    trackOnboardStart,
+    trackOnboardComplete,
+    trackOnboardExit,
+  } = useAnalytics();
   const { getDuration, resetDuration } = useDuration();
   const {
     isBreathing,
@@ -39,11 +44,18 @@ export function OnboardScreen() {
     startBreathing,
   } = useBreathing();
 
+  // 온보딩 시작 추적
+  useEffect(() => {
+    trackOnboardStart();
+  }, [trackOnboardStart]);
+
   // 퍼널 완료 시 로그인 화면으로 이동
   const handleComplete = useCallback(() => {
+    const duration = getDuration();
+    trackOnboardComplete(duration);
     setIsOnboarded(true);
     router.replace(ROUTES.LOGIN);
-  }, [router]);
+  }, [router, getDuration, trackOnboardComplete]);
 
   // 퍼널 초기화
   const funnel = useFunnel<OnboardStepId, OnboardContext>({

@@ -66,16 +66,60 @@ export const useAnalytics = () => {
     });
   };
 
+  // 온보딩
+  const trackOnboardStart = () => {
+    posthog.capture('pado_onboard_start');
+  };
+
+  const trackOnboardComplete = (duration: number) => {
+    posthog.capture('pado_onboard_complete', { duration });
+  };
+
+  const trackOnboardExit = (step: number, duration: number) => {
+    posthog.capture('pado_onboard_exit', { step, duration });
+  };
+
+  // 로그인
+  const trackLoginAttempt = (method: string) => {
+    posthog.capture('pado_login_attempt', { method });
+  };
+
+  const trackLoginSuccess = (method: string) => {
+    posthog.capture('pado_login_success', { method });
+  };
+
+  const trackLoginFail = (method: string, error: string) => {
+    posthog.capture('pado_login_fail', { method, error });
+  };
+
+  // 페이지 뷰
+  const trackPageView = (page: string) => {
+    posthog.capture('pado_page_view', { page });
+  };
+
+  // 채팅
   const trackChatEnter = () => {
     posthog.capture('pado_chat_enter');
   };
 
-  const trackChatExit = () => {
-    posthog.capture('pado_chat_exit');
+  const trackChatExit = (duration: number) => {
+    posthog.capture('pado_chat_exit', { duration });
   };
 
   const trackChatSend = () => {
     posthog.capture('pado_chat_send');
+  };
+
+  // 학습
+  const trackLearningComplete = (title: string, duration: number) => {
+    posthog.capture('pado_learning_complete', { title, duration });
+  };
+
+  // 푸시 알림
+  const trackPushOpened = (campaign?: string) => {
+    posthog.capture('pado_push_opened', {
+      ...(campaign && { campaign }),
+    });
   };
 
   const identifyUser = (userInfo: { name: string; email: string }) => {
@@ -93,9 +137,18 @@ export const useAnalytics = () => {
     trackFunnelPrev,
     trackFunnelExit,
     trackFunnelComplete,
+    trackOnboardStart,
+    trackOnboardComplete,
+    trackOnboardExit,
+    trackLoginAttempt,
+    trackLoginSuccess,
+    trackLoginFail,
+    trackPageView,
     trackChatEnter,
     trackChatExit,
     trackChatSend,
+    trackLearningComplete,
+    trackPushOpened,
     identifyUser,
   };
 };

@@ -41,6 +41,9 @@ jest.mock('@src/lib/analytics', () => ({
   ANALYTICS_KEY: { ONBOARD: 'onboard' },
   useAnalytics: () => ({
     trackFunnelNext: jest.fn(),
+    trackOnboardStart: jest.fn(),
+    trackOnboardComplete: jest.fn(),
+    trackOnboardExit: jest.fn(),
   }),
 }));
 

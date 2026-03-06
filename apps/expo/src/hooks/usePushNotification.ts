@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'expo-router';
 
+import { useAnalytics } from '@src/lib/analytics';
 import { useAuth } from '@src/lib/auth';
 import {
   getInitialNotification,
@@ -15,6 +16,7 @@ import { ROUTES } from '@src/lib/route';
 export function usePushNotification() {
   const accessToken = useAuth((s) => s.accessToken);
   const router = useRouter();
+  const { trackPushOpened } = useAnalytics();
 
   useEffect(() => {
     if (!accessToken) return;
@@ -31,15 +33,17 @@ export function usePushNotification() {
 
         unsubscribeRefresh = onTokenRefresh();
 
-        unsubscribeOpened = onNotificationOpened((_message) => {
-          // TODO: 알림 탭으로 앱 열었을 때 처리 (딥링크 등)
+        unsubscribeOpened = onNotificationOpened((message) => {
+          const campaign = message.data?.campaign as string | undefined;
+          trackPushOpened(campaign);
           router.replace(ROUTES.HOME);
         });
 
         // quit 상태에서 알림 탭으로 열었을 때
         const initialNotification = await getInitialNotification();
         if (initialNotification) {
-          // TODO: 초기 알림 처리
+          const campaign = initialNotification.data?.campaign as string | undefined;
+          trackPushOpened(campaign);
         }
       } catch (error) {
         console.warn('Push notification setup failed:', error);

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
-import { useRouter } from 'expo-router';
 import { getLocales } from 'expo-localization';
+import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useColorScheme } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,6 +10,7 @@ import { scale } from 'react-native-size-matters';
 import { Image, Pressable, Text, View } from '@src/components/ui';
 import { WaveHorizon } from '@src/features/home';
 import { showAlert } from '@src/lib/alert';
+import { useAnalytics } from '@src/lib/analytics';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 
@@ -22,6 +23,7 @@ export default function LoginScreen() {
   const { login, setAuthToken, setUserInfo } = useAuth();
   const router = useRouter();
 
+  const { trackLoginAttempt, trackLoginSuccess, trackLoginFail } = useAnalytics();
   const tapTimestamps = useRef<number[]>([]);
 
   const colorScheme = useColorScheme();
@@ -43,33 +45,16 @@ export default function LoginScreen() {
     }
   };
 
-  const handleAppleLogin = async () => {
-    const result = await login('apple');
+  const handleLogin = async (method: 'apple' | 'google' | 'kakao') => {
+    trackLoginAttempt(method);
+    const result = await login(method);
     if (result && 'cancelled' in result) return;
     if (result && 'errorMessage' in result) {
+      trackLoginFail(method, result.errorMessage);
       showAlert.error(result.errorMessage, t('common.error.tryLater'));
       return;
     }
-    router.replace(ROUTES.HOME);
-  };
-
-  const handleGoogleLogin = async () => {
-    const result = await login('google');
-    if (result && 'cancelled' in result) return;
-    if (result && 'errorMessage' in result) {
-      showAlert.error(result.errorMessage, t('common.error.tryLater'));
-      return;
-    }
-    router.replace(ROUTES.HOME);
-  };
-
-  const handleKakaoLogin = async () => {
-    const result = await login('kakao');
-    if (result && 'cancelled' in result) return;
-    if (result && 'errorMessage' in result) {
-      showAlert.error(result.errorMessage, t('common.error.tryLater'));
-      return;
-    }
+    trackLoginSuccess(method);
     router.replace(ROUTES.HOME);
   };
 
@@ -129,7 +114,7 @@ export default function LoginScreen() {
           }}
         >
           <Pressable
-            onPress={handleAppleLogin}
+            onPress={() => handleLogin('apple')}
             className="flex-row items-center justify-center gap-2 rounded-[32px] bg-black py-5"
           >
             <Image
@@ -146,7 +131,7 @@ export default function LoginScreen() {
           </Pressable>
 
           <Pressable
-            onPress={handleGoogleLogin}
+            onPress={() => handleLogin('google')}
             className="flex-row items-center justify-center gap-2 rounded-[32px] border border-gray-200 bg-white py-5"
           >
             <Image
@@ -164,7 +149,7 @@ export default function LoginScreen() {
 
           {isKakaoAvailable && (
             <Pressable
-              onPress={handleKakaoLogin}
+              onPress={() => handleLogin('kakao')}
               className="flex-row items-center justify-center gap-2 rounded-[32px] bg-[#FEE500] py-5"
             >
               <Image

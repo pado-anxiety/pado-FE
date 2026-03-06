@@ -42,11 +42,17 @@ export function ChatSection({ setPage }: ChatSectionProps) {
   const { remainingQuota } = useChatQuota();
   const recommend = useActRecommend();
   const [showInfo, setShowInfo] = useState(false);
+  const chatEnterTime = useRef(Date.now());
   const { trackChatEnter, trackChatSend } = useAnalytics();
 
   useEffect(() => {
+    chatEnterTime.current = Date.now();
     trackChatEnter();
   }, [trackChatEnter]);
+
+  const getChatDuration = useCallback(() => {
+    return Math.floor((Date.now() - chatEnterTime.current) / 1000);
+  }, []);
 
   const handleSend = useCallback(() => {
     const msg = input.messageRef.current;
@@ -87,6 +93,7 @@ export function ChatSection({ setPage }: ChatSectionProps) {
         <ChatHeader
           setPage={setPage}
           onInfoPress={() => setShowInfo(true)}
+          getChatDuration={getChatDuration}
         />
         <ChatMessageList
           ref={listRef}

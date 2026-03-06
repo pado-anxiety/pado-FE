@@ -15,7 +15,7 @@ export default function LearningScreen() {
   const { subject, title, description } = useLocalSearchParams();
   const { t } = useTranslation();
 
-  const { trackFunnelNext } = useAnalytics();
+  const { trackFunnelNext, trackLearningComplete } = useAnalytics();
 
   const getAnalyticsKey = (subject: string) => {
     return t(`learning.${subject}.analyticsKey`);
@@ -30,6 +30,10 @@ export default function LearningScreen() {
           step ?? -1,
         );
       } else if (action === 'HOME') {
+        trackLearningComplete(
+          getAnalyticsKey(subject as string),
+          duration,
+        );
         router.back();
       }
     },

@@ -15,9 +15,10 @@ const HEADER_HEIGHT = 48;
 interface ChatHeaderProps {
   setPage: (page: PageType) => void;
   onInfoPress: () => void;
+  getChatDuration: () => number;
 }
 
-export function ChatHeader({ setPage, onInfoPress }: ChatHeaderProps) {
+export function ChatHeader({ setPage, onInfoPress, getChatDuration }: ChatHeaderProps) {
   const insets = useSafeAreaInsets();
   const { remainingQuota } = useChatQuota();
   const { trackChatExit } = useAnalytics();
@@ -44,7 +45,7 @@ export function ChatHeader({ setPage, onInfoPress }: ChatHeaderProps) {
           color="#FFFFFF"
           onPress={() => {
             triggerHaptic('NAVIGATE');
-            trackChatExit();
+            trackChatExit(getChatDuration());
             setPage('HOME');
           }}
         />
