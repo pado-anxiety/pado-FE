@@ -131,6 +131,7 @@ export function DiaryScreen() {
     return (
       <ActIntroContent
         title={t('act.diary.intro.title')}
+        question={t('act.diary.intro.question')}
         description={
           t('act.diary.intro.description', { returnObjects: true }) as string[]
         }

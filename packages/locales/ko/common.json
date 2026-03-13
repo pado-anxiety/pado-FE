@@ -50,6 +50,7 @@
     "feedback": {
       "title": "피드백",
       "description": "자유롭게 의견을 남겨주세요",
+      "encouragement": "여러분의 한마디가 큰 도움이 됩니다",
       "placeholder": "피드백을 남겨주세요",
       "send": "피드백 보내기"
     },

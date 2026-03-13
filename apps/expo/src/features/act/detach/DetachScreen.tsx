@@ -155,6 +155,7 @@ export function DetachScreen() {
     return (
       <ActIntroContent
         title={t('act.detach.intro.title')}
+        question={t('act.detach.intro.question')}
         description={
           t('act.detach.intro.description', { returnObjects: true }) as string[]
         }

@@ -1,5 +1,6 @@
 export interface ActIntroData {
   title: string;
+  question: string;
   description: string[];
   contentTitle: string;
   contentDescription: string;

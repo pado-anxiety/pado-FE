@@ -1,25 +1,16 @@
-import { useRef } from 'react';
-
-import { BottomSheetTextInput } from '@gorhom/bottom-sheet';
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
 import { usePostHog } from 'posthog-react-native';
 import { useTranslation } from 'react-i18next';
-import { Keyboard } from 'react-native';
 
 import PageSafeAreaView from '@src/components/layout/page-safe-area-view';
 import {
-  Button,
-  Modal,
   NavButton,
   Pressable,
   Text,
   View,
-  useModal,
 } from '@src/components/ui';
 import { ENV } from '@src/lib';
 import { showAlert } from '@src/lib/alert';
-import { userAPI } from '@src/lib/api/user';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 
@@ -28,31 +19,6 @@ export default function SettingsScreen() {
   const router = useRouter();
   const { logout, deleteAccount, name, email } = useAuth();
   const posthog = usePostHog();
-
-  const feedbackRef = useRef<string>('');
-  const inputRef = useRef(null);
-
-  const { ref: modalRef, present, dismiss } = useModal();
-
-  const handleDismiss = () => {
-    dismiss();
-    feedbackRef.current = '';
-    inputRef.current?.clear();
-  };
-
-  const feedbackMutation = useMutation({
-    mutationFn: userAPI.sendFeedback,
-    onError: (error) => {
-      console.error('Failed to send feedback', error);
-    },
-    onSettled: () => {
-      handleDismiss();
-    },
-  });
-
-  const handleSendFeedback = (feedback: string) => {
-    feedbackMutation.mutate(feedback);
-  };
 
   const handleLogout = () => {
     showAlert.confirm(
@@ -169,16 +135,6 @@ export default function SettingsScreen() {
           {/* 정보 */}
           <View className="overflow-hidden rounded-2xl bg-surface p-1">
             <Pressable
-              onPress={() => present()}
-              className="flex flex-row items-center justify-between px-5 py-4"
-            >
-              <Text preset="body">{t('common.settings.feedback.title')}</Text>
-              <NavButton
-                variant="right"
-                size="small"
-              />
-            </Pressable>
-            <Pressable
               onPress={() => router.push(ROUTES.SETTINGS.PRIVACY_POLICY)}
               className="flex flex-row items-center justify-between px-5 py-4"
             >
@@ -239,30 +195,6 @@ export default function SettingsScreen() {
           </Text>
         </Pressable>
       </View>
-      <Modal ref={modalRef}>
-        <Pressable
-          onPress={() => Keyboard.dismiss()}
-          className="flex w-full flex-1 flex-col gap-4 px-6"
-        >
-          <Text preset="body">{t('common.settings.feedback.description')}</Text>
-          <View className="flex flex-col gap-3">
-            <BottomSheetTextInput
-              placeholder={t('common.settings.feedback.placeholder')}
-              className="bg-surface/20 h-48 rounded-xl border border-default px-4"
-              ref={inputRef}
-              multiline={true}
-              textAlignVertical="top"
-              autoCorrect={false}
-              onChangeText={(text) => (feedbackRef.current = text)}
-            />
-            <Button
-              text={t('common.settings.feedback.send')}
-              onPress={() => handleSendFeedback(feedbackRef.current)}
-              className="rounded-xl bg-btn-act-page"
-            />
-          </View>
-        </Pressable>
-      </Modal>
     </PageSafeAreaView>
   );
 }

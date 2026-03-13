@@ -197,6 +197,7 @@ export function ActionScreen() {
     return (
       <ActIntroContent
         title={t('act.values.intro.title')}
+        question={t('act.values.intro.question')}
         description={
           t('act.values.intro.description', { returnObjects: true }) as string[]
         }

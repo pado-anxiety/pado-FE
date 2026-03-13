@@ -50,6 +50,7 @@
     "feedback": {
       "title": "Feedback",
       "description": "Feel free to share your thoughts.",
+      "encouragement": "Your feedback makes a big difference",
       "placeholder": "Leave your feedback here",
       "send": "Send Feedback"
     },

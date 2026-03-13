@@ -15,6 +15,8 @@ import { ROUTES } from '@src/lib/route';
 import { ICONS_SIZE } from '@src/lib/styles';
 import { useIconColor } from '@src/lib/theme';
 
+import { FeedbackModal, useFeedbackModal } from './FeedbackModal';
+
 const messageIds = [
   { id: 'acc_01', type: 'acceptance' },
   { id: 'acc_02', type: 'acceptance' },
@@ -37,6 +39,7 @@ export function SkySection({
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { iconPrimary, textSecondary } = useIconColor();
+  const { ref: modalRef, present, dismiss } = useFeedbackModal();
 
   const getRandomMessage = () => {
     const randomIndex = Math.floor(Math.random() * messageIds.length);
@@ -57,6 +60,13 @@ export function SkySection({
       }}
     >
       <View className="flex w-full flex-row items-end justify-end gap-4">
+        <Pressable onPress={() => present()}>
+          <MaterialIcons
+            name="mail"
+            size={ICONS_SIZE.large}
+            color={iconPrimary}
+          />
+        </Pressable>
         <Pressable onPress={() => router.push(ROUTES.SETTINGS.BASE)}>
           <MaterialIcons
             name="settings"
@@ -148,6 +158,11 @@ export function SkySection({
           </TouchableOpacity>
         </View>
       </View>
+
+      <FeedbackModal
+        modalRef={modalRef}
+        dismiss={dismiss}
+      />
     </View>
   );
 }

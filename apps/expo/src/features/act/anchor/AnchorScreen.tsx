@@ -114,6 +114,7 @@ export function AnchorScreen() {
     return (
       <ActIntroContent
         title={t('act.anchor.intro.title')}
+        question={t('act.anchor.intro.question')}
         description={
           t('act.anchor.intro.description', { returnObjects: true }) as string[]
         }

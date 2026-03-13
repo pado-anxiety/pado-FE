@@ -129,6 +129,7 @@ export function EmbraceScreen() {
     return (
       <ActIntroContent
         title={t('act.embrace.intro.title')}
+        question={t('act.embrace.intro.question')}
         description={
           t('act.embrace.intro.description', {
             returnObjects: true,
