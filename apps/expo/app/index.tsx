@@ -7,6 +7,7 @@ import Animated from 'react-native-reanimated';
 
 import { Text, View } from '@src/components/ui';
 import { ChatSection } from '@src/features/chat';
+import { DiaryCalendarSection } from '@src/features/diary';
 import {
   HistoryDetailModal,
   HomeListFooter,
@@ -21,10 +22,12 @@ import {
   useHomePageState,
 } from '@src/features/home/hooks';
 import { HomeListItem as HomeListItemType } from '@src/features/home/types';
-import { isOnboarded } from '@src/lib';
+import { ENV, isOnboarded } from '@src/lib';
 import { useAuth } from '@src/lib/auth';
 import { ROUTES } from '@src/lib/route';
 import { PAGE_TRANSITION } from '@src/lib/styles';
+
+console.log(ENV.BASE_URL);
 
 export default function HomeScreen(): React.ReactNode {
   const { t } = useTranslation();
@@ -44,6 +47,7 @@ export default function HomeScreen(): React.ReactNode {
     useHistoryDetailModal();
 
   const isChatPage = page === 'CHAT';
+  const isDiaryPage = page === 'DIARY';
 
   // Data
   const items = useHomeListData({
@@ -119,6 +123,7 @@ export default function HomeScreen(): React.ReactNode {
       />
 
       {isChatPage && <ChatSection setPage={setPage} />}
+      {isDiaryPage && <DiaryCalendarSection setPage={setPage} />}
 
       {modalType && (
         <HistoryDetailModal

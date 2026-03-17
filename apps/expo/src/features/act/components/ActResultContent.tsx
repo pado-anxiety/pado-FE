@@ -35,7 +35,6 @@ export function ActResultContent({
         showsVerticalScrollIndicator={false}
       >
         <View className="gap-6">
-          {/* Title + Description */}
           <View className="gap-3">
             <Text
               preset="title"
@@ -52,16 +51,14 @@ export function ActResultContent({
               </Text>
             ))}
           </View>
-          {/* Custom content slot */}
           {children}
         </View>
       </ScrollView>
 
-      {/* Bottom button */}
       <Button
         text={buttonText}
         onPress={handleComplete}
-        className="bg-btn-act-page"
+        className="bg-btn-dark"
       />
     </View>
   );

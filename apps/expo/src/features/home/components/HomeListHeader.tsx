@@ -20,6 +20,7 @@ const SKY_SECTIONS: Record<
   HISTORY: HistorySkySection,
   LEARNING: LearningSkySection,
   CHAT: () => null,
+  DIARY: () => null,
 };
 
 export const HomeListHeader = ({

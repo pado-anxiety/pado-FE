@@ -117,7 +117,7 @@ export function ActIntroContent({
             className="flex-1"
             showsVerticalScrollIndicator={false}
           >
-            <View className="gap-6 rounded-xl border border-white bg-white/50 p-4 dark:border-white/10 dark:bg-white/5">
+            <View className="gap-6 rounded-2xl border border-white bg-white/50 p-4 dark:border-white/10 dark:bg-white/5">
               {/* Content title & description */}
               <View className="gap-2">
                 <Text preset="heading">{contentTitle}</Text>
@@ -157,7 +157,7 @@ export function ActIntroContent({
       <Button
         text={buttonText}
         onPress={handleStart}
-        className="bg-btn-act-page"
+        className="bg-btn-dark"
       />
     </View>
   );

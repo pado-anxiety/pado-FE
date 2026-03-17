@@ -202,12 +202,12 @@ export function WaveHorizon({
   }, [gapScale]);
 
   const insets = useSafeAreaInsets();
-  const isChatPage = page === 'CHAT';
-  const chatOverflow = isChatPage
+  const shouldRise = page === 'CHAT' || page === 'DIARY';
+  const chatOverflow = shouldRise
     ? -(insets.top + WAVE_LAYOUT.HORIZON_HEIGHT)
     : 0;
   // negative marginTop 보상: 첫 번째 채팅 메시지가 상태바 아래에서 시작하도록
-  const chatMarginBottom = isChatPage ? insets.top * 2 + 16 : undefined;
+  const chatMarginBottom = shouldRise ? insets.top * 2 + 16 : undefined;
 
   return (
     <View

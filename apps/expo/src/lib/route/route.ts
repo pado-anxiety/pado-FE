@@ -6,6 +6,7 @@ export const ROUTES = {
   ACT_HISTORY: '/history',
   ONBOARD: '/onboard',
   LEARNING: '/learning',
+  DIARY: '/diary',
 
   SETTINGS: {
     BASE: '/settings',

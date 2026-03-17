@@ -74,6 +74,7 @@ function NavigationContent() {
           <Stack.Screen name="(act)" />
           <Stack.Screen name="login" />
           <Stack.Screen name="learning" />
+          <Stack.Screen name="diary" />
           <Stack.Screen name="settings" />
           <Stack.Screen name="onboard" />
         </Stack>

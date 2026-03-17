@@ -65,7 +65,7 @@ export const useHomeListData = ({
           items: value,
         }))
         .sort((a, b) => Number(b.date) - Number(a.date));
-    } else if (page === 'CHAT') {
+    } else if (page === 'CHAT' || page === 'DIARY') {
       return [];
     } else if (page === 'LEARNING') {
       return learningItems.map((item) => ({

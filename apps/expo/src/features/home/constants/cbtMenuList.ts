@@ -15,10 +15,10 @@ export const CBT_MENU_LIST = [
     label: '5-4-3-2-1',
     slug: 'grounding',
   },
-  {
-    label: '일기',
-    slug: 'diary',
-  },
+  // {
+  //   label: '일기',
+  //   slug: 'diary',
+  // },
   {
     label: '학습',
     slug: 'learning',

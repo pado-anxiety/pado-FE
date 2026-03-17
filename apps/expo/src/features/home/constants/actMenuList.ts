@@ -3,10 +3,10 @@ export const ACT_MENU_LIST = [
     i18nKey: 'act.common.title.anchor',
     slug: 'anchor',
   },
-  {
-    i18nKey: 'act.common.title.diary',
-    slug: 'diary',
-  },
+  // {
+  //   i18nKey: 'act.common.title.diary',
+  //   slug: 'diary',
+  // },
   {
     i18nKey: 'act.common.title.detach',
     slug: 'detach',

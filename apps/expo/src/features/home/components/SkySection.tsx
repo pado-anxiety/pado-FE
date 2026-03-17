@@ -33,7 +33,7 @@ const messageIds = [
 export function SkySection({
   setPage,
 }: {
-  setPage: (page: 'HOME' | 'HISTORY' | 'CHAT' | 'LEARNING') => void;
+  setPage: (page: 'HOME' | 'HISTORY' | 'CHAT' | 'LEARNING' | 'DIARY') => void;
 }): React.ReactNode {
   const { t } = useTranslation();
   const router = useRouter();
@@ -149,6 +149,30 @@ export function SkySection({
               {t('home.menu.learning')}
             </AnimatedText>
             <Animated.View entering={FadeIn.duration(2000)}>
+              <MaterialIcons
+                name="chevron-right"
+                size={ICONS_SIZE.large}
+                color={textSecondary}
+              />
+            </Animated.View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className="flex flex-row items-center"
+            onPress={() => {
+              triggerHaptic('NAVIGATE');
+              setPage('DIARY');
+            }}
+          >
+            <AnimatedText
+              delay={1700}
+              preset="heading"
+              bold
+              className="text-sub"
+            >
+              {t('diary.menu')}
+            </AnimatedText>
+            <Animated.View entering={FadeIn.duration(2200)}>
               <MaterialIcons
                 name="chevron-right"
                 size={ICONS_SIZE.large}
