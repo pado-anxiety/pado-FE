@@ -33,6 +33,12 @@ export function useDiaryEntries() {
     return monthlyEntries.filter((e) => e.time.startsWith(selectedDate));
   }, [monthlyEntries, selectedDate]);
 
+  // Stable key for selected date entry IDs
+  const selectedEntryIds = useMemo(
+    () => selectedDateEntries.map((e) => e.id).join(','),
+    [selectedDateEntries],
+  );
+
   // Fetch details for selected date entries
   useEffect(() => {
     if (!selectedDate || selectedDateEntries.length === 0) {
@@ -52,7 +58,8 @@ export function useDiaryEntries() {
       setDetailList(results.filter(Boolean) as DiaryDetail[]);
       setDetailLoading(false);
     });
-  }, [selectedDate, selectedDateEntries]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedDate, selectedEntryIds]);
 
   const markedDates = useMemo(() => {
     const dates = new Set<string>();

@@ -1,3 +1,4 @@
+import { Feather } from '@expo/vector-icons';
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +8,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   AnimatedText,
   Pressable,
+  Text,
   TouchableOpacity,
   View,
 } from '@src/components/ui';
@@ -76,15 +78,42 @@ export function SkySection({
         </Pressable>
       </View>
       <View className="flex w-full flex-col gap-6 pt-4">
-        <View className="px-6 py-16">
+        <View className="items-center gap-6 px-6 py-16">
           <AnimatedText
             preset="heading"
             className="text-center text-sub"
           >
             {getRandomMessage().text}
           </AnimatedText>
+
+          {/* Diary CTA */}
+          <Animated.View entering={FadeIn.duration(1500)}>
+            <TouchableOpacity
+              activeOpacity={1}
+              className="bg-btn-dark flex-row items-center gap-2 rounded-2xl px-6 py-3"
+              onPress={() => {
+                triggerHaptic('NAVIGATE');
+                setPage('DIARY');
+              }}
+            >
+              <Feather
+                name="edit-2"
+                size={16}
+                color="#fff"
+              />
+              <Text
+                preset="sub"
+                bold
+                style={{ color: '#fff' }}
+              >
+                {t('diary.menu')}
+              </Text>
+            </TouchableOpacity>
+          </Animated.View>
         </View>
-        <View className="flex w-full flex-col gap-3">
+
+        {/* Menu links */}
+        <View className="flex w-full flex-col gap-3 pt-6">
           <TouchableOpacity
             className="flex flex-row items-center"
             onPress={() => {
@@ -149,30 +178,6 @@ export function SkySection({
               {t('home.menu.learning')}
             </AnimatedText>
             <Animated.View entering={FadeIn.duration(2000)}>
-              <MaterialIcons
-                name="chevron-right"
-                size={ICONS_SIZE.large}
-                color={textSecondary}
-              />
-            </Animated.View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            className="flex flex-row items-center"
-            onPress={() => {
-              triggerHaptic('NAVIGATE');
-              setPage('DIARY');
-            }}
-          >
-            <AnimatedText
-              delay={1700}
-              preset="heading"
-              bold
-              className="text-sub"
-            >
-              {t('diary.menu')}
-            </AnimatedText>
-            <Animated.View entering={FadeIn.duration(2200)}>
               <MaterialIcons
                 name="chevron-right"
                 size={ICONS_SIZE.large}
