@@ -1,0 +1,46 @@
+{
+  "title": "Emotion Diary",
+  "subtitle": "Check in with how you're feeling today",
+  "calendar": {
+    "empty": "No entries yet",
+    "write": "Write Emotion Diary",
+    "today": "Today",
+    "noEntry": "No diary for this day"
+  },
+  "write": {
+    "title": "Today's Emotion Diary",
+    "subtitle": "Take a moment to notice how you feel",
+    "situation": {
+      "badge": "Situation",
+      "question": "What happened?",
+      "hint": "Describe when, where, and what happened\nas it comes to mind.",
+      "placeholder": "e.g., I had to give a surprise presentation...",
+      "chipsLabel": "Quick pick"
+    },
+    "thought": {
+      "badge": "Thought",
+      "question": "What went through your mind?",
+      "hint": "Without judging, write down the thoughts\nthat crossed your mind.",
+      "placeholder": "e.g., Everyone must think I'm strange...",
+      "chipsLabel": "Sound familiar?"
+    },
+    "emotion": {
+      "badge": "Emotion",
+      "question": "What are you feeling right now?",
+      "hint": "You can pick up to 3.",
+      "moreButton": "More emotions",
+      "sheetTitle": "Pick more emotions",
+      "sheetDone": "Done"
+    },
+    "button": {
+      "situation": "Record situation",
+      "thought": "Record thought",
+      "emotion": "Done"
+    },
+    "preview": {
+      "situation": "Situation",
+      "thought": "Thought"
+    }
+  },
+  "menu": "Write Emotion Diary"
+}

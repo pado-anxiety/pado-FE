@@ -11,6 +11,7 @@ import enHome from "./en/home.json";
 import enAuth from "./en/auth.json";
 import enOnboard from "./en/onboard.json";
 import enLearning from "./en/learning.json";
+import enDiary from "./en/diary.json";
 
 // Korean
 import koCommon from "./ko/common.json";
@@ -25,6 +26,7 @@ import koHome from "./ko/home.json";
 import koAuth from "./ko/auth.json";
 import koOnboard from "./ko/onboard.json";
 import koLearning from "./ko/learning.json";
+import koDiary from "./ko/diary.json";
 
 const resources = {
   en: {
@@ -43,6 +45,7 @@ const resources = {
       auth: enAuth,
       onboard: enOnboard,
       learning: enLearning,
+      diary: enDiary,
     },
   },
   ko: {
@@ -61,6 +64,7 @@ const resources = {
       auth: koAuth,
       onboard: koOnboard,
       learning: koLearning,
+      diary: koDiary,
     },
   },
 } as const;

@@ -1,0 +1,49 @@
+{
+  "title": "감정 일기",
+  "subtitle": "오늘의 감정을 기록해보세요",
+  "calendar": {
+    "empty": "아직 기록이 없어요",
+    "write": "감정 일기 작성하기",
+    "today": "오늘",
+    "noEntry": "감정일기가 없어요"
+  },
+  "write": {
+    "title": "오늘의 감정일기",
+    "subtitle": "지금 이 순간을 천천히 기록해보세요",
+    "situation": {
+      "badge": "상황",
+      "question": "어떤 일이 있었나요?",
+      "hint": "언제, 어디서, 무슨 일이 있었는지\n떠오르는 대로 적어보세요.",
+      "placeholder": "예: 회의 중에 갑자기 발표를 해야 했어요...",
+      "chipsLabel": "빠른 선택"
+    },
+    "thought": {
+      "badge": "생각",
+      "question": "그때 어떤 생각이 들었나요?",
+      "hint": "판단하지 말고, 머릿속에 스친\n생각을 그대로 적어보세요.",
+      "placeholder": "예: 다들 나를 이상하게 볼 것 같았어요...",
+      "chipsLabel": "이런 생각이 들었나요?"
+    },
+    "emotion": {
+      "badge": "감정",
+      "question": "지금 느껴지는 감정을 골라보세요",
+      "hint": "최대 3개까지 선택할 수 있어요.",
+      "moreButton": "감정 더 보기",
+      "intensity": "강도",
+      "sheetTitle": "감정 더 고르기",
+      "customPlaceholder": "나만의 감정 단어를 적어보세요",
+      "customAdd": "추가",
+      "sheetDone": "선택 완료"
+    },
+    "button": {
+      "situation": "상황 기록하기",
+      "thought": "생각 기록하기",
+      "emotion": "감정 일기 완료하기"
+    },
+    "preview": {
+      "situation": "상황",
+      "thought": "생각"
+    }
+  },
+  "menu": "감정 일기 작성하기"
+}
