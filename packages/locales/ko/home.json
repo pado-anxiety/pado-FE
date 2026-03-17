@@ -1,9 +1,9 @@
 {
   "greeting": "안녕하세요",
   "menu": {
-    "viewActHistory": "파도 기록 살펴보기",
+    "viewActHistory": "기록 돌아보기",
     "chatWithWind": "마음 털어놓기",
-    "learning": "불안에 대해 더 알아보기",
+    "learning": "불안 학습하기",
     "onboarding": "온보딩",
     "login": "로그인"
   },
@@ -14,7 +14,7 @@
     "description": "ACT 기반 불안 관리 앱"
   },
   "learning": {
-    "title": "불안에 대해 더 알아보기",
+    "title": "불안 학습하기",
     "subtitle": "파도는 잠시 머물다 갈 뿐이에요. 불안이라는 파도가 지나가기를 기다리는 법을 익혀봐요."
   },
   "messages": {

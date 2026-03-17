@@ -1,9 +1,9 @@
 {
   "greeting": "Hello",
   "menu": {
-    "viewActHistory": "View Wave Records",
-    "chatWithWind": "Sharing My Heart",
-    "learning": "Learn More About Anxiety",
+    "viewActHistory": "Look Back",
+    "chatWithWind": "Open Up",
+    "learning": "Learn About Anxiety",
     "onboarding": "Onboarding",
     "login": "Login"
   },
@@ -14,56 +14,56 @@
     "description": "ACT-based anxiety care"
   },
   "learning": {
-    "title": "Learn More About Anxiety",
-    "subtitle": "Waves only stay for a moment. Learn how to wait for the wave of anxiety to pass."
+    "title": "Learn About Anxiety",
+    "subtitle": "Waves only stay for a moment. Learn how to let the wave of anxiety pass."
   },
   "messages": {
     "acceptance": {
       "acc_01": {
         "text": "The waves may rise high, but they will soon settle.",
-        "subText": "It's okay not to force the anxiety to stay calm."
+        "subText": "You don't have to force the anxiety away."
       },
       "acc_02": {
-        "text": "The crashing waves are only a part of you, not all of you.",
-        "subText": "Anxiety is just something that passes through you for a moment."
+        "text": "These crashing waves are just a part of you, not all of you.",
+        "subText": "Anxiety is simply something that passes through."
       },
       "acc_03": {
-        "text": "No matter how rough the waves, your center remains steady.",
-        "subText": "Take a breath and focus on the sensations of the present."
+        "text": "No matter how rough the waves, your center stays steady.",
+        "subText": "Take a breath and tune into what you feel right now."
       }
     },
     "values": {
       "val_01": {
         "text": "Look beyond the waves to where you truly want to go.",
-        "subText": "What matters most to you in this very moment?"
+        "subText": "What matters most to you right now?"
       },
       "val_02": {
-        "text": "Wherever the waves push, simply holding your own direction is enough.",
-        "subText": "What matters isn't the height of the waves, but the direction you choose."
+        "text": "Wherever the waves push, holding your own direction is enough.",
+        "subText": "What matters isn't the height of the waves—it's the direction you choose."
       }
     },
     "action": {
       "act_01": {
-        "text": "One small move you make now creates a big difference.",
-        "subText": "Even if you feel anxious, what is the smallest thing you can start right now?"
+        "text": "One small move right now can make a real difference.",
+        "subText": "Even when anxious, what's the smallest thing you can start with?"
       },
       "act_02": {
-        "text": "The small steps you've started will eventually reach where you want to be.",
-        "subText": "There is real strength in the flow your will creates."
+        "text": "The small steps you've taken will lead you where you want to be.",
+        "subText": "There's real strength in the momentum your will creates."
       },
       "act_03": {
-        "text": "Trust the small steps you took today, rather than grand changes.",
-        "subText": "Small actions gather together to complete your precious daily life."
+        "text": "Trust today's small steps over grand plans.",
+        "subText": "Small actions add up to shape the life you value."
       }
     },
     "rest": {
       "rest_01": {
-        "text": "It's okay to pause and rest for a while. Stillness is a precious moment in life, too.",
-        "subText": "For your tired self, pause everything for a moment and just be."
+        "text": "It's okay to pause and rest. Stillness is part of living, too.",
+        "subText": "Give yourself permission to stop and just be."
       },
       "rest_02": {
-        "text": "Rather than trying to beat the waves, let them flow by and catch your breath.",
-        "subText": "Even without trying hard, you are still more than enough."
+        "text": "Instead of fighting the waves, let them pass and catch your breath.",
+        "subText": "You're doing more than enough, even without trying hard."
       }
     }
   }

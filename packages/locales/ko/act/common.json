@@ -1,21 +1,21 @@
 {
   "title": {
     "anchor": "현재에 집중하기",
-    "diary": "오늘의 파도 기록하기",
+    "diary": "감정 일기 작성하기",
     "detach": "생각과 사실 분리하기",
-    "embrace": "마음의 바다 넓히기",
+    "embrace": "불안 수용하기",
     "values": "나의 가치와 방향 찾기"
   },
   "history": {
-    "title": "파도 기록 살펴보기",
+    "title": "기록 돌아보기",
     "subtitle": "지금까지의 ACT 기록들을 확인할 수 있어요.",
     "viewHistory": "기록 확인하기"
   },
   "historyType": {
     "contactWithPresent": "현재에 집중하기",
-    "emotionNote": "오늘의 파도 기록하기",
+    "emotionNote": "감정 일기 작성하기",
     "cognitiveDefusion": "생각과 사실 분리하기",
-    "acceptance": "마음의 바다 넓히기",
+    "acceptance": "불안 수용하기",
     "values": "나의 가치와 방향 찾기"
   }
 }

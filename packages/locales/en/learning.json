@@ -1,94 +1,94 @@
 {
   "anxiety_info": {
-    "title": "Why do we feel anxious?",
-    "description": "Anxiety isn't an enemy trying to hurt us—it's a signal from the heart to keep us safe.",
-    "analyticsKey": "Why do we feel anxious?",
+    "title": "Why does anxiety happen, and why won't it go away?",
+    "description": "Anxiety isn't your enemy—it's a signal from your mind, trying to keep you safe.",
+    "analyticsKey": "Why does anxiety happen?",
     "steps": {
       "step1": {
         "title": "Anxiety is a survival alarm",
         "content": [
-          "Since ancient times, anxiety has been a helpful alarm protecting us from danger.",
-          "It's an instinctive signal from the brain shouting, \"Be careful!\"",
-          "So feeling anxious means your survival instinct is working perfectly and healthily."
+          "Since ancient times, anxiety has been a built-in alarm protecting us from danger.",
+          "It's your brain's instinctive way of shouting, \"Watch out!\"",
+          "Feeling anxious simply means your survival instinct is still working."
         ]
       },
       "step2": {
-        "title": "It rolls in and fades like waves",
+        "title": "It comes and goes like waves",
         "content": [
-          "Anxiety doesn't stay in our hearts forever.",
-          "Like waves in the ocean, it slowly rises, peaks, and gently subsides again.",
-          "This anxiety may feel like it will last forever, but remember—every wave is bound to pass."
+          "Anxiety doesn't stay in your heart forever.",
+          "Like ocean waves, it slowly rises, swells, and gently fades again.",
+          "It might feel endless right now, but every wave is bound to pass."
         ]
       },
       "step3": {
-        "title": "The more you block it, the bigger it gets",
+        "title": "Waves are a natural part of the ocean",
         "content": [
-          "What happens if you try to block a rushing wave with your bare body?",
-          "You'll likely feel a greater impact or get swept away more easily.",
-          "Anxiety is the same. The more you resist, the more fiercely it crashes over your surface."
+          "The ocean always has waves, big and small.",
+          "Having waves doesn't mean anything is wrong with the ocean.",
+          "Our minds are the same—anxiety isn't a flaw to fix, but a natural movement."
         ]
       },
       "step4": {
-        "title": "Soothe your sensitive alarm",
+        "title": "Acknowledge the wave as it arrives",
         "content": [
-          "In modern life, the alarm often rings even when there's no real danger.",
-          "Instead of trying to break the alarm, it's important to acknowledge its state first.",
-          "Gently say to yourself, \"The alarm is ringing right now. I'm feeling tense.\""
+          "In modern life, anxiety often shows up even when there's no real danger.",
+          "Instead of forcing it down, try acknowledging that a wave is rising in your heart.",
+          "Gently say to yourself, \"I see that I'm feeling tense right now.\""
         ]
       },
       "step5": {
         "title": "Moving forward with anxiety",
         "content": [
-          "You don't have to get rid of anxiety entirely to be happy.",
-          "Just as the deep current doesn't lose its way even when surface waves are high,",
-          "we can move toward the life we want while holding our anxiety within."
+          "You don't need to wait for the waves to stop.",
+          "Just as the deep ocean keeps its course even when the surface is rough,",
+          "you can carry your anxiety and still move toward the life you want."
         ]
       }
     }
   },
   "act_guide": {
     "title": "Moving Forward with Anxiety",
-    "description": "Instead of fighting anxiety, let's learn about ACT—a way to move toward the life you want, even when you feel anxious.",
+    "description": "Instead of fighting anxiety, learn about ACT—a way to move toward the life you want, even with anxiety along for the ride.",
     "analyticsKey": "Moving Forward with Anxiety",
     "steps": {
       "step1": {
         "title": "What is ACT?",
         "content": [
           "ACT (Acceptance and Commitment Therapy) helps you accept anxiety as it is,",
-          "rather than suppressing it, and commit to acting toward the values you hold dear.",
-          "Our app breaks this process into 5 steps you can easily follow."
+          "rather than suppressing it, and commit to acting on the values you care about.",
+          "Our app breaks this into 5 steps you can easily follow."
         ]
       },
       "step2": {
-        "title": "Rising to the surface of the present",
+        "title": "Surfacing to the present moment",
         "content": [
-          "When caught in a whirlpool of thoughts, try Step 1 (Grounding) and Step 2 (Emotion Diary).",
-          "By focusing on your senses and calmly recording the weather of your heart,",
-          "you can find your own calm deep sea that stays centered amidst the rough waves."
+          "When caught in a spiral of thoughts, try Step 1 (Grounding) and Step 2 (Emotion Diary).",
+          "By tuning into your senses and calmly noting your inner weather,",
+          "you can find a calm center even amidst the roughest waves."
         ]
       },
       "step3": {
         "title": "Separating thoughts from facts",
         "content": [
-          "Step 3 (Separating Thoughts from Facts) helps you see thoughts like \"I will fail\" objectively.",
-          "It's a practice of isolating just the 'thought'—the wind—from the rest of the sentence.",
-          "Remember, thoughts are merely wind brushing across the surface, not absolute facts of the ocean."
+          "Step 3 helps you see thoughts like \"I'm going to fail\" from a distance.",
+          "It's a practice of noticing that a thought is just a thought—like wind on the surface.",
+          "Thoughts are passing breezes, not the truth of the ocean."
         ]
       },
       "step4": {
-        "title": "Flowing with the rhythm of the waves",
+        "title": "Breathing with the rhythm of the waves",
         "content": [
-          "In Step 4 (Expanding the Sea Within), breathe along with the rising and falling wave animation.",
-          "Instead of pushing anxiety away, make space within your deep sea for it to simply stay.",
-          "As you breathe in and out, let the wave of anxiety just flow through you."
+          "In Step 4 (Accepting Anxiety), breathe along with the rising and falling wave animation.",
+          "Instead of pushing anxiety away, make room for it within you.",
+          "As you breathe in and out, let the wave simply flow through."
         ]
       },
       "step5": {
-        "title": "Moving toward my own values",
+        "title": "Moving toward your own values",
         "content": [
-          "In the final step, discover the values you truly cherish and take action.",
-          "Even if you feel anxious, you can still take small steps toward your values.",
-          "Holding your anxiety within, start with a small action you can take today."
+          "In the final step, discover what you truly value and take action.",
+          "Even when anxious, you can still take small steps toward what matters.",
+          "Start with one small thing you can do today, waves and all."
         ]
       }
     }
