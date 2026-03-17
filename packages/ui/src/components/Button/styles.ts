@@ -4,7 +4,7 @@ import { tv } from 'tailwind-variants';
 
 export const button = tv({
   slots: {
-    container: 'flex items-center justify-center rounded-md',
+    container: 'flex items-center justify-center rounded-2xl',
     label: 'font-semibold',
     indicator: 'text-white',
   },

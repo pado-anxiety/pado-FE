@@ -21,6 +21,7 @@ module.exports = {
         "btn-act-page": "var(--btn-act-page)",
         "btn-act-page-selected": "var(--btn-act-page-selected)",
         "btn-act-page-unselected": "var(--btn-act-page-unselected)",
+        "btn-dark": "var(--btn-dark)",
         "act-input": "var(--act-input-bg)",
         // Ocean
         "ocean-bg": "var(--ocean-bg-wave)",

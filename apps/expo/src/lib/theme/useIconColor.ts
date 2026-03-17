@@ -12,5 +12,6 @@ export const useIconColor = () => {
     textPrimary: tokens['--text-primary'],
     textSecondary: tokens['--text-secondary'],
     textTertiary: tokens['--text-tertiary'],
+    accent: tokens['--btn-act-page'],
   };
 };

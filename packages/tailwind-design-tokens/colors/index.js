@@ -8,6 +8,8 @@ module.exports = {
     pageDark: "#1A1E24",
     button: "#E8896A",
     buttonDark: "#D88068",
+    btnDark: "#3B3D52",
+    btnDarkDark: "#4A4C62",
   },
 
   blue: {

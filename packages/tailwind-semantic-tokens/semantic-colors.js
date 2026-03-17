@@ -18,6 +18,7 @@ const semanticColors = {
     "--btn-act-page": "#fc8a67ff",
     "--btn-act-page-selected": colors.blue[500],
     "--btn-act-page-unselected": colors.blue[50],
+    "--btn-dark": colors.act.btnDark,
     "--act-input-bg": "rgba(220, 225, 245, 0.5)",
     "--act-input-placeholder": "rgba(59, 61, 82, 0.35)",
 
@@ -105,6 +106,7 @@ const semanticColors = {
     "--btn-act-page": colors.act.buttonDark,
     "--btn-act-page-selected": "#5A82AE",
     "--btn-act-page-unselected": "#252A32",
+    "--btn-dark": colors.act.btnDarkDark,
     "--act-input-bg": "rgba(255, 255, 255, 0.05)",
     "--act-input-placeholder": "rgba(214, 214, 222, 0.55)",
 
