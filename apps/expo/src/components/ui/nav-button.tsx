@@ -12,6 +12,7 @@ interface NavButtonProps {
   size?: NavButtonSize;
   color?: string;
   onPress?: () => void;
+  testID?: string;
 }
 
 const ICON_SIZES = {
@@ -24,6 +25,7 @@ export function NavButton({
   size = 'large',
   color,
   onPress,
+  testID,
 }: NavButtonProps) {
   const { iconPrimary } = useIconColor();
   const iconColor = color ?? iconPrimary;
@@ -73,6 +75,7 @@ export function NavButton({
       onPress={onPress}
       hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
       style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
+      testID={testID ?? `nav-${variant}`}
     >
       {renderIcon()}
     </Pressable>

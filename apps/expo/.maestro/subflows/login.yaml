@@ -1,0 +1,21 @@
+# 로그인 서브플로우
+# 사전 조건: 테스트 계정으로 이미 한 번 이상 로그인하여
+# 디바이스에 세션이 캐시된 상태에서 사용
+# 또는 개발 모드에서 앱 이름 5탭으로 로그인 바이패스
+
+appId: ${APP_ID}
+---
+- launchApp:
+    clearState: true
+
+# 개발 모드: 앱 이름 5번 탭으로 로그인 바이패스
+- tapOn: "파도"
+- tapOn: "파도"
+- tapOn: "파도"
+- tapOn: "파도"
+- tapOn: "파도"
+
+# 홈 화면 도달 대기
+- extendedWaitUntil:
+    visible: "감정 일기"
+    timeout: 10000

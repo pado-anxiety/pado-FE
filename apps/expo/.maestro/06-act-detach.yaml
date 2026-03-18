@@ -1,0 +1,42 @@
+# ACT Detach (생각 분리) 플로우 검증
+# intro → 텍스트 입력 → 토큰 선택 → result
+
+appId: ${APP_ID}
+name: "ACT Detach 플로우"
+tags:
+  - act
+  - detach
+---
+- runFlow: subflows/login.yaml
+
+# 홈에서 ACT Detach 모듈 진입
+- scrollUntilVisible:
+    element: "생각 분리"
+    direction: DOWN
+- tapOn:
+    text: "생각 분리"
+
+# --- Intro ---
+- assertVisible: "시작하기"
+- tapOn: "시작하기"
+
+# --- Step 1: 텍스트 입력 ---
+- assertVisible:
+    id: "nav-back"
+- assertVisible:
+    id: "nav-close"
+- inputText: "나는 실패할 것 같다"
+- tapOn: "다음"
+
+# --- Step 2: 토큰 선택 ---
+# 토큰(단어)들이 표시됨 — 하나 이상 탭
+- tapOn: "실패"
+- tapOn: "다음"
+
+# --- Result ---
+- assertVisible: "완료"
+
+# 닫기 버튼으로 나가기
+- tapOn:
+    id: "nav-close"
+- assertVisible: "감정 일기"

@@ -1,0 +1,59 @@
+# 닫기(X) 버튼 회귀 테스트
+# 모든 ACT 모듈의 닫기 버튼이 홈으로 복귀하는지 검증
+
+appId: ${APP_ID}
+name: "닫기 버튼 회귀 테스트"
+tags:
+  - regression
+  - navigation
+---
+- runFlow: subflows/login.yaml
+
+# --- ACT Anchor 닫기 ---
+- scrollUntilVisible:
+    element: "5감 집중"
+    direction: DOWN
+- tapOn: "5감 집중"
+- assertVisible: "시작하기"
+- tapOn:
+    id: "nav-close"
+- assertVisible: "감정 일기"
+
+# --- ACT Embrace 닫기 ---
+- scrollUntilVisible:
+    element: "호흡"
+    direction: DOWN
+- tapOn:
+    text: "호흡"
+- assertVisible: "시작하기"
+- tapOn:
+    id: "nav-close"
+- assertVisible: "감정 일기"
+
+# --- ACT Action 닫기 ---
+- scrollUntilVisible:
+    element: "가치"
+    direction: DOWN
+- tapOn:
+    text: "가치"
+- assertVisible: "시작하기"
+- tapOn:
+    id: "nav-close"
+- assertVisible: "감정 일기"
+
+# --- ACT Detach 닫기 ---
+- scrollUntilVisible:
+    element: "생각 분리"
+    direction: DOWN
+- tapOn:
+    text: "생각 분리"
+- assertVisible: "시작하기"
+- tapOn:
+    id: "nav-close"
+- assertVisible: "감정 일기"
+
+# --- 감정 일기 닫기 ---
+- tapOn: "감정 일기"
+- tapOn:
+    id: "nav-close"
+- assertVisible: "감정 일기"

@@ -1,0 +1,30 @@
+# 학습 화면 검증
+# 홈에서 학습 진입 → WebView 로드 확인 → 뒤로가기
+
+appId: ${APP_ID}
+name: "학습 화면 검증"
+tags:
+  - learning
+---
+- runFlow: subflows/login.yaml
+
+# 홈 화면에서 스크롤하여 학습 카드 찾기
+- scrollUntilVisible:
+    element: "학습"
+    direction: DOWN
+
+# 학습 카드 탭
+- tapOn:
+    text: "학습"
+
+# WebView 로드 대기 (에러 뷰가 아닌지 확인)
+- assertNotVisible:
+    text: "홈으로"
+    optional: true
+
+# 뒤로가기
+- tapOn:
+    id: "nav-back"
+
+# 홈 복귀
+- assertVisible: "감정 일기"

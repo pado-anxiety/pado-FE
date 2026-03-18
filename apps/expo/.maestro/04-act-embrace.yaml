@@ -1,0 +1,53 @@
+# ACT Embrace (호흡 운동) 플로우 검증
+# intro → 호흡 시작 → 완료 → result
+
+appId: ${APP_ID}
+name: "ACT Embrace 플로우"
+tags:
+  - act
+  - embrace
+---
+- runFlow: subflows/login.yaml
+
+# 홈에서 ACT Embrace 모듈 진입
+- scrollUntilVisible:
+    element: "호흡"
+    direction: DOWN
+- tapOn:
+    text: "호흡"
+
+# --- Intro ---
+- assertVisible: "시작하기"
+- assertVisible:
+    id: "nav-close"
+
+# 닫기 → 홈 복귀 확인
+- tapOn:
+    id: "nav-close"
+- assertVisible: "감정 일기"
+
+# 다시 진입
+- scrollUntilVisible:
+    element: "호흡"
+    direction: DOWN
+- tapOn:
+    text: "호흡"
+
+# 시작
+- tapOn: "시작하기"
+
+# --- Breath Step ---
+# 호흡 시작 버튼 대기
+- assertVisible:
+    text: "시작하기"
+    optional: true
+
+# 호흡이 끝나면 result로 자동 전환되거나 다음 버튼 표시
+# 호흡 세션은 시간이 걸리므로 충분히 대기
+- extendedWaitUntil:
+    visible: "완료"
+    timeout: 120000
+
+# --- Result ---
+- tapOn: "완료"
+- assertVisible: "감정 일기"

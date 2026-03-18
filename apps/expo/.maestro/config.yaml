@@ -1,0 +1,12 @@
+# Maestro E2E Test Configuration
+# 파도(Pado) - 불안 관리 앱
+
+# iOS
+# appId: com.taewoongheo.padoapp
+
+# Android
+# appId: com.taewoongheo.pado
+
+# 기본 설정
+flows:
+  - "*"

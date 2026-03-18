@@ -1,0 +1,26 @@
+# 로그인 화면 검증
+# 소셜 로그인 버튼이 표시되는지, 탭 가능한지 확인
+# 실제 OAuth 인증은 외부 앱 의존이므로 화면 표시만 검증
+
+appId: ${APP_ID}
+name: "로그인 화면 검증"
+tags:
+  - smoke
+  - login
+---
+- launchApp:
+    clearState: true
+
+# 로그인 화면 도달 확인
+- assertVisible: "Apple로 계속하기"
+- assertVisible: "구글로 계속하기"
+
+# 카카오 버튼 (한국어 환경에서만)
+- assertVisible:
+    text: "카카오톡으로 계속하기"
+    optional: true
+
+# 이용약관 텍스트 확인
+- assertVisible:
+    text: "서비스 약관"
+    optional: true

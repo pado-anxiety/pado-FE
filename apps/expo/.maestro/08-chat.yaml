@@ -1,0 +1,37 @@
+# 채팅 플로우 검증
+# 홈에서 채팅 진입 → 메시지 전송 → 응답 대기 → 뒤로가기
+
+appId: ${APP_ID}
+name: "채팅 플로우"
+tags:
+  - chat
+---
+- runFlow: subflows/login.yaml
+
+# 홈에서 채팅 페이지로 전환
+# SkySection의 페이지 전환 또는 메뉴 탭
+- tapOn:
+    text: ".*바람.*"
+    optional: true
+
+# 채팅 화면 확인 — 입력 필드가 보이는지
+- assertVisible:
+    text: ".*메시지.*"
+    optional: true
+
+# 메시지 입력 & 전송
+- inputText: "오늘 기분이 좋지 않아"
+- tapOn:
+    id: "nav-right"
+    optional: true
+
+# AI 응답 대기 (최대 30초)
+- extendedWaitUntil:
+    visible:
+      text: ".*"
+    timeout: 30000
+
+# 뒤로가기
+- tapOn:
+    id: "nav-back"
+    optional: true

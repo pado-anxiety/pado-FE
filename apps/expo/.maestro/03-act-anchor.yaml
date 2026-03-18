@@ -1,0 +1,66 @@
+# ACT Anchor (5감 집중) 전체 플로우 검증
+# intro → step1-5 → result, 뒤로가기/닫기 포함
+
+appId: ${APP_ID}
+name: "ACT Anchor 플로우"
+tags:
+  - act
+  - anchor
+---
+- runFlow: subflows/login.yaml
+
+# 홈에서 ACT Anchor 모듈 진입
+- scrollUntilVisible:
+    element: "5감 집중"
+    direction: DOWN
+- tapOn: "5감 집중"
+
+# --- Intro 화면 ---
+- assertVisible: "시작하기"
+# 닫기 버튼 확인
+- assertVisible:
+    id: "nav-close"
+
+# 시작
+- tapOn: "시작하기"
+
+# --- Step 1 ---
+- assertVisible: "다음"
+# 뒤로가기 확인
+- assertVisible:
+    id: "nav-back"
+# 뒤로가기 → intro 복귀
+- tapOn:
+    id: "nav-back"
+- assertVisible: "시작하기"
+# 다시 시작
+- tapOn: "시작하기"
+
+# 숫자 버튼 탭 (1-5 중 하나 선택)
+- tapOn: "3"
+- tapOn: "다음"
+
+# --- Step 2 ---
+- tapOn: "2"
+- tapOn: "다음"
+
+# --- Step 3 ---
+- tapOn: "4"
+- tapOn: "다음"
+
+# --- Step 4 ---
+- tapOn: "1"
+- tapOn: "다음"
+
+# --- Step 5 ---
+- tapOn: "5"
+- tapOn: "다음"
+
+# --- Result 화면 ---
+- assertVisible: "완료"
+
+# 닫기 대신 완료 버튼 탭
+- tapOn: "완료"
+
+# 홈으로 복귀 확인
+- assertVisible: "감정 일기"

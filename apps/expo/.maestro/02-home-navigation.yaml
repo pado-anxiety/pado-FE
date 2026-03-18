@@ -1,0 +1,33 @@
+# 홈 화면 네비게이션 검증
+# 메뉴 항목 진입 + 뒤로가기 테스트
+
+appId: ${APP_ID}
+name: "홈 화면 네비게이션"
+tags:
+  - smoke
+  - home
+---
+- runFlow: subflows/login.yaml
+
+# 홈 화면 메뉴 확인
+- assertVisible: "감정 일기"
+
+# --- 감정 일기 진입 & 뒤로가기 ---
+- tapOn: "감정 일기"
+- assertVisible:
+    id: "nav-back"
+- tapOn:
+    id: "nav-back"
+# 홈으로 복귀 확인
+- assertVisible: "감정 일기"
+
+# --- 설정 진입 & 뒤로가기 ---
+- tapOn:
+    id: "nav-right"
+    optional: true
+- assertVisible:
+    text: "설정"
+    optional: true
+- tapOn:
+    id: "nav-back"
+    optional: true

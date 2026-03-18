@@ -1,0 +1,57 @@
+# ACT Action (가치 평가) 플로우 검증
+# intro → 가치 선택 → 방향 작성 → 장애물 작성 → 행동 작성 → result
+
+appId: ${APP_ID}
+name: "ACT Action 플로우"
+tags:
+  - act
+  - action
+---
+- runFlow: subflows/login.yaml
+
+# 홈에서 ACT Action 모듈 진입
+- scrollUntilVisible:
+    element: "가치"
+    direction: DOWN
+- tapOn:
+    text: "가치"
+
+# --- Intro ---
+- assertVisible: "시작하기"
+- tapOn: "시작하기"
+
+# --- Step 0: 가치 선택 (ValueCircle) ---
+# 원형 차트에서 영역 하나 탭 (텍스트 기반)
+- tapOn:
+    text: "다음"
+
+# --- Step 1: 가장 낮은 영역 선택 ---
+- assertVisible: "다음"
+- tapOn: "다음"
+
+# --- Step 2: 방향 텍스트 입력 ---
+- tapOn:
+    text: "직접 작성해보세요"
+    optional: true
+- inputText: "테스트 방향 입력"
+- tapOn: "다음"
+
+# --- Step 3: 장애물 텍스트 입력 ---
+- inputText: "테스트 장애물 입력"
+- tapOn: "다음"
+
+# --- Step 4: 행동 텍스트 입력 ---
+- inputText: "테스트 행동 입력"
+- tapOn: "다음"
+
+# --- Result ---
+- assertVisible: "완료"
+# 뒤로가기 → 이전 step 복귀 확인
+- tapOn:
+    id: "nav-back"
+# 다시 다음
+- tapOn: "다음"
+- tapOn: "완료"
+
+# 홈 복귀
+- assertVisible: "감정 일기"

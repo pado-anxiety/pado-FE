@@ -1,0 +1,43 @@
+# 감정 일기 작성 플로우 검증
+# 상황 입력 → 생각 입력 → 감정 선택 → 완료
+
+appId: ${APP_ID}
+name: "감정 일기 작성 플로우"
+tags:
+  - diary
+---
+- runFlow: subflows/login.yaml
+
+# 홈에서 감정 일기 진입
+- tapOn: "감정 일기"
+
+# --- Step 1: 상황 입력 ---
+- assertVisible:
+    id: "nav-back"
+- assertVisible:
+    id: "nav-close"
+
+# 텍스트 입력
+- inputText: "오늘 회사에서 발표가 있었다"
+- tapOn: "다음"
+
+# --- Step 2: 생각 입력 ---
+- inputText: "잘 해낼 수 있을까 걱정됐다"
+- tapOn: "다음"
+
+# --- Step 3: 감정 선택 ---
+# 감정 칩 하나 선택
+- tapOn:
+    text: "불안"
+    optional: true
+- tapOn: "완료"
+
+# --- 뒤로가기 테스트 ---
+# 홈 복귀 확인
+- assertVisible: "감정 일기"
+
+# 다시 진입하여 닫기 버튼 테스트
+- tapOn: "감정 일기"
+- tapOn:
+    id: "nav-close"
+- assertVisible: "감정 일기"
