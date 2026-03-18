@@ -13,6 +13,9 @@ interface AlertStore {
     message: string,
     onConfirm: () => void,
   ) => void;
+  /** Closes the alert and runs the onPress callback if set */
+  dismissAlert: () => void;
+  /** @deprecated Use dismissAlert instead */
   closeAlert: () => void;
   confirmAlert: () => void;
 }
@@ -28,12 +31,16 @@ export const useAlert = create<AlertStore>((set, get) => ({
     set({ isAlertOpen: true, title, message, onPress, isConfirm: false, onConfirm: null }),
   openConfirm: (title: string, message: string, onConfirm: () => void) =>
     set({ isAlertOpen: true, title, message, isConfirm: true, onConfirm, onPress: null }),
-  closeAlert: () => {
+  dismissAlert: () => {
     const { onPress } = get();
     if (onPress) {
       onPress();
     }
     set({ isAlertOpen: false, title: '', message: '', onPress: null, isConfirm: false, onConfirm: null });
+  },
+  closeAlert: () => {
+    // Backward-compatible alias for dismissAlert
+    get().dismissAlert();
   },
   confirmAlert: () => {
     const { onConfirm } = get();

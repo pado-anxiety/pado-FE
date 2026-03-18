@@ -11,11 +11,32 @@ interface ProgressDotsProps {
   currentStep: number;
 }
 
+function getStepColor(
+  stepIndex: number,
+  currentStep: number,
+  tokens: { completed: string; active: string; inactive: string },
+): string {
+  if (stepIndex < currentStep) return tokens.completed;
+  if (stepIndex === currentStep) return tokens.active;
+  return tokens.inactive;
+}
+
 export function ProgressDots({ currentStep }: ProgressDotsProps) {
   const { colorScheme } = useColorScheme();
   const tokens =
     colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
   const accent = tokens['--btn-act-page'];
+
+  const barColors = {
+    completed: tokens['--text-tertiary'],
+    active: accent,
+    inactive: tokens['--border-default'],
+  };
+  const labelColors = {
+    completed: tokens['--text-tertiary'],
+    active: accent,
+    inactive: tokens['--text-disabled'],
+  };
 
   return (
     <View style={{ gap: 8 }}>
@@ -27,12 +48,7 @@ export function ProgressDots({ currentStep }: ProgressDotsProps) {
               flex: 1,
               height: 4,
               borderRadius: 10,
-              backgroundColor:
-                i < currentStep
-                  ? tokens['--text-tertiary']
-                  : i === currentStep
-                    ? accent
-                    : tokens['--border-default'],
+              backgroundColor: getStepColor(i, currentStep, barColors),
             }}
           />
         ))}
@@ -45,12 +61,7 @@ export function ProgressDots({ currentStep }: ProgressDotsProps) {
             style={{
               flex: 1,
               textAlign: 'center',
-              color:
-                i < currentStep
-                  ? tokens['--text-tertiary']
-                  : i === currentStep
-                    ? accent
-                    : tokens['--text-disabled'],
+              color: getStepColor(i, currentStep, labelColors),
             }}
           >
             {label}

@@ -7,13 +7,16 @@ function combineUrl(base: string, path: string) {
   return base.replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '');
 }
 
-export const ROUTES = {
+const AUTH_ENDPOINTS = {
   REFRESH: '/tokens/reissue',
   GOOGLE: '/login/google',
   KAKAO: '/login/kakao',
   APPLE: '/login/apple',
   LOGOUT: '/logout',
 } as const;
+
+/** @deprecated Use AUTH_ENDPOINTS instead */
+export const ROUTES = AUTH_ENDPOINTS;
 
 interface AuthToken {
   accessToken: string;
@@ -28,7 +31,7 @@ export const authAPI = {
     const response = await axios.post<{
       accessToken: string;
       refreshToken: string;
-    }>(combineUrl(ENV.BASE_URL, ROUTES.REFRESH), {
+    }>(combineUrl(ENV.BASE_URL, AUTH_ENDPOINTS.REFRESH), {
       refreshToken: useAuth.getState().refreshToken,
     });
 
@@ -48,7 +51,7 @@ export const authAPI = {
     timezone: string;
   }): Promise<AuthToken> => {
     const response = await axios.post<AuthToken>(
-      combineUrl(ENV.BASE_URL, ROUTES.GOOGLE),
+      combineUrl(ENV.BASE_URL, AUTH_ENDPOINTS.GOOGLE),
       {
         codeVerifier,
         authorizationCode,
@@ -68,8 +71,8 @@ export const authAPI = {
     identityToken: string;
     refreshToken: string;
     timezone: string;
-  }) => {
-    const response = await axios.post(combineUrl(ENV.BASE_URL, ROUTES.KAKAO), {
+  }): Promise<AuthToken> => {
+    const response = await axios.post(combineUrl(ENV.BASE_URL, AUTH_ENDPOINTS.KAKAO), {
       identityToken,
       refreshToken,
       timezone,
@@ -85,8 +88,8 @@ export const authAPI = {
     authorizationCode: string;
     fullName: string | null;
     timezone: string;
-  }) => {
-    const response = await axios.post(combineUrl(ENV.BASE_URL, ROUTES.APPLE), {
+  }): Promise<AuthToken> => {
+    const response = await axios.post(combineUrl(ENV.BASE_URL, AUTH_ENDPOINTS.APPLE), {
       authorizationCode,
       fullName,
       timezone,
@@ -99,7 +102,7 @@ export const authAPI = {
     if (!accessToken) return;
 
     await axios.post(
-      combineUrl(ENV.BASE_URL, ROUTES.LOGOUT),
+      combineUrl(ENV.BASE_URL, AUTH_ENDPOINTS.LOGOUT),
       {},
       {
         headers: {

@@ -8,6 +8,9 @@ import { triggerHaptic } from '@src/lib/haptics';
 
 import type { UserTextToken } from '../types';
 
+// TODO: Replace with a semantic color token that supports dark mode
+const HIGHLIGHT_COLOR = '#ffec5dff';
+
 interface TokenSelectorProps {
   userTextTokens: UserTextToken[];
   setUserTextTokens: (tokens: UserTextToken[]) => void;
@@ -113,7 +116,7 @@ export function TokenSelector({
                 preset="body"
                 style={{
                   backgroundColor: token.isSelected
-                    ? '#ffec5dff'
+                    ? HIGHLIGHT_COLOR
                     : 'transparent',
                   borderRadius: 4,
                   overflow: 'hidden',

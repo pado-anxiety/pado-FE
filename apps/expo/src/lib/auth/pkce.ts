@@ -1,14 +1,7 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import * as Crypto from 'expo-crypto';
 import { Platform } from 'react-native';
 
 import { ENV } from '../env';
-
-GoogleSignin.configure({
-  webClientId: ENV.WEB_CLIENT_ID,
-  iosClientId: ENV.IOS_GOOGLE_CLIENT_ID,
-  offlineAccess: true,
-});
 
 const base64UrlEncode = (str: string): string => {
   return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');

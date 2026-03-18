@@ -84,7 +84,7 @@ export function OnboardScreen() {
     resetDuration();
 
     // 호흡 스텝인 경우
-    if (meta.isBreathingStep) {
+    if (meta.type === 'breathing') {
       const completed = await startBreathing();
       if (completed) {
         await funnel.history.push();
@@ -102,7 +102,7 @@ export function OnboardScreen() {
     await funnel.history.push();
   }, [
     funnel,
-    meta.isBreathingStep,
+    meta.type,
     getDuration,
     resetDuration,
     trackFunnelNext,

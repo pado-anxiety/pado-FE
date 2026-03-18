@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Canvas, DashPathEffect, Path, Skia } from '@shopify/react-native-skia';
 import { useColorScheme } from 'nativewind';
 import { scale } from 'react-native-size-matters';
@@ -10,6 +12,16 @@ type ActPathProps = {
   points: Point[];
   height: number;
 };
+
+/** Curve tension range for X axis: random in [MIN, MIN + RANGE] */
+const CURVE_TENSION_X_MIN = 0.3;
+const CURVE_TENSION_X_RANGE = 0.5;
+/** Curve tension range for Y axis: random in [MIN, MIN + RANGE] */
+const CURVE_TENSION_Y_MIN = 0.4;
+const CURVE_TENSION_Y_RANGE = 0.8;
+
+const STROKE_WIDTH = 6;
+const DASH_INTERVAL = 15;
 
 function drawPath(points: Point[]) {
   const path = Skia.Path.Make();
@@ -28,8 +40,8 @@ function drawPath(points: Point[]) {
       const dx = end.x - start.x;
       const dy = end.y - start.y;
 
-      const curveTensionX = Math.random() * 0.5 + 0.3;
-      const curveTensionY = Math.random() * 0.8 + 0.4;
+      const curveTensionX = Math.random() * CURVE_TENSION_X_RANGE + CURVE_TENSION_X_MIN;
+      const curveTensionY = Math.random() * CURVE_TENSION_Y_RANGE + CURVE_TENSION_Y_MIN;
 
       const cp1x = start.x - dx * curveTensionX;
       const cp2x = end.x + dx * curveTensionX;
@@ -44,7 +56,7 @@ function drawPath(points: Point[]) {
   return path;
 }
 
-export function ActPath({ points, height }: ActPathProps): React.ReactNode {
+export const ActPath = React.memo(function ActPath({ points, height }: ActPathProps): React.ReactNode {
   const { colorScheme } = useColorScheme();
   const scheme = colorScheme === 'dark' ? 'dark' : 'light';
   const ocean = getOceanColors(scheme);
@@ -63,12 +75,12 @@ export function ActPath({ points, height }: ActPathProps): React.ReactNode {
         path={drawPath(points)}
         color={ocean.pathLine}
         style="stroke"
-        strokeWidth={scale(6)}
+        strokeWidth={scale(STROKE_WIDTH)}
         strokeCap="round"
         strokeJoin="round"
       >
-        <DashPathEffect intervals={[scale(15), scale(15)]} />
+        <DashPathEffect intervals={[scale(DASH_INTERVAL), scale(DASH_INTERVAL)]} />
       </Path>
     </Canvas>
   );
-}
+});

@@ -1,6 +1,13 @@
 import { apiClient } from './client';
 
+/** @deprecated Use CHAT_ENDPOINTS instead */
 export const ROUTES = {
+  CHATS: '/chats',
+  QUOTA: '/chats/quota',
+  ACT_RECOMMEND: '/act/recommend',
+} as const;
+
+const CHAT_ENDPOINTS = {
   CHATS: '/chats',
   QUOTA: '/chats/quota',
   ACT_RECOMMEND: '/act/recommend',
@@ -38,7 +45,7 @@ export const chatAPI = {
   getChatHistory: async (
     cursor?: number | null,
   ): Promise<ChatHistoryResponse> => {
-    let url = ROUTES.CHATS;
+    let url = CHAT_ENDPOINTS.CHATS;
     if (cursor != null) {
       url += `?cursor=${cursor}`;
     }
@@ -47,19 +54,19 @@ export const chatAPI = {
   },
   sendMessage: async (message: string): Promise<ChatAPIMessage> => {
     const response: ChatAPIMessage = await apiClient.post(
-      ROUTES.CHATS,
+      CHAT_ENDPOINTS.CHATS,
       { message },
       { timeout: 30000 },
     );
     return response;
   },
   getRemainingQuota: async (): Promise<QuotaResponse> => {
-    const response: QuotaResponse = await apiClient.get(ROUTES.QUOTA);
+    const response: QuotaResponse = await apiClient.get(CHAT_ENDPOINTS.QUOTA);
     return response;
   },
   getActRecommend: async (): Promise<ActRecommendResponse> => {
     const response: ActRecommendResponse = await apiClient.post(
-      ROUTES.ACT_RECOMMEND,
+      CHAT_ENDPOINTS.ACT_RECOMMEND,
       null,
       { timeout: 30000 },
     );

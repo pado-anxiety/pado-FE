@@ -2,7 +2,11 @@ import HistoryCard from '@src/features/history/HistoryCard';
 import { ACTType } from '@src/features/history/types';
 import { LearningCard } from '@src/features/learning';
 
-import { HomeListItem as HomeListItemType } from '../types';
+import {
+  HistoryItemWithIndex,
+  HomeListItem as HomeListItemType,
+  LearningItem,
+} from '../types';
 import { DeepSeaSection } from './DeepSeaSection';
 
 interface HomeListItemProps {
@@ -12,29 +16,29 @@ interface HomeListItemProps {
   onContentHeight?: (height: number) => void;
 }
 
-export const HomeListItem = ({
-  item,
-  index,
-  handleModalOpen,
-  onContentHeight,
-}: HomeListItemProps) => {
-  if (item.type === 'HOME') {
-    return (
-      <DeepSeaSection
-        key="home-sea"
-        onContentHeight={onContentHeight}
-      />
-    );
-  } else if (item.type === 'HISTORY') {
-    return (
-      <HistoryCard
-        item={item}
-        index={index}
-        handleModalOpen={handleModalOpen}
-      />
-    );
-  } else if (item.type === 'LEARNING') {
-    return <LearningCard item={item} />;
-  }
-  return null;
+const ITEM_RENDERERS: Record<
+  HomeListItemType['type'],
+  (props: HomeListItemProps) => React.ReactNode
+> = {
+  HOME: ({ onContentHeight }) => (
+    <DeepSeaSection
+      key="home-sea"
+      onContentHeight={onContentHeight}
+    />
+  ),
+  HISTORY: ({ item, index, handleModalOpen }) => (
+    <HistoryCard
+      item={item as HistoryItemWithIndex}
+      index={index}
+      handleModalOpen={handleModalOpen}
+    />
+  ),
+  LEARNING: ({ item }) => (
+    <LearningCard item={item as LearningItem} />
+  ),
+};
+
+export const HomeListItem = (props: HomeListItemProps) => {
+  const renderer = ITEM_RENDERERS[props.item.type];
+  return renderer ? renderer(props) : null;
 };

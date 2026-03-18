@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList, Keyboard } from 'react-native';
@@ -12,6 +12,7 @@ import { ChatBubbleUser } from './ChatBubbleUser';
 import { ChatLoadingBubble } from './ChatLoadingBubble';
 
 interface ChatMessageListProps {
+  ref?: React.Ref<FlatList<ChatMessageItem>>;
   chatItems: ChatMessageItem[];
   isSending: boolean;
   isFetchingOlder: boolean;
@@ -28,14 +29,50 @@ const renderItem = ({ item }: { item: ChatMessageItem }) =>
 
 const keyExtractor = (item: ChatMessageItem) => item.id;
 
-export const ChatMessageList = forwardRef<
-  FlatList<ChatMessageItem>,
-  ChatMessageListProps
->(function ChatMessageList(
-  { chatItems, isSending, isFetchingOlder, hasOlderMessages, onLoadOlder },
-  ref,
-) {
+function ListEmptyContent() {
   const { t } = useTranslation();
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        transform: [{ scaleY: -1 }],
+      }}
+    >
+      <Text
+        preset="body"
+        style={{
+          color: 'rgba(255, 255, 255, 0.55)',
+          textAlign: 'center',
+        }}
+      >
+        {t('chat.empty')}
+      </Text>
+    </View>
+  );
+}
+
+function ListFooterLoading() {
+  return (
+    <View className="items-center py-4">
+      <ActivityIndicator
+        size="small"
+        color="#FFFFFF"
+      />
+    </View>
+  );
+}
+
+export function ChatMessageList({
+  ref,
+  chatItems,
+  isSending,
+  isFetchingOlder,
+  hasOlderMessages,
+  onLoadOlder,
+}: ChatMessageListProps) {
   const scrollOccurred = useRef(false);
 
   const handleEndReached = useCallback(() => {
@@ -80,36 +117,8 @@ export const ChatMessageList = forwardRef<
       onScrollBeginDrag={handleScrollBeginDrag}
       onTouchEnd={handleTouchEnd}
       ListHeaderComponent={isSending ? <ChatLoadingBubble /> : null}
-      ListEmptyComponent={
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            transform: [{ scaleY: -1 }],
-          }}
-        >
-          <Text
-            preset="body"
-            style={{
-              color: 'rgba(255, 255, 255, 0.55)',
-              textAlign: 'center',
-            }}
-          >
-            {t('chat.empty')}
-          </Text>
-        </View>
-      }
-      ListFooterComponent={
-        isFetchingOlder ? (
-          <View className="items-center py-4">
-            <ActivityIndicator
-              size="small"
-              color="#FFFFFF"
-            />
-          </View>
-        ) : null
-      }
+      ListEmptyComponent={<ListEmptyContent />}
+      ListFooterComponent={isFetchingOlder ? <ListFooterLoading /> : null}
     />
   );
-});
+}

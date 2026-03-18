@@ -1,7 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import Animated, { FadeIn } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button, NavButton, Text, View } from '@src/components/ui';
+
+import { STEP_LAYOUT_MARGIN_LEFT } from '../../constants';
 
 interface BreathContentProps {
   isStarted: boolean;
@@ -27,15 +30,16 @@ export function BreathContent({
   onClose,
 }: BreathContentProps) {
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
 
   return (
     <View className="absolute inset-0 z-20">
       {/* Header */}
       <View
         className="flex-row items-center justify-between px-4"
-        style={{ marginTop: 60 }}
+        style={{ marginTop: insets.top + 12 }}
       >
-        <View style={{ marginLeft: -6 }}>
+        <View style={{ marginLeft: STEP_LAYOUT_MARGIN_LEFT }}>
           <NavButton
             variant="back"
             onPress={onBack}

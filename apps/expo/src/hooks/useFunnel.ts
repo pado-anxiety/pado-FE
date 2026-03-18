@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useReducer } from 'react';
 
 /**
  * 퍼널의 각 스텝 정의
@@ -80,6 +80,69 @@ export interface UseFunnelReturn<
   historySteps: readonly HistoryEntry<TContext>[];
 }
 
+type FunnelState<TContext> = {
+  historyStack: HistoryEntry<TContext>[];
+  historyIndex: number;
+};
+
+type FunnelAction<TContext> =
+  | { type: 'PUSH'; entry: HistoryEntry<TContext> }
+  | { type: 'BACK' }
+  | { type: 'GO'; index: number }
+  | {
+      type: 'REPLACE';
+      context: Partial<TContext> | ((prev: TContext) => TContext);
+    };
+
+function funnelReducer<TContext>(
+  state: FunnelState<TContext>,
+  action: FunnelAction<TContext>,
+): FunnelState<TContext> {
+  switch (action.type) {
+    case 'PUSH': {
+      // 현재 인덱스 이후의 히스토리는 버림 (forward history 제거)
+      const newStack = state.historyStack.slice(0, state.historyIndex + 1);
+      return {
+        historyStack: [...newStack, action.entry],
+        historyIndex: state.historyIndex + 1,
+      };
+    }
+    case 'BACK': {
+      if (state.historyIndex <= 0) return state;
+      return {
+        ...state,
+        historyIndex: state.historyIndex - 1,
+      };
+    }
+    case 'GO': {
+      if (action.index < 0 || action.index >= state.historyStack.length)
+        return state;
+      return {
+        ...state,
+        historyIndex: action.index,
+      };
+    }
+    case 'REPLACE': {
+      const currentCtx = state.historyStack[state.historyIndex].context;
+      const updatedContext =
+        typeof action.context === 'function'
+          ? action.context(currentCtx)
+          : { ...currentCtx, ...action.context };
+      const newStack = [...state.historyStack];
+      newStack[state.historyIndex] = {
+        ...newStack[state.historyIndex],
+        context: updatedContext,
+      };
+      return {
+        ...state,
+        historyStack: newStack,
+      };
+    }
+    default:
+      return state;
+  }
+}
+
 /**
  * 선언적 퍼널 관리 훅
  *
@@ -116,13 +179,12 @@ export function useFunnel<
 ): UseFunnelReturn<TStepId, TContext> {
   const { steps, initialContext, onComplete } = options;
 
-  // 히스토리 스택
-  const [historyStack, setHistoryStack] = useState<HistoryEntry<TContext>[]>([
-    { stepId: steps[0].id, context: initialContext },
-  ]);
+  const [state, dispatch] = useReducer(funnelReducer<TContext>, {
+    historyStack: [{ stepId: steps[0].id, context: initialContext }],
+    historyIndex: 0,
+  });
 
-  // 현재 히스토리 인덱스
-  const [historyIndex, setHistoryIndex] = useState(0);
+  const { historyStack, historyIndex } = state;
 
   // 현재 상태 계산
   const currentEntry = historyStack[historyIndex];
@@ -168,17 +230,10 @@ export function useFunnel<
       }
 
       // 히스토리에 추가
-      const newEntry: HistoryEntry<TContext> = {
-        stepId: targetStepId,
-        context: updatedContext,
-      };
-
-      setHistoryStack((prev) => {
-        // 현재 인덱스 이후의 히스토리는 버림 (forward history 제거)
-        const newStack = prev.slice(0, historyIndex + 1);
-        return [...newStack, newEntry];
+      dispatch({
+        type: 'PUSH',
+        entry: { stepId: targetStepId, context: updatedContext },
       });
-      setHistoryIndex((prev) => prev + 1);
 
       // onEnter 콜백 실행
       const targetStep = steps.find((s) => s.id === targetStepId);
@@ -199,39 +254,20 @@ export function useFunnel<
   // 현재 스텝 컨텍스트 업데이트
   const replace = useCallback(
     (newContext: Partial<TContext> | ((prev: TContext) => TContext)) => {
-      setHistoryStack((prev) => {
-        const newStack = [...prev];
-        const currentCtx = newStack[historyIndex].context;
-        const updatedContext =
-          typeof newContext === 'function'
-            ? newContext(currentCtx)
-            : { ...currentCtx, ...newContext };
-        newStack[historyIndex] = {
-          ...newStack[historyIndex],
-          context: updatedContext,
-        };
-        return newStack;
-      });
+      dispatch({ type: 'REPLACE', context: newContext });
     },
-    [historyIndex],
+    [],
   );
 
   // 이전 스텝으로 이동
   const back = useCallback(() => {
-    if (historyIndex > 0) {
-      setHistoryIndex((prev) => prev - 1);
-    }
-  }, [historyIndex]);
+    dispatch({ type: 'BACK' });
+  }, []);
 
   // 특정 인덱스로 이동
-  const go = useCallback(
-    (index: number) => {
-      if (index >= 0 && index < historyStack.length) {
-        setHistoryIndex(index);
-      }
-    },
-    [historyStack.length],
-  );
+  const go = useCallback((index: number) => {
+    dispatch({ type: 'GO', index });
+  }, []);
 
   const history = useMemo(
     () => ({ push, replace, back, go }),

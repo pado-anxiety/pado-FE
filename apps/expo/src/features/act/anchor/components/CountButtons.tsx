@@ -6,6 +6,10 @@ import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 import { Text, View } from '@src/components/ui';
 import { triggerHaptic } from '@src/lib/haptics';
 
+const BUTTON_BORDER_RADIUS = 16;
+const BUTTON_PADDING = 16;
+const BUTTON_MIN_SIZE = 44;
+
 interface CountButtonsProps {
   count: number;
   selectedIndex: number;
@@ -44,10 +48,10 @@ export function CountButtons({
                 ? tokens['--btn-act-page-selected']
                 : tokens['--btn-act-page-unselected'],
               opacity: isCompleted ? 0.5 : 1,
-              borderRadius: 16,
-              padding: 16,
-              minWidth: 44,
-              minHeight: 44,
+              borderRadius: BUTTON_BORDER_RADIUS,
+              padding: BUTTON_PADDING,
+              minWidth: BUTTON_MIN_SIZE,
+              minHeight: BUTTON_MIN_SIZE,
               alignItems: 'center',
               justifyContent: 'center',
             }}

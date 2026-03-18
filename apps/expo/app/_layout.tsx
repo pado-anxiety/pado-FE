@@ -57,7 +57,7 @@ function NavigationContent() {
     setHapticState(hapticState);
   }, []);
 
-  const { isAlertOpen, title, message, isConfirm, closeAlert, confirmAlert } =
+  const { isAlertOpen, title, message, isConfirm, dismissAlert, confirmAlert } =
     useAlert();
 
   return (
@@ -81,7 +81,7 @@ function NavigationContent() {
       </BottomSheetModalProvider>
       {isAlertOpen && (
         <Pressable
-          onPress={() => closeAlert()}
+          onPress={() => dismissAlert()}
           className="absolute inset-0 items-center justify-center bg-black/70 px-12 py-12"
         >
           <Animated.View
@@ -101,7 +101,7 @@ function NavigationContent() {
               {isConfirm ? (
                 <View className="flex flex-row gap-2">
                   <Pressable
-                    onPress={() => closeAlert()}
+                    onPress={() => dismissAlert()}
                     className="flex-1 items-center justify-center rounded-md bg-btn-cancel py-3"
                   >
                     <Text
@@ -127,7 +127,7 @@ function NavigationContent() {
                 </View>
               ) : (
                 <Pressable
-                  onPress={() => closeAlert()}
+                  onPress={() => dismissAlert()}
                   className="items-center justify-center rounded-md bg-btn-act-page py-3"
                 >
                   <Text

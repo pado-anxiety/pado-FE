@@ -42,6 +42,7 @@ export function StepContent({
   const buttonOpacity = useSharedValue(0);
 
   // 스텝 변경 시 상태 초기화 및 텍스트 순차 표시
+  // stepKey is used as dep instead of texts (which is recreated every render from i18n)
   useEffect(() => {
     setVisibleTextCount(0);
     setShowButton(false);
@@ -70,7 +71,8 @@ export function StepContent({
     return () => {
       timeouts.forEach(clearTimeout);
     };
-  }, [stepKey, texts, buttonOpacity]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stepKey, buttonOpacity]);
 
   const buttonAnimatedStyle = useAnimatedStyle(() => ({
     opacity: buttonOpacity.value,

@@ -10,6 +10,7 @@ import { Divider, NavButton, Text, View } from '@src/components/ui';
 import { showAlert } from '@src/lib/alert';
 
 import { ActStepLayout } from '../../components';
+import { ACT_TEXT_INPUT_STYLE } from '../../constants';
 import { MAX_CHAR_LIMIT, STEP_COUNT } from '../constants';
 import type { DiaryStepMeta, HistoryCard } from '../types';
 
@@ -145,10 +146,7 @@ export function DiaryStepContent({
           multiline
           className="flex-1 rounded-2xl border border-white bg-white/50 p-4 dark:border-white/10 dark:bg-white/5"
           style={{
-            textAlignVertical: 'top',
-            fontSize: 17,
-            lineHeight: 26,
-            fontFamily: 'Pretendard-Regular',
+            ...ACT_TEXT_INPUT_STYLE,
             color: tokens['--text-primary'],
           }}
         />

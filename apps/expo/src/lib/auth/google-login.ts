@@ -12,12 +12,14 @@ import {
   generateCodeVerifier,
   getGoogleClientId,
 } from './pkce';
+import { AuthResult } from './types';
 import { parseAuthToken } from './utils';
 
-type AuthResult =
-  | { accessToken: string; refreshToken: string }
-  | { errorMessage: string }
-  | { cancelled: true };
+GoogleSignin.configure({
+  webClientId: ENV.WEB_CLIENT_ID,
+  iosClientId: ENV.IOS_GOOGLE_CLIENT_ID,
+  offlineAccess: true,
+});
 
 export const SignInWithGoogle = (): Promise<AuthResult> => {
   if (Platform.OS === 'ios') {

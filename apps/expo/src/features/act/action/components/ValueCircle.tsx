@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { useColorScheme } from 'nativewind';
 import { useTranslation } from 'react-i18next';
 import { useWindowDimensions } from 'react-native';
@@ -19,6 +21,9 @@ import {
   getSectorCenter,
 } from './value-circle-utils';
 
+const CIRCLE_SIZE_RATIO = 0.9;
+const PADDING = 8;
+
 interface ValueCircleProps {
   selectedValue: Value;
   onSelectValue: (key: keyof Value, value: number) => void;
@@ -35,11 +40,11 @@ export function ValueCircle({
   const isDark = colorScheme === 'dark';
   const RING_COLORS = getRingColors(tokens, isDark);
   const { width } = useWindowDimensions();
-  const circleSize = width * 0.9;
+  const circleSize = width * CIRCLE_SIZE_RATIO;
   const labelMinWidth = i18n.language === 'ko' ? 80 : 140;
 
   const maxRadius = VIEWBOX_SIZE / 2;
-  const gameRadius = maxRadius - 8;
+  const gameRadius = maxRadius - PADDING;
   const step = gameRadius / 3;
 
   const rings = [
@@ -57,25 +62,29 @@ export function ValueCircle({
 
   const ringValues = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3];
 
-  const sectors: {
-    path: string;
-    center: { x: number; y: number };
-    ringIndex: number;
-    value: number;
-    key: keyof Value;
-  }[] = [];
+  const sectors = useMemo(() => {
+    const result: {
+      path: string;
+      center: { x: number; y: number };
+      ringIndex: number;
+      value: number;
+      key: keyof Value;
+    }[] = [];
 
-  rings.forEach((ring, rIdx) => {
-    QUARTERS.forEach((q, qIdx) => {
-      sectors.push({
-        path: createSectorPath(CX, CY, ring.inner, ring.outer, q.start, q.end),
-        center: getSectorCenter(CX, CY, ring.inner, ring.outer, q.start, q.end),
-        ringIndex: rIdx,
-        value: ringValues[rIdx * 4 + qIdx],
-        key: VALUE_LABELS[qIdx],
+    rings.forEach((ring, rIdx) => {
+      QUARTERS.forEach((q, qIdx) => {
+        result.push({
+          path: createSectorPath(CX, CY, ring.inner, ring.outer, q.start, q.end),
+          center: getSectorCenter(CX, CY, ring.inner, ring.outer, q.start, q.end),
+          ringIndex: rIdx,
+          value: ringValues[rIdx * 4 + qIdx],
+          key: VALUE_LABELS[qIdx],
+        });
       });
     });
-  });
+
+    return result;
+  }, [width]);
 
   return (
     <View className="items-center">

@@ -1,6 +1,15 @@
 import { apiClient } from './client';
 
+/** @deprecated Use ACT_ENDPOINTS instead */
 export const ROUTES = {
+  ANCHOR: '/records/contact-with-present',
+  DIARY: '/records/emotion-note',
+  DETACH: '/records/cognitive-defusion',
+  EMBRACE: '/records/acceptance',
+  VALUES: '/records/committed-action',
+} as const;
+
+const ACT_ENDPOINTS = {
   ANCHOR: '/records/contact-with-present',
   DIARY: '/records/emotion-note',
   DETACH: '/records/cognitive-defusion',
@@ -12,7 +21,7 @@ const SILENT_CONFIG = { _silentAuthFailure: true } as const;
 
 export const actAPI = {
   anchor: async (): Promise<void> => {
-    await apiClient.post(ROUTES.ANCHOR, null, SILENT_CONFIG);
+    await apiClient.post(ACT_ENDPOINTS.ANCHOR, null, SILENT_CONFIG);
   },
   diary: async ({
     situation,
@@ -24,7 +33,7 @@ export const actAPI = {
     feelings: string;
   }): Promise<void> => {
     await apiClient.post(
-      ROUTES.DIARY,
+      ACT_ENDPOINTS.DIARY,
       { situation, thoughts, feelings },
       SILENT_CONFIG,
     );
@@ -34,14 +43,14 @@ export const actAPI = {
   }: {
     userTextToken: { text: string; isSelected: boolean }[];
   }): Promise<void> => {
-    await apiClient.post(ROUTES.DETACH, { userTextToken }, SILENT_CONFIG);
+    await apiClient.post(ACT_ENDPOINTS.DETACH, { userTextToken }, SILENT_CONFIG);
   },
   embrace: async ({
     breathingTime,
   }: {
     breathingTime: number;
   }): Promise<void> => {
-    await apiClient.post(ROUTES.EMBRACE, { breathingTime }, SILENT_CONFIG);
+    await apiClient.post(ACT_ENDPOINTS.EMBRACE, { breathingTime }, SILENT_CONFIG);
   },
   values: async ({
     diagnosis,
@@ -62,7 +71,7 @@ export const actAPI = {
     action: string;
   }): Promise<void> => {
     await apiClient.post(
-      ROUTES.VALUES,
+      ACT_ENDPOINTS.VALUES,
       {
         diagnosis: {
           work: diagnosis.work,

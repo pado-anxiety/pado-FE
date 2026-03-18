@@ -1,16 +1,3 @@
-import { AnimatedProp, Path, PathDef } from '@shopify/react-native-skia';
+import { WaveLayer } from './WaveLayer';
 
-export default function ForegroundWave({
-  path,
-  color,
-}: {
-  path: AnimatedProp<PathDef>;
-  color: string;
-}): React.ReactNode {
-  return (
-    <Path
-      path={path}
-      color={color}
-    />
-  );
-}
+export default WaveLayer;

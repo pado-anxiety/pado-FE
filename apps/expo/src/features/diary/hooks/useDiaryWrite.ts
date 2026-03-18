@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
@@ -116,17 +116,20 @@ export function useDiaryWrite() {
     (funnel.currentStep === 'emotion' && selectedEmotions.size === 0);
 
   // Merged emotions: BASIC + selected from bottom sheet
-  const allEmotions: EmotionItem[] = [
-    ...BASIC_EMOTIONS,
-    ...Array.from(selectedEmotions)
-      .filter((label) => !BASIC_EMOTIONS.some((e) => e.label === label))
-      .map((label) => {
-        const found = EMOTION_CATEGORIES.flatMap((c) => c.emotions).find(
-          (e) => e.label === label,
-        );
-        return { emoji: found?.emoji ?? '', label };
-      }),
-  ];
+  const allEmotions: EmotionItem[] = useMemo(
+    () => [
+      ...BASIC_EMOTIONS,
+      ...Array.from(selectedEmotions)
+        .filter((label) => !BASIC_EMOTIONS.some((e) => e.label === label))
+        .map((label) => {
+          const found = EMOTION_CATEGORIES.flatMap((c) => c.emotions).find(
+            (e) => e.label === label,
+          );
+          return { emoji: found?.emoji ?? '', label };
+        }),
+    ],
+    [selectedEmotions],
+  );
 
   return {
     funnel,

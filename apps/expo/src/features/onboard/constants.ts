@@ -12,28 +12,28 @@ export const ONBOARD_STEPS: readonly FunnelStep<
 >[] = [
   {
     id: 'philosophy1' satisfies OnboardStepId,
-    meta: { i18nKey: 'onboard.steps.step1' } satisfies OnboardStepMeta,
+    meta: { type: 'text', i18nKey: 'onboard.steps.step1' } satisfies OnboardStepMeta,
   },
   {
     id: 'philosophy2' satisfies OnboardStepId,
-    meta: { i18nKey: 'onboard.steps.step2' } satisfies OnboardStepMeta,
+    meta: { type: 'text', i18nKey: 'onboard.steps.step2' } satisfies OnboardStepMeta,
   },
   {
     id: 'value' satisfies OnboardStepId,
-    meta: { i18nKey: 'onboard.steps.step3' } satisfies OnboardStepMeta,
+    meta: { type: 'text', i18nKey: 'onboard.steps.step3' } satisfies OnboardStepMeta,
   },
   {
     id: 'breathing' satisfies OnboardStepId,
     meta: {
+      type: 'breathing',
       i18nKey: 'onboard.steps.step4',
-      isBreathingStep: true,
     } satisfies OnboardStepMeta,
   },
   {
     id: 'complete' satisfies OnboardStepId,
     meta: {
+      type: 'final',
       i18nKey: 'onboard.steps.step5',
-      isFinalStep: true,
     } satisfies OnboardStepMeta,
   },
 ] as const;

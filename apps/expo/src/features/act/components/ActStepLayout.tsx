@@ -2,6 +2,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Button, View } from '@src/components/ui';
 
+import { STEP_LAYOUT_MARGIN_LEFT } from '../constants';
+
 interface ActStepLayoutProps {
   leftButton?: React.ReactNode;
   rightButton?: React.ReactNode;
@@ -27,7 +29,7 @@ export function ActStepLayout({
       style={{ paddingTop: insets.top + 12, paddingBottom: insets.bottom + 16 }}
     >
       <View className="flex-row items-center justify-between">
-        <View style={{ marginLeft: -6 }}>
+        <View style={{ marginLeft: STEP_LAYOUT_MARGIN_LEFT }}>
           {leftButton ?? <View className="h-11 w-11" />}
         </View>
         <View>{rightButton ?? <View className="h-11 w-11" />}</View>

@@ -50,80 +50,86 @@ export function RecommendCard({
         padding: 20,
       }}
     >
-      {isLoading ? (
-        <View className="items-center py-6">
-          <ActivityIndicator
-            size="small"
-            color="#FFFFFF"
-          />
-        </View>
-      ) : data ? (
-        <>
-          <View className="mb-3 flex-row items-start justify-between">
-            <View className="flex-1 gap-1">
-              <Text
-                preset="caption"
-                className="text-white/50"
+      {(() => {
+        if (isLoading) {
+          return (
+            <View className="items-center py-6">
+              <ActivityIndicator
+                size="small"
+                color="#FFFFFF"
+              />
+            </View>
+          );
+        }
+        if (!data) return null;
+        return (
+          <>
+            <View className="mb-3 flex-row items-start justify-between">
+              <View className="flex-1 gap-1">
+                <Text
+                  preset="caption"
+                  className="text-white/50"
+                >
+                  {t('chat.recommend.label')}
+                </Text>
+                <Text
+                  preset="heading"
+                  bold
+                  className="text-white"
+                >
+                  {t(`chat.actName.${data.act}`)}
+                </Text>
+              </View>
+              <Pressable
+                onPress={onDismiss}
+                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
               >
-                {t('chat.recommend.label')}
-              </Text>
+                <Ionicons
+                  name="close"
+                  size={20}
+                  color="rgba(255, 255, 255, 0.5)"
+                />
+              </Pressable>
+            </View>
+            <View className="mb-4 gap-2">
+              {data.reasons.map((reason, index) => (
+                <Text
+                  key={index}
+                  preset="sub"
+                  className="text-white/70"
+                >
+                  {reason}
+                </Text>
+              ))}
+            </View>
+            <Pressable
+              onPress={handleNavigate}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8,
+                paddingVertical: 14,
+                borderRadius: 14,
+                backgroundColor: 'rgba(255, 255, 255, 0.15)',
+              }}
+            >
               <Text
-                preset="heading"
+                preset="body"
                 bold
                 className="text-white"
               >
-                {t(`chat.actName.${data.act}`)}
+                {t('chat.recommend.start')}
               </Text>
-            </View>
-            <Pressable
-              onPress={onDismiss}
-              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            >
               <Ionicons
-                name="close"
-                size={20}
-                color="rgba(255, 255, 255, 0.5)"
+                name="arrow-forward"
+                size={16}
+                color="#FFFFFF"
               />
             </Pressable>
-          </View>
-          <View className="mb-4 gap-2">
-            {data.reasons.map((reason, index) => (
-              <Text
-                key={index}
-                preset="sub"
-                className="text-white/70"
-              >
-                {reason}
-              </Text>
-            ))}
-          </View>
-          <Pressable
-            onPress={handleNavigate}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-              paddingVertical: 14,
-              borderRadius: 14,
-              backgroundColor: 'rgba(255, 255, 255, 0.15)',
-            }}
-          >
-            <Text
-              preset="body"
-              bold
-              className="text-white"
-            >
-              {t('chat.recommend.start')}
-            </Text>
-            <Ionicons
-              name="arrow-forward"
-              size={16}
-              color="#FFFFFF"
-            />
-          </Pressable>
-        </>
-      ) : null}
+          </>
+        );
+      })()}
     </Animated.View>
   );
 }

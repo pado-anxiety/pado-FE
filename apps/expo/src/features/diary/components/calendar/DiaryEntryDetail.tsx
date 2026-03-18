@@ -86,30 +86,41 @@ export function DiaryEntryDetail({
         {displayDate}
       </Text>
 
-      {loading ? (
-        <ActivityIndicator
-          size="small"
-          color="#fff"
-          style={{ paddingVertical: 16 }}
-        />
-      ) : entries.length > 0 ? (
-        <View style={{ gap: 20 }}>
-          {entries.map((entry, i) => (
-            <DiaryEntryCard
-              key={i}
-              data={entry}
-              index={i}
+      {(() => {
+        if (loading) {
+          return (
+            <ActivityIndicator
+              size="small"
+              color="#fff"
+              style={{ paddingVertical: 16 }}
             />
-          ))}
-        </View>
-      ) : !isToday ? (
-        <Text
-          preset="sub"
-          style={{ color: 'rgba(255,255,255,0.4)', paddingVertical: 12 }}
-        >
-          {t('diary.calendar.noEntry')}
-        </Text>
-      ) : null}
+          );
+        }
+        if (entries.length > 0) {
+          return (
+            <View style={{ gap: 20 }}>
+              {entries.map((entry, i) => (
+                <DiaryEntryCard
+                  key={i}
+                  data={entry}
+                  index={i}
+                />
+              ))}
+            </View>
+          );
+        }
+        if (!isToday) {
+          return (
+            <Text
+              preset="sub"
+              style={{ color: 'rgba(255,255,255,0.4)', paddingVertical: 12 }}
+            >
+              {t('diary.calendar.noEntry')}
+            </Text>
+          );
+        }
+        return null;
+      })()}
 
       {isToday && (
         <Button

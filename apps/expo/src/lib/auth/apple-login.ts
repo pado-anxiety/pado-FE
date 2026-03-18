@@ -3,12 +3,8 @@ import { getCalendars } from 'expo-localization';
 
 import { authAPI } from '../api/auth';
 import { i18n } from '../i18n';
+import { AuthResult } from './types';
 import { parseAuthToken } from './utils';
-
-type AuthResult =
-  | { accessToken: string; refreshToken: string }
-  | { errorMessage: string }
-  | { cancelled: true };
 
 export const SignInWithApple = async (): Promise<AuthResult> => {
   try {

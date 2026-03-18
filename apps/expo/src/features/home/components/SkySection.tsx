@@ -19,6 +19,22 @@ import { useIconColor } from '@src/lib/theme';
 
 import { FeedbackModal, useFeedbackModal } from './FeedbackModal';
 
+const DIARY_ICON_SIZE = 16;
+const DIARY_ICON_COLOR = '#fff';
+
+type MenuItem = {
+  i18nKey: string;
+  page: 'CHAT' | 'HISTORY' | 'LEARNING';
+  animDelay: number;
+  chevronDuration: number;
+};
+
+const MENU_ITEMS: MenuItem[] = [
+  { i18nKey: 'home.menu.chatWithWind', page: 'CHAT', animDelay: 1700, chevronDuration: 2500 },
+  { i18nKey: 'home.menu.viewActHistory', page: 'HISTORY', animDelay: 1500, chevronDuration: 1500 },
+  { i18nKey: 'home.menu.learning', page: 'LEARNING', animDelay: 1500, chevronDuration: 2000 },
+];
+
 const messageIds = [
   { id: 'acc_01', type: 'acceptance' },
   { id: 'acc_02', type: 'acceptance' },
@@ -98,13 +114,13 @@ export function SkySection({
             >
               <Feather
                 name="edit-2"
-                size={16}
-                color="#fff"
+                size={DIARY_ICON_SIZE}
+                color={DIARY_ICON_COLOR}
               />
               <Text
                 preset="sub"
                 bold
-                style={{ color: '#fff' }}
+                style={{ color: DIARY_ICON_COLOR }}
               >
                 {t('diary.menu')}
               </Text>
@@ -114,77 +130,32 @@ export function SkySection({
 
         {/* Menu links */}
         <View className="flex w-full flex-col gap-3 pt-6">
-          <TouchableOpacity
-            className="flex flex-row items-center"
-            onPress={() => {
-              triggerHaptic('NAVIGATE');
-              setPage('CHAT');
-            }}
-          >
-            <AnimatedText
-              delay={1700}
-              preset="heading"
-              bold
-              className="text-sub"
+          {MENU_ITEMS.map((menuItem) => (
+            <TouchableOpacity
+              key={menuItem.page}
+              className="flex flex-row items-center"
+              onPress={() => {
+                triggerHaptic('NAVIGATE');
+                setPage(menuItem.page);
+              }}
             >
-              {t('home.menu.chatWithWind')}
-            </AnimatedText>
-            <Animated.View entering={FadeIn.duration(2500)}>
-              <MaterialIcons
-                name="chevron-right"
-                size={ICONS_SIZE.large}
-                color={textSecondary}
-              />
-            </Animated.View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            className="flex flex-row items-center"
-            onPress={() => {
-              triggerHaptic('NAVIGATE');
-              setPage('HISTORY');
-            }}
-          >
-            <AnimatedText
-              delay={1500}
-              preset="heading"
-              bold
-              className="text-sub"
-            >
-              {t('home.menu.viewActHistory')}
-            </AnimatedText>
-            <Animated.View entering={FadeIn.duration(1500)}>
-              <MaterialIcons
-                name="chevron-right"
-                size={ICONS_SIZE.large}
-                color={textSecondary}
-              />
-            </Animated.View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            className="flex flex-row items-center"
-            onPress={() => {
-              triggerHaptic('NAVIGATE');
-              setPage('LEARNING');
-            }}
-          >
-            <AnimatedText
-              delay={1500}
-              preset="heading"
-              bold
-              className="text-sub"
-            >
-              {t('home.menu.learning')}
-            </AnimatedText>
-            <Animated.View entering={FadeIn.duration(2000)}>
-              <MaterialIcons
-                name="chevron-right"
-                size={ICONS_SIZE.large}
-                color={textSecondary}
-              />
-            </Animated.View>
-          </TouchableOpacity>
+              <AnimatedText
+                delay={menuItem.animDelay}
+                preset="heading"
+                bold
+                className="text-sub"
+              >
+                {t(menuItem.i18nKey)}
+              </AnimatedText>
+              <Animated.View entering={FadeIn.duration(menuItem.chevronDuration)}>
+                <MaterialIcons
+                  name="chevron-right"
+                  size={ICONS_SIZE.large}
+                  color={textSecondary}
+                />
+              </Animated.View>
+            </TouchableOpacity>
+          ))}
         </View>
       </View>
 

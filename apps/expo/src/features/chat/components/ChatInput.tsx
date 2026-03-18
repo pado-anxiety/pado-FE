@@ -1,16 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Pressable, TextInput } from 'react-native-gesture-handler';
-import {
-  Easing,
-  cancelAnimation,
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withTiming,
-} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { View } from '@src/components/ui';
@@ -31,9 +23,6 @@ const INPUT_HEIGHT = 55;
 const INPUT_RADIUS = 16;
 const SEND_BUTTON_PADDING = 7;
 const SEND_BUTTON_SIZE = INPUT_HEIGHT - SEND_BUTTON_PADDING * 2;
-const RECOMMEND_SIZE = 45;
-const RECOMMEND_RADIUS = RECOMMEND_SIZE / 2;
-const STROKE_WIDTH = 2;
 const INACTIVE_BG = 'rgba(255, 255, 255, 0.1)';
 const INACTIVE_ICON = 'rgba(255, 255, 255, 0.4)';
 
@@ -41,30 +30,11 @@ export function ChatInput({
   input,
   onSend,
   onFocus,
-  onRecommend,
-  isRecommendLoading,
+  // onRecommend and isRecommendLoading kept in props for caller compatibility
 }: ChatInputProps) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const [hasText, setHasText] = useState(false);
-  const rotation = useSharedValue(0);
-
-  useEffect(() => {
-    if (isRecommendLoading) {
-      rotation.value = 0;
-      rotation.value = withRepeat(
-        withTiming(360, { duration: 1200, easing: Easing.linear }),
-        -1,
-      );
-    } else {
-      cancelAnimation(rotation);
-      rotation.value = 0;
-    }
-  }, [isRecommendLoading, rotation]);
-
-  const rainbowStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${rotation.value}deg` }],
-  }));
 
   const handleChangeText = (text: string) => {
     input.messageRef.current = text;
@@ -88,80 +58,6 @@ export function ChatInput({
           gap: 8,
         }}
       >
-        {/* <Pressable onPress={onRecommend}>
-          <View
-            style={{
-              width: RECOMMEND_SIZE,
-              height: RECOMMEND_SIZE,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            {isRecommendLoading && (
-              <Animated.View style={[StyleSheet.absoluteFill, rainbowStyle]}>
-                <Svg
-                  width={RECOMMEND_SIZE}
-                  height={RECOMMEND_SIZE}
-                >
-                  <Defs>
-                    <SvgLinearGradient
-                      id="rainbow"
-                      x1="0"
-                      y1="0"
-                      x2="1"
-                      y2="1"
-                    >
-                      <Stop
-                        offset="0"
-                        stopColor="#FF6B6B"
-                      />
-                      <Stop
-                        offset="0.25"
-                        stopColor="#FECA57"
-                      />
-                      <Stop
-                        offset="0.5"
-                        stopColor="#48DBFB"
-                      />
-                      <Stop
-                        offset="0.75"
-                        stopColor="#FF9FF3"
-                      />
-                      <Stop
-                        offset="1"
-                        stopColor="#54A0FF"
-                      />
-                    </SvgLinearGradient>
-                  </Defs>
-                  <Circle
-                    cx={RECOMMEND_RADIUS}
-                    cy={RECOMMEND_RADIUS}
-                    r={RECOMMEND_RADIUS - STROKE_WIDTH / 2}
-                    stroke="url(#rainbow)"
-                    strokeWidth={STROKE_WIDTH}
-                    fill="none"
-                  />
-                </Svg>
-              </Animated.View>
-            )}
-            <View
-              style={{
-                width: RECOMMEND_SIZE,
-                height: RECOMMEND_SIZE,
-                borderRadius: RECOMMEND_RADIUS,
-                backgroundColor: 'rgba(255, 255, 255, 0.18)',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Ionicons
-                name="sparkles"
-                size={18}
-                color="rgba(255, 255, 255, 0.8)"
-              />
-            </View>
-          </View>
-        </Pressable> */}
         <View
           style={{
             flex: 1,
@@ -180,7 +76,6 @@ export function ChatInput({
               flex: 1,
               fontSize: 16,
               color: '#FFFFFF',
-              // paddingVertical: 6,
             }}
             placeholder={t('chat.input.placeholder')}
             placeholderTextColor="rgba(255, 255, 255, 0.35)"

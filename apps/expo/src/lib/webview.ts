@@ -22,10 +22,10 @@ export const createWebViewMessageHandler = (
   } = {},
 ) => {
   return (event: WebViewMessageEvent) => {
-    const parsedData = parseJSON(event.nativeEvent.data, () => {});
-    if (parsedData.errorMessage) return;
+    const result = parseJSON(event.nativeEvent.data);
+    if (!result.ok) return;
 
-    const { type, data } = parsedData;
+    const { type, data } = result.data as { type: string; data: any };
 
     // HAPTIC 메시지는 자동으로 처리
     if (type === WEBVIEW_MESSAGE_TYPE.HAPTIC) {
@@ -35,14 +35,19 @@ export const createWebViewMessageHandler = (
     }
 
     // 다른 메시지 타입은 핸들러로 전달
-    if (type === WEBVIEW_MESSAGE_TYPE.NAVIGATE && handlers.onNavigate) {
-      handlers.onNavigate(data.action, data.duration, data.step);
-    } else if (type === WEBVIEW_MESSAGE_TYPE.COMPLETE && handlers.onComplete) {
-      handlers.onComplete(data);
-    } else if (type === WEBVIEW_MESSAGE_TYPE.ERROR && handlers.onError) {
-      handlers.onError(data.error);
-    } else if (type === WEBVIEW_MESSAGE_TYPE.VALIDATE && handlers.onValidate) {
-      handlers.onValidate(data.title, data.message);
+    switch (type) {
+      case WEBVIEW_MESSAGE_TYPE.NAVIGATE:
+        handlers.onNavigate?.(data.action, data.duration, data.step);
+        break;
+      case WEBVIEW_MESSAGE_TYPE.COMPLETE:
+        handlers.onComplete?.(data);
+        break;
+      case WEBVIEW_MESSAGE_TYPE.ERROR:
+        handlers.onError?.(data.error);
+        break;
+      case WEBVIEW_MESSAGE_TYPE.VALIDATE:
+        handlers.onValidate?.(data.title, data.message);
+        break;
     }
   };
 };

@@ -8,7 +8,17 @@ import { ROUTES } from '../route';
 import { SignInWithApple } from './apple-login';
 import { SignInWithGoogle } from './google-login';
 import { SignInWithKakao } from './kakao-login';
+import { AuthResult } from './types';
 import { authStorage } from './utils';
+
+const loginStrategies: Record<
+  'google' | 'kakao' | 'apple',
+  () => Promise<AuthResult>
+> = {
+  google: SignInWithGoogle,
+  kakao: SignInWithKakao,
+  apple: SignInWithApple,
+} as const;
 
 interface AuthState {
   name: string | null;
@@ -46,36 +56,16 @@ export const useAuth = create<AuthState>((set) => ({
     set({ isLoading: true });
 
     try {
-      const token = {
-        accessToken: '',
-        refreshToken: '',
-      };
-
-      if (platform === 'google') {
-        const result = await SignInWithGoogle();
-        if ('cancelled' in result) return { cancelled: true };
-        if ('errorMessage' in result) {
-          return { errorMessage: result.errorMessage };
-        }
-        token.accessToken = result.accessToken;
-        token.refreshToken = result.refreshToken;
-      } else if (platform === 'kakao') {
-        const result = await SignInWithKakao();
-        if ('cancelled' in result) return { cancelled: true };
-        if ('errorMessage' in result) {
-          return { errorMessage: result.errorMessage };
-        }
-        token.accessToken = result.accessToken;
-        token.refreshToken = result.refreshToken;
-      } else if (platform === 'apple') {
-        const result = await SignInWithApple();
-        if ('cancelled' in result) return { cancelled: true };
-        if ('errorMessage' in result) {
-          return { errorMessage: result.errorMessage };
-        }
-        token.accessToken = result.accessToken;
-        token.refreshToken = result.refreshToken;
+      const result = await loginStrategies[platform]();
+      if ('cancelled' in result) return { cancelled: true };
+      if ('errorMessage' in result) {
+        return { errorMessage: result.errorMessage };
       }
+
+      const token = {
+        accessToken: result.accessToken,
+        refreshToken: result.refreshToken,
+      };
 
       if (!token.accessToken || !token.refreshToken) {
         return {

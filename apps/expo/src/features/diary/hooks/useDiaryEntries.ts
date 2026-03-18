@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -10,6 +10,7 @@ function getTodayStr() {
 }
 
 const DIARY_MONTHLY_KEY = 'diary-monthly';
+const DIARY_DETAILS_KEY = 'diary-details';
 
 export function useDiaryEntries() {
   const queryClient = useQueryClient();
@@ -18,8 +19,6 @@ export function useDiaryEntries() {
   const [selectedDate, setSelectedDate] = useState<string | null>(
     getTodayStr(),
   );
-  const [detailList, setDetailList] = useState<DiaryDetail[]>([]);
-  const [detailLoading, setDetailLoading] = useState(false);
 
   // Monthly entries via useQuery
   const { data: monthlyEntries = [] } = useQuery({
@@ -39,27 +38,19 @@ export function useDiaryEntries() {
     [selectedDateEntries],
   );
 
-  // Fetch details for selected date entries
-  useEffect(() => {
-    if (!selectedDate || selectedDateEntries.length === 0) {
-      setDetailList([]);
-      setDetailLoading(false);
-      return;
-    }
-
-    setDetailList([]);
-    setDetailLoading(true);
-
-    Promise.all(
-      selectedDateEntries.map((e) =>
-        diaryAPI.getDetail(e.id).catch(() => null),
-      ),
-    ).then((results) => {
-      setDetailList(results.filter(Boolean) as DiaryDetail[]);
-      setDetailLoading(false);
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedDate, selectedEntryIds]);
+  // Fetch details declaratively via useQuery instead of useEffect+setState
+  const { data: detailList = [], isLoading: detailLoading } = useQuery({
+    queryKey: [DIARY_DETAILS_KEY, selectedDate, selectedEntryIds],
+    queryFn: async () => {
+      const results = await Promise.all(
+        selectedDateEntries.map((e) =>
+          diaryAPI.getDetail(e.id).catch(() => null),
+        ),
+      );
+      return results.filter(Boolean) as DiaryDetail[];
+    },
+    enabled: !!selectedDate && selectedDateEntries.length > 0,
+  });
 
   const markedDates = useMemo(() => {
     const dates = new Set<string>();
@@ -90,6 +81,7 @@ export function useDiaryEntries() {
   /** 일기 작성 후 호출 — 월별 목록 + 상세 모두 갱신 */
   const invalidate = useCallback(() => {
     queryClient.invalidateQueries({ queryKey: [DIARY_MONTHLY_KEY] });
+    queryClient.invalidateQueries({ queryKey: [DIARY_DETAILS_KEY] });
   }, [queryClient]);
 
   return {

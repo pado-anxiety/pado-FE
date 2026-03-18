@@ -49,9 +49,9 @@ export default function HistoryCard({
             </Text>
           </View>
           <View className="flex flex-1 flex-row flex-wrap gap-2">
-            {item.items.map((el) => (
+            {item.items.map((el, elIndex) => (
               <Pressable
-                key={Math.random()}
+                key={el.id ?? `history-${elIndex}`}
                 onPress={() => handleModalOpen(el.id, el.type, item.date)}
                 className="rounded-full bg-white/10 px-3 py-1.5 active:bg-white/20"
               >

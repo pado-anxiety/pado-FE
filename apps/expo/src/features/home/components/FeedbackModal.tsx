@@ -18,6 +18,11 @@ import {
 } from '@src/components/ui';
 import { userAPI } from '@src/lib/api/user';
 
+const INPUT_HEIGHT = 160;
+const INPUT_BORDER_RADIUS = 12;
+const INPUT_PADDING_HORIZONTAL = 16;
+const INPUT_PADDING_TOP = 16;
+
 export const useFeedbackModal = () => {
   const { ref, present, dismiss } = useModal();
   return { ref, present, dismiss };
@@ -79,10 +84,10 @@ export function FeedbackModal({
             placeholder={t('common.settings.feedback.placeholder')}
             style={{
               backgroundColor: tokens['--bg-surface'],
-              height: 160,
-              borderRadius: 12,
-              paddingHorizontal: 16,
-              paddingTop: 16,
+              height: INPUT_HEIGHT,
+              borderRadius: INPUT_BORDER_RADIUS,
+              paddingHorizontal: INPUT_PADDING_HORIZONTAL,
+              paddingTop: INPUT_PADDING_TOP,
             }}
             ref={inputRef}
             multiline={true}

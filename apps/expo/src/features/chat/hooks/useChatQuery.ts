@@ -20,6 +20,9 @@ import { triggerHaptic } from '@src/lib/haptics';
 
 type SendStatus = 'idle' | 'pending' | 'success' | 'error';
 
+/** Minimum delay (ms) for loading older messages to avoid UI flicker */
+const OLDER_MESSAGES_MIN_DELAY_MS = 1500;
+
 interface UseChatQueryReturn {
   chatItems: ChatMessageItem[];
   isSending: boolean;
@@ -58,7 +61,7 @@ export function useChatQuery({
         if (pageParam != null) {
           const [result] = await Promise.all([
             chatAPI.getChatHistory(pageParam),
-            new Promise((r) => setTimeout(r, 1500)),
+            new Promise((r) => setTimeout(r, OLDER_MESSAGES_MIN_DELAY_MS)),
           ]);
           return result;
         }

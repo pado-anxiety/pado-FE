@@ -14,16 +14,12 @@ export type OnboardStepId =
 export type OnboardContext = Record<string, never>;
 
 /**
- * 온보딩 스텝 메타데이터
+ * 온보딩 스텝 메타데이터 (discriminated union)
  */
-export interface OnboardStepMeta {
-  /** i18n 키 (예: 'onboard.steps.step1') */
-  i18nKey: string;
-  /** 호흡 스텝 여부 */
-  isBreathingStep?: boolean;
-  /** 마지막 스텝 여부 (로그인 이동) */
-  isFinalStep?: boolean;
-}
+export type OnboardStepMeta =
+  | { type: 'text'; i18nKey: string }
+  | { type: 'breathing'; i18nKey: string }
+  | { type: 'final'; i18nKey: string };
 
 /**
  * 스텝 컨텐츠 데이터

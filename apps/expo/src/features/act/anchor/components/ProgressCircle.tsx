@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
-
 import { useColorScheme } from 'nativewind';
 import Animated, {
   Easing,
   useAnimatedProps,
-  useSharedValue,
+  useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
 import Svg, { Circle } from 'react-native-svg';
@@ -16,6 +14,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const RADIUS = 42;
 const STROKE_WIDTH = 7;
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+const ANIMATION_DURATION = 400;
 
 interface ProgressCircleProps {
   /** 0~1 사이 진행률 */
@@ -26,14 +25,10 @@ interface ProgressCircleProps {
 export function ProgressCircle({ progress, size }: ProgressCircleProps) {
   const { colorScheme } = useColorScheme();
   const tokens = colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
-  const animatedProgress = useSharedValue(0);
 
-  useEffect(() => {
-    animatedProgress.value = withTiming(progress, {
-      duration: 400,
-      easing: Easing.out(Easing.cubic),
-    });
-  }, [progress, animatedProgress]);
+  const animatedProgress = useDerivedValue(() => {
+    return withTiming(progress, { duration: ANIMATION_DURATION, easing: Easing.out(Easing.cubic) });
+  });
 
   const animatedProps = useAnimatedProps(() => ({
     strokeDashoffset: CIRCUMFERENCE * (1 - animatedProgress.value),

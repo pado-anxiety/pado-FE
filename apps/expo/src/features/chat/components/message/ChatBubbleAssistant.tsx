@@ -5,7 +5,13 @@ import { ChatMessageItem } from '@src/features/home/types';
 
 const BUBBLE_DELAY_MS = 500;
 
-// FlatList 재활용 시 이미 표시된 메시지는 즉시 전체 표시
+/**
+ * FlatList 재활용 시 이미 표시된 메시지는 즉시 전체 표시.
+ *
+ * 주의: 이 Set은 모듈 수명 동안 무한히 커질 수 있음.
+ * 현재 채팅 메시지 수가 세션당 수백 건 이하이므로 실질적 문제는 없지만,
+ * 대규모 사용 시 LRU 캐시로의 교체를 검토할 것.
+ */
 const revealedIds = new Set<string>();
 
 interface ChatBubbleAssistantProps {

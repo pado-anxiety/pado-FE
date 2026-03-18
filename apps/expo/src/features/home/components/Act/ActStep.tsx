@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
 import actionImage from '@assets/images/home/action.png';
 import anchorImage from '@assets/images/home/anchor.png';
@@ -27,6 +27,15 @@ const itemImages = {
   action: actionImage,
 };
 
+const STEP_CIRCLE_COLORS = {
+  dark: ['#152753', '#12234C', '#101F44', '#0E1B3C', '#0B1735'],
+  light: ['#1B3767', '#162E58', '#112446', '#0C1A34', '#071125'],
+} as const;
+
+const RIPPLE_SCALES = [1.25, 1.6, 2.1] as const;
+const RIPPLE_OPACITIES = [0.3, 0.15, 0.06] as const;
+const RIPPLE_BORDERS = [1.2, 1, 0.8] as const;
+
 type ActButtonProps = {
   item: {
     i18nKey: string;
@@ -47,14 +56,7 @@ export function ActStep({
   const { colorScheme } = useColorScheme();
   const scheme = colorScheme === 'dark' ? 'dark' : 'light';
   const ocean = getOceanColors(scheme);
-
-  // frontWave → deep 그래디언트를 각 원 깊이에 맞춰 보간한 값
-  const STEP_CIRCLE_COLORS =
-    scheme === 'dark'
-      ? // dark: #162A58 → #0A1430
-        ['#152753', '#12234C', '#101F44', '#0E1B3C', '#0B1735']
-      : // light: #1E3D72 → #040B1A
-        ['#1B3767', '#162E58', '#112446', '#0C1A34', '#071125'];
+  const circleColors = STEP_CIRCLE_COLORS[scheme];
 
   const { t } = useTranslation();
   const circleRef = useRef<View>(null);
@@ -80,26 +82,17 @@ export function ActStep({
     }
   };
 
-  const ripples = [
-    {
-      scale: 1.25,
-      opacity: 0.3,
-      border: 1.2,
-      color: ocean.horizon,
-    },
-    {
-      scale: 1.6,
-      opacity: 0.15,
-      border: 1,
-      color: ocean.midWave,
-    },
-    {
-      scale: 2.1,
-      opacity: 0.06,
-      border: 0.8,
-      color: ocean.foreWave,
-    },
-  ];
+  const oceanColors = [ocean.horizon, ocean.midWave, ocean.foreWave];
+  const ripples = useMemo(
+    () =>
+      RIPPLE_SCALES.map((scale, i) => ({
+        scale,
+        opacity: RIPPLE_OPACITIES[i],
+        border: RIPPLE_BORDERS[i],
+        color: oceanColors[i],
+      })),
+    [oceanColors[0], oceanColors[1], oceanColors[2]],
+  );
 
   return (
     <View className="w-full flex-col gap-40">
@@ -136,7 +129,7 @@ export function ActStep({
               style={{
                 width: BubbleSize,
                 height: BubbleSize,
-                backgroundColor: STEP_CIRCLE_COLORS[index],
+                backgroundColor: circleColors[index],
                 borderWidth: 1.5,
                 borderColor: 'rgba(255, 255, 255, 0.5)',
               }}

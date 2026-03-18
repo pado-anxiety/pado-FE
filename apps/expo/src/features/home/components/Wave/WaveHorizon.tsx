@@ -39,6 +39,13 @@ import MidgroundBackWave from './MidgroundBackWave';
 import MidgroundWave from './MidgroundWave';
 import { createWavePath, getExtraHeight } from './wave-path-utils';
 
+/** Depth overflow for the ocean gradient area (px) */
+const DEPTH_OVERFLOW = 2000;
+/** Overlap correction between wave canvas and depth gradient (px) */
+const WAVE_DEPTH_OVERLAP = -2;
+/** Default gradient height ratio relative to screen height */
+const DEFAULT_GRADIENT_RATIO = 0.45;
+
 interface WaveHorizonProps {
   /** 파도 간격 스케일 - 1.0 = 기본 간격, > 1.0 = 간격 확대, < 1.0 = 간격 축소 */
   gapScale?: SharedValue<number>;
@@ -256,9 +263,9 @@ export function WaveHorizon({
 
         <View
           style={{
-            paddingBottom: 2000,
-            marginBottom: -2000,
-            marginTop: -2,
+            paddingBottom: DEPTH_OVERFLOW,
+            marginBottom: -DEPTH_OVERFLOW,
+            marginTop: WAVE_DEPTH_OVERLAP,
           }}
         >
           <Canvas
@@ -273,7 +280,7 @@ export function WaveHorizon({
             <Fill>
               <LinearGradient
                 start={vec(0, 0)}
-                end={vec(0, gradientHeight ?? height * 0.45)}
+                end={vec(0, gradientHeight ?? height * DEFAULT_GRADIENT_RATIO)}
                 colors={oceanColors.depthGradient}
               />
             </Fill>

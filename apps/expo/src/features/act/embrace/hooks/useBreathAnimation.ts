@@ -14,6 +14,27 @@ import {
 
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+const BREATH_WAVE_PARAMS = {
+  /** 파도 초기 Y 위치 (아래쪽) */
+  INITIAL_BASE_Y: 0.55,
+  /** 호흡 시작 시 파도 Y 위치 */
+  START_Y: 0.9,
+  /** 흡입 시 상승 비율 (1 사이클 이동량 대비) */
+  INHALE_RISE_RATIO: 1.2,
+  /** 호기 시 하강 비율 (1 사이클 이동량 대비) */
+  EXHALE_DROP_RATIO: 0.5,
+  /** 사이클별 Y 감소 비율 */
+  CYCLE_DECAY_RATIO: 0.7,
+  /** 호흡 시작 준비 애니메이션 duration (초) */
+  PREPARE_DURATION: 2,
+  /** 완료 후 파도 퇴장 Y 위치 */
+  EXIT_Y: -0.3,
+  /** 완료 후 파도 퇴장 duration (초) */
+  EXIT_DURATION: 4,
+  /** 재시작 시 파도 복귀 duration (초) */
+  RESTART_DURATION: 3,
+};
+
 export function useBreathAnimation() {
   const { t } = useTranslation();
   const [isStarted, setIsStarted] = useState(false);
@@ -25,7 +46,7 @@ export function useBreathAnimation() {
   // Shared value for wave animation (0 = exhale, 1 = inhale)
   const breathProgress = useSharedValue(0);
   // Shared value for wave base Y position (1 = bottom, 0 = top)
-  const waveBaseY = useSharedValue(0.55);
+  const waveBaseY = useSharedValue(BREATH_WAVE_PARAMS.INITIAL_BASE_Y);
 
   const hapticIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const abortRef = useRef(false);
@@ -69,27 +90,28 @@ export function useBreathAnimation() {
     [],
   );
 
-  const handleStartClick = useCallback(async () => {
+  const startBreathingSession = useCallback(async () => {
     abortRef.current = false;
     setIsStarted(true);
     setIsCompleted(false);
 
+    const { START_Y, INHALE_RISE_RATIO, EXHALE_DROP_RATIO, CYCLE_DECAY_RATIO, PREPARE_DURATION, EXIT_Y, EXIT_DURATION } = BREATH_WAVE_PARAMS;
+
     // 파도를 아래로 내린 뒤 호흡 시작
-    await animateValue(waveBaseY, 0.9, 2);
+    await animateValue(waveBaseY, START_Y, PREPARE_DURATION);
 
     startHapticLoop();
 
-    const startY = 0.9;
-    waveBaseY.value = startY;
+    waveBaseY.value = START_Y;
 
-    const risePerCycle = startY / BREATH_TIMING.CYCLE_COUNT;
-    const inhaleRise = risePerCycle * 1.2;
-    const exhaleDrop = risePerCycle * 0.5;
+    const risePerCycle = START_Y / BREATH_TIMING.CYCLE_COUNT;
+    const inhaleRise = risePerCycle * INHALE_RISE_RATIO;
+    const exhaleDrop = risePerCycle * EXHALE_DROP_RATIO;
 
     for (let i = 0; i < BREATH_TIMING.CYCLE_COUNT; i++) {
       if (abortRef.current) break;
 
-      const currentY = i === 0 ? startY : startY - i * risePerCycle * 0.7;
+      const currentY = i === 0 ? START_Y : START_Y - i * risePerCycle * CYCLE_DECAY_RATIO;
 
       // Inhale
       await Promise.all([
@@ -127,7 +149,7 @@ export function useBreathAnimation() {
     setTimer(0);
 
     // Final animation: waves rise off screen
-    await animateValue(waveBaseY, -0.3, 4);
+    await animateValue(waveBaseY, EXIT_Y, EXIT_DURATION);
 
     setBreathText(t(BREATH_TEXT_KEYS.COMPLETED));
     setSessionCount((prev) => prev + 1);
@@ -150,15 +172,15 @@ export function useBreathAnimation() {
     breathProgress.value = 0;
 
     // Animate waves back down
-    await animateValue(waveBaseY, 0.9, 3);
+    await animateValue(waveBaseY, BREATH_WAVE_PARAMS.START_Y, BREATH_WAVE_PARAMS.RESTART_DURATION);
 
-    handleStartClick();
+    startBreathingSession();
   }, [
     stopHapticLoop,
     breathProgress,
     waveBaseY,
     animateValue,
-    handleStartClick,
+    startBreathingSession,
     t,
   ]);
 
@@ -174,7 +196,9 @@ export function useBreathAnimation() {
     sessionCount,
     breathProgress,
     waveBaseY,
-    handleStartClick,
+    startBreathingSession,
+    /** @deprecated Use startBreathingSession instead */
+    handleStartClick: startBreathingSession,
     handleRestart,
     getTotalBreathingTime,
   };

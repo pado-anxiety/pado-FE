@@ -86,6 +86,8 @@ export const EMOTION_CATEGORIES: EmotionCategory[] = [
   },
 ];
 
+export const DAY_LABELS = ['일', '월', '화', '수', '목', '금', '토'] as const;
+
 export const STEP_LABELS = ['상황', '생각', '감정'] as const;
 export const STEP_BUTTON_LABELS = [
   '상황 기록하기',

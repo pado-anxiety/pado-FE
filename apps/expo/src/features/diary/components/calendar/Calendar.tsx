@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 
 import { Feather } from '@expo/vector-icons';
 import { useColorScheme } from 'nativewind';
@@ -9,7 +9,24 @@ import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 import { Text } from '@src/components/ui';
 import { hexToRgba } from '@src/lib/theme';
 
-const DAY_LABELS = ['일', '월', '화', '수', '목', '금', '토'];
+import { DAY_LABELS } from '../../constants';
+
+const CALENDAR = {
+  CELL_HEIGHT: 52,
+  SELECTED_SIZE: 36,
+  SELECTED_RADIUS: 8,
+  SELECTED_BORDER_WIDTH: 1.5,
+  DOT_SIZE: 4,
+  DOT_BOTTOM: 5,
+  STREAK_INSET: 4,
+  STREAK_RADIUS: 10,
+  STREAK_TOP: 6,
+  STREAK_BOTTOM: 10,
+  MONTH_NAV_MARGIN_BOTTOM: 12,
+  DAY_LABELS_MARGIN_BOTTOM: 4,
+  NAV_ICON_SIZE: 24,
+  NAV_HIT_SLOP: 12,
+} as const;
 
 interface CalendarProps {
   markedDates: Set<string>;
@@ -32,7 +49,7 @@ function formatDateString(year: number, month: number, day: number): string {
   return `${year}-${m}-${d}`;
 }
 
-function isToday(year: number, month: number, day: number): boolean {
+function checkIsToday(year: number, month: number, day: number): boolean {
   const now = new Date();
   return (
     now.getFullYear() === year &&
@@ -40,6 +57,151 @@ function isToday(year: number, month: number, day: number): boolean {
     now.getDate() === day
   );
 }
+
+function getDayLabelColor(dayIndex: number): string {
+  if (dayIndex === 0) return 'rgba(255,120,120,0.7)';
+  if (dayIndex === 6) return 'rgba(120,160,255,0.7)';
+  return 'rgba(255,255,255,0.5)';
+}
+
+function getDayTextStyle(
+  today: boolean,
+  isSelected: boolean,
+  hasEntry: boolean,
+): { color: string; fontFamily: string } {
+  const isBold = today || isSelected || hasEntry;
+  return {
+    color: today || isSelected || hasEntry ? '#fff' : 'rgba(255,255,255,0.8)',
+    fontFamily: isBold ? 'Pretendard-SemiBold' : 'Pretendard-Regular',
+  };
+}
+
+interface CalendarDayCellProps {
+  day: number;
+  viewYear: number;
+  viewMonth: number;
+  markedDates: Set<string>;
+  selectedDate?: string | null;
+  accent: string;
+  week: (number | null)[];
+  dayIndex: number;
+  onDatePress: (dateString: string) => void;
+}
+
+const CalendarDayCell = memo(function CalendarDayCell({
+  day,
+  viewYear,
+  viewMonth,
+  markedDates,
+  selectedDate,
+  accent,
+  week,
+  dayIndex,
+  onDatePress,
+}: CalendarDayCellProps) {
+  const dateStr = formatDateString(viewYear, viewMonth, day);
+  const today = checkIsToday(viewYear, viewMonth, day);
+  const hasEntry = markedDates.has(dateStr);
+  const isSelected = selectedDate === dateStr;
+
+  // Streak detection — check adjacent cells in same row
+  const prevInRow =
+    hasEntry &&
+    dayIndex > 0 &&
+    week[dayIndex - 1] !== null &&
+    markedDates.has(
+      formatDateString(viewYear, viewMonth, week[dayIndex - 1]!),
+    );
+  const nextInRow =
+    hasEntry &&
+    dayIndex < 6 &&
+    week[dayIndex + 1] !== null &&
+    markedDates.has(
+      formatDateString(viewYear, viewMonth, week[dayIndex + 1]!),
+    );
+
+  const textStyle = getDayTextStyle(today, isSelected, hasEntry);
+
+  return (
+    <Pressable
+      onPress={() => onDatePress(dateStr)}
+      style={{
+        flex: 1,
+        height: CALENDAR.CELL_HEIGHT,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      {/* Streak tint background */}
+      {hasEntry && (
+        <View
+          style={{
+            position: 'absolute',
+            top: CALENDAR.STREAK_TOP,
+            bottom: CALENDAR.STREAK_BOTTOM,
+            left: prevInRow ? 0 : CALENDAR.STREAK_INSET,
+            right: nextInRow ? 0 : CALENDAR.STREAK_INSET,
+            borderTopLeftRadius: prevInRow ? 0 : CALENDAR.STREAK_RADIUS,
+            borderBottomLeftRadius: prevInRow ? 0 : CALENDAR.STREAK_RADIUS,
+            borderTopRightRadius: nextInRow ? 0 : CALENDAR.STREAK_RADIUS,
+            borderBottomRightRadius: nextInRow ? 0 : CALENDAR.STREAK_RADIUS,
+          }}
+        />
+      )}
+
+      {/* Today highlight */}
+      {today && (
+        <View
+          style={{
+            position: 'absolute',
+            width: CALENDAR.SELECTED_SIZE,
+            height: CALENDAR.SELECTED_SIZE,
+            borderRadius: CALENDAR.SELECTED_RADIUS,
+            borderWidth: CALENDAR.SELECTED_BORDER_WIDTH,
+            borderColor: 'rgba(255,255,255,0.3)',
+            backgroundColor: 'rgba(255,255,255,0.1)',
+          }}
+        />
+      )}
+
+      {/* Selected — square border */}
+      {isSelected && !today && (
+        <View
+          style={{
+            position: 'absolute',
+            width: CALENDAR.SELECTED_SIZE,
+            height: CALENDAR.SELECTED_SIZE,
+            borderRadius: CALENDAR.SELECTED_RADIUS,
+            borderWidth: CALENDAR.SELECTED_BORDER_WIDTH,
+            borderColor: hexToRgba(accent, 0.8),
+            backgroundColor: hexToRgba(accent, 0.25),
+          }}
+        />
+      )}
+
+      <Text
+        preset="body"
+        style={textStyle}
+      >
+        {day}
+      </Text>
+
+      {/* Dot — hide when today or selected */}
+      {hasEntry && !today && !isSelected && (
+        <View
+          style={{
+            position: 'absolute',
+            bottom: CALENDAR.DOT_BOTTOM,
+            width: CALENDAR.DOT_SIZE,
+            height: CALENDAR.DOT_SIZE,
+            borderRadius: CALENDAR.DOT_SIZE / 2,
+            backgroundColor: accent,
+          }}
+        />
+      )}
+    </Pressable>
+  );
+});
 
 export function Calendar({
   markedDates,
@@ -61,28 +223,46 @@ export function Calendar({
 
   const goPrev = useCallback(() => {
     setViewMonth((prev) => {
+      let newMonth: number;
       if (prev === 0) {
-        setViewYear((y) => y - 1);
-        return 11;
+        setViewYear((y) => {
+          const newYear = y - 1;
+          onMonthChange?.(newYear, 12);
+          return newYear;
+        });
+        newMonth = 11;
+      } else {
+        newMonth = prev - 1;
+        // Use current viewYear since it hasn't changed
+        setViewYear((y) => {
+          onMonthChange?.(y, newMonth + 1);
+          return y;
+        });
       }
-      return prev - 1;
+      return newMonth;
     });
-  }, []);
+  }, [onMonthChange]);
 
   const goNext = useCallback(() => {
     setViewMonth((prev) => {
+      let newMonth: number;
       if (prev === 11) {
-        setViewYear((y) => y + 1);
-        return 0;
+        setViewYear((y) => {
+          const newYear = y + 1;
+          onMonthChange?.(newYear, 1);
+          return newYear;
+        });
+        newMonth = 0;
+      } else {
+        newMonth = prev + 1;
+        setViewYear((y) => {
+          onMonthChange?.(y, newMonth + 1);
+          return y;
+        });
       }
-      return prev + 1;
+      return newMonth;
     });
-  }, []);
-
-  // Notify parent when month changes
-  useEffect(() => {
-    onMonthChange?.(viewYear, viewMonth + 1);
-  }, [viewYear, viewMonth, onMonthChange]);
+  }, [onMonthChange]);
 
   // Build calendar grid
   const cells: (number | null)[] = [];
@@ -105,16 +285,16 @@ export function Calendar({
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
-          marginBottom: 12,
+          marginBottom: CALENDAR.MONTH_NAV_MARGIN_BOTTOM,
         }}
       >
         <Pressable
           onPress={goPrev}
-          hitSlop={12}
+          hitSlop={CALENDAR.NAV_HIT_SLOP}
         >
           <Feather
             name="chevron-left"
-            size={24}
+            size={CALENDAR.NAV_ICON_SIZE}
             color="rgba(255,255,255,0.7)"
           />
         </Pressable>
@@ -127,18 +307,18 @@ export function Calendar({
         </Text>
         <Pressable
           onPress={goNext}
-          hitSlop={12}
+          hitSlop={CALENDAR.NAV_HIT_SLOP}
         >
           <Feather
             name="chevron-right"
-            size={24}
+            size={CALENDAR.NAV_ICON_SIZE}
             color="rgba(255,255,255,0.7)"
           />
         </Pressable>
       </View>
 
       {/* Day labels */}
-      <View style={{ flexDirection: 'row', marginBottom: 4 }}>
+      <View style={{ flexDirection: 'row', marginBottom: CALENDAR.DAY_LABELS_MARGIN_BOTTOM }}>
         {DAY_LABELS.map((label, i) => (
           <View
             key={label}
@@ -146,14 +326,7 @@ export function Calendar({
           >
             <Text
               preset="sub"
-              style={{
-                color:
-                  i === 0
-                    ? 'rgba(255,120,120,0.7)'
-                    : i === 6
-                      ? 'rgba(120,160,255,0.7)'
-                      : 'rgba(255,255,255,0.5)',
-              }}
+              style={{ color: getDayLabelColor(i) }}
             >
               {label}
             </Text>
@@ -172,124 +345,24 @@ export function Calendar({
               return (
                 <View
                   key={`empty-${di}`}
-                  style={{ flex: 1, height: 52 }}
+                  style={{ flex: 1, height: CALENDAR.CELL_HEIGHT }}
                 />
               );
             }
 
-            const dateStr = formatDateString(viewYear, viewMonth, day);
-            const today = isToday(viewYear, viewMonth, day);
-            const hasEntry = markedDates.has(dateStr);
-            const isSelected = selectedDate === dateStr;
-
-            // Streak detection — check adjacent cells in same row
-            const prevInRow =
-              hasEntry &&
-              di > 0 &&
-              week[di - 1] !== null &&
-              markedDates.has(
-                formatDateString(viewYear, viewMonth, week[di - 1]!),
-              );
-            const nextInRow =
-              hasEntry &&
-              di < 6 &&
-              week[di + 1] !== null &&
-              markedDates.has(
-                formatDateString(viewYear, viewMonth, week[di + 1]!),
-              );
-
             return (
-              <Pressable
+              <CalendarDayCell
                 key={day}
-                onPress={() => onDatePress(dateStr)}
-                style={{
-                  flex: 1,
-                  height: 52,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                {/* Streak tint background */}
-                {hasEntry && (
-                  <View
-                    style={{
-                      position: 'absolute',
-                      top: 6,
-                      bottom: 10,
-                      left: prevInRow ? 0 : 4,
-                      right: nextInRow ? 0 : 4,
-                      // backgroundColor: hexToRgba(accent, 0.1),
-                      borderTopLeftRadius: prevInRow ? 0 : 10,
-                      borderBottomLeftRadius: prevInRow ? 0 : 10,
-                      borderTopRightRadius: nextInRow ? 0 : 10,
-                      borderBottomRightRadius: nextInRow ? 0 : 10,
-                    }}
-                  />
-                )}
-
-                {/* Today highlight — square border like selected, transparent fill */}
-                {today && (
-                  <View
-                    style={{
-                      position: 'absolute',
-                      width: 36,
-                      height: 36,
-                      borderRadius: 8,
-                      borderWidth: 1.5,
-                      borderColor: 'rgba(255,255,255,0.3)',
-                      backgroundColor: 'rgba(255,255,255,0.1)',
-                    }}
-                  />
-                )}
-
-                {/* Selected — square border */}
-                {isSelected && !today && (
-                  <View
-                    style={{
-                      position: 'absolute',
-                      width: 36,
-                      height: 36,
-                      borderRadius: 8,
-                      borderWidth: 1.5,
-                      borderColor: hexToRgba(accent, 0.8),
-                      backgroundColor: hexToRgba(accent, 0.25),
-                    }}
-                  />
-                )}
-
-                <Text
-                  preset="body"
-                  style={{
-                    color: today
-                      ? '#fff'
-                      : isSelected
-                        ? '#fff'
-                        : hasEntry
-                          ? '#fff'
-                          : 'rgba(255,255,255,0.8)',
-                    fontFamily:
-                      today || hasEntry || isSelected
-                        ? 'Pretendard-SemiBold'
-                        : 'Pretendard-Regular',
-                  }}
-                >
-                  {day}
-                </Text>
-
-                {/* Dot — hide when today or selected */}
-                {hasEntry && !today && !isSelected && (
-                  <View
-                    style={{
-                      position: 'absolute',
-                      bottom: 5,
-                      width: 4,
-                      height: 4,
-                      borderRadius: 2,
-                      backgroundColor: accent,
-                    }}
-                  />
-                )}
-              </Pressable>
+                day={day}
+                viewYear={viewYear}
+                viewMonth={viewMonth}
+                markedDates={markedDates}
+                selectedDate={selectedDate}
+                accent={accent}
+                week={week}
+                dayIndex={di}
+                onDatePress={onDatePress}
+              />
             );
           })}
         </View>

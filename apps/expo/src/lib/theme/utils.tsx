@@ -49,9 +49,8 @@ export const useTheme = () => {
     [setColorScheme],
   );
 
-  const themeStyle = useMemo(() => {
-    return colorScheme === 'dark' ? themeVars.dark : themeVars.light;
-  }, [colorScheme]);
+  const themeStyle =
+    colorScheme === 'dark' ? themeVars.dark : themeVars.light;
 
   const pageBgColor = useMemo(() => {
     const tokens =
