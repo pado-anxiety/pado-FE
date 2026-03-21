@@ -1,0 +1,13 @@
+# 릴리즈 문서 템플릿
+# 파일명: v{major}.{minor}.{patch}.yml (예: v2.4.0.yml)
+# 이 파일이 버전의 source of truth. package.json은 빌드 시 자동 동기화됨.
+
+ko:
+  whatsNew: |
+    - 변경 사항 1
+    - 변경 사항 2
+
+en:
+  whatsNew: |
+    - Change 1
+    - Change 2

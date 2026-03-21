@@ -24,6 +24,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       CFBundleLocalizations: ['en', 'ko'],
       CFBundleDisplayName: ClientEnv.NAME,
       UIBackgroundModes: ['remote-notification'],
+      ITSAppUsesNonExemptEncryption: false,
     },
     usesAppleSignIn: true,
     entitlements: {

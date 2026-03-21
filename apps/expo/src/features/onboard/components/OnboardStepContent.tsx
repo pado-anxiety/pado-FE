@@ -85,17 +85,21 @@ export function StepContent({
         {texts.slice(0, visibleTextCount).map((text, index) => (
           <Animated.View
             key={`${stepKey}-text-${index}`}
+            className="w-full"
             entering={FadeIn.duration(ANIMATION.TEXT_FADE_IN).easing(
               EASE_OUT_CUBIC,
             )}
           >
-            <Text
-              bold
-              className="text-center text-white"
-              style={{ fontSize: 24, lineHeight: 32 }}
-            >
-              {text}
-            </Text>
+            {text.split('\n').map((line, lineIndex) => (
+              <Text
+                key={lineIndex}
+                bold
+                className="text-center text-white"
+                style={{ fontSize: 24, lineHeight: 32 }}
+              >
+                {line}
+              </Text>
+            ))}
           </Animated.View>
         ))}
       </View>

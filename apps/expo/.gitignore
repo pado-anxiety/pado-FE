@@ -88,3 +88,7 @@ google-services.json
 scripts/build-ios-local.sh
 
 *.ipa
+
+# ASC API credentials
+.asc.env
+keys/

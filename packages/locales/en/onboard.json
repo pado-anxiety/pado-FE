@@ -9,15 +9,15 @@
       "button": "Tap to continue"
     },
     "step3": {
-      "texts": ["Anxiety isn't something to get rid of —\nit's a natural feeling, like a wave\nthat comes and goes."],
+      "texts": ["Anxiety isn't something\nto get rid of —\nit's a natural feeling,\nlike a wave\nthat comes and goes."],
       "button": "Tap to continue"
     },
     "step4": {
-      "texts": ["Even in those waves,\nyou can find your balance."],
+      "texts": ["But even in those waves,\nyou can find your balance."],
       "button": "Tap to continue"
     },
     "step5": {
-      "texts": ["Start practicing to move forward,\ntogether with the waves."],
+      "texts": ["Learn to manage your anxiety\nand move forward —\ntogether with the waves."],
       "button": "Get started"
     }
   }
