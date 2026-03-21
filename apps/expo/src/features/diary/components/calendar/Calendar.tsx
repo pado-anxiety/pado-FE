@@ -109,16 +109,12 @@ const CalendarDayCell = memo(function CalendarDayCell({
     hasEntry &&
     dayIndex > 0 &&
     week[dayIndex - 1] !== null &&
-    markedDates.has(
-      formatDateString(viewYear, viewMonth, week[dayIndex - 1]!),
-    );
+    markedDates.has(formatDateString(viewYear, viewMonth, week[dayIndex - 1]!));
   const nextInRow =
     hasEntry &&
     dayIndex < 6 &&
     week[dayIndex + 1] !== null &&
-    markedDates.has(
-      formatDateString(viewYear, viewMonth, week[dayIndex + 1]!),
-    );
+    markedDates.has(formatDateString(viewYear, viewMonth, week[dayIndex + 1]!));
 
   const textStyle = getDayTextStyle(today, isSelected, hasEntry);
 
@@ -318,7 +314,12 @@ export function Calendar({
       </View>
 
       {/* Day labels */}
-      <View style={{ flexDirection: 'row', marginBottom: CALENDAR.DAY_LABELS_MARGIN_BOTTOM }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          marginBottom: CALENDAR.DAY_LABELS_MARGIN_BOTTOM,
+        }}
+      >
         {DAY_LABELS.map((label, i) => (
           <View
             key={label}

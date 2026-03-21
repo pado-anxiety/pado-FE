@@ -30,9 +30,24 @@ type MenuItem = {
 };
 
 const MENU_ITEMS: MenuItem[] = [
-  { i18nKey: 'home.menu.chatWithWind', page: 'CHAT', animDelay: 1700, chevronDuration: 2500 },
-  { i18nKey: 'home.menu.viewActHistory', page: 'HISTORY', animDelay: 1500, chevronDuration: 1500 },
-  { i18nKey: 'home.menu.learning', page: 'LEARNING', animDelay: 1500, chevronDuration: 2000 },
+  {
+    i18nKey: 'home.menu.chatWithWind',
+    page: 'CHAT',
+    animDelay: 1700,
+    chevronDuration: 2500,
+  },
+  {
+    i18nKey: 'home.menu.viewActHistory',
+    page: 'HISTORY',
+    animDelay: 1500,
+    chevronDuration: 1500,
+  },
+  {
+    i18nKey: 'home.menu.learning',
+    page: 'LEARNING',
+    animDelay: 1500,
+    chevronDuration: 2000,
+  },
 ];
 
 const messageIds = [
@@ -106,7 +121,7 @@ export function SkySection({
           <Animated.View entering={FadeIn.duration(1500)}>
             <TouchableOpacity
               activeOpacity={1}
-              className="bg-btn-dark flex-row items-center gap-2 rounded-2xl px-6 py-3"
+              className="flex-row items-center gap-2 rounded-2xl bg-btn-dark px-6 py-3"
               onPress={() => {
                 triggerHaptic('NAVIGATE');
                 setPage('DIARY');
@@ -147,7 +162,9 @@ export function SkySection({
               >
                 {t(menuItem.i18nKey)}
               </AnimatedText>
-              <Animated.View entering={FadeIn.duration(menuItem.chevronDuration)}>
+              <Animated.View
+                entering={FadeIn.duration(menuItem.chevronDuration)}
+              >
                 <MaterialIcons
                   name="chevron-right"
                   size={ICONS_SIZE.large}
