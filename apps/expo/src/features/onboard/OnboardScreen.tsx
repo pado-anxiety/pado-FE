@@ -3,7 +3,6 @@ import { useCallback, useEffect } from 'react';
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scale } from 'react-native-size-matters';
 
@@ -15,9 +14,8 @@ import { ANALYTICS_KEY, useAnalytics } from '@src/lib/analytics';
 import { useDuration } from '@src/lib/analytics/useDuration';
 import { ROUTES } from '@src/lib/route';
 
-import { BreathContent, StepContent } from './components';
+import { StepContent } from './components';
 import { ONBOARD_STEPS } from './constants';
-import { useBreathing } from './hooks';
 import { OnboardContext, OnboardStepId, OnboardStepMeta } from './types';
 
 /**
@@ -35,14 +33,6 @@ export function OnboardScreen() {
     trackOnboardExit,
   } = useAnalytics();
   const { getDuration, resetDuration } = useDuration();
-  const {
-    isBreathing,
-    breathText,
-    breathTimer,
-    waveOffset,
-    waveGapScale,
-    startBreathing,
-  } = useBreathing();
 
   // 온보딩 시작 추적
   useEffect(() => {
@@ -79,74 +69,31 @@ export function OnboardScreen() {
     const duration = getDuration();
     const currentIndex = funnel.currentIndex;
 
-    // 애널리틱스 추적
     trackFunnelNext(ANALYTICS_KEY.ONBOARD, duration, currentIndex);
     resetDuration();
 
-    // 호흡 스텝인 경우
-    if (meta.type === 'breathing') {
-      const completed = await startBreathing();
-      if (completed) {
-        await funnel.history.push();
-      }
-      return;
-    }
-
-    // 마지막 스텝인 경우 (onComplete 호출됨)
-    if (funnel.isLast) {
-      await funnel.history.push();
-      return;
-    }
-
-    // 일반 스텝 전환
     await funnel.history.push();
-  }, [
-    funnel,
-    meta.type,
-    getDuration,
-    resetDuration,
-    trackFunnelNext,
-    startBreathing,
-  ]);
-
-  // 파도 위치 애니메이션 (translateY로 WaveHorizon 전체 이동)
-  const waveAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: waveOffset.value }],
-  }));
+  }, [funnel, getDuration, resetDuration, trackFunnelNext]);
 
   return (
     <View
       className="flex-1 bg-page"
       style={{ paddingTop: insets.top }}
     >
-      {/* 파도 애니메이션 - translateY로 위아래 이동, gapScale로 수평선 간격 조절 */}
-      <Animated.View style={waveAnimatedStyle}>
-        <WaveHorizon
-          gapScale={waveGapScale}
-          clockSpeed={0.0012}
-        />
-      </Animated.View>
+      <WaveHorizon clockSpeed={0.0012} />
 
-      {/* 컨텐츠 영역 - 파도와 겹침 */}
       <View
         className="flex-1 justify-between bg-transparent py-8"
         style={{
           paddingBottom: insets.bottom + scale(20),
         }}
       >
-        {isBreathing ? (
-          <BreathContent
-            breathText={breathText}
-            timer={breathTimer}
-          />
-        ) : (
-          <StepContent
-            texts={texts}
-            buttonText={buttonText}
-            onNext={handleNext}
-            stepKey={funnel.currentStep}
-          />
-        )}
+        <StepContent
+          texts={texts}
+          buttonText={buttonText}
+          onNext={handleNext}
+          stepKey={funnel.currentStep}
+        />
       </View>
     </View>
   );

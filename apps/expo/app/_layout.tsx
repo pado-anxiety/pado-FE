@@ -169,7 +169,7 @@ function RootLayout(): React.ReactNode {
       apiKey="phc_STfQdw7sqejGKYfg1kZOhlKOKiSfr9KrebaKA8MucxW"
       options={{
         host: 'https://us.i.posthog.com',
-        enableSessionReplay: true,
+        enableSessionReplay: false,
         sessionReplayConfig: {
           maskAllTextInputs: true,
           maskAllImages: true,

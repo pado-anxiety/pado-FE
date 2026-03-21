@@ -1,29 +1,24 @@
 {
   "steps": {
     "step1": {
-      "texts": ["The waves of anxiety\naren't something to overcome."],
+      "texts": ["Have you felt anxious lately?"],
       "button": "Tap to continue"
     },
     "step2": {
-      "texts": ["They're a natural rhythm\nthat flows with our lives."],
+      "texts": ["When anxiety hits,\nwhat do you do?"],
       "button": "Tap to continue"
     },
     "step3": {
-      "texts": ["We help you manage anxiety with ACT (Acceptance and Commitment Therapy)."],
+      "texts": ["Anxiety isn't something to get rid of —\nit's a natural feeling, like a wave\nthat comes and goes."],
       "button": "Tap to continue"
     },
     "step4": {
-      "texts": ["Let's start with a simple breathing exercise."],
+      "texts": ["Even in those waves,\nyou can find your balance."],
       "button": "Tap to continue"
     },
     "step5": {
-      "texts": ["Feeling more at ease?\nLet's get started with Pado."],
-      "button": "Tap to continue"
+      "texts": ["Start practicing to move forward,\ntogether with the waves."],
+      "button": "Get started"
     }
-  },
-  "breath": {
-    "inhale": "Breathe in deeply",
-    "hold": "Hold your breath gently",
-    "exhale": "Breathe out slowly"
   }
 }

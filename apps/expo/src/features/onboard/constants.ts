@@ -11,26 +11,23 @@ export const ONBOARD_STEPS: readonly FunnelStep<
   OnboardStepId
 >[] = [
   {
-    id: 'philosophy1' satisfies OnboardStepId,
+    id: 'question1' satisfies OnboardStepId,
     meta: { type: 'text', i18nKey: 'onboard.steps.step1' } satisfies OnboardStepMeta,
   },
   {
-    id: 'philosophy2' satisfies OnboardStepId,
+    id: 'question2' satisfies OnboardStepId,
     meta: { type: 'text', i18nKey: 'onboard.steps.step2' } satisfies OnboardStepMeta,
   },
   {
-    id: 'value' satisfies OnboardStepId,
+    id: 'reframe' satisfies OnboardStepId,
     meta: { type: 'text', i18nKey: 'onboard.steps.step3' } satisfies OnboardStepMeta,
   },
   {
-    id: 'breathing' satisfies OnboardStepId,
-    meta: {
-      type: 'breathing',
-      i18nKey: 'onboard.steps.step4',
-    } satisfies OnboardStepMeta,
+    id: 'balance' satisfies OnboardStepId,
+    meta: { type: 'text', i18nKey: 'onboard.steps.step4' } satisfies OnboardStepMeta,
   },
   {
-    id: 'complete' satisfies OnboardStepId,
+    id: 'cta' satisfies OnboardStepId,
     meta: {
       type: 'final',
       i18nKey: 'onboard.steps.step5',
@@ -50,20 +47,4 @@ export const ANIMATION = {
   BUTTON_DELAY_MULTIPLIER: 500,
   /** 스텝 전환 페이드아웃 (ms) */
   STEP_FADE_OUT: 400,
-} as const;
-
-/**
- * 호흡 타이밍 상수
- */
-export const BREATH = {
-  /** 들이쉬기 (초) */
-  INHALE: 4,
-  /** 참기 (초) */
-  HOLD: 7,
-  /** 내쉬기 (초) */
-  EXHALE: 8,
-  /** 반복 횟수 */
-  CYCLE_COUNT: 1,
-  /** 햅틱 간격 (ms) */
-  HAPTIC_INTERVAL: 500,
 } as const;
