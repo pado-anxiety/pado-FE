@@ -2,6 +2,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { TextInput } from 'react-native';
 
 import { useFunnel } from '@src/hooks/useFunnel';
@@ -20,6 +21,7 @@ const normalize = (text: string) => text.trim().replace(/\n{2,}/g, '\n');
 
 export function useDiaryWrite() {
   const router = useRouter();
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const textInputRef = useRef<TextInput>(null);
 
@@ -33,7 +35,7 @@ export function useDiaryWrite() {
         await diaryAPI.create({
           situation: ctx.situation,
           thoughts: ctx.thought,
-          feelings: ctx.emotions,
+          feelings: ctx.emotions.map((key) => t(`diary.emotions.${key}`)),
         });
       } catch (e) {
         console.error('[diary] create failed:', e);

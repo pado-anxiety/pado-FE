@@ -6,11 +6,6 @@ import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { Button, Divider, Text, View } from '@src/components/ui';
 import { DiaryDetail } from '@src/lib/api/diary';
 
-function formatDisplayDate(dateStr: string): string {
-  const [, month, day] = dateStr.split('-');
-  return `${parseInt(month)}월 ${parseInt(day)}일`;
-}
-
 function isTodayDate(dateStr: string): boolean {
   return dateStr === new Date().toISOString().substring(0, 10);
 }
@@ -70,7 +65,15 @@ export function DiaryEntryDetail({
 }: DiaryEntryDetailProps) {
   const { t } = useTranslation();
   const isToday = isTodayDate(date);
-  const displayDate = formatDisplayDate(date);
+
+  const [, monthStr, dayStr] = date.split('-');
+  const month = parseInt(monthStr);
+  const day = parseInt(dayStr);
+  const displayDate = t('diary.calendar.dateLabel', {
+    month,
+    day,
+    monthName: t(`diary.calendar.months.${month - 1}`),
+  });
 
   return (
     <Animated.View

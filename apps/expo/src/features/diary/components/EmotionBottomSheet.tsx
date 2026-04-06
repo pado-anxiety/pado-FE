@@ -44,7 +44,7 @@ export function useEmotionBottomSheet({
               bold
               className="text-sub"
             >
-              {category.label}
+              {t(`diary.emotionCategories.${category.label}`)}
             </Text>
             <EmotionChips
               emotions={category.emotions}

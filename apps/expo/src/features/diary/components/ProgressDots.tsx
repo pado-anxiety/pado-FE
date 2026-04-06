@@ -1,11 +1,12 @@
 import { useColorScheme } from 'nativewind';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
 import { Text } from '@src/components/ui';
 
-import { STEP_COUNT, STEP_LABELS } from '../constants';
+import { STEP_COUNT, STEP_IDS } from '../constants';
 
 interface ProgressDotsProps {
   currentStep: number;
@@ -22,6 +23,7 @@ function getStepColor(
 }
 
 export function ProgressDots({ currentStep }: ProgressDotsProps) {
+  const { t } = useTranslation();
   const { colorScheme } = useColorScheme();
   const tokens =
     colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
@@ -54,9 +56,9 @@ export function ProgressDots({ currentStep }: ProgressDotsProps) {
         ))}
       </View>
       <View style={{ flexDirection: 'row', gap: 6 }}>
-        {STEP_LABELS.map((label, i) => (
+        {STEP_IDS.map((id, i) => (
           <Text
-            key={i}
+            key={id}
             preset="caption"
             style={{
               flex: 1,
@@ -64,7 +66,7 @@ export function ProgressDots({ currentStep }: ProgressDotsProps) {
               color: getStepColor(i, currentStep, labelColors),
             }}
           >
-            {label}
+            {t(`diary.steps.${id}`)}
           </Text>
         ))}
       </View>

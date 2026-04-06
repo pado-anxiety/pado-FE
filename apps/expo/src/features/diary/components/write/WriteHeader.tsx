@@ -1,25 +1,33 @@
 import { useColorScheme } from 'nativewind';
+import { useTranslation } from 'react-i18next';
 
 import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
 import { NavButton, Text, View } from '@src/components/ui';
-
-import { DAY_LABELS } from '../../constants';
 
 interface WriteHeaderProps {
   onBack: () => void;
   onClose: () => void;
 }
 
-function getDateLabel(): string {
-  const d = new Date();
-  return `${d.getMonth() + 1}월 ${d.getDate()}일 ${DAY_LABELS[d.getDay()]}요일`;
-}
-
 export function WriteHeader({ onBack, onClose }: WriteHeaderProps) {
+  const { t } = useTranslation();
   const { colorScheme } = useColorScheme();
   const tokens =
     colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
+
+  const d = new Date();
+  const month = d.getMonth() + 1;
+  const day = d.getDate();
+  const dayName = t(`diary.calendar.days.${d.getDay()}`);
+  const monthName = t(`diary.calendar.months.${d.getMonth()}`);
+
+  const dateLabel = t('diary.calendar.dateLabelWithDay', {
+    month,
+    day,
+    dayName,
+    monthName,
+  });
 
   return (
     <View className="flex-row items-center px-6">
@@ -38,7 +46,7 @@ export function WriteHeader({ onBack, onClose }: WriteHeaderProps) {
           fontFamily: 'Pretendard-SemiBold',
         }}
       >
-        {getDateLabel()}
+        {dateLabel}
       </Text>
       <NavButton
         variant="close"

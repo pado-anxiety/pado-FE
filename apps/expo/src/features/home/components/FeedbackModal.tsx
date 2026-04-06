@@ -73,10 +73,10 @@ export function FeedbackModal({
             preset="body"
             bold
           >
-            사용하면서 느낀 점을 편하게 남겨주세요.
+            {t('common.settings.feedback.description')}
           </Text>
           <Text preset="body">
-            피드백은 서비스를 개선하는데 큰 도움이 됩니다.
+            {t('common.settings.feedback.encouragement')}
           </Text>
         </View>
         <View className="flex flex-col gap-3">

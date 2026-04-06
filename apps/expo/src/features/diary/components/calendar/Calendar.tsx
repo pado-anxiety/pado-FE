@@ -1,15 +1,14 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 
 import { Feather } from '@expo/vector-icons';
 import { useColorScheme } from 'nativewind';
+import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
 import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
 
 import { Text } from '@src/components/ui';
 import { hexToRgba } from '@src/lib/theme';
-
-import { DAY_LABELS } from '../../constants';
 
 const CALENDAR = {
   CELL_HEIGHT: 52,
@@ -205,6 +204,7 @@ export function Calendar({
   onDatePress,
   onMonthChange,
 }: CalendarProps) {
+  const { t } = useTranslation();
   const { colorScheme } = useColorScheme();
   const tokens =
     colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
@@ -216,6 +216,11 @@ export function Calendar({
 
   const daysInMonth = getDaysInMonth(viewYear, viewMonth);
   const firstDay = getFirstDayOfMonth(viewYear, viewMonth);
+
+  const dayLabels = useMemo(
+    () => Array.from({ length: 7 }, (_, i) => t(`diary.calendar.days.${i}`)),
+    [t],
+  );
 
   const goPrev = useCallback(() => {
     setViewMonth((prev) => {
@@ -271,7 +276,10 @@ export function Calendar({
     weeks.push(cells.slice(i, i + 7));
   }
 
-  const monthLabel = `${viewYear}년 ${viewMonth + 1}월`;
+  const monthLabel = t('diary.calendar.monthLabel', {
+    year: viewYear,
+    monthName: t(`diary.calendar.months.${viewMonth}`),
+  });
 
   return (
     <View>
@@ -320,9 +328,9 @@ export function Calendar({
           marginBottom: CALENDAR.DAY_LABELS_MARGIN_BOTTOM,
         }}
       >
-        {DAY_LABELS.map((label, i) => (
+        {dayLabels.map((label, i) => (
           <View
-            key={label}
+            key={i}
             style={{ flex: 1, alignItems: 'center' }}
           >
             <Text

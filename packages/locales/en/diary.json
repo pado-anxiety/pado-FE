@@ -5,7 +5,70 @@
     "empty": "No entries yet",
     "write": "Write Emotion Diary",
     "today": "Today",
-    "noEntry": "No diary for this day"
+    "noEntry": "No diary for this day",
+    "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    "days": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "monthLabel": "{{monthName}} {{year}}",
+    "dateLabel": "{{monthName}} {{day}}",
+    "dateLabelWithDay": "{{dayName}}, {{monthName}} {{day}}"
+  },
+  "steps": {
+    "situation": "Situation",
+    "thought": "Thought",
+    "emotion": "Emotion"
+  },
+  "chips": {
+    "situation": {
+      "atWork": "At work",
+      "atHome": "At home",
+      "inConversation": "During a conversation",
+      "alone": "While alone",
+      "browsingSns": "While on social media"
+    },
+    "thought": {
+      "cantDoWell": "I can't do this well",
+      "onlyMe": "It's just me",
+      "dontKnow": "I don't know what to do",
+      "messedUp": "I messed up again"
+    }
+  },
+  "emotions": {
+    "anxious": "Anxious",
+    "scared": "Scared",
+    "sad": "Sad",
+    "angry": "Angry",
+    "exhausted": "Exhausted",
+    "empty": "Empty",
+    "ashamed": "Ashamed",
+    "lonely": "Lonely",
+    "nervous": "Nervous",
+    "restless": "Restless",
+    "pressured": "Pressured",
+    "onEdge": "On edge",
+    "depressed": "Depressed",
+    "deflated": "Deflated",
+    "nostalgic": "Nostalgic",
+    "disappointed": "Disappointed",
+    "regretful": "Regretful",
+    "irritated": "Irritated",
+    "resentful": "Resentful",
+    "frustrated": "Frustrated",
+    "betrayed": "Betrayed",
+    "incompetent": "Incompetent",
+    "embarrassed": "Embarrassed",
+    "jealous": "Jealous",
+    "guilty": "Guilty",
+    "dazed": "Dazed",
+    "confused": "Confused",
+    "lethargic": "Lethargic",
+    "suffocated": "Suffocated"
+  },
+  "emotionCategories": {
+    "tensionPressure": "Tension & Pressure",
+    "sadnessLoss": "Sadness & Loss",
+    "angerFrustration": "Anger & Frustration",
+    "selfDoubtShame": "Self-doubt & Shame",
+    "numbnessConfusion": "Numbness & Confusion"
   },
   "write": {
     "title": "Today's Emotion Diary",
@@ -29,7 +92,10 @@
       "question": "What are you feeling right now?",
       "hint": "You can pick up to 3.",
       "moreButton": "More emotions",
+      "intensity": "Intensity",
       "sheetTitle": "Pick more emotions",
+      "customPlaceholder": "Type your own emotion word",
+      "customAdd": "Add",
       "sheetDone": "Done"
     },
     "button": {

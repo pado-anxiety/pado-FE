@@ -1,4 +1,5 @@
 import { useColorScheme } from 'nativewind';
+import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
 import semanticColors from '@pado/tailwind-semantic-tokens/semantic-colors';
@@ -18,6 +19,7 @@ export function EmotionChips({
   selectedEmotions,
   onToggle,
 }: EmotionChipsProps) {
+  const { t } = useTranslation();
   const { colorScheme } = useColorScheme();
   const tokens =
     colorScheme === 'dark' ? semanticColors.dark : semanticColors.light;
@@ -53,7 +55,7 @@ export function EmotionChips({
               }}
             >
               {emotion.emoji ? `${emotion.emoji} ` : ''}
-              {emotion.label}
+              {t(`diary.emotions.${emotion.label}`)}
             </Text>
           </Pressable>
         );

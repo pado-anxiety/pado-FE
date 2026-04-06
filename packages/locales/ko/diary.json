@@ -5,7 +5,70 @@
     "empty": "아직 기록이 없어요",
     "write": "감정 일기 작성하기",
     "today": "오늘",
-    "noEntry": "감정일기가 없어요"
+    "noEntry": "감정일기가 없어요",
+    "months": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+    "days": ["일", "월", "화", "수", "목", "금", "토"],
+    "monthLabel": "{{year}}년 {{monthName}}",
+    "dateLabel": "{{monthName}} {{day}}일",
+    "dateLabelWithDay": "{{monthName}} {{day}}일 {{dayName}}요일"
+  },
+  "steps": {
+    "situation": "상황",
+    "thought": "생각",
+    "emotion": "감정"
+  },
+  "chips": {
+    "situation": {
+      "atWork": "직장에서",
+      "atHome": "집에서",
+      "inConversation": "대화 중에",
+      "alone": "혼자 있을 때",
+      "browsingSns": "SNS를 보다가"
+    },
+    "thought": {
+      "cantDoWell": "잘 못할 것 같아",
+      "onlyMe": "나만 이런 것 같아",
+      "dontKnow": "어쩌지 모르겠어",
+      "messedUp": "또 망했어"
+    }
+  },
+  "emotions": {
+    "anxious": "불안한",
+    "scared": "두려운",
+    "sad": "슬픈",
+    "angry": "화가 난",
+    "exhausted": "지친",
+    "empty": "공허한",
+    "ashamed": "수치스러운",
+    "lonely": "외로운",
+    "nervous": "긴장된",
+    "restless": "초조한",
+    "pressured": "압박감",
+    "onEdge": "조마조마한",
+    "depressed": "우울한",
+    "deflated": "허탈한",
+    "nostalgic": "그리운",
+    "disappointed": "실망한",
+    "regretful": "후회되는",
+    "irritated": "짜증나는",
+    "resentful": "억울한",
+    "frustrated": "좌절스러운",
+    "betrayed": "배신감",
+    "incompetent": "무능한 것 같은",
+    "embarrassed": "창피한",
+    "jealous": "질투나는",
+    "guilty": "죄책감",
+    "dazed": "멍한",
+    "confused": "혼란스러운",
+    "lethargic": "무기력한",
+    "suffocated": "답답한"
+  },
+  "emotionCategories": {
+    "tensionPressure": "긴장·압박",
+    "sadnessLoss": "슬픔·상실",
+    "angerFrustration": "분노·좌절",
+    "selfDoubtShame": "자기 의심·수치",
+    "numbnessConfusion": "무감각·혼란"
   },
   "write": {
     "title": "오늘의 감정일기",

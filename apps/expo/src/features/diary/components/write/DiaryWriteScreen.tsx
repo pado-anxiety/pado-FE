@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, View } from '@src/components/ui';
 import { useIconColor } from '@src/lib/theme/useIconColor';
 
-import { SITUATION_CHIPS, THOUGHT_CHIPS } from '../../constants';
+import { SITUATION_CHIP_KEYS, THOUGHT_CHIP_KEYS } from '../../constants';
 import { useDiaryWrite } from '../../hooks/useDiaryWrite';
 import { useEmotionBottomSheet } from '../EmotionBottomSheet';
 import { ProgressDots } from '../ProgressDots';
@@ -80,9 +80,12 @@ export function DiaryWriteScreen() {
         {funnel.currentStep !== 'emotion' ? (
           <TextStep
             chips={
-              funnel.currentStep === 'situation'
-                ? SITUATION_CHIPS
-                : THOUGHT_CHIPS
+              (funnel.currentStep === 'situation'
+                ? SITUATION_CHIP_KEYS
+                : THOUGHT_CHIP_KEYS
+              ).map((key) =>
+                t(`diary.chips.${funnel.currentStep}.${key}`),
+              )
             }
             chipsLabel={t(`${stepI18nKey}.chipsLabel`)}
             value={diary.currentText}
