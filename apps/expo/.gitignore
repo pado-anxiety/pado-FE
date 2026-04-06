@@ -91,4 +91,5 @@ scripts/build-ios-local.sh
 
 # ASC API credentials
 .asc.env
+.env.build
 keys/

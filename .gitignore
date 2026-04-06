@@ -27,3 +27,5 @@ yarn-error.log*
 # Maestro test results
 .maestro/tests/
 *.maestro-report/
+
+apps/quiz/
