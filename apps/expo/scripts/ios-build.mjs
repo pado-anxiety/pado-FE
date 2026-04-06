@@ -6,7 +6,6 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
-  askYesNo,
   ensureEasSecrets,
   findLatestReleaseFile,
   log,
@@ -76,7 +75,7 @@ export async function runBuild(profile = 'production') {
       throw new Error(`${releaseFile}: en.whatsNew가 비어있습니다.`);
     log('P-1', `릴리즈 문서 확인 완료: ${releaseFile}`);
 
-    // P-2: Version sync
+    // P-2: Version sync (릴리즈 문서 버전을 source of truth로 사용)
     log('P-2', '버전 동기화 확인 중...');
     const pkgJsonPath = join(EXPO_DIR, 'package.json');
     const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
@@ -92,43 +91,7 @@ export async function runBuild(profile = 'production') {
       });
       log('P-2', '버전 업데이트 커밋 완료');
     } else {
-      log('P-2', `버전 동일 (v${currentVersion}). EAS 빌드 이력 확인 중...`);
-      const result = spawnSync(
-        'eas',
-        [
-          'build:list',
-          '--platform',
-          'ios',
-          '--appVersion',
-          currentVersion,
-          '--status',
-          'finished',
-          '--json',
-          '--limit',
-          '1',
-        ],
-        { cwd: EXPO_DIR, encoding: 'utf8' },
-      );
-
-      let builds = [];
-      try {
-        builds = JSON.parse(result.stdout.trim());
-      } catch {}
-
-      if (builds.length > 0) {
-        const proceed = await askYesNo(
-          `v${currentVersion} 빌드가 이미 존재합니다. 재빌드하시겠습니까?`,
-        );
-        if (!proceed) {
-          log('P-2', '빌드 중단됨');
-          return null;
-        }
-      } else {
-        throw new Error(
-          `v${currentVersion}은 이미 현재 버전이지만 빌드 이력이 없습니다. ` +
-            '새 버전을 배포하려면 docs/release/v{새버전}.yml을 먼저 작성하세요.',
-        );
-      }
+      log('P-2', `버전 동일 (v${currentVersion}). 빌드 진행.`);
     }
   }
 
